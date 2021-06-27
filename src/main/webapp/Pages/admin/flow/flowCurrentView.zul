@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul"
+    xmlns:zk="http://www.zkoss.org/2005/zk">
+    <window id="flowConfigDlg" apply="com.viettel.voffice.DAO.System.Flow.FlowCurrentViewController" 
+            position="center,center" style="width:100%" closable="true">
+        <h:div class="toolBar">
+            <!--<h:img src="/Share/img/icon/back.png" forward="onClick=flowConfigDlg.onBack" />-->
+            <image src="/Share/img/icon/back.png" forward="onClick=flowConfigDlg.onBack"
+                   tooltiptext="Quay trở lại trang trước" />
+        </h:div>
+        <!--        <h:div style="margin:3px;width:100%;height:400px;overflow:auto">
+            <h:canvas id="flowNode" style="width:100%;height:100%;border:1px solid gray;background-color:antiquewhite">
+            </h:canvas>
+        </h:div>-->
+        <listbox id="lbProcess" mold="paging" pageSize="10" style="width:100%">
+            <listhead>
+                <listheader width="5%" label="STT" align="center" />
+                <listheader width="10%" label="Người gửi"  align="center"  />
+                <listheader width="10%" label="Đơn vị gửi" align="center"   />
+                <listheader width="10%" label="Thời gian" align="center"  />
+                <listheader width="10%" label="Người nhận" align="center"  />
+                <listheader width="10%" label="Đơn vị nhận" align="center"  />
+                <listheader width="10%" label="Nhiệm vụ" visible="false" />
+                <listheader width="15%" label="Trạng thái" align="center"  />                
+                <listheader width="30%" label="Ghi chú" align="center"  />                
+            </listhead>
+            <template name="model">
+                <listitem value="${each}">
+                    <listcell label="${forEachStatus.index+1}" />
+                    <listcell style="text-align:left;">
+                    	<label value="${$composer.getName(each.sendUser)}"></label>
+                   	</listcell>
+                    <listcell style="text-align:left;">
+                        <label value="[Doanh nghiệp]" if="${each.sendGroup eq null}" />
+                        <label value="${each.sendGroup}" if="${each.sendGroup ne null}"/>
+                    </listcell>
+                    <listcell style="text-align:left;">
+                    	<label value="${each.sendDateString}"></label>
+                    </listcell>
+                    <listcell style="text-align:left;">
+                    	<label value="${$composer.getName(each.receiveUser)}"></label>
+                    </listcell>
+                    <listcell style="text-align:left;">
+                        <label value="[Doanh nghiệp]" if="${each.receiveGroup eq null}"/>
+                        <label value="${each.receiveGroup}" if="${each.receiveGroup ne null}"/>
+                    </listcell>
+                    <listcell style="text-align:left;">
+                        <label value="Phối hợp" if="${each.processType==0}"/>
+                        <label value="Xử lý chính" if="${each.processType==1}"/>
+                        <label value="Tham khảo" if="${each.processType==2}"/>
+                        <label value="Cho ý kiến" if="${each.processType==3}"/>
+                        <label value="Nhận để biết" if="${each.processType==4}"/>
+                    </listcell>
+                    <listcell label="${$composer.getStatus(each.status)}" style="text-align:left;"/>
+                    <listcell style="text-align:left;">
+                   		<label value="${each.note}"></label>
+                   	</listcell>
+                </listitem>
+            </template>            
+        </listbox>
+        <script defer="true">
+            /*
+            //var graph = drawCurrentProcess("flowNode");
+            //loadAndDrawFlowContent = function(){
+            //graph.setProcess(page.process);
+            //graph.drawProcess();
+            //}
+            */           
+        </script>
+    </window>
+</zk>

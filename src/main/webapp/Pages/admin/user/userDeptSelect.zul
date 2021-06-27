@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <window id="deptUserSelectWindow" width="550px" apply="com.viettel.voffice.DAO.System.Flow.FlowNodeDeptUserController" border="normal" position="center" closable="true">
+        <caption label="Chọn đơn vị"/>
+        <zscript><![CDATA[
+Long nodeId = (Long) Executions.getCurrent().getArg().get("nodeId");
+TreeModel model = new com.viettel.core.workflow.model.NodeDeptUserTreeModel(nodeId);]]>
+        </zscript>
+        <textbox id="txtNodeId" visible="false"/>
+        <tree id="deptUserTree" model="${model}" style="padding-top:0px;border:0px none" checkmark="true" multiple="true">
+            <template name="model">
+                <treeitem if="${each.selected==1}" selected="true">
+                    <treerow>
+                        <treecell>
+                            <hlayout style="display:inline-flex">
+                                <image src="/Share/img/icon/dept.png" if="${each.type!=1}"/>
+                                <image src="/Share/img/icon/user.gif" if="${each.type==1}"/>
+                                <label value="${each.name}"/>
+                            </hlayout>
+                        </treecell>
+                    </treerow>
+                </treeitem>
+                <treeitem if="${each.selected!=1}" selected="false">
+                    <treerow>
+                        <treecell>
+                            <hlayout style="display:inline-flex">
+                                <image src="/Share/img/icon/dept.png" if="${each.type!=1}"/>
+                                <image src="/Share/img/icon/user.gif" if="${each.type==1}"/>
+                                <label value="${each.name}"/>
+                            </hlayout>
+                        </treecell>
+                    </treerow>
+                </treeitem>
+<!--                <treerow>
+                    <treecell>
+                        <label value="${each.name}"/>
+                    </treecell>
+                    <treecell>
+                        <image if="${each.type==0}" src="/Share/img/icon/dept.png" width="20px" height="20px"/>
+                        <image if="${each.type==1}" src="/Share/img/icon/user.gif" width="20px" height="20px"/>
+                    </treecell>
+                </treerow>-->
+            </template>
+        </tree>
+        <div align="center">
+            <button height="30px" image="/Share/img/icon/save.png" id="btnSaveDeptUser" label="Lưu lại" />
+        </div>
+    </window>
+</zk>

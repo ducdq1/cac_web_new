@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul"
+    xmlns:h="native">
+
+    <window id="caCRUDWindow" width="60%"
+            apply="com.viettel.module.cosmetic.Controller.CaCRUDController" border="normal"
+            title="${$composer.getLabelCos('ca_crud_window_caption')}" closable="true">
+        <style src="/Share/css/cosmetic.css" />
+        <script type="text/javascript" src="/Share/js/UPMSamples.js" />
+        <script type="text/javascript" src="/Share/js/ca/ViettelCAPlugin.js" />
+        <script type="text/javascript" src="/Share/js/ca/serverSide.js" />
+        <h:object id="plugin0" type="application/x-viettelcasigner" width="3" height="10">
+        </h:object>
+        <h:br/>
+        <vlayout>
+            <groupbox>
+                <caption label="${$composer.getLabelCos('ca_crud_window_caption')}" />
+                <h:table width="100%">
+                    <h:tr>
+                        <h:td width="20%">${$composer.getLabelCos('ca_crud_label_serial')}:</h:td>
+                        <h:td width="50%">
+                            <textbox id="tbSerial" width="95%" value="${$composer.caUser.caSerial}" readonly="true" maxlength="255" />
+                        </h:td>
+                        <!--<h:td width="30%"><button label="${$composer.getLabelCos('ca_crud_label_get_serial')}" id="btnGetSerial" image="/Share/img/icon/usb-16.png"/></h:td>-->
+                        <h:td width="30%"> 
+                            <h:input type="button" id="btnSignFile" value="${$composer.getLabelCos('ca_crud_label_sign_ca')}" onclick="uploadCertRegister()"/>
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td>${$composer.getLabelCos('ca_crud_label_signature')}:</h:td>
+                        <h:td colspan="2">
+                            <div>
+                                <vlayout hflex="1">
+                                    <button width="85px" id="btnAttachSignature"
+                                            style="font-weight: bold;color: #F25D45;" sclass="attachBtn"
+                                            src="/Share/img/paperclip.png"
+                                            upload="zk.UPMSample1,maxsize=30720,multiple=false,native"
+                                            label="${$composer.getLabelCos('ca_crud_label_choose_file')}" />
+                                    <vlayout id="flist" hflex="1" sclass="fileList" />
+                                </vlayout>
+                                <hlayout if="${$composer.crudMode.getValue() == 1 and $composer.caUser != null and $composer.caUser.signature != null}" id="signatureAttachedLayout" hflex="min">
+                                    <a forward="onClick=caCRUDWindow.onDownloadAttach(0)" label="${$composer.getLabelCos('ca_crud_attach_download')}" />
+                                    <image src="/Share/img/icon/icon_delete_24.png" width="14px" forward="onClick=caCRUDWindow.onDeleteAttach(0)" style="cursor: pointer"/>
+                                </hlayout>
+                            </div>
+                        </h:td>
+                        <h:td>
+
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td>${$composer.getLabelCos('ca_crud_label_stamper')}:</h:td>
+                        <h:td colspan="2">
+                            <div>
+                                <vlayout>
+                                    <button width="85px" id="btnAttachStamper"
+                                            style="font-weight: bold;color: #F25D45;" sclass="attachBtn"
+                                            src="/Share/img/paperclip.png"
+                                            upload="zk.UPMSample12,maxsize=30720,multiple=false,native"
+                                            label="${$composer.getLabelCos('ca_crud_label_choose_file')}" />
+                                    <vlayout id="flist1" hflex="1" sclass="fileList" />
+                                </vlayout>
+                                <hlayout if="${$composer.crudMode.getValue() == 1 and $composer.caUser != null and $composer.caUser.stamper != null}" id="stamperAttachedLayout" hflex="min">
+                                    <a forward="onClick=caCRUDWindow.onDownloadAttach(1)" label="${$composer.getLabelCos('ca_crud_attach_download')}" />
+                                    <image src="/Share/img/icon/icon_delete_24.png" width="14px" forward="onClick=caCRUDWindow.onDeleteAttach(1)" style="cursor: pointer"/>
+                                </hlayout>
+                            </div>
+                        </h:td>
+                    </h:tr>
+                    
+                    <h:tr>
+                        <h:td>Thừa lệnh:</h:td>
+                        <h:td colspan="2">
+                             <textbox id="txtCommand" width="95%" value="${$composer.caUser.command}"  maxlength="255" />
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td>Chức danh:</h:td>
+                        <h:td colspan="2">
+                            <textbox id="txtPosition" width="95%" value="${$composer.caUser.position}"  maxlength="255" />
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td>Tên:</h:td>
+                        <h:td colspan="2">
+                            <textbox id="txtName" width="95%" value="${$composer.caUser.name}"  maxlength="255" />
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td colspan="3" align="center">
+                            <button if="${$composer.crudMode.getValue() == 1}" sclass="button" id="btnUpdate" label="${$composer.getLabelCos('common_update')}" image="/Share/img/icon/add_1.png" />
+                            <button if="${$composer.crudMode.getValue() == 0}" sclass="button" id="btnAdd" label="${$composer.getLabelCos('common_action_add')}" image="/Share/img/icon/add_1.png" />
+                            <button if="${$composer.crudMode.getValue() == 0}" sclass="button" id="btnAddNClose" label="${$composer.getLabelCos('common_add_and_close')}" image="/Share/img/icon/add_1.png" />
+                        </h:td>
+                    </h:tr>
+
+                </h:table> 
+            </groupbox>
+        </vlayout>
+        
+        <div align="center" visible="false" style="height: 1px">
+            <h:input type="text" name="filepath" id="filepath" size="50" style="display:none"/> 
+            <h:input type="hidden" id="base64Hash" value="" />
+            <textbox id="txtBase64Hash" value="" style="display:none"/>
+            <h:input type="hidden" id="certSerial" value="" />
+            <textbox id="txtCertSerial" value="" style="display:none"/>
+            <h:br/>
+            <h:div id="areaId" style="display: none"/>
+            <label id="lbBottomWarning" style="color: red;" />
+        </div>
+        
+    </window>
+
+</zk>

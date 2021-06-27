@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+   
+    <window id="calendarViewWnd" border="normal" width="1000px"
+            apply="com.viettel.voffice.DAO.Calendar.CalendarViewController" 
+            position="center,center" closable="true">
+        <caption label="Lịch" />
+        <h:div width="100%">
+            <h:table style="border-collapse:collapse">
+                <h:tr>
+                    <h:td width="60%" style="border:1px solid gray;vertical-align:top;padding:3px">
+                        <h:table class="viewTable">
+                            <h:tr>
+                                <h:td width="30%">
+                                    <label value="Tiêu đề"  />
+                                </h:td>
+                                <h:td width="70%">
+                                    <textbox id="txtCalendarId" visible="false"/>
+                                    <label id="lbTitle"
+                               width="400px" maxlength="500"/>
+                                </h:td>
+                            </h:tr>
+                            <h:tr>
+                                <h:td>
+                                    <label value="Địa điểm"  />
+                                </h:td>
+                                <h:td>
+                                    <label id="lbLocationName"
+                               width="350px" maxlength="500"/>
+                                </h:td>
+                            </h:tr>
+                            <h:tr>
+                                <h:td>
+                                    <label value="Thời gian bắt đầu"/>
+                                </h:td>
+                                <h:td>
+                                    <label id="lbStartDate"/>
+                                </h:td>
+                            </h:tr>
+                            <h:tr>
+                                <h:td>
+                                    <label value="Kết thúc"/>
+                                </h:td>
+                                <h:td>
+                                    <label id="lbEndDate" />
+                                </h:td>
+                            </h:tr>
+                            <h:tr>
+                                <h:td> 
+                                    <label value="Mô tả" />
+                                </h:td>
+                                <h:td> 
+                                    <label id="lbDescription" />
+                                </h:td>
+                            </h:tr>
+                            <h:tr>
+                                <h:td colspan="2" style="background-color:rgb(209,224,236); border:1px solid gray;vertical-align:middle">
+                                    <label value="Thành phần tham gia"/>
+                                </h:td>
+                            </h:tr>
+                            <h:tr>
+                                <h:td colspan="2" style="border:1px solid gray;vertical-align:top">
+                                    <listbox id="lbParticipants">
+                                        <listhead sizable="true">
+                                            <listheader width="10%" label="STT" align="center"/>
+                                            <listheader width="30%" label="Đơn vị"/>
+                                            <listheader width="20%" label="Người tham gia" />
+                                            <listheader width="20%" label="Vai trò"  />
+                                            <listheader width="20%" label="Trạng thái"  />
+                                        </listhead>
+                                        <template name="model">
+                                            <listitem value="${each}">
+                                                <listcell label="${forEachStatus.index+1}" />
+                                                <listcell label="${each.deptName}" />
+                                                <listcell label="${each.userName}" />
+                                                <listcell >
+                                                    <label value="Tham gia" if="${each.participantRole==0}" />
+                                                    <label value="Chuẩn bị" if="${each.participantRole==1}" />
+                                                    <label value="Chủ trì" if="${each.participantRole==2}" />
+                                                    <label value="Phê duyệt" if="${each.participantRole==3}" />
+                                                </listcell>
+                                                <listcell >
+                                                    <label value="Chưa trả lời" if="${each.acceptStatus==0}" />
+                                                    <label value="Đồng ý" if="${each.acceptStatus==2}" />
+                                                    <label value="Từ chối" if="${each.acceptStatus==3}" />
+                                                    <image src="/Share/img/icon/warning.png" if="${each.isDuplicated==1}" tooltiptext="Bị trùng với lịch đã phê duyệt"/>
+                                                </listcell>
+                                            </listitem>
+                                        </template>
+                                    </listbox>
+                                </h:td>
+                            </h:tr>
+                            <h:tr>
+                                <h:td colspan="2" style="background-color:rgb(209,224,236); border:1px solid gray;vertical-align:middle">
+                                    <label value="Tài nguyên sử dụng"/>
+                                </h:td>
+                            </h:tr>
+                            <h:tr>
+                                <h:td colspan="2" style="background-color:rgb(209,224,236); border:1px solid gray;vertical-align:middle">
+                                    <listbox id="lbResources">
+                                        <listhead sizable="true">
+                                            <listheader width="10%" label="STT" align="center"/>
+                                            <listheader width="35%" label="Đơn vị"/>
+                                            <listheader width="35%" label="Tài nguyên" />
+                                            <listheader width="20%" label="Trạng thái" />
+                                        </listhead>
+                                        <template name="model">
+                                            <listitem value="${each}">
+                                                <listcell label="${forEachStatus.index+1}" />
+                                                <listcell label="${each.deptName}" />
+                                                <listcell label="${each.resourceName}" />
+                                                <listcell >
+                                                    <label value="Chưa trả lời" if="${each.acceptStatus==0}" />
+                                                    <label value="Đồng ý" if="${each.acceptStatus==2}" />
+                                                    <label value="Từ chối" if="${each.acceptStatus==3}" />
+                                                    <image src="/Share/img/icon/warning.png" if="${each.isDuplicated==1}" tooltiptext="Bị trùng với lịch đã phê duyệt"/>
+                                                </listcell>
+                                            </listitem>
+                                        </template>
+                                    </listbox>
+                                </h:td>
+                            </h:tr>
+                            <h:tr>
+                                <h:td colspan="2" style="text-align:center">
+                                    <button label="Check trùng" id="btnCheck" height="30px" image="/Share/img/icon/warning.png"/>
+                                    <button label="Đồng ý" id="btnApprove" height="30px" image="/Share/img/icon/14.png"/>
+                                    <button label="Từ chối" id="btnReject" height="30px" image="/Share/img/icon/delete.png"/>
+                                    <button label="Đóng" id="btnCancel" height="30px" image="/Share/img/icon/close.png" onClick="calendarViewWnd.detach()"/>
+                                </h:td>
+                            </h:tr>
+                        </h:table>
+                    </h:td>
+                    <h:td width="40%" style="border:1px solid gray;padding:5px;background-color:rgb(209,224,236);vertical-align:top">
+                        <div id="notifyWnd"/>
+                    </h:td>
+                </h:tr>
+            </h:table>
+        </h:div> 
+    </window>
+</zk>

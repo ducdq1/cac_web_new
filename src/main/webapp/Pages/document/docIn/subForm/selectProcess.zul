@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window
+    xmlns:h="http://www.zkoss.org/2005/zk/native"
+    xmlns="http://www.zkoss.org/2005/zul"
+    id="windowSelectProcess"
+    position="center,center" closable="true"
+    border="normal"
+    title="Chọn xử lí"
+    width="50%"
+    apply="com.viettel.voffice.DAO.DocIn.DocInSelectProcess"
+>
+    <listbox id="lbProcess" mold="paging" pageSize="5"
+             emptyMessage="Văn bản chưa có xử lí">
+        <listhead>
+            <listheader label="STT" hflex="min"/>
+            <listheader label="Đơn vị gửi"/>
+            <listheader label="Người gửi"/>
+            <listheader label="Đơn vị nhận"/>
+            <listheader label="Người nhận"/>
+            <listheader label="Hạn xử lí"/>
+            <listheader label="Ngày gửi"/>
+        </listhead>
+        <template name="model">
+            <listitem>
+                <listcell label="${forEachStatus.index + 1}"/>
+                <listcell label="${each.sendGroup}"/>
+                <listcell label="${each.sendUser}"/>
+                <listcell label="${each.receiveUser}"/>
+                <listcell label="${each.receiveGroup}"/>
+                <listcell label="${each.deadline}"/>
+                <listcell label="${each.sendDate}"/>
+            </listitem>
+        </template>
+    </listbox>
+</window>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./templateCRUD" ?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <window id="templateCRUD" title="Thông tin biểu mẫu" border="normal" width="600px" height="310px" 
+            apply="com.viettel.voffice.DAO.Document.TemplateDialogController" 
+            position="center,center" closable="true">
+        <style>
+            .createTable tr
+            {
+            margin-bottom:2px;height:30px;
+            }
+        </style>
+        <h:div width="100%">
+            <groupbox width="100%" mold="3d">
+                <caption label="Thông tin cơ bản"/>       
+                <h:table width="100%" sclass="createTable" style="border-spacing: 2px;">
+                    <h:tr >
+                        <h:td width="140px">
+                            <label value="Tên biểu mẫu" width="120px" />
+                            <label value=" *" sclass="label-required" />
+                        </h:td>
+                        <h:td>
+                            <textbox id="templateName" value="@{controller.templateSelected.templateName, access='both', save-when='none'}"
+                                     mold="rounded"
+                                     width="460px" maxlength="500" sclass="txtInput" />
+                        </h:td>
+                
+                    </h:tr>
+                    <h:tr>
+                        <h:td > 
+                            <label value="Chọn đơn vị" />
+                            <label value=" *" sclass="label-required" />
+                        </h:td>
+                        <h:td > 
+                            <textbox value="@{controller.templateSelected.deptName}" id="txtDeptName" 
+                                     width="390px" readonly="true" mold="rounded" sclass="txtInput"/>
+                            <textbox value="@{controller.templateSelected.deptId,access='both', save-when='none'}" id="txtDeptId" readonly="true" visible="false"/>
+                            <button image="/Share/img/icon/delete.png" height="29px" width="32px" onClick="txtDeptName.setValue(null);txtDeptId.setValue(null);"/>
+                            <button id="btnShowDept" image="/Share/img/icon/dept.png" height="29px" width="32px"/>
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td width="140px"> 
+                            <label value="Loại văn bản" />
+                            <label value=" *" sclass="label-required" />
+                        </h:td>
+                        <h:td width="460px"> 
+                            <listbox id="lboxDocType" width="100%" 
+                                     model="@{controller.catList}" mold="select" selectedItem="@{controller.catSelected}">
+                                <listitem self="@{each=is}" value="@{is.categoryId}" label="@{is.name}"></listitem>
+                            </listbox>
+                        </h:td>
+                    </h:tr>
+                </h:table>
+            </groupbox>
+            
+            <h:div style="height:1px;"></h:div>
+            <groupbox width="100%" mold="3d" >
+                <caption label="Nội dung biểu mẫu"/>
+                <h:table width="100%"> 
+                    <h:tr>
+                        <h:td width="20%">
+                                
+                        </h:td>
+                        <h:td width="70%">
+                            Tên tệp
+                        </h:td>
+                        <h:td width="10%">
+                            Xoá
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td>
+                            <button label="Chọn tệp" style="font-weight: bold;color: #F25D45;" upload="true" id="btnUpload" src="/Share/img/paperclip.png" width="85px">
+                            </button> 
+                        </h:td>
+                        <h:td>
+                            <textbox id="txtFileName" readonly="true" value="" mold="rounded" width="98%" tabindex="1" sclass="txtInput"/>
+                        </h:td>
+                        <h:td>
+                            <image id="imgDelFile" src="/Share/img/icon/delete.png" width="25px" height="25px" visible="false"/>
+                        </h:td>
+                    </h:tr>
+                </h:table>
+            </groupbox>
+            
+            <h:div style="text-align:right;margin-top:2px;height:18px">
+                <button label="Lưu" id="btnSave" sclass="button blue" image="/Share/img/icon/save.png" width="85px"/>
+                <button label="Huỷ bỏ" id="btnCancel" onClick="templateCRUD.detach()" sclass="button blue" width="85px" image="/Share/img/icon/close.png"/>
+            </h:div> 
+        </h:div> 
+    </window>
+</zk>

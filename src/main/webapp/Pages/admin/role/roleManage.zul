@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <window id="roleWindow" apply="com.viettel.voffice.DAO.System.RolesController" border="normal">
+        <caption label="Quản lý vai trò"/>
+        <h:div style="width:100%" align="center">
+            <h:table style="width:80%" class="searchTable">
+                <h:tr>
+                    <h:td>
+                        <label>Mã vai trò</label>
+                    </h:td>
+                    <h:td>
+                        <textbox id="txtroleCode" value="" maxlength="250"/>
+                    </h:td>
+                    <h:td>
+                        <label>Tên vai trò</label>
+                    </h:td>
+                    <h:td>
+                        <textbox id="txtroleName" value="" maxlength="250"/>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td>
+                        <label>Mô tả</label>
+                    </h:td>
+                    <h:td>
+                        <textbox id="txtDescription" value="" maxlength="250"/>
+                    </h:td>
+                    <h:td>
+                        <label>Trạng thái</label>
+                    </h:td>
+                    <h:td>
+                        <listbox id="lboxStatus" mold="select" width="200px" >
+                            <listitem label="--- Chọn ---" value="-1" selected="true"/>
+                            <listitem label="Hoạt động" value="1" selected="true"  />
+                            <listitem label="Bị khóa" value="0" />
+                        </listbox>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td colspan="4" style="text-align:center">
+                        <button height="30px" image="/Share/img/search.png" id="btnSearch" label="Tìm kiếm" />
+                        <button height="30px" image="/Share/img/add.png" id="btnCreate" label="Thêm mới" />
+                    </h:td>
+                </h:tr>
+            </h:table>
+        </h:div>
+        <h:div id="gridDiv" >
+            <listbox id="roleListBox" 
+                     multiple="false"
+                     emptyMessage="Không tồn tại vai trò">
+                <listhead sizable="true">
+                    <listheader width="5%" label="STT" />
+                    <listheader width="20%" label="Tên vai trò" />
+                    <listheader width="10%" label="Mã vai trò" />
+                    <listheader width="20%" label="Mô tả" />
+                    <listheader width="15%" label="Đơn vị" />
+                    <listheader width="10%" label="Chức năng" align="center" />
+                    <listheader width="10%" label="Khóa | Mở khóa" align="center" />
+                    <listheader width="5%" label="Sửa" align="center"/>
+                    <listheader width="5%" label="Xoá" align="center"/>
+                </listhead>
+                <template name="model">
+                    <listitem value="${each}">
+                        <listcell label="${forEachStatus.index+1+userPagingBottom.pageSize*userPagingBottom.activePage}" />
+                        <listcell label="${each.roleName}" />
+                        <listcell label="${each.roleCode}" />
+                        <listcell label="${each.description}" />
+                        <listcell label="${each.deptName}" />
+                        <listcell >
+                            <image forward="onClick=roleListBox.onObject" src="/Share/img/function.png" width="20px" height="20px" tooltiptext="Chọn chức năng cho vai trò"/>
+                        </listcell>
+                        <listcell>
+                            <label value="Hoạt động" if="${each.status==1}"/>
+                            <label value="Bị khóa" if="${each.status!=1}"/>
+                            <image if="${each.status==1}" forward="onClick=roleListBox.onLock" src="/Share/img/icon/lock.png" width="20px" height="20px" tooltiptext="Khóa vai trò"/>
+                            <image if="${each.status!=1}" forward="onClick=roleListBox.onUnlock" src="/Share/img/icon/unlock.png" width="20px" height="20px" tooltiptext="Mở khóa vai trò"/>
+                        </listcell>
+                        <listcell >
+                            <image forward="onClick=roleListBox.onEdit" src="/Share/img/icon/edit.png" width="20px" height="20px" tooltiptext="Sửa vai trò"/>
+                        </listcell>
+                        <listcell>
+                            <image forward="onClick=roleListBox.onDelete" src="/Share/img/icon/delete.png" width="20px" height="20px" tooltiptext="Xóa vai trò"/>
+                        </listcell>
+                    </listitem>
+                </template>
+            </listbox>
+            <paging id="userPagingBottom" pageSize="10" detailed="true"/>
+            <!--            <paging id="pg" autohide="false" detailed="true"/>-->
+        </h:div>
+    </window>
+</zk>

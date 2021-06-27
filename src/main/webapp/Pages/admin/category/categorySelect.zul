@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <window id="selectCategoryDlg" width="550px" apply="com.viettel.voffice.DAO.System.Category.CategorySelectController" border="normal" position="center" closable="true">
+        <caption label="Chọn đơn vị"/>
+        <zscript><![CDATA[
+TreeModel model = new com.viettel.voffice.model.Category.CategoryTreeModel();]]>
+        </zscript>
+        <textbox id="txtDisplayIdComponentId" visible="false"/>
+        <textbox id="txtDisplayNameComponentId" visible="false"/>
+        <tree id="tree" model="${model}" style="padding-top:0px;border:0px none">
+            <template name="model">
+                <treeitem label="${each.name}" id="${each.id}"/>
+            </template>
+        </tree>
+    </window>
+</zk>

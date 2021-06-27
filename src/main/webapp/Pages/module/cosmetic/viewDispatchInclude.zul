@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns:h="http://www.zkoss.org/2005/zk/native"
+     xmlns="http://www.zkoss.org/2005/zul" xmlns:w="client"
+     width="100%" 
+     id="windowViewDispatch"
+     apply="com.viettel.module.cosmetic.Controller.include.DispatchIncludeController"
+     onCtrlKey="$composer.keyEventHandle(event.getKeyCode())"
+     ctrlKeys="#f6#f7#f8">
+    
+    <style src="/Share/css/formstyle.css" />
+    
+    <h:div width="100%">
+        <groupbox width="100%" sclass="gb-form-create" closable="false">
+            <caption label="THÔNG TIN YÊU CẦU SỬA ĐỔI BỔ SUNG" />
+            <listbox id="lbDispatch" emptyMessage="${$composer.getLabelCos('common_emptyMessage')}">
+                <listhead sizable="true">
+                    <listheader label="STT" align="center" style="width:20px"/>
+                    <listheader label="Nội dung yêu cầu bổ sung" align="center" style="width:60%"/>
+                    <listheader label="Ngày yêu cầu" align="center" style="width:18%"/>
+                    <listheader label="Người yêu cầu" align="center" style="width:18%"/>
+                    <listheader label="Tải về" align="center" style="width:18%"/>
+                </listhead>
+                <template name="model">
+                    <listitem forward="onClick=lbList.onOpenView(${each})" >
+                        <listcell label="${forEachStatus.index + 1 + userPagingTop.pageSize * userPagingTop.activePage}" />
+                        <listcell style="text-align:left">
+                            <label value="${each.content}" 
+                                   tooltiptext="${each.content}"
+                            />
+                        </listcell>
+                        <listcell style="text-align:center">
+                            <label value="${$composer.getFormatDate(each.createDate)}" 
+                                   tooltiptext="${$composer.getFormatDate(each.createDate)}"
+                            />
+                        </listcell>
+                        <listcell style="text-align:center">
+                            <label value="${each.creatorName}" 
+                                   tooltiptext="${each.creatorName}"
+                            />
+                        </listcell>
+                        <listcell style="text-align:center">
+                            <image forward="onClick=lbDispatch.onDownloadFile(${each})"                                   
+                                   src="/Share/img/icon/view.png" 
+                                   width="20px" height="20px" 
+                                   tooltiptext="Tải file"
+                                   if="${$composer.CheckCVTC(each.fileId)==1}"/>       
+                        </listcell>
+                    </listitem>
+                </template>
+            </listbox>
+        </groupbox>
+    </h:div> 
+</div>
+

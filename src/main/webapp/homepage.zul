@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns="http://www.zkoss.org/2005/zul">
+
+	<style src="/Share/css/formstyle.css" />
+	<style src="/Share/css/creatfile.css" />
+	<style src="Share/homepage/style_comon.css" />
+	<style src="Share/css/login.css" />
+	<style>
+		.SpanTag { font-family:'MYRIADPRO-COND'!important;
+		font-size:18px !important; }
+	</style>
+	<style>
+	.SpanTag2 { font-family:'MYRIADPRO-COND'!important;
+		font-size:17px !important;color:#026eaf }
+		</style>
+	<style>
+		.title-label { font-family:'MYRIADPRO-COND'!important;
+		font-size:16px !important; }
+	</style>
+	
+	<h:div
+		style="width:100%;font-family:'MyriadPro-BoldCond'!important;
+     	font-size:18px !important; background-color: #ffffff;     
+    	background-position: center bottom;
+    	background-repeat: repeat-x;">
+		<window
+			apply="com.viettel.module.cosmetic.Controller.HomepageDAO"
+			id="homePage">
+			
+				 
+				<div
+					style=" background-image: url('Share/homepage/images/bg-login.png');   
+   					 background-repeat: repeat-x;border:1.5px solid rgb(226,226,226);">
+   					 <h:br />
+					<div>
+						<image src="Share/homepage/images/logo.png" style="margin-left:20px"/>
+					</div>
+					<h:br />
+					<h:br />
+					<h:div class="btn-login" nowrap="true"
+						style="text-align:left;padding-bottom:5px;width:100%;padding-bottom:20px">
+						<button autodisable="self"
+							style="cursor:pointer;margin-left:100px" id="btnLogin"
+							label="Đăng nhập" class="SpanTag"/>
+						<button autodisable="self"
+							style="cursor:pointer;margin-left:15px" id="btnRegister"
+							label="Đăng ký" class="SpanTag" href="/Pages/Register.zul" />							
+							 
+					</h:div>
+				</div>
+
+				<div style="margin:10px;" >
+				<div style=" background-image: url('Share/homepage/images/login_bg.png');   
+   					 background-repeat: repeat-x;border:1.5px solid rgb(226,226,226);">
+				<h:br />
+				<h:table width="100%" align="center">
+					<h:th width="50%" />
+					<h:th width="50%" />
+					<h:tr>
+						<h:td style="vertical-align:top">
+							<groupbox>
+								<caption label="THÔNG TIN HỖ TRỢ"
+									class="group-box" />
+								<groupbox>
+									<div>
+										<label value=" Góp ý:"
+											class="title-label" />
+										<label
+											value="  PCT. Nguyễn Tất Đạt/043.373.66483"
+											class="SpanTag2 " />
+									</div>
+									<div>
+										<label value=" Hỗ trợ nộp phí:"
+											class="title-label" />
+										<label
+											value="  P.KHTC/043.845.9668" class="SpanTag2 " />
+
+									</div>
+
+								 
+								</groupbox>
+								<h:br/>
+								<groupbox>
+								<caption label="Dịch vụ công trực tuyến về tiếp nhận và xử lý thủ tục ĐĂNG KÝ THUỐC"
+									class="group-box" />
+							 
+									<div>
+										<label value=" Email:"
+											class="title-label" />
+										<label
+											value="  hotro.byt@gmail.com"
+											class="SpanTag2 " />
+									</div>
+									<div>
+										<label value=" Hỗ trợ chung:"
+											class="title-label" />
+										<label
+											value="  Vũ Thị Gương/0975.823.927 (trong giờ hành chính)" class="SpanTag2 " />
+									</div>
+
+								</groupbox>
+								
+								<h:br/>
+								<groupbox>
+								<caption label="Dịch vụ công trực tuyến về tiếp nhận và xử lý thủ tục KÊ KHAI/KÊ KHAI LẠI GIÁ THUỐC"
+									class="group-box" />
+							 
+									<div>
+										<label value=" Email:"
+											class="title-label" />
+										<label
+											value="  hotro.byt@gmail.com"
+											class="SpanTag2 " />
+									</div>
+									<div>
+										<label value=" Hỗ trợ chung:"
+											class="title-label" />
+										<label
+											value="  Vũ Thị Gương/0975.823.927 (trong giờ hành chính)" class="SpanTag2 " />
+									</div>
+
+								</groupbox>
+								
+								<h:br/>
+								<groupbox>
+								<caption label="Dịch vụ công trực tuyến về tiếp nhận và xử lý thủ tục ĐĂNG KÝ THÔNG TIN THUỐC"
+									class="group-box" />
+							 
+									<div>
+										<label value=" Email:"
+											class="title-label" />
+										<label
+											value="  dichvucong.qld@gmail.com"
+											class="SpanTag2 " />
+									</div>
+									<div>
+										<label value=" Hỗ trợ kỹ thuật:"
+											class="title-label" />
+										<label
+											value="  Ngô Thị Nhung/01682.924.390" class="SpanTag2 " />
+									</div>
+									
+									<div>
+										<label value=" Hỗ trợ chung:"
+											class="title-label" />
+										<label
+											value="  Phòng quản lý thông quảng cáo/04.382.358.812" class="SpanTag2 " />
+									</div>
+
+								</groupbox>								
+										
+
+							</groupbox>
+							<h:br/>		
+							<groupbox>
+									<caption
+										label="Danh mục tài liệu hướng dẫn sử dụng" class="group-box" />
+									<div>
+										<label
+											value=" Hướng dẫn sử dụng DVC Đăng ký thuốc:"
+											class="title-label" />
+										<a href="Share/huongdan/Tai_lieu_huong_dan_su_dung_cho_DN.pdf">
+											<label class="title-label"
+												style="color: #0000ff; cursor: pointer;"> Xem hướng dẫn	</label>
+										</a>
+									</div>
+									<div>
+										<label
+											value=" Hướng dẫn sử dụng DVC Kê khai/Kê khai lại giá thuốc:"
+											class="title-label" />
+										<a href="Share/huongdan/Tai_lieu_huong_dan_su_dung_cho_DN.pdf">
+											<label class="title-label"
+												style="color: #0000ff; cursor: pointer;"> Xem hướng dẫn	</label>
+										</a>
+
+									</div>
+									<div>
+										<label
+											value=" Hướng dẫn sử dụng DVC Đăng ký thông tin thuốc:"
+											class="title-label" />
+										<a href="Share/huongdan/Tai_lieu_huong_dan_su_dung_cho_DN.pdf">
+											<label class="title-label"
+												style="color: #0000ff; cursor: pointer;"> Xem hướng dẫn	</label>
+										</a>
+
+									</div>
+									
+									<div>
+										<label
+											value=" Hướng dẫn cài đặt chương trình hỗ trợ ký số:"
+											class="title-label" />
+										<a href="Share/huongdan/Tai_lieu_huong_dan_su_dung_cho_DN.pdf">
+											<label class="title-label"
+												style="color: #0000ff; cursor: pointer;"> Xem hướng dẫn	</label>
+										</a>
+
+									</div>
+									
+									<div>
+										<label
+											value=" Chương trình hỗ trợ ký số:"
+											class="title-label" />
+										<a href="Share/huongdan/Tai_lieu_huong_dan_su_dung_cho_DN.pdf">
+											<label class="title-label"
+												style="color: #0000ff; cursor: pointer;"> Tải về	</label>
+										</a>
+
+									</div>
+									
+								</groupbox>
+							
+						</h:td>
+						
+						<!-- THONG KE HO SO -->
+						
+						<h:td style="vertical-align:top">
+							<groupbox>
+								<caption label="THỐNG KÊ"
+									class="group-box" />
+									
+									<div>
+										<label
+											value=" ĐĂNG KÝ THUỐC"
+											class="title-label" />									
+
+									</div>
+									
+									<h:br/>
+									<div>
+										<label
+											value=" KÊ KHAI/KÊ KHAI LẠI GIÁ THUỐC"
+											class="title-label" />									
+
+									</div>
+									
+									<h:br/>
+									<div>
+										<label
+											value=" ĐĂNG KÝ THÔNG TIN THUỐC"
+											class="title-label" />									
+
+									</div>
+									
+									
+									
+							</groupbox>
+						</h:td>
+						
+					</h:tr>
+				</h:table>
+			</div>
+			</div>
+		</window>
+	</h:div>
+</zk>

@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./docView" ?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+  
+    <window id="docView" border="none" width="100%" 
+            apply="com.viettel.voffice.DAO.Document.DocumentViewController" 
+            position="center,center" >
+        <div id="toolbarTop" class="toolBar">
+            <image id="back" sclass="img-cal" style="float:left" src="/Share/img/png/quay-lai.png"  tooltiptext="Quay lại"/>
+            <image id="flow" src="/Share/img/png/flow.png" sclass="img-cal" style="float:left" tooltiptext="Xem luồng"/>
+        </div>
+        <h:div class ="contentDiv" >
+            <h:table width="100%" style="word-wrap:break-word;">
+                <h:tr>
+                    <h:td width="70%" style="vertical-align:top;">
+                        <groupbox width="100%" sclass="gb-form-create">
+                            <caption label="Thông tin cơ bản"/> 
+                            <h:table width="100%" sclass="viewTable" >
+                                <h:tr>
+                                    <h:td width="15%">
+                                        <label value="Sổ văn bản" sclass="hightlight"/>
+                                    </h:td>
+                                    <h:td width="35%">
+                                        <label sclass="label-info" value="@{controller.bookSelected.bookName}"></label>
+                                    </h:td>
+                                    <h:td width="15%">
+                                        <label value="Số sổ" sclass="hightlight"/>
+                                    </h:td>
+                                    <h:td>
+                                        <label sclass="label-info" value="@{controller.bookSelected.currentNumber}"></label>
+                                    </h:td>
+                                </h:tr>
+                                <h:tr>
+                                    <h:td width="15%">
+                                        <label value="Ký hiệu"  sclass="hightlight"/>
+                                    </h:td>
+                                    <h:td width="35%">
+                                        <label sclass="label-info" value="@{controller.docSelected.documentCode}"  />
+                                    </h:td>
+                                    <h:td width="15%">
+                                        <label value="Ngày ban hành" width="120px" sclass="hightlight"/>
+                                    </h:td>
+                                    <h:td width="35%">
+                                        <label sclass="label-info" value="@{controller.docSelected.datePublishStr}"></label>
+                                    </h:td>
+                                </h:tr>
+                                <h:tr>
+                                    <h:td width="15%"> 
+                                        <label value="Loại văn bản" sclass="hightlight"/>
+                                    </h:td>
+                                    <h:td colspan="3"> 
+                                        <label sclass="label-info" value="@{controller.docSelected.documentTypeName}"></label>
+                                    </h:td>
+                                </h:tr>
+                                <h:tr >
+                                    <h:td>
+                                        <label value="Đơn vị soạn thảo" sclass="hightlight"/>
+                                    </h:td>
+                                    <h:td>
+                                        <label sclass="label-info" value="@{controller.docSelected.createDeptName}"></label>
+                                    </h:td>
+                                    <h:td >
+                                        <label value="Người soạn thảo" sclass="hightlight"/>
+                                    </h:td>
+                                    <h:td >
+                                        <label sclass="label-info" value="@{controller.docSelected.creatorName}"></label>
+                                    </h:td>
+                                </h:tr>
+                                <h:tr >
+                                    <h:td width="15%">
+                                        <label value="Trích yếu" width="120px" sclass="hightlight"/>
+                                    </h:td>
+                                    <h:td colspan="3">
+                                        <label sclass="label-info" value="@{controller.docSelected.documentAbstract}" multiline="true"></label>
+                                    </h:td>
+                
+                                </h:tr>
+                                <h:tr>
+                                    <h:td width="15%"> 
+                                        <label value="Lĩnh vực" sclass="hightlight"/>
+                                    </h:td>
+                                    <h:td> 
+                                        <label sclass="label-info" value="@{controller.docSelected.documentAreaName}"></label>
+                                    </h:td>
+                                    <h:td>
+                                        <label value="Người ký" sclass="hightlight"/>
+                                    </h:td>
+                                    <h:td>
+                                        <label value="@{controller.docSelected.signerName}"  sclass="label-info"></label>
+                                    </h:td>
+                                </h:tr>
+                                <h:tr>
+                                    <h:td width="15%">
+                                        <label value="Là văn bản QPPL" sclass="hightlight"/>
+                                    </h:td>
+                                    <h:td width="15%">
+                                        <label sclass="label-info" value="${$composer.docSelected.isLawDocument==true?'Không':'Có'}" />                
+                                    </h:td>
+                                    <h:td width="15%">
+                                        <label value="Là văn bản trả lời" sclass="hightlight"/>
+                                    </h:td>
+                                    <h:td width="35%">
+                                        <label sclass="label-info" value="${$composer.docSelected.isDocAnswer==true?'Không':'Có'}" />            
+                                    </h:td>
+                                </h:tr>
+                                <h:tr>
+                                    <h:td width="15%"> 
+                                        <label value="Số bản" sclass="hightlight"/>
+                                    </h:td>
+                                    <h:td > 
+                                        <label sclass="label-info" value="@{controller.docSelected.numberOfDoc}"></label>
+                                    </h:td>
+                                    <h:td width="15%">
+                                        <label value="Số trang"  sclass="hightlight"/>
+                                    </h:td>
+                                    <h:td >
+                                        <label sclass="label-info" value="@{controller.docSelected.numberOfPage}"></label>
+                                    </h:td>
+                                </h:tr>
+                                <h:tr>
+                                    <h:td>
+                                        <label value="Độ mật" sclass="hightlight"/>
+                                    </h:td>
+                                    <h:td>
+                                        <label sclass="label-info" value="@{controller.docSelected.securityTypeName}"></label>
+                                    </h:td>
+                                    <h:td>
+                                        <label value="Độ khẩn" sclass="hightlight"/>
+                                    </h:td>
+                                    <h:td>
+                                        <label sclass="label-info" value="@{controller.docSelected.emergencyTypeName}"></label>
+                                    </h:td>
+                                </h:tr>
+                                
+                                <h:tr>
+                                    <h:td>
+                                        <label value="Nơi nhận nội bộ" sclass="hightlight"/>
+                                    </h:td>
+                                    <h:td colspan="3">
+                                        <label sclass="label-info" value="@{controller.docSelected.deptInNameReceive}"></label>
+                                    </h:td>
+                                </h:tr>
+                                <h:tr>
+                                    <h:td>
+                                        <label value="Đơn vị ngoài" sclass="hightlight"/>
+                                    </h:td>
+                                    <h:td colspan="3">
+                                        <label sclass="label-info" value="@{controller.docSelected.deptOutNameReceive}"></label>
+                                    </h:td>
+                                </h:tr>
+                            </h:table>
+                        </groupbox>
+                        <separator/>
+                        <groupbox width="100%" sclass="gb-form-create" id="gbIsDocAnswer">
+                            <caption label="Danh sách văn bản trả lời"/>
+                            <listbox id="lbListDocRelation" emptyMessage="Không có văn bản nào" mold="paging" vflex="true" pageSize="10">
+                                <listhead>
+                                    <listheader label="STT" align="center" hflex="min" />
+                                    <listheader label="Số đến" align="center" hflex="min" />
+                                    <listheader label="Số / Kí hiệu" hflex="1" />
+                                    <listheader label="Trích yếu" hflex="2" />
+                                </listhead>
+                                <template name="model">
+                                    <listitem>
+                                        <listcell
+                                            label="${forEachStatus.index+1}">
+                                        </listcell>
+                                        <listcell
+                                            label="">
+                                        </listcell>
+                                        <listcell
+                                            label="${each.documentCode}">
+                                        </listcell>
+                                        <listcell
+                                            label="${each.documentAbstract}">
+                                        </listcell>
+                                    </listitem>
+                                </template>
+                            </listbox>
+                        </groupbox>
+                        <groupbox sclass="gb-form-create" style="min-height:200px">
+                            <caption label="Tệp đính kèm"/>
+                            <button width="85px" id="btnAttach" style="font-weight: bold;color: #F25D45;" sclass="attachBtn" 
+                                    src="/Share/img/paperclip.png"
+                                    upload="zk.UPMSample1,maxsize=10240,native" label="Chọn tệp" visible="false"/>
+                            <vlayout id="flist" hflex="1" sclass="fileList" />
+                            <listbox id="attachListBox" 
+                                     multiple="false" rows="3"
+                                     model="@{controller.attachList}" >
+                                <listhead sizable="true">
+                                    <listheader width="70%" label="Tên tệp" />
+                                    <listheader width="20%" label="Người tạo" />
+                                    <listheader width="10%" align="center" label="Loại tệp"/>
+                                </listhead>
+                                <listitem self="@{each='at'}" value="@{at}">
+                                    <listcell label="@{at.attachName}" forward="onClick=onDownloadAttach"/>
+                                    <listcell label="@{at.creatorName}" />                                
+                                    <listcell label="@{at.attachTypeName}"/>
+                                </listitem> 
+                            </listbox>
+                        </groupbox>
+                    </h:td>
+                    <h:td style="vertical-align:top;">
+                        <groupbox sclass="gb-form-create" style="min-height:200px">
+                            <caption label="Danh sách ý kiến xử lý"/>
+                            <div id="notifyWnd"/>
+                        </groupbox>
+                    </h:td>
+                </h:tr>
+            </h:table>
+        </h:div> 
+        <style src="/Share/css/uploadstyle.css" />
+        <style src="/Share/css/formstyle.css" />
+    </window>
+</zk>

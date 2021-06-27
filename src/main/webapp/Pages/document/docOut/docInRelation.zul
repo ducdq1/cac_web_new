@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+	xmlns="http://www.zkoss.org/2005/zul" id="windowDocInAll"
+	apply="com.viettel.voffice.DAO.Document.DocInRelationController" closable="true" width="80%" title="Danh sách văn bản đến">
+	<style src="/Share/css/formstyle.css" />
+	<h:div class="contentDiv">
+		<include id="incSearchFullForm"
+			src="/Pages/document/docIn/include/searchDocInForm.zul"  />
+	</h:div>
+        <separator />
+	<h:div class="contentDiv">
+		<listbox id="lbListDoc" emptyMessage="Không có văn bản nào" multiple="true" checkmark="true">
+			<listhead>
+				<listheader label="STT" align="center" hflex="min" />
+				<listheader label="Số đến" align="center" hflex="min" />
+				<listheader label="Số / Kí hiệu" hflex="min" />
+				<listheader label="Ngày đến" hflex="min" />
+				<listheader label="Ngày ban hành" hflex="min" />
+				<listheader label="Cơ quan ban hành" hflex="2" />
+				<listheader label="Người ký" hflex="1" />
+				<listheader label="Trích yếu" hflex="2" />
+				<listheader label="Hạn xử lý" hflex="min" />
+			</listhead>
+			<template name="model">
+				<listitem>
+					<listcell
+						forward="onClick=lbListDoc.onOpenView(${each})"
+						label="${forEachStatus.index + 1 + userPagingTop.pageSize * userPagingTop.activePage}">
+					</listcell>
+					<listcell
+						forward="onClick=lbListDoc.onOpenView(${each})"
+						label="${$composer.getBookNumber(each)}">
+					</listcell>
+					<listcell
+						forward="onClick=lbListDoc.onOpenView(${each})"
+						label="${each.documentReceive.documentCode}">
+					</listcell>
+					<listcell
+						forward="onClick=lbListDoc.onOpenView(${each})"
+						label="${each.documentReceive.receiveDateStr}">
+					</listcell>
+					<listcell
+						forward="onClick=lbListDoc.onOpenView(${each})"
+						label="${each.documentReceive.publishDateStr}">
+					</listcell>
+					<listcell
+						forward="onClick=lbListDoc.onOpenView(${each})"
+						label="${each.documentReceive.publishAgencyName}">
+					</listcell>
+					<listcell
+						forward="onClick=lbListDoc.onOpenView(${each})"
+						label="${each.documentReceive.signer}">
+					</listcell>
+					<listcell
+						forward="onClick=lbListDoc.onOpenView(${each})"
+						label="${each.documentReceive.documentAbstract}">
+					</listcell>
+					<listcell
+						forward="onClick=lbListDoc.onOpenView(${each})"
+						label="${each.documentReceive.deadlineByDateStr}">
+					</listcell>
+				</listitem>
+			</template>
+		</listbox>
+		<paging id="userPagingTop" pageSize="10" detailed="true" />
+	</h:div>
+        <separator />
+        <h:div style="text-align:right">
+            <button label="Chọn" image="/Share/img/icon/save.png"  id="btnSave" sclass="button blue" width="85px"/>
+                    <button label="Huỷ bỏ" image="/Share/img/icon/close.png" id="btnCancel" onClick="windowDocInAll.detach()" sclass="button blue" width="85px"/>
+        </h:div>
+</window>

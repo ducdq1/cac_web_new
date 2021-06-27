@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./aMediaView" ?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    
+<window id="aMediaView" title="Nội dung tệp" border="normal" width="860px" height="620px" 
+    apply="com.viettel.voffice.DAO.Document.AttachContentController" 
+    position="center,center" closable="true">
+    <iframe id="iframeView" height="100%" width="100%" />
+</window>
+</zk>

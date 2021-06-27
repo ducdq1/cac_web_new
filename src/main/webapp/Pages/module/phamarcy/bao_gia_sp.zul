@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+	xmlns="http://www.zkoss.org/2005/zul" id="phamarcyAll" title="ádasd"
+	closable="true"
+	apply="com.viettel.module.phamarcy.controller.BaoGiaController">
+	<style src="/Share/css/formstyle.css" />
+	 
+	<script defer="true">toolBar.widget = "phamarcyAll";</script>
+	<style>
+		.z-listheader-cnt{ color:#4584D3 !important;
+		}
+
+	</style>
+	<h:div  style="width:99%;margin:0 auto;background-color:#FBEFFB">
+	<groupbox id="fullSearchGbx"  >
+		<caption
+			label="Thông tin báo giá" />
+		<h:table align="center" width="80%" class="table-search">
+			<h:tr>
+				<h:th width="10%" />
+				<h:th width="25%" />
+				<h:th width="12%" />
+				<h:th width="25%" />
+				<h:th width="12%" />
+				<h:th width="25%" />
+			</h:tr>
+			<h:tr>
+			 
+				<h:td style="text-align: right;">
+					<label value="Mã NVBH:" sclass="lb-create" />
+				</h:td>
+				<h:td>
+					<label id="tbMaNVBH" width="90%"  
+						  />
+				</h:td>
+				
+				<h:td style="text-align: right;">
+					<label value="Khách hàng:" sclass="lb-create" />
+				</h:td>
+				<h:td>
+					<label id="tbKhacHang" width="90%"  
+						  />
+				</h:td>
+				
+				<h:td style="text-align: right">
+					<label value="SĐT:" sclass="lb-create" />
+				</h:td>
+				<h:td>
+					<label id="tbSDT" width="90%" 
+						maxlength="250" />
+				</h:td> 
+				
+			 
+			</h:tr>
+				<h:tr>
+				<h:td style="text-align: right">
+					<label value="Tên NVBH:" sclass="lb-create" />
+				</h:td>
+				<h:td>
+					<label id="tbTenNVBH" width="90%"  
+						 />
+				</h:td> 
+				
+				<h:td style="text-align: right;">
+					<label value="Địa chỉ:" sclass="lb-create" />
+				</h:td>
+				<h:td>
+					<label id="tbDiaChi" width="90%" 
+						  />
+				</h:td>	
+				<h:td style="text-align: right;">
+					<label value="Báo giá cho:" sclass="lb-create" />
+				</h:td>
+				<h:td>
+					<radiogroup id="rdgLoaiBaoGia" ></radiogroup>
+					<radio radiogroup="rdgLoaiBaoGia" selected="true"
+						style="font-size:15px; "  label="Khách hàng lẽ" /> <h:br/>
+					<separator />
+					<radio radiogroup="rdgLoaiBaoGia" 
+						style="font-size:15px"
+					 label="Công trình" class="radio-input" />
+				</h:td>			
+				</h:tr>	 
+			<h:tr>
+				<h:td style="height:10px">
+				</h:td> 
+			</h:tr>
+ 
+		</h:table>
+	</groupbox>
+		 
+	</h:div>
+		
+	<h:div class="contentDiv" style="width:99%;margin:0 auto">
+ 
+ 		<listbox id="lbListSP" checkmark="false" mold="paging" pageSize="10"
+		nonselectableTags="*"
+		emptyMessage="Không tìm thấy sản phẩm nào">
+		<listhead sizable="true">
+			<listheader label="STT" align="center" style="width:3%" />
+			<listheader label="Mã sản phẩm" align="center"
+				style="width:15%" />
+			<listheader label="Tên sản phẩm" align="center"
+				style="width:15%" />
+			<listheader label="Hình ảnh" align="center"
+				style="width:10%" />
+			<listheader label="Đơn vị tính" align="center"
+				style="width:6%" />
+			<listheader label="Số lượng" align="center"
+				style="width:8%" />
+			<listheader label="Giá bán" align="center"
+			style="width:12%" />
+			<listheader label="Thành tiền" align="center"
+			style="width:12%" />
+			<listheader label="Ghi chú" align="center"
+			style="width:12%" /> 
+
+		</listhead>
+		<template name="model">
+			<listitem
+				style="word-wrap: break-word !important; white-space: normal; text-align: left;">
+				<listcell>
+					<label
+						value="${forEachStatus.index + 1 }">
+					</label>
+				</listcell>				
+				 
+				 <listcell style="text-align:left">
+					<label
+						value="${each.productCode}">
+					</label>
+				</listcell>
+				
+				<listcell style="text-align:left">				
+				<label
+						value="${each.productName}">
+					</label>
+				</listcell>
+				<listcell style="text-align:center">
+				 <image width="50px" height="50px"></image>
+				</listcell>
+				<listcell style="text-align:left">
+				<label
+						value="${each.unit}">
+					</label>
+				</listcell>
+				<listcell style="text-align:right">
+					<label
+						value="${$composer.formatNumber(each.amount,'###,###,###.####')}">
+					</label>
+				</listcell>
+				<listcell style="text-align:center">
+				 <textbox value="${$composer.formatNumber(each.price,'###,###,###.####')}"   readonly="${$composer.getStatusQuotation()}"/>
+				</listcell>
+				<listcell style="text-align:right">
+					<label
+						value="${$composer.formatNumber(each.amount * each.price,'###,###,###.####')}">
+					</label>
+				</listcell>
+				<listcell style="text-align:left">
+				<label
+						value="${each.note}">
+					</label>
+				</listcell>
+				  
+			</listitem>
+		</template>
+	</listbox>
+ 	</h:div>
+ 	<h:br/>
+ 	<h:div style="witdh:100%;margin:0 auto;text-align:center">
+		 <label sclass="lb-create" value="Ngày hết hạn: " /> 
+		  <datebox id="dbExpireDate" cols="12" format="dd/MM/yyyy"
+						width="120px"
+						constraint="between 19000101 and 20991231: ${$composer.getLabel('date_validate')}" />
+	 </h:div>
+	 <h:br/>
+ 	<h:div style="witdh:100%;margin:0 auto;text-align:center">
+		
+		<button id="btnPreView" label="Xem trước" sclass="button"
+		image="/Share/img/icon/print_ic_small.png" autodisable="self" />  
+		</h:div>
+		<h:br/>
+		<h:div style="witdh:100%;margin:0 auto;text-align:center">
+		  <button id="btnPrint" label="In báo giá" sclass="button"
+						image="/Share/img/icon/printer_ic.png" autodisable="self" /> 
+		 <button id="btnSave"
+				label="Lưu lại" sclass="button"
+				image="/Share/img/icon/save.png" autodisable="self" />
+				
+		 <button  id="btnClose"
+				label="Đóng" sclass="button" onClick="phamarcyAll.onClose()"  visible="false"
+				image="/Share/img/icon/close.png" autodisable="self" /> 
+		</h:div>
+	<separator />
+</window>

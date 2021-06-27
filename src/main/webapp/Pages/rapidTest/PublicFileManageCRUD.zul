@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+        xmlns="http://www.zkoss.org/2005/zul" id="PublicFileManagerCRUD"  
+        position="center,center" width="600px"   title="Thông tin hồ sơ dùng chung"
+        apply="com.viettel.module.rapidtest.DAO.PublicFileManageCRUDController" closable="true">
+    <style src="/Share/css/formstyle.css" />
+    <!--    <h:div class="toolBar" style="padding-top:10px; padding-left:5px; height:26px">
+        Thông tin hồ sơ dùng chung
+    </h:div>
+    -->
+    <h:table width="100%" align="center">
+        <h:tr>
+            <h:td style="width:30%">
+                <label value="Loại tệp" sclass="lb-create" />
+                <label value=" *" sclass="label-required" />
+            </h:td>
+            <h:td>
+                <listbox id="lbFileType"
+                         mold="select"
+                         width="90%"
+                         >
+                    <template name="model">
+                        <listitem label="${each.name}"
+                                  value="${each.categoryId}" />
+                    </template>
+                </listbox>
+            </h:td>
+            
+            
+        </h:tr>
+        <h:tr>
+            <h:td>
+                <label value="Mô tả tệp" sclass="lb-create" />
+            </h:td>
+            <h:td >
+                <textbox width="89%" id="attachDes" maxlength="255" value="${$composer.getAttach().attachDes}"/>
+            </h:td>
+        </h:tr>
+        <h:tr>
+            <h:td>
+                <label value="Tệp tải lên" sclass="lb-create" />
+                <label value=" *" sclass="label-required" />
+            </h:td>
+            <h:td>
+                <vlayout>
+                    <button width="85px" id="btnAttach"
+                            style="font-weight: bold;color: #F25D45;" sclass="attachBtn"
+                            src="/Share/img/paperclip.png"
+                            upload="zk.UPMSample1,maxsize=3072"
+                            label="Chọn tệp" />
+                    <vlayout id="flist" hflex="1" sclass="fileList" />
+                </vlayout>
+            </h:td>
+        </h:tr>
+                    
+        <h:tr>
+            <h:td style="text-align:center" colspan="4">
+                <button id="btnCreate" label="Lưu" sclass="button" image="/Share/img/icon/Add.png"/>
+                <button id="btnSearch" label="Đóng" sclass="button" image="/Share/img/icon/close.png" forward="onClick=PublicFileManagerCRUD.onClose"/>
+            </h:td>
+            
+        </h:tr>
+    </h:table>
+            
+</window>

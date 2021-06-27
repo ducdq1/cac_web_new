@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul"
+    xmlns:h="native">
+    
+    <window id="cosmeticPermitViewWindow" border="normal" width="100%" 
+            apply="com.viettel.module.cosmetic.Controller.CosmeticPermitViewController"
+            title="TRA CỨU HỒ SƠ">
+        <groupbox mold="3d">
+            <caption label="TRA CỨU HỒ SƠ" />
+            <h:table style="table-layout: fixed;" width="100%">
+                <h:tr>
+                    <h:td style="width:15%">
+                        <label value="${$composer.getLabelCos('lookup_permit_lbBusinessName')}" />
+                    </h:td>
+                    <h:td style="width:35%">
+                        <textbox id="tbBusinessName" maxlength="255" width="95%"/>
+                    </h:td>
+                    <h:td style="width:15%">
+                        <label value="${$composer.getLabelCos('lookup_permit_lbProductName')}" />
+                    </h:td>
+                    <h:td style="width:35%">
+                        <textbox id="tbProductName" maxlength="255" width="95%"/>
+                    </h:td>
+                </h:tr>  
+                <h:tr>
+                    <h:td>
+                        <label value="${$composer.getLabelCos('lookup_permit_lbBusinessAddress')}"/>
+                    </h:td>
+                    <h:td>
+                        <textbox id="tbBusinessAddress" maxlength="255" width="95%" />
+                    </h:td>
+                    <h:td>
+                        <label value="${$composer.getLabelCos('lookup_permit_lbSort')}"/>
+                    </h:td>                                        
+                    <h:td>
+                        <listbox id="lbSort"  mold="select" width="95%">
+                            <listitem label="${$composer.getLabelCos('common_choose')}"
+                                      value="${$composer.getLabelCos('common_choose')}" selected="true" />
+                            <listitem label="${$composer.getLabelCos('lookup_permit_BusinessName_asc')}" value="1"/>
+                            <listitem label="${$composer.getLabelCos('lookup_permit_BusinessName_desc')}" value="2" />
+                            <listitem label="${$composer.getLabelCos('lookup_permit_ProductName_asc')}" value="3"/>
+                            <listitem label="${$composer.getLabelCos('lookup_permit_ProductName_desc')}" value="4" />
+                            <listitem label="${$composer.getLabelCos('lookup_permit_BusinessAddress_asc')}" value="5"/>
+                            <listitem label="${$composer.getLabelCos('lookup_permit_BusinessAddress_desc')}" value="6" />
+                        </listbox>
+                    </h:td>
+                </h:tr> 
+                <h:tr>
+                    <h:td colspan="4" style="text-align:center">                        
+                        <button id="btnSearch" label="Tìm kiếm" sclass="button" image="/Share/img/icon/search.jpg"/>
+                    </h:td>
+                </h:tr>
+            </h:table>
+        </groupbox>
+        
+        <listbox id="lbPermit" 
+                multiple="false" checkmark="false"
+                style="word-wrap: break-word"
+                mold="paging" pageSize="10" 
+                emptyMessage="Không tồn tại bản ghi">
+           <listhead sizable="true">
+               <listheader width="3%" label="STT" align="center"/>
+               <listheader width="7%" label="Ngày cấp" align="center"/>    
+               <listheader width="25%" label="Tên sản phẩm" align="center"/>
+               <listheader width="30%" label="Tên doanh nghiệp" align="left"/>
+               <listheader width="35%" label="Địa chỉ" align="left"/>
+           </listhead>
+           <template name="model">
+               <listitem value="${each}">
+                   <listcell label="${forEachStatus.index+1+userPagingBottom.pageSize*userPagingBottom.activePage}" />
+                   <listcell label="${$composer.convertDateToString(each.receiveDate)}"/>
+                   <listcell label="${each.productName}" style="text-align: left" />
+                   <listcell label="${each.businessName}" style="text-align: left" />
+                   <listcell label="${each.businessAddress}" style="text-align: left" />                                                                               
+               </listitem>
+           </template>
+       </listbox>
+    </window>
+
+</zk>

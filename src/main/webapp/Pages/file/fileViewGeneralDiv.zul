@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">   
+    <window apply="com.viettel.voffice.DAO.Files.FileViewGeneralController" width="100%">
+        <h:table class="viewTable">
+            <h:tr>
+                <h:td width="30%">
+                    <label value="Tiêu đề"/>
+                </h:td>
+                <h:td width="70%">
+                    <label id="lblFileTitle" />
+                </h:td>
+                
+            </h:tr>
+            <h:tr>
+                <h:td>
+                    <label value="Mã hồ sơ"  />
+                </h:td>
+                <h:td>
+                    <label id="lblFileCode"/>
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td>
+                    <label value="Ngày bắt đầu"/>
+                </h:td>
+                <h:td>
+                    <label id="lblStartDate"/>
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td>
+                    <label value="Ngày kết thúc dự kiến"/>
+                </h:td>
+                <h:td>
+                    <label id="lblEndDate"/>
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td>
+                    <label value="Ngày kết thúc thực tế "/>
+                </h:td>
+                <h:td>
+                    <label id="lblActualEndDate"/>
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td colspan="2" style="background-color:rgb(209,224,236); border:1px solid gray;vertical-align:middle">
+                    <label value="Thành phần tham gia"/>
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td colspan="2" style="border:1px solid gray;vertical-align:top">
+                    <listbox id="lbParticipants">
+                        <listhead sizable="true">
+                            <listheader width="10%" label="STT" align="center"/>
+                            <listheader width="30%" label="Đơn vị"/>
+                            <listheader width="20%" label="Người tham gia" />
+                            <listheader width="20%" label="Vai trò"  />
+                            <listheader width="20%" label="Xử lý"  />
+                        </listhead>
+                        <template name="model">
+                            <listitem value="${each}">
+                                <listcell label="${forEachStatus.index+1}" />
+                                <listcell label="${each.receiveGroup}" />
+                                <listcell label="${each.receiveUser}" />
+                                <listcell>
+                                    <label value="Phối hợp" if="${each.processType==0}" />
+                                    <label value="Xử lý chính" if="${each.processType==1}" />
+                                    <label value="Tham khảo" if="${each.processType==2}" />
+                                    <label value="Cho ý kiến" if="${each.processType==3}" />
+                                    <label value="Để biết" if="${each.processType==4}" />
+                                    <label value="Phê duyệt" if="${each.processType==5}" />
+                                </listcell>
+                                <listcell>
+                                    <label value="Đã trả lại" if="${each.status==5}" />
+                                    <label value="Đã phê duyệt" if="${each.status==6}" />
+                                    <label value="Đã chuyển" if="${each.status==7}" />
+                                </listcell>
+                            </listitem>
+                        </template>
+                    </listbox>
+                </h:td>
+            </h:tr>
+        </h:table>
+    </window>
+</zk>

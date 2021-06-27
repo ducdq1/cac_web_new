@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="com.viettel_voffice_war_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>    
+    <class>com.viettel.voffice.BO.Document.SendSheet</class>
+    <class>com.viettel.voffice.BO.Document.DocumentReceive</class>
+    <class>com.viettel.voffice.BO.Document.Attachs</class>    
+    <class>com.viettel.voffice.BO.Document.DocumentPublish</class>
+    <class>com.viettel.voffice.BO.Document.BookDocument</class>
+    <class>com.viettel.voffice.BO.Document.Books</class>
+    <class>com.viettel.voffice.BO.Home.Notify</class>
+    <class>com.viettel.voffice.BO.Home.NotifyAction</class>
+    <class>com.viettel.voffice.BO.Document.OutsideOffice</class>
+    <class>com.viettel.voffice.BO.Calendar.Calendar</class>
+    <class>com.viettel.voffice.BO.Calendar.CalendarResource</class>
+    <class>com.viettel.voffice.BO.Calendar.Resources</class>
+    <class>com.viettel.voffice.BO.Calendar.CalendarRef</class>
+    <class>com.viettel.voffice.BO.Calendar.CalendarParticipants</class>
+    <class>com.viettel.voffice.BO.FileHandler.DocumentRef</class>
+    <class>com.viettel.voffice.BO.RapidTest.VFeeFile</class>
+    <class>com.viettel.voffice.BO.RapidTest.VRapidTestPaymentInfo</class>    
+    <class>com.viettel.voffice.BO.RapidTest.RtRapidTestAttach</class>
+    <class>com.viettel.voffice.BO.RapidTest.RtGroup</class>
+    <class>com.viettel.voffice.BO.RapidTest.FeePaymentInfo</class>
+    <class>com.viettel.voffice.BO.RapidTest.ProcedureGroupFee</class>
+    <class>com.viettel.voffice.BO.RapidTest.FileRt</class>
+    <class>com.viettel.voffice.BO.TimeHoliday</class>
+    <class>com.viettel.voffice.BO.VFeeProcedure</class>
+    <class>com.viettel.voffice.BO.VSubProcedure</class>    
+    <class>com.viettel.voffice.BO.Business</class>
+    <class>com.viettel.voffice.BO.VFee</class>    
+    <class>com.viettel.voffice.BO.Register</class>
+    <class>com.viettel.voffice.BO.VProcedure</class>
+    <class>com.viettel.voffice.BO.Files</class>
+  
+   
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@10.60.15.201:1521:devvas"/>
+      <property name="javax.persistence.jdbc.password" value="abc123"/>
+      <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
+      <property name="javax.persistence.jdbc.user" value="test_voffice"/>
+    </properties>
+  </persistence-unit>
+</persistence>

@@ -1,0 +1,68 @@
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+	xmlns="http://www.zkoss.org/2005/zul" xmlns:w="client"
+	apply="com.viettel.voffice.DAO.DocIn.include.DocOutSearchComposer">
+	<h:div class="contentDiv">
+		<groupbox id="fullSearchGbx" mold="3d">
+			<caption label="Tìm kiếm nâng cao" />
+			<h:table style="width:100%" sclass="searchTable">
+				<h:th width="15%" />
+				<h:th width="35%" />
+				<h:th width="15%" />
+				<h:th width="35%" />
+				<h:tr>
+					<h:td rowspan="2">
+						<label>Trích yếu</label>
+					</h:td>
+					<h:td rowspan="2">
+						<textbox id="tbDocumentAbstract" rows="2"
+							width="95%" />
+					</h:td>
+					<h:td>
+						<label>Ký hiệu văn bản</label>
+					</h:td>
+					<h:td>
+						<textbox id="tbDocumentCode" width="95%" />
+					</h:td>
+				</h:tr>
+				<h:tr>
+					<h:td>
+						<label>Loại văn bản</label>
+					</h:td>
+					<h:td>
+						<listbox id="lbDocType" mold="select"
+							width="95%" onAfterRender="self.setSelectedIndex(0)">
+							<template name="model">
+								<listitem>
+									<listcell label="${each.name}" />
+								</listitem>
+							</template>
+						</listbox>
+					</h:td>
+				</h:tr>
+				<h:tr>
+					<h:td>
+						<label>Ngày tạo, từ ngày:</label>
+					</h:td>
+					<h:td>
+						<datebox id="dbCreateFrom" width="95%"
+							format="dd/MM/yyyy">
+						</datebox>
+					</h:td>
+					<h:td>
+						<label>Đến ngày</label>
+					</h:td>
+					<h:td>
+						<datebox id="dbCreateTo" width="95%"
+							format="dd/MM/yyyy" />
+					</h:td>
+				</h:tr>
+				<h:tr>
+					<h:td colspan="4" align="center">
+						<button id="btnSearch" label="Tìm kiếm"
+							sclass="button" image="/Share/img/icon/search.jpg" />
+					</h:td>
+				</h:tr>
+			</h:table>
+		</groupbox>
+	</h:div>
+</window>

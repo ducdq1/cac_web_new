@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./newWindow" ?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <style src="/Share/css/formstyle.css"/>
+    <window width="100%" id="newWindow"
+            apply="com.viettel.voffice.DAO.Document.TaskManageController" height="100%">
+        <style src="/Share/css/formstyle.css" />
+<!--	<script defer="true">
+		toolBar.widget = "newWindow";
+		addToolbar("Share/img/add.png","Thêm mới văn bản","onOpenCreate");
+		addToolbar("Share/img/icon/excel_table.png", "Xuất file	excel","onExportExcel");
+	</script>-->
+        <h:div id="toolBar" class="toolBar">
+            <button sclass="btnAction" forward="onClick=docPublish.onSave"
+            label="Danh sách công việc " id="btnListTask" image="/Share/img/list.png"/>
+            <button sclass="btnAction" forward="onClick=docPublish.onSave"
+            label="Thêm công việc " id="btnNewTask" image="/Share/img/add.png"/>
+            <h:div style="background-color:white; width:250px; height:22px; margin-top:5px; border : 1px solid rgb(197,210,223); border-radius:16px; float:right">
+                <h:input maxlength="200" type="textbox" id="searchFullText" style="width:200px" onkeydown="toolBarCheckSearch(event);" autofocus="true"/>
+            <h:img src="Share/img/icon/search.jpg" style="width:16px; height:16px;float:left" onclick="toolBarSearch();"/>
+        </h:div>
+        </h:div>
+        <borderlayout height="100%">
+            <west autoscroll="true" maxsize="600" size="20%" border="0" splittable="true" >
+    <tree id="treeParent" width="100%">
+        <treechildren>
+            <treeitem>
+                <treerow>
+                    <treecell label="Công việc của tôi" style="" />
+                </treerow>
+                <treechildren>
+                    <treeitem open="false">
+                        <treerow>
+                            <treecell label="Công việc được giao" id="treeMyJobReceived" >
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                    <treeitem open="false">
+                        <treerow>
+                            <treecell label="Công việc đã giao" id="treeMyJobSend">
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                </treechildren>
+            </treeitem>
+            <treeitem>
+                <treerow>
+                    <treecell label="Tình trạng công việc" />
+                </treerow>
+                <treechildren>
+                    <treeitem open="false">
+                        <treerow>
+                            <treecell label="Đã hoàn thành" id="jobFinish">
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                    <treeitem open="false">
+                        <treerow>
+                            <treecell label="Chưa hoàn thành" id="jobUnFinish">
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                    <treeitem open="false">
+                        <treerow>
+                            <treecell label="Chưa bắt đầu" id="jobNotStart">
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                    <treeitem open="false">
+                        <treerow>
+                            <treecell label="Hủy bỏ" id="jobDestroy">
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                    
+                </treechildren>
+            </treeitem>
+        </treechildren>
+    </tree>
+            </west>
+            <center border="0">
+                  <groupbox width="100%" mold="3d" height="100%" id="gbCat">
+                        <caption label="Danh sách công việc" />
+                        <h:div id="searchDiv" style="width:100%" align="center">
+                            <h:table style="width:90%" class="searchTable">
+                                <h:tr>
+                                    <h:td width="10%"> 
+                                        <label value="Tên"></label>
+                                    </h:td>
+                                    <h:td width="40%">
+                                        <textbox id="txtSearchName" value="" width="98%" maxlength="200"/>
+                                    </h:td>
+                                    <h:td width="10%">
+                                        <label value="Mã"></label>
+                                    </h:td>
+                                    <h:td>
+                                        <textbox id="txtSearchCode" value="" width="98%" maxlength="50"/>
+                                    </h:td>
+                                </h:tr>
+                                <h:tr>
+                                    <h:td>
+                                        <label value="Trạng thái"></label>
+                                    </h:td>
+                                    <h:td>
+                                        <listbox id="lboxStatus" mold="select" width="100%" >
+                                            <listitem label="---Chọn---" value="---Chọn---" selected="true" />
+                                            <listitem label="Hoạt động" value="1"  />
+                                            <listitem label="Bị khóa" value="0" />
+                                        </listbox>
+                                    </h:td>
+                                    <h:td>
+                                        
+                                    </h:td>
+                                    <h:td></h:td>
+                                </h:tr>
+                                <h:tr>
+                                    <h:td colspan="4" style="text-align:center">
+                                        <button id="btnSearch" label="Tìm kiếm" sclass="button" image="/Share/img/icon/search.jpg"/>
+                                        <button id="btnCreate" label="Thêm mới" sclass="button" image="/Share/img/icon/add_1.png"/>
+                                    </h:td>
+                                </h:tr>
+                            </h:table>
+                        </h:div>
+                            <hlayout>
+                                <tree id="treeTask">
+                                    <treecols>
+                                        <treecol label="STT " align="center" width="5%"/>
+                                        <treecol label="Tên công việc " align="left" width="15%"/>
+                                        <treecol label="Ngày tạo" align="center" width="10%"/>
+                                        <treecol label="Ngày bắt đầu" align="center" width="10%"/>
+                                        <treecol label="Hạn hoàn thành" align="center" width="10%"/>
+                                        <treecol label="Người giao" align="center" width="15%"/>
+                                        <treecol label="Người thực hiện" align="left" width="15%"/>
+                                        <treecol label="Trạng thái" align="center" width="10%"/>
+                                        <treecol label="Giao việc" align="center" width="5%"/>
+                                        <treecol label="Sửa" align="center" width="5%"/>
+                                        <treecol label="Xoá" align="center" width="5%"/>
+                                    </treecols>
+                                    <template name="model">
+                                        <treeitem>
+                                            <treerow>
+                                                <treecell label="${forEachStatus.index+1}"  forward="onClick=treeTask.onViewUpdateProgress(${each})" />
+                                                <treecell label="${each.taskName}" forward="onClick=treeTask.onViewUpdateProgress(${each})" />
+                                                <treecell label="${each.createDateStr}" forward="onClick=treeTask.onViewUpdateProgress(${each})" />
+                                                <treecell label="${each.startTimeStr}"  forward="onClick=treeTask.onViewUpdateProgress(${each})" />
+                                                <treecell label="${each.deadlineStr}"  forward="onClick=treeTask.onViewUpdateProgress(${each})" />
+                                                <treecell label="${each.userCreateName}"  forward="onClick=treeTask.onViewUpdateProgress(${each})" />
+                                                <treecell label="${each.userPerformName}"  forward="onClick=treeTask.onViewUpdateProgress(${each})" />
+                                                <treecell label="${each.statusStr}" forward="onClick=treeTask.onViewUpdateProgress(${each})" />
+                                                <treecell>
+                                                    <image  forward="onClick=treeTask.onOpenCreateTask(${each})" src="/Share/img/icon/unlock.png" width="20px" height="20px" tooltiptext="Mở khóa danh mục"/>
+                                                </treecell>
+                                                <treecell>
+                                                    <image  forward="onClick=treeTask.onUpdateProgress(${each})" src="/Share/img/icon/delete.png" width="20px" height="20px" tooltiptext="Cập nhật tiến độ"/>
+                                                </treecell>
+                                                <treecell>
+                                                    <image  forward="onClick=catListbox.onDelete" src="/Share/img/icon/delete.png" width="20px" height="20px" tooltiptext="Xóa danh mục"/>
+                                                </treecell>
+                                            </treerow>
+                                        </treeitem>
+                                    </template>
+                                </tree>
+<!--                            <listbox id="listTaskReceived" 
+                                     multiple="false" style="word-wrap:break-word;max-height:500px;min-height:350px" vflex="true"
+                                     emptyMessage="Không tồn tại bản ghi nào" mold="paging" pageSize="10" model="@{controller.listTaskRc}">
+                                <listhead sizable="true">
+                                    <listheader width="5%" label="STT" align="center"/>
+                                    <listheader width="12%" label="Tên công việc cha" />
+                                    <listheader width="10%" label="Tên công việc" />
+                                    <listheader width="10%" label="Ngày lập" align="center"/>
+                                    <listheader width="10%" label="Ngày bắt đầu" align="center"/>
+                                    <listheader width="10%" label="Ngày hoàn thành" align="center"/>
+                                    <listheader width="11%" label="Người giao" align="center"/>
+                                    <listheader width="10%" label="Người thực hiện" align="center"/>
+                                    <listheader width="10%" label="Tình trạng công việc" align="center"/>
+                                    <listheader width="4%" label="Giao việc" align="center"/>
+                                    <listheader width="4%" label="Sửa" align="center"/>
+                                    <listheader width="4%" label="Xoá" align="center"/>
+                                </listhead>
+                                <template name="model">
+                                    <listitem value="${each}">
+                                        <listcell label="${forEachStatus.index+1}" />
+                                        <listcell label="${each.taskParentName}" />
+                                        <listcell label="${each.taskName}" />
+                                        <listcell label="${each.createDate}" />
+                                        <listcell label="${each.startTime}" />
+                                        <listcell label="${each.deadline}" />
+                                        <listcell label="${each.userCreateName}" />
+                                        <listcell label="${each.userPerformName}" />
+                                        <listcell label="${each.status}" />
+                                        <listcell>
+                                            <image forward="onClick=listTaskReceived.onOpenCreateTask(${each})" src="/Share/img/icon/unlock.png" width="20px" height="20px" tooltiptext="Mở khóa danh mục"/>
+                                        </listcell>
+                                        <listcell>
+                                            <image forward="onClick=listTaskReceived.onUpdateProgress(${each})" src="/Share/img/icon/delete.png" width="20px" height="20px" tooltiptext="Cập nhật tiến độ"/>
+                                        </listcell>
+                                        <listcell>
+                                            <image forward="onClick=catListbox.onDelete" src="/Share/img/icon/delete.png" width="20px" height="20px" tooltiptext="Xóa danh mục"/>
+                                        </listcell>
+                                    </listitem>
+                                </template>
+                            </listbox>-->
+                            </hlayout>
+                    </groupbox>      
+            </center>
+        </borderlayout>
+<!--        <h:table style="width:100%;height:100%">
+            <h:tr style="height:100%">
+                <h:td style="width:400px;vertical-align:top">
+                    
+                </h:td>
+                <h:td style="vertical-align:top">
+                        
+                </h:td>
+            </h:tr>
+        </h:table>-->
+    </window>
+</zk>

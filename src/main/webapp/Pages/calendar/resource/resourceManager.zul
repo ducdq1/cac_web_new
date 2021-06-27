@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <style src="/Share/css/formstyle.css"/>
+    <window width="100%" id="resourceWnd"
+            apply="com.viettel.voffice.DAO.Calendar.ResourceController" border="normal" height="100%">
+        <caption label="Quản lý trang thiết bị" />
+    
+        <h:div id="searchDiv" style="width:100%" align="center">
+            <h:table style="width:80%" class="searchTable">
+                <h:tr>
+                    <h:td width="20%">
+                        <label value="Tên tài nguyên"/>
+                    </h:td>
+                    <h:td width="30%">
+                        <textbox id="txtSearchResourceName" value="" maxlength="250"/>
+                    </h:td>
+                    <h:td width="20%"> 
+                        <label value="Mã tài nguyên"/>
+                    </h:td>
+                    <h:td width="30%">
+                        <textbox id="txtSearchResourceCode" value="" maxlength="50"/>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td>
+                        <label value="Đơn vị "/>
+                    </h:td>
+                    <h:td>
+                        <textbox id="txtSearchDeptName" value="" readonly="true" style="width:70%"/>
+                        <textbox id="txtSearchDeptId" value="" visible="false" />
+                        <button height="30px" id="btnShowSearchDept" image="/Share/img/icon/dept.png"/>
+                        <button height="30px" image="/Share/img/icon/delete.png" onClick="txtSearchDeptName.setValue(null);txtSearchDeptId.setValue(null);"/>
+                    </h:td>
+                    <h:td>
+                        <label value="Loại tài nguyên"/>
+                    </h:td>
+                    <h:td>
+                        <listbox id="lbResourceType" mold="select" onAfterRender='self.setSelectedIndex(0)'>
+                            <template name="model">
+                                <listitem label="${each.name}" id="${each.categoryId}" />
+                            </template>
+                        </listbox>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td colspan="4" style="text-align:center">
+                        <button id="btnSearch" label="Tìm kiếm" sclass="button" image="/Share/img/icon/search.jpg"/>
+                        <button id="btnCreate" label="Thêm mới" sclass="button" image="/Share/img/icon/add_1.png"/>
+                    </h:td>
+                </h:tr>
+            </h:table>
+        </h:div>
+        <h:div id="gridDiv" >
+            <listbox id="lbResources" 
+                     multiple="false"
+                     style="word-wrap: break-word"
+                     emptyMessage="Không tồn tài nguyên">
+                <listhead sizable="true">
+                    <listheader width="5%" label="STT" align="center"/>
+                    <listheader width="35%" label="Tài nguyên"/>
+                    <listheader width="10%" label="Mã" />
+                    <listheader width="20%" label="Loại tài nguyên"  />
+                    <listheader width="20%" label="Đơn vị"  />
+                    <listheader width="5%" label="Sửa" align="center"/>
+                    <listheader width="5%" label="Xoá" align="center"/>
+                </listhead>
+                <template name="model">
+                    <listitem value="${each}">
+                        <listcell label="${forEachStatus.index+1+userPagingBottom.pageSize*userPagingBottom.activePage}" />
+                        <listcell label="${each.resourceName}" />
+                        <listcell label="${each.resourceCode}" />
+                        <listcell label="${each.resourceTypeName}" />
+                        <listcell label="${each.deptName}" />
+                        <listcell >
+                            <image forward="onClick=lbResources.onEdit" src="/Share/img/icon/edit.png" width="20px" height="20px" tooltiptext="Sửa thông tin tài nguyên"/>
+                        </listcell>
+                        <listcell>
+                            <image forward="onClick=lbResources.onDelete" src="/Share/img/icon/delete.png" width="20px" height="20px" tooltiptext="Xóa tài nguyên"/>
+                        </listcell>
+                    </listitem>
+                </template>
+            </listbox>
+            <paging id="userPagingBottom" pageSize="10" detailed="true"/>
+        </h:div>  
+    </window>
+</zk>

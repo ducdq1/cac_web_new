@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+	xmlns="http://www.zkoss.org/2005/zul" id="phamarcyAll" style=""
+	apply="com.viettel.module.phamarcy.controller.DoanhThuController">
+	<style src="/Share/css/formstyle.css" />
+	<script defer="true">toolBar.widget = "phamarcyAll";</script>
+	<style>
+		.z-listheader-cnt{ 
+		color:#4584D3 !important;
+		}
+
+	</style>
+	<h:div class="contentDiv" style="width:99%;margin:0 auto;background-color:#FBEFFB">
+		<include id="incSearchFullForm"
+			src="/Pages/module/phamarcy/searchDoanhThu.zul" />
+	</h:div>
+	<h:br/>
+	<h:div class="contentDiv" style="width:99%;margin:0 auto">
+ 		<h:div style="margin:0 auto;;padding:10px!important;width:100%;display:inline">
+			<label style="font-size:15px;font-style: italic;float:right;" id="lbSoDuDK"> </label>
+			<label style="font-size:15px;float:right;font-weight:bold;color:blue">Số dư đầu kỳ:  </label>			
+		</h:div>
+
+		<listbox id="lbListSP" checkmark="false" mold="paging"
+			pageSize="10" nonselectableTags="*"
+			emptyMessage="Không tìm thấy sản phẩm nào">
+			<listhead sizable="true">
+				<listheader label="STT" align="center" style="width:3%" />				
+				<listheader label="Người mua" align="center"
+					style="width:30%" />
+				<listheader label="Mã sản phẩm" align="center"
+					style="width:15%" />
+					
+				<listheader label="Tên sản phẩm" align="center"
+					style="width:20%" />
+					
+				<listheader label="Đơn vị tính" align="center"
+					style="width:8%" />
+					
+				<listheader label="Số lượng" align="center"
+					style="width:8%" />
+					
+				<listheader label="Giá bán" align="center"
+					style="width:8%" />
+					
+				<listheader label="Thành tiền" align="center"
+					style="width:10%" />
+				<listheader label="Ngày bán" align="center"
+					style="width:8%" />
+				<listheader label="Sửa" align="center" hflex="min" />
+				<listheader label="Xóa" align="center" hflex="min" />
+
+
+			</listhead>
+			<template name="model">
+				<listitem
+					style="word-wrap: break-word !important; white-space: normal; text-align: left;">
+					<listcell>
+						<label
+							value="${ forEachStatus.index + 1}">
+						</label>
+					</listcell>
+					
+					<listcell style="text-align:left">
+						<label value="${each.companyNameFullName}" />
+					</listcell>
+					
+					<listcell style="text-align:left">
+						<label value="${each.productCode}" />
+					</listcell>
+					
+					<listcell style="text-align:left">
+						<label value="${each.name}" />
+					</listcell>
+
+					<listcell style="text-align:left">
+						<label value="${each.unit}"   />
+					</listcell>
+					<listcell style="text-align:right">
+						<label
+							value="${$composer.formatNumber(each.amount,'###,###.####')}" />
+					</listcell>
+
+					<listcell style="text-align:right">
+						<label
+							value="${$composer.formatNumber(each.price,'###,###')}" />
+					</listcell>
+
+					<listcell style="text-align:right">
+						<label value="${each.totalString}"   if="${each.type==0}"/>
+						<label value="${each.sono}"   if="${each.type!=0}"/>
+					</listcell>
+					<listcell style="text-align:center">
+						<label
+							value="${$composer.getFormatDate(each.orderDate)}" />
+					</listcell>
+					<listcell>
+						<image src="/Share/img/icon/edit.png"
+							width="22px" height="22px"
+							forward="onClick=lbListSP.onOpenUpdateSP(${each})"
+							tooltiptext="Sửa" />
+					</listcell>
+
+					<listcell>
+						<image src="/Share/img/icon/delete.png"
+							width="22px" height="22px"
+							forward="onClick=lbListSP.onDeleteSP(${each})" tooltiptext="Xóa" />
+					</listcell>
+
+				</listitem>
+			</template>
+		</listbox>
+		<separator />
+
+		 
+		<h:br/>
+		
+		 <h:div style="margin:0 auto;;padding:10px!important;width:100%;display:inline">
+			<label style="font-size:15px;font-style: italic;float:right;" id="lbTongtien"> </label>
+			<label style="font-size:15px;float:right;font-weight:bold;color:red">Phát sinh trong kỳ:  </label>			
+		</h:div>
+		<h:br/>
+ 		<h:div style="margin:0 auto;;padding:10px!important;width:100%;display:inline">
+			<label style="font-size:15px;font-style: italic;float:right;" id="lbSoDuCK"> </label>
+			<label style="font-size:15px;float:right;font-weight:bold;color:blue">Số dư cuối kỳ:  </label>			
+		</h:div>
+		
+	
+		<h:br/>
+		<h:div style="witdh:100%;margin:0 auto;text-align:center">
+			<button id="btnExport" height="35px" style="color:blue"
+				label="In báo cáo" sclass="button"
+				image="/Share/img/icon/print_ic_small.png" autodisable="self" />						
+		</h:div>
+		<h:br/>
+	</h:div>
+	<separator />
+</window>

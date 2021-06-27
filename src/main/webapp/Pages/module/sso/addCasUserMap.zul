@@ -1,0 +1,30 @@
+<window id="modalDialog" title="Thêm/sửa liên kết" border="normal"
+	width="460px"
+	apply="com.viettel.module.sso.controller.CasAddUserMapController"
+	position="center,center" closable="true"
+	action="show: slideDown;hide: slideUp">
+	<vlayout style="padding:20px">
+		 
+		<hbox>
+			<div width="100px">
+				<label value="Tên đăng nhập"></label>
+			</div>
+			<textbox width="300px" id="tbUname"></textbox>
+		</hbox>
+		<hbox>
+			<div width="100px">
+				<label value="Hệ thống"></label>
+			</div>
+			<combobox width="305px" id="cbSystem">
+				<template name="model">
+					<comboitem value="${each}"
+						label="${each.systemName}" />
+				</template>
+			</combobox>
+		</hbox>
+		<div style="text-align:center;padding-top:10px" width="100%">
+		<button id="btnSave" width="100px" label="Lưu" />
+		<button id="btnCancel" width="100px" label="Hủy" onClick="modalDialog.onClose()"/>
+		</div>
+	</vlayout>
+</window>

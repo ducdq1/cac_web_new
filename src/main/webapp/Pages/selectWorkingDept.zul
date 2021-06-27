@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <window title="Chọn đơn vị làm việc" apply="com.viettel.voffice.DAO.SelectDeptController" id="workingDeptWnd" position="center,center" width="400px" border="normal">
+        <listbox id="lbWorkingDept" style="width:100%;border:none">
+            <template name="model">
+                <listitem>      
+                    <listcell>
+                        <label value="${each.deptName}"/>
+                    </listcell>                                  
+                </listitem>
+            </template>
+        </listbox>
+    </window>
+</zk>

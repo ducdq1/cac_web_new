@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk >
+    <window xmlns:h="http://www.w3.org/1999/xhtml"
+            xmlns="http://www.zkoss.org/2005/zul"
+            title="Thông tin người dùng"
+            id="userViewDlg" apply="com.viettel.voffice.DAO.System.Users.UserViewController" width="1000px" border="normal" position="center" closable="true">
+        <style src="/Share/css/formstyle.css"/>
+        <div  id="divAvatar" style="width:100px;float:left;" align="center">
+            <image id="avatar" width="100px" height="100px" src="/Share/img/default-avatar.png" style="border-radius:100px;"/>
+            <button id="btnUpload" label="Đổi ảnh" upload="true,maxsize=2014" tooltiptext="Đổi ảnh avatar"/>
+        </div>
+        <div id="divmain" style="width:100%;float:right;">
+            <div id="businessType">
+                <groupbox id="gbBusinessInfo" mold="default" style="" width="100%">
+                    <caption label="${$composer.getLabel('userview_thongtindoanhnghiep')}" />
+                    <h:table style="width:100%;height:100%" >
+                        <h:tr>
+                            <h:td style="width:15%">
+                                <label sclass="lb-create" value="${$composer.getLabel('userview_loaihinhdn')}"></label>
+                                <span style="color:red">*</span>
+                            </h:td>
+                            <h:td style="width:35%">
+                                <listbox id="lstLoaiHinhDN" mold="select" style="width:97%">
+                                    <template name="model">
+                                        <listitem label="${each.name}" value="${each.categoryId}" />
+                                    </template>
+                                </listbox>
+                            </h:td>
+                            <h:td style="width:15%">
+                                <label sclass="lb-create" value="${$composer.getLabel('userview_tendntiengviet')}"></label>
+                                <span style="color:red">*</span>
+                            </h:td>
+                            <h:td style="width:35%" >
+                                <textbox id="txtTenTiengViet" width="95%" rows="1"  value=""  maxlength="250" />
+                            </h:td>
+                        </h:tr>
+                        <h:tr>
+                            <h:td style="width:15%">
+                                <label sclass="lb-create" value="${$composer.getLabel('userview_tendntienganh')}"></label>
+                            </h:td>
+                            <h:td style="width:35%">
+                                <textbox id="txtTenTiengAnh" width="95%" rows="1"  value=""  maxlength="255" />
+                            </h:td>
+                            <h:td style="width:15%">
+                                <label sclass="lb-create" value="${$composer.getLabel('userview_tenviettat')}"></label>
+                            </h:td>
+                            <h:td style="width:35%" >
+                                <textbox id="txtTenVietTat" width="95%" rows="1"  value=""  maxlength="255" />
+                            </h:td>
+                        </h:tr>
+                        <h:tr>
+                            <h:td style="width:15%">
+                                <label sclass="lb-create" value="${$composer.getLabel('userview_mst')}"></label>
+                            </h:td>
+                            <h:td style="width:35%">
+                                <textbox id="txtMaSoThue" width="95%" rows="1"  readonly="true" value=""  maxlength="255" />
+                            </h:td>
+                            <h:td style="width:15%">
+                                <label sclass="lb-create" value="${$composer.getLabel('userview_sodkkd')}"></label>
+                                <span style="color:red">*</span>
+                            </h:td>
+                            <h:td style="width:35%" >
+                                <textbox id="txtDKKD" width="95%" rows="1"  value=""  maxlength="255" />
+                            </h:td>
+                        </h:tr>
+                        <h:tr>
+                            <h:td style="width:15%">
+                                <label sclass="lb-create" value="${$composer.getLabel('userview_diachidn')}"></label>
+                                <span style="color:red">*</span>
+                            </h:td>
+                            <h:td style="width:35%">
+                                <textbox id="txtDiaChi" width="95%" rows="1"  value=""  maxlength="255" />
+                            </h:td>
+                            <h:td style="width:15%">
+                                <label sclass="lb-create" value="${$composer.getLabel('userview_dienthoai')}"></label>
+                                <span style="color:red">*</span>
+                            </h:td>
+                            <h:td style="width:35%" >
+                                <textbox id="txtDienThoai" width="95%" rows="1"  value=""  maxlength="255" />
+                            </h:td>
+                        </h:tr>
+                        <h:tr>
+                            
+                            <h:td style="width:15%">
+                                <label sclass="lb-create" value="${$composer.getLabel('userview_fax')}"></label>
+                                <span style="color:red">*</span>
+                            </h:td>
+                            <h:td style="width:35%" >
+                                <textbox id="txtFax" width="95%" rows="1"  value=""  maxlength="255" />
+                            </h:td>
+                              <h:td style="width:15%">
+                                <label sclass="lb-create" value="${$composer.getLabel('userview_emaildoanhnghiep')}"></label>
+                                <span style="color:red">*</span>
+                            </h:td>
+                            <h:td style="width:35%" >
+                                <textbox id="txtEmailDoanhNghiep" width="95%" rows="1"  value=""  maxlength="100" />
+                            </h:td>
+                            
+                        </h:tr>
+                       
+                        <h:tr>
+                           
+                            <h:td style="width:15%">
+                                <label sclass="lb-create" value="${$composer.getLabel('userview_website')}"></label>
+                            </h:td>
+                            <h:td style="width:35%" >
+                                <textbox id="txtWebsite" width="95%" rows="1"  value=""  maxlength="255" />
+                            </h:td>
+                            
+                        </h:tr>
+                        <h:tr>
+                            <h:td style="width:15%">
+                                <label sclass="lb-create" value="${$composer.getLabel('userview_coquanchuquan')}"></label>
+                            </h:td>
+                            <h:td style="width:35%">
+                                <textbox id="txtCoQuanChuQuan" width="95%" rows="1"  value=""  maxlength="255" />
+                            </h:td>
+                            <h:td style="width:15%">
+                                <label sclass="lb-create" value="${$composer.getLabel('userview_namthanhlap')}"></label>
+                            </h:td>
+                            <h:td style="width:35%" >
+                                <textbox id="txtNamThanhLap" width="95%" rows="1"  value=""  maxlength="4" />
+                            </h:td>
+                        </h:tr>
+                    </h:table>
+                </groupbox>
+                <h:br/>
+                <groupbox id="gbUserInfo" mold="default" style="" width="100%">
+                    <caption label="${$composer.getLabel('userview_tendaidienphapluat')}" />
+                    <h:table style="width:100%;height:100%" class="" >
+                        <h:tr>
+                            
+                            <h:td style="width:15%">
+                                <label sclass="lb-create" value="${$composer.getLabel('userview_tendaydu')}"></label>
+                                <span style="color:red">*</span>
+                            </h:td>
+                            <h:td style="width:35%" >
+                                <textbox id="txtTenDayDu" width="95%" rows="1"  value=""  maxlength="255" />
+                            </h:td>
+                            <h:td style="width:15%">
+                                <label sclass="lb-create" value="${$composer.getLabel('userview_sodidong')}"></label>
+                                <span style="color:red">*</span>
+                            </h:td>
+                            <h:td style="width:35%">
+                                <textbox id="txtSoDiDong" width="95%" rows="1"  value=""  maxlength="255" />
+                            </h:td>
+                        </h:tr>
+                        <h:tr>
+                            <h:td style="width:15%">
+                                <label sclass="lb-create" value="${$composer.getLabel('userview_chucvu')}"></label>
+                                <span style="color:red">*</span>
+                            </h:td>
+                            <h:td style="width:35%">
+                                <listbox id="lstChucVu" mold="select" style="width:97%">
+                                    <template name="model">
+                                        <listitem label="${each.name}" value="${each.categoryId}" />
+                                    </template>
+                                </listbox>
+                            </h:td>
+                            <h:td style="width:15%">
+                                <label sclass="lb-create" value="${$composer.getLabel('userview_email')}"></label>
+                                <span style="color:red">*</span>
+                            </h:td>
+                            <h:td style="width:35%" >
+                                <textbox id="txtUserEmail" width="95%" rows="1"  value=""  maxlength="100" />
+                            </h:td>
+                        </h:tr>
+                        
+                    </h:table>
+                </groupbox>
+                <h:br/>
+                <groupbox id="gbUserContactInfo" mold="default" style="" width="100%">
+                    <caption label="${$composer.getLabel('userview_thongtinnguoidung')}" />
+                    <h:table style="width:100%;height:100%" class="" >
+                        <h:tr>
+                            <h:td style="width:15%">
+                                <label sclass="lb-create" value="${$composer.getLabel('userview_tendangnhap')}"></label>
+                            </h:td>
+                            <h:td style="width:35%">
+                                <textbox id="txtTenDangNhap" width="95%" rows="1"  value="" readonly="true" maxlength="255" />
+                            </h:td>
+                            <h:td style="width:15%">
+                                <label sclass="lb-create" value="${$composer.getLabel('userview_tendaydu')}"></label>
+                                <span style="color:red">*</span>
+                            </h:td>
+                            <h:td style="width:35%" >
+                                <textbox id="txtTenDayDuContact" width="95%" rows="1"  value=""  maxlength="255" />
+                            </h:td>
+                        </h:tr>
+                        <h:tr>
+                            <h:td style="width:15%">
+                                <label sclass="lb-create" value="${$composer.getLabel('userview_sodidong')}"></label>
+                                <span style="color:red">*</span>
+                            </h:td>
+                            <h:td style="width:35%">
+                                <textbox id="txtSoDiDongContact" width="95%" rows="1"  value=""  maxlength="255" />
+                            </h:td>
+                            <h:td style="width:15%">
+                                <label sclass="lb-create" value="${$composer.getLabel('userview_email')}"></label>
+                                <span style="color:red">*</span>
+                            </h:td>
+                            <h:td style="width:35%" >
+                                <textbox id="txtUserEmailContact" width="95%" rows="1"  value=""  maxlength="100" />
+                            </h:td>
+                        </h:tr>
+                        <h:tr>
+                            <h:td style="width:15%">
+                                <label sclass="lb-create" value="${$composer.getLabel('userview_chucvu')}"></label>
+                                <span style="color:red">*</span>
+                            </h:td>
+                            <h:td style="width:35%">
+                                <listbox id="lstChucVuContact" mold="select" style="width:97%">
+                                    <template name="model">
+                                        <listitem label="${each.name}" value="${each.categoryId}" />
+                                    </template>
+                                </listbox>
+                            </h:td>
+                            <h:td style="width:15%">
+                                <label sclass="lb-create" value=""></label>
+                            </h:td>
+                            <h:td style="width:35%" >
+                                <label value=""/>
+                            </h:td>
+                        </h:tr>
+                        <h:tr>
+                            <h:td colspan="4" align="center">
+                                <button height="30px" image="/Share/img/icon/save.png" id="btnSaveInfo" 
+                                        label="${$composer.getLabel('userview_capnhatthongtinbtn')}" />         
+                            </h:td>
+                        </h:tr>
+                    </h:table>
+                </groupbox>
+            </div>
+            <div id="SystemType">
+                <h:table style="width:100%;height:100%" class="viewTable">
+                    <h:tr>
+                        <h:td width="35%" >
+                            <label>Họ và tên</label>
+                        </h:td>
+                        <h:td width="64%">
+                            <label id="lbFullName"/>
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td>
+                            <label>Tên đăng nhập</label>
+                        </h:td>
+                        <h:td>
+                            <label id="lbUserName" />
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td>
+                            <label>Email</label>
+                        </h:td>
+                        <h:td>
+                            <label id="lbEmail" />
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td>
+                            <label>Số điện thoại</label>
+                        </h:td>
+                        <h:td>
+                            <label id="lbTelephone" />
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td>
+                            <label>Đơn vị</label>
+                        </h:td>
+                        <h:td>
+                            <label id="lbDeptName"/>
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td>
+                            <label>Chức vụ</label>
+                        </h:td>
+                        <h:td>
+                            <label id="lbPosition" />
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td>
+                            <label>Mã nhân viên</label>
+                        </h:td>
+                        <h:td>
+                            <label id="lbStaffCode" />
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td>
+                            <label>Giới tính</label>
+                        </h:td>
+                        <h:td>
+                            <label id="lbGender" />
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td>
+                            <label>Số CMT</label>
+                        </h:td>
+                        <h:td>
+                            <label id="lbIDNumber" />
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td>
+                            <label>Ngày sinh</label>
+                        </h:td>
+                        <h:td>
+                            <label id="lbBirthday"/>
+                        </h:td>
+                    </h:tr>
+                </h:table>
+            </div>
+        </div>
+         
+    </window>
+</zk>

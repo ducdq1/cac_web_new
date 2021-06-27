@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+   
+    <window id="createDlg" border="normal" width="450px" 
+            apply="com.viettel.voffice.DAO.System.Flow.FlowCreateController" 
+            position="center,center" closable="true">
+        <caption label="Luồng" />
+        <h:table class="createTable">
+            <h:tr>
+                <h:td width="25%">
+                    <label value="Luồng"/>
+                </h:td>
+                <h:td width="75%">
+                    <textbox id="txtFlowId" visible="false"/>
+                    <textbox id="txtFlowName" 
+                             maxlength="200" 
+                             constraint="no empty:Bạn phải nhập tên luồng"/>
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td>
+                    <label value="Mã luồng"/>
+                </h:td>
+                <h:td>
+                    <textbox id="txtFlowCode" maxlength="50"
+                             constraint="no empty:Bạn phải nhập mã luồng" />
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td> 
+                    <label value="Thủ tục hành chính" />
+                </h:td>
+                <h:td> 
+                    <listbox id="cbObjects" mold="select" emptyMessage="Phải chọn Thủ tục hành chính">
+                        <template name="model">
+                            <listitem label="${each.name}" value="${each.categoryId}" />
+                        </template>
+                    </listbox>
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td> 
+                    <label value="Danh mục" />
+                </h:td>
+                <h:td> 
+                    <textbox id="txtCategoryName" style="width:70%" 
+                             readonly="true"/>
+                    <textbox id="txtCategoryId" readonly="true" visible="false"/>
+                    <button id="btnShowCategorySelect" image="/Share/img/icon/dept.png"/>
+                    <button image="/Share/img/icon/delete.png" onClick="txtCategoryName.setValue(null);txtCategoryId.setValue(null);"/>
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td> 
+                    <label value="Phạm vi áp dụng" />
+                </h:td>
+                <h:td> 
+                    <textbox id="txtDeptName" style="width:70%" 
+                             readonly="true" sclass="txtInput"/>
+                    <textbox id="txtDeptId" readonly="true" visible="false"/>
+                    <button id="btnShowDept" image="/Share/img/icon/dept.png"/>
+                    <button id="btnDelDept" image="/Share/img/icon/delete.png" onClick="txtDeptName.setValue(null);txtDeptId.setValue(null);"/>
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td colspan="2" align="center">
+                    <button height="30px" image="/Share/img/icon/save.png" id="btnCreate" label="Lưu lại" />
+                    <button height="30px" image="/Share/img/icon/close.png" id="btnCancel" label="Đóng" onClick="createDlg.detach()" />
+                </h:td>
+            </h:tr>
+        </h:table>
+    </window>
+</zk>

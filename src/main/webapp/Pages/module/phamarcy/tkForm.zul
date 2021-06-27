@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.zkoss.org/2005/zk/native"
+	xmlns="http://www.zkoss.org/2005/zul">
+	<style src="/Share/css/formstyle.css" />
+	<groupbox id="fullSearchGbx" mold="3d"
+		apply="com.viettel.module.phamarcy.controller.PhamarcyAllSearchController">
+		<caption
+			label="${$composer.getLabelCos('cosmetic_search_caption')}" />
+		<h:table align="center" width="80%" class="table-search">
+			<h:tr>
+				<h:th width="12%" />
+				<h:th width="38%" />
+				<h:th width="12%" />
+				<h:th width="38%" />
+			</h:tr>
+			<h:tr>
+				<h:td style="text-align: left;">
+					<label value="Mã sản phẩm" sclass="lb-create" />
+				</h:td>
+				<h:td>
+					<textbox id="tbMaSP" width="90%" rows="1"
+						maxlength="250" />
+				</h:td>
+			 <h:td>
+					<label value="Loại sản phẩm" sclass="lb-create" />
+				</h:td>
+				<h:td>
+					<combobox id="cbLoaiSP" style="font-size:15px">
+					<comboitem value="-1" label="Tất cả" style="font-size:15px"/>
+					<comboitem value="0" label="Thiết bị nhỏ" style="font-size:15px"/>
+					<comboitem value="1" label="Thiết bị lớn" />
+					<comboitem value="2" label="Gạch G001" />
+					<comboitem value="3" label="Gạch lớn" />
+					<comboitem value="3" label="Gạch G065 và G20" />
+					</combobox>
+				</h:td> 
+			</h:tr>
+			<h:tr>
+				 
+				<h:td style="text-align: left;">
+					<label value="Nhân viên" sclass="lb-create" />
+				</h:td>
+				<h:td>
+					<combobox id="cbNV" autocomplete="true" width="92%" >
+	
+						<template name="model">
+							<comboitem value="${each.userName}"
+									label="${each.userName}" />
+						</template>
+						</combobox>
+				</h:td>
+				<h:td>
+					<label value="Từ ngày" sclass="lb-create" />
+				</h:td>
+				<h:td>
+					<datebox id="dbFromDay" cols="12"
+						format="dd/MM/yyyy" width="52%"
+						constraint="between 19000101 and 20991231: ${$composer.getLabel('date_validate')}" />
+				</h:td>
+				</h:tr>
+				 
+				<h:tr>
+				<h:td/>
+				<h:td/>
+				<h:td>
+					<label value="Đến ngày" sclass="lb-create" />
+				</h:td>
+				<h:td>
+					<datebox id="dbToDay" cols="12" format="dd/MM/yyyy"
+						width="52%"
+						constraint="between 19000101 and 20991231: ${$composer.getLabel('date_validate')}" />
+				</h:td>
+			</h:tr>
+			<h:tr>
+				<h:td style="height:20px">
+				</h:td>
+
+			</h:tr>
+
+			<h:tr>
+				<h:td colspan="4" align="center"
+					style="text-align: center">
+					<button id="btnSearch"
+						label="${$composer.getLabelCos('common_search')}" sclass="button"
+						image="/Share/img/icon/search.jpg" autodisable="self" />
+				</h:td>
+			</h:tr>
+		</h:table>
+	</groupbox>
+</zk>

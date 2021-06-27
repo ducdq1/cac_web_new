@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+        xmlns="http://www.zkoss.org/2005/zul"
+        id="windowViewApp" width="50%"
+        position="center,center"
+        mode="overlapped"
+        apply="com.viettel.voffice.DAO.System.Application.AppViewController">
+    <include id="toolbarTop" src="/Pages/common/toolbarView.zul"/>
+    <h:table width="100%">
+        <h:tr>
+            <h:td width="30%">
+                <label value="Mã ứng dụng"/>
+            </h:td>
+            <h:td width="70%">
+                <textbox id="tbAppCode" value="${arg.application.appCode}" width="95%"
+                         maxlength="50" readonly="true"/>
+            </h:td>
+        </h:tr>
+        <h:tr>
+            <h:td width="30%">
+                <label value="Tên ứng dụng"/>
+            </h:td>
+            <h:td width="70%">
+                <textbox id="tbAppName" width="95%" value="${arg.application.appName}"
+                         maxlength="100" readonly="true"/>
+            </h:td>
+        </h:tr>
+        <h:tr>
+            <h:td width="30%">
+                <label value="Mô tả ứng dụng"/>
+            </h:td>
+            <h:td width="70%">
+                <textbox id="tbAppDesc" width="95%" tabindex="11" rows="10" readonly="true"
+                         value="${arg.application.description}"/>
+            </h:td>
+        </h:tr>
+        <h:tr>
+            <h:td width="30%">
+                Trạng thái
+            </h:td>
+            <h:td width="70%">
+                <listbox id="lbStatus" mold="select" width="95%" disabled="true">
+                    <listitem if="${arg.application.status == 1}" label="Hoạt động" value="1" selected="true"/>
+                    <listitem if="${arg.application.status != 1}" label="Bị khóa" value="0" selected="true"/>
+                </listbox>
+            </h:td>
+        </h:tr>
+<!--         <h:tr> -->
+<!--             <h:td colspan="2" align="center"> -->
+<!--                 <button id="btnClose" label="Đóng" onClick="windowViewApp.onClose()"/> -->
+<!--             </h:td> -->
+<!--         </h:tr> -->
+    </h:table>
+    <include id="toolbarBottom" src="/Pages/common/toolbarView.zul"/>
+</window>

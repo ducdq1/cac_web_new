@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns:h="http://www.zkoss.org/2005/zk/native"
+     xmlns="http://www.zkoss.org/2005/zul" xmlns:w="client"
+     width="100%" 
+     id="windowViewListEvaluationInclude"
+     apply="com.viettel.module.cosmetic.Controller.include.ViewListEvaluationIncludeController"
+     onCtrlKey="$composer.keyEventHandle(event.getKeyCode())"
+     ctrlKeys="#f6#f7#f8">
+
+    
+    <style src="/Share/css/formstyle.css" />
+    
+    <h:div width="100%">
+        <groupbox width="100%" sclass="gb-form-create" closable="false">
+            <caption label="THÔNG TIN QUÁ TRÌNH THẨM ĐỊNH" />
+            <listbox id="lbListEvaluation" emptyMessage="${$composer.getLabelCos('common_emptyMessage')}">
+                <listhead sizable="true">
+                    <listheader label="${$composer.getLabelCos('evaluation_stt')}" align="center" style="width:5%" sort="auto" />
+                    <listheader label="${$composer.getLabelCos('evaluation_staffEvaluationValue')}" align="center" style="width:20%"/>
+                    <listheader label="${$composer.getLabelCos('evaluation_main_content')}" align="center" style="width:45%"/>
+                    <listheader label="${$composer.getLabelCos('evaluation_createDate')}" align="center" style="width:15%"/>
+            
+                    <listheader label="${$composer.getLabelCos('evaluation_userName')}" align="center"  style="width:10%"/>
+                    <listheader label="${$composer.getLabelCos('common_view')}" align="center" hflex="min"
+                    />
+                    
+                                
+                </listhead>
+                <template name="model">
+                    <listitem>
+                        <listcell label="${forEachStatus.index + 1 + userPagingTop.pageSize * userPagingTop.activePage}" />
+                        <listcell label="${$composer.cutString(each.staffEvaluationValue, 100)}"
+                                  tooltiptext="${each.staffEvaluationValue}"
+                                  style="text-align:left" />
+                        <listcell label="${$composer.cutString(each.mainContent, 100)}" 
+                                  tooltiptext="${each.mainContent}"
+                                  style="text-align:left"  />
+                        <listcell label="${$composer.convertDateToString(each.createDate)}" />
+                        <listcell label="${$composer.cutString(each.userName, 100)}"/>
+                        <listcell>
+                            <image src="/Share/img/icon/view.png"
+                                   width="20px" height="20px"
+                                   forward="onClick=lbListEvaluation.onOpenView(${each})"
+                                   tooltiptext="${$composer.getLabelCos('common_view')}" />
+                                            
+                        </listcell>
+ 
+                    </listitem>
+                </template>
+            </listbox>
+        </groupbox>
+                                    
+        
+    </h:div> 
+    <h:br/>   
+</div>
+

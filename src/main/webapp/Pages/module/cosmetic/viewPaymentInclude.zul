@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.zkoss.org/2005/zk/native"
+    xmlns="http://www.zkoss.org/2005/zul">
+    
+    <style src="/Share/css/formstyle.css" />
+    
+    <h:div width="100%">
+        <groupbox width="100%" sclass="gb-form-create" closable="false">
+            <caption label="THÔNG TIN THANH TOÁN" />
+            <h:table width="100%">
+                
+                <h:tr>
+                    <h:td width="15%">
+                        <label value="Tên phí"  sclass="lb-create" />
+                    </h:td>
+                    <h:td width="35%">
+                        <label width="95%" multiline="true" pre="true"
+                               value="${$composer.paymentInfo.feeName}"
+                               sclass="label-info"/>
+                    </h:td>
+                    <h:td width="15%">
+                        <label value="Số tiền"  sclass="lb-create" />
+                    </h:td>
+                    <h:td width="35%">
+                        <label width="95%" multiline="true" pre="true"
+                                value="${$composer.formatNumber($composer.paymentInfo.cost, '###,##0.##')}"
+                                sclass="label-info"/>
+                        
+                    </h:td>
+                
+                </h:tr>
+  
+                <h:tr>
+                    <h:td width="15%">
+                        <label value="Trạng thái thanh toán"  sclass="lb-create" />
+                    </h:td>
+                    <h:td width="35%">
+                        <label width="95%" multiline="true" pre="true"
+                                value="${$composer.paymentInfo.statusStr}"
+                                sclass="label-info"/>
+                        
+                    </h:td>
+                    <h:td width="15%">
+                        <label value="Hình thức thanh toán"  sclass="lb-create" />
+                    </h:td>
+                    <h:td width="35%">
+                        
+                        <label width="95%" multiline="true" pre="true"
+                               value="${$composer.paymentInfo.paymentTypeStr}"
+                               sclass="label-info"/>
+                         
+                        
+                    </h:td>
+                
+                </h:tr>
+                
+                <h:tr>
+                    <h:td width="15%">
+                        <label value="Người xác nhận"  sclass="lb-create" />
+                    </h:td>
+                    <h:td width="35%">
+                         
+                        <label width="95%" multiline="true" pre="true"
+                               value="${$composer.paymentInfo.paymentActionUser}"
+                               sclass="label-info"/>
+                    </h:td>
+                    <h:td width="15%">
+                        <label value="Ngày xác nhận"  sclass="lb-create" />
+                    </h:td>
+                    <h:td width="35%">
+                        <label width="95%" multiline="true" pre="true"
+                                value="${$composer.getFormatDate($composer.paymentInfo.dateConfirm)}"
+                                sclass="label-info"/>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td width="15%">
+                        <label value="Lý do"  sclass="lb-create" />
+                    </h:td>
+                    <h:td width="35%">
+                         
+                        <label width="95%" multiline="true" pre="true"
+                               value="${$composer.paymentInfo.note}"
+                               sclass="label-info"/>
+                    </h:td>
+                </h:tr>
+            </h:table>
+        </groupbox>
+    </h:div> 
+</zk>
+

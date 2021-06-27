@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.zkoss.org/2005/zk/native"
+	xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:w="http://www.zkoss.org/2005/zk/client">
+
+	<style src="/Share/css/formstyle.css" />
+
+	<listbox id="lbList" multiple="true" checkmark="false"
+		nonselectableTags="*"
+		emptyMessage="Không tìm thấy sản phẩm nào">
+		<listhead sizable="true">
+			<listheader label="STT" align="center" style="width:5%" />
+			<listheader label="Mã sản phẩm" align="center"
+				style="width:16%" />
+			<listheader label="Tên xuất háng" align="center"
+				style="width:32%" />
+			<listheader label="Tên báo giá" align="center"
+				style="width:32%" />
+			<listheader label="Đơn vị tính" align="center"
+				style="width:8%" />
+				<listheader label="Giá nhập" align="center"
+				style="width:10%" />
+			<listheader label="Chọn" align="center" hflex="min" />
+			<listheader label="Sửa" align="center" hflex="min" />
+			<listheader label="Xóa" align="center" hflex="min" />
+
+		</listhead>
+		
+		<template name="model">
+			<listitem
+				style="word-wrap: break-word !important; white-space: normal; text-align: left">
+				<listcell>
+					<label
+						value="${forEachStatus.index + 1 + userPagingBottom.pageSize *
+						userPagingBottom.activePage }">
+					</label>
+				</listcell>
+
+				<listcell style="text-align:left;font-weight: bold; color:#4584D3 ">
+					<label style="font-weight: bold" value="${each.productCode}" />
+				</listcell>
+				<listcell style="text-align:left">
+					<label value="${each.productName}" />
+				</listcell>
+				<listcell style="text-align:left">
+					<label value="${each.quotationName}" />
+				</listcell>
+				<listcell style="text-align:center">
+					<label value="${each.unit}" />
+				</listcell>
+				<listcell style="text-align:right">
+					<label value="${each.priceString}" />
+				</listcell>
+				<listcell>
+					<image src="/Share/img/icon/approve.png" width="22px"
+						height="22px" forward="onClick=lbList.onChoose(${each})"
+						tooltiptext="Chọn sản phẩm này để xuất" />
+				</listcell>
+				
+				<listcell>
+					<image src="/Share/img/icon/edit.png" width="22px"
+						height="22px" forward="onClick=lbList.onOpenUpdate(${each})"
+						tooltiptext="Sửa" />
+				</listcell>
+				
+				<listcell>
+					<image src="/Share/img/icon/delete.png" width="22px"
+						height="22px" forward="onClick=lbList.onDelete(${each})"
+						tooltiptext="Xóa" />
+					 
+				</listcell>
+				
+
+			</listitem>
+		</template>
+	</listbox>
+	<separator />
+
+</zk>

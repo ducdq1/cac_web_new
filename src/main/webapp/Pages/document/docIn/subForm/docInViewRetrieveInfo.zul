@@ -1,0 +1,24 @@
+<zk>
+	<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+		xmlns="http://www.zkoss.org/2005/zul" border="normal"
+		position="center, center" width="50%" closable="true" mode="modal"
+		title="Văn bản đã bị thu hồi">
+		<listbox model="${arg.listProcess}" mold="paging"
+			pageSize="5">
+			<listhead>
+				<listheader label="Đơn vị thu hồi" hflex="min"/>
+				<listheader label="Người thu hồi" hflex="min"/>
+				<listheader label="Thời gian thu hồi" hflex="min"/>
+				<listheader label="Lí do thu hồi" />
+			</listhead>
+			<template name="model">
+				<listitem>
+					<listcell label="${each.sendGroup}" />
+					<listcell label="${each.sendUser}" />
+					<listcell label="${each.sendDateString}" />
+					<listcell label="${each.note}" />
+				</listitem>
+			</template>
+		</listbox>
+	</window>
+</zk>

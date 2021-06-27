@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns:h="http://www.zkoss.org/2005/zk/native"
+     xmlns="http://www.zkoss.org/2005/zul" xmlns:w="client"
+     width="100%" 
+     id="windowViewListDispathAddtionInclude"
+     apply="com.viettel.module.cosmetic.Controller.include.ViewListDispathAdditionIncludeController"
+     onCtrlKey="$composer.keyEventHandle(event.getKeyCode())"
+     ctrlKeys="#f6#f7#f8">
+    <style src="/Share/css/formstyle.css" />
+    <h:div width="100%">
+        <groupbox width="100%" sclass="gb-form-create" closable="false">
+            <caption label="THÔNG TIN CÔNG VĂN YÊU CẦU SĐBS" />
+            <listbox id="lbListAddition" emptyMessage="${$composer.getLabelCos('common_emptyMessage')}">
+                <listhead sizable="true">
+                    <listheader label="${$composer.getLabelCos('evaluation_stt')}" 
+                                align="center" style="width:5%" sort="auto" />
+                    <listheader label="${$composer.getLabelCos('addtion_receiceNo')}" 
+                                align="center" style="width:20%"/>
+                    <listheader label="${$composer.getLabelCos('addtion_content')}" 
+                                align="center" style="width:40%"/>
+                    <listheader label="${$composer.getLabelCos('addtion_creatorName')}" 
+                                align="center"  style="width:20%"/>
+                    <listheader label="${$composer.getLabelCos('addtion_createDate')}" 
+                                align="center" style="width:15%"/>
+                    <listheader label="${$composer.getLabelCos('common_view')}" 
+                                align="center" hflex="min"
+                    />                                                    
+                </listhead>
+                <template name="model">
+                    <listitem>
+                        <listcell label="${forEachStatus.index + 1 + userPagingTop.pageSize * userPagingTop.activePage}" />
+                        <listcell label="${$composer.cutString(each.receiveNo, 100)}"  style="text-align:left" />
+                        <listcell label="${$composer.cutString(each.content, 100)}"  style="text-align:left" />                        
+                        <listcell label="${$composer.cutString(each.fullName, 100)}"/>
+                        <listcell label="${$composer.convertDateToString(each.dateCreate)}" />                                                
+                        <listcell>                                            
+                            <image src="/Share/img/icon/view.png"
+                                   width="20px" height="20px"
+                                   forward="onClick=lbListAddition.onDownloadAdditionFile(${each})"
+                                   tooltiptext="${$composer.getLabelCos('common_view')}" 
+                                   if="${$composer.CheckCVBS(each.objectId)==1}"/>                                           
+                        </listcell> 
+                    </listitem>
+                </template>
+            </listbox>
+        </groupbox>
+    </h:div> 
+    <h:br/>
+</div>

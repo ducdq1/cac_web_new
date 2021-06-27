@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+	xmlns="http://www.zkoss.org/2005/zul" id="WD_bao_gia_chon_sp"
+	style="background:#FBEFFB;color:red" title="Chọn sản phẩm"
+	closable="true" width="100%"
+	apply="com.viettel.module.phamarcy.controller.BaoGiaChonSPController">
+	<style src="/Share/css/formstyle.css" />
+
+	<script defer="true">toolBar.widget = "phamarcyAll";</script>
+	<style>
+		.z-listheader-cnt{ color:#4584D3 !important; }
+		.z-combobox-inp{font-size: 15px;height:23px}
+		.z-combobox-btn{height:27px !important}
+		
+	</style> 
+	<h:div style="width:99%;margin:0 auto;background-color:#FBEFFB">
+		<groupbox id="fullSearchGbx" mold="3d">
+			<caption label="Tìm kiếm" />
+			<h:table align="center" width="99%" class="table-search">
+				<h:tr>
+					<h:th width="10%" />
+					<h:th width="23%" />
+					<h:th width="15%" />
+					<h:th width="20%" />
+					<h:th width="12%" />
+					<h:th width="20%" />
+				</h:tr>
+				<h:tr>
+					<h:td style="text-align: right;">
+						<label value="Mã hàng hóa:" sclass="lb-create"
+							style=" margin-right:10px" />
+					</h:td>
+					<h:td style="text-align: left;">
+						<combobox id="cbMaSP" autocomplete="true" autodrop="true"
+							width="100%">
+							<template name="model">
+								<comboitem value="${each}"
+									label="${each.productCode}" />
+							</template>
+
+						</combobox>
+					</h:td>
+					<h:td style="text-align: right;">
+						<label value="Tên hàng hóa:" sclass="lb-create" />
+					</h:td>
+					<h:td style="text-align: left;">
+						<label id="lbTenSP" value="" sclass="lb-create"
+							style="color:black;margin-left:10px" />
+					</h:td>
+					<h:td style="text-align: right">
+						<label value="Đơn vị tính:" sclass="lb-create" />
+					</h:td>
+					<h:td style="text-align: left;">
+						<label id="lbDonViTinh" value=" "
+							sclass="lb-create" style="color:black;margin-left:10px" />
+					</h:td>
+				</h:tr>
+				<h:tr>
+					<h:td style="text-align: right;">
+						<label value="Số lượng:" sclass="lb-create"
+							style=" margin-right:10px" />
+					</h:td>
+					<h:td>
+						<textbox id="tbSoLuong" rows="1" width="98%" />
+					</h:td>
+
+					<h:td style="text-align: right;">
+						<label value="Hình ảnh:" sclass="lb-create"
+							style=" margin-right:10px">
+						</label>
+						<checkbox id="cbHinhAnh"></checkbox>
+					</h:td>
+ 
+				</h:tr>
+				<h:tr>
+					<h:td style="text-align: right;vertical-align:top">
+						<label value="Ghi chú:" sclass="lb-create"
+							style=" margin-right:10px" />
+					</h:td>
+					<h:td style="vertical-align:top">
+						<textbox id="tbGhiChu" rows="1" width="98%"
+							multiline="true" height="80px" />
+					</h:td>
+
+					<h:td />
+					<h:td>
+						<h:div class="contentDiv" style="width:40%">
+
+							<listbox id="lbListImages" checkmark="true"
+								visible="false" multiple="false" nonselectableTags="*"
+								width="300px" emptyMessage="Không có hình ảnh">
+								<listhead sizable="true">
+									<listheader label="STT"
+										align="center" style="width:10px" />
+									<listheader label="Hình ảnh"
+										align="center" style="width:60px" />
+								</listhead>
+								<template name="model">
+									<listitem
+										style="word-wrap: break-word !important; white-space: normal; text-align: left;">
+										<listcell>
+											<label
+												value="${ forEachStatus.index + 1 + userPagingBottom.pageSize *
+												userPagingBottom.activePage }">
+											</label>
+										</listcell>
+										<listcell
+											style="text-align:left">
+											<image width="50px"
+												height="100px" />
+										</listcell>
+
+									</listitem>
+								</template>
+							</listbox>
+						</h:div>
+
+					</h:td>
+
+
+				</h:tr>
+
+				<h:tr>
+					<h:td style="height:10px"></h:td>
+				</h:tr>
+			</h:table>
+
+			<h:table align="center" width="80%" class="table-search">
+				<h:tr>
+					<h:th width="12%" />
+					<h:th width="38%" />
+					<h:th width="12%" />
+					<h:th width="38%" />
+				</h:tr>
+				<h:tr></h:tr>
+				<h:tr>
+					<h:td style="height:10px"></h:td>
+
+				</h:tr>
+
+
+			</h:table>
+			<h:br />
+			<h:div
+				style="witdh:100%;margin:0 auto;text-align:center;background-color:#FBEFFB">
+				<button id="btnChonSP" label="Lưu " sclass="button"
+					image="/Share/img/icon/save.png" autodisable="self" />
+				<button id="btnClose"
+					onClick="WD_bao_gia_chon_sp.onClose()" label="Đóng" sclass="button"
+					image="/Share/img/icon/close.png" autodisable="self" />
+
+			</h:div>
+
+		</groupbox>
+	</h:div>
+
+
+
+</window>

@@ -1,0 +1,186 @@
+@charset "utf-8";
+/* CSS Document */
+@font-face {
+    font-family: 'MyriadPro-BoldCond';
+    src: url('../font/MyriadPro-BoldCond.otf');
+    src: url('../font/MyriadPro-BoldCond.otf?#iefix'), /* IE4+ */
+        url('../font/MyriadPro-BoldCond.woff') format('woff'),
+        url('../font/MyriadPro-BoldCond.ttf') format('truetype'), /* font chuan */
+        url('../font/MyriadPro-BoldCond.svg#vni-courinormal') format('svg'); /* iphone, ipad*/
+}
+@font-face {
+    font-family: 'MYRIADPRO-COND';
+    src: url('../font/MYRIADPRO-COND.otf');
+    src: url('../font/MYRIADPRO-COND.otf?#iefix'), /* IE4+ */
+        url('../font/MYRIADPRO-COND.woff') format('woff'),
+        url('../font/MYRIADPRO-COND.ttf') format('truetype'), /* font chuan */
+        url('../font/MYRIADPRO-COND.svg#vni-courinormal') format('svg'); /* iphone, ipad*/
+}
+
+body
+{
+    margin:0; padding:0;
+    width:100%; height:100%;
+    font-family:Arial, Helvetica, sans-serif;
+}
+.header-login
+{
+    height:42px;
+    background:#2063b4;
+    border-bottom:1px solid #c4dfff;
+    text-align: left;
+}
+
+.bodylogin {
+    height: 100%;
+    position: absolute;
+    width: 100%;
+}
+.header-login a img {
+    padding: 5px;
+}
+a img
+{
+    border:none;
+}
+.body-main
+{
+    background:url(../img/login/bg-login-repeat.png) top left repeat-x;
+    min-height: 100%;
+    position: relative;
+}
+.bg_cloud
+{
+    background:url(../img/login/bg-login.png) top left no-repeat;
+    position: absolute;
+    width: 100%;
+    height: 90%;;
+}
+.footer_login
+{
+    background:url(../img/login/bg-footer.png) top left repeat-x;
+    bottom: 0;
+    color: #2063b4;
+    font-family: arial;
+    font-size: 12px;
+    height: 42px;
+    line-height: 42px;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+}
+.box-login
+{
+    width:350px;
+    min-height:200px;
+    background:#fff;
+    left: 50%;
+    margin-left: -175px;
+    margin-top: -250px;
+    position: relative;
+    top: 47%;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -o-border-radius: 8px;
+    box-shadow: 0 0 3px #5295e6;
+    height: 320px;
+    font-family: "MYRIADPRO-COND";
+}
+.box-login1
+{
+    width:350px;
+    min-height:200px;
+    left: 50%;
+    margin-left: -175px;
+    margin-top: -250px;
+    position: relative;
+    top: 47%;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -o-border-radius: 8px;
+    height: 320px;
+    font-family: "MYRIADPRO-COND";
+}
+.headboxlogin
+{
+    background-color:#3776c2;
+    height:42px; line-height:42px;
+    text-align:center;
+    border-radius: 8px 8px 0 0;
+    -moz-border-radius: 8px 8px 0 0;
+    -webkit-border-radius: 8px 8px 0 0;
+    -o-border-radius: 8px 8px 0 0;
+    font-family: "MyriadPro-BoldCond";
+    color:#fff;
+    font-size:23px;
+}
+.bginput {
+    background: url("../img/login/bg-input.jpg") no-repeat scroll center center rgba(0, 0, 0, 0);
+    height: 44px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.bginput span {
+    margin-left: 9px;
+}
+
+.bginput input {
+    border: medium none;
+    color: #ababab;
+    font-size: 16px;
+    height: 44px;
+    left: 24px; padding-left:35px;
+    position: relative;
+    width: 265px;
+    border:1px solid #dbdbdb;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+.user input {
+    background: url("../img/login/user.png") no-repeat  4px 10px ;
+}
+.password input {
+    background: url("../img/login/lock.png") no-repeat 4px 10px;
+}
+
+.btn-login {
+    
+}
+.btn-login button
+{
+    background:#3776c2;
+    border: 1px solid #45A7DC;
+    height: 30px;
+    width: 90px;
+    font-size:18px;
+    color:#fff;
+    font-family:Arial, Helvetica, sans-serif;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -o-border-radius: 5px;
+
+}
+.savepass span a {
+    color: #2063b4;
+    float: right;
+    padding-right: 24px;
+    text-decoration:none;
+}
+.text-login
+{
+    color:#d1e4ed;
+    font-size:14px;
+    margin-top:20px;
+}
+.format-text {
+    font-size: 18px;
+}
+.padd {
+    padding: 10px 0 5px 24px;
+}

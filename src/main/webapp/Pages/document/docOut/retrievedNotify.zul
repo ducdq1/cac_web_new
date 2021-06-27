@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <window id="retrieveWin" title="Thông báo" border="normal" width="650px"
+            position="center,center" closable="true" >
+        <h:div class="contentDialog">
+            <h:table width="100%">
+                <h:tr>
+                    <h:td colspan="2" style="font-weight:bold;">
+                        <label value="Văn bản đã bị thu hồi!"></label>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td width="20%">
+                        <label value="Người thu hồi" />
+                    </h:td>
+                    <h:td>
+                        <label value="${arg.userRetrieve}" />
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td width="20%">
+                        <label value="Thời gian thu hồi" />
+                    </h:td>
+                    <h:td>
+                        <label value="${arg.timeRetrieve}" />
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td width="20%">
+                        <label value="Lý do" />
+                    </h:td>
+                    <h:td>
+                         <label value="${arg.noteRetrieve}" />
+                    </h:td>
+                </h:tr>
+            </h:table>
+        </h:div>
+        <separator bar="false" />
+        <h:div class="btAct" style="text-align:right">
+            <button label="Đóng" id="btnCancel1" onClick="retrieveWin.detach()" sclass="button blue "/>
+        </h:div>
+    </window>   
+</zk>

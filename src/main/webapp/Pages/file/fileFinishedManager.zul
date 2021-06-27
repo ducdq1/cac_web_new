@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+        xmlns="http://www.zkoss.org/2005/zul"
+        id="fileWnd"
+        apply="com.viettel.voffice.DAO.Files.FileProcessedController">
+    <script defer="true">
+        toolBar.widget = "fileWnd";
+    </script>
+    <include src="/Pages/common/searchToolbar.zul"/>
+    <groupbox id="searchGroup" mold="3d" visible="false">
+        <caption label="Tìm kiếm hồ sơ"/>
+        <div id="searchDiv" class="contentDiv" align="center">
+            <h:table class="searchTable" width="80%">
+                <h:tr>
+                    <h:td>
+                        <label value="Từ ngày"/>
+                    </h:td>
+                    <h:td>
+                        <datebox id="dbFromDate"/>
+                    </h:td>
+                    <h:td>
+                        <label value="Đến ngày"/>
+                    </h:td>
+                    <h:td>
+                        <datebox id="dbToDate"/>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td>
+                        <label value="Mã hồ sơ"/>
+                    </h:td>
+                    <h:td>
+                        <textbox id="tbFileCode" maxlength="20"/>
+                    </h:td>
+                    <h:td>
+                        <label value="Tiêu đề"/>
+                    </h:td>
+                    <h:td>
+                        <textbox id="tbFileTitle"  maxlength="250"/>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td colspan="4" style="text-align:center">
+                        <button id="btnSearch" label="Tìm kiếm" image="/Share/img/search.png" height="25px"/>
+                    </h:td>
+                </h:tr>
+            </h:table>
+        </div>
+    </groupbox>
+    <h:div class="contentDiv">
+        <listbox id="lbFiles" emptyMessage="Không có hồ sơ nào">
+            <listhead>
+                <listheader label="STT" align="center" width="5%"/>
+                <listheader label="Mã hồ sơ" width="10%"/>
+                <listheader label="Tiêu đề" width="35%"/>
+                <listheader label="Người tạo" width="10%"/>
+                <listheader label="Ngày bắt đầu" width="10%"/>
+                <listheader label="Ngày kết thúc" width="10%"/>
+                <listheader label="Trạng thái" width="10%"/>
+                <listheader label="Xem" align="center" width="10%"/>
+            </listhead>
+            <template name="model">
+                <listitem>
+                    <listcell forward="onClick=lbFiles.onView">
+                        <label value="${forEachStatus.index + 1 + userPagingBottom.pageSize * userPagingBottom.activePage}"/>
+                    </listcell>
+                    <listcell forward="onClick=lbFiles.onView">
+                        <label value="${each.fileCode}"/>
+                    </listcell>
+                    <listcell forward="onClick=lbFiles.onView">
+                        <label value="${each.fileTitle}"/>
+                    </listcell>
+                    <listcell forward="onClick=lbFiles.onView">
+                        <label value="${each.creatorName}"/>
+                    </listcell>
+                    <listcell forward="onClick=lbFiles.onView">
+                        <label value="${each.dateStartStr}"/>
+                    </listcell >
+                    <listcell forward="onClick=lbFiles.onView">
+                        <label value="${each.dateFinishStr}"/>
+                    </listcell >
+                    <listcell forward="onClick=lbFiles.onView">
+                        <label value="Chờ xử lý" if="${each.status==0}"/>
+                        <label value="Đang xử lý" if="${each.status==1}"/>
+                        <label value="Đã gửi đi" if="${each.status==2}"/>
+                        <label value="Hoàn thành" if="${each.status==3}"/>
+                    </listcell >
+                    <listcell>
+                        <image src="/Share/img/icon/view.png" width="20px" height="20px" forward="onClick=lbFiles.onView" tooltiptext="Xem thông tin hồ sơ"/>
+                    </listcell>
+                </listitem>
+            </template>
+        </listbox>
+        <paging id="userPagingBottom" pageSize="10" detailed="true"/>
+    </h:div>
+</window>

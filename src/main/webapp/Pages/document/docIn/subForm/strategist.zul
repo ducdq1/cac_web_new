@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+        xmlns="http://www.zkoss.org/2005/zul"
+        position="center,center" closable="true" maximizable="true" 
+        width="50%"
+        border="normal" mode="overlapped"
+        id="windowStrategist"
+        title="Chọn đơn vị liên kết"
+        apply="com.viettel.voffice.DAO.DocIn.DocInStrategistController">
+    <style src="/Share/css/formstyle.css"/>
+    <tree id="tree" style="padding-top:0px;border:0px" rows="20" checkmark="true">
+        <template name="model">
+            <treeitem label="${each.name}" value="${each}" >
+            </treeitem>
+        </template>
+    </tree>
+    <div align="center">
+        <button id="btnDone" label="Xong"/>
+    </div>
+</window>

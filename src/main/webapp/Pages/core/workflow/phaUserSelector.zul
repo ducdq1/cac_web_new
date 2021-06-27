@@ -1,0 +1,28 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<window border="normal" id="wdUserSelector" title="Phân công hồ sơ"
+	apply="com.viettel.core.workflow.UserSelector"
+	mode="modal" position="center" visible="false" width="50%"
+	height="auto" closable="true">
+	<style>
+		.h-inline-block { display: inline-block; _display: inline; }
+		div.z-tree-body {
+			overflow-x:hidden;
+		}
+	</style>
+	<listbox id="lbNodeDeptUser" mold="paging" pageSize="5" emptyMessage="Không có người nhận" nonselectableTags="img" checkmark="true">
+        <custom-attributes org.zkoss.zul.listbox.rod="false"/>
+        <listhead>
+            <listheader hflex="1" label="Họ và tên" />
+        </listhead>
+        <template name="model">
+            <listitem>
+                <listcell if="${each.useAllias!=1}" label="${each.userName}" />
+            </listitem>
+        </template>
+    </listbox>
+	<div align="center" style="margin-top:10px;margin-bottom:10px;">
+		<button image="/Share/img/icon/done.png" label="Hoàn thành"
+			id="btnSelect">
+		</button>
+	</div>
+</window>

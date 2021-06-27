@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.zkoss.org/2005/zk/native"
+	xmlns="http://www.zkoss.org/2005/zul">
+	<style src="/Share/css/formstyle.css" />
+	<groupbox id="fullSearchGbx" mold="3d"
+		>
+		<caption
+			label="${$composer.getLabelCos('cosmetic_search_caption')}" />
+		<h:table align="center" width="80%" class="table-search">
+			 
+			<h:tr>
+				<h:td colspan="4" align="center"
+					style="text-align: center"> 			 
+					<button id="btnAdd" label="Thêm mới" sclass="button"
+						image="/Share/img/icon/Add.png" autodisable="self" />
+				</h:td>
+			</h:tr>
+		</h:table>
+	</groupbox>
+</zk>

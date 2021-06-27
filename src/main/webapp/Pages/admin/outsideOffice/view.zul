@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+        xmlns="http://www.zkoss.org/2005/zul"
+        position="center,center" closable="true" maximizable="true" width="50%"
+        border="normal" mode="overlapped"
+        id="windowCRUDOffice"
+        title="Thông tin cơ quan">
+    <zscript>
+        <![CDATA[
+        import com.viettel.voffice.BO.Department;
+        import com.viettel.voffice.BO.Document.OutsideOffice;
+        import com.viettel.voffice.DAOHE.DepartmentDAOHE;
+        
+        OutsideOffice outsideOffice = (OutsideOffice) Executions.getCurrent().getArg().get("outsideOffice");
+        DepartmentDAOHE departmentDAOHE = new DepartmentDAOHE();
+        if(outsideOffice.getDeptId() != null){
+            department = departmentDAOHE.findDeptById(outsideOffice.getDeptId());
+        } else {
+            department = new Department();
+        }
+        ]]>
+    </zscript>
+    <style src="/Share/css/formstyle.css"/>
+    <vlayout>
+        <h:table width="100%">
+            <h:th width="30%"/>
+            <h:th width="70%"/>
+            <h:tr>
+                <h:td>
+                    <label value="Tên đơn vị"/>
+                </h:td>
+                <h:td>
+                    <textbox id="tbOfficeName" maxlength="500" width="95%"
+                             value="${arg.outsideOffice.officeName}" readonly="true"/>
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td>
+                    <label value="Mã đơn vị"/>
+                </h:td>
+                <h:td>
+                    <textbox id="tbOfficeCode" maxlength="20" width="95%"
+                             value="${arg.outsideOffice.officeCode}" readonly="true"/>
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td>
+                    <label value="Đơn vị liên kết"/>
+                </h:td>
+                <h:td>
+                    <textbox id="tbDeptName" width="95%" readonly="true" value="${department.deptName}"/>
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td>
+                    <label value="Địa chỉ"/>
+                </h:td>
+                <h:td>
+                    <textbox id="tbOfficeAddress" maxlength="1000" width="95%"
+                             value="${arg.outsideOffice.address}" readonly="true"/>
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td>
+                    <label value="Link service"/>
+                </h:td>
+                <h:td>
+                    <textbox id="tbOfficeLinkService" maxlength="1000" width="95%" type="url"
+                             value="${arg.outsideOffice.servicesUrl}" readonly="true"/>
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td>
+                    <label value="Email"/>
+                </h:td>
+                <h:td>
+                    <textbox id="tbOfficeEmail" maxlength="50" width="95%" type="email"
+                             value="${arg.outsideOffice.email}" readonly="true"/>
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td>
+                    <label value="Số điện thoại"/>
+                </h:td>
+                <h:td>
+                    <textbox id="tbOfficeTelephone" maxlength="40" width="95%" type="tel"
+                             value="${arg.outsideOffice.mobile}" readonly="true"/>
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td>
+                    <label value="Fax"/>
+                </h:td>
+                <h:td>
+                    <textbox id="tbOfficeFax" maxlength="20" width="95%" 
+                             value="${arg.outsideOffice.fax}" readonly="true"/>
+                </h:td>
+            </h:tr>
+<!--             <h:tr> -->
+<!--                 <h:td> -->
+<!--                     <label value="Hình thức thông báo"/> -->
+<!--                 </h:td> -->
+<!--                 <h:td> -->
+<!--                     <vlayout> -->
+<!--                         <checkbox id="cbSMS" label="SMS" /> -->
+<!--                         <checkbox id="cbEmail" label="Email" /> -->
+<!--                         <checkbox id="cbFax" label="Fax" /> -->
+<!--                         <checkbox id="cbService" label="Web service" /> -->
+<!--                     </vlayout> -->
+<!--                 </h:td> -->
+<!--             </h:tr> -->
+            <h:tr>
+                <separator bar="true"/>
+                <h:td colspan="2" align="center">
+                    <button id="btnClose" label="Đóng" onClick="windowCRUDOffice.onClose()" 
+                    image="/Share/img/icon/close.png"/>
+                </h:td>
+            </h:tr>
+        </h:table>
+    </vlayout>
+</window>

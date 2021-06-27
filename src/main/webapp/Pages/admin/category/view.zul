@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+<window id="catCRUD" title="${arg.titleWindow}" border="normal" width="520px"
+    apply="com.viettel.voffice.DAO.System.Category.CategoryDialogController" 
+    position="center,center" closable="true">
+    <h:div width="100%">
+        <h:table width="100%" style="word-wrap:break-word;table-layout: fixed;">
+            <h:tr>
+                <h:td width="120px">
+                    <label value="Mã danh mục"  />
+                </h:td>
+                <h:td>
+                     <label value="${arg.catInfo.code}"/>
+                </h:td>
+                
+            </h:tr>
+            <h:tr>
+                <h:td>
+                     <label value="Tên danh mục" />
+                </h:td>
+                <h:td>
+                     <label value="${arg.catInfo.name}" />
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td colspan="2" style="text-align:right">
+                      <button image="/Share/img/icon/close.png" label="Đóng" id="btnCancel" onClick="catCRUD.detach()" sclass="button blue" width="85px"/>
+                </h:td>
+            </h:tr>
+        </h:table>
+    </h:div> 
+</window>
+</zk>

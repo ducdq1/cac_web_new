@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <window id="resourceWnd"
+            apply="com.viettel.voffice.DAO.Calendar.ResourceSelectController" border="normal" closable="true" width="1000px">
+        <caption label="Chọn trang thiết bị" />
+    
+        <h:div id="searchDiv" style="width:100%" align="center">
+            <h:table style="width:80%" class="searchTable">
+                <h:tr>
+                    <h:td width="20%"><label value="Tên tài nguyên"/></h:td>
+                    <h:td width="30%">
+                        <textbox id="txtSearchResourceName" value="" maxlength="250"/>
+                    </h:td>
+                    <h:td width="20%"><label value="Mã tài nguyên"/></h:td>
+                    <h:td width="30%">
+                        <textbox id="txtSearchResourceCode" value="" maxlength="250"/>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td><label value="Đơn vị "/></h:td>
+                    <h:td>
+                        <textbox id="txtSearchDeptName" value="" readonly="true" style="width:60%"/>
+                        <textbox id="txtSearchDeptId" value="" visible="false" />
+                        <button id="btnShowSearchDept" image="/Share/img/icon/dept.png" height="30px"/>
+                        <button image="/Share/img/icon/delete.png" onClick="txtSearchDeptName.setValue(null);txtSearchDeptId.setValue(null);" height="30px"/>
+                    </h:td>
+                    <h:td><label value="Loại tài nguyên"/></h:td>
+                    <h:td>
+                        <listbox id="lbResourceType" mold="select" onAfterRender='self.setSelectedIndex(0)'>
+                            <template name="model">
+                                <listitem label="${each.name}" id="${each.categoryId}" />
+                            </template>
+                        </listbox>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td colspan="4" style="text-align:center">
+                        <button id="btnSearch" label="Tìm kiếm" sclass="button" image="/Share/img/icon/search.jpg" height="25px"/>
+                        <button id="btnSelect" label="Chọn" sclass="button" image="/Share/img/icon/Add.png" height="25px"/>
+                    </h:td>
+                </h:tr>
+            </h:table>
+        </h:div>
+        <h:div id="gridDiv" >
+            <listbox id="lbResources"                          
+                     emptyMessage="Không tồn tài nguyên" 
+                     multiple="true" 
+                     checkmark="true" >
+                <listhead sizable="true">
+                    <listheader width="5%" label="STT" align="center"/>
+                    <listheader width="35%" label="Tài nguyên"/>
+                    <listheader width="10%" label="Mã" />
+                    <listheader width="20%" label="Loại tài nguyên"  />
+                    <listheader width="30%" label="Đơn vị"  />
+                </listhead>
+                <template name="model">
+                    <listitem value="${each}">
+                        <listcell label="${forEachStatus.index+1}" />
+                        <listcell label="${each.resourceName}" />
+                        <listcell label="${each.resourceCode}" />
+                        <listcell label="${each.resourceTypeName}" />
+                        <listcell label="${each.deptName}" />
+                    </listitem>
+                </template>
+            </listbox>
+            <paging id="userPagingBottom" pageSize="10" detailed="true"/>
+        </h:div>  
+    </window>
+</zk>

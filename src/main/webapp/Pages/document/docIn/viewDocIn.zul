@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window id="windowDocInView"
+        xmlns:h="http://www.zkoss.org/2005/zk/native"
+        xmlns="http://www.zkoss.org/2005/zul" position="center,center"
+        mode="embedded"
+        apply="com.viettel.voffice.DAO.DocIn.DocInViewController">
+    <style src="/Share/css/formstyle.css" />
+    <style src="/Share/css/uploadstyle.css" />
+    <div id="divToolbarTop" class="toolBar">
+        <image sclass="img-cal" style="float:left"
+               forward="onClick=windowDocInView.onClose"
+               src="/Share/img/png/quay-lai.png" tooltiptext="Quay lại" />
+        <image src="/Share/img/png/flow.png" sclass="img-cal"
+               forward="onClick=windowDocInView.onViewFlow" style="float:left"
+               tooltiptext="Xem luồng" />
+        <label id="lbTopWarning" class="notify" />
+    </div>
+    <h:div>
+        <h:table width="100%" height="100%">
+            <h:tr>
+                <h:td width="70%" style="vertical-align:top;">
+                    <groupbox width="100%" sclass="gb-form-create"
+                              id="groupboxDocInfo" vflex="1">
+                        <caption label="Thông tin văn bản đến" />
+                        <h:table width="100%" align="center"
+                                 sclass="table-view" class="viewTable">
+                            <h:th width="15%" dispaly="true" />
+                            <h:th width="35%" dispaly="true" />
+                            <h:th width="15%" dispaly="true" />
+                            <h:th width="35%" dispaly="true" />
+                            <h:tr>
+                                <h:td>
+                                    <label value="Sổ văn bản"
+                                           sclass="hightlight" />
+                                </h:td>
+                                <h:td>
+                                    <label id="labelBookIn" width="80%"
+                                           value="${$composer.getCategoryName(1, $composer.documentReceive)}"
+                                           sclass="label-info" />
+                                </h:td>
+                                <h:td>
+                                    <label value="Số đến"
+                                           sclass="hightlight" />
+                                </h:td>
+                                <h:td>
+                                    <label id="labelBookNumber"
+                                           width="80%"
+                                           value="${$composer.getBookNumber($composer.documentReceive.documentReceiveId, 1)}"
+                                           sclass="label-info" />
+                                </h:td>
+                            </h:tr>
+                            <h:tr>
+                                <h:td>
+                                    <label value="Số ký hiệu"
+                                           sclass="hightlight" />
+                                </h:td>
+                                <h:td>
+                                    <label id="labelDocCode" width="80%"
+                                           value="${$composer.documentReceive.documentCode}"
+                                           sclass="label-info" />
+                                </h:td>
+                                <h:td>
+                                    <label value="Loại văn bản"
+                                           sclass="hightlight" />
+                                </h:td>
+                                <h:td>
+                                    <label id="labelDocType" width="80%"
+                                           value="${$composer.getCategoryName(2, $composer.documentReceive)}"
+                                           sclass="label-info" />
+                                </h:td>
+                            </h:tr>
+                            <h:tr>
+                                <h:td>
+                                    <label value="Ngày ban hành"
+                                           sclass="hightlight" />
+                                </h:td>
+                                <h:td>
+                                    <label id="labelPublishDay"
+                                           width="80%"
+                                           value="${$composer.documentReceive.publishDateStr}"
+                                           sclass="label-info" />
+                                </h:td>
+                                <h:td>
+                                    <label value="Ngày đến"
+                                           sclass="hightlight" />
+                                </h:td>
+                                <h:td>
+                                    <label id="labelReceivedDay"
+                                           width="80%"
+                                           value="${$composer.documentReceive.receiveDateStr}"
+                                           sclass="label-info"/>
+                                </h:td>
+                            </h:tr>
+                            <h:tr>
+                                <h:td>
+                                    <label value="Nơi gửi"
+                                           sclass="hightlight" />
+                                </h:td>
+                                <h:td colspan="3">
+                                    <label id="labelPublishAgency"
+                                           width="80%"
+                                           value="${$composer.documentReceive.publishAgencyName}"
+                                           sclass="label-info" />
+                                </h:td>
+                            </h:tr>
+                            <h:tr>
+                                <h:td>
+                                    <label value="Người ký"
+                                           sclass="hightlight" />
+                                </h:td>
+                                <h:td colspan="3">
+                                    <label id="labelSigner" width="95%"
+                                           value="${$composer.documentReceive.signer}"
+                                           sclass="label-info" />
+                                </h:td>
+                            </h:tr>
+                            <h:tr>
+                                <h:td>
+                                    <label value="Chuyển cả bì"
+                                           sclass="hightlight" />
+                                </h:td>
+                                <h:td>
+                                    <label sclass="label-info"
+                                           value="${$composer.documentReceive.sendPacking != 0 ? 'Có' : 'Không'}" />
+                                </h:td>
+                                <h:td>
+                                    <label value="Lĩnh vực"
+                                           sclass="hightlight" />
+                                </h:td>
+                                <h:td>
+                                    <label sclass="label-info"
+                                           id="labelDocArea"
+                                           value="${$composer.getCategoryName(7, $composer.documentReceive)}" />
+                                </h:td>
+                            </h:tr>
+                            <h:tr>
+                                <h:td>
+                                    <label value="Trích yếu"
+                                           sclass="hightlight" />
+                                </h:td>
+                                <h:td colspan="3">
+                                    <label id="labelAbstract"
+                                           width="95%" multiline="true" pre="true"
+                                           value="${$composer.documentReceive.documentAbstract}"
+                                           sclass="label-info" />
+                                </h:td>
+                            </h:tr>
+<!--                            <h:tr>
+                                <h:td>
+                                    <label value="Số bản"
+                                           sclass="hightlight" />
+                                </h:td>
+                                <h:td>
+                                    <label id="labelNumberDoc"
+                                           width="95%" value="${$composer.documentReceive.numberOfDoc}"
+                                           sclass="label-info" />
+                                </h:td>
+                                <h:td>
+                                    <label value="Số trang"
+                                           sclass="hightlight" />
+                                </h:td>
+                                <h:td>
+                                    <label id="labelNumberPage"
+                                           width="95%" value="${$composer.documentReceive.numberOfPage}"
+                                           sclass="label-info" />
+                                </h:td>
+                            </h:tr>-->
+                            <h:tr>
+                                <h:td>
+                                    <label value="Độ mật"
+                                           sclass="hightlight" />
+                                </h:td>
+                                <h:td>
+                                    <label id="labelSecurity"
+                                           width="80%"
+                                           value="${$composer.getCategoryName(3, $composer.documentReceive)}"
+                                           sclass="label-info" />
+                                </h:td>
+                                <h:td>
+                                    <label value="Độ khẩn"
+                                           sclass="hightlight" />
+                                </h:td>
+                                <h:td>
+                                    <label id="labelPriority"
+                                           width="80%"
+                                           value="${$composer.getCategoryName(4, $composer.documentReceive)}"
+                                           sclass="label-info" />
+                                </h:td>
+                            </h:tr>
+                            <h:tr>
+                                <h:td>
+                                    <label value="Văn bản QPPL"
+                                           sclass="hightlight" />
+                                </h:td>
+                                <h:td>
+                                    <label
+                                        value="${$composer.documentReceive.isLawDocument == 1 ? 'Có' : 'Không'}"
+                                        id="labelLaw" sclass="label-info" />
+                                </h:td>
+                                <h:td>
+                                    <label value="Phương thức nhận"
+                                           sclass="hightlight" />
+                                </h:td>
+                                <h:td>
+                                    <label id="labelReceiveType"
+                                           width="80%"
+                                           value="${$composer.getCategoryName(5, $composer.documentReceive)}"
+                                           sclass="label-info" />
+                                </h:td>
+                            </h:tr>
+                            <h:tr>
+                                <h:td>
+                                    <label value="Hạn trả lời"
+                                           sclass="hightlight" />
+                                </h:td>
+                                <h:td>
+                                    <label id="labelDeadlineTime"
+                                           width="80%"
+                                           value="${$composer.documentReceive.deadlineByDateStr}"
+                                           sclass="label-info" />
+                                </h:td>
+                                <h:td>
+                                    <label value="Hạn trả lời bằng số"
+                                           sclass="hightlight" />
+                                </h:td>
+                                <h:td>
+                                    <label id="labelAlertTime"
+                                           width="80%"
+                                           value="${$composer.documentReceive.deadlineByWd} ngày"
+                                           sclass="label-info" />
+                                </h:td>
+                            </h:tr>
+                        </h:table>
+                    </groupbox>
+                    <div class="seperateDiv" id="divAttach">
+                        Tệp chứa nội dung toàn văn bản
+                    </div>
+                    <listbox id="lbAttach" multiple="false" rows="3">
+                        <listhead sizable="true">
+                            <listheader width="90%" />
+                            <listheader width="10%" align="center" />
+                        </listhead>
+                        <template name="model">
+                            <listitem>
+                                <listcell label="${each.attachName}" />
+                                <listcell>
+                                    <image
+                                        forward="onClick=lbAttach.onViewAttachFile(${each})"
+                                        src="/Share/img/icon/view.png" width="20px" height="20px"
+                                        tooltiptext="Tải văn bản" />
+                                </listcell>
+                            </listitem>
+                        </template>
+                    </listbox>
+                    <groupbox width="100%" sclass="gb-form-create"
+                              id="gbReplyForDoc">
+                        <caption label="Là hồi báo của văn bản đi" />
+                        <listbox id="lbDocOut"
+                                 emptyMessage="Không có văn bản nào" mold="paging" vflex="true"
+                                 pageSize="5">
+                            <listhead>
+                                <listheader label="STT" align="center"
+                                            hflex="min" />
+                                <listheader label="Số đến"
+                                            align="center" hflex="1" />
+                                <listheader label="Số / Kí hiệu"
+                                            hflex="1" />
+                                <listheader label="Trích yếu" hflex="2" />
+                            </listhead>
+                            <template name="model">
+                                <listitem>
+                                    <listcell
+                                        label="${forEachStatus.index+1}">
+                                    </listcell>
+                                    <listcell
+                                        label="${$composer.getBookOutNumber(each.documentPublishId)}">
+                                    </listcell>
+                                    <listcell
+                                        label="${each.documentCode}">
+                                    </listcell>
+                                    <listcell
+                                        label="${each.documentAbstract}">
+                                    </listcell>
+                                </listitem>
+                            </template>
+                        </listbox>
+                    </groupbox>
+                </h:td>
+                <h:td width="30%" style="vertical-align:top;">
+                    <groupbox style="min-height:200px"
+                              sclass="gb-form-create">
+                        <caption label="Danh sách ý kiến xử lý" />
+                        <div id="notifyWnd" />
+                    </groupbox>
+                </h:td>
+            </h:tr>
+        </h:table>
+    </h:div>
+    <div id="divToolbarBottom" class="toolBar">
+        <image sclass="img-cal" style="float:left"
+               forward="onClick=windowDocInView.onClose"
+               src="/Share/img/png/quay-lai.png" tooltiptext="Quay lại" />
+        <image src="/Share/img/png/flow.png" sclass="img-cal"
+               forward="onClick=windowDocInView.onViewFlow" style="float:left"
+               tooltiptext="Xem luồng" />
+        <label id="lbBottomWarning" class="notify" />
+    </div>
+</window>

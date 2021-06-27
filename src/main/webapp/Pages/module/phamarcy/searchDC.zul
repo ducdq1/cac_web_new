@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.zkoss.org/2005/zk/native"
+	xmlns="http://www.zkoss.org/2005/zul">
+	<style src="/Share/css/formstyle.css" />
+	<groupbox id="fullSearchGbx" mold="3d"
+		>
+		<caption
+			label="${$composer.getLabelCos('cosmetic_search_caption')}" />
+		<h:table align="center" width="80%" class="table-search">
+			<h:tr>
+			 
+				<h:th width="8%" />
+				<h:th width="32%" />
+				<h:th width="8%" />
+				<h:th width="38%" />
+			</h:tr>
+			<h:tr>
+				<h:td style="text-align: left;">
+					<label value="Khu vực: " sclass="lb-create" />
+				</h:td>
+				<h:td>
+					<listbox id="tbMaSP" height="25px"
+					onAfterRender='$composer.getSelectedIndexInModel()'
+					mold="select" width="50%">
+					<template name="model">
+						<listitem label="${each.areaName}"
+							value="${each.areaId}" />
+					</template>
+				</listbox>
+				</h:td>
+				 
+				<h:td style="text-align: left;">
+					<label value="Tên đường: " sclass="lb-create" />
+				</h:td>
+				<h:td>
+					<textbox id="tbTenDuong" height="25px" />
+				</h:td>
+				 
+			</h:tr>
+
+			<h:tr>
+				<h:td style="height:20px">
+				</h:td>
+
+			</h:tr>
+
+			<h:tr>
+				<h:td colspan="4" align="center"
+					style="text-align: center">
+					<button id="btnSearch"
+						label="${$composer.getLabelCos('common_search')}" sclass="button"
+						image="/Share/img/icon/search.jpg" autodisable="self" />
+					 
+					<button id="btnAdd" label="Thêm mới" sclass="button"
+						image="/Share/img/icon/Add.png" autodisable="self" />
+					<button id="btnPrint" label="Xuất excel" sclass="button"
+						image="/Share/img/icon/print_ic_small.png" autodisable="self" />  
+				</h:td>
+			</h:tr>
+		</h:table>
+	</groupbox>
+</zk>

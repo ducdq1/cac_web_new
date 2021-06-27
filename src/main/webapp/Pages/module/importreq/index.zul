@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+        xmlns="http://www.zkoss.org/2005/zul" id="rapidTestMainWnd"
+        xmlns:w="http://www.zkoss.org/2005/zk/client"
+        apply="com.viettel.module.rapidtest.RapidTestKit">
+    Thủ tục cấp phép lưu hành bộ xét nghiệm nhanh
+    <caption label="Luồng" />
+        <h:table class="createTable">
+            <h:tr>
+                <h:td width="25%">
+                    <label value="Kích hoạt luồng"/>
+                </h:td>
+                <h:td width="75%">
+                    <textbox id="txtFlowId" 
+                             maxlength="200" 
+                             constraint="no empty:Bạn phải nhập mã luồng"/>
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td>
+                    <label value="Mã hồ sơ"/>
+                </h:td>
+                <h:td>
+                    <textbox id="txtDocCode" maxlength="50" />
+                </h:td>
+            </h:tr>
+            
+            <h:tr>
+                <h:td colspan="2" align="center">
+                    <button height="30px" image="/Share/img/icon/save.png" 
+                            id="btnCreate" label="Kích hoạt luồng" />
+                    <button height="30px" image="/Share/img/icon/close.png" 
+                            id="btnCancel" label="Đóng" onClick="createDlg.detach()" />
+                    <button height="30px" image="/Share/img/icon/close.png" 
+                            id="btnNext" label="Next" />
+                    <button height="30px" image="/Share/img/icon/close.png" 
+                            id="btnFinish" label="Finish"/>
+                    <image src="/Share/img/png/flow.png" sclass="img-cal" 
+                           tooltiptext="Xem luồng"
+                           width="20px" height="20px"
+                           forward="onClick=rapidTestMainWnd.onViewFlow()">
+                    </image>
+                </h:td>
+            </h:tr>
+        </h:table>
+</window>

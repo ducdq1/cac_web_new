@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <window id="flowWindow" apply="com.viettel.voffice.DAO.System.Flow.FlowsController" border="normal">
+        <caption label="Quản lý luồng"/>
+        <h:div style="width:100%" align="center">
+            <h:table style="width:80%" class="searchTable">
+                <h:tr>
+                    <h:td>
+                        <label>Tên luồng</label>
+                    </h:td>
+                    <h:td>
+                        <textbox id="txtSearchFlowName" value=""/>
+                    </h:td>
+                    <h:td>
+                        <label>Mã luồng</label>
+                    </h:td>
+                    <h:td>
+                        <textbox id="txtSearchFlowCode" value=""/>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td>
+                        <label>Đơn vị</label>
+                    </h:td>
+                    <h:td>
+                        <textbox id="txtSearchDeptName" readonly="true" style="width:70%"/>
+                        <textbox id="txtSearchDeptId" visible="false"/>
+                        <button id="btnShowSearchDept" image="/Share/img/icon/dept.png" height="30px"/>
+                        <button image="/Share/img/icon/delete.png" onClick="txtSearchDeptName.setValue(null);txtSearchDeptId.setValue(null);" height="30px"/>
+                    </h:td>
+                    <h:td>
+                        <label>Thủ tục hành chính</label>
+                    </h:td>
+                    <h:td>
+                        <listbox id="cbSearchObjects" mold="select">
+                            <template name="model">
+                                <listitem label="${each.name}" value="${each.categoryId}" />
+                            </template>
+                        </listbox>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td colspan="4" style="text-align:center">
+                        <button height="30px" image="/Share/img/search.png" id="btnSearch" label="Tìm kiếm" />
+                        <button height="30px" image="/Share/img/add.png" id="btnCreate" label="Thêm mới" />
+                    </h:td>
+                </h:tr>
+            </h:table>
+        </h:div>
+        <h:div id="gridDiv" >
+            <listbox id="lstFlows" 
+                         multiple="false"
+                         mold="paging"
+                         pageSize="10"
+                         emptyMessage="Không tồn tại luồng">
+                <listhead sizable="true">
+                    <listheader width="5%" label="STT" align="center" />
+                    <listheader width="5%" label="ID" align="center" />
+                    <listheader width="20%" label="Luồng"/>
+                    <listheader width="20%" label="Tên luồng"/>
+                    <listheader width="10%" label="Thủ tục" />
+                    <listheader width="20%" label="Danh mục" />
+                    <listheader width="10%" label="Đơn vị"  />
+                    <listheader width="10%" label="Trạng thái"  />
+                    <listheader width="10%" label="Cấu hình" align="center" />
+                    <listheader width="5%" label="Sửa" align="center"/>
+                    <listheader width="5%" label="Xoá" align="center"/>
+                </listhead>
+                <template name="model">
+                    <listitem value="${each}">
+                        <listcell label="${forEachStatus.index+1}" />
+                        <listcell label="${each.flowId}" />
+                        <listcell label="${each.flowCode}" />
+                        <listcell label="${each.flowName}" />
+                        <listcell label="${each.objectName}" />
+                        <listcell label="${each.categoryName}" />
+                        <listcell label="${each.deptName}" />
+                        <listcell>
+                            <label value="Hoạt động" if="${each.isActive==1}"/>
+                            <label value="Bị khóa" if="${each.isActive!=1}"/>
+                        </listcell>
+                        <listcell >
+                            <image forward="onClick=lstFlows.onConfig" src="/Share/img/function.png" width="20px" height="20px"/>
+                        </listcell>
+                        <listcell >
+                            <image forward="onClick=lstFlows.onEdit" src="/Share/img/icon/edit.png" width="20px" height="20px"/>
+                        </listcell>
+                        <listcell>
+                            <image forward="onClick=lstFlows.onDelete" src="/Share/img/icon/delete.png" width="20px" height="20px"/>
+                        </listcell>
+                    </listitem>
+                </template>
+            </listbox>
+        </h:div>
+    </window>
+</zk>

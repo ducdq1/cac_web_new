@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+        xmlns="http://www.zkoss.org/2005/zul"
+        id="calendarManagerWnd"
+        apply="com.viettel.voffice.DAO.Calendar.CalendarApprovedController">
+    <include src="/Pages/common/calendarToolbar.zul"/>
+    <script defer="true">
+        toolBar.widget = "calendarManagerWnd";
+        addToolbar("Share/img/icon/role.png","Xem lịch của cá nhân","onOpenSelectUser");
+        addToolbar("Share/img/menu/technical_icon.png","Xem lịch của tài nguyên","onOpenSelectResource");
+        addPrintToolbar();
+    </script>
+    <div id="selectedDiv" style="padding:3px; border:1px solid gray; background-color:brown;color:white">
+        <label value="Lịch của : "/>
+        <label id="lbSelectedDept"/>
+        <label id="lbSelectedUser"/>
+        <label id="lbSelectedResource"/>
+        <image id="imgDeleteSelected" src="/Share/img/delete.png" width="20" height="20" tooltiptext="Xóa người và tài nguyên đã chọn"/>
+    </div>
+    <div id="viewDiv">
+        <include src="/Pages/calendar/calendarWeek.zul"/> 
+    </div>
+    
+</window>

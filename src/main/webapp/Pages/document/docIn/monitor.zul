@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+        xmlns="http://www.zkoss.org/2005/zul" id="monitorWnd"
+        apply="com.viettel.voffice.DAO.DocIn.DocInMonitor">
+    <script defer="true">
+        toolBar.widget = "monitorWnd";
+    </script>
+    <include src="/Pages/common/searchToolbar.zul" />
+    <h:div class="contentDiv">
+        <h:table style="border-collapse:collapse">
+            <h:tr>
+                <h:td width="30%" style="vertical-align:top;">
+                    <groupbox id="groupDept" title="Cây đơn vị" mold="3d">
+                        <tree id="deptUserTree" style="padding-top:0px;border:0px none">
+                            <template name="model">
+                                <treeitem>
+                                    <treerow>
+                                        <treecell>
+                                            <hlayout style="display:inline-flex">
+                                                <image src="/Share/img/icon/dept.png" if="${each.type!=1}"/>
+                                                <image src="/Share/img/icon/user.gif" if="${each.type==1}"/>
+                                                <label value="${each.name}"/>
+                                            </hlayout>
+                                        </treecell>
+                                    </treerow>
+                                </treeitem>
+                            </template>
+                        </tree>            
+                    </groupbox>
+                </h:td>
+                <h:td width="70%" style="vertical-align:top;">
+                    <groupbox title="Thông tin theo dõi" mold="3d">
+                        <h:table style="width:100%;background-color:#93BDEF">
+                            <h:tr>
+                                <h:td width="20%" align="right">
+                                    <label value="Từ ngày"/>
+                                </h:td>
+                                <h:td width="20%" >
+                                    <datebox id="dbFromDay" cols="12"
+                                             format="dd/MM/yyyy" width="100%"
+                                             constraint="between 19000101 and 20991231: Thời gian phải nằm trong khoảng từ 1/1/1900 đến 31/12/2099" />
+                                </h:td>
+                                <h:td width="20%" align="right">
+                                    <label value="Đến ngày"/>
+                                </h:td>
+                                <h:td width="20%">
+                                    <datebox id="dbToDay" cols="12" format="dd/MM/yyyy"
+                                             width="100%"
+                                             constraint="between 19000101 and 20991231: Thời gian phải nằm trong khoảng từ 1/1/1900 đến 31/12/2099" />
+                                    
+                                </h:td>
+                                <h:td width="20%" align="left">
+                                    <button id="btnSearch" label="Tìm kiếm" sclass="button" image="/Share/img/icon/search.jpg" />
+                                </h:td>
+                            </h:tr>
+                        </h:table>
+                        <h:table class="viewTable">
+                            <h:tr>
+                                <h:td>
+                                    <label value="Chờ xử lý :"/>
+                                    <a>
+                                    <label id="docwaitProcessing" sclass="label-required" />
+                                    </a>
+                                </h:td>
+                                <h:td>
+                                    <label value="Đang xử lý :"/>
+                                    <a>
+                                    <label id="docProcessing" sclass="label-required" />
+                                    </a>
+                                </h:td>
+                                <h:td>
+                                    <label value="Đã xử lý :"/>
+                                    <a>
+                                    <label id="docProcessed" sclass="label-required" />
+                                    </a>
+                                </h:td>
+                            </h:tr>
+                            <h:tr>
+                                <h:td>
+                                    <label value="Quá hạn chưa hoàn thành :"/>
+                                    <a>
+                                    <label id="docOverDeadlineNotProcessed" sclass="label-required" />
+                                    </a>
+                                </h:td>
+                                <h:td>
+                                    <label value="Quán hạn đã hoàn thành :"/>
+                                    <a>
+                                    <label id="docOverDeadlineProcessed" sclass="label-required" />
+                                    </a>
+                                </h:td>
+                                <h:td>
+                                    <label value="Nhận để biết :"/>
+                                    <a>
+                                        <label id="docReceiveToKnow" sclass="label-required" />
+                                    </a>
+                                </h:td>
+                            </h:tr>
+                        </h:table>
+                        <listbox id="lbListDoc" emptyMessage="Không có văn bản nào">
+                            <listhead>
+                                <listheader label="STT" align="center" hflex="min" />
+                                <listheader label="Số / Kí hiệu" hflex="min" />
+                                <listheader label="Ngày đến" hflex="min" />
+                                <listheader label="Ngày ban hành" hflex="min" />
+                                <listheader label="Cơ quan ban hành" hflex="2" />
+                                <listheader label="Người ký" hflex="1" />
+                                <listheader label="Trích yếu" hflex="2" />
+                                <listheader label="Hạn xử lý" hflex="min" />
+                                <listheader label="File" align="center" hflex="min" />
+                            </listhead>
+                            <template name="model">
+                                <listitem>
+                                    <listcell
+                                        forward="onClick=lbListDoc.onOpenView(${each})"
+                                        label="${forEachStatus.index + 1 + userPagingBottom.pageSize * userPagingBottom.activePage}">
+                                    </listcell>
+                                    <listcell
+                                        forward="onClick=lbListDoc.onOpenView(${each})"
+                                        label="${each.documentCode}">
+                                    </listcell>
+                                    <listcell
+                                        forward="onClick=lbListDoc.onOpenView(${each})"
+                                        label="${each.receiveDateStr}">
+                                    </listcell>
+                                    <listcell
+                                        forward="onClick=lbListDoc.onOpenView(${each})"
+                                        label="${each.publishDateStr}">
+                                    </listcell>
+                                    <listcell
+                                        forward="onClick=lbListDoc.onOpenView(${each})"
+                                        label="${each.publishAgencyName}">
+                                    </listcell>
+                                    <listcell
+                                        forward="onClick=lbListDoc.onOpenView(${each})"
+                                        label="${each.signer}">
+                                    </listcell>
+                                    <listcell
+                                        forward="onClick=lbListDoc.onOpenView(${each})"
+                                        label="${each.documentAbstract}">
+                                    </listcell>
+                                    <listcell
+                                        forward="onClick=lbListDoc.onOpenView(${each})"
+                                        label="${each.deadlineByDateStr}">
+                                    </listcell>
+                                    <listcell>
+                                        <image src="/Share/img/menu/files.png"
+                                               width="20px" height="20px"
+                                               forward="onClick=lbListDoc.onDownloadAttach(${each})" tooltiptext="File văn bản"/>
+                                    </listcell>
+                                </listitem>
+                            </template>
+                        </listbox>
+                        <paging id="userPagingBottom" pageSize="10" detailed="true" />                    
+                        <!--                        <include src="/Pages/common/colorNote.zul"/>-->
+                    </groupbox>
+                </h:td>
+            </h:tr>
+        </h:table>
+    </h:div>
+</window>

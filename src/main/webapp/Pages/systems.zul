@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+  
+    <style src="../Share/css/login.css"/>
+     <style> 
+    .box-login1
+{
+    width:650px;
+    min-height:200px;
+    left: 50%;
+    margin-left: -275px;
+    margin-top: -250px;
+    position: relative;
+    top: 47%;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -o-border-radius: 8px;
+    height: 320px;
+    font-family: "MYRIADPRO-COND";
+}
+</style>
+    <style src="../Share/homepage/style_comon.css"/>
+    <style>
+        .SpanTag {
+        font-family:'MYRIADPRO-COND'!important;
+        font-size:18px !important;
+        }
+        
+        .SpanTag2 {
+        font-family:'MYRIADPRO-COND'!important;
+        font-size:20px !important;
+        }
+        
+        .SpanTag3 {
+        font-family:'MYRIADPRO-COND'!important;
+        font-size:12px !important;
+        }
+        
+        .SpanTag4 {
+        font-family:'MYRIADPRO-COND'!important;
+        font-size:24px !important;
+        <!--border-bottom: 3px solid;-->
+        color: #df540a;
+        font-size: 24px;
+        font-weight: bold;
+        padding-bottom: 3px;
+        padding-left: 3px;
+        padding-right: 5px;
+        }
+        
+        .image {
+    position:relative;
+    text-align:center; // doesn't work as desired :(
+}
+
+.text {
+    position:absolute;
+    top:30px;
+}
+    </style>
+    
+    <h:div style="width:100%;font-family:'MyriadPro-BoldCond'!important;
+              font-size:18px !important; background-color: #f8f8f8;
+    background-image: url('../Share/homepage/images/body-bg.png');
+    background-position: center bottom;
+    background-repeat: repeat-x;">
+    
+        <window apply="com.viettel.voffice.DAO.SystemsDAO" style="width:100%;text-align:center;" id="loginForm">
+        
+            <h:div class="header_hp SpanTag">
+                <h:div class="banner SpanTag">
+                    <h:div class="logo1">
+                        <h:img   height="65" src="../Share/homepage/images/logo.png" />
+                    </h:div>
+                    <h:div class="r_banner" style="text-align:left !important">
+                        <h:img width="" height="" src="../Share/homepage/images/r-banner-bg.png" />
+                    </h:div>
+                </h:div>
+            </h:div>
+            <h:div class="login_hr_name">
+            </h:div>
+      
+            <h:div class="wrapper">
+            	<h:div style="text-align: right;margin-right:20px	">
+            		<image   src="../Share/avatar/default-avatar.png"
+            			height="50px" width="50px" />
+            		<label style="font-size:16px;padding-left:10px; top:-20px;position: relative"  id="lbUserFullName" >
+            			Công ty CP Dược Việt NAM
+            		</label>
+            		<h:div style="text-align: right;padding-top:10px">
+
+            			<label 
+            				style="font-size:16px;padding-right:10px;cursor:pointer;color:rgb(65,170,233)">
+            				Cập nhật thông tin
+            			</label>
+            			<label style="font-size:16px;">|</label>
+            			<label id="lbLogout"
+            				style="font-size:16px;cursor:pointer;padding-left:10px;color:rgb(65,170,233)">
+            				Đăng xuất
+            			</label>
+
+            		</h:div>
+            	</h:div>
+            	<h:div class="big_login_div">
+            		<h:div class="box-login1">
+            			<h:div class="headboxlogin SpanTag"
+            				style="box-shadow: 0 0 3px #5295e6;  0 0; border-left-radius: 8px; border-right-radius: 8px;">
+            				LỰA CHỌN DỊCH VỤ CÔNG TRỰC TUYẾN
+            			</h:div>
+            			<h:div style="text-align:left;">
+            				<h:div style="position: relative;">
+            					<h:table
+            						style="position: absolute; top: 0; width: 100%;position: absolute; top: 0; width: 100%; background: #fff none repeat scroll; box-shadow: 0 0 3px #5295e6;  0 0; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;">
+            						<h:tr>
+            							<h:td>
+            								<h:br />
+            								<radiogroup id="rdg"></radiogroup>
+            								<h:div
+            									class="padd format-text SpanTag">
+            									<radio radiogroup="rdg"
+            										style="font-size:16px" selected="true"
+            										label="  Dịch vụ công trực tuyến về tiếp nhận và xử lý thủ tục ĐĂNG KÝ THUỐC" />
+            								</h:div>
+            								<h:br />
+            								<h:div
+            									class="padd format-text SpanTag">
+            									<radio radiogroup="rdg"
+            										style="font-size:16px"
+            										label="  Dịch vụ công trực tuyến về KÊ KHAI/KÊ KHAI LẠI GIÁ THUỐC" />
+            								</h:div>
+            								<h:br />
+            								<h:div
+            									class="padd format-text SpanTag">
+            									<radio radiogroup="rdg"
+            										style="font-size:16px"
+            										label="  Dịch vụ công trực tuyến về tiếp nhận hồ sơ ĐĂNG KÝ THÔNG TIN THUỐC" />
+            								</h:div>
+            								<h:br />
+            							</h:td>
+            						</h:tr>
+            						<h:tr>
+            							<h:td>
+            								<h:div class="btn-login"
+            									nowrap="true"
+            									style="text-align:center;padding-bottom:5px">
+            									<button
+            										autodisable="self" style="cursor:pointer"
+            										id="btnLogin" onClick='gottolink()'
+            										label="Tiếp tục" class="SpanTag" />
+            								</h:div>
+            							</h:td>
+            						</h:tr>
+            					</h:table>
+            				</h:div>
+            			</h:div>
+            		</h:div>
+            	</h:div>
+            </h:div>
+            <h:div class="footer_bt">
+                Bản quyền: Cục Quản lý Dược - Bộ Y tế
+                <h:br/>Địa chỉ: 138A Giảng Võ - Hà Nội
+                <h:br/>Điện thoại: 844.37366483. Fax: 844.38234758. Email: cqldvn@moh.gov.vn
+            </h:div>
+            
+            <zscript><![CDATA[
+        void gottolink(){
+        	  int pos=rdg.getSelectedIndex();
+        	  String url="";
+        	  switch(pos){
+        	  case 0:
+        		  url="http://10.30.176.90:8082/thongtinthuoc";
+        		  break;
+        	  case 1:
+        		  url="http://10.30.176.44:8080/phamarcy/index.zul";
+        		  break;
+        	  case 2:
+        		  url="http://10.30.176.44:8080/phamarcy/index.zul";
+        		  break;
+        	  }
+        	  Executions.sendRedirect(url);
+          }
+    ]]>
+    </zscript>
+    
+        </window>
+    </h:div>
+    
+    
+</zk>

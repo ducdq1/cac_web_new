@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <window id="userLogWindow" apply="com.viettel.voffice.DAO.System.ActionLogController" border="normal" width="600px" closable="true">
+        <caption label="Quản lý log người dùng"/>
+        <div>
+            <h:div style="width:100%" align="center">
+                <h:table style="width:80%;display:none" class="searchTable">
+                    <h:tr>
+                        <h:td>
+                            <label value="Từ ngày"/>
+                        </h:td>
+                        <h:td>
+                            <datebox id="dbFromDate" format="dd/MM/yyyy"/>
+                        </h:td>
+                        <h:td>
+                            <label value="Đến ngày"/>
+                        </h:td>
+                        <h:td>
+                            <datebox id="dbToDate" format="dd/MM/yyyy"/>
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td>
+                            <label value="Account"/>
+                        </h:td>
+                        <h:td>
+                            <textbox id="txtUserName" maxlength="100"/>
+                        </h:td>
+                        <h:td>
+                            <label value="Modun"/>
+                        </h:td>
+                        <h:td>
+                            <listbox id="lbModun"  mold="select">
+                                <listitem value="-1" label="--- Chọn ---" selected="true"/>
+                                <listitem value="0" label="Văn bản đến"/>
+                                <listitem value="1" label="Văn bản đi"/>
+                                <listitem value="2" label="Hồ sơ công việc"/>
+                                <listitem value="3" label="Lịch"/>
+                            </listbox>
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td>
+                            <label value="Hành động"/>
+                        </h:td>
+                        <h:td>
+                            <listbox id="lbActionType" mold="select">
+                                <listitem value="-1" label="--- Chọn ---" selected="true"/>
+                                <listitem value="0" label="Thêm mới"/>
+                                <listitem value="1" label="Cập nhật"/>
+                                <listitem value="2" label="Xóa"/>
+                                <listitem value="3" label="Phê duyệt"/>
+                                <listitem value="4" label="Từ chối"/>
+                                <listitem value="5" label="Xem"/>
+                                <listitem value="6" label="Chuyển"/>
+                            </listbox>
+                        </h:td>
+                        <h:td>
+                            <label>Đối tượng</label>
+                        </h:td>
+                        <h:td>
+                            <textbox id="txtObjectTitle" maxlength="250"/>
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td colspan="4" style="text-align:center">
+                            <button height="30px" image="/Share/img/search.png" id="btnSearch" label="Tìm kiếm" />
+                        </h:td>
+                    </h:tr>
+                </h:table>
+            </h:div>
+        </div>
+        <h:div>
+            <listbox id="lstItems" 
+                     emptyMessage="Không có log nào" style="word-wrap: break-word">
+                <listhead sizable="true">
+                    <listheader  width="10%" align="center" label="STT"/>
+                    <listheader  width="15%" label="Hành động"/>
+                    <listheader  width="15%" label="Loại đối tượng"/>
+                    <listheader  width="35%" label="Đối tượng bị tác động"/>
+                    <listheader  width="15%" label="Thời điểm"/>
+                    <listheader  width="10%" label="Undo" align="center"/>
+                </listhead>
+                <template name="model">                    
+                    <listitem>
+                        <listcell label="${forEachStatus.index+1+userPagingBottom.pageSize*userPagingBottom.activePage}"/>
+                        <listcell label="${each.actionName}" />
+                        <listcell label="${each.modunStr}" />
+                        <listcell label="${each.objectTitle}"/>
+                        <listcell label="${each.actionDateStr}"/>
+                        <listcell>
+                            <image forward="onClick=lstItems.onUndo" src="/Share/img/icon/undo.png" width="20px" height="20px" tooltiptext="Undo hành động"/>
+                        </listcell>
+                    </listitem>
+                </template>
+            </listbox>
+            <paging id="userPagingBottom" pageSize="10" detailed="true"/>
+        </h:div>
+    </window>
+    
+</zk>
+

@@ -1,0 +1,707 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+        xmlns="http://www.zkoss.org/2005/zul" xmlns:w="client"
+        position="center,center" width="100%" mode="embedded"
+        id="windowCRUDRapidTest"
+        apply="com.viettel.module.rapidtest.DAO.RapidTestCRUDController"
+        onCtrlKey="$composer.keyEventHandle(event.getKeyCode())"
+        ctrlKeys="#f6#f7#f8">
+    <style src="/Share/css/formstyle.css" />
+    <style src="/Share/css/uploadstyle.css" />
+    <script type="text/javascript" src="/Share/js/UPMSamples.js" />
+    
+    <h:div id="topToolbar" class="toolBar">
+        <button sclass="btnAction" image="/Share/img/png/quay-lai.png"
+                tooltiptext="${$composer.getLabelRt('common_quaylai')}" forward="onClick=windowCRUDRapidTest.onClose" />
+        <button sclass="btnAction" label="Lưu F7)"
+                image="/Share/img/png/luu-lai-va-dong.png"
+                onClick="$composer.onSave(2)" />
+        <label id="lbTopWarning" class="notify" width="15%" multiline="false" />
+    </h:div>
+    
+    <h:table width="100%" align="center">
+        <h:th width="10%" />
+        <h:th width="10%" />
+        <h:th width="40%" />
+        <h:th width="40%" />
+        <h:tr>
+            <h:td>
+                
+            </h:td>	
+            <h:td>
+                <label value="${$composer.getLabelRt('rapidtest_loaihoso')}" sclass="lb-create" style="align:right" />
+                <label value=" *" sclass="label-required" />
+            </h:td>
+            <h:td colspan="2">
+                <listbox id="lboxDocumentTypeCode" mold="select" width="50%">
+                    <listitem label="${$composer.getLabelRt('common_choose')}" value="-1" selected="true" />
+                    <listitem label="${$composer.getLabelRt('rapidtest_taomoi')}" value="16"  />
+                    <listitem label="${$composer.getLabelRt('rapidtest_suadoi')}" value="17" />
+                    <listitem label="${$composer.getLabelRt('rapidtest_bosung')}" value="18" />
+                </listbox>
+            </h:td>
+        </h:tr>
+    </h:table>
+    <tabbox id="tb">
+        <tabs id="tabs">
+            <tab id="hoso" label="Hồ sơ" />
+            <tab id="tepdinhkem" label="Tệp đính kèm"/>
+        </tabs>
+        
+        <tabpanels>
+            <tabpanel id="mainpanel">
+                <groupbox width="100%" sclass="gb-form-create"
+                          id="gbRapidCRUD1">
+                    <h:table width="100%" align="center">
+                        <h:th width="15%" />
+                        <h:th width="35%" />
+                        <h:th width="15%" />
+                        <h:th width="35%" />
+                        <h:tr>
+                            <h:td>
+                                <label value="Tên doanh nghiệp" sclass="lb-create" />
+                            </h:td>
+                            <h:td>
+                                <label width="95%" value="${$composer.files.businessName}" sclass="label-info" multiline="true" pre="true"/>
+                            </h:td>
+                            <h:td>
+                                <label value="Mã số thuế" sclass="lb-create" />
+                            </h:td>
+                            <h:td>
+                                <label width="95%" value="${$composer.files.taxCode}" sclass="label-info" multiline="true" pre="true"/>
+                            </h:td>
+                        </h:tr>
+                        <h:tr>
+                            <h:td>
+                                <label value="Địa chỉ" sclass="lb-create" />
+                            </h:td>
+                            <h:td colspan="3">
+                                <label width="95%" value="${$composer.files.businessAddress}" sclass="label-info" multiline="true" pre="true"/>
+                            </h:td>
+                            
+                        </h:tr>
+                        <h:tr>
+                            <h:td>
+                                <label value="Điện thoại" sclass="lb-create" />
+                            </h:td>
+                            <h:td>
+                                <label width="95%" value="${$composer.files.businessPhone}" sclass="label-info" multiline="true" pre="true"/>
+                            </h:td>
+                            <h:td>
+                                <label value="Fax" sclass="lb-create" />
+                            </h:td>
+                            <h:td>
+                                <label width="95%" value="${$composer.files.businessFax}" sclass="label-info" multiline="true" pre="true"/>
+                            </h:td>
+                        </h:tr>
+                        <h:tr>
+                            <h:td>
+                                <label value="Số/Ký hiệu" sclass="lb-create" />
+                                <label value=" *" sclass="label-required" />
+                            </h:td>
+                            <h:td>
+                                <textbox id="tbRapidTestNo" width="95%" rows="1"
+                                         value="${$composer.rtFile.rapidTestNo}"
+                                         maxlength="31" />
+                            </h:td>
+                            <h:td>
+                                <label value="Tên bộ xét nghiệm" sclass="lb-create" />
+                                <label value=" *" sclass="label-required" />
+                            </h:td>
+                            <h:td>
+                                <textbox id="tbRapidTestName" width="95%" rows="1"
+                                         value="${$composer.rtFile.rapidTestName}"
+                                         maxlength="255" />
+                            </h:td>
+                        </h:tr>
+            
+                        <h:tr>
+                            <h:td>
+                                <label value="Ký hiệu(Mã hiệu)" sclass="lb-create" />
+                                <label value=" *" sclass="label-required" />
+                            </h:td>
+                            <h:td>
+                                <textbox id="tbRapidTestCode" width="95%" rows="1"
+                                         value="${$composer.rtFile.rapidTestCode}"
+                                         maxlength="255" />
+                            </h:td>
+                            <h:td>
+                                <label value="Nơi sản xuất" sclass="lb-create" />
+                                <label value=" *" sclass="label-required" />
+                            </h:td>
+                            <h:td>
+                                <textbox id="tbPlaceOfManufacture" width="95%" rows="1"
+                                         value="${$composer.rtFile.placeOfManufacture}"
+                                         maxlength="255" />
+                            </h:td>
+                        </h:tr>
+            
+                        <h:tr>
+                            <h:td>
+                                <label value="Tính chất xét nghiệm" sclass="lb-create" />
+                                <label value=" *" sclass="label-required" />
+                            </h:td>
+                            <h:td>
+                                <listbox id="lboxPropertiesTests" mold="select" width="50%">
+                                    <listitem label="---Chọn---" value="-1" selected="true" />
+                                    <listitem label="Định tính" value="1"  />
+                                    <listitem label="Bán định lượng" value="2" />
+                                    <listitem label="Định lượng" value="3" />
+                                </listbox>
+                            </h:td>
+                            <h:td>
+                                <label value="Nguyên lý hoạt động" sclass="lb-create" />
+                                <label value=" *" sclass="label-required" />
+                            </h:td>
+                            <h:td>
+                                <textbox id="tbOperatingPrinciples" width="95%" rows="1"
+                                         value="${$composer.rtFile.operatingPrinciples}"
+                                         maxlength="255" />
+                            </h:td>
+                        </h:tr>
+            
+                        <h:tr>
+                            <h:td>
+                                <label value="Chỉ tiêu xét nghiệm" sclass="lb-create" />
+                                <label value=" *" sclass="label-required" />
+                            </h:td>
+                            <h:td>
+                                <textbox id="tbTargetTesting" width="95%" rows="1"
+                                         value="${$composer.rtFile.targetTesting}"
+                                         maxlength="255" />
+                            </h:td>
+                            <h:td>
+                                <label value="Phạm vi ứng dụng" sclass="lb-create" />
+                                <label value=" *" sclass="label-required" />
+                            </h:td>
+                            <h:td>
+                                <textbox id="tbRangeOfApplications" width="95%" rows="1"
+                                         value="${$composer.rtFile.rangeOfApplications}"
+                                         maxlength="255" />
+                            </h:td>
+                        </h:tr>
+                        <h:tr>
+                            <h:td>
+                                <label value="Giới hạn phát hiện" sclass="lb-create" />
+                                <label value=" *" sclass="label-required" />
+                            </h:td>
+                            <h:td>
+                                <textbox id="tbLimitDevelopment" width="95%" rows="1"
+                                         value="${$composer.rtFile.limitDevelopment}"
+                                         maxlength="255" />
+                            </h:td>
+                            <h:td>
+                                <label value="Độ chính xác" sclass="lb-create" />
+                                <label value=" *" sclass="label-required" />
+                            </h:td>
+                            <h:td>
+                                <textbox id="tbPrecision" width="95%" rows="1"
+                                         value="${$composer.rtFile.precision}"
+                                         maxlength="255" />
+                            </h:td>
+                        </h:tr>
+            
+                        <h:tr>
+                            <h:td>
+                                <label value="Mô tả cấu tạo bộ xét nghiệm nhanh" sclass="lb-create" />
+                                <label value=" *" sclass="label-required" />
+                            </h:td>
+                            <h:td>
+                                <textbox id="tbDescription" width="95%" rows="1"
+                                         value="${$composer.rtFile.description}"
+                                         maxlength="255" />
+                            </h:td>
+                            <h:td>
+                                <label value="Quy cách đóng gói" sclass="lb-create" />
+                                <label value=" *" sclass="label-required" />
+                            </h:td>
+                            <h:td>
+                                <textbox id="tbPakaging" width="95%" rows="1"
+                                         value="${$composer.rtFile.pakaging}"
+                                         maxlength="255" />
+                            </h:td>
+                        </h:tr>
+                        <h:tr>
+                            <h:td>
+                                <label value="Thời hạn sử dụng" sclass="lb-create" />
+                                <label value=" *" sclass="label-required" />
+                            </h:td>
+                            <h:td>
+                                <textbox id="tbShelfLife" width="95%" rows="1"
+                                         value="${$composer.rtFile.shelfLife}"
+                                         maxlength="255" />
+                            </h:td>
+                            <h:td>
+                                <label value="Điều kiện bảo quản" sclass="lb-create" />
+                                <label value=" *" sclass="label-required" />
+                            </h:td>
+                            <h:td>
+                                <textbox id="tbStorageConditions" width="95%" rows="1"
+                                         value="${$composer.rtFile.storageConditions}"
+                                         maxlength="255" />
+                            </h:td>
+                        </h:tr>
+            
+                        <h:tr>
+                            <h:td>
+                                <label value="Các thông tin khác" sclass="lb-create" />
+                            </h:td>
+                            <h:td>
+                                <textbox id="tbOtherInfos" width="95%" rows="1"
+                                         value="${$composer.rtFile.otherInfos}"
+                                         maxlength="255" />
+                            </h:td>
+                            <h:td>
+                                <label value="Hồ sơ kèm theo" sclass="lb-create" />
+                            </h:td>
+                            <h:td>
+                                <textbox id="tbAttachmentsInfo" width="95%" rows="1"
+                                         value="${$composer.rtFile.attachmentsInfo}"
+                                         maxlength="255" />
+                            </h:td>
+                        </h:tr>
+            
+                        <h:tr>
+                            <h:td>
+                                <label value="Nơi ký" sclass="lb-create" />
+                            </h:td>
+                            <h:td>
+                                <textbox id="tbSignPlace" width="95%" rows="1"
+                                         value="${$composer.rtFile.signPlace}"
+                                         maxlength="255" />
+                            </h:td>
+                            <h:td>
+                                <label value="Ngày ký" sclass="lb-create" />
+                            </h:td>
+                            <h:td>
+                                <datebox id="dbSignDate"
+                                         value="${$composer.rtFile.signDate}"
+                                         format="dd/MM/yyyy"/>
+                            </h:td>
+                        </h:tr>
+                        <h:tr>
+                            <h:td>
+                                <label value="Người ký" sclass="lb-create" />
+                            </h:td>
+                            <h:td>
+                                <textbox id="tbSignName" width="95%" rows="1"
+                                         value="${$composer.rtFile.signName}"
+                                         maxlength="255" />
+                            </h:td>
+                
+                        </h:tr>
+                    </h:table>
+                </groupbox>
+        
+                <groupbox width="100%" sclass="gb-form-create"
+                          id="gbRapidCRUD2">
+                    <h:table width="100%" align="center">
+                        <h:th width="15%" />
+                        <h:th width="35%" />
+                        <h:th width="15%" />
+                        <h:th width="35%" />
+                        <h:tr>
+                            <h:td>
+                                <label value="Tên doanh nghiệp" sclass="lb-create" />
+                            </h:td>
+                            <h:td>
+                                <label width="95%" value="${$composer.files.businessName}" sclass="label-info" multiline="true" pre="true"/>
+                            </h:td>
+                            <h:td>
+                                <label value="Mã số thuế" sclass="lb-create" />
+                            </h:td>
+                            <h:td>
+                                <label width="95%" value="${$composer.files.taxCode}" sclass="label-info" multiline="true" pre="true"/>
+                            </h:td>
+                        </h:tr>
+                        <h:tr>
+                            <h:td>
+                                <label value="Địa chỉ" sclass="lb-create" />
+                            </h:td>
+                            <h:td colspan="3">
+                                <label width="95%" value="${$composer.files.businessAddress}" sclass="label-info" multiline="true" pre="true"/>
+                            </h:td>
+                            
+                        </h:tr>
+                        <h:tr>
+                            <h:td>
+                                <label value="Điện thoại" sclass="lb-create" />
+                            </h:td>
+                            <h:td>
+                                <label width="95%" value="${$composer.files.businessPhone}" sclass="label-info" multiline="true" pre="true"/>
+                            </h:td>
+                            <h:td>
+                                <label value="Fax" sclass="lb-create" />
+                            </h:td>
+                            <h:td>
+                                <label width="95%" value="${$composer.files.businessFax}" sclass="label-info" multiline="true" pre="true"/>
+                            </h:td>
+                        </h:tr>
+                        <h:tr>
+                            <h:td>
+                                <label value="Số/Ký hiệu" sclass="lb-create" />
+                                 <label value=" *" sclass="label-required" />
+                                
+                                
+                            </h:td>
+                            <h:td>
+                                <textbox id="t2bRapidTestChangeNo" width="95%" rows="1"
+                                         value="${$composer.rtFile.rapidTestNo}"
+                                         maxlength="31" />
+                            </h:td>
+                            <h:td>
+                                <label value="Tên bộ xét nghiệm" sclass="lb-create"/>
+                                <label value=" *" sclass="label-required"/>
+                            </h:td>
+                            <h:td>
+                                <textbox id="t2bRapidTestName" width="95%" rows="1"
+                                         value="${$composer.rtFile.rapidTestName}"
+                                         maxlength="255" />
+                            </h:td>
+                        </h:tr>
+            
+                        <h:tr>
+                            <h:td>
+                                <label value="Ký hiệu(Mã hiệu)" sclass="lb-create" />
+                                <label value=" *" sclass="label-required" />
+                            </h:td>
+                            <h:td colspan="1">
+                                <textbox id="t2bRapidTestCode" width="95%" rows="1"
+                                         value="${$composer.rtFile.rapidTestCode}"
+                                         maxlength="255" />
+                            </h:td>
+                            
+                            
+                        </h:tr>
+                        
+                        <h:tr>
+                            <h:td>
+                                <label value="Số đăng ký lưu hành đã cấp" sclass="lb-create" />
+                                <label value=" *" sclass="label-required" />
+                            </h:td>
+                            <h:td>
+                                <textbox id="t2bCirculatingRapidTestNo" width="95%" rows="1"
+                                         value="${$composer.rtFile.circulatingRapidTestNo}"
+                                         maxlength="255" />
+                            </h:td>
+                            <h:td>
+                                <label value="Ngày cấp" sclass="lb-create" />
+                                <label value=" *" sclass="label-required" />
+                            </h:td>
+                            <h:td>
+                                <datebox id="d2bDateIssue"
+                                         value="${$composer.rtFile.dateIssue}"
+                                         format="dd/MM/yyyy"/>
+                            </h:td>
+                            
+                        </h:tr>
+            
+                        
+            
+                        <h:tr>
+                            <h:td>
+                                <label value="Nội dung đề nghị thay đổi" sclass="lb-create" />
+                                <label value=" *" sclass="label-required" />
+                            </h:td>
+                            <h:td>
+                                <textbox id="t2bContens" width="95%" rows="1"
+                                         value="${$composer.rtFile.contents}"
+                                         maxlength="255" />
+                            </h:td>
+                            <h:td>
+                                <label value="Hồ sơ kèm theo" sclass="lb-create" />
+                            </h:td>
+                            <h:td>
+                                <textbox id="t2bAttachmentsInfo" width="95%" rows="1"
+                                         value="${$composer.rtFile.attachmentsInfo}"
+                                         maxlength="255" />
+                            </h:td>
+                        </h:tr>
+            
+                        <h:tr>
+                            <h:td>
+                                <label value="Nơi ký" sclass="lb-create" />
+                            </h:td>
+                            <h:td>
+                                <textbox id="t2bSignPlace" width="95%" rows="1"
+                                         value="${$composer.rtFile.signPlace}"
+                                         maxlength="255" />
+                            </h:td>
+                            <h:td>
+                                <label value="Ngày ký" sclass="lb-create" />
+                            </h:td>
+                            <h:td>
+                                <datebox id="d2bSignDate"
+                                         value="${$composer.rtFile.signDate}"
+                                         format="dd/MM/yyyy"/>
+                            </h:td>
+                        </h:tr>
+                        <h:tr>
+                            <h:td>
+                                <label value="Người ký" sclass="lb-create" />
+                            </h:td>
+                            <h:td>
+                                <textbox id="t2bSignName" width="95%" rows="1"
+                                         value="${$composer.rtFile.signName}"
+                                         maxlength="255" />
+                            </h:td>
+                
+                        </h:tr>
+                    </h:table>
+                </groupbox>
+    
+                <groupbox width="100%" sclass="gb-form-create"
+                          id="gbRapidCRUD3">
+                    <h:table width="100%" align="center">
+                        <h:th width="15%" />
+                        <h:th width="35%" />
+                        <h:th width="15%" />
+                        <h:th width="35%" />
+                        <h:tr>
+                            <h:td>
+                                <label value="Tên doanh nghiệp" sclass="lb-create" />
+                            </h:td>
+                            <h:td>
+                                <label width="95%" value="${$composer.files.businessName}" sclass="label-info" multiline="true" pre="true"/>
+                            </h:td>
+                            <h:td>
+                                <label value="Mã số thuế" sclass="lb-create" />
+                            </h:td>
+                            <h:td>
+                                <label width="95%" value="${$composer.files.taxCode}" sclass="label-info" multiline="true" pre="true"/>
+                            </h:td>
+                        </h:tr>
+                        <h:tr>
+                            <h:td>
+                                <label value="Địa chỉ" sclass="lb-create" />
+                            </h:td>
+                            <h:td colspan="3">
+                                <label width="95%" value="${$composer.files.businessAddress}" sclass="label-info" multiline="true" pre="true"/>
+                            </h:td>
+                            
+                        </h:tr>
+                        <h:tr>
+                            <h:td>
+                                <label value="Điện thoại" sclass="lb-create" />
+                            </h:td>
+                            <h:td>
+                                <label width="95%" value="${$composer.files.businessPhone}" sclass="label-info" multiline="true" pre="true"/>
+                            </h:td>
+                            <h:td>
+                                <label value="Fax" sclass="lb-create" />
+                            </h:td>
+                            <h:td>
+                                <label width="95%" value="${$composer.files.businessFax}" sclass="label-info" multiline="true" pre="true"/>
+                            </h:td>
+                        </h:tr>
+                        <h:tr>
+                            <h:td>
+                                <label value="Số/Ký hiệu" sclass="lb-create" />
+                                <label value=" *" sclass="label-required" />
+                            </h:td>
+                            <h:td>
+                                <textbox id="t3bCirculatingExtensionNo" width="95%" rows="1"
+                                         value="${$composer.rtFile.circulatingExtensionNo}"
+                                         maxlength="255" />
+                            </h:td>
+                            <h:td>
+                                <label value="Tên bộ xét nghiệm" sclass="lb-create" />
+                                <label value=" *" sclass="label-required" />
+                            </h:td>
+                            <h:td>
+                                <textbox id="t3bRapidTestName" width="95%" rows="1"
+                                         value="${$composer.rtFile.rapidTestName}"
+                                         maxlength="255" />
+                            </h:td>
+                        </h:tr>
+            
+                        <h:tr>
+                            <h:td>
+                                <label value="Ký hiệu(Mã hiệu)" sclass="lb-create" />
+                                <label value=" *" sclass="label-required" />
+                            </h:td>
+                            <h:td colspan="1">
+                                <textbox id="t3bRapidTestCode" width="95%" rows="1"
+                                         value="${$composer.rtFile.rapidTestCode}"
+                                         maxlength="255" />
+                            </h:td>
+                        </h:tr>
+                        
+                        <h:tr>
+                            <h:td>
+                                <label value="Số đăng ký lưu hành đã cấp" sclass="lb-create" />
+                                <label value=" *" sclass="label-required" />
+                            </h:td>
+                            <h:td>
+                                <textbox id="t3bCirculatingRapidTestNo" width="95%" rows="1"
+                                         value="${$composer.rtFile.circulatingRapidTestNo}"
+                                         maxlength="255" />
+                            </h:td>
+                            <h:td>
+                                <label value="Ngày cấp" sclass="lb-create" />
+                                <label value=" *" sclass="label-required" />
+                            </h:td>
+                            <h:td>
+                                <datebox id="d3bDateIssue"
+                                         value="${$composer.rtFile.dateIssue}"
+                                         format="dd/MM/yyyy"/>
+                            </h:td>
+                            
+                        </h:tr>
+            
+                        <h:tr>
+                            <h:td>
+                                <label value="Có hiệu lực đến" sclass="lb-create" />
+                                <label value=" *" sclass="label-required" />
+                            </h:td>
+                            <h:td>
+                                <datebox id="d3bDateEffect"
+                                         value="${$composer.rtFile.dateEffect}"
+                                         format="dd/MM/yyyy"/>
+                            </h:td>
+                            <h:td>
+                                <label value="Xin gia hạn lần thứ" sclass="lb-create" />
+                                <label value=" *" sclass="label-required" />
+                            </h:td>
+                            <h:td>
+                                <textbox id="t3bExtensionNo" width="95%" rows="1"
+                                         value="${$composer.rtFile.extensionNo}"
+                                         maxlength="255" />
+                                
+                            </h:td>
+                            
+                        </h:tr>
+            
+                        <h:tr>
+                            
+                            <h:td>
+                                <label value="Hồ sơ xin gia hạn bao gồm" sclass="lb-create" />
+                            </h:td>
+                            <h:td>
+                                <textbox id="t3bAttachmentsInfo" width="95%" rows="1"
+                                         value="${$composer.rtFile.attachmentsInfo}"
+                                         maxlength="255" />
+                            </h:td>
+                        </h:tr>
+            
+                        <h:tr>
+                            <h:td>
+                                <label value="Nơi ký" sclass="lb-create" />
+                            </h:td>
+                            <h:td>
+                                <textbox id="t3bSignPlace" width="95%" rows="1"
+                                         value="${$composer.rtFile.signPlace}"
+                                         maxlength="255" />
+                            </h:td>
+                            <h:td>
+                                <label value="Ngày ký" sclass="lb-create" />
+                            </h:td>
+                            <h:td>
+                                <datebox id="d3bSignDate"
+                                         value="${$composer.rtFile.signDate}"
+                                         format="dd/MM/yyyy"/>
+                            </h:td>
+                        </h:tr>
+                        <h:tr>
+                            <h:td>
+                                <label value="Người ký" sclass="lb-create" />
+                            </h:td>
+                            <h:td>
+                                <textbox id="t3bSignName" width="95%" rows="1"
+                                         value="${$composer.rtFile.signName}"
+                                         maxlength="255" />
+                            </h:td>
+                        </h:tr>
+                    </h:table>
+                </groupbox>
+            </tabpanel>
+            
+            <tabpanel>
+                <h:table width="100%" align="center">
+                    <h:tr>
+                        <h:td width="15%">
+                            <label value="Loại tệp đính kèm" sclass="lb-create" />
+                        </h:td>
+                        <h:td width="35%">
+                            <listbox id="lbRapidTestFileType"
+                                     onCreate="self.model=$composer.getListBoxModel(1)" mold="select"
+                                     width="80%"
+                                     onAfterRender='self.setSelectedIndex($composer.getSelectedIndexInModel(1))'>
+                                <template name="model">
+                                    <listitem label="${each.name}"
+                                              value="${each.code}" />
+                                </template>
+                            </listbox>
+                        </h:td>
+                        <h:td width="15%">
+                            <label value="Tệp tải lên" sclass="lb-create" />
+                        </h:td>
+                        <h:td width="35%">
+                            <vlayout>
+                                <button width="85px" id="btnAttach"
+                                        style="font-weight: bold;color: #F25D45;" sclass="attachBtn"
+                                        src="/Share/img/paperclip.png"
+                                        upload="zk.UPMSample1,maxsize=10240,multiple=true,native"
+                                        label="Chọn tệp" />
+                                <vlayout id="flist" hflex="1" sclass="fileList" />
+                            </vlayout>
+                        </h:td>
+                    </h:tr>
+                    
+                    <h:tr>
+                        <h:td colspan="4" style="text-align:center">
+                            <button id="btnCreate" label="Thêm mới" sclass="button" image="/Share/img/icon/add_1.png"/>
+                            <button id="btnCreateProFile" label="Thêm từ hồ sơ dùng chung" sclass="button" image="/Share/img/icon/add_1.png"/>
+                        </h:td>
+                    </h:tr>
+                    
+                    <h:tr>
+                        <h:td colspan="4" style="text-align:center">
+                            <listbox id="fileListbox" 
+                                     multiple="false" style="word-wrap:break-word" vflex="true"
+                                     emptyMessage="Không tồn tại danh mục" mold="paging" pageSize="10">
+                                <listhead sizable="true">
+                                    <listheader width="5%" label="STT" align="center"/>
+                                    <listheader width="40%" label="Tên tệp" align="left"/>
+                                    <listheader width="45%" label="Loại tệp" align="left"/>
+                                    <listheader width="5%" label="Tải về" align="center"/>
+                                    <listheader width="5%" label="Xoá" align="center"/>
+                                </listhead>
+                                <template name="model">
+                                    <listitem value="${each}">
+                                        <listcell label="${forEachStatus.index+1}" />
+                                        <listcell label="${each.attachName}" />
+                                        <listcell label="${each.typeFileName}"/>
+                                        <listcell >
+                                            <image forward="onClick=fileListbox.onDownloadFile(${each})" 
+                                                   src="/Share/img/icon/view.png" 
+                                                   width="20px" height="20px" 
+                                                   tooltiptext="Tải file"/>
+                                        </listcell>
+                                        <listcell>
+                                            
+                                            <image src="/Share/img/icon/delete.png"
+                                                   width="20px" height="20px"
+                                                   forward="onClick=fileListbox.onDeleteFile(${each})"
+                                                   tooltiptext="Xóa sản phẩm" />
+                                        </listcell>
+                                    </listitem>
+                                </template>
+                            </listbox>
+                        </h:td>
+                    </h:tr>
+                </h:table>
+            </tabpanel>
+        </tabpanels>
+    </tabbox>
+    
+ 
+    <h:div id="bottomToolbar" class="toolBar">
+        <button sclass="btnAction" image="/Share/img/png/quay-lai.png"
+                tooltiptext="Quay lại" forward="onClick=windowCRUDRapidTest.onClose" />
+        <button sclass="btnAction" label="Lưu (F7)"
+                image="/Share/img/png/luu-lai-va-dong.png"
+                onClick="$composer.onSave(2)" />
+        <label id="lbBottomWarning" class="notify" width="15%" multiline="false" />
+    </h:div>
+</window>

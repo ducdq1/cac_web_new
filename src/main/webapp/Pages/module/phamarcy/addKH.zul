@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    
+    <window id="resetPassDlg" title="Thêm mới khách hàng" 
+    apply="com.viettel.module.phamarcy.controller.AddKHController" width="1000px" border="normal" position="center" closable="true">
+     <style>
+    	tr{height:35px;
+    	}
+    	input[type="checkbox" i] {
+   width:20px;
+   margin-left:20px;
+}
+.z-label, .z-radio-cnt, .z-checkbox-cnt, .z-loading {
+    font-size: 14px;
+}
+    </style>
+    <style src="/Share/css/formstyle.css" />
+         
+        
+        <h:table style="width:100%;height:100%;padding-left:0px" class="createTable">
+        
+        <h:tr style="height:5px">
+				<h:th width="12%" />
+				<h:th width="25%" />
+				<h:th width="12%" />
+				<h:th width="25%" />
+			</h:tr>
+			
+           <h:tr >
+                <h:td style="text-align: right;">
+                    <label sclass="lb-create" >Khu vực:</label>
+                </h:td>
+                <h:td>
+                    <listbox id="tbArea" height="25px"
+					onAfterRender='$composer.getAreaIndexInModel()'
+					onSelect="$composer.onSelectArea()"
+					mold="select" width="92%">
+					<template name="model">
+						<listitem label="${each.areaName}"
+							value="${each.areaId}" />
+					</template>
+				</listbox>
+                </h:td>
+             	
+                <h:td style="text-align: right;">
+                    <label sclass="lb-create" >Tên đường:</label>
+                </h:td>
+                <h:td>
+                    <listbox id="lbTenDuong" height="25px"
+					onAfterRender='$composer.getStreetSelectedIndexInModel()'
+					mold="select" width="92%">
+					<template name="model">
+						<listitem label="${each.streetName}"
+							value="${each.streetId}" />
+					</template>
+				</listbox>
+                </h:td>
+            </h:tr> 
+             <h:tr >
+               	<h:td style="text-align: right;">
+					<label value="Số nhà: " sclass="lb-create" />
+				</h:td>
+				<h:td>
+					<textbox id="tbDiaChi"> </textbox>
+				</h:td>
+                 
+             
+               	<h:td style="text-align: right;">
+					<label value="Tên khách hàng:" sclass="lb-create" />
+				</h:td>
+				<h:td>
+					<textbox id="tbTenKH"> </textbox>
+				</h:td>
+                 
+            </h:tr>
+            
+             <h:tr >
+               	<h:td style="text-align: right;">
+					<label value="Điện thoại: " sclass="lb-create" />
+				</h:td>
+				<h:td>
+					<textbox id="tbDT"> </textbox>
+				</h:td>
+                 
+            
+               	<h:td style="text-align: right;">
+					<label value="Người giới thiệu: " sclass="lb-create" />
+				</h:td>
+				<h:td>
+					<textbox id="tbAssignName"> </textbox>
+				</h:td>
+                 
+            </h:tr> 
+            
+            <h:tr >
+               	<h:td style="text-align: right;">
+					<label value="Nhân viên khảo sát: " sclass="lb-create" />
+				</h:td>
+				<h:td>
+					<textbox id="tbNVKhaoSat"> </textbox>
+				</h:td>
+                 
+                     
+				<h:td style="text-align: right;">
+					<label value="Trạng thái: " sclass="lb-create" />
+				</h:td>
+				<h:td>
+					<listbox id="lbTrangThai" height="25px"
+					mold="select" width="92%">
+					<template name="model">
+						<listitem label="${each.name}"
+							value="${each.categoryId}" />
+					</template>
+				</listbox>
+				</h:td>
+            </h:tr>
+            
+            <h:tr>            
+				<h:td style="text-align: right;">
+					<label value="Lấy hàng: " sclass="lb-create" />
+				</h:td>
+				<h:td>
+					<listbox id="lbLayHang" height="25px"
+					onAfterRender='$composer.getLayHangSelectedIndexInModel()'
+					mold="select" width="92%">
+					<template name="model">
+						<listitem label="${each.name}"
+							value="${each.categoryId}" />
+					</template>
+				</listbox>
+				</h:td>
+            
+            <h:td style="text-align: right;">
+					<label value="Ngày nhập:"
+						sclass="lb-create" />
+				</h:td>
+				<h:td>
+					<datebox id="dbCreateDate"  format="dd/MM/yyyy"
+						width="40%" height="20px"
+						constraint="between 19000101 and 20991231: ${$composer.getLabel('date_validate')}" />
+				</h:td> 
+				
+           </h:tr> 
+             <h:tr >
+               	<h:td style="text-align: right;" >
+					<label value="Tiến độ công trình:" sclass="lb-create"/>
+				</h:td>
+				<h:td>
+					<textbox height="20px" id="tbTienDo"> </textbox>
+				</h:td>
+                 
+            
+            <h:td style="text-align: right;">
+					<label value="Ngày đặt cọc/lấy hàng:"
+						sclass="lb-create" />
+				</h:td>
+				<h:td>
+					<datebox id="dbBuyDay"  format="dd/MM/yyyy"
+						width="40%" height="20px"
+						constraint="between 19000101 and 20991231: ${$composer.getLabel('date_validate')}" />
+				</h:td> 
+            </h:tr>
+            <h:tr>
+            <h:td style="text-align: right;" >
+					<label value="Số lần gọi điện: " sclass="lb-create"/>
+				</h:td>
+				<h:td>
+					<textbox  id="tbDaGoiDien" multiline="true" height="50px" width="90%"/>
+				</h:td>
+                 
+             
+            <h:td style="text-align: right;">
+					<label value="Ý kiến KH:"
+						sclass="lb-create" />
+				</h:td>
+				<h:td>
+					<textbox id="tbYKienKH" multiline="true" height="50px" width="90%"/>
+				</h:td> 
+            </h:tr>
+            
+            <h:tr>
+            <h:td style="text-align: right;">
+					<label value="Không lấy hàng do:"
+						sclass="lb-create" />
+				</h:td>
+				<h:td>
+					<checkbox id="cbGiaCao" label="Giá cao, Lấy người quen"/>  <h:br/>
+					<checkbox id="cbThaiDoPV" label="Thái độ phục vụ, Không thích mẫu" style="width:20%"/><h:br/>
+				</h:td> 
+            </h:tr>
+            
+              <h:tr/>
+            <h:tr>
+                <h:td colspan="4" align="center">
+                    <button height="30px" image="/Share/img/icon/Save-icon.png" id="btnSave" label="Lưu " class="button z-button-os"/>                  
+                    <button height="30px" image="/Share/img/icon/close.png"  class="button z-button-os" style="margin-left:10px" label="Hủy bỏ" onClick="resetPassDlg.onClose()" />
+                </h:td>
+            </h:tr>
+        </h:table>
+    </window>
+</zk>

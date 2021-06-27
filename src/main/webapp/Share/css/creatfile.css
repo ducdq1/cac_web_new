@@ -1,0 +1,69 @@
+.SpanTag {
+	font-family: 'MYRIADPRO-COND' !important;
+	font-size: 18px !important;
+}
+
+.SpanTag2 {
+	font-family: 'MYRIADPRO-COND' !important;
+	font-size: 20px !important;
+}
+
+.SpanTag3 {
+	font-family: 'MYRIADPRO-COND' !important;
+	font-size: 12px !important;
+}
+
+.SpanTag4 {
+	font-family: 'MYRIADPRO-COND' !important;
+	font-size: 24px !important; <!--
+	border-bottom: 3px solid; -->
+	color: #df540a;
+	font-size: 24px;
+	font-weight: bold;
+	padding-bottom: 3px;
+	padding-left: 3px;
+	padding-right: 5px;
+}
+
+.warning-info {
+	color: red;
+	font-weight: bold !important;
+	margin-right: 10px;
+}
+
+.group-box {
+	font-size: 13px !important;
+}
+
+.button-add-medicince {
+	margin: 30px;
+	align: center;
+	font-size: 13px;
+	background-color: #2b6fc2;
+	border: medium none;
+	border-radius: 2px;
+	color: #ffffff;
+	display: inline-block;
+	font-weight: bold;
+	height: 30px;
+	margin-right: 3px;
+	margin-top: 3px;
+}
+
+.button-add-medicince:hover {
+	color: #F90;
+	background-color: #1469AB;
+	border: 1px solid brown;
+}
+
+.table-register {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding-right: 20px;
+}
+
+.general-infor {
+	height: 30px;
+	padding-left: 20px;
+}
+}

@@ -1,0 +1,866 @@
+@charset "utf-8";
+@media print
+{
+    * {-webkit-print-color-adjust:exact;}
+}
+
+body{
+    padding:0px;
+}
+
+.projectName {
+    background-color: #c9dff7;
+    height: 42px;
+}
+
+.loginBox {
+    width:300px;height:150px;
+    border:1px solid rgb(248,250,247); 
+    border-radius:10px; 
+    margin-top:200px;
+    padding:20px;
+    background-color: rgba(0,117,147,0.4);
+}
+
+.loginBox table {
+    width:100%;
+}
+
+.loginBox span {
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+}
+
+.headerTab {
+    display: block;
+    height: 38px;
+}
+
+.headerTab li {
+    display: inline;
+    border: 0px none;
+    border-bottom-width: 0;
+    margin: 0 2px;
+    padding-bottom: 1px;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    color: white;
+    cursor: pointer;
+    padding-top: 5px;
+    font-family: arial;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.headerTab ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: #4584d3;
+    height: 100%;
+    /*    border-top: 1px solid rgb(82,132,188);
+        border-left: 1px solid rgb(82,132,188);
+        border-right: 1px solid rgb(82,132,188);    */
+}
+
+.headerTab li:hover {
+    display: inline;
+    background-color: bisque;
+    border-bottom-width: 0;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-left-radius: -6px;
+    border-bottom-right-radius: -6px;
+    padding: 7px 1.2em 5px 1.2em;
+}
+
+
+
+.headerTab .selected {
+    background: #eff6ff;
+    border-bottom-width: 0;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-left-radius: -6px;
+    border-bottom-right-radius: -6px;
+    padding: 7px 1.2em 5px 1.2em;
+    color: #365780;
+}  
+
+.tabContent {
+    background: linear-gradient(#eff6ff, #c9dff7) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    padding: 2px;
+}
+
+.tabContent div.group {
+    height:80px;
+    display:inline-block;
+    position: relative;
+    vertical-align: top;
+    text-align: center;
+    margin: 1px;
+    cursor: pointer;
+    overflow: hidden;    
+    min-width: 100px !important;
+    width: auto;
+}
+
+.tabContent div.group:hover {
+    overflow: visible;    
+}
+
+.tabContent div.group .item {
+    display:inline-block;
+    position: relative;
+    margin:0px;
+    padding: 0px;
+    width:50px;
+    text-align: center;
+    vertical-align: top;
+    height: 80px;
+    color: rgb(62,106,170);
+    font-size: 11px;
+}
+
+.tabContent div.group .item:hover {
+    background-color: bisque;
+}
+
+.tabContent div.group img {
+    width:35px;
+    height: 35px;
+    margin:1px;
+    border:4px double #ccc;
+    border-radius:35px;
+    padding: 3px;
+    background-color: white;
+}
+.tabContent div.group img:hover
+{
+    border:4px solid #FEBA79;
+    background-color: #FEF26C;
+}
+
+.tabContent div.group img.selected
+{
+    border:4px solid #FEBA79;
+    background-color: #FEF26C;
+}
+
+.tabContent div.group .title {
+    background-color: rgb(194,217,241);
+    position: absolute; 
+    width:100%;
+    bottom: 0px;
+    height: 20px;
+    text-align: center;
+    vertical-align: text-bottom;
+    color: rgb(62,106,170);
+    font-size: 11px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.tabContent div.group .function {
+    position: absolute; 
+    width:100%;
+    bottom: 0px;
+    height: 28px;
+    text-align: center;
+    vertical-align: text-bottom;
+    color: rgb(62,106,170);
+    font-size: 11px;
+    font-weight:bold;
+    font-family: arial;
+}
+
+.toolBar {
+    height: 34px;
+    background-color: #93BDEF;
+    border-top: 1px solid white;
+}
+.toolBar .img-cal
+{
+    background-color: #2b6fc2;
+    border-radius: 4px;
+    height: 26px;
+    margin: 2px;
+    padding: 2px;
+    width: 26px;
+    cursor: pointer;
+}
+.toolBar img {
+    width:24px;
+    height:24px;
+    margin: 1px;
+    cursor: pointer;
+    /*    border:1px solid white;float: left;*/
+
+}
+
+.toolBar img:hover  {
+    /*    background-color: #1469AB;
+        border:1px solid brown;*/
+}
+
+.toolBar button {
+    color:white;
+    float:left;
+    height:28px;
+    margin: 2px;
+    margin-top:3px; 
+    text-align: center;
+    background-color: #2b6fc2;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 11px;
+    font-family: arial;
+}
+
+.toolBar button:hover {
+    color: #F90;
+    background-color: #1469AB;
+    border:1px solid brown;
+}
+
+.toolBar input {
+    margin: 2px;
+    float: left;
+    border:none;
+    margin-left: 10px;
+}
+
+.toolBar .toolbarButton {
+    color:white;
+    border-left: 1px solid whitesmoke;
+    float:left;
+    height:24px;
+    padding-top:8px;
+    padding-bottom:3px;
+    padding-left:10px;
+    padding-right:10px;
+    background-color: dodgerblue;
+}
+
+.toolBar .searchButton {
+    height: 20px;
+    width: 20px;
+    background-image: url("./Share/img/icon/search.jpg");
+}
+
+.toolBar .toolbarButton:hover {
+    color: #F90;
+}
+
+.toolbarButtonSelected {
+    width:30px;
+    height:30px;
+    margin: 1px;
+    border:1px solid white;
+    float: left;
+    background-color: #FF9900;
+}
+
+#vt-home {
+    float:right;
+    padding-left: 26px;
+    background: url(../img/icon/home.gif) no-repeat 0% 0%;
+}
+
+#vt-home:hover {
+    color:#A1D072;
+
+}
+
+#vt-project {
+    font-weight: bold;
+    font-size: 15pt;
+    color: white;
+    float:left;
+    padding:3px;
+}
+
+#vt-profile {
+    font-size: 15px;
+    font-weight: bold;
+    float:right;
+    color:white;
+    padding-top:10px;
+}
+
+#vt-profile:hover {
+    color: #000000;
+}
+
+#vt-changePwd {
+    float:right;
+    padding-left: 21px;
+    background: url(../img/icon/top_menu_pwd.gif) no-repeat 0% 0%;
+}
+
+#vt-help {
+    float:right;
+    padding-left: 21px;
+    margin-right: 10px;
+    font-weight: bold;
+    color:white;
+    font-family: helvetica, sans-serif; 
+    font-size: 11px;
+    background: url(../img/icon/help.png ) no-repeat 0% 0%;
+}
+
+#vt-help:hover {   
+    color:#A1D072;
+}
+
+#vt-keyboard {
+    float:right;    
+    padding-left: 21px;
+    margin-right: 10px;
+    font-weight: bold;
+    color:white;
+    font-family: helvetica, sans-serif; 
+    font-size: 11px;
+    background: url(../img/icon/keyboard.ico ) no-repeat 0% 0%;
+}
+
+#vt-avatar {
+    float:right;    
+    padding-left: 5px;
+    margin-right: 1px;
+}
+
+#vt-avatar img {
+    /*    background-color: #032557;
+        border:1px solid #fd971f;*/
+    margin-top: 5px;
+}
+
+#vt-keyboard:hover {
+    color:#A1D072;
+}
+
+#vt-logout {
+    float:right;
+    padding-left: 25px;
+    margin-right:10px;
+    background: url(../img/icon/home.gif ) no-repeat 0% 0%;
+}
+
+#vt-logout:hover {
+    color:#A1D072;
+}
+
+.searchTable {
+    width:80%;
+}
+
+.searchTable input {
+    width:90%;
+}
+
+.searchTable select {
+    width:90%;
+}
+.searchTable td {
+    text-align: left;
+}
+
+.viewTable {
+    width:100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.viewTable td {
+    padding: 10px 5px 10px 5px ;
+    height: 16px;
+    border: 1px solid #d0d0d0;
+}
+
+.createTable input{
+    width:90%;
+}
+.createTable input[type=radio] {
+		width:20px !important;
+		}
+.createTable select {
+    width:90%;
+}
+
+.attachBtn td{
+    padding:0px;
+    height: 0px;
+}
+
+.contentDiv {
+    margin: 1px;
+}
+
+.contentDivCreate
+{
+    margin: 5px auto;
+    width: 98%;
+}
+
+.notify {
+    padding: 5px;
+    color:red;
+    float:right;
+    margin-top:8px;
+    margin-right: 5px;
+    font-weight: bold;
+}
+.notifyCapcha {
+	padding: 5px;
+    color:red;
+    font-weight: bold;
+}
+.notifyUnder {
+    padding: 5px;
+    color:red;
+    font-weight: bold;
+}
+
+.seperateDiv {
+    border-left: 1px solid #c5c5c5;
+    border-right: 1px solid #c5c5c5;
+    background-color: blanchedalmond;
+    height: 20px;
+    padding-top: 5px;
+    padding-left: 5px;
+    font-weight: bold;
+    font-size: 12px;
+    font-family: arial, sans-serif;
+}
+
+/*#zk_err{
+    display: none !important;
+}*/
+
+/*
+ * Style for notify
+ *
+*/
+.notifyItem {
+    border:1px solid rgb(192,217,237);
+    padding:5px;
+    background-color:rgba(137,200,248,0.2);
+    margin-bottom:5px;
+    clear: both;
+    min-height: 60px;
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
+    word-wrap: break-word;
+}
+
+.notifyItem input[type=textbox] {
+    border:1px solid #00aeef;
+    height: 25px;
+    width: 600px;
+    margin-left: 20px;
+    margin-top:10px;
+
+}
+
+.notifyItem input[type=button] {
+    margin-top: 10px;
+    background-color: white;
+    border:1px solid gray;
+}
+
+.notifyItem img {
+    border:1px solid goldenrod;
+    border-radius: 32px;
+    background-color: #1469AB;
+}
+/*#zk_err{
+    display: none !important;
+}*/
+
+/*
+ * Style for notify
+ *
+*/
+.notifyItemAlert {
+    clear: both;
+    min-height: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
+    word-wrap: break-word;
+    color: #000000;
+    font-size: 12px;
+    font-weight: bold;
+    list-style: square outside none;
+    margin-bottom: 5px;
+}
+
+.notifyItemAlert input[type=textbox] {
+    height: 10px;
+    margin-left: 0px;
+    margin-top:10px;
+    
+}
+
+.headlineDiv {
+    margin-left:5px;
+    margin-top:1px;
+    margin-bottom: 4px;
+    min-height: 60px;
+    border:1px solid rgb(192,217,237);
+    padding:5px;
+    color:rgba(211,17,18,1);
+    font-size: 20px;
+    font-style: italic;
+    cursor: pointer;
+    background-color: rgb(214, 227, 244);
+}
+
+.headlineItem {
+    margin-right: 80px;
+    color:rgba(24,90,168,1);
+    font-style: normal;
+    font-size: 12px;
+    margin:8px;
+}
+
+.commentItems {
+    background-color:azure;
+    padding:5px;
+}
+
+.titleItems{
+    padding-left:80px;
+    font-weight: bold;
+    font-size: 11px;
+    color:rgb(192,12,12);
+}
+.contentItems {
+    padding-left:80px;
+    padding-top: 5px;
+    font-size: 11px;
+    color:rgb(0,54,112);
+    word-wrap: break-word;
+    word-break: break-all;
+    line-height: 1.5;
+}
+
+.commentItem {
+    clear:both;
+}
+
+.signOfNotifyItem {
+    width:20px;
+    height:20px; 
+    float:right;
+    margin-right:0px;
+    margin-top:0px;    
+}
+
+.titleItem {
+    font-weight:bold;
+}
+
+/*
+End of style for notify
+*/
+
+/*
+ -------------------   Style for calendar ------------------------------
+*/
+
+.monthHeader td{
+    text-align: center;
+    font-weight: bold;
+    background-color: #1469AB;
+    font-size: 12px;
+    color:white;
+    font-family: arial
+}
+
+.monthContent td{
+    vertical-align: top;
+    height: 120px;
+}
+
+td.noActive{
+    background-color: rgba(157, 192, 219,0.5);
+}
+
+.divCalendarMonth{
+    border : 1px solid brown;
+    border-radius: 3px;
+    color :white;
+    background-color: rgb(118, 104, 151);
+    padding: 3px 10px;
+    margin-top: 2px;
+    font:bold 10px Arial,sans-serif;
+    cursor: pointer;
+
+}
+
+.divCalendarMonthReject{
+    border : 1px solid rgb(95, 95, 37);
+    border-radius: 3px;
+    color :white;
+    background-color: rgb(153, 151, 94);
+    padding: 3px 10px;
+    margin-top: 2px;
+    font:bold 10px Arial,sans-serif;
+    cursor: pointer;
+}
+
+.divCalendarMonthApprove{
+    border : 1px solid #8B3392;
+    border-radius: 3px;
+    color :white;
+    background-color: rgb(216, 89, 155);
+    padding: 3px 10px;
+    margin-top: 2px;
+    font:bold 10px Arial,sans-serif;
+    cursor: pointer;
+}
+
+.timeLineDiv{
+    height:41px;
+    text-align: right;
+    border-bottom: 1px solid #cccccc;
+    padding-right: 2px;
+}
+
+.monthTable {
+    width:100%;
+    padding:0px;
+    border-collapse: collapse;
+    table-layout: fixed;
+    background-image: url('/Share/img/background/calendar.jpg')    
+
+}
+
+.monthTable th {
+    margin:0px;
+    font-weight: bold;
+    padding: 2px 5px;
+    color: #3172D4;
+    background-color: #93B8DA;
+    border-bottom: 1px solid #B0B0B0;
+    text-align: center;
+    vertical-align: middle;
+    height: 20px;    
+}
+
+.monthTable td{
+    border: 1px solid #cccccc;
+    vertical-align: top;
+    padding: 3px;
+    word-wrap: break-word;
+}
+
+.weekTable {
+    width:100%;
+    padding:0px;
+    border-collapse: collapse;
+    table-layout: fixed;
+    background-image: url('/Share/img/background/calendar.jpg')    
+
+}
+
+.weekTable td{
+    border : 1px solid #cccccc;
+}
+
+.inActiveTime td{
+    height:20px;
+    background-color: #1469AB;
+}
+
+.weekTable th {
+    border : 1px solid #cccccc;
+}
+
+.weekContainerDiv {
+    display:block;
+    margin-right:10px;
+}
+
+.divCalendarWeek{
+    border : 1px solid rgb(92, 57, 99);
+    border-radius: 3px;
+    color :white;
+    background-color: rgb(118, 104, 151);
+    width: 90%;
+    position: absolute;
+    font:bold 10px Arial,sans-serif;
+    box-shadow: 0px 2px 2px 0px #6C5F6F;
+    cursor: pointer;
+    padding-left:3px;
+    word-wrap: break-word;
+    overflow:hidden;
+}
+
+.divCalendarWeek:hover{
+    z-index: 1;
+    min-width: 100px !important;
+    min-height: 30px !important;
+    background-color: #00aeef;
+}
+
+.divCalendarWeekApprove{
+    border : 1px solid #8B3392;
+    border-radius: 3px;
+    color :white;
+    background-color: rgb(216, 89, 155);
+    width: 90%;
+    position: absolute;
+    font:bold 10px Arial,sans-serif;
+    box-shadow: 0px 2px 2px 0px #f3a8f1;
+    cursor: pointer;
+    word-wrap: break-word;
+    overflow:hidden;    
+}
+
+.divCalendarWeekApprove:hover{
+    z-index: 1;
+    min-width: 100px !important;
+    min-height: 30px !important;
+    background-color: #00aeef;
+}
+
+.divCalendarWeekReject{
+    border : 1px solid rgb(95, 95, 37);
+    border-radius: 3px;
+    color :white;
+    background-color: rgb(153, 151, 94);
+    width: 90%;
+    position: absolute;
+    font:bold 10px Arial,sans-serif;
+    box-shadow: 0px 2px 2px 0px #665A48;
+    cursor: pointer;
+    word-wrap: break-word;
+    overflow:hidden;    
+}
+
+.divCalendarWeekReject:hover{
+    z-index: 1;
+    min-width: 100px !important;
+    min-height: 30px !important;
+    background-color: #00aeef;
+}
+
+
+.oddDiv {
+    height:20px;
+    border-bottom: 1px solid #cccccc;    
+}
+
+.oddDiv:hover {
+    background-color: #FF9900;
+}
+
+.evenDiv {
+    height:20px;
+    border-bottom: 1px solid #cccccc;    
+}
+
+.evenDiv:hover {
+    background-color: #FF9900;
+}
+
+.lstTable tr.headerRow{
+    background: url("../images/tabEnabled.png") repeat-x scroll 0 0 transparent;
+    background-color: #a8e289;
+    color:white;
+}
+
+.headerRowViewPage th {
+    margin:0px;
+    font-weight: bold;
+    padding: 2px 5px;
+    color: #d43132;
+    background-color: #93B8DA;
+    border-bottom: 1px solid #B0B0B0;
+    text-align: center;
+    vertical-align: middle;
+    height: 20px;
+}
+
+.lstTable tr{
+    height: 25px;
+}
+
+.lstTable td.dayOfCalendar{
+    background-color: #1469AB;
+    color: white;
+}
+
+
+.lstTable th{
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid #cccccc;
+    color: #15428b;
+}
+
+.lstTable{
+    width:100%;
+    background-color: white;
+    border-collapse:collapse;
+    border: 1px solid #cccccc;
+    font-size:13px;
+    table-layout: fixed;
+    /*    background-image: url('/Share/img/background/calendar.jpg')        */
+}
+
+.lstTable td{
+    border: 1px solid #cccccc;
+    vertical-align: middle;
+    padding: 3px 5px;
+    word-wrap: break-word;
+    color:#000;    
+}
+
+
+/*
+ End of calendar style
+*/
+
+/* 
+    form style
+*/
+.label-required
+{
+    color: red; 
+}
+
+/* 
+    end of form style
+*/
+
+
+/* Note style
+*/
+.note {
+    position:absolute;
+    background-color: yellow;
+    border:1px solid #F90;
+    z-index: 1;
+}
+.viewTableAtt
+{
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 100%;
+}
+.viewTableAtt .att-header
+{
+    background-color: #93bdef;
+}
+.viewTableAtt .att-header span
+{
+    font-weight: bold;
+}
+.viewTableAtt .att-cell {
+    border: 1px solid #d0d0d0;
+    padding: 5px;
+    vertical-align: top;
+}

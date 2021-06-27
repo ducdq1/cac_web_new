@@ -1,0 +1,268 @@
+.hightlight {
+	color: #1469AB;
+	font-weight: bold;
+}
+
+.error {
+	color: red;
+	margin-left: 2px;
+}
+
+.label-required {
+	color: red;
+}
+
+.z-combobox-inp .z-comboitem-text{
+	font-size:15px !important;	
+}
+.z-comboitem .z-comboitem-text {
+    font-size: 15px !important;
+}
+
+.button {
+	font-size:15px;	
+	height:30px!important;
+	border-radius:3px;
+	border:1px solid #bbb;
+	cursor:pointer;
+	background:#F6F6F6 none repeat scroll 0 0
+}
+
+.button:hover {
+	
+	cursor:pointer;
+	background:#D6E6FC none repeat scroll 0 0
+}
+
+.button-search {
+	height: 25px;
+	text-align: center;
+}
+
+.txtInput {
+	height: 20px;
+}label-infoable {
+	border-spacing: 2px;
+	border-collapse: separate;
+	line-height: 30px;
+}
+
+.textbox {
+	width: 80%;
+}
+
+.label-info {
+	color: black;
+	font-weight: bold;
+}
+.label-info-red {
+	color: red;
+	font-weight: bold;
+}
+.table-view {
+	border: 1px solid #01a3c6;
+	border-collapse: collapse;
+}
+
+.docInfo {
+	margin-bottom: 3px;
+}
+
+.divSeperator .spanSeperator {
+	border-bottom: 1px solid gray;
+	height: 1px;
+	margin: 4px;
+}
+
+.divSeperator table {
+	width: 100%;
+}
+
+.divSeperator-c1 {
+	border-radius: 6px;
+	background-color: #cccccc;
+	height: 18px;
+	text-align: center;
+	padding-top: 3px;
+}
+
+.divSeperator-c1 span {
+	color: #F25D45;
+}
+
+.divSeperator-c2 {
+	border-bottom: 1px solid gray;
+	height: 1px;
+	margin: 4px;
+}
+
+.toolbarAction {
+	background: #f9f9f9;
+	border-bottom: 1px solid #BFD2DE;
+	height: 35px;
+}
+
+
+.btnAction {
+	background-color: #2b6fc2;
+	border: medium none;
+	border-radius: 2px;
+	color: #ffffff;
+	display: inline-block;
+	font-size: 11px;
+        font-weight: bold;
+	height: 30px;
+	margin-right: 3px;
+	margin-top: 3px;
+}
+
+.btnClick {
+    color: #F90000;
+    background-color: #F469AB;
+    border:1px solid brown;
+}
+
+.z-vlayout-inner .attNotify {
+	float: right;
+}
+
+.sendNotify {
+	background-color: white;
+	border: 1px solid gray;
+	padding: 4px;
+	height: 35px;
+	position: relative;
+	bottom: 0px
+}
+
+.sendNotify img {
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	right: 1px;
+	margin-top: 3px;
+}
+
+.rowUnread .z-listcell div {
+	font-weight: bold !important;
+}
+
+.rowUnread .z-listitem div {
+	font-weight: bold !important;
+}
+
+.rowWarning .z-listcell div {
+	color: blue;
+}
+
+.rowUnreadWarning .z-listcell div {
+	font-weight: bold !important;
+	color: blue;
+}
+
+.rowExpired .z-listcell div {
+	color: red;
+}
+
+.rowUnreadExpired .z-listcell div {
+	font-weight: bold !important;
+	color: red;
+}
+
+.rowUnreadNormal .z-listcell div{
+	font-weight: bold !important;
+	color:black;
+}
+
+.textbox-uppercase {
+	text-transform: uppercase;
+}
+.timeNotify
+{
+    color: #b0b0b0;
+    float: right;
+    font-size: 9px;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.lstDocPublish
+{
+    
+}
+
+.lstDocPublish .lst-header
+{
+    
+}
+
+.lstDocPublish .firstColumn
+{
+    
+}
+.lstdoc-table
+{
+    border-spacing: 2px;line-height:27px;
+}
+
+.lstdoc-table select,
+.lstdoc-table input,
+.lstdoc-table textArea
+{
+    border:1px solid #93BDEF;
+}
+
+.lstdoc-table select
+{
+    height: 25px;
+}
+
+.lb-create
+{	font-size:15px !important;
+    color: #2063B4;
+}
+.gb-form-create
+{
+    
+}
+.z-groupbox-header
+{
+    font-weight: bold;
+    font-size: 11px;
+    font-family: arial;
+    color: #2063B4;
+}
+
+.gb-form-create .z-groupbox-cnt
+{
+    margin-top: 8px;
+    
+}
+
+.viewTable{
+    width: 100%;
+    background-color: white;
+    border-collapse: collapse;
+    border: 1px solid #cccccc;
+}
+
+.z-label {
+	white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+	white-space: -webkit-pre-wrap; /*Chrome & Safari */ 
+	white-space: -pre-wrap;      /* Opera 4-6 */
+	white-space: -o-pre-wrap;    /* Opera 7 */
+	white-space: pre-wrap;       /* css-3 */
+	word-wrap: break-word ;       /* Internet Explorer 5.5+ */
+	word-break: break-all ;
+}
+
+.viewFile {
+	color: #003399 !important;
+	cursor: pointer;
+}
+
+.viewFile:hover {
+	color: #001a4d !important;
+	cursor: pointer;
+}
+

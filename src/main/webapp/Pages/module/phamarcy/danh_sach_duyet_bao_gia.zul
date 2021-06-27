@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+	xmlns="http://www.zkoss.org/2005/zul" id="danhSachBaoGia" style=""
+	apply="com.viettel.module.phamarcy.controller.DanhSachDuyetBaoGiaController">
+	<style src="/Share/css/formstyle.css" />
+
+	<script defer="true">toolBar.widget = "phamarcyAll";</script>
+	<style>
+		.z-listheader-cnt{ color:#4584D3 !important; }
+
+	</style>
+	<h:div style="width:99%;margin:0 auto;background-color:#FBEFFB">
+		<groupbox id="fullSearchGbx">
+			<caption label="Thông tin báo giá" />
+			<h:table align="center" width="80%" class="table-search">
+				<h:tr>
+					<h:th width="10%" />
+					<h:th width="25%" />
+					<h:th width="12%" />
+					<h:th width="25%" />
+					<h:th width="12%" />
+					<h:th width="25%" />
+				</h:tr>
+				<h:tr>
+
+					<h:td style="text-align: right;">
+						<label value="Mã NVBH:" sclass="lb-create" />
+					</h:td>
+					<h:td>
+						<textbox id="tbMaNVBH" width="90%" rows="1" />
+					</h:td>
+
+					<h:td style="text-align: right;">
+						<label value="Khách hàng:" sclass="lb-create" />
+					</h:td>
+					<h:td>
+						<textbox id="tbKhacHang" width="90%" rows="1" />
+					</h:td>
+
+					<h:td style="text-align: right">
+						<label value="SĐT:" sclass="lb-create" />
+					</h:td>
+					<h:td>
+						<textbox id="tbSDT" width="90%" rows="1"
+							maxlength="250" />
+					</h:td>
+
+
+				</h:tr>
+				<h:tr>
+					<h:td style="text-align: right">
+						<label value="Trạng thái:" sclass="lb-create" />
+					</h:td>
+					<h:td style="height:10px">
+						<combobox id="cbTrangThai"
+							style="font-size:15px">
+							<comboitem value="-1" label="Tất cả"
+								style="font-size:15px" />
+							<comboitem value="0" label="Chưa báo giá"
+								style="font-size:15px" />
+							<comboitem value="1" label="Đã báo giá"
+								style="font-size:15px" />
+						</combobox>
+					</h:td>
+
+					<h:td style="text-align: right;">
+						<label value="Địa chỉ:" sclass="lb-create" />
+					</h:td>
+					<h:td>
+						<textbox id="tbDiaChi" width="90%" rows="1" />
+					</h:td>
+					
+					<h:td style="text-align: right;">
+					<label value="Từ ngày:" sclass="lb-create" style="margin-top:10px"/>
+					<h:br/>
+					<label value="  " sclass="lb-create" style="font-size:8px !important"/>
+					<h:br/>
+					<label value="Đến ngày:" sclass="lb-create" />
+					<h:br/>
+					
+					</h:td>
+					<h:td>
+					
+					 <datebox id="dbFromDay" cols="12" format="dd/MM/yyyy"
+						width="95%"
+						constraint="between 19000101 and 20991231: ${$composer.getLabel('date_validate')}" />
+					  <h:br/>
+					  <datebox id="dbToDay" cols="12" format="dd/MM/yyyy"
+						width="95%"
+						constraint="between 19000101 and 20991231: ${$composer.getLabel('date_validate')}" />
+				</h:td>
+				
+				</h:tr>
+				
+				<h:tr>
+				<h:td style="text-align: right">
+						<label value="Đã bán:" sclass="lb-create" />
+					</h:td>
+						<h:td style="height:10px">
+						<combobox id="cbDaBan"
+							style="font-size:15px">
+							<comboitem value="-1" label="Tất cả"
+								style="font-size:15px" />
+							<comboitem value="0" label="Chưa bán"
+								style="font-size:15px" />
+							<comboitem value="1" label="Đã bán"
+								style="font-size:15px" />
+						</combobox>
+					</h:td>
+				</h:tr>
+				<h:tr>
+						
+				</h:tr>
+
+			</h:table>
+			
+			<h:div style="witdh:100%;margin:0 auto;text-align:center">
+		<button id="btnSearch"
+						label="${$composer.getLabelCos('common_search')}" sclass="button"
+						image="/Share/img/icon/search.jpg" autodisable="self" />
+											<label value=" " width="20px"/>
+   <button label="In kiểm tra"
+							id="btnPrint" autodisable="true"
+						sclass="button"
+				 
+							image="/Share/img/icon/print_ic_small.png" />
+	</h:div>
+	
+		</groupbox>
+
+	</h:div>
+
+	<h:div class="contentDiv" style="width:99%;margin:0 auto">
+
+		<listbox id="lbListSP" checkmark="false" mold="paging"
+			pageSize="10" nonselectableTags="*"
+			emptyMessage="Không tìm thấy báo giá">
+			<listhead sizable="true">
+				<listheader label="STT" align="center" style="width:3%" />
+				<listheader label="Ngày báo giá" align="center"
+					style="width:7%" /> 
+				<listheader label="Mã báo giá" align="center"
+					style="width:7%" />
+				<listheader label="Tên Khách hàng" align="center"
+					style="width:20%" />
+				<listheader label="Địa chỉ" align="center"
+					style="width:20%" />
+				<listheader label="Số điện thoại" align="center"
+					style="width:8%" />
+				<listheader label="Người tạo" align="center"
+					style="width:10%" />
+				<listheader label="Trạng thái" align="center"
+					style="width:8%" />
+				<listheader label="Tiến độ" align="center"
+					style="width:8%" />
+				<listheader label="Đã bán" align="center"
+					style="width:8%" />
+				<listheader label="Duyệt" align="center" hflex="min" />
+
+			</listhead>
+			<template name="model">
+				<listitem
+					style="word-wrap: break-word !important; white-space: normal; text-align: left;">
+					<listcell>
+						<label
+						value="${ forEachStatus.index + 1 + userPagingBottom.pageSize *
+						userPagingBottom.activePage }">
+					</label>
+					</listcell>
+					<listcell style="text-align:center">
+						<label value="${$composer.getFormatDate(each.modifyDate)}"   />
+					</listcell>
+					<listcell style="text-align:left">
+						<label value="${each.quotationNumber}"></label>
+					</listcell>
+
+					<listcell style="text-align:left">
+						<label value="${each.cusName}"></label>
+					</listcell>
+
+					<listcell style="text-align:left">
+						<label value="${each.cusAddress}"></label>
+					</listcell>
+					<listcell style="text-align:left">
+						<label value="${each.cusPhone}"></label>
+					</listcell>
+					<listcell style="text-align:left">
+						<label value="${each.createUserFullName}"></label>
+					</listcell>
+					<listcell style="text-align:center">
+						<label value="Chưa báo giá" if="${each.status == 0}" ></label>
+						<label value="Đã báo giá" if="${each.status ==1}" ></label> 
+					</listcell> 
+					<listcell style="text-align:center">
+						<label value="${each.note}" if="${each.status ==1}" ></label> 
+					</listcell>
+					<listcell style="text-align:center">
+						<label value="Chưa bán" if="${each.saledDate == null}" ></label>
+						<label value="Đã bán" if="${each.saledDate != null}" ></label> 
+					</listcell> 
+					
+					<listcell>
+						<image src="/Share/img/icon/edit.png"
+							width="22px" height="22px"
+							forward="onClick=lbListSP.onOpenUpdate(${each})"
+							tooltiptext="Duyệt" />
+					</listcell> 
+				</listitem>
+			</template>
+		</listbox>
+	 <paging id="userPagingBottom" pageSize="10" detailed="true" />
+	</h:div>
+
+</window>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window id="tmpBillCreateWnd" border="normal" width="530px"
+        xmlns:h="http://www.w3.org/1999/xhtml"
+        xmlns="http://www.zkoss.org/2005/zul"
+        apply="com.viettel.module.cosmetic.Controller.TmpBillCreateController" 
+        position="center,center" closable="true">
+    <style src="/Share/css/formstyle.css" />
+    <style src="/Share/css/uploadstyle.css" />
+    <script type="text/javascript" src="/Share/js/UPMSamples.js" />
+    <caption label="Nhập file biên lại thanh toán" />
+        
+    <h:div width="100%">
+        <h:table width="100%">               
+            <h:tr>
+                <h:td>
+                    <label id="lbnamefile" value="Tải file biên lai thống kê hóa đơn thanh toán" width="20%" />
+                    <label value=" *" sclass="label-required" />
+                </h:td>
+                <h:td colspan="4">
+                    <textbox id="txtFileName" readonly="true" value="" width="99%" tabindex="1" />
+                    <label value="  " sclass="label-required" />                            
+                    <image id="imgDelFile" src="/Share/img/icon/delete.png" width="20px" height="20px" visible="false" style="vertical-align:middle"/>
+                    <label id="lbdeletefile" value="Xóa" width="80px" style="text-align:center" visible="false" />
+                    <label value="  " sclass="label-required" />
+                    <h:br/>
+                    <button label="Chọn file biên lai" style="font-weight: bold;color: #F25D45;" upload="true" id="btnUpload" src="/Share/img/paperclip.png">
+                    </button>                             
+                </h:td>
+                <h:td colspan="2">                            
+                    <label value="  " sclass="label-required" />                           
+                </h:td>
+            </h:tr>
+            <h:tr> 
+                <h:td colspan="2" style="text-align:center">
+                    <button label="Lưu" id="btnSave" src="/Share/img/icon/Add.png"/>
+                    <button label="Huỷ bỏ" id="btnCancel" onClick="tmpBillCreateWnd.detach()" src="/Share/img/icon/close.png"/>
+                </h:td>
+            </h:tr>
+        </h:table>
+    </h:div> 
+</window>

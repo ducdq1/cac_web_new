@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <window id="roleCRUD" title="Cập nhật thông tin vai trò" border="normal" width="500px" 
+            apply="com.viettel.voffice.DAO.System.RolesDialogController" 
+            position="center,center" closable="true">
+        <h:div>
+            <h:table width="100%" class="createTable">
+                <h:tr>
+                    <h:td width="30%">
+                        <label value="Mã vai trò" width="100px" />
+                        <label value=" *" sclass="label-required" />
+                    </h:td>
+                    <h:td width="70%">
+                        <textbox id="txtRoleId" 
+                                 visible="false" />
+                        <textbox id="txtRoleCode" 
+                                 maxlength="50" />
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td>
+                        <label value="Tên vai trò"/>
+                        <label value=" *" sclass="label-required" />
+                    </h:td>
+                    <h:td>
+                        <textbox id="txtRoleName" maxlength="100"/>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td>
+                        <label value="Mô tả" />
+                    </h:td>
+                    <h:td>
+                        <textbox id="txtDescription" maxlength="500" />
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td>
+                        <label>Đơn vị</label>
+                    </h:td>
+                    <h:td>
+                        <textbox id="txtDeptName" style="width:70%" disabled="true"/>
+                        <textbox id="txtDeptId" visible="false"/>
+                        <button height="30px" id="btnShowDept" image="/Share/img/icon/dept.png"/>
+                        <button height="30px" image="/Share/img/icon/delete.png" onClick="txtDeptName.setValue(null);txtDeptId.setValue(null);"/>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td>
+                        <label>Chức vụ mặc định</label>
+                    </h:td>
+                    <h:td>
+                        <listbox id="cbPosition" mold="select">
+                            <template name="model">
+                                <listitem label="${each.posName}" value="${each.posId}" />
+                            </template>
+                        </listbox>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td colspan="2" style="text-align:center">
+                        <button height="30px" image="/Share/img/icon/save.png" id="btnSave" label="Lưu lại" />
+                        <button height="30px" image="/Share/img/icon/close.png" id="btnCancel" label="Đóng" />
+                    </h:td>
+                </h:tr>
+            </h:table>
+        </h:div> 
+    </window>
+</zk>

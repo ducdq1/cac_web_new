@@ -1,0 +1,7 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<window id="pdfwindow" width="100%" height="100%"
+    border="none" minimizable="false" mode="modal" maximizable="false"
+    closable="true" apply="com.viettel.module.phamarcy.viewmodel.ZKPDFViewerVM">
+ <iframe height="100%" width="100%" id="reportframe"></iframe>
+</window>
+ 

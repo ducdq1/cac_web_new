@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    
+    <style src="../Share/css/login.css"/>
+    <style src="../Share/homepage/style_comon.css"/>
+    <style>
+        .SpanTag {
+        font-family:'MYRIADPRO-COND'!important;
+        font-size:18px !important;
+        }
+        
+        .SpanTag2 {
+        font-family:'MYRIADPRO-COND'!important;
+        font-size:20px !important;
+        }
+        
+        .SpanTag3 {
+        font-family:'MYRIADPRO-COND'!important;
+        font-size:12px !important;
+        }
+        
+        .SpanTag4 {
+        font-family:'MYRIADPRO-COND'!important;
+        font-size:24px !important;
+        <!--border-bottom: 3px solid;-->
+        color: #df540a;
+        font-size: 24px;
+        font-weight: bold;
+        padding-bottom: 3px;
+        padding-left: 3px;
+        padding-right: 5px;
+        }
+    </style>
+    
+    <h:div style="width:100%;font-family:'MyriadPro-BoldCond'!important;
+              font-size:18px !important; background-color: #f8f8f8;
+    background-image: url('../Share/homepage/images/body-bg.png');
+    background-position: center top;
+    background-repeat: repeat-y;">
+    
+        <window apply="com.viettel.voffice.DAO.LoginDAO" style="width:100%;text-align:center;" id="loginForm">
+        
+            <h:div class="header_hp SpanTag">
+                <h:div class="banner SpanTag">
+                    <h:div class="logo1">
+                        <h:img   height="65" src="../Share/homepage/images/logo_thuoc.png" />
+                    </h:div>
+                    <h:div class="r_banner" style="text-align:left !important">
+                        <h:img width="" height="" src="../Share/homepage/images/r-banner-bg.png" />
+                    </h:div>
+                </h:div>
+            </h:div>
+            <h:div class="login_hr_name">
+            </h:div>
+            <h:div class="wrapper">                
+                <h:div class="big_login_div" >
+                    <h:div class="box-login1" >
+                        <h:div class="headboxlogin SpanTag" style="box-shadow: 0 0 3px #5295e6;  0 0; border-left-radius: 8px; border-right-radius: 8px;">ĐĂNG NHẬP</h:div>
+                        <h:div style="text-align:left;">
+                            <h:div style="position: relative;">
+                                <h:table style="position: absolute; top: 0; width: 100%;position: absolute; top: 0; width: 100%; background: #fff none repeat scroll; box-shadow: 0 0 3px #5295e6;  0 0; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;">
+                                    <h:tr>
+                                        <h:td>
+                                            <h:div class="padd format-text SpanTag">Tên đăng nhập</h:div>
+                                        </h:td>
+                                    </h:tr>
+                                    <h:tr>
+                                        <h:td>
+                                            <h:div class="bginput user">
+                                                <textbox id="userName" focus="true" maxlength="250" value="kt"/>
+                                            </h:div>
+                                        </h:td>
+                                    </h:tr>
+                                    <h:tr>
+                                        <h:td>
+                                            <h:div class="padd format-text SpanTag">Mật khẩu</h:div>
+                                        </h:td>
+                                    </h:tr>
+                                    <h:tr>
+                                        <h:td>
+                                            <h:div class="bginput password">
+                                                <textbox value="123" id="password" type="password" maxlength="250"/>
+                                            </h:div>
+                                        </h:td>
+                                    </h:tr>
+                                
+                                    <h:tr>
+                                        <h:td>
+                                            <label id="loginError" style="width:100%;color:red;font-weight:bold; padding-left:16px;"/>
+                                        </h:td>
+                                    </h:tr>
+                                    <h:tr>
+                                        <h:td>
+                                            <h:div style="margin-left:20%">
+                                                <vbox id="vboxCaptchaId" visible="false">
+                                                    <h:table style="width:100%;">
+                                                        <h:tr>
+                                                            <h:td></h:td>
+                                                            <h:td></h:td>
+                                                        </h:tr>
+                                                        
+                                                    </h:table>
+                                                </vbox>
+                                            </h:div>
+                                        </h:td>
+                                    </h:tr>
+                                    <h:tr>
+                                        <h:td >
+                                            <h:div class="btn-login" nowrap="true" style="text-align:center;padding-bottom:5px">
+                                                <button autodisable="self" style="cursor:pointer" id="btnLogin" label="Đăng nhập" class="SpanTag"/>
+                                            </h:div>
+                                        </h:td>
+                                    </h:tr>
+                                </h:table>
+                            </h:div>
+                        </h:div>
+                    </h:div>               
+                </h:div>
+            </h:div>
+             <h:br/>
+            <h:div class="footer_bt">
+               
+                <h:br/>
+                <h:br/>
+            </h:div>
+        </window>
+    </h:div>
+</zk>

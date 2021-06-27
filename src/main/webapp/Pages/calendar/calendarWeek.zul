@@ -1,0 +1,59 @@
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <h:div id="weekCalendarDiv" class="contentDiv" onmousemove="onMouseMove();">
+        <h:div>
+            <h:img src="Share/img/icon/back.png" widh="20" height="20" title="Tuần trước" onclick="previous();"/>
+            <h:img src="Share/img/icon/next.png" widh="20" height="20" title="Tuần tới" onclick="next();"/>
+            <h:label id="displayWeek" style="font-size: 25px; font-weight: bold;color:crimson;margin:10px"/>
+        </h:div>
+        <h:table class="weekTable" id="calendarTable">
+            <h:tr class="headerRowViewPage" >
+                <h:th width="7%" style="border:none"></h:th>
+                <h:th width="13%">Thứ 2</h:th>
+                <h:th width="13%">Thứ 3</h:th>
+                <h:th width="13%">Thứ 4</h:th>
+                <h:th width="13%">Thứ 5</h:th>
+                <h:th width="13%">Thứ 6</h:th>
+                <h:th width="13%">Thứ 7</h:th>
+                <h:th width="13%">Chủ nhật</h:th>
+            </h:tr>
+            <h:tr class="inActiveTime">
+                <h:td id="t07"></h:td>
+                <h:td id="t01"></h:td>
+                <h:td id="t02"></h:td>
+                <h:td id="t03"></h:td>
+                <h:td id="t04"></h:td>
+                <h:td id="t05"></h:td>
+                <h:td id="t06"></h:td>
+                <h:td id="t00"></h:td>
+            </h:tr>
+            <h:tr>
+                <h:td id="t7"></h:td>
+                <h:td id="t1"></h:td>
+                <h:td id="t2"></h:td>
+                <h:td id="t3"></h:td>
+                <h:td id="t4"></h:td>
+                <h:td id="t5"></h:td>
+                <h:td id="t6"></h:td>
+                <h:td id="t0"></h:td>
+            </h:tr>
+        </h:table>
+    </h:div>
+    <script defer="true">
+        calendar = new calendarWeek();
+        calendar.initCalendar("calendarManagerWnd");
+        calendar.initMouseWheel();
+        //initCalendar();
+        onMouseMove = function(){
+            calendar.onMouseMove();
+        };
+        
+        previous = function(){
+            calendar.previousWeek();
+        }
+        
+        next = function(){
+            calendar.nextWeek();
+        }
+    </script>
+</zk>

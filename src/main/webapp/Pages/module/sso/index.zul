@@ -1,0 +1,183 @@
+<zk xmlns:x="xhtml" xmlns:h="http://www.w3.org/1999/xhtml">
+	<h:style>
+		body {
+		    margin: 0;
+		    padding: 0 0px;
+		}
+	</h:style>
+
+	<window
+		id="businessWindow" height="680px"
+		apply="com.viettel.module.sso.controller.CasHomeController"
+		style="width: 100%; margin: auto;height:100%" title="Quản lý tài khoản dùng chung" border="normal">
+		<style>
+			.nav_toolbar .z-toolbarbutton-content i { font-size: 20px;}
+			.nav_tabs .z-tabpanel { padding: 0; border-bottom: 0 none;}
+			.nav_tabs .z-tabpanels .z-toolbarbutton-content { padding:
+			4px;} .nav_category { cursor:pointer; } .nav_text { color:
+			#696569; font-size : 24px; font-weight: bold;}
+		</style>
+		<style src="/Share/css/creatfile.css" />
+		<style src="/Share/css/formstyle.css" />
+		<div style="overflow: scroll" height="100%">
+		<tabbox width="100%" sclass="nav_tabs" >
+			<tabs id="tabs">
+				<tab label="Quản lý Người Dùng" />
+				<tab label="Quản Lý Hệ Thống" />
+			</tabs>
+			<tabpanels>
+				<tabpanel>
+					<groupbox>
+						<groupbox>
+							<caption label="Danh sách người dùng hệ thống CAS" class="group-box"   />
+							<h:br/>
+							<hbox spacing="15px" style="padding-left: 15px;">
+							<h:br/>
+								<label value="Tên đăng nhập"></label>
+								<textbox id="tbUserName"></textbox>
+								<label value="Họ và tên"></label>
+								<textbox id="tbFullName"></textbox>
+								<button label="Tìm Kiếm" id="btnFindCasUser"></button>
+								<button label="Tạo tài khoản CAS" id="btnAddCasUser"></button>
+							</hbox>
+							<separator height="10px" />
+							<h:br/>
+							<listbox id="lbUser" checkmark="true" mold="paging" pageSize="9">
+								<listhead>
+									<listheader width="32px" />
+									<listheader label="Tên đăng nhập" align="center" />
+									<listheader label="Họ và tên" align="center"  />
+									<listheader label="Loại Tài Khoản" align="center" />
+									<listheader label="Email" align="center" />
+									 
+									 
+									<listheader align="center" label="Sửa" width="5%"/>
+									<listheader align="center" label="Xóa" width="5%" />
+								</listhead>
+								<template name="model">
+									<listitem>
+										<listcell />
+										<listcell label="${each.userName}" style="text-align: left"/>
+										<listcell label="${each.fullName}" style="text-align: left"/>
+										<listcell label="${each.userType ==2 ? 'Doanh Nghiệp' : 'Cán Bộ'}" style="text-align: left"/>
+										<listcell label="${each.email}" style="text-align: left" />									 
+										  
+										
+										<listcell>
+											<image
+												src="/Share/img/icon/edit.png" width="20px" height="20px"
+												forward="onClick=lbUser.onEditItem(${each})"
+												tooltiptext="${$composer.getLabelCos('common_edit')}" />
+
+										</listcell>
+										
+										<listcell >
+											<image
+												src="/Share/img/icon/delete.png" width="20px" height="20px"
+												forward="onClick=lbUser.onDeleteItem(${each})"
+												tooltiptext="${$composer.getLabelCos('common_delete')}" />
+										</listcell>
+										
+										 
+									</listitem>
+								</template>
+							</listbox>
+						</groupbox>
+						<h:br/>
+						<groupbox id="gbMapUser" visible="false">
+							<caption label="Liên kết dữ liệu người dùng với các hệ thống dược" class="group-box"  />
+							<hbox spacing="15px" style="padding-left: 15px;">
+								<button label="Tạo liên kết" id="btnAddCasUserMap"></button>
+							</hbox>
+							<separator height="10px" />
+							<listbox id="lbUserMap" checkmark="true" mold="paging" pageSize="4">
+								<listhead>
+									<listheader width="32px" />									
+									<listheader label="Tên đăng nhập" align="center" width="20%" />
+									<listheader label="Hệ thống" align="center" width="70%" />
+									<listheader align="center" label="Sửa"  width="5%" />
+									<listheader align="center" label="Xóa"  width="5%" />
+								</listhead>
+								<template name="model">
+									<listitem>
+										<listcell />
+										<listcell label="${each.userName}" style="text-align: left"/>
+										<listcell
+											label="${each.systemName}" style="text-align: left" />
+										<listcell>
+											<image
+												src="/Share/img/icon/edit.png" width="20px" height="20px"
+												forward="onClick=lbUserMap.onEditItem(${each})"
+												tooltiptext="${$composer.getLabelCos('common_edit')}" />
+
+										</listcell>
+										
+										<listcell >
+											<image
+												src="/Share/img/icon/delete.png" width="20px" height="20px"
+												forward="onClick=lbUserMap.onDeleteItem(${each})"
+												tooltiptext="${$composer.getLabelCos('common_delete')}" />
+										</listcell>
+										
+
+
+									</listitem>
+								</template>
+							</listbox>
+						</groupbox>
+					</groupbox>
+				</tabpanel>
+				<tabpanel>
+					<groupbox>
+						<groupbox>
+							<caption label="Danh sách người dùng hệ thống CAS" class="group-box" />
+							<h:br/>
+							<hbox spacing="15px" style="padding-left: 15px;">
+								<label value="Tên hệ thống"></label>
+								<textbox id="tbSysName"></textbox>
+								<button label="Tìm Kiếm"></button>
+								<button label="Thêm hệ thống" id="btnAddSystem"></button>
+							</hbox>
+							<separator height="10px" />
+							<listbox id="lbSystem" checkmark="true" mold="paging" pageSize="9">
+								<listhead>
+									<listheader width="32px" />
+									<listheader label="Tên Hệ Thống" align="center" />
+									<listheader label="Địa Chỉ" align="center"  />
+									 <listheader align="center" label="Sửa"  width="5%" />
+									<listheader align="center" label="Xóa"  width="5%" />
+								</listhead>
+								<template name="model">
+									<listitem>
+										<listcell />
+										<listcell label="${each.systemName}" style="text-align: left"/>
+										<listcell label="${each.systemURL}" style="text-align: left"/>
+										<listcell>
+											<image
+												src="/Share/img/icon/edit.png" width="20px" height="20px"
+												forward="onClick=lbSystem.onEditItem(${each})"
+												tooltiptext="${$composer.getLabelCos('common_edit')}" />
+
+										</listcell>
+										
+										<listcell >
+											<image
+												src="/Share/img/icon/delete.png" width="20px" height="20px"
+												forward="onClick=lbSystem.onDeleteItem(${each})"
+												tooltiptext="${$composer.getLabelCos('common_delete')}" />
+										</listcell>
+										
+										
+										 
+									</listitem>
+								</template>
+							</listbox>
+						</groupbox>
+					</groupbox>
+				</tabpanel>
+			</tabpanels>
+		</tabbox>
+		</div>
+		<separator height="30px"></separator>
+	</window>
+</zk>

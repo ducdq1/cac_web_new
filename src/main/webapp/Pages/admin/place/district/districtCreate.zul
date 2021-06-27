@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window id="districtCreateWnd" border="normal" width="530px"
+        xmlns:h="http://www.w3.org/1999/xhtml"
+        xmlns="http://www.zkoss.org/2005/zul"
+        apply="com.viettel.voffice.DAO.System.Place.DistrictCreateController" 
+        position="center,center" closable="true">
+    <style src="/Share/css/formstyle.css" />
+    <style src="/Share/css/uploadstyle.css" />
+    <script type="text/javascript" src="/Share/js/UPMSamples.js" />
+    <caption label="Quản lý danh mục quận/huyện" />
+        
+    <h:div width="100%">
+        <h:table width="100%">
+            <h:tr>
+                <h:td>
+                    <label value="Quốc gia"  />
+                    <label value=" *" sclass="label-required" />
+                </h:td>
+                <h:td>
+                    <listbox id="lbNation" mold="select"  onSelect="$composer.onSelectNation()" width="80%">
+                        <template name="model">
+                            <listitem label="${each.name}" value="${each.placeId}" />
+                        </template>
+                    </listbox>
+                </h:td>
+            </h:tr>
+              <h:tr>
+                <h:td>
+                    <label value="Tỉnh/thành phố"  />
+                    <label value=" *" sclass="label-required" />
+                </h:td>
+                <h:td>
+                    <listbox id="lbProvince" mold="select" width="80%">
+                        <template name="model">
+                            <listitem label="${each.name}" value="${each.placeId}" />
+                        </template>
+                    </listbox>
+                </h:td>
+            </h:tr>
+             <h:tr>
+                <h:td width="25%">
+                    <label value="Mã quận/huyện"  />
+                    <label value=" *" sclass="label-required" />
+                </h:td>
+                <h:td width="75%">
+                    <textbox id="txtCode" 
+                             maxlength="255" width="80%"/>
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td width="25%">
+                    <label value="Tên quận/huyện"  />
+                    <label value=" *" sclass="label-required" />
+                </h:td>
+                <h:td width="75%">
+                    <textbox id="txtId" 
+                             visible="false"/>
+                    <textbox id="txtName" 
+                             maxlength="255" width="80%"/>
+                </h:td>
+            </h:tr>
+           
+            <h:tr> 
+                <h:td colspan="2" style="text-align:center">
+                    <button label="Lưu" id="btnSave" src="/Share/img/icon/Add.png"/>
+                    <button label="Huỷ bỏ" id="btnCancel" onClick="districtCreateWnd.detach()" src="/Share/img/icon/close.png"/>
+                </h:td>
+            </h:tr>
+        </h:table>
+    </h:div> 
+</window>

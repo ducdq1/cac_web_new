@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <h:div id="toolBar" class="toolBar">
+        <h:div style="background-color:white; width:250px; height:22px; margin-top:5px; border : 1px solid rgb(197,210,223); border-radius:16px; float:right">
+            <h:input maxlength="200" type="textbox" id="searchFullText" style="width:200px" onkeydown="onCheckSearch(event);" autofocus="true"/>
+            <h:img src="Share/img/icon/search.jpg" style="width:16px; height:16px;float:left" onclick="toolBarSearch();"/>
+        </h:div>
+        <h:img class="img-cal" id="workingTime7" src="Share/img/png/lich-theo-danh-sach.png" onclick="changeViewType(3)" title="Lịch theo danh sách"/>
+        <h:img class="img-cal" id="workingTime5"  src="Share/img/png/lich-thang.png" onclick="changeViewType(2)" title="Lịch tháng"/>
+        <h:img class="img-cal" id="workingTime3"  src="Share/img/png/lich-tuan.png" onclick="changeViewType(1)" title="Lịch tuần"/>
+<!--        <h:img id="workingTime1"  src="../Share/img/toolbar/date.png" onclick="changeViewType(0)" title="Lịch ngày"/>-->
+<!--        <h:img src="../Share/img/icon/search.png" title="Tìm kiếm nâng cao" onclick="sendAction('onShowFullSearch');"/>-->
+    </h:div>
+    <script>
+        onCheckSearch = function(event) {
+            if (event.keyCode === 13) {
+                calendar.getCalendar();
+            }
+        };
+        
+        changeViewType = function(type){
+            var wgt = zk.Widget.$("$"+toolBar.widget);
+            zAu.send(new zk.Event(wgt, 'onChangeViewType', type));
+        }
+        
+        
+    </script>
+</zk>

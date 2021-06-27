@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul"
+    xmlns:h="xhtml">
+    
+    <window id="specialSymbolWnd" position="center,center" width="400px" mode="embedded" border="normal" closable="true"
+        apply="com.viettel.module.cosmetic.Controller.CosmeticSpecialSymbolController">
+        <caption label="${$composer.getLabelCos('cosmetic_special_symbol_caption')}" image="/Share/img/icon/special_symbol_icon_16.png"/>
+        <vlayout id="buttonLayout"/>
+    </window>
+    
+</zk>

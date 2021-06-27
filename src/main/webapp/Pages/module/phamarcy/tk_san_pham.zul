@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.zkoss.org/2005/zk/native"
+	xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:w="http://www.zkoss.org/2005/zk/client">
+
+	<style src="/Share/css/formstyle.css" />
+
+	<listbox id="lbListSP" checkmark="true"  multiple="true" 
+		nonselectableTags="*"
+		emptyMessage="Không tìm thấy sản phẩm nào">
+		<listhead sizable="true">
+			<listheader label="STT" align="center" style="width:3%" />
+			<listheader label="Mã sản phẩm" align="center"
+				style="width:16%" />
+				
+			 <listheader label="Tên sản phẩm" align="center"
+				style="width:16%" />
+			
+			<listheader label="Lượt xem" align="center"
+				style="width:10%" />
+					
+			
+		</listhead>
+		<template name="model">
+			<listitem
+				style="word-wrap: break-word !important; white-space: normal; text-align: left;">
+				<listcell>
+					<label
+						value="${ forEachStatus.index + 1 + userPagingBottom.pageSize *
+						userPagingBottom.activePage }">
+					</label>
+				</listcell>				
+				 <listcell style="text-align:left">
+					<label value="${each.productCode}"  />
+				</listcell>
+				<listcell style="text-align:left">
+					<label value="${each.productName}"  />
+				</listcell>
+				<listcell style="text-align:right">
+				<label value="${each.counts}"   />
+				</listcell>
+				  
+			</listitem>
+		</template>
+	</listbox>
+	<separator />
+	
+ <zscript><![CDATA[
+        String getStyle(){
+        	alert("dd");
+        	return "";
+        }
+    ]]>
+    </zscript>
+</zk>

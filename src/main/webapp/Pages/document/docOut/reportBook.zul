@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+        xmlns="http://www.zkoss.org/2005/zul"
+        id="windowReportBook"
+        apply="com.viettel.voffice.DAO.Document.DocOutReportBookController">
+    <script defer="true">
+        toolBar.widget = "windowReportBook";
+        addToolbar("Share/img/icon/excel_table.png","In báo cáo","onExportExcel");
+    </script>
+    <include src="/Pages/common/searchToolbar.zul"/>
+    <h:div class="contentDiv">
+        <groupbox id="fullSearchGbx" mold="3d" visible="false"
+                  apply="com.viettel.voffice.DAO.Document.DocOutSearchController" >
+            <caption label="Tìm kiếm nâng cao"/>
+            <h:table align="center" width="100%">
+                <h:th width="15%"/>
+                <h:th width="35%"/>
+                <h:th width="15%"/>
+                <h:th width="35%"/>
+                <h:tr>
+                    <h:td>
+                        <label value="Sổ văn bản đi"/>
+                    </h:td>
+                    <h:td>
+                        <listbox id="lbBookIn" mold="select" width="80%" onAfterRender="self.setSelectedIndex(0)" >
+                            <template name="model">
+                                <listitem label="${each.bookName}" value="${each.bookId}"/>
+                            </template>
+                        </listbox>
+                    </h:td>
+                    <h:td>
+                        <label value="Loại văn bản"/>
+                    </h:td>
+                    <h:td>
+                        <listbox id="lbDocType" mold="select" width="80%" onAfterRender="self.setSelectedIndex(0)">
+                            <template name="model">
+                                <listitem label="${each.name}" value="${each.categoryId}"/>
+                            </template>
+                        </listbox>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td>
+                        <label value="Ngày ban hành từ ngày"/>
+                    </h:td>
+                    <h:td>
+                        <datebox id="dbFromDay" 
+                                 cols="12" format="dd/MM/yyyy" width="230px">
+                        </datebox>
+                    </h:td>
+                    <h:td>
+                        <label value="Đến ngày"/>
+                    </h:td>
+                    <h:td>
+                        <datebox id="dbToDay" cols="12" format="dd/MM/yyyy" width="230px" >
+                        </datebox>
+                    </h:td>                    
+                </h:tr>
+                <h:tr>
+                    <h:td colspan="4" align="center">
+                        <button id="btnSearch" label="Tìm kiếm" sclass="button" image="/Share/img/icon/search.jpg"/>
+                    </h:td>
+                </h:tr>
+            </h:table>
+        </groupbox>
+    </h:div>
+    <h:div class="contentDiv">
+        <paging id="userPaging" pageSize="10"/>
+        <listbox id="lbListDoc" mold="paging" emptyMessage="Không có văn bản nào" style="word-wrap:break-word;" >
+            <listhead>
+                <listheader label="STT" align="center" hflex="min"/>
+                <listheader label="Ký hiệu"/>
+                <listheader label="Trích yếu" />
+                <listheader label="Ngày ban hành" align="center" hflex="min"/>
+                <listheader label="Người ký" />
+                <listheader label="Đơn vị soạn thảo"/>
+            </listhead>
+            <template name="model">
+                <listitem>
+                    <listcell>
+                        <label value="${forEachStatus.index + 1 + userPaging.pageSize * userPaging.activePage}"/>
+                    </listcell>
+                    <listcell>
+                        <label value="${each.documentCode}"/>
+                    </listcell>
+                    <listcell>
+                        <label value="${each.documentAbstract}" forward="onClick=lbListDoc.onOpenView(${each})"/>
+                    </listcell>
+                    <listcell>
+                        <label value="${each.datePublishStr}" forward="onClick=lbListDoc.onOpenView(${each})"/>
+                    </listcell>
+                    <listcell>
+                        <label value="${each.signerName}" forward="onClick=lbListDoc.onOpenView(${each})"/>
+                    </listcell>
+                    <listcell>
+                        <label value="${each.createDeptName}" forward="onClick=lbListDoc.onOpenView(${each})"/>
+                    </listcell>
+                </listitem>
+            </template>
+        </listbox>
+    </h:div>
+    
+</window>

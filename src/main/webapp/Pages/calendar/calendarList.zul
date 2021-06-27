@@ -1,0 +1,36 @@
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+
+    <h:div class="talbeBorderPage">
+        <h:div>
+            <h:img src="Share/img/icon/back.png" widh="20" height="20" title="Tuần trước" onclick="previous();"/>
+            <h:img src="Share/img/icon/next.png" widh="20" height="20" title="Tuần tới" onclick="next();"/>
+            <h:label id="displayWeek" style="font-size: 25px; font-weight: bold;color:crimson;margin:10px"/>
+        </h:div>
+        <h:table class="lstTable" id="calendarTable">
+            <h:tr class="headerRowViewPage">
+                <h:th width="10%">Thời gian</h:th>
+                <h:th width="25%">Nội dung</h:th>
+                <h:th width="10%">Địa điểm</h:th>
+                <h:th width="10%">Chủ trì</h:th>
+                <h:th width="20%">Thành phần</h:th>
+                <h:th width="15%">Đơn vị chuẩn bị</h:th>
+                <h:th width="10%">Trạng thái</h:th>
+            </h:tr>
+        </h:table>
+    </h:div>
+   
+    <script defer="true">
+        calendar = new calendarList();
+        calendar.initCalendar("calendarManagerWnd");
+
+        previous = function(){
+            calendar.previousWeek();
+        }
+        
+        next = function(){
+            calendar.nextWeek();
+        }
+        
+    </script>
+</zk>

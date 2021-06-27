@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    
+    <window id="resetPassDlg" title="Chọn kiểu báo giá" 
+    apply="com.viettel.module.phamarcy.controller.QuotationInforController" 
+    width="650px" border="normal" position="center" closable="true">
+
+           <style>
+           	tr{height:35px; } 
+           	
+           	.textboxa{ width:90% !important; }
+           	
+           	.createTable input { width: 70px ; }
+
+           </style>
+
+           <h:table style="width:100%;height:100%;padding-left:10px" class="createTable">
+            <h:tr>
+                <h:td width="20%">
+                    <label sclass="lb-create" >Báo giá đến:</label>
+                </h:td>
+                <h:td width="60%">
+                     <textbox  id="tbCompanyName"  class="textboxa"  maxlength="2000" />
+                </h:td>
+            </h:tr>
+            <h:tr >
+                <h:td>
+                    <label sclass="lb-create" >Địa chỉ:</label>
+                </h:td>
+                <h:td>
+                     <textbox  id="tbCompanyAdd" class="textboxa"   maxlength="2000"/>
+                </h:td>
+            </h:tr>
+             <h:tr >
+                <h:td>
+                    <label sclass="lb-create" >Số điện thoại:</label>
+                </h:td>
+                <h:td>
+                     <textbox class="textboxa" id="tbCompanyPhone"   maxlength="200"/>
+                </h:td>
+            </h:tr>
+           <h:tr >
+                <h:td>
+                    <label sclass="lb-create"  >Ngày báo giá:</label>
+                </h:td>
+                <h:td>
+                    <datebox id="dbNgayBaoGia"   format="dd/MM/yyyy" />
+                </h:td>
+            </h:tr>
+            
+              <h:tr >
+                <h:td>
+                    <label sclass="lb-create" >Hiệu lực đến ngày:</label>
+                </h:td>
+                <h:td>
+                    <datebox id="dbNgayHieuLuc"  format="dd/MM/yyyy" />
+                </h:td>
+            </h:tr>
+            
+             <h:tr >
+                <h:td>
+                    <label sclass="lb-create" >Ghi chú:</label>
+                </h:td>
+                <h:td>
+                    <textbox id="tbGhiChu" multiline="true" maxlength="2000" height="30px"/>
+                </h:td>
+            </h:tr>
+            
+            
+              <h:tr>
+              	<h:td>
+              		<label sclass="lb-create">Hiển thị:</label>
+              	</h:td>
+              	<h:td colspan="2" style="text-align:left;width:20px" >              		 
+              	 <radiogroup id="rg"/>
+              		<radio   label="Tên báo giá " checked="true" radiogroup="rg"/>  <h:br/>
+              		 <radio label="Tên sản phẩm" style="" radiogroup="rg"/> 
+              	</h:td>
+              </h:tr>
+              
+               <h:tr>
+              	<h:td>
+              		<label sclass="lb-create">Báo giá cho:</label>
+              	</h:td>
+              	<h:td colspan="2" style="text-align:left;width:20px" >              		 
+              	 <radiogroup id="rgKhacHang"/>
+              		<radio   label="Công trình" checked="true" radiogroup="rgKhacHang"/>  <h:br/>
+              		 <radio label="Khách hàng lẽ" style="" radiogroup="rgKhacHang"/> 
+              	</h:td>
+              </h:tr>
+              
+              <h:tr >
+                <h:td>
+                   
+                </h:td>
+                 
+            </h:tr>
+            <h:tr>
+                <h:td colspan="2" align="center">
+                    <button height="30px" image="/Share/img/icon/save.png" id="btnSave" label="Đồng ý" />         
+                  
+                    <button height="30px" image="/Share/img/icon/close.png"  style="margin-left:10px" label="Hủy bỏ" onClick="resetPassDlg.onClose()" />
+                </h:td>
+            </h:tr>
+        </h:table>
+    </window>
+</zk>

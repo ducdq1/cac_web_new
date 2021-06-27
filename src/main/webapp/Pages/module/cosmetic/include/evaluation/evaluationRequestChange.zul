@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+        xmlns="http://www.zkoss.org/2005/zul" id="businessWindow"
+        position="center,center" 
+        title="Phê duyệt hồ sơ" apply="com.viettel.module.cosmetic.Controller.include.CosEvaluationRequestChangeController" width="100%">
+    <style src="/Share/css/formstyle.css" />
+    <style src="/Share/css/uploadstyle.css" />
+    <script type="text/javascript" src="/Share/js/UPMSamples.js" />
+    <vlayout id="layoutComment">
+        <label id="lbTopWarning" style="color: red;" />
+        <h:table width="100%" align="center">
+            <h:th width="15%" />
+            <h:th width="35%" />
+            <h:th width="15%" />
+            <h:th width="35%" />
+            <h:tr>
+                <h:td>
+                    <label value="Kết quả thẩm định"
+                           sclass="hightlight" />
+                  
+                </h:td>
+                <h:td>
+                    <label width="95%" multiline="true" pre="true"
+                                           value="${$composer.obj.staffEvaluationValue}"
+                                           sclass="label-info" />
+                    
+                </h:td>
+                
+                
+            </h:tr>    
+            <h:tr>
+                <h:td>
+                    <label value="Nội dung thẩm định"
+                           sclass="hightlight" />
+                    
+                </h:td>
+                <h:td>
+                    <label width="95%" multiline="true" pre="true"
+                                           value="${$composer.obj.staffEvaluationContent}"
+                                           sclass="label-info" />
+                    
+                </h:td>
+                
+                
+            </h:tr> 
+            <h:tr>
+                <h:td>
+                    <label value="Kết quả thẩm định"
+                           sclass="hightlight" />
+                   
+                </h:td>
+                <h:td>
+                    
+<!--                    <radiogroup id="rbStatus"/>-->
+                    <label width="95%" multiline="true" pre="true"
+                                           value="Yêu cầu bổ sung"
+                                           sclass="label-info" />
+                    
+                </h:td>
+                
+            </h:tr>
+            <h:tr>
+                <h:td>
+                    <label value="Nội dung yêu cầu bổ sung" sclass="lb-create" />
+                     <label value=" *"
+                           sclass="label-required" />
+                </h:td>
+                
+                <h:td colspan="3">
+                    <textbox id="mainContent" width="95%" rows="5"
+                             value="${$composer.obj.mainContent}"
+                             maxlength="500" />
+                </h:td>
+			
+            </h:tr>
+       
+               
+        </h:table>
+        
+
+         <div align="center" visible="false">
+            <button id="btnSubmit" label="Gửi xử lý" visible="true"
+                    image="/Share/img/icon/send_document_1.png" />
+        </div>
+        <label id="lbBottomWarning" style="color: red;" />
+        <textbox id="txtValidate" visible="false" />
+    </vlayout>
+</window>

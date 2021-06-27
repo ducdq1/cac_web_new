@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns="http://www.zkoss.org/2005/zul">
+	<h:div class="view_statistical">
+		<label class="title1">Đăng ký qua mạng</label>
+		<h:br />
+		<h:div style="margin-top:3px">
+			<label class="title2">DỊCH VỤ CÔNG Y TẾ</label>
+		</h:div>
+		<h:div style="margin-top:3px">
+			<label class="title3">
+				Cấp số tiếp nhận hồ sơ đăng ký thông tin thuốc, xác nhận
+				quảng cáo thuốc
+			</label>
+		</h:div>
+		<h:br />
+
+		<h:div style="margin:0 auto;width:80%">
+			<h:div style="float:left;width:45%;">
+				<a href="/Pages/login.zul">
+					<h:div  class="button_login">
+						<label class="button_label">Đăng nhập</label>
+					</h:div>
+				</a>
+			</h:div>
+			
+			 <h:div style="float:left;width:10%;">
+				<a href="/Pages/Register.zul">
+					<h:div style="float:left;background-color:white" class="button_register" >
+						<label class="button_label"></label>
+					</h:div>
+				</a>
+			</h:div>
+			
+			<h:div style="float:left;width:45%;">
+				<a href="/Pages/Register.zul">
+					<h:div style="float:left" class="button_register">
+						<label class="button_label">Đăng ký</label>
+					</h:div>
+				</a>
+			</h:div>
+
+		</h:div>
+	</h:div>
+
+
+</zk>

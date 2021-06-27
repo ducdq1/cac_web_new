@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+	xmlns="http://www.zkoss.org/2005/zul" title="Xử lý hồ sơ"
+	id="windowProcessing" position="center,center" closable="true"
+	border="normal" width="100%"
+	apply="com.viettel.core.workflow.ProcessingWindow">
+	<style src="/Share/css/formstyle.css" />
+	<style src="/Share/css/uploadstyle.css" />
+	<style>
+		.button{ height:25px; font-weight:bold;
+
+		}
+	</style>
+	<vlayout id="vlayoutMain">
+		<div width="100%" id="divReceivers">
+			<label id="lbTopWarning" style="color: red;" />
+			<include id="incUserSelector"
+				src="/Pages/core/workflow/userSelector.zul">
+			</include>
+			<div width="100%" align="center" style="margin-top:10px;">
+				<button id="btnChoose" label="Chọn cán bộ xử lý"
+					image="/Share/img/add.png" />
+			</div>
+
+		</div>
+		<div width="100%">
+			<groupbox id="gbSelected" visible="false" mold="3d">
+				<caption label="Hồ sơ đã chọn"></caption>
+				<listbox id="lbListSelected"
+					emptyMessage="${$composer.getLabelCos('common_emptyMessage')}">
+					<listhead sizable="true">
+						<listheader label="Mã hồ sơ" align="center"
+							style="width:30%" />
+						<listheader label="Tên doanh nghiệp"
+							align="center" style="width:40%" />
+						<listheader label="Trạng thái hồ sơ"
+							align="center" style="width:30%" />
+
+					</listhead>
+					<template name="model">
+						<listitem
+							style="word-wrap: break-word !important; white-space: normal; text-align: left">
+
+							<listcell>
+								<label value="${each.code}" />
+							</listcell>
+
+							<listcell style="text-align:left">
+								<label value="${each.orgName}" />
+							</listcell>
+							<listcell style="text-align:left">
+								<label
+									value="${$composer.getStatus(each.status)}" />
+							</listcell>
+
+						</listitem>
+					</template>
+				</listbox>
+			</groupbox>
+		</div>
+		<div width="100%" id="divBusiness" style="padding-left: 50px">
+			<label value="Tên doanh nghiệp:" style="color: #0084e0;" />
+			<label id="businessName" style="color: red;" />
+			<h:br />
+			<label value="Mã số thuế:" style="color: #0084e0;" />
+			<label id="businessId" style="color: red;" />
+			<h:br />
+			<label value="Người liên hệ:" style="color: #0084e0;" />
+			<label id="businessContact" style="color: red;" />
+			<h:br />
+			<label value="Email liên hệ:" style="color: #0084e0;" />
+			<label id="businessEmail" style="color: red;" />
+			<label value="ĐT liên hệ:" style="color: #0084e0;" />
+			<label id="businessPhone" style="color: red;" />
+		</div>
+		<!--<include id="incBusinessPage"></include>-->
+		<vlayout id="includeWindow"></vlayout>
+
+		<groupbox mold="3d" id="gbNote">
+			<caption id="cbProcessContent" label="Ghi chú" />
+			<textbox id="txtNote" rows="5" width="100%"
+				maxlength="2000" />
+		</groupbox>
+		<div align="center">
+			<button id="btnOkOption" label="OK" class="button"
+				autodisable="self" visible="false" />
+			<button id="btnOK" label="OK" class="button"
+				autodisable="self" />
+			<button id="btnOkOption2" label="OK" class="button"
+				autodisable="self" visible="false" />
+			<button id="btnClose" label="Đóng" class="button"
+				autodisable="self" forward="onClick=windowView.onClose" />
+			<button id="btnCloseConFirm" label="Đóng" class="button"
+				visible="false" autodisable="self" />
+		</div>
+		<label id="lbBottomWarning" style="color: red;" />
+	</vlayout>
+</window>

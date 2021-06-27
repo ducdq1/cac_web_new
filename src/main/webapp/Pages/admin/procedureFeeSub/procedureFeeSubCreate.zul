@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+   
+    <window id="procedureFeeSubCreateWnd" border="normal" width="530px"
+        apply="com.viettel.module.rapidtest.DAO.ProcedureFeeSubCreateController" 
+        position="center,center" closable="true">
+        <caption label="Quản lý Phí" />
+        <h:div width="100%">
+            <h:table class="createTable" width="100%">
+                <h:tr>
+                    <h:td>
+                        <label value="Thủ tục"  />
+                        <label value=" *" sclass="label-required" />
+                    </h:td>
+                    <h:td>
+                        <listbox id="lbProcedure" mold="select">
+                            <template name="model">
+                                <listitem label="${each.name}" value="${each.categoryId}" />
+                            </template>
+                        </listbox>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td>
+                        <label value="Phí"  />
+                        <label value=" *" sclass="label-required" />
+                    </h:td>
+                    <h:td>
+                        <listbox id="lbFee" mold="select">
+                            <template name="model">
+                                <listitem label="${each.name}" value="${each.categoryId}" />
+                            </template>
+                        </listbox>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td>
+                        <label value="Thủ tục con"  />
+                    </h:td>
+                    <h:td>
+                        <listbox id="lbSub" mold="select">
+                            <template name="model">
+                                <listitem label="${each.name}" value="${each.categoryId}" />
+                            </template>
+                        </listbox>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td width="20%">
+                        <label value="Giá tiền"  />
+                        <label value=" *" sclass="label-required" />
+                    </h:td>
+                    <h:td width="80%">
+                        <textbox id="txtId" visible="false"/>
+                        <textbox id="txtCost"
+                              width="400px" maxlength="22"/>
+                    </h:td>
+                
+                </h:tr>
+                <h:tr>
+                    <h:td>
+                        <label value="Giai đoạn thanh toán"  />
+                    </h:td>
+                    <h:td >
+                        <textbox id="txtPhase"
+                              width="400px" maxlength="1"/>
+                    </h:td>
+                </h:tr>
+
+                <h:tr>
+                    <h:td colspan="2" style="text-align:center">
+                        <button label="Lưu" id="btnSave" src="/Share/img/icon/Add.png"/>
+                        <button label="Huỷ bỏ" id="btnCancel" onClick="procedureFeeSubCreateWnd.detach()" src="/Share/img/icon/close.png"/>
+                    </h:td>
+                </h:tr>
+            </h:table>
+        </h:div> 
+    </window>
+</zk>

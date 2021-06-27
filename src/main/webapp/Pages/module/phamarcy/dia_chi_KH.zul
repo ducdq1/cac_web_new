@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+	xmlns="http://www.zkoss.org/2005/zul" id="phamarcyAllDH"    
+	apply="com.viettel.module.phamarcy.controller.DiaChiKHController">
+	<style src="/Share/css/formstyle.css" />
+	<script defer="true">toolBar.widget = "phamarcyAll";</script>
+	<style>
+		.z-listheader-cnt{ color:#4584D3 !important;
+		}
+
+	</style>
+	<h:div class="contentDiv" style="width:99%;margin:0 auto;background-color:#FBEFFB">
+		<groupbox id="fullSearchGbx" 
+		> 
+		<h:table align="center" width="99%" class="table-search">
+			<h:tr>
+			 
+				<h:th width="20%" />
+				<h:th width="20%" />
+				<h:th width="20%" />
+				<h:th width="20%" />
+				<h:th width="20%" />
+				<h:th width="20%" />
+			</h:tr>
+			<h:tr >
+				<h:td style="text-align: right">
+					<label value="Khu vực: " sclass="lb-create" />
+				</h:td>
+				<h:td style="text-align: left;">
+					 <listbox id="tbArea" height="25px"
+					onAfterRender='$composer.getStreetSelectedIndexInModel()'
+					mold="select" width="91%">
+					<template name="model">
+						<listitem label="${each.areaName}"
+							value="${each.areaId}" />
+					</template>
+				</listbox>
+				</h:td>
+				 <h:td style="text-align: right;">
+					<label value="Tên đường: " sclass="lb-create" />
+				</h:td>
+				<h:td>
+					<textbox id="tbTenKH"> </textbox>
+				</h:td>
+				
+				 <h:td style="text-align: right;">
+					<label value="Số nhà: " sclass="lb-create" />
+				</h:td>
+				<h:td>
+					<textbox  id="tbDiaChi"> </textbox>
+				</h:td>
+				
+			</h:tr>
+		 
+			
+			<h:tr>
+				
+				<h:td style="text-align: right;">
+					<label value="Số điện thoại: " sclass="lb-create" />
+				</h:td>
+				<h:td>
+					<textbox  id="tbSoDT"> </textbox>
+				</h:td>
+				
+				 <h:td style="text-align: right;">
+					<label value="Người giới thiệu: " sclass="lb-create" />
+				</h:td>
+				<h:td>
+					<textbox  id="tbAssignName"> </textbox>
+				</h:td>
+				
+				 <h:td style="text-align: right;">
+					<label value="Nhân viên khảo sát:" sclass="lb-create" />
+				</h:td>
+				<h:td>
+					<textbox  id="tbSurveyName"> </textbox>
+				</h:td>
+				
+			</h:tr>
+		<h:tr>
+		                     
+				<h:td style="text-align: right;">
+					<label value="Lấy hàng: " sclass="lb-create" />
+				</h:td>
+				<h:td>
+					<listbox id="lbLayHang" height="25px"
+					onAfterRender='$composer.getLayHangSelectedIndexInModel()'
+					mold="select" width="91%">
+					<template name="model">
+						<listitem label="${each.name}"
+							value="${each.categoryId}" />
+					</template>
+				</listbox>
+				</h:td>
+            
+            <h:td style="text-align: right;">
+					<label value="Trạng thái: " sclass="lb-create" />
+				</h:td>
+				<h:td>
+					<listbox id="lbTrangThai" height="25px"
+					onAfterRender='$composer.getSelectedIndexInModel()'
+					mold="select" width="91%">
+					<template name="model">
+						<listitem label="${each.name}"
+							value="${each.categoryId}" />
+					</template>
+				</listbox>
+				</h:td>
+				
+				<h:td style="text-align: right;"> 
+					<label value="Ngày nhập PM:"
+						sclass="lb-create" />
+				</h:td>
+				<h:td>
+					<datebox id="dbCreateFromDay"  height="20px"
+						format="dd/MM/yyyy" width="91%"
+						constraint="between 19000101 and 20991231: ${$composer.getLabel('date_validate')}" />
+				</h:td>
+				
+				</h:tr>
+			<h:tr>
+				<h:td style="text-align: right;"> 
+					<label value="Ngày lấy hàng(đặt cọc):"
+						sclass="lb-create" />
+				</h:td>
+				<h:td>
+					<datebox id="dbFromDay"  height="20px"
+						format="dd/MM/yyyy" width="91%"
+						constraint="between 19000101 and 20991231: ${$composer.getLabel('date_validate')}" />
+				</h:td>
+				<h:td/><h:td/>
+		<h:td style="text-align: right;">
+					<label value="Đến ngày:"
+						sclass="lb-create" />
+				</h:td>
+				<h:td>
+					<datebox id="dbCreateToDay"  format="dd/MM/yyyy"
+						width="91%" height="20px"
+						constraint="between 19000101 and 20991231: ${$composer.getLabel('date_validate')}" />
+				</h:td>
+			</h:tr>
+			
+			<h:tr>
+			
+				<h:td style="text-align: right;">
+					<label value="Đến ngày:"
+						sclass="lb-create" />
+				</h:td>
+				<h:td>
+					<datebox id="dbToDay"  format="dd/MM/yyyy"
+						width="91%" height="20px"
+						constraint="between 19000101 and 20991231: ${$composer.getLabel('date_validate')}" />
+				</h:td>
+				
+			</h:tr>
+			
+			
+		<h:tr>
+				<h:td style="height:20px">
+				</h:td>
+
+			</h:tr>
+			
+			<h:tr>
+				<h:td colspan="6" align="center"
+					style="text-align: center">
+					<button id="btnSearch"
+						label="${$composer.getLabelCos('common_search')}" sclass="button"
+						image="/Share/img/icon/search.jpg" autodisable="self" />					 
+					<button id="btnAdd" label="Thêm mới" sclass="button"
+						image="/Share/img/icon/Add.png" autodisable="self" /> 
+				<h:div style="text-align: right;padding:0px">	<button label="In kiểm tra"
+							id="btnPrint" autodisable="true"
+						sclass="button"
+					width="160px"
+							image="/Share/img/icon/print_ic_small.png" />
+					 </h:div>
+				</h:td>
+			</h:tr>
+		</h:table>
+	</groupbox>
+	</h:div>
+	<h:div class="contentDiv" style="width:99%;margin:0 auto">
+	<listbox id="lbList" multiple="true" checkmark="false"
+		nonselectableTags="*"
+		emptyMessage="Không tìm thấy địa chỉ nào">
+		<listhead sizable="true">
+			<listheader label="STT" align="center" style="width:4%;font-size:13px" />
+			<listheader label="Tên khách hàng" align="left"
+				style="width:16%;font-size:13px" />
+			<listheader label="Địa chỉ" align="left"
+				style="width:15%;font-size:13px" />	
+			<listheader label="Điện thoại" align="left"
+				style="width:10%;font-size:13px" />	
+			 <listheader label="Người giới thiệu" align="left"
+				style="width:8%;font-size:13px" />	
+			<listheader label="Nhân viên khảo sát" align="left"
+				style="width:10%;font-size:13px" /> 
+			<listheader label="Trạng thái" align="left"
+				style="width:7%;font-size:13px" />	 
+			<listheader label="Đã gọi điện" align="left"
+				style="width:10%;font-size:13px" />
+			<listheader label="Lấy hàng" align="left"
+				style="width:10%;font-size:13px" />	 
+			<listheader label="Sửa" align="left" hflex="min" style=" font-size:13px"/>
+			<listheader label="Xóa" align="left" hflex="min" style=" font-size:13px"/>
+
+		</listhead>
+		
+		<template name="model">
+			<listitem
+				style="word-wrap: break-word !important; white-space: normal; text-align: left">
+				<listcell>
+					<label
+						value="${forEachStatus.index + 1 + userPagingBottom.pageSize *
+						userPagingBottom.activePage }">
+					</label>
+				</listcell>
+
+				<listcell style="text-align:left; color:#4584D3 ">
+				<label value="${each.name}" style="text-align:left; color:#4584D3 "/>
+					
+				</listcell>
+				
+				<listcell style="text-align:left">
+					<label style="" value="${each.fullAdd}" />
+				</listcell>
+				
+				<listcell style="text-align:left">
+					<label style="" value="${each.phone}" />
+				</listcell>
+				
+				<listcell style="text-align:left">
+					<label style="" value="${each.assignName}" />
+				</listcell>
+				
+				<listcell style="text-align:left">
+					<label style="" value="${each.surveyName}" />
+				</listcell>
+
+				<listcell style="text-align:left">					 
+					<label style="color:red" value="${each.trangThai}" if="${each.status == 0}"/>
+					<label style="color:red" value="${each.trangThai}" if="${each.status == 1}"/>
+					<label style="color:green" value="${each.trangThai}" if="${each.status == 2}"/>	
+					<label style="color:green" value="${each.trangThai}" if="${each.status == 3}"/>				
+				</listcell>
+				
+				<listcell style="text-align:left">
+					<label style="" value="${each.numCall}" />
+				</listcell>
+				
+				<listcell style="text-align:left">
+					<label style="" value="${each.layHang}" />
+				</listcell>
+				
+				<listcell>
+					<image src="/Share/img/icon/edit.png" width="22px"
+						height="22px" forward="onClick=lbList.onOpenUpdate(${each})"
+						tooltiptext="Sửa" />
+				</listcell>
+				
+				<listcell>
+					<image src="/Share/img/icon/delete.png" width="22px"
+						height="22px" forward="onClick=lbList.onDelete(${each})"
+						tooltiptext="Xóa" />
+					 
+				</listcell>
+			</listitem>
+		</template>
+	</listbox>
+		 <paging id="userPagingBottom" pageSize="10" detailed="true" />
+	</h:div>
+	<separator />
+</window>

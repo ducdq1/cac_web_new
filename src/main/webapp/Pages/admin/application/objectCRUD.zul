@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window 
+    xmlns:h="http://www.zkoss.org/2005/zk/native"
+    xmlns="http://www.zkoss.org/2005/zul"
+    id="windowCRUD" position="center,center"
+    width="50%"
+    apply="com.viettel.voffice.DAO.System.Application.ObjectCRUDController" >
+    <style src="/Share/css/formstyle.css"/>
+    <include id="toolbarTop" src="/Pages/common/toolbarCRUD.zul"/>
+    <h:table width="100%">
+        <h:th width="25%"/>
+        <h:th width="25%"/>
+        <h:th width="50%"/>
+        <h:tr>
+            <h:td rowspan="8" align="center">
+                <vlayout>
+                    <image id="imgAvatar" width="100px" height="100px" src="/Share/img/default-avatar.png" if="${arg.object == null}"/>
+                    <image id="imgAvatar" width="100px" height="100px" if="${arg.object != null}"/>
+                    <button id="btnUpload" label="Upload image" upload="true,maxsize=300"/>
+                </vlayout>
+            </h:td>
+            <h:td>
+                <label value="Mã chức năng"/>
+                <label value=" *" sclass="label-required"/>
+            </h:td>
+            <h:td align="left">
+                <textbox class="textbox-uppercase" id="tbObjectsCode" width="95%" maxlength="100"
+                         if="${arg.object == null}"/>
+                <textbox class="textbox-uppercase" id="tbObjectsCode" width="95%" maxlength="100"
+                         value="${arg.object.objectCode}"
+                         if="${arg.object != null}"/>
+            </h:td>
+        </h:tr>
+        <h:tr>
+            <h:td>
+                <label value="Tên chức năng"/>
+                <label value=" *" sclass="label-required"/>
+            </h:td>
+            <h:td align="left">
+                <textbox id="tbObjectsName" width="95%" maxlength="100"
+                         if="${arg.object == null}"/>
+                <textbox id="tbObjectsName" width="95%" maxlength="100"
+                         value="${arg.object.objectName}"
+                         if="${arg.object != null}"/>                
+            </h:td>
+        </h:tr>
+        <h:tr>
+            <h:td>
+                <label value="Chức năng cha"/>       
+            </h:td>
+            <h:td align="left">
+                <hbox width="95%">
+                    <textbox id="tbParentObjects" disabled="true" hflex="1" if="${arg.parentObject == null}"
+                    style="float:left;"/>
+                    <textbox id="tbParentObjects" disabled="true" hflex="1" 
+                             value="${arg.parentObject.objectName}"
+                             if="${arg.parentObject != null}"
+                             style="float:left;"/>
+                    <button id="btnSelectParent" image="/Share/img/icon/dept.png" style="float:right;"/>        
+                </hbox>
+            </h:td>
+        </h:tr>
+        <h:tr>
+            <h:td>
+                <label value="Loại chức năng"/>
+            </h:td>
+            <h:td align="left">
+                <listbox id="lbObjectsType" mold="select" width="95%" style="padding:0px;">
+                    <listitem label="Module" value="1" selected="true"/>
+                    <listitem label="Component" value="0"/>
+                </listbox>
+            </h:td>
+        </h:tr>
+        <h:tr>
+            <h:td>
+                <label value="Đường dẫn"/>                
+            </h:td>
+            <h:td align="left">
+                <textbox id="tbObjectsUrl" width="95%" if="${arg.object == null}" maxlength="500"/>
+                <textbox id="tbObjectsUrl" width="95%" 
+                         value="${arg.object.objectUrl}"
+                         if="${arg.object != null}"
+                         maxlength="500" />
+            </h:td>             
+        </h:tr>
+        <h:tr>
+            <h:td>
+                <label value="Thứ tự"/>
+            </h:td>
+            <h:td align="left">
+                <textbox id="tbObjectsOrd" width="95%" if="${arg.object == null}" maxlength="3"/>
+                <textbox id="tbObjectsOrd" width="95%" 
+                         value="${arg.object.ord}"
+                         if="${arg.object != null}" maxlength="3"/>
+            </h:td>   
+        </h:tr>
+        <h:tr>
+            <h:td>
+                <label value="Trạng thái"/>
+                <label value=" *" sclass="label-required"/>
+            </h:td>
+            <h:td align="left">
+                <listbox id="lbObjectsStatus" mold="select" width="95%">
+                    <listitem label="Hoạt động" value="1" selected="true"/>
+                    <listitem label="Bị khóa" value="0"/>
+                </listbox>
+            </h:td>              
+        </h:tr>    
+        <h:tr>
+            <h:td>
+                <label value="Mô tả"/>                
+            </h:td>
+            <h:td align="left">
+                <textbox id="tbObjectsDesc" width="95%" if="${arg.object == null}" maxlength="200"/>
+                <textbox id="tbObjectsDesc" width="95%" 
+                         value="${arg.object.description}"
+                         if="${arg.object != null}" 
+                         maxlength="200"/>
+            </h:td>  
+        </h:tr>        
+<!--        <h:tr>
+            <h:td colspan="3" align="center">
+                <hlayout>
+                    <button id="btnSave" label="Lưu lại"/>
+                    <button id="btnCancel" label="Đóng"/>
+                </hlayout>
+            </h:td>
+        </h:tr>-->
+    </h:table>
+    <include id="toolbarBottom" src="/Pages/common/toolbarCRUD.zul"/>
+</window>

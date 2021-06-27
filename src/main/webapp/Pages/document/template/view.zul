@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./templateCRUD" ?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <window id="templateCRUD" title="Xem thông tin biểu mẫu" border="normal" width="800px"
+            apply="com.viettel.voffice.DAO.Document.TemplateDialogController" 
+            position="center,center" closable="true">
+        <style>
+            .createTable tr
+            {
+            margin-bottom:2px;height:30px;
+            }
+        </style>
+        <h:div width="100%">
+            <groupbox width="100%" mold="3d" closable="true">
+                <caption label="Thông tin cơ bản"/>       
+                <h:table width="100%" sclass="createTable" style="border-spacing: 2px;">
+                    <h:tr >
+                        <h:td width="100px">
+                            <label value="Tên biểu mẫu" width="120px" />
+                        </h:td>
+                        <h:td>
+                            <label value="@{controller.templateSelected.templateName}" />
+                        </h:td>
+                
+                    </h:tr>
+                    <h:tr>
+                        <h:td > 
+                            <label value="Đơn vị" />
+                        </h:td>
+                        <h:td > 
+                            <label value="@{controller.templateSelected.deptName}" />
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td width="100px"> 
+                            <label value="Loại văn bản" />
+                        </h:td>
+                        <h:td > 
+                            <label value="@{controller.templateSelected.documentTypeName}" />
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td width="100px"> 
+                            <label value="Tên tệp" />
+                        </h:td>
+                        <h:td > 
+                            <label value="" />
+                        </h:td>
+                    </h:tr>
+                </h:table>
+            </groupbox>
+            <groupbox style="background: #FEFFEB;overflow:auto" width="100%" mold="3d" height="250px" closable="false" id="gbTemplateContent">
+                <caption label="Nội dung biểu mẫu"/>
+                <!-- <html content="@{controller.templateSelected.templateContent}" /> -->
+            </groupbox>
+            <h:div style="text-align:right;margin:2px;height:30px">
+                <button label="Đóng" id="btnCancel" onClick="templateCRUD.detach()" sclass="button blue" width="85px" image="/Share/img/icon/close.png"/>
+            </h:div> 
+        </h:div> 
+    </window>
+</zk>

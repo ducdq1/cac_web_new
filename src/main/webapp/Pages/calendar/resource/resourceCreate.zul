@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+   
+    <window id="resourceCreateWnd" border="normal" width="530px"
+        apply="com.viettel.voffice.DAO.Calendar.ResourceCreateController" 
+        position="center,center" closable="true">
+        <caption label="Tài nguyên" />
+        <h:div width="100%">
+            <h:table class="createTable" width="100%">
+                <h:tr>
+                    <h:td width="20%">
+                        <label value="Tên tài nguyên"  />
+                        <label value=" *" sclass="label-required" />
+                    </h:td>
+                    <h:td width="80%">
+                        <textbox id="txtResourceId" visible="false"/>
+                        <textbox id="txtResourceName"
+                              width="400px" maxlength="250"/>
+                    </h:td>
+                
+                </h:tr>
+                <h:tr>
+                    <h:td>
+                        <label value="Mã tài nguyên"  />
+                        <label value=" *" sclass="label-required" />
+                    </h:td>
+                    <h:td >
+                        <textbox id="txtResourceCode"
+                              width="400px" maxlength="50"/>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td>
+                        <label value="Loại tài nguyên"  />
+                        <label value=" *" sclass="label-required" />
+                    </h:td>
+                    <h:td>
+                        <listbox id="lbResourceType" mold="select">
+                            <template name="model">
+                                <listitem label="${each.name}" value="${each.categoryId}" />
+                            </template>
+                        </listbox>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td> 
+                        <label value="Chọn phòng ban" />
+                    </h:td>
+                    <h:td> 
+                        <textbox id="txtDeptName" width="80%" readonly="true" sclass="txtInput"/>
+                        <textbox id="txtDeptId" visible="false"/>
+                        <button height="30px" id="btnShowDept" image="/Share/img/icon/dept.png"/>
+                        <button height="30px" image="/Share/img/icon/delete.png" onClick="txtDeptId.setValue(null);txtDeptName.setValue(null);"/>
+                    </h:td>
+                </h:tr>
+            
+                <h:tr>
+                    <h:td width="20%"> 
+                        <label value="Mô tả" />
+                    </h:td>
+                    <h:td width="80%"> 
+                        <textbox id="txtResourceInf"
+                              rows="3"
+                              width="400px" maxlength="250" />
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td colspan="2" style="text-align:center">
+                        <button label="Lưu" id="btnSave" src="/Share/img/icon/Add.png"/>
+                        <button label="Huỷ bỏ" id="btnCancel" onClick="resourceCreateWnd.detach()" src="/Share/img/icon/close.png"/>
+                    </h:td>
+                </h:tr>
+            </h:table>
+        </h:div> 
+    </window>
+</zk>

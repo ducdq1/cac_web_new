@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">   
+    <window id="fileCreateWnd"
+            apply="com.viettel.voffice.DAO.Files.FileCreateController"
+            position="center,center">
+        <h:div class="toolBar">
+            <image  src="/Share/img/icon/back.png" sclass="back img-cal" tooltiptext="Quay lại"/>
+            <image  src="/Share/img/icon/save.png" sclass="save img-cal" tooltiptext="Lưu"/>
+        </h:div>
+        <h:div width="100%">
+            <h:table class="createTable" style="border-spacing:0px">
+                <h:tr>
+                    <h:td width="20%">
+                        <label value="Tiêu đề"  />
+                        <label value=" *" sclass="label-required" />
+                    </h:td>
+                    <h:td width="80%">
+                        <textbox id="txtFileId" visible="false"/>
+                        <textbox id="txtFileTitle"
+                                 maxlength="250"/>
+                    </h:td>
+                
+                </h:tr>
+                <h:tr>
+                    <h:td width="20%">
+                        <label value="Mã hồ sơ"  />
+                        <label value=" *" sclass="label-required" />
+                    </h:td>
+                    <h:td width="80%">
+                        <textbox id="txtFileCode"
+                                 maxlength="20"/>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td>
+                        <label value="Ngày bắt đầu"/>
+                        <label value=" *" sclass="label-required" />
+                    </h:td>
+                    <h:td>
+                        <datebox id="dbStartDate" format="short"  />
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td>
+                        <label value="Ngày kết thúc dự kiến"/>
+                    </h:td>
+                    <h:td>
+                        <datebox id="dbEndDate" format="short"  />
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td colspan="2" style="background-color:rgb(209,224,236); border:1px solid gray;vertical-align:middle">
+                        <label value="Thành phần tham gia"/>
+                        <image id="btnShowDept" src="/Share/img/icon/Add.png" tooltiptext="Chọn thành phần tham gia"/>
+                        <label value=" *" sclass="label-required" />
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td width="20%" colspan="2" style="border-bottom:1px solid gray;border-left:1px solid gray; border-right:1px solid gray">
+                        <listbox id="lbParticipants" emptyMessage="Chưa có ai tham gia hồ sơ">
+                            <listhead sizable="true">
+                                <listheader width="10%" label="STT" align="center"/>
+                                <listheader width="30%" label="Đơn vị"/>
+                                <listheader width="30%" label="Người tham gia" />
+                                <listheader width="20%" label="Vai trò"  />
+                                <listheader width="10%" label="Xóa"  />
+                            </listhead>
+                            <template name="model">
+                                <listitem value="${each}">
+                                    <listcell label="${forEachStatus.index+1}" />
+                                    <listcell label="${each.receiveGroup}" />
+                                    <listcell label="${each.receiveUser}" />
+                                    <listcell >
+                                        <label value="Phối hợp" if="${each.processType==0}" />
+                                        <label value="Xử lý chính" if="${each.processType==1}" />
+                                        <label value="Tham khảo" if="${each.processType==2}" />
+                                        <label value="Cho ý kiến" if="${each.processType==3}" />
+                                        <label value="Để biết" if="${each.processType==4}" />
+                                        <label value="Phê duyệt" if="${each.processType==5}" />
+                                        <image forward="onClick=lbParticipants.onChangeType" src="/Share/img/icon/edit.png" width="20px" height="20px" tooltiptext="Đổi vai trò"/>
+                                    </listcell>
+                                    <listcell>
+                                        <image forward="onClick=lbParticipants.onDeleteParticipant" src="/Share/img/icon/delete.png" width="20px" height="20px" tooltiptext="Xóa người tham gia"/>
+                                    </listcell>
+                                </listitem>
+                            </template>
+                        </listbox>
+                    </h:td>
+                </h:tr>
+            </h:table>
+        </h:div> 
+    </window>
+</zk>

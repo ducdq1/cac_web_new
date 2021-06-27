@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+        xmlns="http://www.zkoss.org/2005/zul" id="mainWnd"
+        apply="com.viettel.voffice.DAO.DocIn.DocInProcessController"
+        border="none">
+    <style src="/Share/css/formstyle.css" />
+    <script defer="true">
+        toolBar.widget = "mainWnd";
+        addToolbar("Share/img/icon/excel_table.png", "Xuất file excel","onExportExcel");
+    </script>
+    <include id="incColorNoteTop" src="/Pages/common/searchToolbar.zul" />
+    <h:div class="contentDiv">
+        <include id="incSearchFullForm"
+                 src="/Pages/document/docIn/include/searchDocInForm.zul" />
+    </h:div>
+    <h:div class="contentDiv">
+        <menupopup id="menuAction">
+        </menupopup>
+        <paging id="userPagingTop" pageSize="10" detailed="true" />
+        <listbox id="lbListDoc" emptyMessage="Không có văn bản nào">
+            <listhead>
+                <listheader label="STT" align="center" hflex="min" />
+                <listheader label="Số đến" align="center" hflex="min" />
+                <listheader label="Số / Kí hiệu" hflex="min" />
+                <listheader label="Ngày đến" hflex="min" />
+                <listheader label="Ngày ban hành" hflex="min" />
+                <listheader label="Cơ quan ban hành" hflex="1" />
+                <listheader label="Người ký" hflex="1" />
+                <listheader label="Trích yếu" hflex="2" />
+                <listheader label="Hạn xử lý" hflex="min" />
+                <listheader hflex="min"/>
+                <listheader hflex="min"/>
+                <listheader label="File" align="center" hflex="min" />
+                <listheader label="Sửa" align="center" hflex="min"
+                            visible="${$composer.isCRUDMenu()}" />
+                <listheader label="Xóa" align="center" hflex="min"
+                            visible="${$composer.isCRUDMenu()}" />
+            </listhead>
+            <template name="model">
+                <listitem>
+                    <listcell
+                        forward="onClick=lbListDoc.onOpenView(${each})"
+                        label="${forEachStatus.index + 1 + userPagingTop.pageSize * userPagingTop.activePage}">
+                    </listcell>
+                    <listcell
+                        forward="onClick=lbListDoc.onOpenView(${each})"
+                        label="${$composer.getBookNumber(each)}">
+                    </listcell>
+                    <listcell
+                        forward="onClick=lbListDoc.onOpenView(${each})"
+                        label="${each.documentReceive.documentCode}">
+                    </listcell>
+                    <listcell
+                        forward="onClick=lbListDoc.onOpenView(${each})"
+                        label="${each.documentReceive.receiveDateStr}">
+                    </listcell>
+                    <listcell
+                        forward="onClick=lbListDoc.onOpenView(${each})"
+                        label="${each.documentReceive.publishDateStr}">
+                    </listcell>
+                    <listcell
+                        forward="onClick=lbListDoc.onOpenView(${each})"
+                        label="${each.documentReceive.publishAgencyName}">
+                    </listcell>
+                    <listcell
+                        forward="onClick=lbListDoc.onOpenView(${each})"
+                        label="${each.documentReceive.signer}">
+                    </listcell>
+                    <listcell
+                        forward="onClick=lbListDoc.onOpenView(${each})"
+                        label="${each.documentReceive.documentAbstract}">
+                    </listcell>
+                    <listcell
+                        forward="onClick=lbListDoc.onOpenView(${each})"
+                        label="${each.deadlineStr}">
+                    </listcell>
+                    <listcell forward="onClick=mainWnd.onViewAction(${each})" popup="menuAction">
+                        <image src="/Share/img/list.png"/>
+                    </listcell>
+                    <listcell>
+                        <image src="/Share/img/png/flow.png" sclass="img-cal" 
+                               tooltiptext="Xem luồng"
+                               width="20px" height="20px"
+                               forward="onClick=mainWnd.onViewFlow(${each.documentReceive.documentReceiveId})">
+                        </image>
+                    </listcell>
+                    <listcell>
+                        <image src="/Share/img/menu/files.png"
+                               width="20px" height="20px"
+                               forward="onClick=lbListDoc.onDownloadAttach(${each})"
+                               tooltiptext="File văn bản" />
+                    </listcell>
+                    <listcell>
+                        <image src="/Share/img/icon/edit.png"
+                               width="20px" height="20px"
+                               forward="onClick=lbListDoc.onOpenUpdate(${each})"
+                               if="${$composer.isAbleToModify(each.documentReceive)}"
+                               tooltiptext="Sửa văn bản" />
+                        <image src="/Share/img/icon/edit_disable.png"
+                               width="20px" height="20px"
+                               if="${!$composer.isAbleToModify(each.documentReceive)}"
+                               tooltiptext="Sửa văn bản" />
+                    </listcell>
+                    <listcell>
+                        <image src="/Share/img/icon/delete.png"
+                               width="20px" height="20px"
+                               forward="onClick=lbListDoc.onDelete(${each})"
+                               if="${$composer.isAbleToDelete(each.documentReceive)}"
+                               tooltiptext="Xóa văn bản" />
+                        <image src="/Share/img/icon/delete_disable.png"
+                               width="20px" height="20px"
+                               if="${!$composer.isAbleToDelete(each.documentReceive)}"
+                               tooltiptext="Xóa văn bản" />
+                    </listcell>
+                </listitem>
+            </template>
+        </listbox>
+        <paging id="userPagingBottom" pageSize="10" detailed="true" />
+    </h:div>
+    <separator />
+    <include id="incColorNoteBottom" src="/Pages/common/colorNote.zul"></include>
+    <script defer="true">toolBar.widget = "mainWnd";</script>
+</window>

@@ -1,0 +1,698 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+	xmlns="http://www.zkoss.org/2005/zul" xmlns:w="client"
+	position="center,center" width="100%" mode="embedded" id="windowView"
+	apply="com.viettel.module.phamarcy.controller.PhamarcyViewController">
+	<style src="/Share/css/formstyle.css" />
+	<style src="/Share/css/uploadstyle.css" />
+	<style src="/Share/css/creatfile.css" />
+	<script type="text/javascript" src="/Share/js/UPMSamples.js" />
+	<style>
+		.redtab .z-tab-text{color:
+		#2063B4;font-size:13px;font-weight:bold}
+	</style>
+	<h:div id="phamarcyView">
+		<div id="divToolbarTop" class="toolBar">
+			<button sclass="img-cal" style="float:left;font-size: 11px;"
+				forward="onClick=windowView.onClose" height="30px"	 width="90px"	
+				image="/Share/img/png/quay-lai.png" label="Quay lại"
+				tooltiptext="${$composer.getLabelCos('cosmetic_tooltip_quaylai')}" />
+
+			<image src="/Share/img/png/flow.png" sclass="img-cal"
+				if="${$composer.CheckUserDN()}"
+				forward="onClick=windowView.onViewFlow" style="float:left"
+				tooltiptext="${$composer.getLabelCos('cosmetic_tooltip_xemluong')}" />
+
+			<button id="btnTongHopYKienThamDinh" autodisable="self"
+				label="Tổng hợp ý kiến thẩm định trong tiểu ban" visible="false" />
+		</div>
+		<h:table width="100%" align="center">
+			<h:th width="10%" />
+			<h:th width="10%" />
+			<h:th width="40%" />
+			<h:th width="40%" />
+		</h:table>
+		<tabbox id="tb">
+			<tabs id="tabs">
+				<tab id="hoso" label="${$composer.getLabel('file')}" />
+				<tab id="tepdinhkem"
+					label="${$composer.getLabel('attach')}" />
+				<tab id="tabOldFile" label="Hồ sơ ban đầu"
+					visible="false">
+				</tab>
+				<tab id="tabOldAttach" label="Tệp đính kèm ban đầu"
+					visible="false">
+				</tab>
+				<tab id="phancong"
+					label="${$composer.getLabel('chi_tiet_phan_cong')}"
+					visible="false" />
+				<tab id="lydotuchoi"
+					label="${$composer.getLabel('ly_do_de_nghi_xem_xet_lai')}"
+					visible="false" />
+				<tab id="tongHopYKienThamDinh"
+					label="${$composer.getLabel('th_y_kien_tham_dinh')}"
+					visible="false" />
+				<tab id="tabXemtruocCongVan"
+					label="Xem công văn/Giấy tiếp nhận" visible="false" />
+
+			</tabs>
+			<tabpanels>
+				<tabpanel id="filepanel">
+					<h:div class="wrapper">
+						<h:div
+							style="margin-top:10px;margin-bottom:10px;" class="SpanTag">
+							<h:br />
+							<h:div width="100%" align="center">
+								<!-- THONG TIN HO SO -->
+								<groupbox width="80%" closable="false"
+									style="text-align:left;">
+									<caption label="Thông tin hồ sơ"
+										class="group-box" />
+									<h:table width="100%"
+										align="center">
+										<h:th width="5%" />
+										<h:th width="15%" />
+										<h:th width="30%" />
+										<h:th width="10%" />
+										<h:th width="33%" />
+										<h:tr style="height:30px;">
+											<h:td></h:td>
+											<h:td>
+												<label
+													value="${$composer.getLabel('code_file')}"
+													sclass="lb-create" />
+											</h:td>
+											<h:td colspan="3">
+												<label id="lbFileCode"
+													width="95%" value="">
+												</label>
+
+											</h:td>
+										</h:tr>
+										<h:tr style="height:30px;">
+											<h:td></h:td>
+											<h:td>
+												<label
+													value="${$composer.getLabel('file_status')}"
+													sclass="lb-create" />
+											</h:td>
+											<h:td colspan="3">
+												<label id="lbFileStatus"
+													width="95%" value="">
+												</label>
+											</h:td>
+
+										</h:tr>
+										<h:tr>
+											<h:td></h:td>
+											<h:td>
+												<label
+													id="lbTitleFileNo" value="${$composer.getLabel('file_no')}"
+													sclass="lb-create" style="align:right" />
+											</h:td>
+											<h:td colspan="3">
+												<label id="lbFileNo"
+													width="95%">
+												</label>
+
+											</h:td>
+										</h:tr>
+										<!-- <h:tr>
+											<h:td></h:td>
+											<h:td></h:td>
+											<h:td colspan="3">
+											<label
+											value="${$composer.getLabel('file_no_note')}"
+											sclass="lb-create"
+											style="align:right;tex;font-style: italic;" />
+											</h:td>
+											</h:tr> -->
+									</h:table>
+								</groupbox>
+								<h:br />
+							</h:div>
+						</h:div>
+
+						<!-- THONG TIN DON VI DANG KY -->
+						<h:div width="100%" align="center">
+							<groupbox width="80%" closable="false"
+								style="text-align:left;">
+								<caption
+									label="${$composer.getLabel('org_infor')}" class="group-box" />
+								<h:table width="100%" align="center">
+									<h:th width="5%" />
+									<h:th width="15%" />
+									<h:th width="30%" />
+									<h:th width="10%" />
+									<h:th width="33%" />
+									<h:tr style="height:30px;">
+										<h:td></h:td>
+										<h:td>
+											<label
+												value="${$composer.getLabel('org_name')}" sclass="lb-create"
+												style="text-align:right" />
+										</h:td>
+										<h:td colspan="3">
+											<label id="lbOrgNameDetail"
+												width="95%" value="" />
+										</h:td>
+									</h:tr>
+									<h:tr style="height:30px;">
+										<h:td></h:td>
+										<h:td>
+											<label
+												value="${$composer.getLabel('org_address')}"
+												sclass="lb-create" style="text-align:right" />
+										</h:td>
+										<h:td colspan="3">
+											<label id="lbAddress"
+												width="95%" value="" />
+										</h:td>
+									</h:tr>
+
+									<h:tr style="height:30px;">
+										<h:td></h:td>
+										<h:td>
+											<label
+												value="${$composer.getLabel('org_phone')}"
+												sclass="lb-create" style="align:right" />
+										</h:td>
+										<h:td colspan="1">
+											<label id="lbOrgPhone"
+												width="95%" value="" />
+										</h:td>
+										<h:td
+											style="padding-left:30px">
+											<label
+												value="${$composer.getLabel('org_fax')}" sclass="lb-create"
+												style="align:right" />
+										</h:td>
+										<h:td colspan="1">
+											<label id="lbOrgFax"
+												width="89%" value="" />
+										</h:td>
+									</h:tr>
+									<h:tr style="height:30px;">
+										<h:td></h:td>
+										<h:td>
+											<label
+												value="${$composer.getLabel('org_email')}"
+												sclass="lb-create" style="text-align:right" />
+										</h:td>
+										<h:td colspan="3">
+											<label id="lbEmail"
+												width="95%" value="" />
+										</h:td>
+									</h:tr>
+									<h:tr style="height:30px;">
+										<h:td></h:td>
+										<h:td>
+											<label
+												value="${$composer.getLabel('org_license_no')}"
+												sclass="lb-create" style="text-align:right" />
+										</h:td>
+										<h:td colspan="3">
+											<label id="lbLicenseNo"
+												width="95%" value="" />
+										</h:td>
+									</h:tr>
+
+								</h:table>
+							</groupbox>
+							<h:br />
+
+							<!-- THONG TIN CA NHAN CHIU TRACH NHIEM DANG KY -->
+							<groupbox width="80%" closable="false"
+								style="text-align:left;">
+								<caption
+									label="${$composer.getLabel('personal_register_infor')}"
+									class="group-box" />
+								<h:table width="100%" align="center">
+									<h:th width="5%" />
+									<h:th width="15%" />
+									<h:th width="30%" />
+									<h:th width="10%" />
+									<h:th width="33%" />
+									<h:tr style="height:30px;">
+										<h:td></h:td>
+										<h:td
+											style="margin-top:10px;margin-bottom:10px;">
+											<label
+												value="${$composer.getLabel('personal_name')}"
+												sclass="lb-create" style="text-align:right;" />
+
+										</h:td>
+										<h:td colspan="1">
+											<label id="lbPersonalName"
+												width="95%" value="" maxlength="100" />
+										</h:td>
+									</h:tr>
+									<h:tr style="height:30px;">
+										<h:td></h:td>
+										<h:td>
+											<label
+												value="${$composer.getLabel('org_phone')}"
+												sclass="lb-create" style="text-align:right" />
+
+										</h:td>
+										<h:td colspan="1">
+											<label id="lbPersonalPhone"
+												width="95%" value="" maxlength="30" />
+										</h:td>
+									</h:tr>
+								</h:table>
+							</groupbox>
+							<h:br />
+
+							<!-- DANH MUC THUOC DANG KY -->
+							<groupbox width="80%" closable="false"
+								style="text-align:left;">
+								<caption
+									label="${$composer.getLabel('category_medicine')}"
+									class="group-box" />
+
+								<!-- LIST THUOC DANG KY-->
+								<h:div width="90%" align="center">
+									<listbox id="lstMedicineItemsDetail"
+										model="${$composer.lstModelMedicine}"
+										emptyMessage="${$composer.getLabel('no_medicine')}"
+										style="word-wrap: break-word">
+										<listhead sizable="true">
+											<listheader width="5%"
+												align="center" label="${$composer.getLabel('stt')}" />
+											<listheader width="30%"
+												align="center"
+												label="${$composer.getLabel('medicine_name_table_header')}" />
+											<listheader width="15%"
+												align="center"
+												label="${$composer.getLabel('registered_no_table_header')}" />
+											<listheader width="20%"
+												align="center"
+												label="${$composer.getLabel('formal_table_header')}" />
+											<listheader width="10%"
+												align="center"
+												label="${$composer.getLabel('times_table_header')}" />
+											<listheader align="center"
+												width="10%" label="${$composer.getLabel('loai_thuoc')}" />
+											<listheader align="center"
+												width="10%" label="${$composer.getLabel('xuat_xu')}" />
+
+										</listhead>
+										<template name="model">
+											<listitem>
+												<listcell
+													label="${forEachStatus.index+1+userPagingBottom.pageSize*userPagingBottom.activePage}" />
+												<listcell
+													style="text-align:left;" label="${each.name}" />
+												<listcell
+													style="text-align:left;" label="${each.registrationNo}" />
+												<listcell
+													style="text-align:left;" label="${each.formalAndObject}" />
+												<listcell
+													label="${each.times}" />
+												<listcell
+													label="${$composer.getMedicineType(each.medicineType)}">
+												</listcell>
+												<listcell
+													label="${$composer.getXuatxu(each.xuatXu)}">
+												</listcell>
+											</listitem>
+										</template>
+									</listbox>
+
+								</h:div>
+							</groupbox>
+							<h:br />
+							<!-- CHI TIET THUOC DANG KY -->
+							<groupbox width="80%" closable="false"
+								style="text-align:left;">
+								<caption
+									label="${$composer.getLabel('detail_medicine')}"
+									class="group-box" />
+
+								<h:div width="90%" align="center">
+									<listbox id="lbDetailMedicineItems"
+										model="${$composer.lstModelMedicine}"
+										emptyMessage="${$composer.getLabel('no_medicine')}"
+										style="word-wrap: break-word">
+										<listhead sizable="true">
+											<listheader width="5%"
+												align="center" label="${$composer.getLabel('stt')}" />
+											<listheader width="30%"
+												align="center"
+												label="${$composer.getLabel('medicine_name_table_header')}" />
+											<listheader width="15%"
+												align="center"
+												label="${$composer.getLabel('active_element_table_header')}" />
+											<listheader width="20%"
+												align="center"
+												label="${$composer.getLabel('prepare_medicines_form_table_header')}" />
+											<listheader width="10%"
+												align="center"
+												label="${$composer.getLabel('content_table_header')}" />
+											<listheader width="20%"
+												align="center"
+												label="${$composer.getLabel('manufactory_table_header')}" />
+
+										</listhead>
+										<template name="model">
+											<listitem>
+												<listcell
+													label="${forEachStatus.index+1+userPagingBottom.pageSize*userPagingBottom.activePage}" />
+												<listcell
+													style="text-align:left;" label="${each.name}" />
+												<listcell
+													style="text-align:left;" label="${each.hoatchat}" />
+												<listcell
+													style="text-align:left;" label="${each.dangBaoChe}" />
+												<listcell
+													style="text-align:left;" label="${each.hamLuong}" />
+												<listcell
+													style="text-align:left;" label="${each.manufacturer}" />
+
+											</listitem>
+										</template>
+									</listbox>
+
+								</h:div>
+							</groupbox>
+							<h:br />
+							<groupbox width="80%" closable="false"
+								style="text-align:left;">
+								<caption
+									label="${$composer.getLabel('org_agreement')}"
+									class="group-box" />
+								<h:div>
+									<checkbox id="cbAgree"
+										disabled="true">
+									</checkbox>
+									<label
+										value="${$composer.getLabel('agreement1')}" />
+								</h:div>
+								<h:br />
+							</groupbox>
+							<h:br />
+							<!-- THONG TIN HO SO KY -->
+							<groupbox width="80%" closable="false"
+								style="text-align:left;">
+								<caption
+									label="${$composer.getLabel('signed_file_infor')}"
+									class="group-box" />
+								<h:table width="100%" align="center">
+									<h:th width="5%" />
+									<h:th width="15%" />
+									<h:th width="30%" />
+									<h:th width="10%" />
+									<h:th width="33%" />
+									<h:tr style="height:30px;">
+										<h:td></h:td>
+										<h:td>
+											<label
+												value="${$composer.getLabel('signed_where')}"
+												sclass="lb-create" style="align:right" />
+										</h:td>
+										<h:td colspan="1">
+											<label id="lbSignedWhere"
+												width="95%" value="" />
+										</h:td>
+										<h:td
+											style="text-align:right; padding-right:20px">
+											<label
+												value="${$composer.getLabel('signed_when')}"
+												sclass="lb-create" style="align:right" />
+										</h:td>
+										<h:td colspan="1">
+											<label id="lbSignedWhen"
+												width="95%" value="" />
+										</h:td>
+									</h:tr>
+
+									<h:tr style="height:30px;">
+										<h:td></h:td>
+										<h:td>
+											<label
+												value="${$composer.getLabel('signed_who')}"
+												sclass="lb-create" style="align:right" />
+										</h:td>
+										<h:td colspan="1">
+											<label id="lbSignedWho"
+												width="95%" value="" />
+										</h:td>
+									</h:tr>
+								</h:table>
+							</groupbox>
+
+						</h:div>
+					</h:div>
+				</tabpanel>
+
+				<!-- TEP DINH KEM -->
+				<tabpanel>
+					<groupbox width="100%" sclass="gb-form-create"
+						closable="false">
+						<caption style="font-size:13px"
+							label="${$composer.getLabel('list_ducument')}" />
+						<h:table width="100%" align="center">
+							<h:tr>
+								<h:td colspan="4"
+									style="text-align:center">
+									<listbox id="fileListbox"
+										multiple="false" style="word-wrap:break-word" vflex="true"
+										emptyMessage="${$composer.getLabel('not_exist_category')}"
+										mold="paging" pageSize="10">
+										<listhead sizable="true">
+											<listheader width="5%"
+												label="${$composer.getLabel('stt')}" align="center" />
+											<listheader width="60%"
+												label="${$composer.getLabel('file_type')}" align="center" />
+											<listheader width="30%"
+												label="${$composer.getLabel('file_name')}" align="center" />
+											<listheader width="5%"
+												label="${$composer.getLabel('download_file')}"
+												align="center" />
+
+										</listhead>
+										<template name="model">
+											<listitem value="${each}">
+												<listcell
+													label="${forEachStatus.index+1}" />
+												<listcell
+													style="text-align:left" label="${each.typeFileName}" />
+												<listcell
+													style="text-align:left" label="${each.attachName}" />
+												<listcell>
+													<image
+														forward="onClick=fileListbox.onDownloadFile(${each})"
+														src="/Share/img/icon/view.png" width="20px" height="20px"
+														tooltiptext="Tải file" />
+												</listcell>
+
+											</listitem>
+										</template>
+									</listbox>
+								</h:td>
+							</h:tr>
+						</h:table>
+					</groupbox>
+					<h:br />
+					<groupbox width="100%" sclass="gb-form-create"
+						closable="false">
+						<caption
+							label="${$composer.getLabel('root_file')}"
+							style="font-size:13px" />
+						<h:table width="100%" align="center">
+							<h:tr>
+								<h:td colspan="4"
+									style="text-align:center">
+									<listbox id="finalFileListbox"
+										multiple="false" style="word-wrap:break-word" vflex="true"
+										emptyMessage="${$composer.getLabel('not_exist_category')}"
+										mold="paging" pageSize="10">
+										<listhead sizable="true">
+											<listheader width="5%"
+												label="${$composer.getLabel('stt')}" align="center" />
+											<listheader width="90%"
+												label="${$composer.getLabel('file_name')}" align="center" />
+
+											<listheader width="5%"
+												label="${$composer.getLabel('download_file')}"
+												align="center" />
+
+										</listhead>
+										<template name="model">
+											<listitem value="${each}">
+												<listcell
+													label="${forEachStatus.index+1}" />
+												<listcell
+													style="text-align:left" label="${each.creatorName}" />
+												<listcell>
+													<image
+														forward="onClick=finalFileListbox.onDownloadFinalFile(${each})"
+														src="/Share/img/icon/view.png" width="20px" height="20px"
+														tooltiptext="${$composer.getLabel('download_file')}" />
+												</listcell>
+
+											</listitem>
+										</template>
+									</listbox>
+								</h:td>
+							</h:tr>
+						</h:table>
+					</groupbox>
+				</tabpanel>
+				<!-- HO SO BAN DAU -->
+				<tabpanel>
+					<include id="incOldFile"
+						src="/Pages/module/phamarcy/include/fileInfo.zul" />
+				</tabpanel>
+				<!-- TEP DINH KEM BAN DAU -->
+				<tabpanel>
+					<include id="incOldAttach"
+						src="/Pages/module/phamarcy/include/attachInfo.zul" />
+				</tabpanel>
+				<!-- Tab danh sách phân công -->
+				<tabpanel id="tpAssign" visible="false">
+					<groupbox mold="3d" visible="true">
+						<caption label="Danh sách người nhận xử lý" />
+						<listbox id="lbAssignUser" mold="paging"
+							pageSize="5" emptyMessage="Không có người nhận"
+							nonselectableTags="img">
+							<listhead>
+								<listheader align="center" hflex="min"
+									label="STT" />
+								<listheader align="center" hflex="1"
+									label="Đơn vị" />
+								<listheader align="center" hflex="1"
+									label="Chức vụ" />
+								<listheader align="center" hflex="1"
+									label="Họ và tên" />
+								<listheader align="center" hflex="1"
+									label="Nhiệm vụ" visible="false" />
+
+							</listhead>
+							<template name="model">
+								<listitem>
+									<listcell
+										label="${forEachStatus.index+1}" />
+									<listcell style="text-align: left"
+										label="${each.deptName}" />
+									<listcell style="text-align: left"
+										label="${each.posName}" />
+									<listcell style="text-align: left"
+										if="${each.useAllias!=1}" label="${each.userName}" />
+									<listcell style="text-align: left"
+										if="${each.useAllias==1}" label="${each.allias}" />
+									<listcell
+										style="text-align: left">
+										<label
+											value="${$composer.loadProcessTypeName(each.processType)}" />
+
+									</listcell>
+
+								</listitem>
+							</template>
+						</listbox>
+					</groupbox>
+				</tabpanel>
+				<tabpanel id="tpReject">
+					<groupbox closable="false">
+						<caption
+							label="${$composer.getLabel('ly_do_de_nghi_xem_xet_lai')}"
+							style="font-size:13px">
+						</caption>
+						<label id="lbLyDoTuChoiHoSo"
+							style="margin-top:15px !important" />
+					</groupbox>
+				</tabpanel>
+
+				<tabpanel id="tpTongHopThamDinh">
+
+					<!-- TONG HOP Y KIEN THAM DINH ducdq1 -->
+					<include id="incList"
+						src="/Pages/module/phamarcy/include/general_infor.zul" />
+					<!-- TONG HOP CUA CHUYEN VIEN THU LY -->
+					<groupbox width="100%" closable="false"
+						id="gbYKienChuyenVienTruoc" visible="false"
+						style="font-size: 13px;margin-top:15px">
+						<caption
+							label="Tổng hợp lần trước của chuyên viên thụ lý "
+							style="font-size: 13px" />
+						<h:div width="100%"
+							style="margin:10px;margin-top:10px">
+							<h:table width="100%" align="center">
+								<h:tr>
+									<h:td>
+										<textbox
+											id="tbYKienChuyenVienTruoc" width="100%" multiline="true"
+											readonly="true" height="150px" />
+									</h:td>
+								</h:tr>
+
+							</h:table>
+						</h:div>
+					</groupbox>
+					<h:br />
+					<groupbox width="100%" closable="false"
+						style="font-size: 13px" id="abc">
+						<caption
+							label="${$composer.getLabel('td_th_cv_thu_ly')}"
+							style="font-size: 13px" />
+						<h:div width="100%"
+							style="margin:10px;margin-top:10px">
+							<h:table width="100%" align="center">
+								<h:tr>
+									<h:td>
+										<textbox id="tbYKienChuyenVien"
+											width="100%" multiline="true" readonly="true" height="150px" />
+									</h:td>
+								</h:tr>
+
+							</h:table>
+						</h:div>
+					</groupbox>
+
+					<div id="divGhiChu" visible="false">
+						<h:br />
+						<groupbox width="100%" closable="false"
+							style="font-size: 13px">
+							<caption label="Ghi chú"
+								style="font-size: 13px" />
+							<h:div width="100%" style="margin:10px">
+								<h:table width="100%" align="center">
+									<h:tr>
+										<h:td>
+											<textbox id="tbGhiChu"
+												width="100%" multiline="true" readonly="true"
+												height="150px" />
+										</h:td>
+									</h:tr>
+
+								</h:table>
+							</h:div>
+
+						</groupbox>
+					</div>
+					<h:br />
+					<!--HET TONG HOP Y KIEN THAM DINH ducdq1 -->
+				</tabpanel>
+
+				<tabpanel id="tpXemTruocCongVan">
+					<h:div width="100%" style="height:600px;"
+						align="center">
+						<iframe height="100%" width="100%"
+							id="reportframe">
+						</iframe>
+					</h:div>
+				</tabpanel>
+
+			</tabpanels>
+		</tabbox>
+
+		<div id="divToolbarBottom" class="toolBar">
+			<image sclass="img-cal" style="float:left"
+				forward="onClick=windowView.onClose"
+				src="/Share/img/png/quay-lai.png" tooltiptext="Quay lại" />
+			<label id="lbBottomWarning" class="notify" />
+		</div>
+	</h:div>
+</window>

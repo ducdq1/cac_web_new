@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <style src="/Share/css/formstyle.css"/>
+    <window width="100%" id="tmpBillManageWnd"
+            apply="com.viettel.module.cosmetic.Controller.TmpBillManageController" border="normal" height="100%">
+        <caption label="Nhập biên lai thanh toán" />
+    
+        <h:div id="searchDiv" style="width:100%" align="center">
+            <h:table style="width:80%" class="searchTable">
+                <h:tr>
+                    <h:td colspan="4" style="text-align:center">
+                        <button id="btnImport" label="Nhập vào" sclass="button" image="/Share/img/icon/add_1.png"/>
+                    </h:td>
+                </h:tr>
+            </h:table>
+        </h:div>
+    </window>
+</zk>

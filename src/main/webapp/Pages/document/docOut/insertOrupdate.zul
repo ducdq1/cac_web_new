@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./docCRUD" ?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <window id="docCRUD" border="none" width="100%" 
+            apply="com.viettel.voffice.DAO.Document.DocDialogController" 
+            position="center,center" onCtrlKey="$composer.keyEventHandle(event.getKeyCode())" ctrlKeys="#f6#f7#f8">
+        <style src="/Share/css/uploadstyle.css" />
+        <style src="/Share/css/formstyle.css" />
+        <div id="topToolbar" class="toolBar">
+            <button sclass="btnAction" image="/Share/img/png/quay-lai.png" forward="onClick=docCRUD.onClose" tooltiptext="Quay lại"/>
+            <!--        <image src="/Share/img/icon/save.png" sclass="save" forward="onClick=docCRUD.onSave" tooltiptext="Lưu lại"/>-->
+            <button sclass="btnAction" forward="onClick=docCRUD.onSave"
+                    label="Lưu lại và thêm mới (F6)" id="btnSave" image="/Share/img/png/luu-lai.png"/>
+            <button sclass="btnAction" forward="onClick=docCRUD.onSaveAndClose"
+                    label="Lưu lại và đóng (F7)" id="btnSaveAndClose" image="/Share/img/png/luu-lai-va-dong.png"/>
+            <button sclass="btnAction" forward="onClick=docCRUD.onSaveAndCopy"
+                    label="Lưu và sao lưu (F8)" id="btnSaveAndCopy" image="/Share/img/png/luu-lai-sao-luu.png"/>       
+            <label id="lbTopWarning" class="notify"/>
+        
+        </div>
+        <h:div class="contentDivCreate">
+            <groupbox width="100%">
+                <caption label="Thông tin cơ bản"/> 
+                <h:table width="100%"  class="lstdoc-table">
+                    <h:tr >
+                        <h:td>
+                            <label value="Đơn vị soạn thảo" sclass="lb-create" />
+                        </h:td>
+                        <h:td>
+                            <label value="@{controller.docSelected.createDeptName}" style="font-weight:bold" />
+                        </h:td>
+                        <h:td >
+                            <label value="Người soạn thảo" sclass="lb-create"/>
+                        </h:td>
+                        <h:td >
+                            <label value="@{controller.docSelected.creatorName}" style="font-weight:bold"/>
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td width="140px">
+                            <label value="Ký hiệu" sclass="lb-create"/>
+                        </h:td>
+                        <h:td width="360px">
+                            <textbox id="documentCode" value="@{controller.docSelected.documentCode, access='both', save-when='none'}"						
+                                     width="99%" maxlength="50" sclass="txtInput" focus="true" />
+                        </h:td>
+                        <h:td width="140px">
+                            <label value="Số bản" sclass="lb-create"/>
+                        </h:td>
+                        <h:td width="360px">
+                            <intbox id="numberOfDoc" value="@{controller.docSelected.numberOfDoc,access='both', save-when='none'}" constraint="no negative,no zero:Bạn phải nhập số lớn hơn 0" width="100px" maxlength="10" >
+                            </intbox>
+                            <label value="Số trang" style="margin-left:5px;margin-right:5px;" sclass="lb-create"/>
+                            <intbox id="numberOfPage" value="@{controller.docSelected.numberOfPage,access='both', save-when='none'}" constraint="no negative,no zero:Bạn phải nhập số lớn hơn 0" width="100px" maxlength="10" />
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td width="140px"> 
+                            <label value="Loại văn bản" sclass="lb-create"/>
+                            <label value=" *" sclass="label-required" />
+                        </h:td>
+                        <h:td width="360px"> 
+                            <listbox id="lboxDocType" width="100%" 
+                                     model="@{controller.catListDocType}" mold="select" selectedItem="@{controller.catDocTypeSelected}">
+                                <listitem self="@{each=dt}" value="@{dt.categoryId}" label="@{dt.name}"></listitem>
+                            </listbox>
+                        </h:td>
+                        <h:td width="140px"> 
+                            <label value="Lĩnh vực" sclass="lb-create"/>
+                            <label value=" *" sclass="label-required" />
+                        </h:td>
+                        <h:td width="360px"> 
+                            <listbox id="lboxDocfield" width="100%"
+                                     model="@{controller.catListDocfield}" mold="select" selectedItem="@{controller.catDocfieldSelected}" xmlns:w="client">
+                                <listitem self="@{each=df}" value="@{df.categoryId}" label="@{df.name}"></listitem>
+                                <attribute w:name="doBlur_"><![CDATA[
+                                    function(evt) {
+                                        this.$doBlur_(evt);
+                                        if (this.$n().value == '--- Chọn ---') {
+                                            zAu.wrongValue_(this, 'Bạn chưa chọn lĩnh vực');
+                                        } else {
+                                            zAu.cmd0.clearWrongValue(this.uuid);
+                                        }
+                                    }
+                                ]]></attribute>
+                            </listbox>
+                        </h:td>
+                    </h:tr>
+                    <h:tr >
+                        <h:td width="140px">
+                            <label value="Trích yếu" width="120px" sclass="lb-create"/>
+                            <label value=" *" sclass="label-required" />
+                        </h:td>
+                        <h:td colspan="3">
+                            <textbox id="documentAbstract" value="@{controller.docSelected.documentAbstract, access='both', save-when='none'}"
+                                     width="99.4%" maxlength="250" multiline="true" rows="2" />
+                        </h:td>
+                
+                    </h:tr>
+                    <h:tr>
+                        <h:td>
+                            <label value="Độ mật" sclass="lb-create"/>
+                            <label value=" *" sclass="label-required" />
+                        </h:td>
+                        <h:td>
+                            <listbox id="lboxSecret" width="100%" 
+                                     model="@{controller.catListSecret}"  mold="select" selectedItem="@{controller.catSecretSelected}">
+                                <listitem self="@{each=s}" value="@{s.categoryId}" label="@{s.name}"></listitem>
+                            </listbox>
+                        </h:td>
+                        <h:td>
+                            <label value="Độ khẩn" sclass="lb-create"/>
+                            <label value=" *" sclass="label-required" />
+                        </h:td>
+                        <h:td>
+                            <listbox id="lboxUrgency" width="100%" 
+                                     model="@{controller.catListUrgency}" mold="select" selectedItem="@{controller.catUrgencySelected}">
+                                <listitem self="@{each=u}" value="@{u.categoryId}" label="@{u.name}"></listitem>
+                            </listbox>
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td >
+                            <label value="Người ký" sclass="lb-create"/>
+                        </h:td>
+                        <h:td >
+                            <textbox id="signerName" value="@{controller.docSelected.signerName, access='both', save-when='none'}"						
+                                     width="99%" maxlength="500" sclass="txtInput" />
+                        </h:td>
+                        <h:td >              
+                        </h:td>
+                        <h:td >                  
+                        </h:td>              
+                    </h:tr>
+                    <h:tr>
+                        <h:td > 
+                            <label value="Là văn bản trả lời" sclass="lb-create"/>
+                        </h:td>
+                        <h:td align="left"> 
+                            <checkbox id="cbIsDocAnswer" onCheck="doChecked()"  /> 
+                        </h:td>
+                        <h:td>
+                            <label value="Văn bản QPPL" sclass="lb-create"/>
+                        </h:td>
+                        <h:td align="left">
+                            <checkbox id="cbLawDoc"   />      
+                        </h:td>
+                    </h:tr>
+                    
+                </h:table>
+            </groupbox>
+            <h:div style="height:1px;"></h:div>
+            <groupbox width="100%" sclass="gb-form-create" id="gbIsDocAnswer" onCreate="self.visible=cbIsDocAnswer.isChecked()">
+                <caption label="Là văn bản trả lời của văn bản đến"/>
+                <button sclass="btnAction small" image="/Share/img/add_black.png"
+                        label="Thêm" id="btnSearchDocIn" onCreate="self.visible=cbIsDocAnswer.isChecked()" tooltiptext="Tìm kiếm văn bản đến" /> 
+                <h:div style="height:1px;"></h:div>
+                        <listbox id="lbListDocRelation" emptyMessage="Không có văn bản nào" mold="paging" vflex="true" pageSize="10">
+                    <listhead>
+                        <listheader label="STT" align="center" hflex="min" />
+                        <listheader label="Số đến" align="center" hflex="1" />
+                        <listheader label="Số / Kí hiệu" hflex="1" />
+                        <listheader label="Cơ quan ban hành" hflex="2" />
+                        <listheader label="Trích yếu" hflex="2" />
+                        <listheader label="Xóa" hflex="min" />
+                    </listhead>
+                    <template name="model">
+                        <listitem>
+                            <listcell
+                                label="${forEachStatus.index+1}">
+                            </listcell>
+                            <listcell
+                                label="${$composer.getBookNumber(each)}">
+                            </listcell>
+                            <listcell
+                                label="${each.documentCode}">
+                            </listcell>
+                            <listcell label="${each.publishAgencyName}">
+					</listcell>
+                            <listcell
+                                label="${each.documentAbstract}">
+                            </listcell>
+                            <listcell>
+                                <image src="/Share/img/icon/13.png"
+                                       width="20px" height="20px"
+                                       forward="onClick=lbListDocRelation.onDeleteDocRelation()" tooltiptext="Xóa văn bản"/>
+                            </listcell>
+                        </listitem>
+                    </template>
+                </listbox>
+            </groupbox>
+            <h:div style="height:1px;"></h:div>
+            <groupbox width="100%" sclass="gb-form-create">
+                <caption label="Tệp văn bản đính kèm"/>
+                <h:table width="100%" class="viewTableAtt">
+                    <h:tr class="att-header">
+                        <h:td align="center" class="att-cell">
+                            <label>Phiếu trình</label>
+                        </h:td>
+                        <h:td align="center" class="att-cell">
+                            <label>Dự thảo</label>
+                        </h:td>
+                        <h:td align="center" class="att-cell">
+                            <label>Văn bản liên quan</label>
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td width="33%" class="att-cell">
+                            <vlayout>
+                                <button width="85px" id="btnAttach" style="font-weight: bold;color: #F25D45;" sclass="attachBtn" 
+                                        src="/Share/img/paperclip.png"
+                                        upload="zk.UPMSample1,maxsize=10240,native" label="Chọn tệp"/>
+                                <vlayout id="flist" hflex="1" sclass="fileList" />
+                                <listbox id="attachListBox" width="99%"
+                                         multiple="false"
+                                         model="@{controller.attachList}" >
+                                    <listhead sizable="true">
+                                        <listheader hflex="2" label="Tên tệp"/>
+                                        <listheader hflex="min" align="center" label="Xóa"/>
+                                    </listhead>
+                                    <listitem self="@{each='at'}" value="@{at}">
+                                        <listcell label="@{at.attachName}" tooltiptext="Tải tệp đính kèm" forward="onClick=onDownloadAttach"/>
+                                        <listcell>
+                                            <image forward="onClick=attachListBox.onDelete" src="/Share/img/icon/delete.png" width="20px" height="20px" tooltiptext="Xóa tệp đính kèm"/>
+                                        </listcell>
+                                    </listitem> 
+                                </listbox>
+                            </vlayout>
+                        </h:td>
+                        <h:td width="33%" class="att-cell">
+                            <vlayout>
+                                <button width="85px" id="btnAttachDraft" style="font-weight: bold;color: #F25D45;" sclass="attachBtn" 
+                                        src="/Share/img/paperclip.png"
+                                        upload="zk.UPMSample1,maxsize=10240,native" label="Chọn tệp"/>
+                                <vlayout id="flistDraft" hflex="1" sclass="fileList" />
+                                <listbox id="attachDraftListBox" width="99%"
+                                         multiple="false"
+                                         model="@{controller.attachDraftList}" >
+                                    <listhead sizable="true">
+                                        <listheader hflex="2" label="Tên tệp"/>
+                                        <listheader hflex="min" align="center" label="Xóa"/>
+                                    </listhead>
+                                    <listitem self="@{each='at'}" value="@{at}">
+                                        <listcell label="@{at.attachName}" tooltiptext="Tải tệp đính kèm" forward="onClick=onDownloadAttach"/>
+                                        <listcell>
+                                            <image forward="onClick=attachDraftListBox.onDelete" src="/Share/img/icon/delete.png" width="20px" height="20px" tooltiptext="Xóa tệp đính kèm"/>
+                                        </listcell>
+                                    </listitem> 
+                                </listbox>
+                            </vlayout>
+                        </h:td >
+                        <h:td width="33%" class="att-cell">
+                            <vlayout>
+                                <button width="85px" id="btnAttachDocRelation" style="font-weight: bold;color: #F25D45;" sclass="attachBtn" 
+                                        src="/Share/img/paperclip.png"
+                                        upload="zk.UPMSample1,maxsize=10240,native" label="Chọn tệp"/>
+                                <vlayout id="flistDocRelation" hflex="1" sclass="fileList" />
+                                <listbox id="attachDocRelationListBox" width="99%"
+                                         multiple="false"
+                                         model="@{controller.attachDocRelationList}" >
+                                    <listhead sizable="true">
+                                        <listheader hflex="2" label="Tên tệp"/>
+                                        <listheader hflex="min" align="center" label="Xóa"/>
+                                    </listhead>
+                                    <listitem self="@{each='at'}" value="@{at}">
+                                        <listcell label="@{at.attachName}" tooltiptext="Tải tệp đính kèm" forward="onClick=onDownloadAttach"/>                                       
+                                        <listcell>
+                                            <image forward="onClick=attachDocRelationListBox.onDelete" src="/Share/img/icon/delete.png" width="20px" height="20px" tooltiptext="Xóa tệp đính kèm"/>
+                                        </listcell>
+                                    </listitem> 
+                                </listbox>
+                            </vlayout>
+                        </h:td>
+                    </h:tr>
+                </h:table>
+            </groupbox>
+            <groupbox width="100%" sclass="gb-form-create" visible="false" >
+                <caption label="Nội dung văn bản"/>   
+                <!--                <ckeditor width="100%" height="100%" id="ckDocumentContent" toolbar="Complex"
+                          customConfigurationsPath="/Share/js/wysiwyg_editor/config.js"  value="@{controller.docSelected.documentContent,access='both', save-when='none'}">
+                                        <attribute name="onChange"><![CDATA[
+                        Clients.evalJavaScript("jq('$cntDiv').html('"+ ckDocumentContent.value.replaceAll("\n", "") +"')");
+                    ]]></attribute>
+                </ckeditor>-->
+                <!--                <separator height="20px"/>
+                <tabbox width="100%" sclass="demoTbx">
+                    <toolbar>
+                        You Can Edit The HTML Directly
+                    </toolbar>
+                    <tabs>
+                        <tab label="Browser Result" />
+                    </tabs>
+                    <tabpanels>
+                        <tabpanel>
+                            <div id="cntDiv" style="background: #FEFFEB;" width="540px">
+                                <html content="${ckDocumentContent.value}" />
+                            </div>
+                        </tabpanel>
+                    </tabpanels>
+                </tabbox>-->
+            </groupbox>
+        </h:div> 
+        <div id="bottomToolbar" class="toolBar">
+            <button sclass="btnAction" image="/Share/img/png/quay-lai.png" forward="onClick=docCRUD.onClose" tooltiptext="Quay lại"/>
+            <!--    <image src="/Share/img/icon/save.png" sclass="save" forward="onClick=docCRUD.onSave" tooltiptext="Lưu lại"/>-->
+            <button sclass="btnAction" forward="onClick=docCRUD.onSave"
+                    label="Lưu lại và thêm mới (F6)" id="btnSave1" image="/Share/img/png/luu-lai.png"/>
+            <button  sclass="btnAction" forward="onClick=docCRUD.onSaveAndClose"
+                     label="Lưu và đóng (F7)" id="btnSaveAndClose1" image="/Share/img/png/luu-lai-va-dong.png"/>
+            <button sclass="btnAction" forward="onClick=docCRUD.onSaveAndCopy"
+                    label="Lưu và sao lưu (F8)" id="btnSaveAndCopy1" image="/Share/img/png/luu-lai-sao-luu.png"/>       
+            <label id="lbBottomWarning" class="notify"/>
+        </div>
+        <script type="text/javascript" src="/Share/js/UPMSamples.js" />
+        <script type="text/javascript">
+            zk.afterMount(function() {
+            $.mask.definitions['A']='[A-Z]';
+            $.mask.definitions['m']='[01]';
+            $.mask.definitions['d']='[123456789]';
+            $.mask.definitions['y']='[12]';
+            jq("$numberOfDoc").mask("d?99999999",{placeholder:""});
+            jq("$numberOfPage").mask("d?99999999",{placeholder:""});
+            });
+        </script>
+        <zscript> void doChecked() { 
+            gbIsDocAnswer.visible = cbIsDocAnswer.isChecked();
+            btnSearchDocIn.visible = cbIsDocAnswer.isChecked();
+            }
+        </zscript>
+        <zscript><![CDATA[
+	void addItem() {
+		org.zkoss.util.media.Media media = event.getMedia();
+		Hlayout hl = new Hlayout();
+		hl.setSpacing("6px");
+		hl.setClass("newFile");
+		hl.appendChild(new Label(media.getName()));
+		A rm = new A("remove");
+		rm.addEventListener(Events.ON_CLICK,new org.zkoss.zk.ui.event.EventListener(){
+			public void onEvent(Event event) throws Exception {
+				hl.detach();
+			}
+		});
+		hl.appendChild(rm);
+		flist.appendChild(hl);
+	}
+	]]></zscript>
+    </window>
+</zk>

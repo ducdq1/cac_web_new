@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+        xmlns="http://www.zkoss.org/2005/zul" id="businessWindow"
+        position="center,center" 
+        title="Thẩm định hồ sơ" apply="com.viettel.module.cosmetic.Controller.include.EvaluationController" width="100%">
+    <style src="/Share/css/formstyle.css" />
+    <style src="/Share/css/uploadstyle.css" />
+    <script type="text/javascript" src="/Share/js/UPMSamples.js" />
+    <vlayout id="layoutComment">
+        <label id="lbTopWarning" style="color: red;" />
+        
+        <div align="center" visible="false">
+            <textbox id="txtValidate" visible="false" />
+        </div>
+        <h:table style="width:100%">
+            <h:tr>
+                <h:td colspan="2">
+                    <div visible="true" align="center">
+                        <button id="btnCheck" label="Kiểm tra nồng độ" visible="true"
+                                image="/Share/img/icon/send_document_1.png" />
+                        <button id="btnExportCVTC" label="Xem trước công văn TC"
+                                visible="true"
+                                image="/Share/img/icon/save_min.png" />
+                    </div>
+                </h:td>
+            </h:tr>
+            <h:tr>                
+                <h:td style="width:70%">
+                    <div id="divParent">
+                        <div id="divChild">
+                            
+                        </div>
+                    </div>
+                </h:td>
+                <h:td style="width:30%">
+                    <h:div style="width:100%; height:400px; overflow:auto;">
+                        <h:table width="100%" align="center">
+                            <h:th width="40%" />
+                            <h:th width="40%" />
+                            <h:th width="10%" />
+                            <h:th width="10%" />
+                            <h:tr>
+                                <h:td>
+                                    <label  value="Về pháp chế" sclass="lb-create" />
+                                </h:td>
+                                <h:td colspan="3">
+                                    <listbox id="lbLegal" mold="select" width="80%" emptyMessage="Chưa chọn nội dung"
+                                             onSelect="$composer.onChangelbLegal()">
+                                        <listitem label="--Chọn--" value="-1" selected="true" />
+                                        <listitem label="Đồng ý" value="1" />
+                                        <listitem label="Yêu cầu bổ sung" value="2" />
+                                        <listitem label="Từ chối" value="0" />
+                                    </listbox>
+                                </h:td>
+                            </h:tr>
+                            <div align="center" visible="false">
+                                <h:tr>
+                                    <h:td>
+                                        <label  id="labelLegal" value="Lý do không cấp hoặc yêu cầu bổ sung" visible="false" sclass="lb-create" />
+                                        <label id="labelLegalRequi" value=" *" sclass="label-required" visible="false"/>
+                                    </h:td>
+                                    <h:td colspan="3">
+                                        <textbox id="legalContent" width="95%" rows="5" visible="false"
+                                                 value="${$composer.obj.legalContent}"
+                                                 maxlength="450" 
+                                                 style="font-size:12pt;"/>
+                                    </h:td>
+                                </h:tr>
+                            </div>	
+                            <h:tr>
+                                <h:td>
+                                    <label value="Tên sản phẩm" sclass="lb-create" />
+                                </h:td>
+                                <h:td colspan="3">
+                                    <listbox id="lbProductName" mold="select" width="80%" emptyMessage="Chưa chọn nội dung"
+                                             onSelect="$composer.onChangelbProductName()">
+                                        <listitem label="--Chọn--" value="-1" selected="true" />
+                                        <listitem label="Đồng ý" value="1" />
+                                        <listitem label="Yêu cầu bổ sung" value="2" />
+                                        <listitem label="Từ chối" value="0" />
+                                    </listbox>
+                                </h:td>
+                            </h:tr>
+                            <div id="gbProductName">
+                                <h:tr>
+                                    <h:td>
+                                        <label id="labelProductName" value="Lý do không cấp hoặc yêu cầu bổ sung" visible="false" sclass="lb-create" />
+                                        <label id="labelProductNameRequi" value=" *" sclass="label-required" visible="false"/>
+                                    </h:td>
+                                    <h:td colspan="3">
+                                        <textbox id="ProductNameContent" width="95%" rows="5" visible="false"
+                                                 value="${$composer.obj.nameproductContent}"
+                                                 maxlength="450" 
+                                                 style="font-size:12pt;"/>
+                                    </h:td>
+                                </h:tr>
+                            </div>
+                           	
+            
+                            <h:tr>
+                                <h:td>
+                                    <label  value="Về mục đích sử dụng" sclass="lb-create" />
+                                </h:td>
+                                <h:td colspan="3">
+                                    <listbox id="lbMechanism" mold="select" width="80%"
+                                             onSelect="$composer.onChangelbMechanism()">
+                                        <listitem label="--Chọn--" value="-1" selected="true" />
+                                        <listitem label="Đồng ý" value="1" />
+                                        <listitem label="Yêu cầu bổ sung" value="2" />
+                                        <listitem label="Từ chối" value="0" />
+                                    </listbox>
+                                </h:td>
+                            </h:tr>
+            
+                            <h:tr>
+                                <div id="gbCoCheTacDung">
+                                    <h:td>
+                                        <label id="labelMechanism" value="Lý do không cấp hoặc yêu cầu bổ sung" visible="false" sclass="lb-create" />
+                                        <label id="labelMechanismRequi" value=" *" sclass="label-required" visible="false"/>
+                                    </h:td>
+                                    <h:td colspan="3">
+                                        <textbox id="mechanismContent" width="95%" rows="5" visible="false"
+                                                 value="${$composer.obj.legalContent}"
+                                                 maxlength="450" 
+                                                 style="font-size:12pt;"/>
+                                    </h:td>
+                                </div>	
+                            </h:tr>
+                            <h:tr>
+                                <h:td>
+                                    <label value="Chỉ tiêu yêu cầu của Hiệp định mỹ phẩm ASEAN và các phụ lục" sclass="lb-create" />
+                                </h:td>
+                                <h:td colspan="3">
+                                    <listbox id="lbCriteria" mold="select" width="80%" emptyMessage="Chưa chọn nội dung"
+                                             onSelect="$composer.onChangelbCriteria()">
+                                        <listitem label="--Chọn--" value="-1" selected="true" />
+                                        <listitem label="Đồng ý" value="1" />
+                                        <listitem label="Yêu cầu bổ sung" value="2" />
+                                        <listitem label="Từ chối" value="0" />
+                                    </listbox>
+                                </h:td>
+                            </h:tr>
+                            <div id="gbAsean">
+                                <h:tr>
+                                    <h:td>
+                                        <label id="labelCriteria" value="Lý do không cấp hoặc yêu cầu bổ sung" visible="false" sclass="lb-create" />
+                                        <label id="labelCriteriaRequi" value=" *" sclass="label-required" visible="false"/>
+                                    </h:td>
+                                    <h:td colspan="3">
+                                        <textbox id="criteriaContent" width="95%" rows="5" visible="false"
+                                                 value="${$composer.obj.legalContent}"
+                                                 maxlength="450" 
+                                                 style="font-size:12pt;"/>
+                                    </h:td>
+                                </h:tr>
+                            </div>
+            
+                            <h:tr>
+                                <h:td>
+                                    <label value="Kết quả thẩm định"
+                                           sclass="hightlight" />
+                  
+                                </h:td>
+                                <h:td>
+                                    <textbox  visible="false" id="lbStatus" value="0"/>
+                                    <label  value="Từ chối"/>
+                                </h:td>
+                            </h:tr>
+                            <div id="gbmain">
+                                <h:tr>
+                                    <h:td>
+                                        <label value="Nội dung từ chối" sclass="lb-create"  visible="true"/>
+                                        <label id="mainContentRequi" value=" *" sclass="label-required" visible="false"/>
+                                    </h:td>
+                                    <h:td colspan="3">
+                                        <textbox id="mainContent" width="95%" rows="5" visible="true"
+                                                 value="${$composer.obj.mainContent}"
+                                                 maxlength="2000" 
+                                                 style="font-size:12pt;"/>
+                                    </h:td>
+                                </h:tr>
+                            </div>
+           
+                        </h:table>
+                    </h:div>
+                </h:td>
+            </h:tr>
+        </h:table>
+        <div align="center" visible="false">
+            <button id="btnSubmit" label="Gửi xử lý" visible="true"
+                    image="/Share/img/icon/send_document_1.png" />
+        </div>
+        <label id="lbBottomWarning" style="color: red;" />
+    </vlayout>
+</window>

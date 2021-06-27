@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    
+    <window id="newTask" border="none" width="70%" 
+            apply="com.viettel.voffice.DAO.Document.TaskDialogController" 
+            position="center,center" onCtrlKey="$composer.keyEventHandle(event.getKeyCode())" ctrlKeys="#f6#f7#f8">
+        <style src="/Share/css/chosen/chosen.css"/>
+        
+        <style>
+            .createTable tr
+            {
+            margin-bottom:2px;height:30px;
+            }
+        </style>
+        
+        <h:div class="toolBar">
+            <button sclass="btnAction" image="/Share/img/png/quay-lai.png" id="btnBack" tooltiptext="Quay lại"/>
+            <button sclass="btnAction" forward="onClick=docPublish.onSave"
+                    label="Lưu lại " id="btnSave" image="/Share/img/png/luu-lai.png"/>
+            <button sclass="btnAction" forward="onClick=docPublish.onSaveAndClose"
+                    label="Lưu và Thêm mới " id="btnSaveAndClose" image="/Share/img/png/luu-lai-va-dong.png"/>
+        </h:div>
+        <h:div class="contentDivCreate">
+            <groupbox width="100%" sclass="gb-form-create">
+                <caption label="Thông tin chung"/> 
+                <h:table  width="100%" class="lstdoc-table">
+                    <h:tr>
+                        <h:td width="12%">
+                            <label value="Tên công việc" sclass="lb-create"/>
+                            <label value=" *" sclass="label-required" />
+                        </h:td>
+                        <h:td width="38%" colspan="3">
+                            <textbox value="" id="taskName" width="89%"/>
+                        </h:td>
+                        <h:td width="12%">
+                            <label value="Mô tả" sclass="lb-create"/>
+                        </h:td>
+                        <h:td width="38%" rowspan="3" colspan="3">
+                            <textbox id="description" sclass="z-textbox"					
+                                     width="90%" maxlength="200" rows="6" />
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td width="12%" > 
+                            <label value="Loại công việc" sclass="lb-create"/>
+                        </h:td>
+                        <h:td width="38%" colspan="3"> 
+                            <combobox id="taskType" width="90%" 
+                                     model="@{controller.taskType}" >
+                                <!--<listitem self="@{each=dt}" value="@{dt.categoryId}" label="@{dt.name}"></listitem>-->
+                            </combobox>
+                        </h:td>
+<!--                        <h:td >
+                            <label value="Ngày ban hành" sclass="lb-create"/>
+                            <label value=" *" sclass="label-required" />
+                        </h:td>
+                        <h:td >
+                            <datebox id="dbPublishDay" value="@{controller.docSelected.datePublish, access='both', save-when='none'}" format="dd/MM/yyyy"/>
+                        </h:td>-->
+                    </h:tr>
+                    <h:tr >
+                        <h:td width="12%" > 
+                            <label value="Độ ưu tiên" sclass="lb-create"/>
+                        </h:td>
+                        <h:td width="38%" colspan="3"> 
+                            <combobox id="taskPriorityId" width="90%" 
+                                     model="@{controller.taskPriorityId}" >
+                                <!--<combobox self="@{each=dt}" value="@{dt.categoryId}" label="@{dt.name}"></combobox>-->
+                            </combobox>
+                        </h:td>
+                    </h:tr>
+                    <h:tr >
+                        <h:td width="12%" > 
+                            <label value="Công việc cha" sclass="lb-create"/>
+                        </h:td>
+                        <h:td width="38%" colspan="3"> 
+                            <listbox id="taskParentId" width="90%" 
+                                     rows="1">
+                                <template name="model">
+                                    <listitem value="${each}">
+                                            <listcell label="${each.taskName}"/>
+                                    </listitem>
+                                </template>
+                            </listbox>
+                        </h:td>
+                    </h:tr>
+                    
+                    <h:tr >
+                        <h:td width="12%" > 
+                            <label value="Người thực hiện" sclass="lb-create"/>
+                            <label value=" *" sclass="label-required" />
+                        </h:td>
+                        <h:td width="33%" colspan="2"> 
+                            <listbox id="userPerform" width="90%" rows="1" sclass="z-listbox"
+                                     >
+                                <template name="model">
+                                    <listitem value="${each}">
+                                            <listcell label="${each.userName}"/>
+                                    </listitem>
+                                </template>
+                            </listbox>
+                        </h:td>
+                        <h:td width="5%" colspan="1">
+                                <button id="btnSelectUserPerform" label="Chọn " style="width: 80px; height: 20px" sclass="button" image="/Share/img/icon/dept.png"/>
+                        </h:td>
+<!--                        <h:td width="12%">
+                        </h:td>
+                        <h:td width="38%" rowspan="10" >
+                            <vlayout id="flist" hflex="1" sclass="fileList" />
+                        </h:td>-->
+                        <h:td width="12%" > 
+                            <label value="Người đồng thực hiện" sclass="lb-create"/>
+                        </h:td>
+                        <h:td width="28%" colspan="2"> 
+                            <listbox id="userHelp" width="90%" rows="2"
+					onSelect="" model="@{controller.listUser}">
+                                <listhead sizable="true">
+                                    <listheader width="80%" label="" />
+                                    <listheader width="20%" label="" />
+                                </listhead>
+                                <template name="model">
+                                    <listitem value="${each}">
+                                            <listcell label="${each.userName}"/>
+                                            <listcell>
+                                                <image if="${each.userName != ''}" forward="onClick=userHelp.onDelete" src="/Share/img/icon/delete.png" width="20px" height="20px" tooltiptext="Xóa người phối hợp"/>
+                                            </listcell>
+                                    </listitem>
+                                </template>
+						
+                            </listbox>
+                        </h:td>
+                        <h:td width="8%" colspan="1">
+                                <button id="btnSelectUserHept" label="Chọn " style="width: 80px; height: 20px" sclass="button" image="/Share/img/icon/dept.png"/>
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td width="12%">
+                            <label value="Ngày bắt đầu" sclass="lb-create"/>
+                            <label value=" *" sclass="label-required" />
+                        </h:td>
+                        <h:td width="13%">
+                            <datebox id="startTime" value="@{controller.taskBO.startTime, access='both', save-when='none'}" format="dd/MM/yyyy"/>
+                        </h:td>
+                        <h:td width="15%">
+                            <!--<label value="Ngày hoàn thành" sclass="lb-create"/>-->
+                            <!--<label value=" *" sclass="label-required" />-->
+                        </h:td>
+                        <h:td width="10%">
+                            <!--<datebox id="deadline" value="@{controller.taskBO.deadline, access='both', save-when='none'}" format="dd/MM/yyyy"/>-->
+                        </h:td>
+                        <h:td width="12%">
+                            <label value="Ngày hoàn thành" sclass="lb-create"/>
+                        </h:td>
+                        <h:td width="13%">
+                            <datebox id="deadline" value="@{controller.taskBO.deadline, access='both', save-when='none'}" format="dd/MM/yyyy"/>
+                        </h:td>
+                        <h:td width="15%">
+                        </h:td>
+                        <h:td width="10%">
+                        </h:td>
+                    </h:tr>
+                                            
+                    <h:tr>
+                        <h:td width="12%">
+                            <label value="Tệp văn bản đính kèm" sclass="lb-create"/>
+                        </h:td>
+                        <h:td width="13%" >
+                            <button width="85px" id="btnAttach" style="font-weight: bold;color: #F25D45;" sclass="attachBtn" 
+                                src="/Share/img/paperclip.png"
+                                upload="zk.UPMSample1,maxsize=10240,native" label="Chọn tệp"/>
+                            <!--<vlayout id="flist" hflex="1" sclass="fileList" />-->
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td width="12%">
+                            
+                        </h:td>
+                        <h:td width="33%" colspan="2">
+                            <vlayout id="flist" hflex="1" sclass="fileList" />
+                        </h:td>
+                    </h:tr>
+                </h:table>
+            </groupbox>
+        </h:div>
+        <style src="/Share/css/uploadstyle.css" />
+        <style src="/Share/css/formstyle.css" />
+        <script type="text/javascript" src="/Share/js/UPMSamples.js" />
+        <script type="text/javascript">
+            zk.afterMount(function() {
+            $.mask.definitions['A']='[A-Z]';
+            $.mask.definitions['m']='[01]';
+            $.mask.definitions['d']='[123456789]';
+            $.mask.definitions['y']='[12]';
+            
+            jq("$numberOfDoc").mask("d?99999999",{placeholder:""});
+            jq("$numberOfPage").mask("d?99999999",{placeholder:""});
+            jq("$spinnerBookNumber").mask("d?99999999",{placeholder:""});
+            });
+        </script>
+        <zscript> void doChecked() { 
+            gbIsDocAnswer.visible = cbIsDocAnswer.isChecked();
+            btnSearchDocIn.visible = cbIsDocAnswer.isChecked();
+            }
+        </zscript>
+        <zscript><![CDATA[
+	void addItem() {
+		org.zkoss.util.media.Media media = event.getMedia();
+		Hlayout hl = new Hlayout();
+		hl.setSpacing("6px");
+		hl.setClass("newFile");
+		hl.appendChild(new Label(media.getName()));
+		A rm = new A("remove");
+		rm.addEventListener(Events.ON_CLICK,new org.zkoss.zk.ui.event.EventListener(){
+			public void onEvent(Event event) throws Exception {
+				hl.detach();
+			}
+		});
+		hl.appendChild(rm);
+		flist.appendChild(hl);
+	}
+	]]></zscript>
+        
+        <script>
+             <![CDATA[
+                var config = {
+                '.chosen-select'           : {},
+                '.chosen-select-deselect'  : {allow_single_deselect:true},
+                '.chosen-select-no-single' : {disable_search_threshold:10},
+                '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
+                '.chosen-select-width'     : {width:"95%"}
+                }
+                for (var selector in config) {
+                $(selector).chosen(config[selector]);
+                }
+                
+                jq(function() {
+                    jq(".chosen-select").chosen();
+                });
+            ]]>
+        </script>
+    </window>
+</zk>

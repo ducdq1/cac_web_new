@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <window id="notifyWindowUserDept" 
+            apply="com.viettel.voffice.DAO.NotifyListController" >
+        <!--<caption label="Danh sách nhận thông báo truyền thông"/>-->
+        <h:div>
+            <listbox id="lstNotify"
+                     emptyMessage="Không có ngươif nhận nào" style="word-wrap: break-word">
+                <listhead sizable="true">
+                    <listheader  width="10%" align="center" label="STT"/>
+                    <listheader  width="50%" label="Đơn vị"/>
+                    <!--<listheader  width="20%" label="Chức vụ"/>-->
+                    <listheader  width="30%" label="Họ tên"/>
+                    <listheader  width="10%" label="Xóa" align="center"/>
+                </listhead>
+                <template name="model">                    
+                    <listitem>
+                        <listcell label="${forEachStatus.index+1}" />
+                        <listcell label="${each.deptName}" />
+                        <!--<listcell label="${each.posName}" />-->
+                        <listcell label="${each.userName}" />
+                        <listcell>
+                                <image src="/Share/img/icon/13.png"
+                                        height="20px" tooltiptext="Xóa">
+                                        <custom-attributes
+                                                index="${forEachStatus.index}" />
+                                        <attribute name="onClick">
+                                            $composer.onDelete(self.getAttribute("index"));
+                                        </attribute>
+                                </image>
+                        </listcell>
+                    </listitem>
+                </template>
+            </listbox>
+            <!--<paging id="userPagingBottom" pageSize="10" detailed="true"/>-->
+        </h:div>
+    </window>
+    
+</zk>
+

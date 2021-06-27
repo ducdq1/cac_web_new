@@ -1,0 +1,162 @@
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns="http://www.zkoss.org/2005/zul">
+	<script src="/Share/js/menu.js" />
+	<script src="/Share/js/toolbar.js" />
+	<script src="/Share/js/flow.js" />
+	<script src="/Share/js/flowView.js" />
+	<script src="/Share/js/calendar.js" />
+	<style src="/Share/css/voffice.css" />
+	<style src="/Share/css/style_comon.css" />
+	<script src="/Share/js/chosen/chosen.jquery.js" />
+	<script src="/Share/js/jquery.maskedinput.js" />
+	<script src="/Share/js/jquery.watermarkinput.js" />
+	<script type="text/javascript" src="/Share/js/UPMSamples.js" />
+	
+	<script type="text/javascript"
+		src="/Share/js/ca/ViettelCAPlugin.js" />
+	<script type="text/javascript" src="/Share/js/ca/serverSide.js" />
+	<style>
+	.z-window-modal-cnt-noborder, .z-window-highlighted-cnt-noborder, .z-window-embedded-cnt-noborder, .z-window-overlapped-cnt-noborder, .z-window-popup-cnt-noborder {
+    
+    overflow: scroll	;
+    
+	}
+	 
+	
+	 .z-textbox, .z-intbox {
+   		 font-size: 17px !important;
+   		 height:23px;
+		}
+		
+		.z-option,.z-select {
+   		 font-size: 15px !important;
+		}
+		
+		.z-label {
+   		 font-size: 13px !important;
+   		  
+		}
+		
+		.z-datebox-inp, .z-datebox-rounded-inp, .z-timebox-rounded-inp{
+		height:20px;
+		}
+		
+	.z-datebox-inp,.z-datebox-rounded-inp, .z-timebox-rounded-inp{
+	font-size:15px !important
+	}
+	</style>
+		
+	<div id="mainContent"
+		apply="com.viettel.voffice.DAO.System.IndexController"
+		style="width:100%;height:100%;">
+		<h:div
+			style="width:100%;font-family:'MyriadPro-BoldCond'!important;
+                  font-size:18px !important; background-color: #f8f8f8;
+        background-image: url('Share/homepage/images/body-bg.png');
+        background-position: center bottom;
+        background-repeat: repeat-x;">
+			<h:div class="header_hp">
+				<h:div class="banner" style="position: relative;">
+					<h:div class="logo1">
+						<h:img height="68px"
+							src="Share/homepage/images/logo_thuoc.png" />
+					</h:div>
+					<h:div class="r_banner"
+						style="text-align:left !important; top: 0; position: absolute; right: 0;">
+						<h:img width="35" height="74"
+							src="Share/homepage/images/r-banner-bg.png" />
+						<h:div>
+							<h:div id="vt-avatar" class="cursor-pointer"
+								style="margin-right:10px;margin-top:-55px;padding:0px">
+								<image id="avatar"
+									src="Share/img/icon/home-icon.png" width="30px" height="30px"
+									tooltiptext="Ảnh đại diện" popup="userPopup" />
+								<menupopup id="userPopup">
+									<!--<menuitem id="changeDeptMenu" image="Share/img/icon/dept.png" label="Đổi đơn vị làm việc"/>-->
+									<menuitem id="userPasswordMenu"
+										image="Share/img/icon/lock.png" label="Đổi mật khẩu" />
+									<menuitem id="logoutMenu"
+										image="Share/img/icon/logout.png" label="Đăng xuất" />
+								</menupopup>
+							</h:div>
+						</h:div>
+
+						<h:div>
+
+							<h:div id="vt-profile"
+								style="text-align:right;width:170px;margin-right:50px;margin-top:-45px; padding:0px"
+								class="cursor-pointer">
+							</h:div>
+
+						</h:div>
+					</h:div>
+
+				</h:div>
+			</h:div>
+			<h:div class="login_hr_name"></h:div>
+			<h:div class="wrapper" style="min-height:800px;">
+
+
+				<h:div id="topDiv"
+					style="width:100%;border:0px solid none;margin-top:5px;">
+					<h:div class="headerTab" id="headerTab">
+						<h:ul id="menuUL">
+							<h:div id="vt-user-info"
+								class="no-space no-float"
+								style="color:white; font-family: helvetica, sans-serif; font-weight: bold; font-size: 11px;padding-top: 19px">
+
+							</h:div>
+						</h:ul>
+					</h:div>
+
+					<h:div class="tabContent" id="tabContent"></h:div>
+				</h:div>
+				<!-- <include src="/Pages/common/searchToolbar.zul" /> -->
+				<div id="bodyContent"
+					style="width:100%;height:100%;background:#fff">
+				</div>
+				<!--        <h:div style="height:20px;width:100%;position:fixed; bottom:0px">
+					<toolbar id="toolBar" width="200px" height="20px">
+					<toolbarbutton height="20px" width="20px"/>
+					<toolbarbutton height="20px" width="20px"/>
+					<toolbarbutton height="20px" width="20px"/>
+					<toolbarbutton height="20px" width="20px"/>
+					</toolbar>               
+					</h:div>-->
+
+
+
+
+
+
+
+			</h:div>
+			 
+		</h:div>
+
+
+
+
+
+
+	</div>
+	<h:script type="text/javascript">
+		document.getElementsByTagName("body")[0].setAttribute("style","padding:0px");
+		var page = new Object();
+
+		createMenu = function(){
+		
+		document.getElementById('vt-profile').innerHTML =
+		escapeHtml_(page.token.userFullName);
+		menu.drawOfficeMenu('menuUL', 'tabContent', page.token); }
+
+		initContext = function(context){ page.context = context; }
+
+		onLogout = function(){ var wgt = zk.Widget.$("mainContent");
+		zAu.send(new zk.Event(wgt, 'onLogout', null)); }
+
+		onHome = function(){ window.location = page.context +
+		"/index.zul"; }
+
+	</h:script>
+</zk>

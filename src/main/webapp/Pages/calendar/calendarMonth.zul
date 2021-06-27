@@ -1,0 +1,38 @@
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+
+    <h:div class="talbeBorderPage" id="monthCalendarDiv" onmousewheel="calendar.onMouseWheel();">
+        <h:div>
+            <h:img src="Share/img/icon/back.png" widh="20" height="20" title="Tháng trước" onclick="previousMonth();"/>
+            <h:img src="Share/img/icon/next.png" widh="20" height="20" title="Tháng tới" onclick="nextMonth();"/>
+            <h:label id="displayMonth" style="font-size: 25px; font-weight: bold;color:crimson;margin:10px"/>
+        </h:div>
+        <h:table class="monthTable" id="calendarMonth">
+            <h:tr class="headerRowViewPage" >
+                <h:th width="14%">Thứ 2</h:th>
+                <h:th width="14%">Thứ 3</h:th>
+                <h:th width="14%">Thứ 4</h:th>
+                <h:th width="14%">Thứ 5</h:th>
+                <h:th width="14%">Thứ 6</h:th>
+                <h:th width="14%">Thứ 7</h:th>
+                <h:th width="14%">Chủ nhật</h:th>
+            </h:tr>
+        </h:table>
+
+    </h:div>
+
+    <script defer="true">
+        calendar = new calendarMonth();
+        calendar.initCalendar("calendarManagerWnd");
+        //calendar.onMouseWheel();
+        
+        previousMonth = function(){
+            calendar.previousMonth();
+        }
+        
+        nextMonth = function(){
+            calendar.nextMonth();
+        }
+
+    </script>
+</zk>

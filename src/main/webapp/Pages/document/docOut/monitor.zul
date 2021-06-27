@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+        xmlns="http://www.zkoss.org/2005/zul" id="monitorWnd"
+        apply="com.viettel.voffice.DAO.Document.DocDraffMonitor">
+    <script defer="true">
+        toolBar.widget = "monitorWnd";
+    </script>
+    <include src="/Pages/common/searchToolbar.zul" />
+    <h:div class="contentDiv">
+        <h:table style="border-collapse:collapse">
+            <h:tr>
+                <h:td width="30%" style="vertical-align:top;">
+                    <groupbox id="groupDept" title="Cây đơn vị" mold="3d">
+                        <tree id="deptUserTree" style="padding-top:0px;border:0px none">
+                            <template name="model">
+                                <treeitem>
+                                    <treerow>
+                                        <treecell>
+                                            <hlayout style="display:inline-flex">
+                                                <image src="/Share/img/icon/dept.png" if="${each.type!=1}"/>
+                                                <image src="/Share/img/icon/user.gif" if="${each.type==1}"/>
+                                                <label value="${each.name}"/>
+                                            </hlayout>
+                                        </treecell>
+                                    </treerow>
+                                </treeitem>
+                            </template>
+                        </tree>            
+                    </groupbox>
+                </h:td>
+                <h:td width="70%" style="vertical-align:top;">
+                    <groupbox title="Thông tin theo dõi" mold="3d">
+                        <h:table style="width:100%;background-color:#93BDEF">
+                            <h:tr>
+                                <h:td width="20%" align="right">
+                                    <label value="Từ ngày"/>
+                                </h:td>
+                                <h:td width="20%" >
+                                    <datebox id="dbFromDay" cols="12"
+                                             format="dd/MM/yyyy" width="100%"
+                                             constraint="between 19000101 and 20991231: Thời gian phải nằm trong khoảng từ 1/1/1900 đến 31/12/2099" />
+                                </h:td>
+                                <h:td width="20%" align="right">
+                                    <label value="Đến ngày"/>
+                                </h:td>
+                                <h:td width="20%">
+                                    <datebox id="dbToDay" cols="12" format="dd/MM/yyyy"
+                                             width="100%"
+                                             constraint="between 19000101 and 20991231: Thời gian phải nằm trong khoảng từ 1/1/1900 đến 31/12/2099" />
+                                    
+                                </h:td>
+                                <h:td width="20%" align="right">
+                                    <button id="btnSearch" label="Tìm kiếm" sclass="button" image="/Share/img/icon/search.jpg" />
+                                </h:td>
+                            </h:tr>
+                        </h:table>
+                        <h:table class="viewTable">
+                            <h:tr>
+                                <h:td>
+                                    <label value="Dự thảo :"/>
+                                    <a>
+                                        <label id="docwaitProcessing" sclass="label-required" />
+                                    </a>
+                                </h:td>
+                                <h:td>
+                                    <label value="Đang xử lý :"/>
+                                    <a>
+                                        <label id="docProcessing" sclass="label-required" />
+                                    </a>
+                                </h:td>
+                                <h:td>
+                                    <label value="Đã ban hành :"/>
+                                    <a>
+                                        <label id="docProcessed" sclass="label-required" />
+                                    </a>
+                                </h:td>
+                            </h:tr>
+                        </h:table>
+                        <listbox id="lbListDoc" 
+                                 multiple="false"
+                                 emptyMessage="Không tồn tại văn bản" model="@{controller.documentList}" mold="paging" pagingPosition="both" pageSize="10" sclass="lstDocPublish" >
+                            <listhead sizable="true" sclass="lst-header">
+                                <listheader width="5%" label="STT" />
+                                <listheader width="30%" label="Trích yếu" sclass="firstColumn" />
+                                <listheader width="10%" label="Ngày tạo" />
+                                <listheader width="15%" label="Người tạo" />
+                                <listheader width="10%" label="Loại văn bản" />
+                                <listheader width="10%" label="Người xử lý" />
+                                <listheader width="10%" label="Ngày nhận" />
+                                <listheader width="10%" label="Trạng thái"  />
+                            </listhead>
+                            <template name="model">
+                                <listitem  value="${each}">
+                                    <listcell 
+                                        label="${forEachStatus.index + 1 + userPagingBottom.pageSize * userPagingBottom.activePage}" 
+                                        forward="onClick=lbListDoc.onOpenView"/>
+                                    <listcell label="${each.documentAbstract}" forward="onClick=lbListDoc.onOpenView"/>
+                                    <listcell label="${each.dateCreateStr}" forward="onClick=lbListDoc.onOpenView"/>
+                                    <listcell label="${each.creatorName}" forward="onClick=lbListDoc.onOpenView"/>
+                                    <listcell label="${each.documentTypeName}" forward="onClick=lbListDoc.onOpenView"/>
+                                    <listcell label="${each.processUserName}" forward="onClick=lbListDoc.onOpenView"/>
+                                    <listcell label="${each.processDateStr}" forward="onClick=lbListDoc.onOpenView"/>
+                                    <listcell label="${$composer.getDocStatus(each.status,each.processStatusName)}" forward="onClick=lbListDoc.onOpenView"/>
+                                </listitem> 
+                            </template>
+                        </listbox>
+                        <paging id="userPagingBottom" pageSize="10" detailed="true" />                    
+                        <!--                        <include src="/Pages/common/colorNote.zul"/>-->
+                    </groupbox>
+                </h:td>
+            </h:tr>
+        </h:table>
+    </h:div>
+</window>

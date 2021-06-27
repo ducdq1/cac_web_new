@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <style src="/Share/css/formstyle.css"/>
+    <window width="100%" id="tmpBillManageWnd"
+            apply="com.viettel.module.cosmetic.Controller.ImpTmpBillToBillController" border="normal" height="100%">
+        <caption label="Nhập biên lai thanh toán vào hóa đơn" />
+    
+        <h:div id="searchDiv" style="width:100%" align="center">
+            <h:table style="width:80%" class="searchTable">       
+                <h:tr>
+                    <h:td>
+                        <label value="Từ ngày"/>
+                    </h:td>
+                    <h:td>
+                        <datebox id="dbFromDate" format="dd/MM/yyyy"/>
+                    </h:td>
+                    <h:td>
+                        <label value="Đến ngày"/>
+                    </h:td>
+                    <h:td>
+                        <datebox id="dbToDate" format="dd/MM/yyyy"/>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td>
+                        <label value="Trạng thái"/>
+                    </h:td>
+                    <h:td>
+                        <listbox id="lbStatus"  mold="select">
+                            <listitem value="-1" label="--- Chọn ---" selected="true"/>
+                            <listitem value="0" label="Chưa nhập"/>
+                            <listitem value="1" label="Đã nhập thành công"/>
+                            <listitem value="2" label="Chưa nhập, đủ điều kiện"/>
+                        </listbox>
+                    </h:td>
+                    <h:td>
+                        <label value="Là mới nhất"/>
+                    </h:td>
+                    <h:td>
+                        <listbox id="lbIsLast"  mold="select">
+                            <listitem value="-1" label="--- Chọn ---" selected="true"/>
+                            <listitem value="1" label="Mới nhất"/>
+                            <listitem value="0" label="Không"/>
+                        </listbox>
+                    </h:td>
+                </h:tr>
+                <h:tr>       
+                    <h:td colspan="4" style="text-align:center">
+                        <button id="btnImport" label="Cập nhập dữ liệu mới nhất" sclass="button" image="/Share/img/icon/search.jpg"/>
+                        <button id="btnSearch" label="Tìm kiếm" sclass="button" image="/Share/img/icon/search.jpg"/>
+                        <button id="btn" label="Nhập dữ liệu vào hệ thống" sclass="button" image="/Share/img/icon/search.jpg"/>
+                    </h:td>
+                </h:tr>
+            </h:table>
+        </h:div>
+        <h:div id="gridDiv" >
+            <listbox id="lbTmpBill" 
+                     multiple="false"
+                     style="word-wrap: break-word"
+                     emptyMessage="Không tồn tại bản ghi">
+                <listhead sizable="true">
+                    <listheader width="5%" label="STT" align="center"/>
+                    <listheader width="25%" label="Số biên lai"  />
+                    <listheader width="25%" label="Mã sản phẩm"  />
+                    <listheader width="35%" label="Tên công ty"  />
+                    <listheader width="35%" label="Ngày tháng"/>
+                    <listheader width="35%" label="Trạng thái"/>
+                </listhead>
+                <template name="model">
+                    <listitem value="${each}">
+                        <listcell label="${forEachStatus.index+1+userPagingBottom.pageSize*userPagingBottom.activePage}" />
+                        <listcell label="${each.code}" />
+                        <listcell label="${each.productCode}" />
+                        <listcell label="${each.businessName}" />
+                        <listcell label="${$composer.convertDateToString(each.billDate)}"/>
+                        <listcell label="${each.status == 0 ? 'Chưa nhập' : each.status == 1 ? 'Đã nhập thành công' : 'Chưa nhập, đủ điều kiện'}" />
+                    </listitem>
+                </template>
+            </listbox>
+            <paging id="userPagingBottom" pageSize="10" detailed="true"/>
+        </h:div>  
+    </window>
+</zk>

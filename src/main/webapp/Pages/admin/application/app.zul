@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+	xmlns="http://www.zkoss.org/2005/zul" id="windowAppAll"
+	title="Quản lý ứng dụng" border="normal"
+	apply="com.viettel.voffice.DAO.System.Application.AppController">
+	<vlayout>
+		<groupbox mold="3d">
+			<caption label="Tìm kiếm ứng dụng" />
+			<h:table width="100%">
+				<h:tr>
+					<h:td width="20%">
+						<label value="Mã ứng dụng" />
+					</h:td>
+					<h:td width="30%">
+						<textbox id="tbAppCode" width="80%"
+							maxlength="50" />
+					</h:td>
+					<h:td width="20%">
+						<label value="Tên ứng dụng" />
+					</h:td>
+					<h:td width="30%">
+						<textbox id="tbAppName" width="80%"
+							maxlength="100" />
+					</h:td>
+				</h:tr>
+				<h:tr>
+					<h:td width="20%">
+						<label value="Trạng thái" />
+					</h:td>
+					<h:td width="30%">
+						<listbox id="lbAppStatus" mold="select"
+							width="80%">
+							<listitem label="Hoạt động" value="1" />
+							<listitem label="Bị khóa" value="0" />
+							<listitem label="--Chọn--" selected="true"
+								value="-1" />
+						</listbox>
+					</h:td>
+					<h:td />
+					<h:td />
+				</h:tr>
+				<h:tr>
+					<h:td colspan="4" align="center">
+						<button id="btnSearch" label="Tìm kiếm"
+							image="/Share/img/search.png" />
+					</h:td>
+				</h:tr>
+			</h:table>
+		</groupbox>
+
+		<groupbox mold="3d">
+			<caption label="Danh sách ứng dụng" />
+			<vlayout>
+				<listbox id="lbListApp" model="${$composer.listApp}"
+					mold="paging" pageSize="10" emptyMessage="Không có ứng dụng nào"
+					checkmark="true">
+					<listhead>
+						<listheader label="STT" hflex="min" />
+						<listheader label="Mã ứng dụng" />
+						<listheader label="Tên ứng dụng" />
+						<listheader label="Mô tả ứng dụng" />
+						<listheader align="center" label="Trạng thái"
+							hflex="min" />
+						<listheader align="center" label="Xem"
+							hflex="min" />
+						<listheader align="center" label="Sửa"
+							hflex="min" />
+						<listheader align="center" label="Chức năng"
+							hflex="min" />
+					</listhead>
+					<template name="model">
+						<listitem>
+							<listcell label="${forEachStatus.index+1}" />
+							<listcell label="${each.appCode}" />
+							<listcell>
+								<div style="word-break:break-all;">
+									<label value="${each.appName}" />
+								</div>
+							</listcell>
+							<listcell label="${each.description}" />
+							<listcell>
+								<label if="${each.status == 1}"
+									value="Hoạt động" />
+								<label if="${each.status != 1}"
+									value="Bị khóa" />
+							</listcell>
+							<listcell>
+								<image src="/Share/img/icon/view.png"
+									width="20px" height="20px"
+									forward="onClick=lbListApp.onOpenView(${each})"
+									tooltiptext="Xem ứng dụng" />
+							</listcell>
+							<listcell>
+								<image src="/Share/img/icon/edit.png"
+									width="20px" height="20px"
+									forward="onClick=lbListApp.onOpenUpdate(${each})"
+									tooltiptext="Sửa ứng dụng" />
+							</listcell>
+							<listcell>
+								<image src="/Share/img/function.png"
+									width="20px" height="20px"
+									forward="onClick=lbListApp.onOpenObject(${each})"
+									tooltiptext="Xem chức năng của ứng dụng" />
+							</listcell>
+						</listitem>
+					</template>
+				</listbox>
+				<include id="toolbarApp"
+					src="/Pages/common/toolbarApplication.zul" />
+			</vlayout>
+		</groupbox>
+	</vlayout>
+</window>

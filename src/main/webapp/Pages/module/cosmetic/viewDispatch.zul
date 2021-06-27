@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window id="viewDispatchWnd" border="normal" width="800px"
+        xmlns:h="http://www.w3.org/1999/xhtml"
+        xmlns="http://www.zkoss.org/2005/zul"
+        apply="com.viettel.module.cosmetic.Controller.CosmeticViewDispatchController" 
+        position="center,center" closable="true">
+    <style src="/Share/css/formstyle.css" />
+    <style src="/Share/css/uploadstyle.css" />
+    <script type="text/javascript" src="/Share/js/UPMSamples.js" />
+    <caption label="${$composer.getLabelCos('view_dispatch_caption')}" />
+    <div id="main">
+        <div id="divDispath">
+            <!--        <include id="incList" src="/Pages/module/cosmetic/viewDispatchInclude.zul" />-->
+        </div>
+    </div>
+    <h:table width="100%">
+        <h:tr> 
+            <h:td colspan="2" style="text-align:center">
+                <button label="Đóng" id="btnCancel" onClick="viewDispatchWnd.detach()" src="/Share/img/icon/close.png"/>
+            </h:td>
+        </h:tr>
+    </h:table>
+</window>

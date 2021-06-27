@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+	xmlns="http://www.zkoss.org/2005/zul" id="windowReportBook"
+	apply="com.viettel.voffice.DAO.DocIn.DocInReportBookController">
+	<script defer="true">
+		toolBar.widget = "windowReportBook";
+		addToolbar("Share/img/icon/excel_table.png", "Xuất file	excel","onExportExcel");
+	</script>
+	<include src="/Pages/common/searchToolbar.zul" />
+	<h:div class="contentDiv">
+		<groupbox id="fullSearchGbx" mold="3d" visible="false">
+			<caption label="Tìm kiếm nâng cao" />
+			<h:table align="center" width="100%">
+				<h:th width="15%" />
+				<h:th width="35%" />
+				<h:th width="15%" />
+				<h:th width="35%" />
+				<h:tr>
+					<h:td>
+						<label value="Sổ văn bản" />
+					</h:td>
+					<h:td>
+						<listbox id="lbBookIn" mold="select" width="80%"
+							onAfterRender="self.setSelectedIndex(0)">
+							<template name="model">
+								<listitem label="${each.bookName}"
+									value="${each.bookId}" />
+							</template>
+						</listbox>
+					</h:td>
+					<h:td>
+						<label value="Loại văn bản" />
+					</h:td>
+					<h:td>
+						<listbox id="lbDocType" mold="select"
+							width="80%" onAfterRender="self.setSelectedIndex(0)">
+							<template name="model">
+								<listitem label="${each.name}"
+									value="${each.categoryId}" />
+							</template>
+						</listbox>
+					</h:td>
+				</h:tr>
+				<h:tr>
+					<h:td>
+						<label value="Từ ngày" />
+					</h:td>
+					<h:td>
+						<datebox id="dbFromDay" cols="12"
+							format="dd/MM/yyyy" width="230px">
+						</datebox>
+					</h:td>
+					<h:td>
+						<label value="Đến ngày" />
+					</h:td>
+					<h:td>
+						<datebox id="dbToDay" cols="12"
+							format="dd/MM/yyyy" width="230px">
+						</datebox>
+					</h:td>
+				</h:tr>
+				<h:tr>
+					<h:td colspan="4" align="center">
+						<button id="btnSearch" label="Tìm kiếm"
+							sclass="button" image="/Share/img/icon/search.jpg" />
+						<button id="btnExport" label="Xuất file Excel"
+							image="/Share/img/icon/excel.png" sclass="button"
+							forward="onClick=windowReportBook.onExportExcel" />
+					</h:td>
+				</h:tr>
+			</h:table>
+		</groupbox>
+	</h:div>
+	<h:div class="contentDiv">
+		<paging id="userPagingTop" pageSize="10" detailed="true" />
+		<listbox id="lbListDoc" emptyMessage="Không có văn bản nào">
+			<listhead>
+				<listheader label="STT" align="center" hflex="min" />
+				<listheader label="Số / Kí hiệu" hflex="min" />
+				<listheader label="Ngày đến" hflex="min" />
+				<listheader label="Ngày ban hành" hflex="min" />
+				<listheader label="Cơ quan ban hành" hflex="1" />
+				<listheader label="Người ký" hflex="1" />
+				<listheader label="Trích yếu" hflex="2" />
+				<listheader label="Hạn xử lý" hflex="min" />
+			</listhead>
+			<template name="model">
+				<listitem>
+					<listcell>
+						<label
+							value="${forEachStatus.index + 1 + userPagingTop.pageSize * userPagingTop.activePage}" />
+					</listcell>
+					<listcell>
+						<label value="${each.documentCode}" />
+					</listcell>
+					<listcell>
+						<label value="${each.receiveDateStr}" />
+					</listcell>
+					<listcell>
+						<label value="${each.publishDateStr}" />
+					</listcell>
+					<listcell>
+						<label value="${each.publishAgencyName}" />
+					</listcell>
+					<listcell>
+						<label value="${each.signer}" />
+					</listcell>
+					<listcell>
+						<label value="${each.documentAbstract}" />
+					</listcell>
+					<listcell>
+						<label value="${each.deadlineByDateStr}" />
+					</listcell>
+				</listitem>
+			</template>
+		</listbox>
+		<paging id="userPagingBottom" pageSize="10" detailed="true" />
+
+	</h:div>
+
+</window>

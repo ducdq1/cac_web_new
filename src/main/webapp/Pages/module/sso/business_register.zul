@@ -1,0 +1,247 @@
+<zk xmlns:x="xhtml" xmlns:h="http://www.w3.org/1999/xhtml">
+	<h:style>body { margin: 0; padding: 0 0px; }</h:style>
+
+	<h:div
+		style="background-color: red; width: 100%; height: 100px; margin: auto;">
+		<h:div
+			style="background-color: green; width: 90%; height: 100px; margin: auto;">
+		</h:div>
+	</h:div>
+
+	<window id="businessWindow" style="max-width: 900px; margin: auto;"
+		apply="com.viettel.module.sso.controller.BusinessRegistrationController"
+		title="Đăng ký tài khoản" border="normal">
+		<style>
+			.nav_toolbar .z-toolbarbutton-content i { font-size: 20px;}
+			.nav_tabs .z-tabpanel { padding: 0; border-bottom: 0 none;}
+			.nav_tabs .z-tabpanels .z-toolbarbutton-content { padding:
+			4px;} .nav_category { cursor:pointer; } .nav_text { color:
+			#696569; font-size : 24px; font-weight: bold;}
+		</style>
+
+		<groupbox>
+			<groupbox>
+				<caption label="Thông tin tài khoản"></caption>
+				<div style="padding: 10px;">
+					<label value="Email đăng ký:"></label>
+				</div>
+				<div style="padding-left: 10px;">
+					<textbox id="tbRegisEmail" width="300px"></textbox>
+				</div>
+				<div style="padding: 10px;">
+					<label value="Email sử dụng làm tên đăng nhập"></label>
+				</div>
+			</groupbox>
+
+			<groupbox>
+				<caption label="Thông tin doanh nghiệp"></caption>
+				<tablelayout columns="3" width="100%">
+					<tablechildren width="33%">
+						<div>
+							<label value="Tên tiếng việt"></label>
+						</div>
+						<div>
+							<textbox id="tbNameVN" width="90%"></textbox>
+						</div>
+						<div height="10px"></div>
+						<div>
+							<label value="Mã số thuế"></label>
+						</div>
+						<div>
+							<textbox id="tbTaxCode" width="90%"></textbox>
+						</div>
+					</tablechildren>
+					<tablechildren width="33%">
+						<div>
+							<label value="Tên tiếng anh"></label>
+						</div>
+						<div>
+							<textbox id="tbNameEN" width="90%"></textbox>
+						</div>
+						<div height="10px"></div>
+						<div>
+							<label
+								value="Số ĐKKD/Số giấy phép hoạt động">
+							</label>
+						</div>
+						<div>
+							<textbox id="tbNumberInLaw" width="90%"></textbox>
+						</div>
+					</tablechildren>
+					<tablechildren>
+						<div>
+							<label value="Tên viết tắt"></label>
+						</div>
+						<div>
+							<textbox id="tbSortName" width="90%"></textbox>
+						</div>
+
+					</tablechildren>
+				</tablelayout>
+			</groupbox>
+
+			<groupbox>
+				<caption label="Địa chỉ doanh nghiệp"></caption>
+				<tablelayout columns="3" width="100%">
+					<tablechildren width="33%">
+						<div>
+							<label value="Tỉnh/Thành phố"></label>
+						</div>
+						<div>
+							<combobox id="cbTinh" width="90%"></combobox>
+						</div>
+						<div height="10px"></div>
+						<div>
+							<label value="Địa chỉ chi tiết"></label>
+							<label value="(*)" style="color: red;"></label>
+						</div>
+						<div>
+							<textbox id="tbAddress" width="90%"></textbox>
+						</div>
+						<div height="10px"></div>
+						<div>
+							<label value="Số Fax"></label>
+						</div>
+						<div>
+							<textbox id="tbFax" width="90%"></textbox>
+						</div>
+					</tablechildren>
+					<tablechildren width="33%">
+						<div>
+							<label value="Quận/Huyện"></label>
+						</div>
+						<div>
+							<combobox id="cbQuan" width="90%"></combobox>
+						</div>
+						<div height="10px"></div>
+						<div>
+							<label value="Điện thoại"></label>
+							<label value="(*)" style="color: red;"></label>
+						</div>
+						<div>
+							<textbox id="tbPhone" width="90%"></textbox>
+						</div>
+						<div height="10px"></div>
+						<div>
+							<label value="Website"></label>
+						</div>
+						<div>
+							<textbox id="tbSite" width="90%"></textbox>
+						</div>
+					</tablechildren>
+					<tablechildren>
+						<div>
+							<label value="Xã/Phường"></label>
+						</div>
+						<div>
+							<combobox id="cbXa" width="90%"></combobox>
+						</div>
+						<div height="10px"></div>
+						<div>
+							<label value="Email "></label>
+							<label value="(*)" style="color: red;"></label>
+						</div>
+						<div>
+							<textbox id="tbEmail" width="90%"></textbox>
+						</div>
+					</tablechildren>
+				</tablelayout>
+			</groupbox>
+
+			<groupbox>
+				<caption label="Thông tin người đại diện"></caption>
+				<tablelayout columns="3" width="100%">
+					<tablechildren width="33%">
+						<div>
+							<label value="Họ và tên "></label>
+							<label value="(*)" style="color: red;"></label>
+						</div>
+						<div>
+							<textbox id="tbFactorName" width="90%"></textbox>
+						</div>
+						<div height="10px"></div>
+						<div>
+							<label value="Chức vụ "></label>
+							<label value="(*)" style="color: red;"></label>
+						</div>
+						<div>
+							<combobox id="cbFactorPosition" width="90%"></combobox>
+						</div>
+					</tablechildren>
+					<tablechildren width="33%">
+						<div>
+							<label value="Email "></label>
+							<label value="(*)" style="color: red;"></label>
+						</div>
+						<div>
+							<textbox id="tbFactorEmail" width="90%"></textbox>
+						</div>
+						<div>
+							<label
+								value="Email để nhận mật khẩu từ hệ thống">
+							</label>
+						</div>
+					</tablechildren>
+					<tablechildren>
+						<div>
+							<label value="Số điện thoại"></label>
+							<label value="(*)" style="color: red;"></label>
+						</div>
+						<div>
+							<textbox id="tbFactorPhone" width="90%"></textbox>
+						</div>
+
+					</tablechildren>
+				</tablelayout>
+			</groupbox>
+
+			<groupbox>
+				<caption
+					label="Tên và địa chỉ văn phòng đại diện hoặc người liên lạc ở Việt Nam">
+				</caption>
+				<tablelayout columns="3" width="100%">
+					<tablechildren width="33%">
+						<div>
+							<label value="Họ và tên "></label>
+						</div>
+						<div>
+							<textbox id="tbFactorNameVN" width="90%"></textbox>
+						</div>
+						<div height="10px"></div>
+						<div>
+							<label value="Địa chỉ "></label>
+						</div>
+						<div>
+							<textbox id="tbFactorAddressVN" width="90%"></textbox>
+						</div>
+					</tablechildren>
+					<tablechildren width="33%">
+						<div>
+							<label value="Email"></label>
+						</div>
+						<div>
+							<textbox id="tbFactorEmailVN" width="90%"></textbox>
+						</div>
+					</tablechildren>
+					<tablechildren>
+						<div>
+							<label value="Số điện thoại"></label>
+						</div>
+						<div>
+							<textbox id="tbFactorPhoneVN" width="90%"></textbox>
+						</div>
+
+					</tablechildren>
+				</tablelayout>
+			</groupbox>
+
+		</groupbox>
+
+		<separator height="10px"></separator>
+		<div width="100%" align="center">
+			<button id="btnSave" label="Đăng Ký"></button>
+			<button id="btnCancel" label="Hủy Bỏ"></button>
+		</div>
+		<separator height="50px"></separator>
+	</window>
+</zk>

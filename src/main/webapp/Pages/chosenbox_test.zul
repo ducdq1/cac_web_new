@@ -1,0 +1,290 @@
+<zk>
+	<zscript>
+		<![CDATA[
+	String[] userName = { new String("Tony"), new String("Ryan"),
+			new String("Jumper"), new String("Wing"), new String("Sam"),
+			new String("Tony1"), new String("Ryan1"), new String("Jumper1"),
+			new String("Wing1"), new String("Sam1") };
+	String[] userName2 = { new String("Tony2"), new String("Ryan2"),
+			new String("Jumper2"), new String("Wing2"), new String("Sam2") };
+	ListModelList model = new ListModelList(userName);
+	ListModelList model2 = new ListModelList(userName2);
+	ListModel submodel = ListModels.toListSubModel(model);
+	public void addMsg(Label msg, String value) {
+		String _value = msg.getValue();
+		_value += "\n\r" + value;
+		msg.setValue(_value);
+	}
+]]></zscript>
+	<chosenbox model="${model}" tabindex="2" selectedIndex="-1"
+		id="cbxtest"
+		width="300px" emptyMessage="This is the test box" creatable="true"
+		createMessage="create new - {0}" noResultsText="no such item - {0}"
+		onSelect="">
+	</chosenbox>
+	<chosenbox id="cbx" model="${submodel}" width="500px" onChanging=""
+		separator=",.;'/" emptyMessage="This is the test box" tabindex="1"
+		creatable="true" createMessage="create new - {0}"
+		noResultsText="no such item - {0}" selectedIndex="2" name="testbox">
+		<attribute name="onSelect">
+	addMsg(msg, "current selection: " + event.getSelectedObjects());
+	addMsg(msg, "current index: " + self.getSelectedIndex());
+</attribute>
+		<attribute name="onSearch">
+	String data = (String) event.getData();
+	addMsg(msg, "change value -- " + data);
+	if (data != null)
+		if (data.length() != 0) {
+			String newLabel = new String(data);
+			model.add(newLabel);
+			cbx.addItemToSelection(newLabel);
+		}
+	self.invalidate();
+</attribute>
+		<attribute name="onOpen">
+	if (self.isOpen())
+		addMsg(msg, "opened");
+	else
+		addMsg(msg, "closed");
+</attribute>
+	</chosenbox>
+	<div />
+	<button label="show selected items">
+		<attribute name="onClick">
+	System.out.println(cbx.getSelectedObjects());
+	addMsg(msg, "current selection: " + cbxtest.getSelectedObjects());
+</attribute>
+	</button>
+	<button label="clear model">
+		<attribute name="onClick">
+	cbx.setModel(null);
+	addMsg(msg, "current selection: " + cbx.getSelectedObjects());
+	addMsg(msg, "current index: " + cbx.getSelectedIndex());
+</attribute>
+	</button>
+	<button label="change model">
+		<attribute name="onClick">
+	cbx.setModel(model2);
+	addMsg(msg, "current selection: " + cbx.getSelectedObjects());
+	addMsg(msg, "current index: " + cbx.getSelectedIndex());
+</attribute>
+	</button>
+	<button label="insert AAA to position 2">
+		<attribute name="onClick">
+	model.add(2, "AAA");
+	addMsg(msg, "current selection: " + cbx.getSelectedObjects());
+	addMsg(msg, "current index: " + cbx.getSelectedIndex());
+</attribute>
+	</button>
+	<button label="insert BBB CCC position 2">
+		<attribute name="onClick">
+	List l = new ArrayList();
+	l.add("BBB");
+	l.add("CCC");
+	model.addAll(2, l);
+	addMsg(msg, "current selection: " + cbx.getSelectedObjects());
+	addMsg(msg, "current index: " + cbx.getSelectedIndex());
+</attribute>
+	</button>
+	<button label="remove item 3">
+		<attribute name="onClick">
+	model.remove(3);
+	addMsg(msg, "current selection: " + cbx.getSelectedObjects());
+	addMsg(msg, "current index: " + cbx.getSelectedIndex());
+</attribute>
+	</button>
+	<button label="remove item 0 and 1">
+		<attribute name="onClick">
+	model.remove(1);
+	model.remove(0);
+	addMsg(msg, "current selection: " + cbx.getSelectedObjects());
+	addMsg(msg, "current index: " + cbx.getSelectedIndex());
+</attribute>
+	</button>
+	<button label="show">
+		<attribute name="onClick">
+	cbx.setVisible(true);
+</attribute>
+	</button>
+	<button label="enable">
+		<attribute name="onClick">
+	cbx.setDisabled(false);
+	addMsg(msg, "enabled");
+</attribute>
+	</button>
+	<checkbox label="open" checked="false">
+		<attribute name="onCheck">
+	cbx.setOpen(self.isChecked());
+	addMsg(msg, "open? " + cbx.isOpen());
+</attribute>
+	</checkbox>
+	<checkbox label="disable" checked="false">
+		<attribute name="onCheck">
+	cbx.setDisabled(self.isChecked());
+	addMsg(msg, "disable? " + cbx.isDisabled());
+</attribute>
+	</checkbox>
+	<checkbox label="use sub model" checked="true">
+		<attribute name="onCheck">
+	cbx.setModel(self.checked ? submodel : model);
+</attribute>
+	</checkbox>
+	<button label="remove first tony">
+		<attribute name="onClick">
+	cbx.removeItemFromSelection(cbx.getModel().getElementAt(0));
+	addMsg(msg, "current selection: " + cbx.getSelectedObjects());
+	addMsg(msg, "current index: " + cbx.getSelectedIndex());
+</attribute>
+	</button>
+	<button label="remove first jumper">
+		<attribute name="onClick">
+	cbx.removeItemFromSelection(cbx.getModel().getElementAt(2));
+	addMsg(msg, "current selection: " + cbx.getSelectedObjects());
+	addMsg(msg, "current index: " + cbx.getSelectedIndex());
+</attribute>
+	</button>
+	<button label="set item 2 and 0 selected">
+		<attribute name="onClick">
+	List l = new ArrayList();
+	l.add(cbx.getModel().getElementAt(2));
+	l.add(cbx.getModel().getElementAt(0));
+	cbx.setSelectedObjects(l);
+	addMsg(msg, "current selection: " + cbx.getSelectedObjects());
+	addMsg(msg, "current index: " + cbx.getSelectedIndex());
+</attribute>
+	</button>
+	<button label="select first Tony">
+		<attribute name="onClick">
+	cbx.setSelectedIndex(0);
+	addMsg(msg, "current selection: " + cbx.getSelectedObjects());
+	addMsg(msg, "current index: " + cbx.getSelectedIndex());
+</attribute>
+	</button>
+	<button label="select first jumper">
+		<attribute name="onClick">
+	cbx.setSelectedIndex(2);
+	addMsg(msg, "current selection: " + cbx.getSelectedObjects());
+	addMsg(msg, "current index: " + cbx.getSelectedIndex());
+</attribute>
+	</button>
+	<button label="select first Wing">
+		<attribute name="onClick">
+	cbx.setSelectedIndex(3);
+	addMsg(msg, "current selection: " + cbx.getSelectedObjects());
+	addMsg(msg, "current index: " + cbx.getSelectedIndex());
+</attribute>
+	</button>
+	<button label="select second jumper">
+		<attribute name="onClick">
+	cbx.setSelectedIndex(7);
+	addMsg(msg, "current selection: " + cbx.getSelectedObjects());
+	addMsg(msg, "current index: " + cbx.getSelectedIndex());
+</attribute>
+	</button>
+	<button label="select second Wing">
+		<attribute name="onClick">
+	cbx.setSelectedIndex(8);
+	addMsg(msg, "current selection: " + cbx.getSelectedObjects());
+	addMsg(msg, "current index: " + cbx.getSelectedIndex());
+</attribute>
+	</button>
+	<button label="clear all">
+		<attribute name="onClick">
+	cbx.setSelectedIndex(-1);
+	addMsg(msg, "current selection: " + cbx.getSelectedObjects());
+	addMsg(msg, "current index: " + cbx.getSelectedIndex());
+</attribute>
+	</button>
+	<button label="invalidate">
+		<attribute name="onClick">
+	cbx.invalidate();
+	addMsg(msg, "do invalidate!");
+	addMsg(msg, "current selection: " + cbx.getSelectedObjects());
+	addMsg(msg, "current index: " + cbx.getSelectedIndex());
+</attribute>
+	</button>
+	<button label="try select outofbound">
+		<attribute name="onClick">
+	addMsg(msg, "should throw exception");
+	cbx.setSelectedIndex(100);
+</attribute>
+	</button>
+	<button label="try select unknown item">
+		<attribute name="onClick">
+	List l = new ArrayList();
+	l.add(new String("Jumper"));
+	addMsg(msg, "should throw exception");
+	cbx.setSelectedObjects(l);
+</attribute>
+	</button>
+	<div />
+	<label id="msg" value="message:" pre="true" />
+	<absolutelayout>
+		<absolutechildren x="100" y="100">
+			<vbox>
+				<hbox>
+					<chosenbox model="${model}">
+						<template name="model">
+							Name is ${each}
+						</template>
+					</chosenbox>
+					<chosenbox model="${model}">
+						<template name="model">
+							Name is ${each}
+						</template>
+					</chosenbox>
+				</hbox>
+				<vbox>
+					<chosenbox model="${model}">
+						<template name="model">
+							Name is ${each}
+						</template>
+					</chosenbox>
+					<chosenbox model="${model}">
+						<template name="model">
+							Name is ${each}
+						</template>
+					</chosenbox>
+				</vbox>
+				<hbox>
+					<chosenbox model="${model}">
+						<template name="model">
+							Name is ${each}
+						</template>
+					</chosenbox>
+					<chosenbox model="${model}">
+						<template name="model">
+							Name is ${each}
+						</template>
+					</chosenbox>
+				</hbox>
+			</vbox>
+		</absolutechildren>
+		<absolutechildren x="300" y="300">
+			<anchorlayout>
+				<anchorchildren>
+					<chosenbox model="${model}" tabindex="5">
+						<template name="model">
+							Name is ${each}
+						</template>
+					</chosenbox>
+					<chosenbox model="${model}" tabindex="3">
+						<template name="model">
+							Name is ${each}
+						</template>
+					</chosenbox>
+					<chosenbox model="${model}" tabindex="7">
+						<template name="model">
+							Name is ${each}
+						</template>
+					</chosenbox>
+					<chosenbox model="${model}">
+						<template name="model">
+							Name is ${each}
+						</template>
+					</chosenbox>
+				</anchorchildren>
+			</anchorlayout>
+		</absolutechildren>
+	</absolutelayout>
+</zk>

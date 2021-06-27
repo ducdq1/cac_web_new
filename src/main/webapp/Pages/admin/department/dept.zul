@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <style src="/Share/css/formstyle.css"/>
+    <style>
+        .footer {
+        position: relative;
+        bottom: 0;
+        width: 100%;
+        margin:0 auto;
+        }
+        .gbChilds
+        {
+        padding:0px;
+        position: relative;
+        }
+        .divLeft .z-groupbox-3d-cnt
+        {
+        padding:0px !important;
+        }
+        .divRight .z-label
+        {
+        display:none;
+        }
+    </style>
+    <window id="win" apply="com.viettel.voffice.DAO.System.Department.DepartmentController" border="normal" height="100%">   
+        <caption label="Quản lý đơn vị" />
+        <borderlayout height="100%" vflex="min">
+            <west autoscroll="true" maxsize="600" size="30%" border="0" splittable="true" style="min-height: 500px">
+                <tree id="tree" style="padding-top:0px;border:0px;" >
+                    <template name="model">
+                        <treeitem>
+                            <treerow>
+                                <treecell>
+                                    <hlayout sclass="h-inline-block" style="display:inline-flex">
+                                        <image src="/Share/img/icon/dept.png"/>
+                                         <label value="${each.name}"/>
+                                    </hlayout>
+                                </treecell>
+                            </treerow>
+                        </treeitem>
+                    </template>
+                </tree>
+            </west>
+            <center border="0" style="min-height: 500px;" >
+                <borderlayout>
+                    <north border="0" title="Đơn vị cấp dưới" size="50%" splittable="true" collapsible="true">
+                        <div vflex="1">
+                            <h:div style="margin:2px;">
+                                <button id="btnCreate" label="Thêm mới" image="/Share/img/icon/add_1.png" sclass="button"/>
+                                <button id="btnDelete" label="Xoá" width="80px" image="/Share/img/delete.png" sclass="button"/>
+                            </h:div>
+                            <listbox id="deptChildsListbox" multiple="false" style="word-wrap:break-word;"
+                                     emptyMessage="Không tồn tại đơn vị cấp dưới" vflex="true"
+                                     mold="paging" pageSize="8" rows="7" pagingPosition="top" checkmark="true" 
+                            >
+                                <listhead sizable="true">
+                                    <listheader  label="STT" width="10%"/>
+                                    <listheader width="30%" label="Tên đơn vị" />
+                                    <listheader width="15%" label="Mã đơn vị" />
+                                    <listheader width="15%" label="Trạng thái"  />
+                                    <listheader width="5%" label="Xem" align="center"/>
+                                    <listheader width="5%" label="Sửa" align="center"/>
+                                    <listheader  width="20%" label="Người dùng" align="center"/>
+                                    <!--                                    <listheader width="40px" label="Thêm người dùng" align="center"/>-->
+                                </listhead>
+                                <template name="model">
+                                    <listitem value="${each}">
+                                        <listcell label="${forEachStatus.index+1}" />
+                                        <!--                                        <listcell>
+                                            <checkbox id="chkDeptItem${forEachStatus.index+1}" label="" forward="onClick=deptChildsListbox.onCheckItem" visible="${$composer.getCboxVisible(each.parentId)}" />
+                                        </listcell>-->
+                                        <listcell label="${each.deptName}" />
+                                        <listcell label="${each.deptCode}" />
+                                        <listcell label="${each.status ==1 ? 'Hoạt động' : 'Bị khóa'}" />
+                                        <listcell >
+                                            <image forward="onClick=deptChildsListbox.onView" src="/Share/img/icon/view.png" width="20px" height="20px" tooltiptext="Xem thông tin đơn vị"/>
+                                        </listcell>
+                                        <listcell >
+                                            <image forward="onClick=deptChildsListbox.onEdit" src="/Share/img/icon/edit.png" width="20px" height="20px" tooltiptext="Sửa đơn vị"/>
+                                        </listcell>
+                                        <listcell>
+                                            <image forward="onClick=deptChildsListbox.onViewUser" src="/Share/img/icon/entrust.png" width="20px" height="20px" tooltiptext="Danh sách người dùng"/>
+                                        </listcell>
+                                        <!--                                        <listcell>
+                                            <image forward="onClick=deptChildsListbox.onAddUser" src="/Share/img/icon/addUser.png" width="20px" height="20px"/>
+                                        </listcell>-->
+                                    </listitem>
+                                </template>
+                            </listbox>
+                        </div>
+                       
+                    </north>
+                    <center border="0" title="Danh sách người dùng">
+                        <div vflex="1">         
+                            <listbox id="deptUsersListbox" style="word-wrap:break-word;"
+                                     multiple="false" autopaging="true" vflex="true"
+                                     emptyMessage="Không tồn tại người dùng" mold="paging" pageSize="10" pagingPosition="top">
+                                <listhead sizable="true">
+                                    <listheader width="5%" label="STT" align="center"/>
+                                    <listheader width="15%" label="Tên đăng nhập"/>
+                                    <listheader width="25%" label="Họ và tên" />
+                                    <listheader width="15%" label="Chức vụ" />
+                                    <listheader width="10%" label="Điện thoại" />
+                                    <listheader width="15%" label="Email" />
+                                    <listheader width="15%" label="Trạng thái"  />
+                                    <!--                                    <listheader width="5%" label="Xem" align="center"/>-->
+                                    <!--                    <listheader width="5%" label="Sửa" align="center"/>
+                                    <listheader width="7%" label="Phân quyền" align="center"/>-->
+                                </listhead>
+                                <template name="model">
+                                    <listitem value="${each}">
+                                        <listcell label="${forEachStatus.index+1}" />
+                                        <listcell label="${each.userName}" />
+                                        <listcell label="${each.fullName}" />
+                                        <listcell label="${each.posName}" />
+                                        <listcell label="${each.telephone}" />
+                                        <listcell label="${each.email}" />
+                                        <listcell label="${each.status ==1 ? 'Hoạt động' : 'Không hoạt động'}" />
+                                        <!--                                        <listcell >
+                                            <image forward="onClick=deptUsersListbox.onView" src="/Share/img/icon/view.png" width="20px" height="20px"/>
+                                        </listcell>-->
+                                        <!--                       <listcell >
+                                             <image forward="onClick=deptUsersListbox.onEdit" src="/Share/img/icon/edit.png" width="20px" height="20px"/>
+                                         </listcell>
+                                        <listcell>
+                                            <image forward="onClick=deptChildsListbox.onViewUser" src="/Share/img/icon/entrust.png" width="20px" height="20px"/>
+                                        </listcell>-->
+                                    </listitem>
+                                </template>
+                            </listbox> 
+                        </div>
+                    </center>
+                </borderlayout>
+            </center>
+        </borderlayout>
+    </window>
+</zk>   
+    	
+    

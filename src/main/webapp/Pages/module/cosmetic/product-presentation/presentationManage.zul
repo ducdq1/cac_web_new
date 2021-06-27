@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul"
+    xmlns:h="http://www.w3.org/1999/xhtml">
+    <window id="presentationWnd" width="100%"
+            apply="com.viettel.module.cosmetic.Controller.ProductPresentationController"
+            border="normal"
+            title="${$composer.getLabelName('presentation_caption')}">
+        <style src="/Share/css/formstyle.css" />
+        <vlayout>
+            <groupbox mold="3d">
+                <caption label="${$composer.getLabelName('presentation_search_caption')}" />
+                <div align="center">
+                    <h:table width="80%">
+                        <h:tr>
+                            <h:td width="10%">
+                                <label value="${$composer.getLabelName('presentation_label_name_vi')}" />
+                            </h:td>
+                            <h:td width="30%">
+                                <textbox id="tbNameVi" width="80%" maxlength="255"></textbox>
+                            </h:td>
+                            <h:td width="10%">
+                                <label value="${$composer.getLabelName('presentation_label_name_en')}" />
+                            </h:td>
+                            <h:td width="30%">
+                                <textbox id="tbNameEn" width="80%" maxlength="255"></textbox>
+                            </h:td>
+                            <h:td width="10%">
+                                <label value="${$composer.getLabelName('presentation_label_is_active')}" />
+                            </h:td>
+                            <h:td width="10%">
+                                <listbox mold="select" id="lbIsActive">
+                                    <template name="model">
+                                        <listitem label="${each.name}" value="${each.value}" />
+                                    </template>
+                                </listbox>
+                            </h:td>
+                        </h:tr>
+                        <h:tr>
+                            <h:td colspan="6" align="center">
+                                <button sclass="button" id="btnSearch" label="${$composer.getLabelName('presentation_btn_search')}" image="/Share/img/icon/search.jpg" />
+                                <button sclass="button" id="btnAddNew" label="${$composer.getLabelName('presentation_btn_add')}" image="/Share/img/icon/add_1.png" />
+                            </h:td>
+                        </h:tr>
+                    </h:table>
+                </div>
+            </groupbox>
+            <groupbox mold="3d">
+                <caption label="${$composer.getLabelName('presentation_caption_list')}" />
+                <vlayout>
+                    <listbox id="lbListPresentation" mold="paging" pageSize="10" 
+                             emptyMessage="${$composer.getLabelName('presentation_list_empty_message')}" 
+                             checkmark="false">
+                        <listhead>
+                            <listheader label="STT" hflex="min" />
+                            <listheader label="${$composer.getLabelName('presentation_label_name_vi')}" hflex="5" />
+                            <listheader label="${$composer.getLabelName('presentation_label_name_en')}" hflex="5"/>
+                            <listheader label="${$composer.getLabelName('presentation_label_is_active')}" hflex="min" align="center" />
+                            <listheader label="${$composer.getLabelName('presentation_label_action_edit')}" hflex="min" />
+                            <listheader label="${$composer.getLabelName('presentation_label_action_delete')}" hflex="min" />
+                        </listhead>
+                        <template name="model">
+                            <listitem>
+                                <listcell label="${forEachStatus.index+1}" style="text-align:center;" />
+                                <listcell label="${each.nameVi}" />
+                                <listcell label="${each.nameEn}" />
+                                <listcell label="${each.isActive == 1 ? $composer.getLabelName('presentation_list_status_enable') : $composer.getLabelName('presentation_list_status_disable')}" />
+                                <listcell style="text-align: center">
+                                    <image forward="onClick=lbListPresentation.onEditItem" src="/Share/img/edit.png" width="20px" height="20px" tooltiptext="${$composer.getLabelName('presentation_tooltip_action_edit')}" />
+                                </listcell>
+                                <listcell style="text-align: center">
+                                    <image forward="onClick=lbListPresentation.onDeleteItem" src="/Share/img/delete.png" width="20px" height="20px" tooltiptext="${$composer.getLabelName('presentation_tooltip_action_delete')}" />
+                                </listcell>
+                            </listitem>
+                        </template>
+                    </listbox>
+                </vlayout>
+            </groupbox>
+            
+        </vlayout>
+    </window>
+
+</zk>

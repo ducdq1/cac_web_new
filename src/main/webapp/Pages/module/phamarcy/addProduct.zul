@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns="http://www.zkoss.org/2005/zul" title="Thêm mới sản phẩm"
+	apply="com.viettel.module.phamarcy.controller.AddProductController"
+	id="createDlg" width="97%" border="normal" position="center"
+	closable="true">
+<style>
+    .z-textbox-uppercase{
+    	text-transform:uppercase;
+    }
+    .z-combobox-btn{
+    height:29px !important;
+    }
+    .z-combobox-inp{
+    height:25px;
+    font-size:17px;
+    }
+  </style>
+	<div style="width:100%; margin:0 auto ;padding-top:10px;display: inline-flex"
+		align="center">
+		<div style="width:130px;float:left;" align="center">
+			<image id="QRCode" width="130px" height="130px"
+				style="border-radius:100px;">
+			</image>
+		</div>
+		<div style="width:100%;float:left; padding-left:10px">
+			<h:table style="width:100%;height:100%;padding-left:10px"
+				class="createTable">
+				<h:th width="15%" />
+				<h:th width="35%" />
+				<h:th width="15%" />
+				<h:th width="35%" />
+				<h:tr>
+				<h:td style="text-align: right;">
+					<label sclass="lb-create" >Loại sản phẩm:  </label>
+				</h:td>
+				<h:td colspan="3">
+					<radiogroup id="rdgProductType" onCheck="doCheck()"></radiogroup>
+					<groupbox width="97%" >
+					<caption label="Thiết bị" style="font-size:13px"/>
+					<radio radiogroup="rdgProductType" selected="true"
+						style="font-size:14px; "  label="Thiết bị nhỏ" />
+					<radio radiogroup="rdgProductType" style="font-size:14px;margin-left:22px "
+					 label="Thiết bị lớn" class="radio-input" />
+					 </groupbox>
+					 <groupbox width="97%" style="margin-top:5px;margin-bottom:10px">
+					<caption label="Gạch" style="font-size:13px;margin-bottom:10px" />
+						<radio radiogroup="rdgProductType" style="font-size:14px; "
+							label="Gạch G001" class="radio-input" />
+						<radio radiogroup="rdgProductType" style="font-size:14px;margin-left:22px "
+							label="Gạch lớn" class="radio-input" />
+				 
+						<radio radiogroup="rdgProductType" style="font-size:14px;margin-left:22px  "
+							label="Gạch G065 và G20" class="radio-input" />
+							</groupbox>
+					</h:td>
+				</h:tr>
+				<h:tr>
+					<h:td style="text-align: right;">
+						<label sclass="lb-create">Mã vật tư(*):  </label>
+					</h:td>
+					<h:td>
+						<textbox id="tbMaHangHoa" > </textbox>
+					</h:td>
+				 </h:tr>
+				<h:tr>
+					<h:td style="text-align: right;">
+						<label sclass="lb-create">Tên sản phẩm(*):  </label>
+					</h:td>
+					<h:td colspan="1">
+						<div><combobox autodrop="true" autocomplete="true" id="cbTenSP" width="82%" maxlength="2000" style="margin-bottom:10px" >
+						<template name="model">
+							<comboitem value="${each}"
+									label="${each.value}" />
+						</template>
+				</combobox>
+						<button class="button" height="30px"
+							image="/Share/img/icon/Add.png" id="btnThemTenSP" label="" tooltip="Thêm tên sản phẩm" /></div>
+					</h:td>
+				 
+					<h:td width="15%" style="text-align: right;">
+						<label sclass="lb-create" >Mã sản phẩm(*):</label>
+					</h:td>
+					<h:td width="85%" colspan="1">
+						<textbox id="tbMaSP" maxlength="2000" style="margin-bottom:10px"/>
+					</h:td>
+
+				</h:tr>
+				<h:tr>
+					<h:td style="text-align: right;">
+						<label sclass="lb-create" >Xuất xứ:  </label>
+					</h:td>
+					<h:td colspan="1"  >
+						<div><combobox autocomplete="true" id="cbXuatXu" width="82%" maxlength="2000" style="margin-bottom:10px">
+						<template name="model">
+							<comboitem value="${each}"
+									label="${each.value}" />
+						</template>
+						</combobox>
+						<button class="button" height="30px"
+							image="/Share/img/icon/Add.png" id="btnThemXuatXu" label="" tooltip="Thêm xuất xứ" /></div>
+					</h:td>
+			 
+					<h:td style="text-align: right;">
+						<label sclass="lb-create">Thông tin bảo hành:  </label>
+					</h:td>
+					<h:td colspan="1">
+						<div><combobox autocomplete="true" id="cbBaoHanh" width="82%" maxlength="2000" style="margin-bottom:10px">
+						<template name="model">
+							<comboitem value="${each}"
+									label="${each.value}" />
+						</template>
+						</combobox>
+						<button class="button" height="30px"
+							image="/Share/img/icon/Add.png" id="btnThemBaoHanh" label="" tooltip="Thêm thông tin bảo hành" /></div>
+					</h:td>
+				</h:tr>
+				<h:tr>
+					<h:td style="text-align: right;">
+						<label sclass="lb-create">Giá nhập:  </label>
+					</h:td>
+					<h:td colspan="1">
+						<textbox id="tbGiaNhap" maxlength="2000" style="margin-bottom:10px"/>
+					</h:td>
+				 
+					<h:td style="text-align: right;">
+						<label sclass="lb-create">Giá bán:  </label>
+					</h:td>
+					<h:td colspan="1">
+						<textbox id="tbGia" maxlength="2000" style="margin-bottom:10px"/>
+					</h:td>
+				</h:tr>
+				
+				<h:tr>
+					<h:td style="text-align: right;">
+						<label sclass="lb-create">Tính năng:  </label>
+					</h:td>
+					<h:td colspan="1">
+						<div><combobox id="cbTinhNang" autocomplete="true"  maxlength="2000" width="82%" style="margin-bottom:10px">
+						<template name="model">
+							<comboitem value="${each}"
+									label="${each.value}" />
+						</template>
+						</combobox>
+						<button class="button" height="30px"
+							image="/Share/img/icon/Add.png" id="btnThemTinhNang" label="" />
+							</div>
+					</h:td>
+				 
+					<h:td style="text-align: right;">
+						<label sclass="lb-create">Kích thước:  </label> 
+					</h:td>
+					<h:td>
+						<div><combobox id="cbKichThuoc" autocomplete="true"  maxlength="2000" width="82%" style="margin-bottom:10px">
+						<template name="model">
+							<comboitem value="${each}"
+									label="${each.value}" />
+						</template>
+						</combobox>
+						<button class="button" height="30px"
+							image="/Share/img/icon/Add.png" id="btnThemKichThuoc" label="" />
+							</div>
+					</h:td>
+					
+				</h:tr>
+					<h:tr>
+					<h:td style="text-align: right;">
+						<label sclass="lb-create">Đơn vị tính(*):  </label>
+					</h:td>
+					<h:td colspan="1">
+						<div><combobox id="cbDonViTinh" autocomplete="true"  width="82%" style="margin-bottom:10px" >
+						<template name="model">
+							<comboitem value="${each}"
+									label="${each.value}" />
+						</template>
+						</combobox>
+						<button class="button" height="30px"
+							image="/Share/img/icon/Add.png" id="btnThemDonViTinh" label="" />
+							</div>
+					</h:td>
+				 
+					<h:td style="text-align: right;">
+						<label sclass="lb-create">Trọng lượng thùng:  </label> 
+					</h:td>
+					<h:td>
+						<div><combobox id="cbTrongLuongThung" autocomplete="true"  width="82%" style="margin-bottom:10px">
+						<template name="model">
+							<comboitem value="${each}"
+									label="${each.value}" />
+						</template>
+						</combobox>
+						<button class="button" height="30px"
+							image="/Share/img/icon/Add.png" id="btnThemTrongLuongThung" label="" /></div>
+					</h:td>
+					 
+				</h:tr>
+				<h:tr>
+					<h:td style="text-align: right;">
+						<label sclass="lb-create">Đóng gói viên/thùng:  </label> 
+					</h:td>
+					<h:td>
+						<div><combobox id="cbDongGoi" autocomplete="true" width="82%" style="margin-bottom:10px">
+						<template name="model">
+							<comboitem value="${each}"
+									label="${each.value}" />
+						</template>
+						</combobox>
+						<button class="button" height="30px"
+							image="/Share/img/icon/Add.png" id="btnThemDongGoi" label="" />
+							</div>
+					</h:td>
+					<h:td style="text-align: right;">
+						<label sclass="lb-create">Nơi sản xuất:  </label> 
+					</h:td>
+					<h:td>
+						<div><combobox id="cbNoiSanXuat" autocomplete="true" width="82%" style="margin-bottom:10px">
+	
+						<template name="model">
+							<comboitem value="${each}"
+									label="${each.value}" />
+						</template>
+						</combobox>
+						<button class="button" height="30px"
+							image="/Share/img/icon/Add.png" id="btnThemNoiSanXuat" label="" />
+							</div>
+					</h:td>
+				</h:tr>
+				<h:tr>
+					<h:td style="text-align: right;">
+						<label sclass="lb-create">Mô tả màu sắc:  </label>
+					</h:td>
+					<h:td colspan="1">
+					<div><combobox autocomplete="true" id="cbColor" width="82%" maxlength="2000" style="margin-bottom:10px">
+						<template name="model">
+							<comboitem value="${each}"
+									label="${each.value}" />
+						</template>
+						</combobox>
+						<button class="button" height="30px"
+							image="/Share/img/icon/Add.png" id="btnThemMauSac" label="" tooltip="Thêm mô tả màu sắc" /></div>
+					</h:td>
+				 <h:td style="text-align: right;">
+						<label sclass="lb-create">Thông số kỹ thuật:  </label> 
+					</h:td>
+					<h:td>
+						<div><combobox id="cbThongSoKyThuat" autocomplete="true" width="82%" style="margin-bottom:10px">
+						<template name="model">
+							<comboitem value="${each}"
+									label="${each.value}" />
+						</template>
+						</combobox>
+						<button class="button" height="30px"
+							image="/Share/img/icon/Add.png" id="btnThemThongSoKT" label="" />
+							</div>
+					</h:td>
+				</h:tr>
+				<h:tr>
+					<h:td style="text-align: right;">
+						<label id="lbDSP" sclass="lb-create" visible="false">Dòng sản phẩm:  </label> 
+					</h:td>
+					<h:td>
+						<textbox id="tbDSP" maxlength="2000" width="80%" visible="false" style="margin-bottom:10px"/>
+					</h:td>
+				</h:tr>
+				
+				<h:tr>
+					<h:td style="text-align: right;">
+						<label sclass="lb-create">VAT:  </label>
+					</h:td>
+					<h:td colspan="1">
+						<radiogroup id="rdg"></radiogroup>
+
+						<radio radiogroup="rdg" style="font-size:14px; "
+							selected="false" label="Chưa bao gồm VAT" />
+							<radio radiogroup="rdg" style="font-size:14px;margin-left:40px "
+							selected="true" label="Đã bao gồm VAT" class="radio-input" />
+					</h:td>
+				</h:tr>
+				<h:tr>
+					<h:td colspan="2" align="center"></h:td>
+				</h:tr>
+			</h:table>
+		</div>
+	</div>
+	<div style="padding-top:30px; padding-left:10px;float:left"
+		width="98%">
+		<label sclass="lb-create">Hình ảnh:  </label>
+		<button id="btnUpload" style=" padding-left:30px"
+			label="Upload ảnh" upload="true,maxsize=100014,multiple=true"
+			tooltiptext="Upload ảnh avatar" />
+			<button id="btnViewFile" style=" margin-left:30px;cursor:pointer" sclass="z-upload"
+			label="Xem ảnh thông số kỹ thuật"  
+			tooltiptext="Xem ảnh thông số kỹ thuật" />
+		<div style="padding-top:10px">
+			<listbox id="lbListImages" width="100%" checkmark="false"
+				nonselectableTags="*" emptyMessage="Không có ảnh nào">
+				<listhead sizable="true">
+					<listheader label="STT" align="center"
+						style="width:2%" />
+					<listheader label="Tên ảnh" align="center"
+						style="width:15%" />
+					<listheader label="Hình ảnh" align="center"
+						style="width:10%" />
+					<listheader label="Xóa" style="width:3%"
+						align="center" />
+				</listhead>
+				<template name="model">
+					<listitem
+						style="word-wrap: break-word !important; white-space: normal; text-align: left;">
+						<listcell>
+							<label
+								value="${ forEachStatus.index + 1 + userPagingTop.pageSize *
+						userPagingTop.activePage }">
+							</label>
+						</listcell>
+						<listcell style="text-align:left">
+							<label value="${each.attachName}" />
+						</listcell>
+
+						<listcell>
+							<image width="200px" height="200px" />
+						</listcell>
+
+						<listcell>
+							<image src="/Share/img/icon/delete.png"
+								width="22px" height="22px"
+								forward="onClick=lbListImages.onDeleteImage(${forEachStatus.index + 1 + userPagingTop.pageSize *
+								userPagingTop.activePage })"
+								tooltiptext="Xóa" />
+						</listcell>
+					</listitem>
+				</template>
+			</listbox>
+		</div>
+
+		<div style=" margin:0 auto ;padding-top:20px" align="center">
+			<button class="button" height="30px"
+				image="/Share/img/icon/save.png" id="btnSave" label="Lưu lại" />
+
+			<button class="button" height="30px"
+				image="/Share/img/icon/close.png" style="margin-left:10px"
+				label="Hủy bỏ" onClick="createDlg.onClose()" />
+		</div>
+	</div>
+	
+	<zscript><![CDATA[
+	void doCheck() {
+		if(rdgProductType.getSelectedIndex()>=2){
+			tbDSP.setVisible(true);
+			lbDSP.setVisible(true);
+		}else{
+			tbDSP.setVisible(false);
+			lbDSP.setVisible(false);
+		}
+	}
+	]]></zscript>
+</window>

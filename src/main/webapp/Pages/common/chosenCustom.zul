@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./windowChosen" ?>
+<zk xmlns:h="http://www.zkoss.org/2005/zk/native"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <style>
+        .container-od
+        {
+        border:1px solid #93bdef;
+        }
+        .odList
+        { 
+        min-height:25px;
+        }
+        .newFile
+        {
+        border:1px solid #93bdef;
+        border-radius:3px;
+        padding:2px;
+        border-radius: 4px;
+        height: 18px;
+        margin: 2px;
+        background: none repeat scroll 0 0 #eff6ff;
+        }
+        .newFile img
+        {
+        margin-top:7px;
+        margin-right: 3px;
+        }
+        .newFile .z-hlayout-inner
+        {
+            margin-top:-4px;
+        }
+        .newFile span
+        {
+        }
+        .clear-all
+        {
+        margin:5px 2px 5px 2px;
+         cursor: pointer;
+        }
+    </style>
+    <window id="windowChosen" border="none" width="100%" apply="com.viettel.voffice.CustomControl.CustomChosen">
+        <vlayout>
+            <h:div class="container-od">
+                <h:table width="100%">
+                    <h:tr>
+                        <h:td width="95%">
+                            <div id="flist" sclass="odList" width="100%" style="display:inline-block"> 
+                            </div>
+                        </h:td>
+                        <h:td>
+                            <image id="imgDeleleAll" src="/Share/img/ignore.png" tooltiptext="Xóa" sclass="clear-all"/>
+                            <textbox id="txtOutsideDepartmentId" visible="false"/>
+                            <textbox id="txtOutsideDepartmentName" height="0px" width="0px" left="-1000px" style="position:absolute"  onFocus="cmbOutsideDepartment.setVisible(true);cmbOutsideDepartment.focus();txtOutsideDepartmentName.setVisible(false);"/>
+                        </h:td>
+                    </h:tr>
+                </h:table>
+            </h:div>        
+            <combobox sclass="cbb-outside" id="cmbOutsideDepartment" width="100%">
+            </combobox>
+        </vlayout>
+        <script>
+             <![CDATA[         
+                jq(function() {
+                   $("body").click
+                    (
+                      function(e)
+                      {
+                      console.log(e.target.className);
+                      console.log(e.target.className.indexOf("cbb-outside"));
+                        if(e.target.className.indexOf("cbb-outside") !=-1)
+                        {
+                            console.log(e.target.className.indexOf("odList"));
+                           if(e.target.className.indexOf("odList") !=-1)
+                           {
+                                $(".cbb-outside").show();
+                            
+                           }
+                           else
+                           {
+                            $(".cbb-outside").hide();
+                           } 
+                        }
+                        else
+                        {
+                            $(".cbb-outside").show();
+                        }
+                      }
+                    );
+                });
+            ]]>
+        </script>
+    </window>
+</zk>

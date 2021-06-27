@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window id="viewEvaluationWnd" border="normal" width="600px"
+        xmlns:h="http://www.w3.org/1999/xhtml"
+        xmlns="http://www.zkoss.org/2005/zul"
+        apply="com.viettel.module.cosmetic.Controller.CosmeticViewEvaluationController" 
+        position="center,center" closable="true">
+    <style src="/Share/css/formstyle.css" />
+    <style src="/Share/css/uploadstyle.css" />
+    <script type="text/javascript" src="/Share/js/UPMSamples.js" />
+    <caption label="THÔNG TIN QUÁ TRÌNH THẨM ĐỊNH" />
+        
+    <include id="incList" src="/Pages/module/cosmetic/viewEvaluationInclude.zul" />
+            <h:table width="100%">
+                <h:tr> 
+                    <h:td colspan="2" style="text-align:center">
+                        <button label="Đóng" id="btnCancel" onClick="viewEvaluationWnd.detach()" src="/Share/img/icon/close.png"/>
+                    </h:td>
+                </h:tr>
+            </h:table>
+    
+    
+</window>

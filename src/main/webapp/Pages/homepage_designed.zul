@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns="http://www.zkoss.org/2005/zul">
+
+	<style src="../Share/homepage/style_comon1.css" />
+	<style src="../Share/css/homepage.css" />
+	<style>
+		.SpanTag { font-family:'MYRIADPRO-COND'!important;
+		font-size:18px !important; }
+
+		.SpanTag2 { font-family:'MYRIADPRO-COND'!important;
+		font-size:20px !important; }
+
+		.SpanTag3 { font-family:'MYRIADPRO-COND'!important;
+		font-size:12px !important; }
+
+		.SpanTag4 { font-family:'MYRIADPRO-COND'!important;
+		font-size:24px !important;
+		<!--border-bottom: 3px solid;-->
+		color: #df540a; font-size: 24px; font-weight: bold;
+		padding-bottom: 3px; padding-left: 3px; padding-right: 5px; }
+	</style>
+
+	<h:div
+		style="width:100%;
+     font-size:18px !important; background-color: #ededed;
+   	 background-position: center bottom;
+   	 background-repeat: repeat-x;">
+		<window
+			apply="com.viettel.module.cosmetic.Controller.HomepageDAO"
+			id="homePage">
+			<h:div>
+				<h:img style="width:100%"
+					src="../Share/homepage/new_images/banner.png" />
+				<h:div class="hr_name">
+					<h:ul class="h_menu">
+						<h:li class="li-active">
+							<a href="/Pages/homepage.zul">Trang chủ</a>
+						</h:li>
+						<h:li>
+							<a href="/Pages/proceduce.zul">
+								Thủ tục hành chính
+							</a>
+						</h:li>
+						<h:li>
+							<a
+								href="/Pages/lookupCosPermitManager.zul">
+								Tra cứu
+							</a>
+						</h:li>
+						<h:li>
+							<a href="/Pages/introduce.zul">Liên hệ</a>
+						</h:li>
+					</h:ul>
+				</h:div>
+			</h:div>
+
+			<h:div style="width:85%;margin:0 auto;">
+				<h:div style="width:33%;float:left">
+					<include src="/Pages/homepage/view_statistical.zul" />
+				</h:div>
+				
+				<h:div style="width:60%;float:left" class="view_action">
+					<include src="/Pages/homepage/step_action.zul" />
+				</h:div>
+			</h:div>
+			
+			
+			
+			
+			<h:div class="wrapper">
+				<h:div class="big_banner">
+					<h:div class="statistic">
+						<h:div class="titTK">
+							<h:div class="SpanTag2">
+								<a>Thống kê hồ sơ</a>
+							</h:div>
+						</h:div>
+						<h:div class="contentTK">
+							<h:table style="width:75%">
+								<h:tr>
+									<h:td>
+										<label class="SpanTag">
+											Số hồ sơ chờ nộp phí:
+										</label>
+									</h:td>
+									<h:td>
+										<a href="#"
+											style="color: #4c8f1f">
+											<label id="lblWaitProcess"
+												class="SpanTag">
+											</label>
+										</a>
+									</h:td>
+								</h:tr>
+								<h:tr>
+									<h:td style="width:80%">
+										<label class="SpanTag">
+											Số hồ sơ đã tiếp nhận:
+										</label>
+									</h:td>
+									<h:td style="width:20%">
+										<a href="#"
+											style="color: #4c8f1f">
+											<label id="lblSumFiles"
+												class="SpanTag">
+											</label>
+										</a>
+									</h:td>
+								</h:tr>
+								<h:tr>
+									<h:td>
+										<label class="SpanTag">
+											Số hồ sơ đã cấp số tiếp
+											nhận:
+										</label>
+									</h:td>
+									<h:td>
+										<a href="#"
+											style="color: #4c8f1f">
+											<label id="lblFinish"
+												class="SpanTag">
+											</label>
+										</a>
+									</h:td>
+								</h:tr>
+								<h:tr>
+									<h:td>
+										<label class="SpanTag">
+											Số hồ sơ không được cấp số
+											tiếp nhận:
+										</label>
+									</h:td>
+									<h:td>
+										<a href="#"
+											style="color: #4c8f1f">
+											<label id="lblFinishReject"
+												class="SpanTag">
+											</label>
+										</a>
+									</h:td>
+								</h:tr>
+								<h:tr>
+									<h:td>
+										<label class="SpanTag">
+											Số hồ sơ chờ sửa đổi bổ
+											sung:
+										</label>
+									</h:td>
+									<h:td>
+										<a href="#"
+											style="color: #4c8f1f">
+											<label
+												id="lblDaThongBaoSDBS" class="SpanTag">
+											</label>
+										</a>
+									</h:td>
+								</h:tr>
+								<h:tr>
+									<h:td>
+										<label class="SpanTag">
+											Số hồ sơ đang xử lý:
+										</label>
+									</h:td>
+									<h:td>
+										<a href="#"
+											style="color: #4c8f1f">
+											<label id="lblProcess"
+												class="SpanTag">
+											</label>
+										</a>
+									</h:td>
+								</h:tr>
+							</h:table>
+						</h:div>
+					</h:div>
+					<h:div class="RegForm">
+						 
+						<h:div class="contentReg"
+							style="margin-top: 30px">
+							
+							<h:div
+								style="margin-left: -40px;margin-top: -10px">
+								<h:div
+									style="height: 32px;background: url(../Share/homepage/images/support_3.png) left 5px no-repeat;">
+									<h:p>
+										<label class="SpanTag2"
+											style="margin-left: 40px;padding-top: 10px;color: #636363;font-weight: bolder;text-decoration: underline">
+											HỖ TRỢ TRỰC TUYẾN
+										</label>
+									</h:p>
+								</h:div>
+								<h:ul
+									style="margin-top: 5px;margin-left: 40px;">
+									<html id="htmlContactContent"
+										content="${$composer.getStringValue('2')}" />
+								</h:ul>
+							</h:div>
+						</h:div>
+					</h:div>
+				</h:div>
+				 
+				<h:div class="footer">
+					<h:div class="boxInfoFoot" id="notices"
+						style="width: 60% !important;color: #636363 !important">
+						<h:div class="TitleFoot iconReport">
+							<label class="SpanTag4">Thông báo</label>
+						</h:div>
+						<h:div style="padding: 8px;">
+							<html id="htmlAlertContent"
+								content="${$composer.getStringValue('1')}" />
+						</h:div>
+					</h:div>
+					
+					<h:div class="boxInfoFoot"
+						style="width: 30% !important;color: #636363 !important">
+						<h:table style="width:100%">
+							<h:tbody>
+								<h:tr>
+									<html id="htmlHelpContent"
+										content="${$composer.getStringValue('3')}" />
+								</h:tr>
+								
+								<h:tr>
+									<h:td>
+										<h:br />
+									</h:td>
+								</h:tr>
+								<h:tr>
+									<h:td>
+										<h:div
+											class="TitleFoot iconReport">
+											<label class="SpanTag4">
+												Thống kê
+											</label>
+										</h:div>
+										<h:div style="padding: 8px;">
+											<label class="SpanTag">
+												SỐ LƯỢNG TRUY CẬP VÀO HỆ
+												THỐNG
+											</label>
+										</h:div>
+										<h:div
+											style="margin-top: 15px;margin-left: 20px">
+											<!-- Histats.com  START (html only)-->
+											<!-- <h:img src="../Share/homepage/images/page-count.png" alt="web counter" border="0" /> -->
+											<html>												
+												<![CDATA[ <script
+												type="text/javascript">document.write(unescape("%3Cscript
+												src=%27http://s10.histats.com/js15.js%27
+												type=%27text/javascript%27%3E%3C/script%3E"));</script>
+												<a
+												href="http://www.histats.com"
+												target="_blank"
+												title="web stats"
+												><script
+												type="text/javascript" >
+												try
+												{Histats.start(1,3116492,4,408,270,55,"00011101");
+												Histats.track_hits();}
+												catch(err){};
+												</script></a>
+												<noscript><a
+												href="http://www.histats.com"
+												target="_blank"><img
+												src="http://sstatic1.histats.com/0.gif?3116492&101"
+												alt="web stats"
+												border="0"></a></noscript>
+												]]>							
+												
+												
+                                            </html>
+										</h:div>
+									</h:td>
+								</h:tr>
+							</h:tbody>
+						</h:table>
+					</h:div>
+					<h:div class="clear"></h:div>
+				</h:div>
+			</h:div>
+
+			<h:div class="footer_bt" style="margin-top:5px;">
+				<label class="SpanTag3">
+					Bản quyền: Cục Quản lý Dược - Bộ Y tế
+				</label>
+				<h:br />
+				<label class="SpanTag3">
+					Địa chỉ: 138A Giảng Võ - Hà Nội
+				</label>
+				<h:br />
+				<label class="SpanTag3">
+					Điện thoại: 844.37366483. Fax: 844.38234758. Email:
+					cqldvn@moh.gov.vn
+				</label>
+			</h:div>
+		</window>
+	</h:div>
+</zk>

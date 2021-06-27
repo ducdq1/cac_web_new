@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <window id="selectDeptDlg" apply="com.viettel.voffice.DAO.System.Users.UserSelectDeptController" width="550px" height="400px" visible="false" border="normal" position="center" closable="true">
+        <caption label="Chọn đơn vị"/>        
+        <h:div>
+            <button sclass="btnAction"
+                    label="Lưu" id="btnSaveAndClose" visible="false"  />
+        </h:div>
+        <h:div style="height:325px;overflow:auto">
+            <textbox id="txtDisplayIdComponentId" visible="false"/>
+            <textbox id="txtDisplayNameComponentId" visible="false"/>
+            <tree id="deptTree">
+                <template name="model">
+                    <!--<treeitem label="${each.name}"/>-->
+                    <treeitem>
+                        <treerow>
+                            <treecell>
+                                <hlayout sclass="h-inline-block" style="display:inline-flex">
+                                    <image src="/Share/img/icon/dept.png"/>
+                                      <label value="${each.name}"/>
+                                </hlayout>
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                </template>
+            </tree>
+        </h:div>
+        
+    </window>
+</zk>

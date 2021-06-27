@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+   
+    <window id="calendarCreateWnd" border="normal" width="600px"
+            apply="com.viettel.voffice.DAO.Calendar.CalendarCreateController" 
+            position="center,center" closable="true">
+        <caption label="Lịch" />
+        <h:div width="100%">
+            <h:table width="100%" style="border:1px solid white;border-collapse:collapse">
+                <h:tr>
+                    <h:td width="20%">
+                        <label value="Tiêu đề"  />
+                        <label value=" *" sclass="label-required" />
+                    </h:td>
+                    <h:td width="80%">
+                        <textbox id="txtCalendarId" visible="false"/>
+                        <textbox id="txtTitle"
+                                 width="400px" maxlength="250"/>
+                    </h:td>
+                
+                </h:tr>
+                <h:tr>
+                    <h:td width="20%">
+                        <label value="Địa điểm"  />
+                    </h:td>
+                    <h:td width="80%">
+                        <textbox id="txtLocationName"
+                                 width="400px" maxlength="250"/>
+                        <textbox id="txtLocationId"
+                                 visible="false"/>
+                        <!--                        <image id="btnSelectResource" src="/Share/img/icon/search.png" width="16px" height="16px"/>-->
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td>
+                        <label value="Thời gian bắt đầu"/>
+                    </h:td>
+                    <h:td>
+                        <datebox id="dbStartDate" format="short"  />
+                        <timebox id="tbStartTime" format="short"  />
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td>
+                        <label value="Kết thúc"/>
+                    </h:td>
+                    <h:td>
+                        <datebox id="dbEndDate" format="short"  />
+                        <timebox id="tbEndTime" format="short" />
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td width="20%"> 
+                        <label value="Mô tả" />
+                    </h:td>
+                    <h:td width="80%"> 
+                        <textbox id="txtDescription"
+                                 rows="3"
+                                 width="400px" maxlength="500" />
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td colspan="2" style="background-color:rgb(209,224,236); border:1px solid gray;vertical-align:middle">
+                        <label value="Thành phần tham gia"/>
+                        <image id="btnShowDept" src="/Share/img/icon/Add.png" tooltiptext="Chọn thành phần tham gia"/>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td width="20%" colspan="2" style="border:1px solid gray;">
+                        <listbox id="lbParticipants">
+                            <listhead sizable="true">
+                                <listheader width="10%" label="STT" align="center"/>
+                                <listheader width="30%" label="Đơn vị"/>
+                                <listheader width="30%" label="Người tham gia" />
+                                <listheader width="20%" label="Vai trò"  />
+                                <listheader width="10%" label="Xóa"  />
+                            </listhead>
+                            <template name="model">
+                                <listitem value="${each}">
+                                    <listcell label="${forEachStatus.index+1}" />
+                                    <listcell label="${each.deptName}" />
+                                    <listcell label="${each.userName}" />
+                                    <listcell >
+                                        <label value="Tham gia" if="${each.participantRole==0}" />
+                                        <label value="Chuẩn bị" if="${each.participantRole==1}" />
+                                        <label value="Chủ trì" if="${each.participantRole==2}" />
+                                        <label value="Phê duyệt" if="${each.participantRole==3}" />
+                                        <image forward="onClick=lbParticipants.onChangeType" src="/Share/img/icon/edit.png" width="20px" height="20px" tooltiptext="Đổi vai trò"/>
+                                    </listcell>
+                                    <listcell >
+                                        <image forward="onClick=lbParticipants.onDelete" src="/Share/img/icon/delete.png" width="20px" height="20px" tooltiptext="Xóa thành phần tham gia"/>
+                                    </listcell>
+                                </listitem>
+                            </template>
+                        </listbox>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td colspan="2" style="background-color:rgb(209,224,236); border:1px solid gray;vertical-align:middle">
+                        <label value="Tài nguyên sử dụng"/>
+                        <image id="btnShowResource" src="/Share/img/icon/Add.png" tooltiptext="Chọn tài nguyên sử dụng"/>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td colspan="2" style="background-color:rgb(209,224,236); border:1px solid gray;vertical-align:middle">
+                        <listbox id="lbResources">
+                            <listhead sizable="true">
+                                <listheader width="10%" label="STT" align="center"/>
+                                <listheader width="40%" label="Đơn vị"/>
+                                <listheader width="40%" label="Tài nguyên" />
+                                <listheader width="10%" label="Xóa"  />
+                            </listhead>
+                            <template name="model">
+                                <listitem value="${each}">
+                                    <listcell label="${forEachStatus.index+1}" />
+                                    <listcell label="${each.deptName}" />
+                                    <listcell label="${each.resourceName}" />
+                                    <listcell >
+                                        <image forward="onClick=lbResources.onDelete" src="/Share/img/icon/delete.png" width="20px" height="20px" tooltiptext="Xóa tài nguyên sử dụng"/>
+                                    </listcell>
+                                </listitem>
+                            </template>
+                        </listbox>
+                    </h:td>
+                </h:tr>
+                
+                <h:tr>
+                    <h:td colspan="2" style="text-align:center">
+                        <button height="30px" image="/Share/img/icon/save.png" id="btnSave" label="Lưu lại" />
+                        <button height="30px" image="/Share/img/icon/delete.png" id="btnDelete" label="Xóa" />
+                        <button height="30px" image="/Share/img/icon/close.png" id="btnCancel" label="Đóng" onClick="calendarCreateWnd.detach()" />
+                    </h:td>
+                </h:tr>
+            </h:table>
+        </h:div> 
+    </window>
+</zk>

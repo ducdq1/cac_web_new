@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.zkoss.org/2005/zk/native"
+    xmlns="http://www.zkoss.org/2005/zul">
+    
+    <style src="/Share/css/formstyle.css" />
+    
+    <h:div width="100%">
+        <groupbox width="100%" sclass="gb-form-create" closable="false">
+            <caption label="THÔNG TIN QUÁ TRÌNH THẨM ĐỊNH" />
+            <h:table width="100%">
+                <h:tr>
+                    <h:td width="20%">
+                        <label value="Nội dung thẩm định"  sclass="lb-create" />
+                    </h:td>
+                    <h:td width="80%">
+                        <label width="95%" multiline="true" pre="true"
+                           value="${$composer.evaluationRecord.staffEvaluationValue}"
+                           sclass="label-info"/>
+                    </h:td>
+                
+                </h:tr>
+                <h:tr>
+                    <h:td width="20%">
+                        <label value="Ý kiến chuyên viên"  sclass="lb-create" />
+                    </h:td>
+                    <h:td width="80%">
+                        <label width="95%" multiline="true" 
+                           value="${$composer.evaluationRecord.mainContent}"
+                           sclass="label-info"/>
+                    </h:td>
+                
+                </h:tr>
+                <h:tr>
+               
+                    <h:td>
+                        <label value="Ngày thẩm định" sclass="lb-create"/>
+                    </h:td>
+                    <h:td>
+                        <label width="95%" multiline="true" pre="true"
+                           value="${$composer.getFormatDate($composer.evaluationRecord.createDate)}"
+                           sclass="label-info"/>
+                    </h:td>
+                </h:tr>
+            
+                <h:tr>
+                    <h:td>
+                        <label value="Người thẩm định" sclass="lb-create" />
+                    </h:td>
+                    <h:td>
+                        <label width="95%" multiline="true" pre="true"
+                           value="${$composer.evaluationRecord.userName}"
+                           sclass="label-info"/>
+                    </h:td>
+                </h:tr>
+                
+                
+            </h:table>
+            
+        </groupbox>
+                                    
+        
+    </h:div> 
+    
+</zk>
+

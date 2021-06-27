@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./attachView" ?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    
+<window id="attachView" title="Biểu mẫu" border="normal" width="860px" height="620px" 
+    apply="com.viettel.voffice.DAO.Document.AttachContentController" 
+    position="center,center" closable="true">
+    <h:div style="height:580px">
+        <ckeditor width="100%" id="ckContentAttach" height="580px" toolbar="Empty"
+    customConfigurationsPath="/Share/js/wysiwyg_editor/config.js">
+    </ckeditor>
+    </h:div>
+</window>
+</zk>

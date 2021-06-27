@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <h:div id="toolBar" class="toolBar">
+<!--        <h:div style="background-color:white; width:250px; height:22px; margin-top:5px; border : 1px solid rgb(197,210,223); border-radius:16px; float:right">
+            <h:input maxlength="200" type="textbox" id="searchFullText" style="width:200px" onkeydown="toolBarCheckSearch(event);" autofocus="true" visible="false"/>
+            <h:img src="Share/img/icon/search.jpg" style="width:16px; height:16px;float:left" onclick="toolBarSearch();" visible="false"/>
+        </h:div>-->
+        <!--        <h:div id="btnShowFullSearch" class="toolbarButton" forward="onClick=docNotProcessWnd.onShowFullSearch">Tìm kiếm mở rộng</h:div>-->
+        <!--        <h:img id="workingTime8"  src="../Share/img/toolbar/year_pre.png" onclick="changeWorkingDay(8)" title="Năm trước"/>-->
+        <!--<h:img class="img-cal" id="workingTime7"  src="Share/img/png/lich-nam.png" onclick="changeWorkingDay(7)" title="Năm nay"/>-->
+        <!--        <h:img id="workingTime6"  src="../Share/img/toolbar/month.png" onclick="changeWorkingDay(6)" title="Tháng trước"/>-->
+        <!--<h:img class="img-cal" id="workingTime5"  src="Share/img/png/lich-thang.png" onclick="changeWorkingDay(5)" title="Tháng này"/>-->
+        <!--        <h:img id="workingTime4"  src="../Share/img/toolbar/week.png" onclick="changeWorkingDay(4)" title="Tuần trước"/>-->
+        <!--<h:img class="img-cal" id="workingTime3"  src="Share/img/png/lich-tuan.png" onclick="changeWorkingDay(3)" title="Tuần này"/>-->
+        <!--        <h:img id="workingTime2"  src="../Share/img/toolbar/date.png" onclick="changeWorkingDay(2)" title="Hôm qua"/>-->
+        <!--<h:img class="img-cal" id="workingTime1"  src="Share/img/png/lich-ngay.png" onclick="changeWorkingDay(1)" title="Hôm nay"/>-->
+        <!--        <h:img class="img-cal" src="Share/img/png/tim-kiem-nang-cao.png" title="Tìm kiếm nâng cao" onclick="sendAction('onShowFullSearch');"/>-->
+        <h:button  id="workingTime7" sclass="btnAction" label="Năm nay" style="background-color:#2b6fc2;background-image: url(Share/img/png/lich-nam.png);background-repeat:no-repeat;padding-left:24px;cursor: pointer;"
+           onclick="changeWorkingDay(7)">
+            Năm
+        </h:button>        
+        <h:button  id="workingTime5" sclass="btnAction" label="Tháng này" style="background-color:#2b6fc2;background-image: url(Share/img/png/lich-thang.png);background-repeat:no-repeat;padding-left:24px;cursor: pointer;"
+           onclick="changeWorkingDay(5)">
+            Tháng
+        </h:button>        
+        <h:button  id="workingTime3" sclass="btnAction" label="Tuần này" style="background-color:#2b6fc2;background-image: url(Share/img/png/lich-tuan.png);background-repeat:no-repeat;padding-left:24px;cursor: pointer;"
+                   onclick="changeWorkingDay(3)">
+            Tuần
+        </h:button>
+        <h:button  id="workingTime1" sclass="btnAction" label="Hôm nay" style="background-color:#2b6fc2;background-image: url(Share/img/png/lich-ngay.png);background-repeat:no-repeat;padding-left:24px;cursor: pointer;"
+                    onclick="changeWorkingDay(1)">
+            Ngày
+        </h:button>
+        <h:button sclass="btnAction" label="Tìm kiếm nâng cao" style="background: url(Share/img/png/tim-kiem-nang-cao.png) no-repeat #2b6fc2;padding-left:24px;cursor: pointer;"
+                   image="/Share/img/png/tim-kiem-nang-cao.png"
+                   onclick="sendAction('onShowFullSearch')">
+            Tìm kiếm
+        </h:button>
+         <h:button sclass="btnAction" label="Thao tác" style=" #2b6fc2;cursor: pointer;"
+                   onclick="sendAction('onShowActionMulti')">
+            Thao tác
+        </h:button>
+    </h:div>
+</zk>   

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns="http://www.zkoss.org/2005/zul">
+	<style src="../Share/homepage/style_comon.css" />
+	<style src="/Share/css/formstyle.css" />
+	<style src="/Share/css/voffice.css" />
+	<style>
+		.SpanTag { font-family:'MYRIADPRO-COND'!important;
+		font-size:18px !important; }
+
+		.SpanTag2 { font-family:'MYRIADPRO-COND'!important;
+		font-size:20px !important; }
+
+		.SpanTag3 { font-family:'MYRIADPRO-COND'!important;
+		font-size:12px !important; }
+
+		.SpanTag4 { font-family:'MYRIADPRO-COND'!important;
+		font-size:24px !important;
+		<!--border-bottom: 3px solid;-->
+		color: #df540a; font-size: 24px; font-weight: bold;
+		padding-bottom: 3px; padding-left: 3px; padding-right: 5px; }
+	</style>
+
+	<h:div
+		style="width:100%;font-family:'MyriadPro-BoldCond'!important;
+              font-size:18px !important; background-color: #f8f8f8;
+   		background-image: url('../Share/homepage/images/body-bg.png');
+    	background-position: center bottom;
+    	background-repeat: repeat-x;height:933px">
+		<window width="100%" id="lookupCosPermitManageWnd"
+			apply="com.viettel.module.cosmetic.Controller.ProceduceController"
+			border="none" height="100%">
+			<h:div class="header_hp">
+				<h:div class="banner">
+					<h:div class="logo1">
+						<h:img width="380" height="65"
+							src="../Share/homepage/images/logo.png" />
+					</h:div>
+					<h:div class="hotline">
+						<h:img width="" height=""
+							src="../Share/homepage/images/hotline_img.png" />
+					</h:div>
+				</h:div>
+			</h:div>
+			<h:div class="hr_name">
+				<h:ul class="h_menu">
+					<h:li>
+						<a href="/Pages/homepage.zul">Trang chủ</a>
+					</h:li>
+					<h:li class="li-active">
+						<a href="/Pages/proceduce.zul">
+							THỦ TỤC HÀNH CHÍNH
+						</a>
+					</h:li>
+					<h:li>
+						<a href="/Pages/lookupCosPermitManager.zul">
+							TRA CỨU
+						</a>
+					</h:li>
+					<h:li>
+						<a href="/Pages/introduce.zul">lIÊN HỆ</a>
+					</h:li>
+				</h:ul>
+			</h:div>
+			<h:div style="float:right">
+				<label id="lbTopWarning" class="notify" width="95%"
+					multiline="false" />
+			</h:div>
+			<h:div
+				style="margin-top:10px;margin-bottom:10px;"
+				class="SpanTag">
+				<h:br />
+				<h:div>
+					<h:div class="wrapper" >
+						<h:div style="width:100%;padding:10px" align="left">
+						<h:p />
+						Thông tư số 13/2009/TT-BYT ngày 01 tháng 9 năm 2009 của Bộ Y tế hướng dẫn hoạt động thông tin thuốc.
+						<h:p />
+						Xem thông tin chi tiết <h:a href="http://thuvienphapluat.vn/van-ban/Thuong-mai/Thong-tu-13-2009-TT-BYT-hoat-dong-thong-tin-quang-cao-thuoc-94229.aspx"> tại đây</h:a><h:br/>
+						<h:br/>
+						<h:br/>
+						<h:p />
+						Thông tư số 09/2015/TT-BYT ngày 25 tháng 05 năm 2015 của Bộ trưởng Bộ Y tế quy định về xác nhận nội dung quảng cáo đối với sản phẩm, hàng hóa, dịch vụ đặc biệt thuộc lĩnh vực quản lý của Bộ Y tế.
+						<h:p />
+						Xem thông tin chi tiết <h:a href="http://thuvienphapluat.vn/van-ban/Thuong-mai/Thong-tu-09-2015-TT-BYT-xac-nhan-noi-dung-quang-cao-san-pham-hang-hoa-dich-vu-quan-ly-cua-Bo-Y-te-275518.aspx"> tại đây</h:a><h:br/>
+						<h:br/>
+						<h:br/><h:br/>
+						<h:br/><h:br/>
+						<h:br/>
+						</h:div>
+					</h:div>
+				</h:div>
+			</h:div>
+			<!-- Footer -->
+			<h:div class="footer_bt">
+				<label class="SpanTag3">
+					Bản quyền: Cục Quản lý Dược - Bộ Y tế
+				</label>
+				 
+				<label class="SpanTag3">
+					Địa chỉ: 138A Giảng Võ - Hà Nội
+				</label>
+				 
+				<label class="SpanTag3">
+					Điện thoại: 844.37366483. Fax: 844.38234758. Email:
+					cqldvn@moh.gov.vn
+				</label>
+			</h:div>
+		</window>
+	</h:div>
+</zk>

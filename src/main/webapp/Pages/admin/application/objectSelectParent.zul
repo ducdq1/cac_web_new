@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window 
+    xmlns:h="http://www.zkoss.org/2005/zk/native"
+    xmlns="http://www.zkoss.org/2005/zul"
+    id="windowSelectParent" title="Chọn chức năng cha" position="center,center" closable="true"
+    border="normal" width="50%"
+    apply="com.viettel.voffice.DAO.System.Application.ObjectSelectParentController">
+    <tree id="treeObject" rows="20">
+    </tree>
+</window>

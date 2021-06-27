@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns="http://www.zkoss.org/2005/zul" title="Thêm mới sản phẩm"
+	apply="com.viettel.module.phamarcy.controller.AddProductController"
+	id="createDlg" width="100%" height="100%" border="normal" position="center"
+	closable="true">
+<style>
+    .z-textbox-uppercase{
+    	text-transform:uppercase;
+    }
+  </style>
+	<div style="width:100%; margin:0 auto ;display: inline-flex"
+		align="center">
+		<div style="width:100%;float:left; padding-left:10px">
+		<h:table style="width:100%;height:100%;padding-left:10px"
+				class="createTable">
+				<h:th width="10%" />
+				<h:th width="30%" />
+				<h:th width="5%" />
+				<h:th width="40%" />
+				<h:tr>
+					<h:td>
+						<label sclass="lb-create">Tên sản phẩm:</label>
+					</h:td>
+					<h:td colspan="1">
+						<textbox id="tbTenSP" maxlength="2000" sclass="z-textbox-uppercase"/>
+					</h:td>
+				</h:tr>
+ 
+			</h:table>
+			
+						<tabbox id="tabFiles" >
+                        <tabs id="tabs" width="100%" height="100%">
+                            <tab label="Thông tin sản phẩm" />
+                            <tab label="Đơn vị tính" />
+                            <tab label="Kích thước" />
+                            <tab label="Tính năng" />
+                            <tab label="Trọng lượng kg/thùng" />
+                            <tab label="Đóng gói viên/thùng" />
+                            <tab label="Xuất xứ" />
+                            <tab label="Nơi sản xuất" />
+                        </tabs>
+                        <tabpanels>
+                            <tabpanel id="generalTab" ></tabpanel>
+                            <tabpanel id="docRelateTab"></tabpanel>
+                            <tabpanel id="docDraffTab"></tabpanel>
+                            <tabpanel id="sendSheetTab" ></tabpanel>
+                        </tabpanels>
+                    </tabbox>
+                    
+		</div>
+	</div>
+	<div style="padding-top:30px; padding-left:10px;float:left"
+		width="98%">
+
+		<div style=" margin:0 auto ;padding-top:20px" align="center">
+			<button class="button" height="30px"
+				image="/Share/img/icon/save.png" id="btnSave" label="Lưu lại" />
+
+			<button class="button" height="30px"
+				image="/Share/img/icon/close.png" style="margin-left:10px"
+				label="Hủy bỏ" onClick="createDlg.onClose()" />
+		</div>
+	</div>
+	
+	<zscript><![CDATA[
+	void doCheck() {
+		if(rdgProductType.getSelectedIndex()==3){
+			tbDSP.setVisible(true);
+			lbDSP.setVisible(true);
+		}else{
+			tbDSP.setVisible(false);
+			lbDSP.setVisible(false);
+		}
+	}
+	]]></zscript>
+</window>

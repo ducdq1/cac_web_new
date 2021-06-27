@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+<window id="roleViewWindow" title="Thông tin vai trò" border="normal" width="400px" height="200px"  
+    position="center,center" closable="true">
+    <h:div>
+        <h:table class="viewTable">
+            <h:tr>
+                <h:td width="40%">
+                    <label value="Mã vai trò:" width="100px" />
+                </h:td>
+                <h:td width="60%">
+                    <label value="${arg.roleInfo.roleCode}" style="font-weight:bold"></label>
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td>
+                     <label value="Tên vai trò:" width="100px" />
+                </h:td>
+                <h:td>
+                     <label value="${arg.roleInfo.roleName}"
+                            width="300px"  style="font-weight:bold"/>
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td>
+                    <label value="Mô tả:" width="100px" maxlength="300" />
+                </h:td>
+                <h:td>
+                     <label id="roleForm.description" value="${arg.roleInfo.description}"
+                            width="300px" style="font-weight:bold"/>
+                </h:td>
+                
+            </h:tr>
+            <h:tr>
+                <h:td>
+                     <label value="Trạng thái:" width="100px" />
+                </h:td>
+                <h:td>
+                    <label value="${arg.roleInfo.status==1?'Hoạt động' : 'Không hoạt động'}" style="font-weight:bold"></label>
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td colspan="2" style="text-align:center">
+                      <button label="Đóng" id="btnCancel" sclass="mybutton button blue small" onClick="roleViewWindow.detach()"/>
+                </h:td>
+            </h:tr>
+        </h:table>
+    </h:div> 
+</window>
+</zk>

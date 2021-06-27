@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./docOutWindow" ?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <style src="/Share/css/formstyle.css"/>
+    <window id="docOutWindow" apply="com.viettel.voffice.DAO.Document.DocOutController" border="none">
+        <script defer="true">
+            toolBar.widget = "docOutWindow";
+            addToolbar("Share/img/add.png","Thêm mới văn bản đi","onOpenCreate");
+        </script>
+        <include src="/Pages/common/searchToolbar.zul"/>
+        <h:div class="contentDiv">
+            <groupbox id="fullSearchGbx" mold="3d" visible="false" >
+                <caption label="Tìm kiếm nâng cao"/>
+                <h:table style="width:100%" sclass="searchTable">
+                    <h:tr>
+                        <h:td width="150px">
+                            <label>Trích yếu</label>
+                        </h:td>
+                        <h:td>
+                            <textbox id="documentAbstract" value="@{controller.searchForm.documentAbstract, access='both', save-when='none'}"
+                                 mold="rounded" width="450px"/>
+                        </h:td>
+                        <h:td width="150px">
+                            <label>Ký hiệu văn bản</label>
+                        </h:td>
+                        <h:td>
+                            <textbox id="documentCode" value="@{controller.searchForm.documentCode, access='both', save-when='none'}" mold="rounded" width="450px"/>
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td width="150px">
+                            <label>Đơn vị soạn thảo</label>
+                        </h:td>
+                        <h:td></h:td>
+                        <h:td width="150px">
+                        <label>Người ký</label>
+                        </h:td>
+                        <h:td></h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td>
+                            <label>Loại văn bản</label>
+                        </h:td>
+                        <h:td>
+                            <listbox id="lboxDocType" width="250px" 
+                                 model="@{controller.catList}" mold="select" selectedItem="@{controller.catSelected}">
+                                <listitem self="@{each='cats'}" value="@{cats}">
+                                    <listcell label="@{cats.name}"  />
+                                </listitem>
+                            </listbox>
+                        </h:td>
+                        <h:td>
+                            <label>Trạng thái</label>
+                        </h:td>
+                        <h:td>
+                            <listbox id="lboxStatus" mold="select" width="250px" >
+                                <listitem label="---Chọn---" value="-1" selected="true" />
+                                <listitem label="Hoạt động" value="1"  />
+                                <listitem label="Không hoạt động" value="0" />
+                            </listbox>
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td>
+                            <label>Ngày tạo, từ ngày:</label>
+                        </h:td>
+                        <h:td>
+                            <datebox id="dateCreateFrom" cols="12" format="dd/MM/yyyy" >
+                                <attribute name="onCreate" >
+                                    java.util.Calendar cal = java.util.Calendar.getInstance();
+                                    cal.set(java.util.Calendar.MONTH, cal.get(java.util.Calendar.MONTH) - 1);
+                                    java.util.Date date = cal.getTime();
+                                    dateCreateFrom.setValue(date);
+                                </attribute>
+                            </datebox>
+                        </h:td>
+                        <h:td>
+                            <label>Đến ngày</label>
+                        </h:td>
+                        <h:td>
+                            <datebox id="dateCreateTo" cols="12" format="dd/MM/yyyy" onCreate="self.value = new Date()"/>
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td colspan="4" style="text-align:center">
+                            <button id="btnSearch" label="Tìm kiếm" sclass="button" image="/Share/img/icon/search.jpg" />
+                            <!--                        <button id="btnCreate" label="Thêm mới" sclass="button" image="/Share/img/icon/add_1.png" visible="false"/>-->
+                        </h:td>
+                    </h:tr>
+                </h:table>
+            </groupbox>
+        </h:div>
+        <h:div class="contentDiv" >
+            <paging id="paging1" pageSize="15" detailed="true" mold="os"/>
+            <listbox id="docDraftListBox" 
+                     multiple="false"
+                     emptyMessage="Không tồn tại văn bản" model="@{controller.documentList}" mold="paging" paginal="${paging}" pagingPosition="top">
+                <listhead sizable="true">
+                    <listheader width="5%" label="STT" />
+                    <listheader width="30%" label="Trích yếu"  />
+                    <listheader width="10%" label="Ngày tạo" />
+                    <listheader width="10%" label="Loại văn bản" />
+                    <listheader width="10%" label="Người xử lý" />
+                    <listheader width="10%" label="Trạng thái"  />
+                    <listheader width="10%" label="Tình trạng"  />
+                    <listheader width="5%" label="Xem" align="center"/>
+                    <listheader width="5%" label="Sửa" align="center"/>
+                    <listheader width="5%" label="Xoá" align="center"/>
+                </listhead>
+                <template name="model">
+                    <listitem  value="${each}">
+                        <listcell label="${controller.startIndex + forEachStatus.index + 1}" forward="onClick=docDraftListBox.onSelectView"/>
+                        <listcell label="${each.documentAbstract}" forward="onClick=docDraftListBox.onSelectView"/>
+                        <listcell label="${each.dateCreateStr}" forward="onClick=docDraftListBox.onSelectView"/>
+                        <listcell label="${each.documentTypeName}" forward="onClick=docDraftListBox.onSelectView"/>
+                        <listcell label="${each.creatorName}" forward="onClick=docDraftListBox.onSelectView"/>
+                        <listcell label="${$composer.getDocStatus(each.status,each.processStatusName)}" forward="onClick=docDraftListBox.onSelectView"/>
+                        <listcell label="${each.isActive==1 ? 'Hoạt động' : 'Không hoạt động'}" forward="onClick=docDraftListBox.onSelectView"/>
+                        <listcell >
+                            <image forward="onClick=docDraftListBox.onView" src="/Share/img/icon/view.png" width="20px" height="20px"/>
+                        </listcell>
+                        <listcell >
+                            <image forward="onClick=docDraftListBox.onEdit" src="/Share/img/icon/edit.png" width="20px" height="20px"/> 
+                        </listcell>
+                        <listcell>
+                           <image forward="onClick=docDraftListBox.onDelete" src="/Share/img/icon/delete.png" width="20px" height="20px"/>   
+                        </listcell>
+                    </listitem> 
+                </template>
+            </listbox>
+            <paging id="paging" pageSize="15" detailed="true" mold="os"/>
+        </h:div>
+    </window>
+</zk>

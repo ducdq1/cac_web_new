@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+        xmlns="http://www.zkoss.org/2005/zul" id="windowCheckComponent"
+        position="center,center" 
+        title="Kiểm tra thành phần đầy đủ" apply="com.viettel.module.cosmetic.Controller.include.EvaluationCheckComponentController"
+        width="95%" closable="true" sizable="true">
+    <style src="/Share/css/formstyle.css" />
+    <style src="/Share/css/uploadstyle.css" />
+    <script type="text/javascript" src="/Share/js/UPMSamples.js" />
+   <include id="incList" src="/Pages/module/cosmetic/include/listbox/listCheckComponent.zul" />
+</window>

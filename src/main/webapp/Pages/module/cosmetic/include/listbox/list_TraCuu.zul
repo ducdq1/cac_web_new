@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.zkoss.org/2005/zk/native"
+    xmlns="http://www.zkoss.org/2005/zul">
+    
+    <style src="/Share/css/formstyle.css" />
+    <listbox id="lbList"                             
+style="word-wrap: break-word "
+             emptyMessage="${$composer.getLabelCos('common_emptyMessage')}">
+        <listhead>
+            <listheader label="${$composer.getLabelCos('cosmetic_stt')}" align="center" style="width:5%" />
+            <listheader label="${$composer.getLabelCos('cosmetic_mahoso')}" align="center" style="width:10%"/>
+            <listheader label="${$composer.getLabelCos('cosmetic_tenbxn')}" align="center" style="width:20%"/>
+            <listheader label="${$composer.getLabelCos('cosmetic_tensp')}" align="center" style="width:20%"/>
+            <listheader label="${$composer.getLabelCos('cosmetic_tendoanhnghiep')}" align="center"  style="width:20%"/>
+            <listheader label="${$composer.getLabelCos('cosmetic_thoigiancapnhat')}" align="center"  style="width:10%"/>
+            <listheader label="${$composer.getLabelCos('cosmetic_trangthaihs')}" align="center" style="width:15%"/>
+            <listheader label="${$composer.getLabelCos('common_view')}" align="center" hflex="min"/>
+        </listhead>
+        <template name="model">
+         <listitem  style="word-wrap: break-word !important; white-space: normal; text-align: left">
+                <!--forward="onClick=lbList.onOpenView(${each})">-->
+                <listcell label="${forEachStatus.index + 1 + userPagingTop.pageSize * userPagingTop.activePage}" />
+                <listcell style="text-align:left">
+                    <label value="${each.nswFileCode}" 
+                           tooltiptext="${each.nswFileCode}"
+                           />
+                  
+                </listcell>
+                <listcell style="text-align:left">
+                    <label value="${each.brandName}" 
+                           tooltiptext="${each.brandName}"
+                          />
+                </listcell>
+                <listcell style="text-align:left">
+                    <label value="${each.productName}" 
+                           tooltiptext="${each.productName}"
+                          />
+                   
+                </listcell>
+                <listcell style="text-align:left">
+                    <label value="${each.businessName}" 
+                           tooltiptext="${each.businessName}"
+                          />
+                  
+                </listcell>
+                <listcell style="text-align:center">
+                    <label value="${$composer.convertDateToString(each.modifyDate)}" 
+                           tooltiptext="${$composer.convertDateToString(each.modifyDate)}"
+                          />
+                   
+                </listcell>
+                <listcell style="text-align:left">
+                    <label value="${$composer.getStatus(each.status)}" 
+                           tooltiptext="${$composer.getStatus(each.status)}"
+                           />
+                </listcell>
+                <listcell >
+                    <image src="/Share/img/icon/view.png"
+                           width="20px" height="20px"
+                           forward="onClick=lbList.onOpenView(${each})"
+                           tooltiptext="${$composer.getLabelCos('common_view')}" />
+                </listcell>                
+            </listitem>
+        </template>
+    </listbox>
+    <separator />
+	
+</zk>

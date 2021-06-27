@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window 
+    xmlns:h="http://www.zkoss.org/2005/zk/native"
+    xmlns="http://www.zkoss.org/2005/zul"
+    id="windowViewObject"  position="center,center"
+    width="50%"
+    apply="com.viettel.voffice.DAO.System.Application.ObjectsViewController">
+    <include id="toolbarTop" src="/Pages/common/toolbarView.zul"/>
+    <h:table width="100%">
+        <h:th width="25%"/>
+        <h:th width="30%"/>
+        <h:th width="50%"/>
+        <h:tr>
+            <h:td rowspan="8" align="center">
+                <vlayout>
+                    <image id="imgAvatar" width="100px" height="100px" content="${arg.image}"/>
+                </vlayout>
+            </h:td>
+            <h:td>
+                <label value="Mã chức năng"/>
+            </h:td>
+            <h:td align="center">
+                <textbox id="tbObjectsCode" width="95%" value="${arg.object.objectCode}"
+                         maxlength="100" readonly="true"/>
+            </h:td>
+        </h:tr>
+        <h:tr>
+            <h:td>
+                <label value="Tên chức năng"/>
+            </h:td>
+            <h:td align="center">
+                <textbox id="tbObjectsName" width="95%" value="${arg.object.objectName}"
+                         maxlength="100" readonly="true"/>
+            </h:td>
+        </h:tr>
+        <h:tr>
+            <h:td>
+                <label value="Chức năng cha"/>                
+            </h:td>
+            <h:td>
+                <textbox id="tbParentObjects" readonly="true" width="95%"/>  
+            </h:td>
+        </h:tr>
+        <h:tr>
+            <h:td>
+                <label value="Loại chức năng"/>
+            </h:td>
+            <h:td align="center">
+                <listbox id="lbObjectsType" mold="select" width="95%" disabled="true">
+                    <listitem if="${arg.object.objectTypeId == 1}" label="Module" value="1" selected="true"/>
+                    <listitem if="${arg.object.objectTypeId != 1}" label="Component" value="0" selected="true"/>
+                </listbox>
+            </h:td>
+        </h:tr>
+        <h:tr>
+            <h:td>
+                <label value="Đường dẫn"/>                
+            </h:td>
+            <h:td align="center">
+                <textbox id="tbObjectsUrl" width="95%" value="${arg.object.objectUrl}" readonly="true"/>
+            </h:td>             
+        </h:tr>
+        <h:tr>
+            <h:td>
+                <label value="Thứ tự"/>
+            </h:td>
+            <h:td align="center">
+                <textbox id="tbObjectsOrd" value="${arg.object.ord}" width="95%" readonly="true"/>
+            </h:td>   
+        </h:tr>
+        <h:tr>
+            <h:td>
+                <label value="Trạng thái"/>
+            </h:td>
+            <h:td align="center">
+                <listbox id="lbObjectsStatus" mold="select" width="95%" disabled="true">
+                    <listitem if="${arg.object.status == 1}" label="Hoạt động" value="1" selected="true"/>
+                    <listitem if="${arg.object.status != 1}" label="Bị khóa" value="0" selected="true"/>
+                </listbox>
+            </h:td>              
+        </h:tr>    
+        <h:tr>
+            <h:td>
+                <label value="Mô tả"/>                
+            </h:td>
+            <h:td align="center">
+                <textbox id="tbObjectsDesc" value="${arg.object.description}" width="95%" readonly="true"/>
+            </h:td>  
+        </h:tr>
+    </h:table>
+    <include id="toolbarBottom" src="/Pages/common/toolbarView.zul"/>
+</window>

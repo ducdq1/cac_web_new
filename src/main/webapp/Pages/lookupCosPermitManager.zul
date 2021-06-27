@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns="http://www.zkoss.org/2005/zul">
+	<style src="../Share/homepage/style_comon.css" />
+	<style src="/Share/css/formstyle.css" />
+	<style src="/Share/css/voffice.css" />
+	<style>
+		.SpanTag { font-family:'MYRIADPRO-COND'!important;
+		font-size:18px !important; }
+
+		.SpanTag2 { font-family:'MYRIADPRO-COND'!important;
+		font-size:20px !important; }
+
+		.SpanTag3 { font-family:'MYRIADPRO-COND'!important;
+		font-size:12px !important;white-space:nowrap !important; }
+
+		.SpanTag4 { font-family:'MYRIADPRO-COND'!important;
+		font-size:24px !important;
+	</style>
+
+	<h:div
+		style="width:100%;font-family:'MyriadPro-BoldCond'!important;  background-image: url('../Share/homepage/images/body-bg.png');
+		 background-color: #f8f8f8;background-position: center bottom;background-repeat: repeat-x;
+              font-size:18px !important;">
+		<window id="lookupCosPermitManageWnd"
+			apply="com.viettel.module.cosmetic.Controller.LookupCosPermitController"
+			border="none" style="min-height:700px;">
+			<h:div class="header_hp">
+				<h:div class="banner">
+					<h:div class="logo1">
+						<h:img width="380" height="65"
+							src="../Share/homepage/images/logo.png" />
+					</h:div>
+					<h:div class="hotline">
+						<h:img
+							src="../Share/homepage/images/hotline_img.png" />
+					</h:div>
+				</h:div>
+			</h:div>
+			<h:div class="hr_name">
+				<h:ul class="h_menu">
+					<h:li>
+						<a href="/Pages/homepage.zul">Trang chủ</a>
+					</h:li>
+					<h:li>
+						<a href="/Pages/proceduce.zul">
+							THỦ TỤC HÀNH CHÍNH
+						</a>
+					</h:li>
+					<h:li class="li-active">
+						<a href="/Pages/lookupCosPermitManager.zul">
+							TRA CỨU
+						</a>
+					</h:li>
+					<h:li>
+						<a href="/Pages/introduce.zul">lIÊN HỆ</a>
+					</h:li>
+				</h:ul>
+			</h:div>
+			<!-- <h:div style="float:right;">
+				<label id="lbTopWarning" class="notify" width="100%"
+				multiline="false" />
+				</h:div> -->
+			<h:div
+				style="margin-top:10px;margin-bottom:10px;height:100%;"
+				class="SpanTag">
+				<h:br />
+				<h:div class="wrapper">
+					<h:div id="searchDiv">
+						<h:table width="1000px;" align="center">
+							<h:tr>
+								<h:th width="12%" />
+								<h:th width="38%" />
+								<h:th width="12%" />
+								<h:th width="38%" />
+							</h:tr>
+							<h:tr>
+								<h:td>
+									<label
+										value="${$composer.getLabelName('lookup_permit_lbBusinessName')}"
+										sclass="lb-create" />
+								</h:td>
+								<h:td>
+									<textbox id="txtBusinessName"
+										width="82%" rows="1" maxlength="255" />
+								</h:td>
+								<h:td>
+									<label
+										value="${$composer.getLabelName('ten_thuoc')}"
+										sclass="lb-create" />
+								</h:td>
+								<h:td>
+									<textbox id="txtProductName"
+										width="82%" rows="1" maxlength="255" />
+								</h:td>
+							</h:tr>
+							<h:tr>
+								<h:td>
+									<label
+										value="${$composer.getLabelName('lookup_permit_lbBusinessAddress')}"
+										sclass="lb-create" />
+								</h:td>
+								<h:td>
+									<textbox id="txtBusinessAddress"
+										width="82%" rows="1" maxlength="255" />
+								</h:td>
+								<h:td>
+									<label
+										value="${$composer.getLabelCos('so_tiep_nhan')}"
+										sclass="lb-create" />
+								</h:td>
+								<h:td>
+									<textbox id="txtReceiveNo"
+										width="82%" rows="1" maxlength="255" />
+								</h:td>
+							</h:tr>
+							<h:tr>
+								<h:td>
+									<label
+										value="${$composer.getLabelCos('tiep_nhan_ngay')}"
+										sclass="lb-create" />
+								</h:td>
+								<h:td>
+									<datebox id="dbReceiveDateFrom"
+										width="84%" format="dd/MM/yyyy" />
+								</h:td>
+								<h:td>
+									<label
+										value="${$composer.getLabelName('lookup_permit_lbReceiveDateTo')}"
+										sclass="lb-create" />
+								</h:td>
+								<h:td>
+									<datebox id="dbReceiveDateTo"
+										width="84%" format="dd/MM/yyyy" />
+								</h:td>
+							</h:tr>
+							<h:tr>
+								<h:td>
+									<label
+										value="${$composer.getLabelName('lookup_permit_lbSort')}"
+										sclass="lb-create" />
+								</h:td>
+								<h:td>
+									<listbox id="lbSort" mold="select"
+										width="83%">
+										<listitem
+											label="${$composer.getLabelName('common_choose')}"
+											value="${$composer.getLabelName('common_choose')}"
+											selected="true" />
+										<listitem
+											label="${$composer.getLabelName('lookup_permit_BusinessName_asc')}"
+											value="1" />
+										<listitem
+											label="${$composer.getLabelName('lookup_permit_BusinessName_desc')}"
+											value="2" />
+										<!-- <listitem
+											label="${$composer.getLabelName('lookup_permit_ProductName_asc')}"
+											value="3" />
+											<listitem
+											label="${$composer.getLabelName('lookup_permit_ProductName_desc')}"
+											value="4" /> -->
+										<listitem
+											label="${$composer.getLabelName('lookup_permit_BusinessAddress_asc')}"
+											value="5" />
+										<listitem
+											label="${$composer.getLabelName('lookup_permit_BusinessAddress_desc')}"
+											value="6" />
+										<listitem
+											label="${$composer.getLabelCos('sotiepnhan_acs')}" value="7" />
+										<listitem
+											label="${$composer.getLabelCos('sotiepnhan_desc')}"
+											value="8" />
+									</listbox>
+								</h:td>
+								<h:td></h:td>
+								<h:td>
+
+								</h:td>
+							</h:tr>
+
+							<zscript>
+                                <![CDATA[
+	import org.zkforge.bwcaptcha.Captcha;
+	void verifyCaptcha(Textbox tbox, Captcha capt) {
+		if (!capt.getValue().equals(tbox.getValue())) {
+			throw new WrongValueException(tbox, "Code Error!");
+		}
+	}
+	void verifyCaptchaIgnoreCase(Textbox tbox, Captcha capt) {
+		if (!capt.getValue().equalsIgnoreCase(tbox.getValue())) {
+			throw new WrongValueException(tbox, "Code Error!");
+		}
+	}
+]]>
+                                </zscript>
+							<h:tr>
+								<h:td colspan="4" align="center">
+									<h:div style="align:center">
+										<vbox id="vboxCaptchaId"
+											visible="false">
+											<h:table
+												style="width:100%;">
+												<h:tr>
+													<h:td></h:td>
+													<h:td></h:td>
+												</h:tr>
+												<h:tr>
+													<h:td
+														style="text-align:right;width:50%">
+														<bw.captcha
+															id="capcha" width="200" height="50"
+															style="bgcolor:black;" />
+													</h:td>
+													<h:td
+														style="text-align:left;width:50% ">
+														<a
+															onClick="capcha.randomValue();">
+															<h:img
+																width="20" height="20"
+																src="../Share/img/icon/Refresh_icon.png"
+																onClick="capcha.randomValue();"
+																style="cursor: pointer; cursor: hand;" />
+														</a>
+													</h:td>
+												</h:tr>
+												<h:tr>
+													<h:td colspan="2">
+														<textbox
+															id="txtCaptchaId"
+															style="width:195px!important;border-style: solid!important;border-width: 1px!important; border-color: gray!important;" />
+													</h:td>
+												</h:tr>
+											</h:table>
+										</vbox>
+									</h:div>
+								</h:td>
+							</h:tr>
+							<h:tr>
+								<h:td style="text-align:center"
+									colspan="4">
+									<label id="lbTopWarning"
+										class="notifyCapcha" />
+								</h:td>
+							</h:tr>
+
+							<h:tr>
+								<h:td colspan="4"
+									style="text-align:center;">
+									<button id="btnSearch"
+										label="Tìm kiếm" sclass="button"
+										image="/Share/img/icon/search.jpg" />
+								</h:td>
+							</h:tr>
+						</h:table>
+					</h:div>
+					<h:div>
+						<listbox id="lbLookupCosPermitManager"
+							width="1129px"
+							emptyMessage="${$composer.getLabelCos('common_emptyMessage')}">
+							<listhead sizable="true">
+								<listheader
+									label="${$composer.getLabelCos('cosmetic_stt')}" align="center"
+									style="width:5%" />
+								<listheader
+									label="${$composer.getLabelCos('so_tiep_nhan')}" align="center"
+									style="width:10%" />
+								<listheader
+									label="${$composer.getLabelCos('ngay_cap')}" align="center"
+									style="width:10%" />
+								<listheader
+									label="${$composer.getLabelCos('ten_thuoc')}" align="center"
+									style="width:20%" />
+								<listheader
+									label="${$composer.getLabelCos('doanh_nghiep')}" align="center"
+									style="width:55%" />
+							</listhead>
+							<template name="model">
+								<listitem
+									style="word-wrap: break-word !important; white-space: normal; text-align: left">
+									<listcell
+										label="${forEachStatus.index + 1 + userPagingBottom.pageSize * userPagingBottom.activePage}" />
+									<listcell>
+										<label
+											value="${each.receiveNo}">
+										</label>
+									</listcell>
+
+									<listcell
+										style="text-align:center">
+										<label
+											value="${$composer.convertDateToString(each.receiveDate)}" />
+									</listcell>
+									<listcell style="text-align:left">
+										<label
+											value="${each.firstMedicineName}" />
+									</listcell>
+									<listcell style="text-align:left">
+										<label value="${each.orgName}" />
+									</listcell>
+								</listitem>
+							</template>
+						</listbox>
+						<paging id="userPagingBottom" pageSize="10"
+							detailed="true" />
+					</h:div>
+				</h:div>
+			</h:div>
+			<!-- Footer -->
+
+		</window>
+		<h:div class="footer_bt">
+			<label class="SpanTag3">
+				Bản quyền: Cục Quản lý Dược - Bộ Y tế
+			</label>
+			<h:br />
+			<label class="SpanTag3">
+				Địa chỉ: 138A Giảng Võ - Hà Nội
+			</label>
+			<h:br />
+			<label class="SpanTag3">
+				Điện thoại: 844.37366483. Fax: 844.38234758. Email:
+				cqldvn@moh.gov.vn
+			</label>
+		</h:div>
+	</h:div>
+</zk>

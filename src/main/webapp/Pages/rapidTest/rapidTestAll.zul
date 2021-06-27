@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+	xmlns="http://www.zkoss.org/2005/zul" id="rapidTestAll"
+	apply="com.viettel.module.rapidtest.DAO.RapidTestAllController">
+    
+	<style src="/Share/css/formstyle.css" />
+        
+	<script defer="true">
+		toolBar.widget = "rapidTestAll";
+		<!--addToolbar("Share/img/add.png","Thêm mới hồ sơ","onOpenCreate") com.viettel.module.rapidtest.DAO.RapidTestAllController;-->
+	</script>
+        
+	<include src="/Pages/common/searchToolbar.zul" />
+        
+	<h:div class="contentDiv">
+		<include id="incSearchFullForm"
+			src="/Pages/rapidTest/searchForm.zul" />
+	</h:div>
+	<h:div class="contentDiv">
+            
+		<paging id="userPagingTop" pageSize="10" detailed="true" />
+		<listbox id="lbList" emptyMessage="${$composer.getLabelRt('common_emptyMessage')}">
+			<listhead>
+				<listheader label="${$composer.getLabelRt('rapidtest_stt')}" align="center" hflex="min" />
+				<listheader label="${$composer.getLabelRt('rapidtest_mahoso')}" hflex="2" />
+                                <listheader label="${$composer.getLabelRt('rapidtest_sohoso')}" hflex="min" />
+                                <listheader label="${$composer.getLabelRt('rapidtest_thutuc')}" hflex="2" />
+				<listheader label="${$composer.getLabelRt('rapidtest_loaihoso')}" hflex="3" />
+				<listheader label="${$composer.getLabelRt('rapidtest_tendoanhnghiep')}" hflex="min" />
+				<listheader label="${$composer.getLabelRt('rapidtest_tenbxn')}" hflex="2" />
+				<listheader label="${$composer.getLabelRt('rapidtest_thoigiantao')}" hflex="1" />
+				<listheader label="${$composer.getLabelRt('rapidtest_trangthaihs')}" hflex="2"/>
+                                <listheader label="${$composer.getLabelRt('common_edit')}" align="center" hflex="min"
+					visible="${$composer.isCRUDMenu()}"/>
+				<listheader label="${$composer.getLabelRt('common_delete')}" align="center" hflex="min"
+					visible="${$composer.isCRUDMenu()}" />
+                                <listheader label="${$composer.getLabelRt('rapidtest_xemgiayphep')}" hflex="min" />
+			</listhead>
+			<template name="model">
+				<listitem forward="onClick=lbList.onOpenView(${each})">
+					<listcell label="${forEachStatus.index + 1 + userPagingTop.pageSize * userPagingTop.activePage}">
+					</listcell>
+					<listcell label="${each.nswFileCode}">
+					</listcell>
+                                        <listcell label="${each.rapidTestNo}"/>
+                                        <listcell label="${each.fileTypeName}"/>
+					<listcell>
+                                            <label if="${each.documentTypeCode==-1}" value="${$composer.getLabelRt('common_notchoose')}"></label>
+                                            <label if="${each.documentTypeCode==16}" value="${$composer.getLabelRt('rapidtest_taomoi')}"></label>
+                                            <label if="${each.documentTypeCode==17}" value="${$composer.getLabelRt('rapidtest_suadoi')}"></label>
+                                            <label if="${each.documentTypeCode==18}" value="${$composer.getLabelRt('rapidtest_bosung')}"></label>
+					</listcell>
+					<listcell label="${each.businessName}">
+					</listcell>
+                                        <listcell label="${each.rapidTestName}">
+					</listcell>
+					<listcell label="${each.createDate}">
+					</listcell>
+                                        <listcell label="${each.status} - ${$composer.getStatus(each.status)}"/>
+                                        <listcell>
+                                            
+                                            <image src="/Share/img/icon/edit.png"
+                                                       width="20px" height="20px"
+                                                       forward="onClick=lbList.onOpenUpdate(${each})"
+                                                       if="${$composer.isAbleToModify(each)}"
+                                                       tooltiptext="${$composer.getLabelRt('common_edit')}" />
+                                            
+                                        </listcell>
+					<listcell>
+						<image src="/Share/img/icon/delete.png"
+							width="20px" height="20px"
+							forward="onClick=lbList.onDelete(${each})"
+							if="${$composer.isAbleToDelete(each)}"
+							tooltiptext="${$composer.getLabelRt('common_delete')}" />
+						
+					</listcell>
+                                        
+                                        <listcell>
+                                            
+<!--                                            <image src="/Share/img/icon/edit.png"
+                                                       width="20px" height="20px"
+                                                       forward=""
+                                                       tooltiptext="Xem hồ sơ" />-->
+                                            
+                                        </listcell>
+				</listitem>
+			</template>
+		</listbox>
+		<paging id="userPagingBottom" pageSize="10" detailed="true" />
+	</h:div>
+	<separator />
+	
+</window>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.zkoss.org/2005/zk/native"
+    xmlns="http://www.zkoss.org/2005/zul">
+    
+    <style src="/Share/css/formstyle.css"/>
+        
+    <h:table style="width:100%">
+        <h:tr>
+            <h:td style="width:30%">
+                <div>
+                    <listbox  height="600px" id="lbCosfileIngreCheck" emptyMessage="Không có bản ghi" droppable="true">
+                        <listhead  sizable="true">
+                            <listheader label="STT" style="width:10%;text-align:center"/>
+                            <listheader label="Tên thành phần đầy đủ" style="width:60%;text-align:center"/>
+                             <listheader label="Dạng hoặc màu"  style="white-space: normal;width:15%;text-align:center"/>
+                            <listheader label="Tỷ lệ những chất có giới hạn nồng độ" 
+                                        style="white-space: normal;width:15%;text-align:center"/>
+                        </listhead>
+                        <template name="model" >
+                            <listitem forward="onClick=lbCosfileIngreCheck.onOpenView(${each})">
+                                <listcell>
+                                    <label style="color:red" value="${forEachStatus.index + 1 }" if="${$composer.Checkingredient(each,'1')}">
+                                        <!--                                          <attribute name="style" value="color:red"  />-->
+                                    </label>
+                                    <label  style="color:black" value="${forEachStatus.index + 1 }" if="${$composer.Checkingredient(each,'0')}">
+                                        <!--                                          <attribute name="style" value="color:red"  />-->
+                                    </label>
+                                </listcell>
+                                <listcell>
+                                    <label style="color:red" value="${each.ingredientName}" if="${$composer.Checkingredient(each,'1')}">
+                                        <!--                                          <attribute name="style" value="color:red"  />-->
+                                    </label>
+                                    <label style="color:black"  value="${each.ingredientName}" if="${$composer.Checkingredient(each,'0')}">
+                                        <!--                                          <attribute name="style" value="color:red"  />-->
+                                    </label>
+                                </listcell>
+                                <listcell>
+                                    <label style="color:red;text-align:center" value="${each.variantOrShade}" if="${$composer.Checkingredient(each,'1')}">
+                                        <!--                                          <attribute name="style" value="color:red"  />-->
+                                    </label>
+                                    <label  style="color:black" value="${each.variantOrShade}" if="${$composer.Checkingredient(each,'0')}" >
+                                        <!--                                          <attribute name="style" value="color:red"  />-->
+                                    </label>
+                                </listcell>
+                                <listcell>
+                                    <label style="color:red;text-align:center" value="${$composer.FormatnumberFloat(each.percent)}" if="${$composer.Checkingredient(each,'1')}" unless="${each.percent==null}">
+                                        <!--                                          <attribute name="style" value="color:red"  />-->
+                                    </label>
+                                    <label  style="color:black" value="${$composer.FormatnumberFloat(each.percent)}" if="${$composer.Checkingredient(each,'0')}"  unless="${each.percent==null}">
+                                        <!--                                          <attribute name="style" value="color:red"  />-->
+                                    </label>
+                                </listcell>
+                            </listitem>
+                        </template>
+                    </listbox>
+                </div>
+            </h:td>
+            <h:td  style="width:70%">
+                <div>
+                    <h:table style="width:100%;height=60px" >
+                        <h:tr>
+                            <h:td style="width:10%">
+                                <label value="Substance" sclass="lb-create" />
+                            </h:td>
+                            <h:td style="width:40%">
+                                <textbox id="txtSubstance" maxlength="500" width="90%">
+
+                                </textbox>
+                            </h:td>
+                        </h:tr>
+                        <h:tr>
+                            <h:td colspan="2" style="text-align:center">
+                                <button id="btnSearch" label="Tìm kiếm" sclass="button" image="/Share/img/icon/search.jpg"/>
+                            </h:td>
+                        </h:tr>
+                    </h:table>
+                </div>
+                <div>
+                    <listbox  height="540px" id="lbAnnexe" emptyMessage="Không có thành phần đầy đủ" droppable="true">
+                        <listhead  sizable="true">
+                            <listheader label="STT" style="white-space: normal;width:4%;text-align:center"/>
+                            <listheader label="Phụ lục" style="white-space: normal;width:10%;text-align:center"/>
+                            <listheader label="Substance" style="white-space: normal;width:15%;text-align:center"/>
+                            <listheader label="CAS Number" style=" white-space: normal;width:10%;text-align:center"/>
+                            <listheader label="Ref. No" style="white-space: normal;width:10%;text-align:center"/>
+                            <listheader label="Field of application and/or use" style="white-space: normal;width:10%;text-align:center"/>
+                            <listheader label="Maximum authorised concentration in the finished cosmetic product" style="white-space: normal;width:10%;text-align:center"/>
+                            <listheader label="Other limittations and requirements" style="white-space: normal;width:10%;text-align:center"/>
+                            <listheader label="Conditions of use and warning which must  be printed on the label" style="white-space: normal;width:10%;text-align:center"/>
+                            <listheader label="Allowed until" style="white-space: normal;width:10%;text-align:center"/>
+                        </listhead>
+                        <template name="model" >
+                            <listitem  >
+                                <listcell>
+                                    <label value="${forEachStatus.index + 1 }"/>
+                                </listcell>
+                                <listcell label="${$composer.cutString(each.annexeTypeName,50)}" tooltiptext="${each.annexeType}"/>
+                                <listcell label="${$composer.cutString(each.substance,50)}" tooltiptext="${each.substance}"/>
+                                <listcell label="${$composer.cutString(each.casNumber,50)}" tooltiptext="${each.casNumber}"/>
+                                <listcell label="${$composer.cutString(each.refNo,50)}" tooltiptext="${each.refNo}"/>
+                                <listcell label="${$composer.cutString(each.fieldUse,50)}" tooltiptext="${each.fieldUse}"/>
+                                <listcell label="${$composer.cutString(each.maximumAuthorized,50)}" tooltiptext="${each.maximumAuthorized}"/>
+                                <listcell label="${$composer.cutString(each.limitationRequirements,50)}" tooltiptext="${each.limitationRequirements}"/>
+                                <listcell label="${$composer.cutString(each.conditionsOfUse,50)}" tooltiptext="${each.conditionsOfUse}"/>
+                                <listcell label="${$composer.cutString(each.allowedUntil,50)}" tooltiptext="${each.allowedUntil}"/>
+                            </listitem>
+                        </template>
+                    </listbox>
+                    <paging id="userPagingBottom" pageSize="10" detailed="true" />
+                </div>
+
+            </h:td>
+        </h:tr>
+    </h:table>
+    <separator />
+	
+</zk>

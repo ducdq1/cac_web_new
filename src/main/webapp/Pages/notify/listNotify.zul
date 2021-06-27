@@ -1,0 +1,52 @@
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+        xmlns="http://www.zkoss.org/2005/zul"
+        apply="com.viettel.voffice.DAO.NotifyController"
+        id="windowNotify">
+    <h:div style="background-color:white;border:1px solid gray;padding:4px;">
+        <button style="float:left;" sclass="attachBtn" 
+                src="/Share/img/icon/attach_min.png" width="34px" height="30px"
+                upload="maxsize=10240,native" id="imgSendAttach" tooltiptext="Tệp đính kèm"/>
+        <textbox id="tbcomment" width="75%" style="border:none;resize:none; height:30px;" maxlength="500" />
+        <image style="float:right" src="/Share/img/icon/next.png" width="30px" height="30px" id="btnSendNotify" tooltiptext="Gửi ý kiến"/>
+    </h:div>
+    <listbox id="lbProcess"
+             mold="paging" pageSize="5"
+             style="border:none;word-wrap:break-word;" 
+             emptyMessage="Chưa có ý kiến nào với văn bản này">
+        <template name="model">
+            <listitem context="userNotifyPopup" >
+                <listcell>
+                    <h:table  width="100%">
+                        <h:th width="20%"/>
+                        <h:th width="80%"/>
+                        <h:tr>
+                            <h:td align="center">
+                                <image style="border:1px solid gray;border-radius:30px" width="60px" height="60px" content="${$composer.getAvatar(each)}"/>
+                            </h:td>
+                            <h:td>
+                                <h:div>
+                                    <h:div style="width:60%;float:left">
+                                        <label style="font-weight: bold;">
+                                            <attribute name="value">
+                                                ${each.sendUserName}:
+                                            </attribute>
+                                        </label>
+                                    </h:div>
+                                    <h:div style="width:40%;float:right">
+                                        <label value="${each.sendTimeByDateStr}" sclass="timeNotify" style="float:right;font-size:10px" />
+                                    </h:div>
+                                </h:div>
+                                <label value="${each.content}" />
+                                <image if="${each.attachId !=null}" sclass="attNotify" tooltiptext="Tệp đính kèm ý kiến" forward="onClick=lbProcess.onDownloadAttach(${each})" src="/Share/img/icon/download.png" width="20px" height="20px">                     
+                                </image>
+                            </h:td>
+                        </h:tr>
+                    </h:table>
+                </listcell>
+            </listitem>
+        </template>
+    </listbox> 
+    <menupopup id="userNotifyPopup">
+        <menuitem id="deleteMenu" image="/Share/img/delete.png" label="Xóa"/>
+    </menupopup>                      
+</window>

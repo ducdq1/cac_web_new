@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window id="viewDispatchWnd"
+        border="normal"
+        width="800px"
+        xmlns:h="http://www.w3.org/1999/xhtml"
+        xmlns="http://www.zkoss.org/2005/zul"
+        apply="com.viettel.module.cosmetic.Controller.CosmeticXemPhieuBaoThuController" 
+        position="center,center"
+        closable="true">
+    
+    <style src="/Share/css/formstyle.css" />
+    <style src="/Share/css/uploadstyle.css" />
+    <script type="text/javascript" src="/Share/js/UPMSamples.js" />
+    <caption label="Giấy báo thu" />
+    <div id="main">
+        <h:div width="100%">
+            <h:table width="100%" align="center">
+                <h:tr>
+                    <h:td colspan="4">
+                        <label value="Thông tin giấy báo thu" style="font-size: 90%"/>
+                    </h:td>
+                </h:tr> 
+                <h:tr>
+                    <h:td style="width:10%">
+                        <label value="Số tiếp nhận"
+                               sclass="hightlight" />
+                        <!--                    <label value=" *"
+                        sclass="label-required" />-->
+                    </h:td>
+                    <h:td style="width:10%">
+                        <label id="lbBookNumber"/>
+                    </h:td>
+                    <h:td style="width:10%">
+                        <label value="Trạng thái tiếp nhận" sclass="hightlight" />
+                    </h:td>
+                    <h:td style="width:10%">
+                        <textbox id="tbStatusReceive" visible="false" value="1"/>
+                        <label value="Đồng ý tiếp nhận" sclass="label-info" />                             
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td style="width:10%">
+                        <label value="Người tiếp nhận"
+                               sclass="hightlight" />
+                    </h:td>
+                    <h:td style="width:10%">
+                        <label id="lbUserReceice"/>
+                    </h:td>
+                    <h:td style="width:10%">
+                        <label value="Ngày tiếp nhận" sclass="hightlight" />
+                    </h:td>
+                    <h:td style="width:10%">
+                        <label id="lbDateReceive"/>                             
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td style="width:10%">
+                        <label value="Số giấy báo thu"
+                               sclass="hightlight" />
+                    </h:td>
+                    <h:td style="width:10%">
+                        <label id="lbReceicePapeNo"/>
+                    </h:td>
+                    <h:td style="width:10%">
+                    </h:td>
+                    <h:td style="width:10%">
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td colspan="4">
+                        <groupbox width="100%"  closable="false"
+                                  id="gbRapidCRUD1">
+                            <caption label="DANH SÁCH HỒ SƠ" />
+                            <h:div style="width:100%; height:400px; overflow:auto;">
+                                <listbox id="lbListViewMulti" emptyMessage="${$composer.getLabelCos('common_emptyMessage')}">
+                                    <listhead sizable="true">
+                                        <listheader label="${$composer.getLabelCos('cosmetic_stt')}" align="center" style="width:5%"  />
+                                        <listheader label="Số tiếp nhận" align="center" style="width:15%"  />
+                                        <listheader label="${$composer.getLabelCos('cosmetic_mahoso')}" align="center" style="width:15%"/>
+                                        <listheader label="${$composer.getLabelCos('cosmetic_tendoanhnghiep')}" align="center" style="width:20%"/>
+                                        <listheader label="${$composer.getLabelCos('cosmetic_tenbxn')}" align="center" style="width:20%"/>
+                                        <listheader label="${$composer.getLabelCos('cosmetic_tensp')}" align="center" style="width:20%"/>
+                                        <listheader label="Số tiền" align="center" style="width:20%"/>
+                                    </listhead>
+                                    <template name="model">
+                                        <listitem>
+                                            <listcell label="${forEachStatus.index + 1 + userPagingTop.pageSize * userPagingTop.activePage}" />
+                                            <listcell label="${forEachStatus.index + 1 + userPagingTop.pageSize * userPagingTop.activePage+$composer.getBookNumber()}" />
+                                            <listcell label="${each.nswFileCode}"></listcell>
+                                            <listcell  style="text-align:left" label="${each.businessName}"></listcell>
+                                            <listcell style="text-align:left">
+                                                <label value="${$composer.cutString(each.brandName, 100)}" 
+                                                       tooltiptext="${each.brandName}"
+                                                       multiline="true" 
+                                                       pre="true" />
+                                            </listcell>
+                                            <listcell style="text-align:left">
+                                                <label value="${$composer.cutString(each.productName, 100)}" 
+                                                       tooltiptext="${each.productName}"
+                                                       multiline="true" 
+                                                       pre="true" />
+                                            </listcell>
+                                            <listcell> 
+                                                <label value="${$composer.getCost()}"> </label>
+                                            </listcell>
+                                        </listitem>
+                                    </template>
+                                </listbox>
+                            </h:div>
+                        </groupbox>
+                    </h:td>
+                </h:tr>
+                
+                <h:tr>
+                    <h:td >
+                        <label value="Tổng số hồ sơ: "
+                               sclass="hightlight" />
+                        <label id="lbSumFile"/>
+                    </h:td>
+                    <h:td>
+                        <label value="Tổng số tiền: " sclass="hightlight" />
+                        <label id="lbSumMoney"/>
+                    </h:td>
+                    <h:td colspan="3">
+                        <label value="Viết bằng chữ:  " sclass="hightlight" />
+                        <label id="lbtextMoney"/>
+                    </h:td>
+                </h:tr>
+            </h:table>
+        </h:div> 
+    </div>
+    <h:table width="100%">
+        <h:tr> 
+            <h:td style="width:50%;text-align:right">
+                <button id="onPrint" label="Xuất giấy báo thu" />
+            </h:td>
+            <h:td style="width:50%;text-align:left" >
+                <button label="Đóng" id="btnCancel" onClick="viewDispatchWnd.detach()"/>
+            </h:td>            
+        </h:tr>
+    </h:table>
+</window>

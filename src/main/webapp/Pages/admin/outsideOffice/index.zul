@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+	xmlns="http://www.zkoss.org/2005/zul" title="Quản lý đơn vị ngoài"
+	id="windowOutsideOffice" border="normal"
+	apply="com.viettel.voffice.DAO.System.OutsideOffice.OutsideOfficeController">
+	<style src="/Share/css/voffice.css" />
+	<vlayout>
+		<groupbox mold="3d">
+			<caption label="Tìm kiếm đơn vị" />
+			<h:div class="searchDiv">
+				<h:table width="50%" align="center">
+					<h:th width="10%" />
+					<h:th width="50%" />
+					<h:tr>
+						<h:td>
+							<label value="Tên đơn vị" />
+						</h:td>
+						<h:td>
+							<textbox id="tbSearchOfficeName" width="95%"
+								maxlength="500" />
+						</h:td>
+					</h:tr>
+					<h:tr>
+						<h:td>
+							<label value="Mã đơn vị" />
+						</h:td>
+						<h:td>
+							<textbox id="tbSearchOfficeCode" width="95%"
+								maxlength="20" />
+						</h:td>
+					</h:tr>
+					<h:tr>
+						<h:td colspan="2" align="center">
+							<button id="btnSearch" label="Tìm kiếm"
+								image="/Share/img/search.png" />
+						</h:td>
+					</h:tr>
+				</h:table>
+			</h:div>
+		</groupbox>
+		<groupbox mold="3d">
+			<caption label="Danh sách đơn vị ngoài" />
+			<vlayout>
+				<listbox id="lbListOffice" mold="paging" pageSize="10"
+					emptyMessage="Không có đơn vị nào" checkmark="true"
+					style="border:none">
+					<listhead>
+						<listheader label="STT" width="5%" />
+						<listheader label="Tên đơn vị" width="25%" />
+						<listheader label="Mã đơn vị" width="10%" />
+						<listheader label="Địa chỉ" width="25%" />
+						<listheader label="Email" width="10%" />
+						<listheader label="Điện thoại" width="10%" />
+						<listheader label="Trạng thái" width="5%" />
+						<listheader align="center" label="Xem"
+							width="5%" />
+						<listheader align="center" label="Sửa"
+							width="5%" />
+					</listhead>
+					<template name="model">
+						<listitem>
+							<listcell label="${forEachStatus.index+1}"
+								tooltiptext="${forEachStatus.index+1}" />
+							<listcell label="${each.officeName}"
+								tooltiptext="${each.officeName}" />
+							<listcell label="${each.officeCode}"
+								tooltiptext="${each.officeCode}" />
+							<listcell label="${each.address}"
+								tooltiptext="${each.address}" />
+							<listcell label="${each.email}"
+								tooltiptext="${each.email}" />
+							<listcell label="${each.mobile}"
+								tooltiptext="${each.mobile}" />
+							<listcell>
+								<label if="${each.status == 1}"
+									value="Hoạt động" />
+								<label if="${each.status != 1}"
+									value="Bị khóa" />
+							</listcell>
+							<listcell>
+								<image src="/Share/img/icon/view.png"
+									width="20px" height="20px"
+									forward="onClick=lbListOffice.onOpenView(${each})"
+									tooltiptext="Xem đơn vị" />
+							</listcell>
+							<listcell>
+								<image src="/Share/img/icon/edit.png"
+									width="20px" height="20px"
+									forward="onClick=lbListOffice.onOpenUpdate(${each})"
+									tooltiptext="Sửa đơn vị" />
+							</listcell>
+						</listitem>
+					</template>
+				</listbox>
+				<include id="toolbarOffice"
+					src="/Pages/common/toolbarApplication.zul" />
+			</vlayout>
+		</groupbox>
+	</vlayout>
+</window>

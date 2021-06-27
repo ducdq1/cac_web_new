@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+   
+    <window id="nodeConfigDlg" border="normal" width="850px"
+            apply="com.viettel.voffice.DAO.System.Flow.FlowNodeConfigController" 
+            position="center,center" closable="true">
+        <caption label="Cấu hình node" />
+        <textbox id="txtNodeId" visible="false" />
+        <listbox id="lstDeptUser" 
+                     multiple="false"
+                     emptyMessage="Không tồn tại actor ">
+                <listhead sizable="true">
+                    <listheader width="10%" label="STT" align="center" />
+                    <listheader width="30%" label="Đơn vị"  />
+                    <listheader width="20%" label="Chức vụ" sort="auto" />
+                    <listheader width="20%" label="Cán bộ xử lý" />
+                    <listheader width="20%" label="Trách nhiệm" />
+                    <listheader width="20%" label="Allias" />
+                    <listheader width="20%" label="Sử dụng Allias" />
+                    <listheader width="20%" label="Mặc định chọn" />
+                </listhead>
+                <template name="model">
+                    <listitem value="${each}">
+                        <listcell label="${forEachStatus.index+1}" />
+                        <listcell>
+                            <label value="${each.deptName}" if="${each.deptId != -7}"/>
+                            <label value="${each.deptName}+${each.deptLevel}" if="${each.deptId == -7}"/>
+                            <image src="/Share/img/icon/back.png" if="${each.deptId == -7}" forward="onClick=lstDeptUser.onReduceDeptLevel"/>
+                            <image src="/Share/img/icon/next.png" if="${each.deptId == -7}" forward="onClick=lstDeptUser.onIncreaseDeptLevel"/>
+                        </listcell>
+                        <listcell>
+                            <label value="${each.posName}"/>
+                            <image if="${each.userId == null}" forward="onClick=lstDeptUser.onPosition" src="/Share/img/icon/user.gif" width="20px" height="20px" tooltiptext="Chọn chức vụ"/>
+                        </listcell>
+                        <listcell label="${each.userName}">
+                        </listcell>
+                        <listcell>
+                            <label value = "Xử lý chính" if="${each.processType == 1}"/>
+                            <label value = "Phối hợp" if="${each.processType == 0}"/>
+                            <label value = "Tham khảo" if="${each.processType == 2}"/>
+                            <label value = "Cho ý kiến" if="${each.processType == 3}"/>
+                            <label value = "Nhận để biết" if="${each.processType == 4}"/>
+                            <label value = "" if="${each.processType == null}"/>
+                            <image forward="onClick=lstDeptUser.onChangeProcessType" src="/Share/img/icon/user.gif" width="20px" height="20px" tooltiptext="Đổi vai trò"/>
+                        </listcell>
+                        <listcell>
+                            <textbox value="@bind(each.deptName)"/>
+                        </listcell>
+                        <listcell>
+                            <checkbox label="Sử dụng Allias" forward="onClick=lstDeptUser.onCheckUseAllias"/>
+                            <!--<textbox value="" />-->
+                        </listcell>
+                        <listcell>
+<!--                            <radiogroup id="${each.nodeDeptUserId}" forward="onclick=lstDeptUser.onCheckOptionSelected" />
+                            <radio value="1" label="Chọn sẵn" radiogroup="${each.nodeDeptUserId}" />
+                            <radio value="2" label="Mặc định gửi" radiogroup="${each.nodeDeptUserId}" />
+                            <radio value="0" label="Không chọn" radiogroup="${each.nodeDeptUserId}" />-->
+                        </listcell>
+                    </listitem>
+                </template>
+            </listbox>
+        <div>
+            <grid hflex="min" id="gridListNDUs" 
+                  >
+<!--                <columns height="22px">
+                    <column width="120px" label="Đơn vị"></column>
+                    <column width="120px" label="Chức danh" align="center"></column>
+                </columns>
+                <template name="model">
+                    <row>
+                        <textbox inplace="true"
+                                 value="${each.deptName}" width="99%" />
+                        <label value="${each.deptName}"/>
+                    </row>
+                </template>-->
+            </grid>
+<!--            <grid hflex="min" id="gridListNDUs" model="@load(vm.listNDUs)"
+            emptyMessage="Khong co ban ghi nao!">
+                
+                <columns height="22px">
+                    <column width="120px" label="Đơn vị"></column>
+                    <column width="120px" label="Chức danh" align="center"></column>
+                    <column width="150px" label="Người xử lý" align="center"></column>
+                    <column width="100px" label="Nhiệm vụ" align="center"></column>
+                    <column width="100px" label="Allias" align="center">
+                    </column>
+                    <column width="100px" label="Sử dụng Allias" align="center">
+                    </column>
+                    <column width="100px" label="Mặc định chọn" align="center">
+                    </column>
+                </columns>
+                <template name="model">
+                    <row>
+                        <textbox inplace="true"
+                             value="@bind(each.deptName)" width="99%" />
+                        <label value="@bind(each.deptName)"/>
+                        <textbox inplace="true"
+                             value="@bind(each.posName)" width="99%" />
+                        <textbox inplace="true"
+                             value="@bind(each.userName)" width="98%"/>
+                        <textbox inplace="true"
+                             value="@bind(each.processType)" width="98%"/>
+                        <textbox inplace="true"
+                             value="@bind(each.allias)" width="98%"/>
+                        <textbox inplace="true"
+                             value="@bind(each.useAllias)" width="98%"/>
+                        <combobox inplace="true"
+                              selectedItem="@bind(each.optionSelected)" hflex="1" >
+                            <comboitem value="1" label="Chọn sẵn" />
+                            <comboitem value="2" label="Mặc định" />
+                            <comboitem value="0" label="Có thể chọn" />
+                        </combobox>
+                    </row>
+                </template>
+            </grid>-->
+            
+            <listbox width="300px" model="@load(vm.listNDUs)" 
+                     emptyMessage="Khong co ban ghi nao" vflex="true">
+                <template name="model" var="foo">
+                    <listitem label="@load(foo.deptName)"/>
+                    <listitem label="${fooStatus.index}" />
+                </template>
+            </listbox>
+        </div>
+        <div align="center">
+            <button height="30px" image="/Share/img/icon/save.png" id="btnAddNodeConfig" label="Chọn actor" />
+            <button height="30px" image="/Share/img/icon/close.png" id="btnSave" label="Lưu và Đóng" />
+        </div>
+    </window>
+</zk>

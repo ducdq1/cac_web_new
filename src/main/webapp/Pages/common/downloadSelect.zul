@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+        xmlns="http://www.zkoss.org/2005/zul"
+        position="center,center" width="750px"
+        id="downloadWnd"
+        border="normal"
+        apply="com.viettel.voffice.DAO.System.AttachDownloadController" 
+        closable="true">
+    <caption label="Danh sách đính kèm"  />
+    <listbox id="lbAttachs" emptyMessage="Không tồn tại tệp đính kèm" style="word-wrap:break-word;" mold="paging" pagingPosition="top" pageSize="15">
+        <listhead>
+            <listheader label="STT" align="center" width="5%"/>
+            <listheader label="Tên tệp" align="left" width="35%"/>
+            <listheader label="Người tạo" align="left" width="20%"/>
+            <listheader label="Người sửa" align="left" width="20%"/>
+            <listheader label="Loại tệp" align="left" width="10%"/>
+            <listheader label="Trạng thái" align="center" width="10%"/>
+        </listhead>
+        <template name="model">
+            <listitem value="${each}">
+                <listcell label="${forEachStatus.index+1}" />
+                <listcell label="${each.attachName}"/>
+                <listcell label="${each.creatorName}"/>
+                <listcell label="${each.modifierName}"/>
+                <listcell label="${each.attachTypeName}"/>
+                <listcell label="${each.isActive==1?'Hoạt động' : 'Đã xóa'}"/>
+            </listitem>
+        </template>
+    </listbox>
+</window>

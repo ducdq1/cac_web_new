@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+	xmlns="http://www.zkoss.org/2005/zul" position="center,center"
+	closable="true" maximizable="true" width="50%" mode="overlapped"
+	border="normal" id="windowCRUDOffice"
+	apply="com.viettel.voffice.DAO.System.OutsideOffice.OutsideOfficeCRUDController">
+	<zscript>
+        <![CDATA[
+	String rexOfficeCode = "/^\\S+$/: Mã đơn vị không được để trống, không có dấu cách";
+	String rexEmail = "/(.+@.+\\.[a-z]+)|(^$)/: Nhập chính xác địa chỉ email";
+	String rexTel = "/(\\d{10,11})|(^$)/: Nhập chính xác số điện thoại";
+        ]]>
+    </zscript>
+	<style src="/Share/css/formstyle.css" />
+	<include id="toolbarTop" src="/Pages/common/toolbarCRUD.zul" />
+	<vlayout>
+		<h:table width="100%">
+			<h:th width="30%" />
+			<h:th width="70%" />
+			<h:tr>
+				<h:td>
+					<label value="Tên đơn vị" />
+					<label value=" *" sclass="label-required" />
+				</h:td>
+				<h:td>
+					<textbox id="tbOfficeName" maxlength="500"
+						width="95%" if="${arg.outsideOffice == null}" />
+					<textbox id="tbOfficeName" maxlength="500"
+						width="95%" value="${arg.outsideOffice.officeName}"
+						if="${arg.outsideOffice != null}" />
+				</h:td>
+			</h:tr>
+			<h:tr>
+				<h:td />
+				<h:td align="left">
+					<label id="lbNameWarning" class="notify"
+						visible="false" width="95%" />
+				</h:td>
+			</h:tr>
+			<h:tr>
+				<h:td>
+					<label value="Mã đơn vị" />
+					<label value=" *" sclass="label-required" />
+				</h:td>
+				<h:td>
+					<textbox class="textbox-uppercase" id="tbOfficeCode"
+						maxlength="20" width="95%" if="${arg.outsideOffice == null}" />
+					<textbox class="textbox-uppercase" id="tbOfficeCode"
+						maxlength="20" width="95%" value="${arg.outsideOffice.officeCode}"
+						if="${arg.outsideOffice != null}" />
+				</h:td>
+			</h:tr>
+			<h:tr>
+				<h:td />
+				<h:td align="left">
+					<label id="lbCodeWarning" class="notify"
+						visible="false" width="95%" />
+				</h:td>
+			</h:tr>
+			<h:tr>
+				<h:td>
+					<label value="Đơn vị sử dụng" />
+				</h:td>
+				<h:td>
+					<hbox width="95%">
+						<textbox id="tbDeptName" disabled="true"
+							hflex="1" if="${arg.outsideOffice == null}" />
+						<textbox id="tbDeptName" disabled="true"
+							hflex="1" if="${arg.outsideOffice != null}" />
+						<button id="btnSelectDept"
+							image="/Share/img/icon/dept.png" />
+						<button id="btnDeleteDept"
+							image="/Share/img/delete.png" />
+					</hbox>
+				</h:td>
+			</h:tr>
+			<h:tr>
+				<h:td>
+					<label value="Địa chỉ" />
+				</h:td>
+				<h:td>
+					<textbox id="tbOfficeAddress" maxlength="500"
+						width="95%" value="${arg.outsideOffice.address}" />
+				</h:td>
+			</h:tr>
+			<h:tr>
+				<h:td>
+					<label value="Link service" />
+				</h:td>
+				<h:td>
+					<textbox id="tbOfficeLinkService" maxlength="500"
+						width="95%" type="url" value="${arg.outsideOffice.servicesUrl}" />
+				</h:td>
+			</h:tr>
+			<h:tr>
+				<h:td>
+					<label value="Email" />
+				</h:td>
+				<h:td>
+					<textbox id="tbOfficeEmail" maxlength="50"
+						width="95%" type="email" if="${arg.outsideOffice == null}" />
+					<textbox id="tbOfficeEmail" maxlength="50"
+						width="95%" type="email" value="${arg.outsideOffice.email}"
+						if="${arg.outsideOffice != null}" />
+				</h:td>
+			</h:tr>
+			<h:tr>
+				<h:td />
+				<h:td align="left">
+					<label id="lbEmailWarning" class="notify"
+						visible="false" width="95%" />
+				</h:td>
+			</h:tr>
+			<h:tr>
+				<h:td>
+					<label value="Số điện thoại" />
+				</h:td>
+				<h:td>
+					<textbox id="tbOfficeTelephone" maxlength="20"
+						width="95%" type="tel" if="${arg.outsideOffice == null}" />
+					<textbox id="tbOfficeTelephone" maxlength="20"
+						width="95%" type="tel" value="${arg.outsideOffice.mobile}"
+						if="${arg.outsideOffice != null}" />
+				</h:td>
+			</h:tr>
+			<h:tr>
+				<h:td>
+					<label value="Fax" />
+				</h:td>
+				<h:td>
+					<textbox id="tbOfficeFax" maxlength="30" width="95%"
+						value="${arg.outsideOffice.fax}" />
+				</h:td>
+			</h:tr>
+			<!--             <h:tr> -->
+			<!--                 <h:td> -->
+			<!--                     <label value="Hình thức thông báo"/> -->
+			<!--                 </h:td> -->
+			<!--                 <h:td> -->
+			<!--                     <vlayout> -->
+			<!--                         <checkbox id="cbSMS" label="SMS" /> -->
+			<!--                         <checkbox id="cbEmail" label="Email" /> -->
+			<!--                         <checkbox id="cbFax" label="Fax" /> -->
+			<!--                         <checkbox id="cbService" label="Web service" /> -->
+			<!--                     </vlayout> -->
+			<!--                 </h:td> -->
+			<!--             </h:tr> -->
+<!-- 			<h:tr> -->
+<!-- 				<h:td colspan="2" align="center"> -->
+<!-- 					<button id="btnSave" label="Lưu" /> -->
+<!-- 					<button id="btnClose" label="Đóng" -->
+<!-- 						onClick="windowCRUDOffice.onClose()" /> -->
+<!-- 				</h:td> -->
+<!-- 			</h:tr> -->
+		</h:table>
+	</vlayout>
+	<include id="toolbarBottom" src="/Pages/common/toolbarCRUD.zul" />
+</window>

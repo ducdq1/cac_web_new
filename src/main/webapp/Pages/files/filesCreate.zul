@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window id="filesCreateWnd"
+        xmlns:h="http://www.w3.org/1999/xhtml"
+        xmlns="http://www.zkoss.org/2005/zul"
+        apply="com.viettel.module.files.DAO.FilesCreateController" 
+        position="center,center" mode="embedded">
+    <style src="/Share/css/formstyle.css" />
+    <style src="/Share/css/uploadstyle.css" />
+
+    <h:div width="100%">
+        
+        <h:table width="100%">
+            <h:tr>
+                <h:td colspan="4" style="text-align:center">
+                    <label id="lbTopWarning" class="notify" width="15%" multiline="false" />
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td width="5%">
+                </h:td>
+                <h:td width="45%">
+                    <label value="Chọn thủ tục"  sclass="lb-create" style="align:right" />
+                    <label value=" *" sclass="label-required" />
+                </h:td>
+                <h:td width="40%">
+                    <label value="Chọn đơn vị tiếp nhận"  sclass="lb-create" style="align:right" />
+                    <label value=" *" sclass="label-required" />
+                </h:td>
+                <h:td width="15%">
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td>
+                </h:td>
+                <h:td>
+                    <listbox id="lbProcedure" mold="select" width="80%" 
+                             rows="8" onSelect="$composer.onSelectProcedure()">
+                        <template name="model">
+                            <listitem label="${each.name}" value="${each.categoryId}" />
+                        </template>
+                    </listbox>
+                </h:td>
+
+                <h:td>
+                    <listbox id="lbDept" mold="select" 
+                             rows="8" 
+                             width="80%">
+                        <template name="model">
+                            <listitem label="${each.deptName}" value="${each.deptId}" />
+                        </template>
+                    </listbox>
+                </h:td>
+                <h:td>
+                    <button id="btnAction" src="/Share/img/png/bt-next.png" 
+                            onClick="$composer.onNext()" />
+                </h:td>
+                
+            </h:tr>
+            
+            <h:tr>
+                <h:td colspan="4" style="text-align:center">
+                    <label id="lbBottomWarning" class="notify" width="15%" multiline="false" />
+                </h:td>
+            </h:tr>
+
+        </h:table>
+    </h:div> 
+    
+</window>

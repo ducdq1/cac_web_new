@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window id="createUpdateHolidays" border="normal" width="530px"
+        xmlns:h="http://www.w3.org/1999/xhtml"
+        xmlns="http://www.zkoss.org/2005/zul"
+        apply="com.viettel.voffice.DAO.System.Category.CreateUpdateHolidaysController" 
+        position="center,center" closable="true">
+    <style src="/Share/css/formstyle.css" />
+    <style src="/Share/css/uploadstyle.css" />
+    <script type="text/javascript" src="/Share/js/UPMSamples.js" />
+    <caption label="${$composer.getLabelName('create_holiday_title')}" />
+        
+    <h:div width="100%">
+        <h:table width="100%">
+            <h:tr>
+                <h:td width="25%">
+                    <label value="${$composer.getLabelName('manage_holiday_name')}"/>
+                    <label value=" *" sclass="label-required" />
+                </h:td>
+                <h:td width="75%">
+                    <textbox id="tbId" 
+                             visible="false"/>
+                    <textbox id="tbName" 
+                             maxlength="250" width="78.5%"/>
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td>
+                    <label value="${$composer.getLabelName('manage_holiday_time')}"  />
+                    <label value=" *" sclass="label-required" />
+                </h:td>
+                <h:td>
+                    <datebox id="dbTimeDate" cols="12"
+                             format="dd/MM/yyyy" width="80%"
+                             constraint="${$composer.getLabelName('manage_holiday_dbDay_constraint')}" />
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td>
+                    <label value="${$composer.getLabelName('manage_holiday_description')}"  />
+                </h:td>
+                <h:td>
+                    <textbox id="tbDescription" 
+                             maxlength="250" width="78.5%"/>
+                </h:td>
+            </h:tr>    
+            <h:tr>
+                <h:td>
+                    <label value="${$composer.getLabelName('manage_holiday_date_type')}"></label>
+                </h:td>
+                <h:td>
+                    <listbox id="lbDayType" mold="select" width="80%" >
+                        <listitem label="${$composer.getLabelName('manage_holiday_lbDayType_search_0')}" value="0" />
+                        <listitem label="${$composer.getLabelName('manage_holiday_lbDayType_search_1')}" value="1" selected="true"/>
+                    </listbox>
+                </h:td>
+            </h:tr>
+            <h:tr> 
+                <h:td colspan="2" style="text-align:center">
+                    <button label="${$composer.getLabelName('create_holiday_save')}" id="btnSave" src="/Share/img/icon/Add.png"/>
+                    <button label="${$composer.getLabelName('create_holiday_cancel')}" id="btnCancel" onClick="createUpdateHolidays.detach()" src="/Share/img/icon/close.png"/>
+                </h:td>
+            </h:tr>
+        </h:table>
+    </h:div> 
+</window>

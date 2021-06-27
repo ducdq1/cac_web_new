@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <style src="/Share/css/formstyle.css"/>
+    <window width="100%" id="manageHolidaysWindow"
+            apply="com.viettel.voffice.DAO.System.Category.HolidaysManagementController" border="normal" height="100%">
+        <caption label="${$composer.getLabelName('manage_holiday_title')}"/>
+        <h:div id="searchDiv" style="width:100%" align="center">
+            <h:table style="width:90%" class="searchTable">
+                <h:tr>
+                    <h:td width="10%"> 
+                        <label value="${$composer.getLabelName('manage_holiday_name_search')}"></label>
+                    </h:td>
+                    <h:td width="40%">
+                        <datebox id="dbDay" cols="12"
+                                 format="dd/MM/yyyy" width="90%"
+                                 constraint="${$composer.getLabelName('manage_holiday_dbDay_constraint')}" />
+                    </h:td>
+                    <h:td width="10%">
+                        <label value="${$composer.getLabelName('manage_holiday_date_type_search')}"></label>
+                    </h:td>
+                    <h:td>
+                        <listbox id="lbDayType" mold="select" width="90%" >
+                            <listitem label="${$composer.getLabelName('common_choose')}"
+                                      value="${$composer.getLabelName('common_choose')}" selected="true" />
+                            <listitem label="${$composer.getLabelName('manage_holiday_lbDayType_search_1')}" value="1"/>
+                            <listitem label="${$composer.getLabelName('manage_holiday_lbDayType_search_0')}" value="0" />
+                        </listbox>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td width="10%">
+                        <label value="${$composer.getLabelName('manage_holiday_arrange')}"></label>
+                    </h:td>
+                    <h:td>
+                        <listbox id="lbArrange" mold="select" width="90%" >
+                            <listitem label="${$composer.getLabelName('common_choose')}"
+                                      value="${$composer.getLabelName('common_choose')}" selected="true" />
+                            <listitem label="${$composer.getLabelName('arrange_name_asc')}" value="1"/>
+                            <listitem label="${$composer.getLabelName('arrange_name_desc')}" value="2" />
+                            <listitem label="${$composer.getLabelName('arrange_date_asc')}" value="3"/>
+                            <listitem label="${$composer.getLabelName('arrange_date_desc')}" value="4" />
+                        </listbox>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td colspan="4" style="text-align:center">
+                        <button id="btnSearch" label="${$composer.getLabelName('common_search')}" sclass="button" image="/Share/img/icon/search.jpg"/>
+                        <button id="btnCreate" label="${$composer.getLabelName('common_add')}" sclass="button" image="/Share/img/icon/add_1.png"/>
+                    </h:td>
+                </h:tr>
+            </h:table>
+        </h:div>
+        <h:div id="gridDiv" >
+            <listbox id="lbManageHolidays" 
+                     style="word-wrap:break-word;min-height:350px"
+                     emptyMessage="${$composer.getLabelName('manage_holiday_emptymessage')}">
+                <listhead sizable="true">
+                    <listheader width="5%" label="${$composer.getLabelName('manage_holiday_stt')}" align="center"/>
+                    <listheader width="20%" label="${$composer.getLabelName('manage_holiday_name')}" />
+                    <listheader width="20%" label="${$composer.getLabelName('manage_holiday_time')}" />
+                    <listheader width="20%" label="${$composer.getLabelName('manage_holiday_description')}" />
+                    <listheader width="20%" label="${$composer.getLabelName('manage_holiday_date_type')}" />
+                    <listheader width="5%" label="${$composer.getLabelName('common_edit')}" align="center"/>
+                    <listheader width="5%" label="${$composer.getLabelName('common_delete')}" align="center"/>
+                </listhead>
+                <template name="model">
+                    <listitem value="${each}">
+                        <listcell label="${forEachStatus.index+1+userPagingBottom.pageSize*userPagingBottom.activePage}" />
+                        <listcell label="${each.name}" />
+                        <listcell label="${$composer.convertDateToString(each.timeDate)}"/>
+                        <listcell label="${each.description}" />
+                        <listcell label="${each.dateType ==1 ? $composer.getLabelName('manage_holiday_lbDayType_search_1')
+                                                             : $composer.getLabelName('manage_holiday_lbDayType_search_0')}" />
+                        <listcell >
+                            <image forward="onClick=lbManageHolidays.onEdit" src="/Share/img/icon/edit.png" width="20px" height="20px"
+                                   tooltiptext="${$composer.getLabelName('manage_holiday_edit')}"/>
+                        </listcell>
+                        <listcell>
+                            <image forward="onClick=lbManageHolidays.onDelete" src="/Share/img/icon/delete.png" width="20px" height="20px"
+                                   tooltiptext="${$composer.getLabelName('manage_holiday_del')}"/>
+                        </listcell>
+                    </listitem>
+                </template>
+            </listbox>
+            <paging id="userPagingBottom" pageSize="10" detailed="true"/>
+        </h:div>
+    </window>
+</zk>

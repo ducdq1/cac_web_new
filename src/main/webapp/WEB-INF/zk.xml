@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Created by ZK Studio -->
+
+<zk>
+	<device-config>
+		<device-type>ajax</device-type>
+		<timeout-uri>/error.zul</timeout-uri><!-- An empty URL can cause the 
+			browser to reload the same URL -->
+	</device-config>
+	<language-config>
+		<addon-uri>/WEB-INF/lang-addon.xml</addon-uri>
+	</language-config>
+	<library-property>
+        <name>org.zkoss.zul.progressbox.position</name>
+        <value>center,center</value>
+    </library-property>
+    
+    <library-property>
+        <name>org.zkoss.zul.progressbox.mask</name>
+        <value>true</value>
+    </library-property>
+    
+	<error-page>
+		<exception-type>java.lang.Throwable</exception-type>
+		<location>/error.zul</location>
+	</error-page>
+	
+</zk>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <window id="objectWindow" apply="com.viettel.voffice.DAO.System.RoleObjectController" width="550px" visible="false" border="normal" position="center" closable="true">
+       <caption label="Chọn chức năng"/>
+       <textbox id="txtRoleId" visible="false"/>
+       <zscript><![CDATA[
+                Long roleId = (Long) Executions.getCurrent().getArg().get("roleId");
+                TreeModel objects = new com.viettel.core.sys.model.FullObjectTreeModel(roleId);]]>
+        </zscript>
+        <tree id="treeObject" model="${objects}" style="padding-top:0px;border:0px none" checkmark="true" multiple="true">
+            <template name="model">
+                
+                <treeitem label="${each.name}" selected="true" if="${each.selected==1}">
+                    <attribute name="checkable" value="false" if="${each.type==1}"/>
+                </treeitem>
+                <treeitem label="${each.name}" if="${each.selected!=1}">
+                    <attribute name="checkable" value="false" if="${each.type==1}"/>
+                </treeitem>
+                
+            </template>
+        </tree>
+        <div align="center">
+            <button id="btnSave" image="/Share/img/icon/save.png" label="Lưu lại"/>
+        </div>
+    </window>
+</zk>

@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.w3.org/1999/xhtml"
+        xmlns="http://www.zkoss.org/2005/zul"
+        title="Thông tin chi tiết tài khoản"
+        id="createUserBusiness" apply="com.viettel.voffice.DAO.System.Users.UserBusinessCreateController" width="100%" border="normal" position="center" closable="true">
+    
+    <style>
+        .z-label {
+            word-wrap: break-word !important;
+        }
+        
+        .z-a:focus, .z-a:hover {
+        	text-decoration: underline;
+        }
+        .filedownload {
+        	overflow: hidden;
+        	white-space: nowrap;
+        	text-overflow: ellipsis;
+        }
+    </style>
+    
+    <div style="width:100%;float:left; padding-right:10px">
+    	<h:div style="float:right">
+			<label id="lbTopWarning"
+		   	       class="warning-info" multiline="false"
+				   style="color:red;"/>				   	
+		</h:div>
+		<h:br/>				
+        <groupbox id="gbThongTinTaiKhoan" mold="default" width="100%">
+            <caption label="THÔNG TIN TÀI KHOẢN" />
+            <h:table style="width:100%; height:100%;" class="createTable">
+            	<h:th width="5%" />
+                <h:th width="10%" />
+                <h:th width="35%" />
+                <h:th width="10%" />
+                <h:th width="35%" />
+                <h:tr>
+                    <h:td></h:td>
+                    <h:td style="text-align:left">
+                        <label sclass="lb-create">Email:</label>
+                    </h:td>
+                    <h:td style="width:40%;text-align:left">
+                        <textbox id="txtUserId" visible="false" value="${$composer.register.registerId}"/>
+                        <label id="txtFullName" value="${$composer.register.userEmail}"/>
+                    </h:td>
+                    <h:td style="vertical-align: top;" rowspan="3">
+                        <label sclass="lb-create"> Lý do:</label>
+                    </h:td>
+                    <h:td style="width:40%; vertical-align: top; white-space:pre-wrap;" rowspan="3">
+                        <label id="" value="${$composer.register.description}"/>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td></h:td>
+                    <h:td style="text-align:left">
+                        <label sclass="lb-create">Tài khoản đăng nhập:</label>
+                    </h:td>
+                   <!--  <h:td style="color:red" >
+                        <label value="${$composer.register.manageEmail}"/>
+                    </h:td> -->
+                    <h:td style="color:red" >
+                        <label id="lbAccountLogin"/>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td></h:td>
+                    <h:td style="text-align:left">
+                        <label sclass="lb-create">Mật khẩu:</label>
+                    </h:td>
+                    <h:td style="color:red">
+                        <label id="lbPassWord"  value="${$composer.getPassword()}"/>
+                    </h:td>
+                </h:tr>
+            </h:table>
+            
+        </groupbox>
+        <h:br/>
+        <groupbox id="gbThongTinDoanhNghiep" mold="default" width="100%">
+            <caption label="THÔNG TIN DOANH NGHIỆP" />
+            <h:table width="100%" align="center" style="table-layout: fixed;">
+                <h:th width="5%" />
+                <h:th width="10%" />
+                <h:th width="35%" />
+                <h:th width="10%" />
+                <h:th width="35%" />
+                
+               	<h:tr>
+               		<h:td colspan="5">
+               			<groupbox id="gbLoaiHinh" mold="default" width="100%">
+               				<h:table width="100%" align="center" style="table-layout: fixed;">
+               					<h:th width="5%" />
+               					<h:th width="10%" />
+               					<h:th width="25%" />
+                				<h:th width="25%" />
+                				<h:th width="35%" />
+
+                				<h:tr>
+                					<h:td></h:td>
+                					<h:td>
+			                        	<label value="Loại hình" sclass="lb-create" style="align:right">
+			                        	 <attribute name="style" if="${!$composer.compareObject($composer.register.businessTypeName,$composer.business.businessTypeName)}">
+                      						color: red !important;
+                      					 </attribute>
+			                        	</label>
+				                    </h:td>
+				                    <h:td colspan="2">
+				                        <label  value="${$composer.getsLoaiHinh()}"/>
+				                    </h:td>
+				                    <h:td></h:td>
+                				</h:tr>
+                				<h:tr>
+                					<h:td></h:td>
+                					<h:td colspan="2">
+                						<label value="Số giấy chứng nhận đủ điều kiện kinh doanh thuốc" sclass="lb-create" style="align:right">
+                						 <attribute name="style" if="${!$composer.compareObject($composer.register.numberCertificate,$composer.business.numberCertificate)}">
+                      						color: red !important;
+                      					 </attribute>
+                						</label>
+                					</h:td>
+                					<h:td>
+                						<label  value="${$composer.register.numberCertificate}"/>
+                					</h:td>
+                					<h:td  class="filedownload">  
+                						<a                 							
+                							id="onDownloadFileNoCertificate" 
+                							label="${$composer.getAttachNameNumberCertificate()}"
+                							tooltiptext="${$composer.getAttachNameNumberCertificate()}"/>                							
+                					</h:td>
+                				</h:tr>
+                				<h:tr>
+                					<h:td></h:td>
+                					<h:td colspan="2">
+                						<label value="Số giấy phép thành lập Văn phòng đại diện tại VN" sclass="lb-create" style="align:right">
+                						 <attribute name="style" if="${!$composer.compareObject($composer.register.numberLicensesOfficesVn,$composer.business.numberLicensesOfficesVn)}">
+                      						color: red !important;
+                      					 </attribute>
+                						</label>
+                					</h:td>
+                					<h:td>
+                						<label value="${$composer.register.numberLicensesOfficesVn}"/>
+                					</h:td>
+                					
+                					<h:td class="filedownload">  
+                						<a
+                							id="onDownloadFileLicensesEstablishedOffices" 
+                							label="${$composer.getAttachLicenseOfficeVN()}"
+                							tooltiptext="${$composer.getAttachLicenseOfficeVN()}" />
+                						
+                					</h:td>
+                				</h:tr>
+                				<h:tr>
+                					<h:td></h:td>
+                					<h:td colspan="2">
+                						<label value="Số giấy phép hoạt động về thuốc và nguyên liệu làm thuốc tại VN" sclass="lb-create" style="align:right" >
+                						 <attribute name="style" if="${!$composer.compareObject($composer.register.numberLicensesInMedicines,$composer.business.numberLicensesInMedicines)}">
+                      						color: red !important;
+                      					 </attribute>
+                						</label>
+                					</h:td>
+                					<h:td>
+                						<label value="${$composer.register.numberLicensesInMedicines}"/>
+                					</h:td>
+                					<h:td class="filedownload">  
+                						<a
+                							id="onDownloadFileNoLicensesInMedicines" 
+                							label="${$composer.getAttachNameLicenseInMedicines()}"
+                							tooltiptext="${$composer.getAttachNameLicenseInMedicines()}"/>
+                					</h:td>
+                				</h:tr>
+               				</h:table>
+           	 			</groupbox>
+               		</h:td>
+               	</h:tr>
+               	<h:tr>
+                    <h:td></h:td>
+                    <h:td>
+                        <label value="Tên tiếng Việt" sclass="lb-create" style="text-align:right">
+                          <attribute name="style" if="${!$composer.compareObject($composer.register.businessNameVi,$composer.business.businessName)}"  >
+                      		color: red !important;
+                      	</attribute>
+                        </label>
+                    </h:td>
+                    <h:td colspan="3">
+                        <label width="95%" value="${$composer.register.businessNameVi}"/>
+                    </h:td>
+                </h:tr>
+        
+                <h:tr>
+                    <h:td></h:td>
+                    <h:td>
+                        <label value="Tên tiếng Anh" sclass="lb-create" style="align:right">
+                         <attribute name="style" if="${!$composer.compareObject($composer.register.businessNameEng,$composer.business.businessNameEng)}">
+                      		color: red !important;
+                      	</attribute>
+                        </label>
+                    </h:td>
+                    <h:td colspan="3">
+                        <label width="95%" value="${$composer.register.businessNameEng}" />
+                    </h:td>
+                </h:tr>
+        
+                <h:tr>
+                    <h:td></h:td>
+                    <h:td>
+                        <label value="Tên viết tắt" sclass="lb-create" style="align:right">
+                         <attribute name="style" if="${!$composer.compareObject($composer.register.businessNameAlias,$composer.business.businessNameAlias)}">
+                      		color: red !important;
+                      	</attribute>
+                        </label>
+                    </h:td>
+                    <h:td colspan="3">
+                        <label width="95%" value="${$composer.register.businessNameAlias}" />
+                    </h:td>
+                </h:tr>
+        
+                <h:tr>
+                    <h:td></h:td>
+                    <h:td>
+                        <label value="Mã số thuế" sclass="lb-create" style="align:right">
+                         <attribute name="style" if="${!$composer.compareObject($composer.register.businessTaxCode,$composer.business.businessTaxCode)}">
+                      		color: red !important;
+                      	</attribute>
+                        </label>
+                    </h:td>
+                    <h:td>
+                        <label width="95%" value="${$composer.register.businessTaxCode}"/>
+                    </h:td>
+                    <h:td>
+                        <label value="Số đăng ký KD" sclass="lb-create" style="align:right">
+                        <attribute name="style" if="${!$composer.compareObject($composer.register.businessLicense,$composer.business.businessLicense)}">
+                      		color: red !important;
+                      	</attribute>
+                        </label>
+                    </h:td>
+                    <h:td>
+                        <label width="95%" value="${$composer.register.businessLicense}"/>
+                    </h:td>
+                </h:tr>
+        
+                <h:tr>
+                    <h:td></h:td>
+                    <h:td>
+                        <label value="Cơ quan chủ quản" sclass="lb-create" style="align:right">
+                         <attribute name="style" if="${!$composer.compareObject($composer.register.governingBody,$composer.business.governingBody)}">
+                      		color: red !important;
+                      	</attribute>
+                        </label>
+                    </h:td>
+                    <h:td colspan="3">
+                        <label width="95%" value="${$composer.register.governingBody}"/>
+                    </h:td>
+                </h:tr>
+            </h:table>
+        </groupbox>
+        
+        <h:br/>
+        <!--         Dia chi-->
+        <groupbox id="gbDiaChi" mold="default" width="100%">
+            <caption label="ĐỊA CHỈ" />
+            <h:div>
+                <h:table width="100%" align="center" style="table-layout: fixed;">
+                    <h:th width="5%" />
+                    <h:th width="10%" />
+                    <h:th width="35%" />
+                    <h:th width="10%" />
+                    <h:th width="35%" />
+                    <h:tr>
+                        <h:td></h:td>
+                        <h:td>
+                            <label value="Tỉnh/Thành phố" sclass="lb-create" style="align:right">
+                            <attribute name="style" if="${!$composer.compareObject($composer.register.businessProvince,$composer.business.businessProvince)}">
+                      						color: red !important;
+                      		</attribute>
+                            </label>
+                            <span style="color:red">*</span>
+                        </h:td>
+                        <h:td>
+                            <label width="95%" value="${$composer.getsTinh()}"/>
+                           
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td></h:td>
+                        <h:td>
+                            <label value="Quận/Huyện" sclass="lb-create" style="align:right">
+                             <attribute name="style" if="${!$composer.compareObject($composer.register.businessDistrict,$composer.business.businessDistrict)}">
+                      						color: red !important;
+                      		</attribute>
+                            </label>
+                            <span style="color:red">*</span>
+                        </h:td>
+                        <h:td>
+                    
+                            <label width="95%" value="${$composer.getsHuyen()}"/>
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td></h:td>
+                        <h:td>
+                            <label value="Xã/Phường/Thị trấn" sclass="lb-create" style="align:right">
+                             <attribute name="style" if="${!$composer.compareObject($composer.register.businessTown,$composer.business.businessTown)}">
+                      						color: red !important;
+                      		</attribute>
+                            </label>
+                            <span style="color:red">*</span>
+                        </h:td>
+                        <h:td>
+                            <label width="95%" value="${$composer.getsXa()}"/>
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td></h:td>
+                        <h:td>
+                            <label value="Địa chỉ chi tiết" sclass="lb-create" style="align:right">
+                              <attribute name="style" if="${!$composer.compareObject($composer.register.businessAdd,$composer.business.businessAddress)}">
+                      			color: red !important;
+                      		</attribute>
+                            </label>
+                            <span style="color:red">*</span>
+                        </h:td>
+                        <h:td>
+                            <label width="95%" value="${$composer.register.businessAdd}"/>
+                        </h:td>
+                        <h:td>
+                            <label value="Năm thành lập" sclass="lb-create" style="align:right">
+                              <attribute name="style" if="${!$composer.compareObject($composer.register.businessEstablishYear,$composer.business.businessEstablishYear)}">
+                      			color: red !important;
+                      		</attribute>
+                            </label>
+                        </h:td>
+                        <h:td>
+                            <label width="95%" value="${$composer.register.businessEstablishYear}"/>
+                        </h:td>
+                    </h:tr>
+        
+                    <h:tr>
+                        <h:td></h:td>
+                        <h:td>
+                            <label value="Điện thoại" sclass="lb-create" style="align:right">
+                              <attribute name="style" if="${!$composer.compareObject($composer.register.businessTelephone,$composer.business.businessTelephone)}">
+                      			color: red !important;
+                      		</attribute>
+                            </label>
+                        </h:td>
+                        <h:td>
+                            <label width="95%" value="${$composer.register.businessTelephone}"/>
+                        </h:td>
+                        <h:td>
+                            <label value="Fax" sclass="lb-create" style="align:right">
+                              <attribute name="style" if="${!$composer.compareObject($composer.register.businessFax,$composer.business.businessFax)}">
+                      			color: red !important;
+                      		</attribute>
+                            </label>
+                        </h:td>
+                        <h:td>
+                            <label width="95%" value="${$composer.register.businessFax}"/>
+                        </h:td>
+                
+                    </h:tr>
+        
+                    <h:tr>
+                        <h:td></h:td>
+                        <h:td>
+                            <label value="Email" sclass="lb-create" style="align:right">
+                              <attribute name="style" if="${!$composer.compareObject($composer.register.manageEmail,$composer.business.manageEmail)}">
+                      			color: red !important;
+                      		</attribute>
+                            </label>
+                            <span style="color:red">*</span>
+                        </h:td>
+                        <h:td>
+                            <label width="95%" value="${$composer.register.manageEmail}"/>
+                        </h:td>
+                
+                        <h:td>
+                            <label value="Website" sclass="lb-create" style="align:right">
+                            <attribute name="style" if="${!$composer.compareObject($composer.register.businessWebsite,$composer.business.businessWebsite)}">
+                      			color: red !important;
+                      		</attribute>
+                            </label>
+                        </h:td>
+                        <h:td>
+                            <label width="95%" value="${$composer.register.businessWebsite}"/>
+                        </h:td>
+                    </h:tr>
+                </h:table>
+            </h:div>
+        </groupbox>
+        <h:br/>
+        <groupbox id="gbNguoiDaiDien" mold="default" width="100%">
+            <caption label="NGƯỜI ĐẠI DIỆN" />
+            <h:div>
+                <h:table width="100%" align="center" style="table-layout: fixed;">
+                    <h:th width="5%" />
+                    <h:th width="10%" />
+                    <h:th width="35%" />
+                    <h:th width="10%" />
+                    <h:th width="35%" />
+                    <h:tr>
+                        <h:td></h:td>
+                        <h:td>
+                            <label value="Họ và tên" sclass="lb-create" style="align:right" />
+                            <span style="color:red">*</span>
+                        </h:td>
+                        <h:td>
+                            <label width="95%" value="${$composer.register.userFullName}"/>
+                        </h:td>
+                        <h:td>
+                            <label value="Email" sclass="lb-create" style="align:right" />
+                            <span style="color:red">*</span>
+                        </h:td>
+                        <h:td>
+                            <label width="95%" value="${$composer.register.userEmail}"/>
+                        </h:td>
+                    </h:tr>
+        
+                    <h:tr>
+                        <h:td></h:td>
+                        <h:td>
+                            <label value="Chức vụ" sclass="lb-create" style="align:right" />
+                            <span style="color:red">*</span>
+                        </h:td>
+                        <h:td>
+                            <label width="95%" value="${$composer.getsChucVu()}"/>
+                        </h:td>
+                        <h:td>
+                            <label value="Số di động" sclass="lb-create" style="align:right" />
+                            <span style="color:red">*</span>
+                        </h:td>
+                        <h:td>
+                            <label width="95%" value="${$composer.register.userMobile}"/>
+                        </h:td>
+                    </h:tr>
+                </h:table>
+            </h:div>
+        </groupbox>
+        <h:br/>
+        <groupbox width="98%" sclass="gb-form-create" closable="false" style="text-align:left;" >
+                    		<caption label="Tên và địa chỉ văn phòng đại diện hoặc người liên lạc ở Việt Nam:" />
+                    		<h:table width="100%" align="center">
+                    			<h:th width="5%" />
+                                <h:th width="10%" />
+                                <h:th width="35%" />
+                                <h:th width="10%" />
+                                <h:th width="35%" />
+                                <h:tr>
+                                	<h:td></h:td>
+                                	<h:td>
+                                		<label value="Tên">
+                                		  <attribute name="style" if="${!$composer.compareObject($composer.register.officeVNName,$composer.business.officeVNName)}">
+                      						color: red !important;
+                      					</attribute>
+                                		</label> 
+                                	</h:td>
+                                	<h:td>
+                                		<label id="tbOfficeName" width="89%" value="${$composer.register.officeVNName}"/>
+                                	</h:td>
+                                	<h:td></h:td>
+                                </h:tr>
+                                <h:tr>
+                                	<h:td></h:td>
+                                	<h:td>
+                                		<label value="Địa chỉ chi tiết:">
+                                		<attribute name="style" if="${!$composer.compareObject($composer.register.officeVNAddress,$composer.business.officeVNAddress)}">
+                      						color: red !important;
+                      					</attribute>
+                                		</label> 
+                                	</h:td>
+                                	<h:td colspan="4">
+                                		<label id="tbOfficeAddress" width="89%" value="${$composer.register.officeVNAddress}"/>
+                                	</h:td>
+                                </h:tr>
+                                 <h:tr>
+                                 	<h:td></h:td>
+                                	<h:td>
+                                		<label value="Điện thoại:">
+                                		<attribute name="style" if="${!$composer.compareObject($composer.register.officeVNPhoneNumber,$composer.business.officeVNPhoneNumber)}">
+                      						color: red !important;
+                      					</attribute>
+                                		</label> 
+                                	</h:td>
+                                	<h:td>
+                                		<label id="tbOfficePhone" width="89%" value="${$composer.register.officeVNPhoneNumber}"/>
+                                	</h:td>
+                                	<h:td></h:td>
+                                </h:tr>
+                    		</h:table>
+                    	</groupbox>
+        <h:table>
+            
+            <h:tr>
+                <h:td colspan="2" align="center">
+                    <button height="30px" image="/Share/img/icon/back.png" id="btnBack" 
+                            forward="onClick=createUserBusiness.onClose" label="Quay lại" />         
+                    <button height="30px" image="/Share/img/icon/save.png" id="btnPheDuyet"
+                    		if="${$composer.checkVisibleApproveButton()}" label="Phê duyệt" />
+                    <button height="30px" image="/Share/img/icon/close.png" id="btnTuChoi"
+                    		if="${$composer.CheckVisibleButton()}" label="Từ chối" />
+                </h:td>
+            </h:tr>
+        </h:table>
+    </div>
+</window>
+

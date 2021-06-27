@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+	xmlns="http://www.zkoss.org/2005/zul" id="cosmeticAll"
+	apply="com.viettel.module.cosmetic.Controller.ChangeSatusController">
+    
+	<style src="/Share/css/formstyle.css" />
+        
+	<script defer="true">
+		toolBar.widget = "cosmeticAll";
+		<!--addToolbar("Share/img/add.png","Thêm mới hồ sơ","onOpenCreate") com.viettel.module.cosmetic.DAO.CosmeticAllController;-->
+	</script>
+        
+	<include src="/Pages/common/searchToolbar.zul" />
+<!--        <zk if="${1==1}">
+            <h:label>123</h:label>
+        </zk>-->
+	<h:div class="contentDiv">
+		<include id="incSearchFullForm"
+			src="/Pages/module/cosmetic/include/seach/searchForm_CB.zul" />
+	</h:div>
+	<h:div class="contentDiv">
+            
+		<paging id="userPagingTop" pageSize="10" detailed="true" />
+		<include id="incList"
+			src="/Pages/module/cosmetic/include/listbox/list_ChangeStatus.zul" />
+		<paging id="userPagingBottom" pageSize="10" detailed="true" />
+	</h:div>
+	<separator />
+	
+</window>

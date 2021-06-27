@@ -1,0 +1,44 @@
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./wdChooseDocOut" ?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+	xmlns="http://www.zkoss.org/2005/zul" xmlns:w="client"
+	id="wdChooseDocOut" border="normal" title="Chọn văn bản hồi đáp"
+	position="center" closable="true"
+	apply="com.viettel.voffice.DAO.DocIn.DocInChooseDocOutComposer"
+	width="75%">
+	<include id="incSearchDocOut"
+		src="/Pages/document/docIn/include/searchDocOutForm.zul">
+	</include>
+	<div class="contentDiv">
+		<paging id="pagingTop" pageSize="10" detailed="true" />
+		<listbox id="lbDocDraft" multiple="true"
+			emptyMessage="Không tồn tại văn bản" mold="paging" checkmark="true"
+			pagingPosition="top">
+			<listhead sizable="true">
+				<listheader label="STT" hflex="min" />
+				<listheader label="Trích yếu" hflex="2" />
+				<listheader label="Ngày tạo" hflex="min" />
+				<listheader label="Loại văn bản" hflex="1" />
+				<listheader label="Người xử lý" hflex="1" />
+			</listhead>
+			<template name="model">
+				<listitem value="${each}">
+					<listcell
+						label="${pagingTop.pageSize * pagingTop.activePage + forEachStatus.index + 1}" />
+					<listcell label="${each.documentAbstract}" />
+					<listcell label="${each.dateCreateStr}" />
+					<listcell label="${each.documentTypeName}" />
+					<listcell label="${each.creatorName}" />
+				</listitem>
+			</template>
+		</listbox>
+		<paging id="pagingBottom" pageSize="10" detailed="true" />
+	</div>
+	<div align="center">
+		<button image="/Share/img/icon/done.png" label="Xong"
+			id="btnSelect">
+		</button>
+		<button image="/Share/img/delete.png" label="Hủy" id="btnClose"
+			onClick="wdChooseDocOut.onClose()">
+		</button>
+	</div>
+</window>

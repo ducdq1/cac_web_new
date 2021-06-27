@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+	xmlns="http://www.zkoss.org/2005/zul" xmlns:w="client"
+	position="center,center" width="100%" mode="embedded"
+	id="windowCRUDAttach"
+	apply="com.viettel.voffice.DAO.Ycnk.AttachCRUDController"
+	onCtrlKey="$composer.keyEventHandle(event.getKeyCode())"
+	ctrlKeys="#f6#f7#f8">
+	<style src="/Share/css/formstyle.css" />
+	<style src="/Share/css/uploadstyle.css" />
+	<script type="text/javascript" src="/Share/js/UPMSamples.js" />
+	<h:div id="topToolbar" class="toolBar">
+		<button sclass="btnAction" image="/Share/img/png/quay-lai.png"
+			tooltiptext="Quay lại" forward="onClick=windowCRUDAttach.onClose" />
+		<button sclass="btnAction" label="Lưu và thêm mới (F6)"
+			image="/Share/img/png/luu-lai.png" onClick="$composer.onSave(1)" />
+		<button sclass="btnAction" label="Lưu và đóng (F7)"
+			image="/Share/img/png/luu-lai-va-dong.png"
+			onClick="$composer.onSave(2)" />
+		<label id="lbTopWarning" class="notify" width="15%" multiline="false" />
+	</h:div>
+	<h:table width="100%" align="center">
+		<h:th width="15%" />
+		<h:th width="35%" />
+		<h:th width="15%" />
+		<h:th width="35%" />
+                <h:tr>
+			<h:td colspan="3">
+				<label value="Thông tin file đính kèm" sclass="lb-create" />
+			</h:td>
+		</h:tr>
+		<h:tr>
+			<h:td>
+				<label value="Mã file" sclass="lb-create" />
+				<label value=" *" sclass="label-required" />
+			</h:td>
+			<h:td>
+				<textbox id="tbAttachCode" width="95%" rows="1"
+					value="${$composer.attach.attachCode}"
+					maxlength="500" />
+			</h:td>
+			<h:td>
+				<label value="Tên file" sclass="lb-create" />
+				<label value=" *" sclass="label-required" />
+			</h:td>
+			<h:td>
+				<textbox id="tbAttachName" width="95%" rows="1"
+					value="${$composer.attach.attachName}"
+					maxlength="500" />
+			</h:td>
+		</h:tr>
+                <h:tr>
+			<h:td>
+				<label value="File đính kèm" sclass="lb-create" />
+				<label value=" *" sclass="label-required" />
+			</h:td>
+			<h:td colspan="3">
+				<vlayout>
+					<button width="85px" id="btnAttach"
+						style="font-weight: bold;color: #F25D45;" sclass="attachBtn"
+						src="/Share/img/paperclip.png"
+						upload="zk.UPMSample1,maxsize=10240,multiple=true,native"
+						label="Chọn tệp" />
+					<vlayout id="flist" hflex="1" sclass="fileList" />
+				</vlayout>
+			</h:td>
+			
+		</h:tr>
+		
+	</h:table>
+        
+
+	<h:div id="bottomToolbar" class="toolBar">
+		<button sclass="btnAction" image="/Share/img/png/quay-lai.png"
+			tooltiptext="Quay lại" forward="onClick=windowCRUDAttach.onClose" />
+		<button sclass="btnAction" label="Lưu và thêm mới (F6)"
+			image="/Share/img/png/luu-lai.png" onClick="$composer.onSave(1)" />
+		<button sclass="btnAction" label="Lưu và đóng (F7)"
+			image="/Share/img/png/luu-lai-va-dong.png"
+			onClick="$composer.onSave(2)" />
+		<label id="lbBottomWarning" class="notify" width="15%" multiline="false" />
+	</h:div>
+</window>

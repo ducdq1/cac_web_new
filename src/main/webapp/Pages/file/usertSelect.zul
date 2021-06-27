@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <window id="deptUserSelectWindow" width="550px" apply="com.viettel.voffice.DAO.Files.SendToController" border="normal" position="center" closable="true">
+        <caption label="Chọn người nhận"/>
+        <tree id="deptUserTree" style="padding-top:0px;border:0px none" checkmark="false" multiple="false">
+            <template name="model">
+                <treeitem label="${each.name}" />
+            </template>
+        </tree>
+    </window>
+</zk>

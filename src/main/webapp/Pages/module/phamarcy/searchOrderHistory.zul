@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.zkoss.org/2005/zk/native"
+	xmlns="http://www.zkoss.org/2005/zul">
+	<style src="/Share/css/formstyle.css" />
+	<style>td{
+	height:30px;
+	}
+	.label_title{
+	text-align: right;
+	padding-right:10px;
+	}
+	</style>
+	<groupbox id="fullSearchGbx" mold="3d">
+		<caption
+			label="${$composer.getLabelCos('cosmetic_search_caption')}" />
+		<h:table align="center" width="80%" class="table-search">
+			<h:tr>
+				<h:th width="14%" />
+				<h:th width="36%" />
+				<h:th width="14%" />
+				<h:th width="36%" />
+			</h:tr>
+			<h:tr>
+				<h:td class="label_title">
+					<label value="Mã đơn hàng" sclass="lb-create" />
+				</h:td>
+				<h:td>
+					<textbox id="tbMaBG" width="90%" rows="1"
+						maxlength="250" />
+				</h:td>
+
+				<h:td class="label_title">
+					<label value="Người bán" sclass="lb-create" />
+				</h:td>
+
+				<h:td>
+					<textbox id="tbNguoiBaoGia" width="90%" rows="1"
+						maxlength="250" />
+				</h:td>
+			</h:tr>
+
+			<h:tr>
+				<h:td class="label_title">
+					<label value="Bán giá từ ngày" sclass="lb-create" />
+				</h:td>
+				<h:td>
+					<datebox id="dbFromDay" cols="12"
+						format="dd/MM/yyyy" width="30%"
+						constraint="between 19000101 and 20991231: ${$composer.getLabel('date_validate')}" />
+				</h:td>
+				<h:td class="label_title">
+					<label value="Đến ngày" sclass="lb-create" />
+				</h:td>
+				<h:td>
+					<datebox id="dbToDay" cols="12" format="dd/MM/yyyy"
+						width="30%"
+						constraint="between 19000101 and 20991231: ${$composer.getLabel('date_validate')}" />
+				</h:td>
+			</h:tr>
+
+
+			<h:tr>
+				<h:td style="height:20px">
+
+				</h:td>
+
+			</h:tr>
+
+			<h:tr>
+				<h:td colspan="4" align="center"
+					style="text-align: center">
+					<button id="btnSearch"
+						label="${$composer.getLabelCos('common_search')}" sclass="button"
+						image="/Share/img/icon/search.jpg" autodisable="self" />
+					<button id="btnReset" label="Nhập lại"
+						sclass="button" image="/Share/img/icon/reset_small.png"
+						autodisable="self" />
+
+				</h:td>
+			</h:tr>
+		</h:table>
+	</groupbox>
+</zk>

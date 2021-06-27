@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+        xmlns="http://www.zkoss.org/2005/zul"
+        position="center,center" closable="true" maximizable="true" 
+        width="50%" height="50%"
+        border="normal" mode="overlapped"
+        id="windowSelectDept"
+        title="Chọn đơn vị liên kết"
+        apply="com.viettel.voffice.DAO.System.OutsideOffice.OutsideOfficeSelectDept">
+    <style src="/Share/css/formstyle.css"/>
+    <style>
+        .footer {
+        position: relative;
+        bottom: 0;
+        width: 100%;
+        margin:0 auto;
+        }
+        .gbChilds
+        {
+        padding:0px;
+        position: relative;
+        }
+        .divLeft .z-groupbox-3d-cnt
+        {
+        padding:0px !important;
+        }
+        .divRight .z-label
+        {
+        display:none;
+        }
+    </style>
+    <tree id="tree" style="padding-top:0px;border:0px" rows="10">
+        <template name="model">
+            <treeitem label="${each.name}">
+            </treeitem>
+        </template>
+    </tree>
+</window>

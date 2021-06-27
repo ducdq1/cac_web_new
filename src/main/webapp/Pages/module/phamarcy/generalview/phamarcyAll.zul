@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+	xmlns="http://www.zkoss.org/2005/zul" id="phamarcyAll" style=""
+	apply="com.viettel.module.phamarcy.controller.PhamarcyAllController">
+	<style src="/Share/css/formstyle.css" />
+	 
+	<script defer="true">toolBar.widget = "phamarcyAll";</script>
+	<style>
+		.z-listheader-cnt{ color:#4584D3 !important;
+		}
+
+	</style>
+	<h:div class="contentDiv" style="width:99%;margin:0 auto;background-color:#FBEFFB">
+		<include id="incSearchFullForm"
+			src="/Pages/module/phamarcy/searchForm_DN.zul" />
+	</h:div>
+	<h:div class="contentDiv" style="width:99%;margin:0 auto">
+
+		<include id="incList"
+			src="/Pages/module/phamarcy/listDocs_DN.zul" />
+		<paging id="userPagingBottom" pageSize="10" detailed="true" />
+		
+		 <h:br/>
+
+		<h:div
+			style="text-align:left;width:380px;border-radius:10px;
+			border:1px solid #bbbaaa;padding:10px;background-color:#eb8b00">
+			<label style="font-size:17px;border-radius: 5px;color:white">Danh sách sản phẩm đã chọn để báo giá</label>
+		</h:div>
+		
+		 <h:br/>
+		 <h:div style="margin:0 auto;;padding:10px!important;width:100%;display:inline">
+		<label style="font-size:13px;font-style:italic;color:red;float:left">Chú ý: Những sản phẩm màu đỏ là sản phẩm có giá thấp hơn hoặc bằng với giá nhập</label>
+			<label style="font-size:15px;font-style: italic;float:right;" id="lbTongtien"> </label>
+			<label style="font-size:15px;float:right;font-weight:bold;color:red">Tổng tiền:  </label>
+			
+		</h:div>
+ 
+		<include id="incListSP" src="/Pages/module/phamarcy/listSP.zul" />
+		<h:br/>
+		<h:div style="witdh:100%;margin:0 auto;text-align:center">
+			<button id="btnExport"
+				label="Xuất báo giá" sclass="button"
+				image="/Share/img/icon/save.png" autodisable="self" />
+			<button id="btnOrder" label="Chuyển đơn hàng" sclass="button"
+				image="/Share/img/icon/next.png" autodisable="self" />
+		</h:div>
+		<h:br/>
+	</h:div>
+	<separator />
+</window>

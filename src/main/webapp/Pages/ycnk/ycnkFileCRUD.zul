@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+	xmlns="http://www.zkoss.org/2005/zul" xmlns:w="client"
+	position="center,center" width="100%" mode="embedded"
+	id="windowCRUDYcnkFile"
+	apply="com.viettel.voffice.DAO.Ycnk.YcnkFileCRUDController"
+	onCtrlKey="$composer.keyEventHandle(event.getKeyCode())"
+	ctrlKeys="#f6#f7#f8">
+	<style src="/Share/css/formstyle.css" />
+	<style src="/Share/css/uploadstyle.css" />
+	<script type="text/javascript" src="/Share/js/UPMSamples.js" />
+	<h:div id="topToolbar" class="toolBar">
+		<button sclass="btnAction" image="/Share/img/png/quay-lai.png"
+			tooltiptext="Quay lại" forward="onClick=windowCRUDYcnkFile.onClose" />
+		<button sclass="btnAction" label="Lưu và thêm mới (F6)"
+			image="/Share/img/png/luu-lai.png" onClick="$composer.onSave(1)" />
+		<button sclass="btnAction" label="Lưu và đóng (F7)"
+			image="/Share/img/png/luu-lai-va-dong.png"
+			onClick="$composer.onSave(2)" />
+		<button sclass="btnAction" label="Lưu và sao lưu (F8)"
+			image="/Share/img/png/luu-lai-sao-luu.png"
+			onClick="$composer.onSave(3)" />
+		<label id="lbTopWarning" class="notify" width="15%" multiline="false" />
+	</h:div>
+	<h:table width="100%" align="center">
+		<h:th width="15%" />
+		<h:th width="35%" />
+		<h:th width="15%" />
+		<h:th width="35%" />
+                <h:tr>
+                    <h:td colspan="3">
+                        <label value="Thông tin đơn vị đăng ký" sclass="lb-create" />
+                    </h:td>
+                </h:tr>
+		<h:tr>
+			<h:td>
+				<label value="Tên tổ chức /cá nhân đăng ký" sclass="lb-create" />
+				<label value=" *" sclass="label-required" />
+			</h:td>
+			<h:td>
+				<textbox id="tbRegisterName" width="95%" rows="1"
+					value="${$composer.ycnkFile.registerName}"
+					maxlength="500" />
+			</h:td>
+			<h:td>
+				<label value="Số CMT" sclass="lb-create" />
+				<label value=" *" sclass="label-required" />
+			</h:td>
+			<h:td>
+				<intbox id="boxRegisterCmt" maxlength="9"
+                                        value="${$composer.ycnkFile.registerCmt}">
+					<attribute w:name="doKeyPress_">
+						function(evt){ if(!this._shallIgnore(evt,
+						"1234567890")){ this.$doKeyPress_(evt); } }
+					</attribute>
+				</intbox>
+			</h:td>
+		</h:tr>
+		
+		<h:tr>
+			<h:td>
+				<label value="Ngày cấp" sclass="lb-create" />
+                                <label value=" *" sclass="label-required" />
+			</h:td>
+			<h:td>
+				<datebox id="dbRegisterNgayCap"
+					value="${$composer.ycnkFile.registerNgayCap}"
+					format="dd/MM/yyyy"
+					constraint="no future, between 19000101 and 20991231: Ngày cấp không chính xác" />
+			</h:td>
+			<h:td>
+				<label value="Nơi cấp" sclass="lb-create" />
+				<label value=" *" sclass="label-required" />
+			</h:td>
+			<h:td>
+                            <textbox id="tbRegisterNoiCap" width="95%" rows="1"
+					value="${$composer.ycnkFile.registerNoiCap}"
+					maxlength="500" />
+			</h:td>
+		</h:tr>
+		<h:tr>
+			<h:td>
+				<label value="Fax" sclass="lb-create" />
+			</h:td>
+			<h:td>
+                            <textbox id="tbRegisterFax" width="95%" rows="1"
+					value="${$composer.ycnkFile.registerFax}"
+					maxlength="200" />
+			</h:td>
+			<h:td>
+				<label value="Mail" sclass="lb-create" />
+			</h:td>
+			<h:td>
+                            <textbox id="tbRegisterEmail" width="95%" rows="1"
+					value="${$composer.ycnkFile.registerEmail}"
+					maxlength="200" />
+			</h:td>
+		</h:tr>
+
+
+		
+		
+		<h:tr>
+			<h:td colspan="4">
+				<label value="Hồ sơ đăng ký" sclass="lb-create" />
+			</h:td>
+		</h:tr>
+                <h:tr>
+			<h:td>
+				<label value="Số hồ sơ" sclass="lb-create" />
+                                <label value=" *" sclass="label-required" />
+			</h:td>
+			<h:td>
+                            <textbox id="tbNswFileCode" width="95%" rows="1"
+					value="${$composer.ycnkFile.nswFileCode}"
+					maxlength="12" />
+			</h:td>
+			<h:td>
+				<label value="Loại hồ sơ" sclass="lb-create" />
+			</h:td>
+			<h:td>
+                            <textbox id="tbFileTypeCode" width="95%" rows="1"
+					value="${$composer.ycnkFile.fileTypeCode}"
+					maxlength="12" />
+			</h:td>
+		</h:tr>
+                <h:tr>
+			<h:td>
+				<label value="Ngày tạo" sclass="lb-create" />
+			</h:td>
+			<h:td>
+<!--				<datebox id="dbCreateDate"
+					value="${$composer.ycnkFile.createDate}"
+					format="dd/MM/yyyy"
+					constraint="no future, between 19000101 and 20991231: Ngày cấp không chính xác" />-->
+			</h:td>
+			<h:td>
+				<label value="Người tạo" sclass="lb-create" />
+			</h:td>
+			<h:td>
+<!--                            <textbox id="tbCreateBy" width="95%" rows="1"
+					value="${$composer.ycnkFile.createBy}"
+					maxlength="14" />-->
+			</h:td>
+		</h:tr>
+                <h:tr>
+			<h:td>
+				<label value="Trạng thái" sclass="lb-create" />
+			</h:td>
+			<h:td>
+<!--				<textbox id="boxStatusCode" width="95%" rows="1"
+					value="${$composer.ycnkFile.statusCode}"
+					maxlength="14" />-->
+                                <intbox id="boxStatusCode" maxlength="14"
+					constraint="no zero: Bạn phải nhập số lớn hơn 0">
+					<attribute w:name="doKeyPress_">
+						function(evt){ if(!this._shallIgnore(evt,
+						"1234567890")){ this.$doKeyPress_(evt); } }
+					</attribute>
+				</intbox>
+			</h:td>
+			<h:td>
+				<label value="Mã số thuế" sclass="lb-create" />
+                                <label value=" *" sclass="label-required" />
+			</h:td>
+			<h:td>
+                            <textbox id="tbBusinessTaxCode" width="95%" rows="1"
+					value="${$composer.ycnkFile.businessTaxCode}"
+					maxlength="14" />
+			</h:td>
+		</h:tr>
+                <h:tr>
+			<h:td>
+				<label value="Số vận đơn" sclass="lb-create" />
+			</h:td>
+			<h:td>
+				<textbox id="tbTransNo" width="95%" rows="1"
+					value="${$composer.ycnkFile.transNo}"
+					maxlength="35" />
+			</h:td>
+			<h:td>
+				<label value="Ngày vận đơn" sclass="lb-create" />
+			</h:td>
+			<h:td>
+				<datebox id="dbTransDate"
+					value="${$composer.ycnkFile.transDate}"
+					format="dd/MM/yyyy"
+					constraint="no future, between 19000101 and 20991231: Ngày cấp không chính xác" />
+			</h:td>
+		</h:tr>
+                <h:tr>
+			<h:td>
+				<label value="Số hợp đồng" sclass="lb-create" />
+			</h:td>
+			<h:td>
+				<textbox id="tbContractNo" width="95%" rows="1"
+					value="${$composer.ycnkFile.contractNo}"
+					maxlength="35" />
+			</h:td>
+			<h:td>
+				<label value="Ngày hợp đồng" sclass="lb-create" />
+			</h:td>
+			<h:td>
+				<datebox id="dbContractDate"
+					value="${$composer.ycnkFile.contractDate}"
+					format="dd/MM/yyyy"
+					constraint="no future, between 19000101 and 20991231: Ngày cấp không chính xác" />
+			</h:td>
+		</h:tr>
+                <h:tr>
+			<h:td>
+				<label value="Ngày gửi" sclass="lb-create" />
+			</h:td>
+			<h:td>
+				<datebox id="dbSendDate"
+					value="${$composer.ycnkFile.sendDate}"
+					format="dd/MM/yyyy"
+					constraint="no future, between 19000101 and 20991231: Ngày cấp không chính xác" />
+			</h:td>
+			<h:td>
+				<label value="Mã số thuế người ủy quyền" sclass="lb-create" />
+			</h:td>
+			<h:td>
+				<textbox id="tbAssignBusinessTaxCode" width="95%" rows="1"
+					value="${$composer.ycnkFile.assignBusinessTaxCode}"
+					maxlength="14" />
+			</h:td>
+		</h:tr>
+ 
+		
+		<h:tr>
+			<h:td colspan="4">
+				<label value="Thông tin giấy phép nhập khẩu" sclass="lb-create" />
+			</h:td>
+		</h:tr>
+                <h:tr>
+			<h:td>
+				<label value="Đơn vị cấp phép" sclass="lb-create" />
+			</h:td>
+			<h:td>
+				<textbox id="tbDeptCode" width="95%" rows="1"
+					value="${$composer.ycnkFile.deptCode}"
+					maxlength="20" />
+			</h:td>
+			<h:td>
+				<label value="Tổ chức cá nhân xuất khẩu" sclass="lb-create" />
+                                <label value=" *" sclass="label-required" />
+			</h:td>
+			<h:td>
+				<textbox id="tbExporterName" width="95%" rows="1"
+					value="${$composer.ycnkFile.exporterName}"
+					maxlength="20" />
+			</h:td>
+		</h:tr>
+
+                <h:tr>
+			<h:td>
+				<label value="Địa chỉ thương nhân xuất khẩu" sclass="lb-create" />
+			</h:td>
+			<h:td>
+				<textbox id="tbExporterAddress" width="95%" rows="1"
+					value="${$composer.ycnkFile.exporterAddress}"
+					maxlength="250" />
+			</h:td>
+			<h:td>
+				<label value="Điện thoại thương nhân xuất khẩu" sclass="lb-create" />
+			</h:td>
+			<h:td>
+                                <textbox id="tbExporterPhone" width="95%" rows="1"
+					value="${$composer.ycnkFile.exporterPhone}"
+					maxlength="50" />
+			</h:td>
+		</h:tr>
+                <h:tr>
+			<h:td>
+				<label value="Fax" sclass="lb-create" />
+			</h:td>
+			<h:td>
+				<textbox id="tbExporterFax" width="95%" rows="1"
+					value="${$composer.ycnkFile.exporterFax}"
+					maxlength="20" />
+			</h:td>
+			<h:td>
+				<label value="Email" sclass="lb-create" />
+			</h:td>
+			<h:td>
+				<textbox id="tbExporterEmail" width="95%" rows="1"
+					value="${$composer.ycnkFile.exporterEmail}"
+					maxlength="210" />
+			</h:td>
+		</h:tr>
+                <h:tr>
+			<h:td>
+				<label value="Nước xuất khẩu" sclass="lb-create" />
+			</h:td>
+			<h:td>
+				<textbox id="tbExporterNationCode" width="95%" rows="1"
+					value="${$composer.ycnkFile.exporterNationCode}"
+					maxlength="6" />
+			</h:td>
+			<h:td>
+				<label value="Cửa khẩu xuất" sclass="lb-create" />
+			</h:td>
+			<h:td>
+				<textbox id="tbExporterGateCode" width="95%" rows="1"
+					value="${$composer.ycnkFile.exporterGateCode}"
+					maxlength="6" />
+			</h:td>
+		</h:tr>
+                
+                <h:tr>
+                        <h:td>
+				<label value="Tổ chức/ cá nhân nhập khẩu" sclass="lb-create" />
+                                <label value=" *" sclass="label-required" />
+			</h:td>
+			<h:td>
+				<textbox id="tbImporterName" width="95%" rows="1"
+					value="${$composer.ycnkFile.importerName}"
+					maxlength="50" />
+			</h:td>	
+                        <h:td>
+				<label value="Địa chỉ thương nhân nhập khẩu" sclass="lb-create" />
+			</h:td>
+			<h:td>
+				<textbox id="tbImporterAddress" width="95%" rows="1"
+					value="${$composer.ycnkFile.importerAddress}"
+					maxlength="500" />
+			</h:td>
+			
+		</h:tr>
+                <h:tr>
+			<h:td>
+				<label value="Fax" sclass="lb-create" />
+			</h:td>
+			<h:td>
+				<textbox id="tbImporterFax" width="95%" rows="1"
+					value="${$composer.ycnkFile.importerFax}"
+					maxlength="20" />
+			</h:td>
+			<h:td>
+				<label value="Email" sclass="lb-create" />
+			</h:td>
+			<h:td>
+				<textbox id="tbImporterEmail" width="95%" rows="1"
+					value="${$composer.ycnkFile.importerEmail}"
+					maxlength="210" />
+			</h:td>
+		</h:tr>
+                 <h:tr>
+			<h:td>
+				<label value="Điện thoại" sclass="lb-create" />
+			</h:td>
+			<h:td>
+				<textbox id="tbImporterPhone" width="95%" rows="1"
+					value="${$composer.ycnkFile.importerPhone}"
+					maxlength="50" />
+			</h:td>
+			<h:td>
+				<label value="Cửa khẩu nhập khẩu" sclass="lb-create" />
+			</h:td>
+			<h:td>
+				<textbox id="tbImporterGateCode" width="95%" rows="1"
+					value="${$composer.ycnkFile.importerGateCode}"
+					maxlength="5" />
+			</h:td>
+		</h:tr>
+                <h:tr>
+			<h:td>
+				<label value="Thời gian dự kiến nhập khẩu" sclass="lb-create" />
+			</h:td>
+			<h:td colspan="3">
+				<datebox id="dbComingDate"
+					value="${$composer.ycnkFile.comingDate}"
+					format="dd/MM/yyyy"
+					constraint="no future, between 19000101 and 20991231: Ngày cấp không chính xác" />
+			</h:td>
+			
+		</h:tr>
+               
+	</h:table>
+<!--        <include id="ycnkProductForm" src="/Pages/ycnk/ycnkProductAll.zul" />-->
+<groupbox width="100%" sclass="gb-form-create" 	id="gbYcnkProduct">
+    <caption label="Thông tin sản phẩm trong hồ sơ" />
+    <listbox id="lbYcnkProduct" emptyMessage="Không có hồ sơ nào...">
+			<listhead>
+				<listheader label="STT" align="center" hflex="min" />
+				<listheader label="Mã số sản phẩm"/>
+				<listheader label="Tên sản phẩm"/>
+                                <listheader label="Sửa" align="center" hflex="min"
+					visible="${$composer.isCRUDProductMenu()}" />
+				<listheader label="Xóa" align="center" hflex="min"
+					visible="${$composer.isCRUDProductMenu()}" />
+			</listhead>
+			<template name="model">
+				<listitem>
+					<listcell
+						forward="onClick=lbYcnkProduct.onOpenView(${each})"
+						label="${forEachStatus.index + 1 + userPagingTop.pageSize * userPagingTop.activePage}">
+					</listcell>
+					<listcell
+						forward="onClick=lbYcnkProduct.onOpenView(${each})"
+						label="${each.productCode}">
+					</listcell>
+					<listcell
+						forward="onClick=lbYcnkProduct.onOpenView(${each})"
+						label="${each.productName}">
+					</listcell>
+					
+					<listcell>
+						<image src="/Share/img/icon/edit.png"
+							width="20px" height="20px"
+							forward="onClick=lbYcnkProduct.onOpenUpdateProduct(${each})"
+							if="${$composer.isAbleToModifyProduct(each)}"
+							tooltiptext="Sửa sản phẩm" />
+						<image src="/Share/img/icon/edit_disable.png"
+							width="20px" height="20px"
+							if="${!$composer.isAbleToModifyProduct(each)}"
+							tooltiptext="Sửa sản phẩm" />
+					</listcell>
+					<listcell>
+						<image src="/Share/img/icon/delete.png"
+							width="20px" height="20px"
+							forward="onClick=lbYcnkProduct.onDeleteProduct(${each})"
+							if="${$composer.isAbleToDeleteProduct(each)}"
+							tooltiptext="Xóa sản phẩm" />
+						<image src="/Share/img/icon/delete_disable.png"
+							width="20px" height="20px"
+							if="${!$composer.isAbleToDeleteProduct(each)}"
+							tooltiptext="Xóa sản phẩm" />
+					</listcell>
+				</listitem>
+			</template>
+		</listbox>
+        <h:table>
+                <h:tr>
+                    <h:td colspan="4" style="text-align:center">
+                        <button id="btnCreateProduct" label="Thêm mới" sclass="button" image="/Share/img/icon/add_1.png"/>
+                    </h:td>
+                </h:tr>
+	</h:table>
+</groupbox>
+        
+        
+        
+ <groupbox width="100%" sclass="gb-form-create" id="gbAttach">
+     <caption label="Thông tin file đính kèm" />
+     <listbox id="lbAttach" emptyMessage="Không có file nào...">
+			<listhead>
+				<listheader label="STT" align="center" hflex="min" />
+				<listheader label="Mã tài liệu"/>
+				<listheader label="Tên tài liệu"/>
+                                <listheader label="Xem" align="center" hflex="min"/>
+                                <listheader label="Sửa" align="center" hflex="min"/>
+				<listheader label="Xóa" align="center" hflex="min"/>
+			</listhead>
+			<template name="model">
+				<listitem>
+					<listcell
+						forward="onClick=lbAttach.onOpenView(${each})"
+						label="${forEachStatus.index + 1 + userPagingTop.pageSize * userPagingTop.activePage}">
+					</listcell>
+					<listcell
+						forward="onClick=lbAttach.onOpenView(${each})"
+						label="${each.attachCode}">
+					</listcell>
+					<listcell
+						forward="onClick=lbAttach.onOpenView(${each})"
+						label="${each.attachName}">
+					</listcell>
+					<listcell>
+						<image src="/Share/img/icon/view.png"
+							width="20px" height="20px"
+                                                            forward="onClick=lbAttach.onOpenViewAttach(${each})"
+							tooltiptext="Xem File" />
+					</listcell>
+					<listcell>
+						<image src="/Share/img/icon/edit.png"
+							width="20px" height="20px"
+							forward="onClick=lbAttach.onOpenUpdateAttach(${each})"
+							tooltiptext="Sửa File" />
+					</listcell>
+					<listcell>
+						<image src="/Share/img/icon/delete.png"
+							width="20px" height="20px"
+							forward="onClick=lbAttach.onDeleteAttach(${each})"
+							tooltiptext="Xóa File" />
+					</listcell>
+				</listitem>
+			</template>
+		</listbox>
+        <h:table>
+                <h:tr>
+                    <h:td colspan="4" style="text-align:center">
+                        <button id="btnCreateAttach" label="Thêm mới" sclass="button" image="/Share/img/icon/add_1.png"/>
+                    </h:td>
+                </h:tr>
+	</h:table>
+ </groupbox>
+        
+        
+        
+        
+	<h:div id="bottomToolbar" class="toolBar">
+		<button sclass="btnAction" image="/Share/img/png/quay-lai.png"
+			tooltiptext="Quay lại" forward="onClick=windowCRUDYcnkFile.onClose" />
+		<button sclass="btnAction" label="Lưu và thêm mới (F6)"
+			image="/Share/img/png/luu-lai.png" onClick="$composer.onSave(1)" />
+		<button sclass="btnAction" label="Lưu và đóng (F7)"
+			image="/Share/img/png/luu-lai-va-dong.png"
+			onClick="$composer.onSave(2)" />
+		<button sclass="btnAction" label="Lưu và sao lưu (F8)"
+			onClick="$composer.onSave(3)"
+			image="/Share/img/png/luu-lai-sao-luu.png" />
+		<label id="lbBottomWarning" class="notify" width="15%" multiline="false" />
+	</h:div>
+</window>

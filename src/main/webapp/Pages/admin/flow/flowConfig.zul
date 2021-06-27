@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul"
+    xmlns:zk="http://www.zkoss.org/2005/zk">
+    <window id="flowConfigDlg" apply="com.viettel.voffice.DAO.System.Flow.FlowConfigController" position="top,center" style="width:100%;" closable="true">
+        <h:div class="toolBar">
+            <h:img src="Share/img/icon/back.png" forward="onClick=flowConfigDlg.onBack" title="Quay lại màn hình quản lý"/>
+            <h:img src="Share/img/icon/save.png" onclick="onPack();" title="Lưu lại cấu hình"/>
+            <h:img src="Share/img/icon/flows/notation_start.png" onclick="addNewNode('',2);" title="Sự kiện bắt đầu" />
+            <h:img src="Share/img/icon/flows/notation_task.png" onclick="addNewNode('',1);" title="Xử lý"  />
+            <h:img src="Share/img/icon/flows/notation_end.png" onclick="addNewNode('',3);" title="Sự kiện kết thúc" />
+            <h:img src="Share/img/icon/flows/association_action.png" onclick="onSelect(this,1);" title="Hành động"/>
+            <h:img src="Share/img/icon/flows/association_expand.png" onclick="onSelect(this,2);" title="Tự động chuyển"/>
+            <!--h:img src="Share/img/icon/flows/association_undirected.png" onclick="onSelect(this,3);" /-->
+        </h:div>
+        <h:div style="height:600px;overflow:auto">
+            <h:canvas id="flowNode" style="width:100%;height:100%;border:1px solid gray;background-color:antiquewhite">
+            </h:canvas>
+        </h:div>
+        <h:input type="textbox" id="txtNodeName" style="display:none;position:absolute"/>
+        <script defer="true">
+           
+            var graph = null;
+            var select = 0;
+            var flow = null;
+            graph = drawProcess("flowNode");
+            var selectItem = null;
+            
+            document.onkeydown = function(e) {
+                graph.keyPress(e);
+            }
+            
+            addNewNode = function(nodeName, nodeType){
+                graph.addNewNode(nodeName,nodeType);
+            }
+            
+            finishInput = function(){
+                var value = document.getElementById('txtNodeName').value;
+                document.getElementById('txtNodeName').style.display= "none";
+                graph.setActiveItemText(value);
+            }
+            
+            onSelect = function(obj,type){
+                if(selectItem != null){
+                    selectItem.setAttribute("style","background-color:");
+                } 
+                if(selectItem == obj){
+                    selectItem = null;
+                    graph.changeAccessory();
+                } else {
+                    selectItem = obj;
+                    obj.setAttribute("style","background-color:rgb(255,122,0)");
+                    graph.setSelect(1);
+                    graph.setButtonType(type);
+                }
+            }
+            
+            loadFlowContent = function(){
+                graph.setFlowData(page.flow);
+            }
+            
+            updateNodeId = function(index, nodeId){
+                graph.updateNodeId(index,nodeId);
+            }
+            
+            onPack = function(){
+                var wgt = zk.Widget.$("$flowConfigDlg");
+                var flowData = graph.nodeToJSON();
+                zAu.send(new zk.Event(wgt, 'onSave', flowData));            
+            }
+        </script>
+    </window>
+</zk>

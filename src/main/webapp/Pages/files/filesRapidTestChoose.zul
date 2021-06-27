@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window id="filesRapidTestChooseWnd"
+        xmlns:h="http://www.w3.org/1999/xhtml"
+        xmlns="http://www.zkoss.org/2005/zul"
+        apply="com.viettel.module.files.DAO.FilesRapidTestChooseController" 
+        position="center,center" mode="embedded">
+    <style src="/Share/css/formstyle.css" />
+    <style src="/Share/css/uploadstyle.css" />
+
+    <h:div width="100%">
+        <groupbox id="gbChoose" mold="default" width="100%">
+            <caption label="Chọn loại hồ sơ" />
+            <h:ul>
+                <h:li>
+                    <a>
+                        <label value="Hồ sơ đề nghị đăng ký lưu hành bộ xét nghiệm nhanh thực phẩm" 
+                                 onClick="$composer.createNew()"/>
+                    </a>
+                </h:li>
+                <h:li>
+                    <a>
+                        <label value="Hồ sơ đề nghị thay đổi nội dung đã đăng ký thông tin lưu hành bộ xét nghiệm nhanh thực phẩm" 
+                             onClick="$composer.changeRequest()"/>
+                    </a>
+                    
+                </h:li>
+                <h:li>
+                    <a>
+                        <label value="Hồ sơ đề nghị gia hạn đăng ký lưu hành bộ xét nghiệm nhanh thực phẩm" 
+                             onClick="$composer.extendRequest()"/>
+                    </a>
+                    
+                </h:li>
+            </h:ul>
+        </groupbox>
+        
+    </h:div> 
+    
+</window>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window id="notificationCreateWnd" border="normal" width="600px"
+        xmlns:h="http://www.w3.org/1999/xhtml"
+        xmlns="http://www.zkoss.org/2005/zul"
+        apply="com.viettel.module.cosmetic.Controller.notification.NotificationCreateController" 
+        position="center,center" closable="true">
+    <style src="/Share/css/formstyle.css" />
+    <style src="/Share/css/uploadstyle.css" />
+    <script type="text/javascript" src="/Share/js/UPMSamples.js" />
+    <caption label="Quản lý danh mục thông tin" />
+        
+    <h:div width="100%">
+        <h:table width="100%">
+            <h:tr>
+                <h:td width="25%">
+                    <label value="Nội dung"  />
+                    <label value=" *" sclass="label-required" />
+                </h:td>
+                <h:td width="75%">
+                    <textbox id="txtId" 
+                             visible="false"/>
+                    <textbox id="txtContent" height="150px"
+                             maxlength="2000" width="100%" multiline="true"/>
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td width="25%">
+                    <label value="Loại thông tin"  />
+                    <label value=" *" sclass="label-required" />
+                </h:td>
+                <h:td width="75%">
+                    <listbox id="lboxType" mold="select" 
+                             width="200px">
+                        <listitem label="-- Chọn --" value="-1" selected="true"  />
+                        <listitem label="Nội dung Thông báo" value="3" />
+                        <listitem label="Nội dung Hỗ trợ" value="2" />
+                        <listitem label="Nội dung Liên hệ" value="1"  />                                                
+                    </listbox>
+                </h:td>
+            </h:tr>    
+            <h:tr>
+                <h:td width="25%">
+                    <label value="Trạng thái"  />
+                    <label value=" *" sclass="label-required" />
+                </h:td>
+                <h:td width="75%">
+                    <listbox id="lbIsActive"  mold="select" width="50%">
+                        <listitem value="-1" label="--- Chọn ---" selected="true"/>
+                        <listitem value="1" label="Hoạt động"/>
+                        <listitem value="0" label="Không hoạt động"/>
+                    </listbox>                     
+                </h:td>
+            </h:tr>                                                 
+            <h:tr> 
+                <h:td colspan="2" style="text-align:center">
+                    <button label="Lưu" id="btnSave" src="/Share/img/icon/Add.png"/>
+                    <button label="Huỷ bỏ" id="btnCancel" onClick="notificationCreateWnd.detach()" src="/Share/img/icon/close.png"/>
+                    <button label="Xem trước" id="btnPreview" src="/Share/img/icon/special_symbol_icon_16.png"/>
+                    <h:hr></h:hr>
+                </h:td>
+            </h:tr>
+            
+            <h:tr> 
+                <h:td colspan="2" style="text-align:center">
+                     
+                </h:td>
+            </h:tr>
+            
+        </h:table>
+    </h:div> 
+</window>

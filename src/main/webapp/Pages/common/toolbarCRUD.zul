@@ -1,0 +1,8 @@
+<zk xmlns:h="http://www.zkoss.org/2005/zk/native"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <div class="toolBar">
+        <image src="/Share/img/icon/back.png" sclass="back" tooltiptext="Quay lại"/>
+        <image src="/Share/img/icon/save.png" sclass="save" tooltiptext="Lưu lại"/>
+        <label id="lbWarning" class="notify"/>
+    </div>
+</zk>

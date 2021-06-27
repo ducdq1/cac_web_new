@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+        xmlns="http://www.zkoss.org/2005/zul" id="businessWindow"
+        position="center,center" 
+        title="Từ chối tiếp nhận hồ sơ" apply="com.viettel.module.cosmetic.Controller.include.PutInBookController" width="100%">
+    <style src="/Share/css/formstyle.css" />
+    <style src="/Share/css/uploadstyle.css" />
+    <script type="text/javascript" src="/Share/js/UPMSamples.js" />
+    <vlayout id="layoutComment">
+        <label id="lbTopWarning" style="color: red;" />
+        <h:table width="100%" align="center">
+            <h:th width="15%" />
+            <h:th width="35%" />
+            <h:th width="15%" />
+            <h:th width="35%" />
+            <h:tr>
+                <h:td>
+                    <label value="Trạng thái tiếp nhận" sclass="lb-create" />
+                </h:td>
+                <h:td colspan="1">
+                    <!--                    <listbox id="lbStatusReceive" mold="select" width="80%" emptyMessage="Chưa chọn nội dung">
+                        <listitem label="Từ chối" selected="true" value="0" />
+                    </listbox>-->
+                    <label width="95%" value="Từ chối" 
+                           sclass="label-info" />
+                    <textbox id="tbStatusReceive" width="95%" visible="false"
+                             value="0"/>
+                </h:td>
+			
+            </h:tr>
+            <h:tr>
+                <h:td colspan="6">
+                    <groupbox width="100%"  closable="false"
+                              id="gbRapidCRUD1">
+                        <caption label="DANH SÁCH HỒ SƠ" />
+                        <h:div style="width:100%; height:350px; overflow:auto;">
+                            <listbox id="lbListViewMulti" emptyMessage="${$composer.getLabelCos('common_emptyMessage')}">
+                                <listhead sizable="true">
+                                    <listheader label="${$composer.getLabelCos('cosmetic_stt')}" align="center" style="width:5%"  />
+                                    <listheader label="${$composer.getLabelCos('cosmetic_mahoso')}" align="center" style="width:15%"/>
+                                    <listheader label="${$composer.getLabelCos('cosmetic_tendoanhnghiep')}" align="center" style="width:20%"/>
+                                    <listheader label="${$composer.getLabelCos('cosmetic_tenbxn')}" align="center" style="width:20%"/>
+                                    <listheader label="${$composer.getLabelCos('cosmetic_tensp')}" align="center" style="width:20%"/>
+                                    <listheader label="Số tiền" align="center" style="width:20%"/>
+                                </listhead>
+                                <template name="model">
+                                    <listitem>
+                                        <listcell label="${forEachStatus.index + 1 + userPagingTop.pageSize * userPagingTop.activePage}" />
+                                        <listcell label="${each.nswFileCode}"></listcell>
+                                        <listcell  style="text-align:left" label="${each.businessName}"></listcell>
+                                        <listcell style="text-align:left">
+                                            <label value="${$composer.cutString(each.brandName, 100)}" 
+                                                   tooltiptext="${each.brandName}"
+                                                   multiline="true" 
+                                                   pre="true" />
+                                        </listcell>
+                                        <listcell style="text-align:left">
+                                            <label value="${$composer.cutString(each.productName, 100)}" 
+                                                   tooltiptext="${each.productName}"
+                                                   multiline="true" 
+                                                   pre="true" />
+                                        </listcell>
+                                        <listcell> 
+                                            <label value="${$composer.getCost()}"> </label>
+                                        </listcell>
+                                    </listitem>
+                                </template>
+                            </listbox>
+                        </h:div>
+                    </groupbox>
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td colspan="2">
+                    <label value="Tổng số hồ sơ"
+                           sclass="hightlight" />
+                    <label id="lbSumFile"/>
+                </h:td>
+                <h:td>
+                    <label value="Tổng số tiền" sclass="hightlight" />
+                    <label id="lbSumMoney"/>
+                </h:td>
+                <h:td colspan="3">
+                    <label value="Viết bằng chữ" sclass="hightlight" />
+                    <label id="lbtextMoney"/>
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td>
+                    <label value="Yêu cầu bổ sung" sclass="lb-create" />
+                    <label id="lbBillNoRequi" value=" *" sclass="label-required" />
+                </h:td>
+                <h:td colspan="3">
+                    <textbox id="tbAdditionRequest" width="95%" rows="5"
+                             value=""
+                             maxlength="500" focus="true"
+                    />
+                    <textbox id="txtValidate" visible="false" />
+                </h:td>
+			
+            </h:tr>
+               
+        </h:table>
+        
+
+        <div align="center" visible="false">
+            <button id="btnSubmit" label="Từ chối yêu cầu SĐBS" visible="true"
+                    image="/Share/img/icon/send_document_1.png" />
+        </div>
+        <label id="lbBottomWarning" style="color: red;" />
+    </vlayout>
+</window>

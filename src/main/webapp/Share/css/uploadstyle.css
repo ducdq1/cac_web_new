@@ -1,0 +1,126 @@
+/*****Panel Customize*****/
+.z-caption-content {
+    padding-left: 10px;
+    font-weight: bold;
+}
+.z-caption button{
+    float: right;
+}
+.z-panel-body {
+    padding: 5px 0px;
+}
+.z-panel-body .z-toolbar {
+    border: none;
+}
+.z-panel-noborder .z-panel-bottom div.footer {
+    padding: 2px 0;
+    border-left: 0 none;
+    border-right: 0 none;
+}
+
+/*****Text Style*****/
+span.name {
+    font-size: 12px;
+    display: block;
+    width: 50px;
+    text-align: right;
+    font-weight: bold;
+}
+.attachBtn {
+    font-weight: bold;
+    color: #F25D45;
+}
+.newFile {
+    padding-left: 10px;
+    word-wrap: break-word;
+    float:left;
+}
+/*****Attach Field*****/
+.z-toolbar {
+    background: none;
+}
+.z-toolbar .fileList a{
+    border: 0 none;
+    text-decoration: underline;
+    background: none;
+}
+
+/*****Input Field*****/
+.input-area {
+    margin: 0 3px;
+    border-top: 1px solid #ECECEC;
+}
+.input-area .z-textbox {
+    border: 0 none;
+}
+
+/*****UPMSample1*****/
+.UPMSample1 .msg span {
+    height: 15px;
+    padding-left:10px;
+    font-size:12px;
+}
+.UPMSample1 .z-progressmeter {
+    width: 100px;
+    height: 10px;
+}
+
+/*****UPMSample2*****/
+.UPMSample2 {
+    background:#F4F8FF;
+    border-top: 1px solid #99AABD;
+    border-bottom: 1px solid #99AABD;
+    font-family: tahoma,helvetica,arial,sans-serif;
+    font-size: 11px;
+    padding: 3px;
+    width: 542px;
+    color: #0F3B82;
+}
+.UPMSample2 a {
+    color: #0366AC;
+    font-weight: bold;
+    cursor: pointer;
+}
+.UPMSample2 .float-left {
+    float: left;
+}
+.UPMSample2 .float-right {
+    float: right;
+}
+.UPMSample2 .clear {
+    clear: both;
+}
+.attachBtn-new-orange {
+    background-color: #e9942e;
+    border-color: #d48a30;
+}
+.btnUpload
+{
+    border-radius: 3px;
+    border: 1px solid #bbb;
+}
+.btnUpload,.btnUpload table tr td
+{
+    /*background-color: #e9942e !important;*/
+    border-color: #d48a30;
+    color: #fff;
+}
+
+
+.attachBtn-new {
+    background-image: -moz-linear-gradient(center top , rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0));
+    border: 1px solid #bbb;
+    border-radius: 3px;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    overflow: visible;
+    text-decoration: none;
+    text-shadow: 1px 0 0 rgba(0, 0, 0, 0.35);
+    transition: all 0.15s linear 0s;
+    vertical-align: middle;
+    white-space: nowrap;
+    font-size: 0.8em;
+    line-height: 1.8em;
+    font-weight: bold;
+}

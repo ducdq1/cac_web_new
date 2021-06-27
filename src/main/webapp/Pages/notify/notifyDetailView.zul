@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+
+<window id="windowNotifyDetailView"
+            title="Chi tiết thông báo"
+            apply="com.viettel.voffice.DAO.NotifyDetailViewController"
+            width="700px" border="normal" position="center" closable="true">
+        <!-- View detail -->
+	<style src="/Share/css/formstyle.css" />
+	<style src="/Share/css/uploadstyle.css" />
+	<!--<h:div>-->
+            <h:table width="100%" class = "viewTable">
+                
+                <h:tr>
+                    <h:td colspan = "4" style="background: #f0efef">
+                        <h:b> Thông tin cơ bản </h:b>
+                    </h:td> 
+                </h:tr>
+                <h:tr>
+                        <h:td  >
+                                <label value="Người gửi " sclass="hightlight"/>
+                        </h:td>
+                        <h:td colspan = "3">
+                                <label id="labelUserName" />
+                        </h:td>
+                </h:tr>
+                <h:tr>
+                        <h:td >
+                                <label value="Đơn vị " sclass="hightlight"/>
+                        </h:td>
+                        <h:td colspan = "3">
+                                <label id="labelDeptName" />
+                        </h:td>
+                </h:tr>
+                <h:tr>
+                        <h:td >
+                                <label value="Tiêu đề " 
+                                        sclass="hightlight" />
+                        </h:td>
+                        <h:td colspan = "3">
+                                <label id="labelTitle" />
+                        </h:td>
+                </h:tr>
+                <h:tr>
+                        <h:td >
+                                <label value="Thời gian " 
+                                        sclass="hightlight" />
+                        </h:td>
+                        <h:td colspan = "3">
+                                <label id="labelSendTime" />
+                        </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td colspan = "4" style="background: #f0efef">
+                        <h:b> Nội dung </h:b>
+                    </h:td> 
+                </h:tr>
+                <h:tr>
+                    <h:td colspan = "4">
+                      <!--   <html id="labelContent" ></html> -->
+                    </h:td>
+                </h:tr>
+            </h:table>
+	<!--</h:div>-->
+</window>
+</zk>

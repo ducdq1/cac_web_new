@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <window id="userManWindow" apply="com.viettel.voffice.DAO.System.Users.UsersController" border="normal" >
+        <caption label="Quản lý người dùng"/>
+        <div>
+            <h:div style="width:100%" align="center">
+                <h:table style="width:80%" class="searchTable">
+                    <h:tr>
+                        <h:td>
+                            <label>Tên đăng nhập</label>
+                        </h:td>
+                        <h:td>
+                            <textbox id="txtSearchUserName" maxlength="100"/>
+                        </h:td>
+                        <h:td>
+                            <label>Tên đầy đủ</label>
+                        </h:td>
+                        <h:td>
+                            <textbox id="txtSearchFullName" maxlength="250" />
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td>
+                            <label>Mã nhân viên</label>
+                        </h:td>
+                        <h:td>
+                            <textbox id="txtSearchStaffCode" maxlength="50"/>
+                        </h:td>
+                        <h:td>
+                            <label>Chức vụ</label>
+                        </h:td>
+                        <h:td>
+                            <listbox id="cbSearchPosition" mold="select" width="200px">
+                                <template name="model">
+                                    <listitem label="${each.posName}" value="${each.posId}" />
+                                </template>
+                            </listbox>
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td>
+                            <label>Đơn vị</label>
+                        </h:td>
+                        <h:td>
+                            <textbox id="txtSearchDept" maxlength="250" readonly="true" style="width:70%"/>
+                            <textbox id="txtSearchDeptId" visible="false"/>
+                            <button id="btnShowSearchDept" image="/Share/img/icon/dept.png" height="30px"/>
+                            <button image="/Share/img/icon/delete.png" onClick="txtSearchDept.setValue(null);txtSearchDeptId.setValue(null);" height="30px"/>
+                        </h:td>
+                        <h:td>
+                            <label>Số điện thoại</label>
+                        </h:td>
+                        <h:td>
+                            <textbox id="txtSearchTelephone" maxlength="20"/>
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td>
+                            <label>Loại tài khoản</label>
+                        </h:td>
+                        <h:td>
+                            <listbox id="cbUserType" mold="select" width="200px">
+                                <template name="model">
+                                    <listitem label="${each[1]}" value="${each[0]}" />
+                                </template>
+                            </listbox>
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td colspan="4" style="text-align:center">
+                            <button height="30px" image="/Share/img/search.png" id="btnSearch" label="Tìm kiếm" />
+                            <button height="30px" image="/Share/img/add.png" id="btnOpenCreate" label="Thêm mới" />
+                        </h:td>
+                    </h:tr>
+                </h:table>
+            </h:div>
+        </div>
+        <h:div>
+            <listbox id="lstItems" model="${$composer.lstUser}" 
+                     emptyMessage="Không có người dùng nào" style="word-wrap: break-word">
+                <listhead sizable="true">
+                    <listheader  width="5%" align="center" label="STT"/>
+                    <listheader  width="10%" align="center" label="Avatar"/>
+                    <listheader  width="10%" label="Tên đăng nhập"/>
+                    <listheader  width="10%" label="Họ và tên"/>
+                    <listheader  width="10%" label="Chức vụ"/>
+                    <listheader  width="10%" label="Đơn vị"/>
+                    <listheader  width="10%" label="Email"/>
+                    <listheader  width="10%" label="Điện thoại"/>
+                    <listheader  width="5%" label="Vai trò" align="center"/>
+                    <listheader  width="5%" label="Sửa" align="center"/>
+                    <listheader  width="5%" label="Xóa" align="center"/>
+                    <listheader  width="5%" label="Trạng thái" align="center"/>
+                    <listheader  width="5%" label="Mật khẩu" align="center"/>
+                </listhead>
+                <template name="model">                    
+                    <listitem>
+                        <listcell label="${forEachStatus.index+1+userPagingBottom.pageSize*userPagingBottom.activePage}"/>
+                        <listcell>
+                            <image  style="border-radius:25px;border:1px solid gray" width="50px" height="50px"/>
+                        </listcell>
+                        <listcell label="${each.userName}" />
+                        <listcell label="${each.fullName}" />
+                        <listcell label="${each.posName}" />
+                        <listcell label="${each.deptName}" />
+                        <listcell label="${each.email}"/>
+                        <listcell label="${each.telephone}" />
+                        <listcell>
+                            <image forward="onClick=lstItems.onRole" src="/Share/img/icon/role.png" width="20px" height="20px" tooltiptext="Cập nhật vai trò của người dùng"/>
+                        </listcell>
+                        <listcell>
+                            <image forward="onClick=lstItems.onEdit" src="/Share/img/icon/edit.png" width="20px" height="20px" tooltiptext="Sửa thông tin người dùng"/>
+                        </listcell>
+                        <listcell>
+                            <image forward="onClick=lstItems.onDelete" src="/Share/img/icon/delete.png" width="20px" height="20px" tooltiptext="Xóa người dùng"/>
+                        </listcell>
+                        <listcell>
+                            <label value="Mở" if="${each.status==1}" />
+                            <label value="Khóa" if="${each.status!=1}" />
+                            <image if="${each.status == 1}" forward="onClick=lstItems.onLock" src="/Share/img/icon/lock.png" width="20px" height="20px" tooltiptext="Khóa người dùng"/>
+                            <image if="${each.status != 1}" forward="onClick=lstItems.onUnlock" src="/Share/img/icon/unlock.png" width="20px" height="20px" tooltiptext="Mở khóa người dùng"/>
+                        </listcell>
+                        <listcell>
+                            <image forward="onClick=lstItems.onResetPass" src="/Share/img/icon/user.gif" width="20px" height="20px" tooltiptext="Đổi password của người dùng"/>
+                        </listcell>
+                    </listitem>
+                </template>
+            </listbox>
+            <paging id="userPagingBottom" pageSize="10" detailed="true"/>
+        </h:div>
+    </window>
+    
+</zk>
+

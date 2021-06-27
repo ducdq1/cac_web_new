@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./docBookWindow" ?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <style src="/Share/css/formstyle.css"/>
+    <window id="docBookWindow" apply="com.viettel.voffice.DAO.System.Books.BookController" border="normal">
+        <caption label="Quản lý sổ văn bản"/>
+        <h:div style="width:100%" align="center">
+            <h:table style="width:100%" sclass="searchTable">
+                <h:tr>
+                    <h:td width="15%">
+                        <label>Tên sổ</label>
+                    </h:td>
+                    <h:td width="35%">
+                        <textbox id="bookName" value="@{controller.searchForm.bookName, access='both', save-when='none'}"
+                                 sclass="txtInput"  width="98%" maxlength="500"/>
+                    </h:td>
+                    <h:td width="15%">
+                        <label>Mã sổ</label>
+                    </h:td>
+                    <h:td width="35%">
+                        <textbox id="prefix" maxlength="50" value="@{controller.searchForm.prefix,access='both', save-when='none'}" sclass="txtInput"  width="98%"/>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td>
+                        <label>Số sổ hiện tại</label>
+                    </h:td>
+                    <h:td>
+                        <intbox id="currentNumber" value="@{controller.searchForm.currentNumber,access='both', save-when='none'}" constraint="no negative,no zero:Bạn phải nhập số lớn hơn 0" width="98%" maxlength="10" />
+                    </h:td>
+                    <h:td>
+                        <label>Loại thủ tục</label>
+                    </h:td>
+                    <h:td>
+                        <listbox id="lboxDocBookType" width="200px"  mold="select">
+                            <template name="model">
+                                <listitem label="${each.name}" value="${each.categoryId}" />
+                            </template>
+                        </listbox>
+                        
+<!--                        <listbox id="lboxDocBookType" width="200px" 
+                                 model="@{controller.catList}" mold="select" selectedItem="@{controller.catSelected}">
+                            <listitem self="@{each='cats'}" value="@{cats}">
+                                <listcell label="@{cats.name}"  />
+                            </listitem>
+                        </listbox>-->
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td>
+                        <label>Đơn vị</label>
+                    </h:td>
+                    <h:td>
+                        <textbox id="txtDeptName" 
+                                 width="80%" readonly="true" sclass="txtInput" value="@{controller.searchForm.deptName}"/>
+                        <textbox  id="txtDeptId" readonly="true" visible="false" value="@{controller.searchForm.deptId,access='both', save-when='none'}"/>
+                        <button id="btnClearDept" image="/Share/img/icon/delete.png" height="29px" width="32px"/>
+                        <button id="btnShowDept" height="29px" width="32px" image="/Share/img/icon/dept.png"/>
+                    </h:td>
+                    <h:td>
+                        <label>Trạng thái</label>
+                    </h:td>
+                    <h:td>
+                        <listbox id="lboxStatus" mold="select" width="200px" >
+                            <listitem label="---Chọn---" value="-1" selected="true" />
+                            <listitem label="Hoạt động" value="1"  />
+                            <listitem label="Bị khóa" value="0" />
+                        </listbox>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td colspan="4" style="text-align:center">
+                        <button id="btnSearch" label="Tìm kiếm" sclass="button" image="/Share/img/icon/search.jpg" />
+                        <button id="btnCreate" label="Thêm mới" sclass="button" image="/Share/img/icon/add_1.png"/>
+                    </h:td>
+                </h:tr>
+            </h:table>
+        </h:div>
+        <h:div id="gridDiv" >
+            <listbox id="bookListBox" 
+                     multiple="false"
+                     emptyMessage="Không tồn tại sổ văn bản" model="@{controller.booksList}" mold="paging" pageSize="10">
+                <listhead sizable="true">
+                    <listheader width="5%" label="STT" />
+                    <listheader width="25%" label="Tên sổ" />
+                    <listheader width="10%" label="Số sổ hiện tại" />
+                    <listheader width="10%" label="Mã sổ" />
+                    <listheader width="20%" label="Đơn vị" />
+                    <listheader width="10%" label="Trạng thái"  />
+                    <listheader width="5%" label="Sửa" align="center"/>
+                    <listheader width="10%" label="Khóa/Mở khóa" align="center"/>
+                    <listheader width="5%" label="Xoá" align="center"/>
+                </listhead>
+                <template name="model">
+                    <listitem value="${each}">
+                        <listcell label="${forEachStatus.index + 1}" forward="onClick=bookListBox.onView"/>
+                        <listcell label="${each.bookName}" forward="onClick=bookListBox.onView"/>
+                        <listcell label="${each.currentNumber}" forward="onClick=bookListBox.onView"/>
+                        <!--                    <listcell label="${each.isDefault}" />-->
+                        <listcell label="${each.prefix}" forward="onClick=bookListBox.onView"/>
+                        <listcell label="${each.deptName}" forward="onClick=bookListBox.onView"/>
+                        <listcell label="${each.status==1 ? 'Hoạt động' : 'Bị khóa'}" forward="onClick=bookListBox.onView"/>
+                        <listcell >
+                            <image forward="onClick=bookListBox.onEdit" src="/Share/img/icon/edit.png" width="20px" height="20px" tooltiptext="Sửa sổ văn bản"/>
+                        </listcell>
+                        <listcell>
+                            <image if="${each.status==1}" forward="onClick=bookListBox.onLockBook" src="/Share/img/icon/lock.png" width="20px" height="20px" tooltiptext="Khóa sổ văn bản"/>
+                            <image if="${each.status!=1}" forward="onClick=bookListBox.onUnLockBook" src="/Share/img/icon/unlock.png" width="20px" height="20px" tooltiptext="Mở khóa sổ văn bản"/>
+                        </listcell>
+                        <listcell>
+                            <image forward="onClick=bookListBox.onDelete" src="/Share/img/icon/delete.png" width="20px" height="20px" tooltiptext="Xóa sổ văn bản"/>
+                        </listcell>
+                    </listitem> 
+                </template>
+            </listbox>
+        </h:div>
+    </window>
+</zk>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+<h:div id="searchDiv" style="width:100%" align="center">
+    <h:table style="width:80%" class="searchTable">
+        <h:tr>
+            <h:td>Tên</h:td>
+            <h:td>
+                <textbox id="name" value=""/>
+            </h:td>
+            <h:td>Mã</h:td>
+            <h:td>
+                <textbox id="code" value=""/>
+            </h:td>
+        </h:tr>
+         <h:tr>
+                    <h:td colspan="4" style="text-align:center">
+                        <button id="btnSearch" label="Tìm kiếm" />
+                        <button id="btnCreate" label="Thêm mới"/>
+                    </h:td>
+         </h:tr>
+    </h:table>
+</h:div>
+<!--<listbox id="catListbox" model="@{controller.catList}"
+		sclass="mylist"
+		multiple="false" emptyMessage="No User found in the database">
+		<listhead sizable="true">
+			<listheader label="STT" sort="auto" />
+			<listheader label="Tên" sort="auto" />
+			<listheader label="Mã" sort="auto" />
+			<listheader label="Trạng thái" />
+		</listhead>
+
+		<listitem self="@{each='categorys'}" value="@{categorys}">
+                        <listcell label="1"/>
+			<listcell label="@{categorys.categoryId}" />
+			<listcell label="@{categorys.name}" />
+			<listcell label="@{categorys.code}" />
+			<listcell>
+				<hbox spacing="20px">
+					<image forward="onClick=UserListbox.onEdit"
+						sclass="fimageedit">
+					</image>
+					<image forward="onClick=UserListbox.onView"
+						sclass="fimageView">
+					</image>
+
+                                            <image forward="onClick=UserListbox.onDelete"
+                                                    sclass="fimageDelete">
+                                            </image>
+                                    </hbox>
+                            </listcell>
+                    </listitem>
+    </listbox>-->
+</zk>

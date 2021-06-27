@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+        xmlns="http://www.zkoss.org/2005/zul" 
+        id="windowAttachFinalFileCRUD"  
+        position="center,center" width="600px"   title="Đính kèm hồ sơ gốc"
+        apply="com.viettel.module.cosmetic.Controller.CosAttachFinalFileCRUDController"
+        >
+
+    <h:table width="100%" align="center">
+        <h:th width="15%" />
+        <h:th width="35%" />
+        <h:th width="15%" />
+        <h:th width="35%" />
+
+        <h:tr>
+            <h:td>
+                <label value="File đính kèm" sclass="lb-create" />
+                <label value=" *" sclass="label-required" />
+            </h:td>
+            <h:td colspan="3">
+                <vlayout>
+                    <button width="85px" id="btnAttachFinalFile"
+                                                style="font-weight: bold;color: #F25D45;" sclass="attachBtn"
+                                                src="/Share/img/paperclip.png"
+                                                upload="zk.UPMSample12,maxsize=3072"
+                                                label="Chọn tệp" />
+                    <vlayout id="flist1" hflex="1" sclass="fileList" />
+                </vlayout>
+            </h:td>
+			
+        </h:tr>
+                
+        <h:tr>
+            <h:td style="text-align:center" colspan="4">
+                <button id="btnCreate" label="Lưu" sclass="button" image="/Share/img/icon/Add.png"/>
+                <button id="btnClose" label="Đóng" sclass="button" image="/Share/img/icon/close.png" forward="onClick=windowAttachFinalFileCRUD.onClose"/>
+            </h:td>
+            
+        </h:tr>
+		
+    </h:table>
+        
+
+</window>

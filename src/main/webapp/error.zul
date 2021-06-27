@@ -1,0 +1,6 @@
+<?page title="Hệ thống cấp tiếp nhận hồ sơ đăng ký thông tin - xác nhận quảng cáo thuốc" contentType="text/html;charset=UTF-8"?>
+<zk >
+<script>
+alert('Có lỗi xãy ra !');
+</script>
+</zk>

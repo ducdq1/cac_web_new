@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <window id="positionWindow" 
+            apply="com.viettel.voffice.DAO.PositionController" 
+            border="normal" >
+        <caption label="Quản lý chức vụ"/>
+        <div>
+            <h:div style="width:100%" align="center">
+                <h:table style="width:80%" class="searchTable">
+                    <h:tr>
+                        <h:td>
+                            <label>Tên chức vụ</label>
+                        </h:td>
+                        <h:td>
+                            <textbox id="txtSearchPosName" maxlength="180" width="90%"/>
+                        </h:td>
+                        <h:td>
+                            <label>Mã chức vụ</label>
+                        </h:td>
+                        <h:td>
+                            <textbox id="txtSearchPosCode" width="90%" maxlength="20" />
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td>
+                            <label>Đơn vị</label>
+                        </h:td>
+                        <h:td>
+                            <textbox id="txtSearchDept" maxlength="250" readonly="true" style="width:75%"/>
+                            <textbox id="txtSearchDeptId" visible="false"/>
+                            <button id="btnShowSearchDept" image="/Share/img/icon/dept.png" height="30px"/>
+                            <button image="/Share/img/icon/delete.png" onClick="txtSearchDept.setValue(null);txtSearchDeptId.setValue(null);" height="30px"/>
+                        </h:td>
+                        <h:td>
+                            <label>Trạng thái</label>
+                        </h:td>
+                        <h:td>
+                            <listbox id="lboxStatus" mold="select" 
+                                     width="200px">
+                                <listitem label="-- Chọn --" value="-1" selected="true"  />
+                                <listitem label="Hoạt động" value="1"  />
+                                <listitem label="Khóa" value="0" />
+                            </listbox>
+                        </h:td>
+                        
+                    </h:tr>
+                    <h:tr>
+                        <h:td>
+                            <label>Mô tả</label>
+                        </h:td>
+                        <h:td>
+                            <textbox id="txtSearchDescription" width="90%" maxlength="1500" rows="2"/>
+                        </h:td>
+                        <h:td>
+                        </h:td>
+                        <h:td>
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td colspan="4" style="text-align:center">
+                            <button height="30px" image="/Share/img/search.png" id="btnSearch" label="Tìm kiếm" style="margin-right:10px;" />
+                            <button height="30px" image="/Share/img/add.png" id="btnOpenCreate" label="Thêm mới" />
+                        </h:td>
+                    </h:tr>
+                </h:table>
+            </h:div>
+        </div>
+        <h:div>
+            <listbox id="lstItems"
+                     emptyMessage="Không có chức vụ nào" style="word-wrap: break-word">
+                <listhead sizable="true">
+                    <listheader  width="5%" align="center" label="STT"/>
+                    <listheader  width="30%" label="Tên chức vụ"/>
+                    <listheader  width="20%" label="Mã chức vụ"/>
+                    <listheader  width="30%" label="Mô tả"/>
+                    <listheader  width="5%" label="Sửa" align="center"/>
+                    <!--<listheader  width="5%" label="Xóa" align="center"/>-->
+                    <listheader  width="10%" label="Trạng thái" align="center"/>
+                </listhead>
+                <template name="model">                    
+                    <listitem>
+                        <listcell label="${forEachStatus.index+1+userPagingBottom.pageSize*userPagingBottom.activePage}"/>
+                        <listcell label="${each.posName}" />
+                        <listcell label="${each.posCode}" />
+                        <listcell label="${each.description}" />
+                        <listcell>
+                            <image forward="onClick=lstItems.onEdit" src="/Share/img/icon/edit.png" width="20px" height="20px" tooltiptext="Sửa thông tin chức vụ"/>
+                        </listcell>
+<!--                        <listcell>
+                            <image forward="onClick=lstItems.onDelete" src="/Share/img/icon/delete.png" width="20px" height="20px" tooltiptext="Xóa chức vụ"/>
+                        </listcell>-->
+                        <listcell>
+                            <label value="Mở" if="${each.status==1}" />
+                            <label value="Khóa" if="${each.status!=1}" />
+                            <image if="${each.status==1}" forward="onClick=lstItems.onLock" src="/Share/img/icon/lock.png" width="20px" height="20px" tooltiptext="Khóa người dùng"/>
+                            <image if="${each.status!=1}" forward="onClick=lstItems.onUnlock" src="/Share/img/icon/unlock.png" width="20px" height="20px" tooltiptext="Mở khóa người dùng"/>
+                        </listcell>
+                    </listitem>
+                </template>
+            </listbox>
+            <paging id="userPagingBottom" pageSize="10" detailed="true"/>
+        </h:div>
+    </window>
+    
+</zk>
+

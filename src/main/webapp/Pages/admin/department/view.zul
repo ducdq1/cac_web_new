@@ -1,0 +1,46 @@
+<window id="deptViewWindow" title="Thông tin chi tiết đơn vị" border="normal" width="760px"
+        position="center,center" closable="true"
+        action="show: slideDown;hide: slideUp">
+    <grid width="100%" height="100%">
+        <columns>
+            <column  width="20%" />
+            <column  width="80%"/>
+        </columns>
+        <rows>
+            <row>
+                <label value="Tên đơn vị"/>
+                <label value="${arg.deptInfo.deptName}"></label>
+            </row>
+            <row>
+                <label value="Loại đơn vị"  />
+                <label value="${arg.deptInfo.deptTypeName}"  />
+            </row>
+            <row>
+                <label value="Mã đơn vị"/>
+                <label value="${arg.deptInfo.deptCode}"></label>      
+            </row>
+            <row>
+                <label value="Đơn vị cấp trên" />
+                <label value="${arg.deptParent}" />
+            </row>
+            <row>
+                <label value="Điện thoại"  />
+                <label value="${arg.deptInfo.telephone}"  />
+            </row>
+            <row>
+                <label value="Email" />
+                <label value="${arg.deptInfo.email}" />
+            </row>
+            <row>
+                <label value="Địa chỉ" />
+                <label value="${arg.deptInfo.address}" />        
+            </row>
+            <row>
+                <cell colspan="2" style="text-align:right">
+                     <button label="Đóng" id="btnCancel" image="/Share/img/icon/close.png"
+                                width="85px" sclass="button blue" onClick="deptViewWindow.detach()"/>    
+                </cell>
+            </row>
+        </rows>
+    </grid>  
+</window>

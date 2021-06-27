@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <hlayout>
+        <button id="btnNew" label="Thêm mới" image="Share/img/icon/add_1.png" sclass="button"/>
+        <button id="btnLock" label="Khóa" image="Share/img/icon/lock.png" sclass="button"/>
+        <button id="btnUnlock" label="Mở khóa" image="Share/img/icon/unlock.png" sclass="button"/>
+        <button id="btnDelete" label="Xóa" image="Share/img/icon/delete_1.png" sclass="button"/>
+    </hlayout>
+</zk>

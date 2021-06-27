@@ -1,0 +1,246 @@
+<?page title="Quá trình xử lý hồ sơ" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window title="Quá trình xử lý hồ sơ" border="normal" xmlns:h="http://www.zkoss.org/2005/zk/native"
+		xmlns="http://www.zkoss.org/2005/zul" xmlns:w="client" closable="true"
+		apply="com.viettel.module.phamarcy.controller.HistoryController"
+		position="center,center" width="100%" mode="embedded" id="businessWindow">
+		<style src="/Share/css/creatfile.css" />
+		<style src="/Share/css/formstyle.css" />
+		<style src="/Share/css/voffice.css" />
+		<groupbox width="100%" closable="false" style="text-align:left;">
+			<caption label="${$composer.getLabel('his_qua_trinh')}" class="group-box" />
+			<listbox id="lstQuaTrinh" mold="paging" pageSize="10"
+				emptyMessage="${$composer.getLabel('no_history')}"
+				style="word-wrap: break-word; width:100%">
+				<listhead sizable="true">
+					<listheader width="5%" align="center"
+						label="${$composer.getLabel('stt')}" />
+					<listheader width="17%" align="center"
+						label="${$composer.getLabel('his_nguoi_gui')}" />
+					<listheader width="13%" align="center"
+						label="${$composer.getLabel('his_don_vi')}" />
+					<listheader width="13%" align="center"
+						label="${$composer.getLabel('his_thoi_gian')}" />
+					<listheader width="13%" align="center"
+						label="${$composer.getLabel('his_nguoi_nhan')}" />
+					<listheader width="13%" align="center"
+						label="${$composer.getLabel('his_don_vi_nhan')}" />
+					<listheader width="13%" align="center"
+						label="${$composer.getLabel('his_trang_thai')}" />
+					<listheader width="13%" align="center"
+						label="${$composer.getLabel('his_ghi_chu')}" />
+				</listhead>
+				<template name="model">
+					<listitem>
+						<listcell>
+							<label value="${forEachStatus.index+1}"/>
+						</listcell>
+	                    <listcell style="text-align: left;">
+	                    	<label value="${$composer.getName(each.sendUser)}"></label>
+                    	</listcell>
+	                    <listcell style="text-align: left;">
+	                        <label value="[Doanh nghiệp]" if="${each.sendGroup eq null}"/>
+	                        <label value="${each.sendGroup}" if="${each.sendGroup ne null}"/>
+	                    </listcell>
+	                    <listcell style="text-align: left;">
+                    		<label value="${$composer.getTime(each.sendDate)}"></label>
+                    	</listcell>
+	                    <listcell style="text-align: left;">
+	                    	<label value="${each.receiveUser}"></label>
+	                    </listcell>
+	                    <listcell style="text-align: left;">
+	                        <label value="[Doanh nghiệp]" if="${each.receiveGroup eq null}"/>
+	                        <label value="${each.receiveGroup}" if="${each.receiveGroup ne null}"/>
+	                    </listcell>
+	                    <listcell style="text-align: left;">
+	                    	<label value="${$composer.getStatus(each.status)}"></label>
+	                    </listcell>
+	                    <listcell style="text-align: left;">
+	                    	<label value="${each.note}"></label>
+	                    </listcell>
+					</listitem>
+				</template>
+			</listbox>
+		</groupbox>
+		<div id="divThamDinh">
+		<h:br/>
+		<groupbox id="gbThamDinhLanMot" width="100%" closable="false" style="text-align:left;">
+			<caption  id="capYKienThamDinhLanMot" label="${$composer.getLabel('his_y_kien')}" class="group-box" />
+			<listbox id="lstYKienThamDinhLanMot" mold="paging" pageSize="10"
+				emptyMessage="${$composer.getLabel('no_history')}"
+				style="word-wrap: break-word; width:100%">
+				<listhead sizable="true">
+					<listheader width="5%" align="center"
+						label="${$composer.getLabel('stt')}" />
+					<listheader width="38%" align="center"
+						label="${$composer.getLabel('his_y_kien_td')}" />
+					<listheader width="19%" align="center"
+						label="${$composer.getLabel('his_ten_chuyen_gia')}" />
+					<listheader width="19%" align="center"
+						label="${$composer.getLabel('his_tieu_ban')}" />
+					<listheader width="19%" align="center"
+						label="${$composer.getLabel('his_ngay_td')}" />
+				</listhead>
+				<template name="model">
+					<listitem>
+						<listcell>
+							<label value="${forEachStatus.index+1+userPagingBottom.pageSize*userPagingBottom.activePage}"></label>
+						</listcell>
+						<listcell style="text-align:left">
+							<label value="${$composer.trimString(each.content)}"></label>
+						</listcell>
+                        <listcell style="text-align:left" >
+                        	<label value="${each.expertName}"></label>
+                        </listcell>
+						<listcell style="text-align:left">
+							<label value="${$composer.getDeptName(each.expertId)}"></label>
+						</listcell>
+						<listcell style="text-align:left">
+							<label value="${$composer.getTime(each.evaluationWhen)}"></label>
+						</listcell>
+					</listitem>
+				</template>
+			</listbox>
+		</groupbox>
+		<h:br/>
+		<groupbox id="gbThamDinhLanHai" width="100%" closable="false" style="text-align:left;" visible="false">
+			<caption label="${$composer.getLabel('his_y_kien_2')}" class="group-box" />
+			<listbox id="lstYKienThamDinhLanHai" mold="paging" pageSize="10"
+				emptyMessage="${$composer.getLabel('no_history')}"
+				style="word-wrap: break-word; width:100%">
+				<listhead sizable="true">
+					<listheader width="5%" align="center"
+						label="${$composer.getLabel('stt')}" />
+					<listheader width="38%" align="center"
+						label="${$composer.getLabel('his_y_kien_td')}" />
+					<listheader width="19%" align="center"
+						label="${$composer.getLabel('his_ten_chuyen_gia')}" />
+					<listheader width="19%" align="center"
+						label="${$composer.getLabel('his_tieu_ban')}" />
+					<listheader width="19%" align="center"
+						label="${$composer.getLabel('his_ngay_td')}" />
+				</listhead>
+				<template name="model">
+					<listitem>
+						<listcell>
+							<label value="${forEachStatus.index+1+userPagingBottom.pageSize*userPagingBottom.activePage}"></label>
+						</listcell>
+						<listcell style="text-align:left">
+							<label value="${$composer.trimString(each.content)}"></label>
+						</listcell>
+                        <listcell style="text-align:left" >
+                        	<label value="${each.expertName}"></label>
+                        </listcell>
+						<listcell style="text-align:left">
+							<label value="${$composer.getDeptName(each.expertId)}"></label>
+						</listcell>
+						<listcell style="text-align:left">
+							<label value="${$composer.getTime(each.evaluationWhen)}"></label>
+						</listcell>
+					</listitem>
+				</template>
+			</listbox>
+		</groupbox>
+		</div>
+		<h:br/>
+		<groupbox id="gbKetLuan" width="100%" closable="false" style="text-align:left; margin-top:10px;" visible="false">
+			<caption label="${$composer.getLabel('his_ket_luan')}" class="group-box" />
+			
+			<h:div style="margin-top:10px; margin-left:5px;">
+				<label id="lbKetLuan" value="${$composer.ketLuan}" style="font-weight:bold;"></label>
+			</h:div>
+			<h:div style="margin-top:10px; margin-left:5px; margin-right:5px; margin-bottom:10px;">
+				<h:div style="width:100%;">
+					<label value="${$composer.getLabel('his_ket_luan_noi_dung')}"></label>
+					<label id="lbNoiDungKetLuan" value="${$composer.noiDungKetLuan}"></label>
+				</h:div>
+			</h:div>
+			
+			
+		</groupbox>
+		<groupbox id="gbSDBS" width="100%" closable="false" style="text-align:left; margin-top:10px;" visible="false">
+			<caption label="${$composer.getLabel('his_sdbs')}" class="group-box" />
+			<h:div>
+				<h:div style="width:60%; float:left">
+					<label
+						value="${$composer.getLabel('his_so_cv')}" />
+					<label id="lbSoCVSDBS"
+						value="${$composer.soCongVanSDBS}"
+						style="padding-left:10px;font-weight: bold;" />
+				</h:div>
+				<h:div style="width:40%; float:left;">
+					<label
+						value="${$composer.getLabel('his_ngay_nhan')}" />
+					<label id="lbNgayNhanSDBS"
+						value="${$composer.ngayNhanSDBS}"
+						style="padding-left:10px;font-weight: bold; white-space: pre-wrap;" />
+				</h:div>
+			</h:div>
+			<h:div style="margin-top:20px;">
+				<h:div style="width:100%;">
+					<label
+						value="${$composer.getLabel('his_xem_cv')}" />
+					<label id="lbXemCVSDBS" class="viewFile"
+						value="${$composer.xemCongVanSDBS}"
+						style="padding-left:10px;font-weight: bold;" />
+				</h:div>
+			</h:div>
+		</groupbox>
+		<groupbox id="gbTTTN" width="100%" closable="false" style="text-align:left; margin-top:10px;" visible="false">
+			<caption label="${$composer.getLabel('his_tttn')}" class="group-box" />
+			<h:div>
+				<h:div style="width:60%; float:left">
+					<label
+						value="${$composer.getLabel('his_so_cv')}" />
+					<label id="lbSoCVTTTN"
+						value="${$composer.soCongVanTTTN}"
+						style="padding-left:10px;font-weight: bold;" />
+				</h:div>
+				<h:div style="width:40%; float:left;">
+					<label
+						value="${$composer.getLabel('his_ngay_nhan')}" />
+					<label id="lbNgayNhanTTTN"
+						value="${$composer.ngayNhanTTTN}"
+						style="padding-left:10px;font-weight: bold; white-space: pre-wrap;" />
+				</h:div>
+			</h:div>
+			<h:div style="margin-top:20px;">
+				<h:div style="width:100%;">
+					<label
+						value="${$composer.getLabel('his_xem_cv')}" />
+					<label id="lbXemCVTTTN" class="viewFile"
+						value="${$composer.xemCongVanTTTN}"
+						style="padding-left:10px;font-weight: bold;" />
+				</h:div>
+			</h:div>
+		</groupbox>
+		<groupbox id="gbTTTC" width="100%" closable="false" style="text-align:left; margin-top:10px;" visible="false">
+			<caption label="${$composer.getLabel('his_tttc')}" class="group-box" />
+			<h:div>
+				<h:div style="width:60%; float:left">
+					<label
+						value="${$composer.getLabel('his_so_cv')}" />
+					<label id="lbSoCVTTTC"
+						value="${$composer.soCongVanTTTC}"
+						style="padding-left:10px;font-weight: bold;" />
+				</h:div>
+				<h:div style="width:40%; float:left;">
+					<label
+						value="${$composer.getLabel('his_ngay_nhan')}" />
+					<label id="lbNgayNhanTTTC"
+						value="${$composer.ngayNhanTTTC}"
+						style="padding-left:10px;font-weight: bold; white-space: pre-wrap;" />
+				</h:div>
+			</h:div>
+			<h:div style="margin-top:20px;">
+				<h:div style="width:100%;">
+					<label
+						value="${$composer.getLabel('his_xem_cv')}" />
+					<label id="lbXemCVTTTC" class="viewFile"
+						value="${$composer.xemCongVanTTTC}"
+						style="padding-left:10px;font-weight: bold;" />
+				</h:div>
+			</h:div>
+		</groupbox>
+</window>
+</zk>

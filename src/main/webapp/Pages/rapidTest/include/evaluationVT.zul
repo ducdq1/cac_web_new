@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <window id="windowEvaluationVT" title="Cấp số hồ sơ" border="normal" width="70%" 
+            apply="com.viettel.module.rapidtest.DAO.include.EvaluationController" 
+            position="center,center" closable="true">
+
+        <h:div id="topToolbar" class="toolBar">
+            <button sclass="btnAction" image="/Share/img/png/quay-lai.png"
+                    tooltiptext="Quay lại" forward="onClick=windowEvaluationVT.onClose" />
+
+            
+            
+            <button sclass="btnAction" label="Cấp sô công văn SĐBS"
+                    onClick="$composer.onProvideNumberDispatch()"/>
+            
+           
+            
+            <label id="lbTopWarning" class="notify" width="15%"
+                   multiline="false" />
+            
+
+        </h:div>
+        <h:table width="100%" align="center">
+            <h:th width="15%" />
+            <h:th width="35%" />
+            <h:th width="15%" />
+            <h:th width="35%" />
+            <h:tr>
+                <h:td>
+                    <label value="Tên tổ chức cá nhân"
+                           sclass="hightlight" />
+                </h:td>
+                <h:td>
+                    <label width="95%" multiline="true" pre="true"
+                                           value="${$composer.vFileRtfile.businessName}"
+                                           sclass="label-info" />
+                </h:td>
+            </h:tr> 
+            <h:tr>
+                <h:td>
+                    <label value="Tên sản phẩm"
+                           sclass="hightlight" />
+                </h:td>
+                <h:td>
+                    <label width="95%" multiline="true" pre="true"
+                                           value="${$composer.vFileRtfile.rapidTestName}"
+                                           sclass="label-info" />
+                </h:td>
+            </h:tr> 
+            <h:tr>
+                <h:td>
+                    <label value="Kết quả Xem xét"
+                           sclass="hightlight" />
+                </h:td>
+                <h:td>
+                    <label width="95%" multiline="true" pre="true"
+                                           value="${$composer.obj.staffEvaluationValue}"
+                                           sclass="label-info" />
+                </h:td>
+            </h:tr>    
+            <h:tr>
+                <h:td>
+                    <label value="Nội dung thẩm định"
+                           sclass="hightlight" />
+                    <label value=" *"
+                           sclass="label-required" />
+                </h:td>
+                <h:td>
+                    <label width="95%" multiline="true" pre="true"
+                                           value="${$composer.obj.staffEvaluationContent}"
+                                           sclass="label-info" />
+                    
+                </h:td>
+                
+                
+            </h:tr> 
+            
+            
+            
+               
+        </h:table>
+        
+
+        <h:div id="bottomToolbar" class="toolBar">
+            <button sclass="btnAction" image="/Share/img/png/quay-lai.png"
+                    tooltiptext="Quay lại" forward="onClick=windowEvaluationVT.onClose" />
+            <button sclass="btnAction" label="Cấp sô công văn SĐBS"
+                    onClick="$composer.onProvideNumberDispatch()"/>
+            
+            
+            <label id="lbBottomWarning" class="notify" width="15%"
+                   multiline="false" />
+        </h:div>
+    </window>
+</zk>

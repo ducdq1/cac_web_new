@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.zkoss.org/2005/zk/native"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <style src="/Share/css/formstyle.css" />
+    <groupbox id="fullSearchGbx" mold="3d" visible="false"
+              apply="com.viettel.module.rapidtest.DAO.RapidTestSearchController">
+        <caption label="Tìm kiếm nâng cao" />
+        <h:table align="center" width="100%">
+            <h:th width="15%" />
+            <h:th width="35%" />
+            <h:th width="15%" />
+            <h:th width="35%" />
+            <h:tr>
+                
+                <h:td>
+                    <label value="Mã hồ sơ" sclass="lb-create" />
+                </h:td>
+                <h:td>
+                    <textbox id="tbNSWFileCode" width="50%" rows="1"
+                             maxlength="250" />
+                </h:td>
+                
+                <h:td>
+                    <label value="Số/Ký hiệu" sclass="lb-create" />
+                </h:td>
+                <h:td>
+                    <textbox id="tbRapidTestNo" width="50%" rows="1"
+                             maxlength="250" />
+                </h:td>
+            </h:tr>
+            
+            <h:tr>
+               
+                <h:td>
+                    <label value="Trạng thái hồ sơ" sclass="lb-create" />
+                </h:td>
+                <h:td>
+                    
+                    
+                    <listbox id="lboxStatus" width="50%" mold="select" onAfterRender='self.setSelectedIndex(0)'>
+                            <template name="model">
+                                <listitem label="${each.name}" value="${each.value}" />
+                            </template>
+                        </listbox>
+                </h:td>
+                
+                <h:td>
+                    <label value="Loại hồ sơ" sclass="lb-create" />
+                </h:td>
+                <h:td>
+                    <listbox id="lboxDocumentTypeCode" mold="select" width="50%">
+                        <listitem label="---Chọn---" value="-1" selected="true"/>
+                        <listitem label="Hồ sơ đề nghị đăng ký lưu hành bộ xét nghiệm nhanh thực phẩm" value="16"/>
+                        <listitem label="Hồ sơ đề nghị thay đổi nội dung đã đăng ký thông tin lưu hành bộ xét nghiệm nhanh thực phẩm" value="17"/>
+                        <listitem label="Hồ sơ đề nghị gia hạn đăng ký lưu hành bộ xét nghiệm nhanh thực phẩm" value="18"/>
+                    </listbox>
+                </h:td>
+            </h:tr>	
+            <h:tr>
+                <h:td>
+                    <label value="Ngày tạo, từ ngày" sclass="lb-create"/>
+                </h:td>
+                <h:td>
+                    <datebox id="dbFromDay" cols="12"
+                             format="dd/MM/yyyy" width="230px"
+                             constraint="between 19000101 and 20991231: Thời gian phải nằm trong khoảng từ 1/1/1900 đến 31/12/2099" />
+                </h:td>
+                <h:td>
+                    <label value="Đến ngày" sclass="lb-create"/>
+                </h:td>
+                <h:td>
+                    <datebox id="dbToDay" cols="12" format="dd/MM/yyyy"
+                             width="230px"
+                             constraint="between 19000101 and 20991231: Thời gian phải nằm trong khoảng từ 1/1/1900 đến 31/12/2099" />
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td colspan="4" align="center">
+                    <button id="btnSearch" label="Tìm kiếm"
+                            sclass="button" image="/Share/img/icon/search.jpg" />
+                </h:td>
+            </h:tr>	
+        </h:table>
+    </groupbox>
+</zk>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">   
+    <window id="fileViewWnd"
+            apply="com.viettel.voffice.DAO.Files.FileViewController"
+            position="center,center">
+        <h:div class="toolBar">
+            <image src="/Share/img/icon/back.png" sclass="back img-cal" tooltiptext="Quay lại"/>
+            <image id="imgComplete" src="/Share/img/icon/task_completed.png" sclass="complete img-cal" tooltiptext="Hoàn thành" visible="false"/>
+            <image class="img-cal" id="imgSave" src="/Share/img/icon/save.png" tooltiptext="Lưu lại" visible="false"/>
+            <image class="img-cal" id="imgAddDoc" src="/Share/img/add.png" tooltiptext="Thêm mới văn bản" visible="false"/>
+            <image class="img-cal" id="imgSendFile" src="/Share/img/icon/send_document.png" tooltiptext="Gửi hồ sơ" visible="false"/>
+            <image class="img-cal" id="imgApprove" src="/Share/img/icon/approve.png" tooltiptext="Phê duyệt" visible="false"/>
+            <image class="img-cal" id="imgReject" src="/Share/img/delete.png" tooltiptext="Từ chối" visible="false"/>
+        </h:div>
+        <h:table style="border-collapse:collapse">
+            <h:tr>
+                <h:td width="60%" style="vertical-align:top;border:1px solid gray;padding:3px">
+                    <tabbox id="tabFiles" >
+                        <tabs id="tabs" width="100%" height="100%">
+                            <tab label="Thông tin hồ sơ" />
+                            <tab label="Văn bản liên quan" />
+                            <tab label="Dự thảo" />
+                            <tab label="Phiếu trình" />
+                        </tabs>
+                        <tabpanels>
+                            <tabpanel id="generalTab" ></tabpanel>
+                            <tabpanel id="docRelateTab"></tabpanel>
+                            <tabpanel id="docDraffTab"><label value="Chưa có dự thảo"/></tabpanel>
+                            <tabpanel id="sendSheetTab" ></tabpanel>
+                        </tabpanels>
+                    </tabbox>
+                </h:td>
+                <h:td width="40%" style="border:1px solid gray;padding:5px;background-color:rgb(209,224,236);vertical-align:top">
+                    <div id="notifyWnd"/>
+                </h:td>
+            </h:tr>
+        </h:table>
+    </window>
+</zk>

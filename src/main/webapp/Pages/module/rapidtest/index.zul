@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+        xmlns="http://www.zkoss.org/2005/zul" id="businessWindow"
+        xmlns:w="http://www.zkoss.org/2005/zk/client"
+        apply="com.viettel.voffice.DAO.Ycnk.wf.ActiveFlowController" closable="true">
+    
+        <style src="/Share/css/formstyle.css" />
+    <style src="/Share/css/uploadstyle.css" />
+    <script type="text/javascript" src="/Share/js/UPMSamples.js" />
+    <vlayout id="layoutComment">
+        <!-- START OF BUSINESS PAGE -->
+        
+        
+        <!-- END OF BUSINESS PAGE
+        // template for business page
+        // the DIV below is mandatory 
+        // for the call of submit data 
+        // of BusinessController
+        // remember that the buttonId is "btnSubmit"
+        -->
+        <div align="center">
+            <button id="btnSubmit" label="Gửi xử lý" visible="false"
+                    image="/Share/img/icon/send_document_1.png" />
+        </div>
+        <label id="lbBottomWarning" style="color: red;" />
+    </vlayout>
+</window>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <window id="TypePaymentConfirm" title="Thông tin thanh toán" border="normal" width="60%" height="44%" 
+            apply="com.viettel.module.rapidtest.DAO.include.TypePaymentConfirm" 
+            position="center,center" closable="true">
+        <style>
+            .createTable tr
+            {
+            margin-bottom:2px;height:30px;
+            }
+        </style>
+        <h:div width="100%">
+            <textbox id="txtDisplayNameComponentId" visible="false"/>
+            <h:div style="height:1px;"></h:div>
+            <groupbox width="100%" mold="3d" >
+                <caption label="Nội dung hóa đơn"/>
+                <h:table width="100%" sclass="createTable" style="border-spacing: 2px;">
+                      <h:tr >
+                        <h:td width="40%">
+                            <label value="Ngày thanh toán trong hóa đơn" />
+                             <label value=" *" sclass="label-required" />
+                        </h:td>
+                        <h:td>
+                            <datebox id="dbDayPayment" cols="12" format="dd/MM/yyyy" name="Đến ngày"
+                             constraint="between 19000101 and 20991231: Thời gian phải nằm trong khoảng từ 1/1/1900 đến 31/12/2099" />
+                        </h:td>
+                    </h:tr> 
+                    
+                    
+                    <h:tr >
+                        <h:td width="140px">
+                            <label id="lbBillNo" value="Mã hóa đơn" width="120px" />
+                            <label id="lbBillNoRequi" value=" *" sclass="label-required" />
+                             
+                        </h:td>
+                        <h:td>
+                            <textbox id="txtBillNo" value="@{controller.TypePaymentConfirm.txtBillNo, access='both', save-when='none'}"
+                                     mold="rounded"
+                                     width="140px" maxlength="500" sclass="txtInput" />
+                        </h:td>
+                
+                
+                 <h:td width="140px">
+                            <label  id="lbBillKey" value="Ký hiệu hóa đơn" width="120px" />
+                            <label  id="lbBillKeyRequi" value=" *" sclass="label-required" />
+                             
+                        </h:td>
+                        <h:td>
+                            <textbox id="txtBillKey" value="@{controller.TypePaymentConfirm.txtBillKey, access='both', save-when='none'}"
+                                     mold="rounded"
+                                     width="140px" maxlength="500" sclass="txtInput" />
+                        </h:td>
+                
+                    </h:tr>
+                  
+                    
+                    
+                </h:table>
+                <h:table width="100%"> 
+                    <h:tr>
+                        <h:td width="30%">
+                                
+                        </h:td>
+                        <h:td width="60%">
+                            Tên tệp
+                        </h:td>
+                        <h:td width="10%">
+                            Xoá
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td>
+                            <button label="Chọn hóa đơn" style="font-weight: bold;color: #F25D45;" upload="true" id="btnUpload" src="/Share/img/paperclip.png" width="95px">
+                            </button> 
+                        </h:td>
+                        <h:td>
+                            <textbox id="txtFileName" readonly="true" value="" mold="rounded" width="90%" tabindex="1" sclass="txtInput"/>
+                        </h:td>
+                        <h:td>
+                            <image id="imgDelFile" src="/Share/img/icon/delete.png" width="25px" height="25px" visible="false"/>
+                        </h:td>
+                    </h:tr>
+                </h:table>
+            </groupbox>
+            
+            
+            <h:table width="100%"> 
+                    <h:tr>
+                        <h:td width="100%">      
+                        <label id="lbWarning" class="notify"/>
+                        </h:td>
+                    </h:tr>
+            </h:table>
+            <h:div style="text-align:right;margin-top:2px;height:18px">
+                <button label="Lưu" id="btnSave" sclass="button blue" image="/Share/img/icon/save.png" width="85px"/>
+                <button label="Huỷ bỏ" id="btnCancel"  sclass="button blue" width="85px" image="/Share/img/icon/close.png"/>
+            </h:div> 
+        </h:div> 
+    </window>
+</zk>

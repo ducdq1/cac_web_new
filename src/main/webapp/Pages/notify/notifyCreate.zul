@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <window id="createNotifyDlg"
+            title="Thêm mới thông báo"
+            apply="com.viettel.voffice.DAO.NotifyAlertCreateController"
+            width="700px" border="normal" position="center" closable="true"
+            action="show: slideDown;hide: slideUp">
+        <groupbox id="notifyCreateSelect" mold="3d">
+            <caption  label="Thêm mới thông báo" />
+            <h:div>
+                <h:table width="100%" height="100%" cellpadding="5" cellspacing="2" style="border-collapse:collapse">
+                    <h:tr>
+                        <h:td> 
+                            <textbox id="txtNotifyId" visible="false"/>
+                            <label value="Tên tiêu đề" width="150px" />
+                            <label value=" *" sclass="label-required" />
+                        </h:td>
+                        <h:td> 
+                            <textbox id="txtTitle" rows="1"
+                                     width="99%" maxlength="250" />
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td width="20%"> 
+                            <label value="Hạn thông báo " width="150px" />
+                        </h:td>
+                        <h:td width="80%"> 
+                            <datebox id="dbEndTime" format="dd/MM/yyyy"
+                                    constraint="no past, between 19000101 and 20991231: Thời gian phải nằm trong khoảng từ 1/1/1900 đến 31/12/2099">
+                            </datebox>
+                        </h:td>
+                    </h:tr>
+                    <h:tr style="display:none">
+                        <h:td>
+                            <label value="Trạng thái" width="100px" />
+                        </h:td>
+                        <h:td>
+                            <listbox id="lboxStatus" mold="select"
+                                     width="33%" >
+                                <listitem label="Hoạt động" value="1" selected="true"  />
+                                <listitem label="Khóa" value="0" />
+                            </listbox>
+                        </h:td>
+                    </h:tr>
+                </h:table>
+            </h:div>
+        </groupbox>
+        <groupbox id="contentGrb" mold="3d">
+            <caption  label="Nội dung thông báo" />
+                            <ckeditor width="100%" id="ckContent" height="150px" toolbar="Complex" 
+                                filebrowserImageBrowseUrl="/widgets/input/wysiwyg_editor/img"
+                                filebrowserFlashBrowseUrl="/widgets/input/wysiwyg_editor/flash"
+                                customConfigurationsPath="/Share/js/wysiwyg_editor/config.js"
+                            >
+                            </ckeditor>
+        </groupbox>
+        
+        <groupbox id="notifyGroupboxSelect" mold="3d">
+            <caption  label="Danh sách nhận thông báo truyền thông" />
+            <include id="notifyWindowSelect"
+                        src="/Pages/notify/notifyListReceive.zul">
+            </include>
+            <div width="100%" align="center">
+                    <button id="btnChoose" label="Chọn" image="/Share/img/add.png"/>
+            </div>
+        </groupbox>
+        <h:div style="text-align:center">
+            <button label="Lưu" id="btnCreate" image="/Share/img/icon/save.png"
+                    width="85px" height="30px" sclass="button blue" style="margin-right:10px;" />
+            <button label="Huỷ bỏ" id="btnClose" image="/Share/img/icon/close.png"
+                    width="85px" height="30px" sclass="button blue"  />    
+        </h:div>
+        
+        
+    </window>
+</zk>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns="http://www.zkoss.org/2005/zul" title="Thêm mới giá trị"
+	apply="com.viettel.module.phamarcy.controller.AddUnitController"
+	id="createDlg1" width="70%" border="normal" position="center"
+	closable="true">
+	<style>
+		.z-textbox-uppercase{ text-transform:uppercase; }
+		.z-combobox-btn{ height:29px !important; } .z-combobox-inp{
+		height:25px; }
+	</style>
+	<div
+		style="width:100%; margin:0 auto ;padding-top:10px;display: inline-flex"
+		align="center">
+		<div style="width:100%;float:left; padding-left:10px">
+			<h:table style="width:100%;height:100%;padding-left:10px"
+				class="createTable">
+				<h:th width="10%" />
+				<h:th width="70%" />
+				<h:th width="10%" />
+				<h:th width="10%" />
+				<h:tr>
+					<h:td>
+						<label sclass="lb-create">Giá trị:</label>
+					</h:td>
+					<h:td colspan="3">
+						<textbox id="tbValue" maxlength="2000"  /> 
+					</h:td>
+				</h:tr>
+			<h:tr/>
+				<h:tr>
+					<h:td colspan="4">
+					<h:br/>
+						<listbox id="lbList"  
+							nonselectableTags="*" emptyMessage="Không tìm thấy dữ liệu" mold="paging" pageSize="10">
+							<listhead sizable="true">
+								<listheader label="STT" align="center"
+									style="width:5%" />
+								<listheader label="Giá trị"
+									align="center" style="width:70%" />
+								<listheader label="Sửa" align="center"
+									hflex="min" />
+								<listheader label="Xóa" align="center"
+									hflex="min" />
+							</listhead>
+							<template name="model">
+								<listitem
+									style="word-wrap: break-word !important; white-space: normal; text-align: left;">
+									<listcell>
+										<label
+											value="${ forEachStatus.index + 1}">
+										</label>
+									</listcell>
+									<listcell style="text-align:left">
+										<label
+											value="${each.value}" />
+									</listcell>
+
+									<listcell>
+										<image
+											src="/Share/img/icon/edit.png" width="22px" height="22px"
+											forward="onClick=lbList.onOpenUpdate(${each})"
+											tooltiptext="Sửa" />
+									</listcell>
+
+									<listcell>
+										<image
+											src="/Share/img/icon/delete.png" width="22px" height="22px"
+											forward="onClick=lbList.onDeleteSP(${each})"
+											tooltiptext="Xóa" />
+									</listcell>
+								</listitem>
+							</template>
+						</listbox>
+						<separator />
+
+					</h:td>
+
+				</h:tr>
+			</h:table>
+		</div>
+	</div>
+	<div style="padding-top:30px; padding-left:10px;float:left"
+		width="98%">
+
+		<div style=" margin:0 auto ;padding-top:20px" align="center">
+			<button class="button" height="30px"
+				image="/Share/img/icon/save.png" id="btnSave" label="Lưu lại" />
+
+			<button class="button" height="30px"
+				image="/Share/img/icon/close.png" style="margin-left:10px"
+				label="Hủy bỏ" onClick="createDlg1.onClose()" />
+		</div>
+	</div>
+
+	<zscript><![CDATA[
+	void doCheck() {
+		if (rdgProductType.getSelectedIndex() == 3) {
+			tbDSP.setVisible(true);
+			lbDSP.setVisible(true);
+		} else {
+			tbDSP.setVisible(false);
+			lbDSP.setVisible(false);
+		}
+	}
+]]></zscript>
+</window>

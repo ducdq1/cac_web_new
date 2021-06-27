@@ -1,0 +1,26 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<window border="normal" id="wdTree" title="Chọn cá nhân, đơn vị"
+	closable="true"
+	apply="com.viettel.voffice.DAO.DocIn.include.TreeObjectsToSendProcess"
+	mode="modal" position="center" visible="false" width="50%"
+	height="75%">
+	<style>
+		.h-inline-block { display: inline-block; _display: inline; }
+		div.z-tree-body {
+			overflow-x:hidden;
+		}
+	</style>
+	<tree id="tree" checkmark="true"
+		style="overflow-x:hidden !important;overflow-y:auto;" vflex="1"
+		nonselectableTags="img" >
+		<treecols>
+			<treecol hflex="2" label="Tên đơn vị, cá nhân" />
+			<treecol hflex="1" label="Loại xử lý" />
+		</treecols>
+	</tree>
+	<div align="center">
+		<button image="/Share/img/icon/done.png" label="Xong"
+			id="btnSelect">
+		</button>
+	</div>
+</window>

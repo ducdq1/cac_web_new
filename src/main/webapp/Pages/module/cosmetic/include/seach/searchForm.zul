@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.zkoss.org/2005/zk/native"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <style src="/Share/css/formstyle.css" />
+    <groupbox id="fullSearchGbx" mold="3d" visible="false"
+              apply="com.viettel.module.cosmetic.Controller.ComesticAllSearchController">
+        <caption label="${$composer.getLabelCos('cosmetic_search_caption')}" />
+        <h:table align="center" width="80%" class="table-search">
+            <h:tr>
+                <h:th width="12%" />
+                <h:th width="38%" />
+                <h:th width="12%" />
+                <h:th width="38%" />
+            </h:tr>
+            <h:tr>
+                <h:td style="text-align: left;">
+                    <label value="${$composer.getLabelCos('cosmetic_mahoso')}" sclass="lb-create" />
+                </h:td>
+                <h:td>
+                    <textbox id="tbNSWFileCode" width="50%" rows="1"
+                             maxlength="250" />
+                </h:td>
+                <h:td>
+                    <label value="${$composer.getLabelCos('cosmetic_trangthaihs')}" sclass="lb-create" />
+                </h:td>
+                <h:td>
+                    <listbox id="lboxStatus" width="51%" mold="select" onAfterRender='self.setSelectedIndex(0)'>
+                        <template name="model">
+                            <listitem label="${each.name}" value="${each.value}" />
+                        </template>
+                    </listbox>
+                </h:td>
+            </h:tr>
+
+            <h:tr>
+                <h:td>
+                    <label value="${$composer.getLabelCos('cosmetic_createdate_from')}" sclass="lb-create"/>
+                </h:td>
+                <h:td>
+                    <datebox id="dbFromDay" cols="12"
+                             format="dd/MM/yyyy" width="52%"
+                             constraint="between 19000101 and 20991231: Thời gian phải nằm trong khoảng từ 1/1/1900 đến 31/12/2099" />
+                </h:td>
+                <h:td>
+                    <label value="${$composer.getLabelCos('cosmetic_createdate_to')}" sclass="lb-create"/>
+                </h:td>
+                <h:td>
+                    <datebox id="dbToDay" cols="12" format="dd/MM/yyyy"
+                             width="52%"
+                             constraint="between 19000101 and 20991231: Thời gian phải nằm trong khoảng từ 1/1/1900 đến 31/12/2099" />
+                </h:td>
+            </h:tr>	
+            <h:tr>
+                <h:td>
+                    <!--                    <label value="${$composer.getLabelCos('cosmetic_tendoanhnghiep')}" sclass="lb-create" />-->
+                </h:td>
+                <h:td>
+                    <textbox visible="false" id="tbCosmeticCompanyName" width="50%" rows="1"
+                             maxlength="250" />
+                </h:td>
+                <h:td>
+                    <!--                    <label value="${$composer.getLabelCos('cosmetic_diachi')}" sclass="lb-create" />-->
+                </h:td>
+                <h:td>
+                    <textbox  visible="false" id="tbCosmeticCompanyAddress" width="50%" rows="1"
+                              maxlength="250" />
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td>
+                    <label value="${$composer.getLabelCos('cosmetic_tenbxn')}" sclass="lb-create" />
+                </h:td>
+                <h:td>
+                    <textbox id="tbCosmeticBrand" width="50%" rows="1"
+                             maxlength="250" />
+                </h:td>
+                <h:td>
+                    <label value="${$composer.getLabelCos('cosmetic_tensp')}" sclass="lb-create" />
+                </h:td>
+                <h:td>
+                    <textbox id="tbCosmeticProductName" width="50%" rows="1"
+                             maxlength="250" />
+                </h:td>
+                <h:td>
+                    <!--<label value="${$composer.getLabelCos('cosmetic_tennguoidaidien')}" sclass="lb-create" />-->
+                </h:td>
+                <h:td>
+                    <textbox visible="false" id="tbCosmeticDistributePersonName" width="50%" rows="1"
+                             maxlength="250" />
+                </h:td>
+            </h:tr>
+            
+            <h:tr>
+                <h:td>
+                    <label value="Sắp xếp theo" sclass="lb-create" />
+                </h:td>
+                <h:td>
+                    <listbox id="lbSort"  mold="select" width="52%">
+                        <listitem label="${$composer.getLabelCos('common_choose')}"
+                                                      value="${$composer.getLabelCos('common_choose')}" selected="true" />
+                        <listitem label="Mã hồ sơ tăng dần" value="1"/>
+                        <listitem label="Mã hồ sơ giảm dần" value="2" />
+                        <listitem label="Ngày tạo tăng dần" value="3"/>
+                        <listitem label="Ngày tạo giảm dần" value="4" />
+                        <listitem label="Nhãn hiệu tăng dần" value="5"/>
+                        <listitem label="Nhãn hiệu giảm dần" value="6" />
+                        <listitem label="Tên sản phẩm tăng dần" value="7"/>
+                        <listitem label="Tên sản phẩm giảm dần" value="8" />
+                    </listbox>
+                </h:td>
+                <h:td>
+                    <!--                    <label value="${$composer.getLabelCos('cosmetic_diachi')}" sclass="lb-create" />-->
+                </h:td>
+                <h:td>
+                    <textbox  visible="false" id="" width="50%" rows="1"
+                              maxlength="250" />
+                </h:td>
+            </h:tr>            
+            <h:tr>
+                <h:td colspan="4" align="center" style="text-align: center">
+                    <button id="btnSearch" label="${$composer.getLabelCos('common_search')}"
+                            sclass="button" image="/Share/img/icon/search.jpg" />
+                    <button id="btnReset" label="${$composer.getLabelCos('common_delete')}"
+                            sclass="button" image="/Share/img/icon/reset_small.png" />
+                </h:td>
+            </h:tr>	
+        </h:table>        
+    </groupbox>
+</zk>

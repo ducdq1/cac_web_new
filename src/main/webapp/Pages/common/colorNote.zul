@@ -1,0 +1,20 @@
+<zk xmlns:h="http://www.zkoss.org/2005/zk/native"
+	xmlns="http://www.zkoss.org/2005/zul">
+	<vlayout hflex="min" height="75px">
+		<hlayout valign="middle">
+			<div width="20px" height="20px" vflex="1"
+				style="background: red" />
+			<label value="Văn bản đã quá hạn" />
+		</hlayout>
+		<hlayout valign="middle">
+			<div width="20px" height="20px" vflex="1"
+				style="background: blue" />
+			<label value="Hạn xử lý còn không quá 2 ngày" />
+		</hlayout>
+		<hlayout valign="middle">
+			<div width="20px" height="20px" vflex="1"
+				style="background: black" />
+			<label value="Hạn xử lý còn nhiều hơn 2 ngày" />
+		</hlayout>
+	</vlayout>
+</zk>

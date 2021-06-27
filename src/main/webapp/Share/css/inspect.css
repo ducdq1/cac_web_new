@@ -1,0 +1,20 @@
+@CHARSET "ISO-8859-1";
+
+.button {
+  color: #fff;
+  background-color: #4584D3;
+  text-shadow: -1px 1px #417cb8;
+  border: none;
+  font-weight: bold;
+}
+
+.button:hover,
+.button.hover {
+  background-color: #346392;
+  text-shadow: -1px 1px #27496d;
+}
+.button:active,
+.button.active {
+  background-color: #27496d;
+  text-shadow: -1px 1px #193047;
+}

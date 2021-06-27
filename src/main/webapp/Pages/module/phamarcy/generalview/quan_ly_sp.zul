@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+	xmlns="http://www.zkoss.org/2005/zul" id="phamarcyAll" style=""
+	apply="com.viettel.module.phamarcy.controller.ProductController">
+	<style src="/Share/css/formstyle.css" />
+	 
+	<script defer="true">toolBar.widget = "phamarcyAll";</script>
+	<style>
+		.z-listheader-cnt{ color:#4584D3 !important;
+		}
+
+	</style>
+	<h:div class="contentDiv" style="width:99%;margin:0 auto;background-color:#FBEFFB">
+		<include id="incSearchFullForm"
+			src="/Pages/module/phamarcy/searchForm_DN.zul" />
+	</h:div>
+	<h:div class="contentDiv" style="width:99%;margin:0 auto">
+
+		<include id="incListSP"
+			src="/Pages/module/phamarcy/ds_san_pham.zul" />
+		<paging id="userPagingBottom" pageSize="10" detailed="true" />
+	</h:div>
+	<separator />
+</window>

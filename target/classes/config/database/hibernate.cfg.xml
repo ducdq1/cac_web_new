@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+       
+        <property name="hibernate.dialect">org.hibernate.dialect.OracleDialect</property>
+        <property name="hibernate.connection.driver_class">oracle.jdbc.OracleDriver</property>
+        <property name="hibernate.current_session_context_class">thread</property>
+
+        <property name="connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
+        <property name="hibernate.c3p0.min_size">1</property>
+        <property name="hibernate.c3p0.max_size">50</property>
+        <property name="hibernate.c3p0.timeout">300</property>
+        <property name="hibernate.c3p0.checkoutTimeout">300</property>
+        <property name="hibernate.c3p0.max_statements">1</property>
+        <property name="hibernate.c3p0.idle_test_period">100</property>
+    
+        <property name="show_sql">false</property>
+        <property name="format_sql">true</property>
+        <!-- QUAN TRI HE THONG -->
+        <mapping class="com.viettel.core.sys.BO.ActionLog"/>
+        <mapping class="com.viettel.core.sys.BO.Applications"/>
+        <mapping class="com.viettel.core.sys.BO.Category"/>
+        <mapping class="com.viettel.core.sys.BO.CategoryType"/>
+        <mapping class="com.viettel.core.sys.BO.Objects"/>
+        <!-- QUAN TRI HE THONG -->
+        
+        <!-- QUAN TRI NGUOI DUNG -->
+        <mapping class="com.viettel.core.user.BO.Department"/>
+        <mapping class="com.viettel.core.user.BO.Position"/>
+        <mapping class="com.viettel.core.user.BO.Roles"/>
+        <mapping class="com.viettel.core.user.BO.RoleObjectPK"/>
+        <mapping class="com.viettel.core.user.BO.RoleObject"/>
+        <mapping class="com.viettel.core.user.BO.RoleUserDept"/>
+        <mapping class="com.viettel.core.user.BO.Users"/>
+        <!-- QUAN TRI NGUOI DUNG -->
+        
+        <!-- QUAN LY LUONG -->
+        <mapping class="com.viettel.core.workflow.BO.Flow"/>
+        <mapping class="com.viettel.core.workflow.BO.Node"/>
+        <mapping class="com.viettel.core.workflow.BO.NodeDeptUser"/>
+        <mapping class="com.viettel.core.workflow.BO.NodeToNodePK"/>
+        <mapping class="com.viettel.core.workflow.BO.NodeToNode"/>
+        <mapping class="com.viettel.core.workflow.BO.Process"/>
+        <!--<mapping class="com.viettel.core.workflow.BO.ProcessAttachs"/>-->
+        <!-- QUAN LY LUONG -->
+        
+        <!-- Quan ly so van ban -->
+        <mapping class="com.viettel.voffice.BO.Document.Attachs"/>
+        <mapping class="com.viettel.voffice.BO.Document.Books"/>
+        <!--<mapping class="com.viettel.voffice.BO.Document.DocumentPublish"/>
+        <mapping class="com.viettel.voffice.BO.Document.DocumentReceive"/>
+        <mapping class="com.viettel.voffice.BO.Document.OutsideOffice"/>
+        <mapping class="com.viettel.voffice.BO.Document.SendSheet"/>
+        -->
+
+        <!-- End of Quan ly van ban -->
+    
+        <!-- Quan ly trang chu -->
+        <!--<mapping class="com.viettel.voffice.BO.Home.Notify"/>
+        <mapping class="com.viettel.voffice.BO.Home.NotifyAction"/>-->
+        <!-- End of Quan ly trang chu -->
+    
+        <!-- Quan ly lich cong tac -->
+        <!--<mapping class="com.viettel.voffice.BO.Calendar.Calendar"/>
+        <mapping class="com.viettel.voffice.BO.Calendar.CalendarParticipants"/>
+        <mapping class="com.viettel.voffice.BO.Calendar.CalendarRef"/>
+        <mapping class="com.viettel.voffice.BO.Calendar.CalendarResource"/>
+        <mapping class="com.viettel.voffice.BO.Calendar.Resources"/>-->
+        <!-- End of Quan ly cong tac -->
+        
+        <!-- Quan ly ho so -->
+        <mapping class="com.viettel.voffice.BO.Files"/>
+        <!--<mapping class="com.viettel.voffice.BO.Files.DocumentRef"/>-->
+        <!-- End of Quan ly ho so -->
+        
+        <!--Start giao viec--> 
+        <!--<mapping class="com.viettel.voffice.BO.Document.Task"/>
+        <mapping class="com.viettel.voffice.BO.Document.TaskProgress"/>-->
+        <!--End giao viec--> 
+         
+        <mapping class="com.viettel.voffice.BO.Register"/>
+        <mapping class="com.viettel.voffice.BO.Business"/>
+        <mapping class="com.viettel.module.phamarcy.BO.Product"/>
+         <mapping class="com.viettel.module.phamarcy.BO.Workers"/>
+         <mapping class="com.viettel.module.phamarcy.BO.ProductCategory"/>
+         <mapping class="com.viettel.module.phamarcy.BO.Promotion"/>
+          <mapping class="com.viettel.module.phamarcy.BO.QuotationDetail"/>
+            <mapping class="com.viettel.module.phamarcy.BO.Quotation"/>
+            <mapping class="com.viettel.module.phamarcy.BO.Order"/>
+            <mapping class="com.viettel.module.phamarcy.BO.OrderDetail"/>
+        <mapping class="com.viettel.module.phamarcy.BO.VOrderDetail"/>
+         
+        <mapping class="com.viettel.core.sys.BO.Place"/>
+          <mapping class="com.viettel.module.phamarcy.BO.Street"/>
+           <mapping class="com.viettel.module.phamarcy.BO.Area"/>
+            <mapping class="com.viettel.module.phamarcy.BO.Customer"/>
+  		<mapping class="com.viettel.module.phamarcy.BO.Unit"/>
+        <mapping class="com.viettel.module.phamarcy.BO.Statistics"/>
+       <mapping class="com.viettel.module.phamarcy.BO.StatisticsProductView"/>
+       <mapping class="com.viettel.module.phamarcy.BO.StatisticsUserView"/>
+    </session-factory>
+</hibernate-configuration>

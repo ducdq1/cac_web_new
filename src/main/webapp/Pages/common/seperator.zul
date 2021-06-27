@@ -1,0 +1,23 @@
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <zscript><![CDATA[       
+        String lbText = self.getDynamicProperty("argText");
+        String w = self.getDynamicProperty("argWidth");
+    ]]>
+    </zscript>
+    <h:div class="divSeperator">
+        <h:table>
+            <h:tr>
+                <h:td width="${w}">
+                    <h:div class="divSeperator-c1">
+                        <label value="${lbText}"/>
+                    </h:div>
+                </h:td>
+                <h:td>
+                    <h:div class="divSeperator-c2">
+                    </h:div>
+                </h:td>
+            </h:tr>
+        </h:table>
+    </h:div>
+</zk>

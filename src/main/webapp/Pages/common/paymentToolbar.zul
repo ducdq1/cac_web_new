@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.zkoss.org/2005/zk/native"
+    xmlns="http://www.zkoss.org/2005/zul">
+    
+    <style src="/Share/css/formstyle.css" />
+     
+    <h:div id="toolBar" class="toolBar">
+        
+        <h:div style="background-color:white; width:250px; height:22px; margin-top:5px; border : 1px solid rgb(197,210,223); border-radius:16px; float:right">
+            <h:input maxlength="200" type="textbox" id="searchFullText" style="width:200px" onkeydown="toolBarCheckSearch(event);" autofocus="true"/>
+            <h:img src="Share/img/icon/search.jpg" style="width:16px; height:16px;float:left" onclick="toolBarSearch();"/>
+        </h:div>
+      
+        <h:button  id="btnListPayment" sclass="btnAction" label="Danh sách hồ sơ" style="background-color:#2b6fc2;background-image: url(Share/img/png/lich-nam.png);background-repeat:no-repeat;padding-left:24px;cursor: pointer;"
+                   onclick="sendAction('onShowListPayment')">
+            Danh sách hồ sơ
+        </h:button>        
+        <h:button  id="btnListBill" sclass="btnAction" label="Danh sách hóa đơn" style="background-color:#2b6fc2;background-image: url(Share/img/png/lich-thang.png);background-repeat:no-repeat;padding-left:24px;cursor: pointer;"
+                   onclick="sendAction('onShowListBill')">
+            Danh sách hóa đơn 
+        </h:button>        
+     
+        <h:button sclass="btnAction" label="Tìm kiếm nâng cao" style="background: url(Share/img/png/tim-kiem-nang-cao.png) no-repeat #2b6fc2;padding-left:24px;cursor: pointer;"
+                  image="/Share/img/png/tim-kiem-nang-cao.png"
+                  onclick="sendAction('onShowFullSearch')">
+            Tìm kiếm
+        </h:button>
+    </h:div>
+</zk>   

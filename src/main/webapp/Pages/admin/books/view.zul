@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./docBookCRUD" ?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    
+    <window id="docBookCRUD" title="Thông tin sổ văn bản" border="normal" width="530px"
+            apply="com.viettel.voffice.DAO.System.Books.BookDialogController" 
+            position="center,center" closable="true">
+        <style>
+            .createTable tr
+            {
+            margin-bottom:2px;height:30px;
+            }
+        </style>
+        <h:div width="100%">
+            <h:table width="100%" sclass="createTable" style="border-spacing: 1px;">
+                <h:tr >
+                    <h:td width="22%">
+                        <label value="Tên sổ văn bản" width="120px" />
+                    </h:td>
+                    <h:td width="78%">
+                        <label value="@{controller.bookSelected.bookName}" />               
+                    </h:td>
+                </h:tr>
+                <h:tr >
+                    <h:td width="22%">
+                        <label value="Mã sổ" width="120px" />
+                    </h:td>
+                    <h:td width="78%">
+                        <label value="@{controller.bookSelected.prefix}" />
+                       
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td>
+                        <label value="Số hiện tại" width="120px" />
+                    </h:td>
+                    <h:td>
+                        <label value="@{controller.bookSelected.currentNumber}" />
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td>
+                        <label value="Thứ tự" width="120px" />
+                    </h:td>
+                    <h:td>
+                        <label value="@{controller.bookSelected.bookOrder}" />
+                    </h:td>
+                </h:tr>
+            
+                <h:tr>
+                    <h:td > 
+                        <label value="Đơn vị" />
+                    </h:td>
+                    <h:td > 
+                        <label value="@{controller.bookSelected.deptName}" />
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td > 
+                        <label value="Loại sổ" />
+                    </h:td>
+                    <h:td > 
+                        <label value="@{controller.bookSelected.bookObjectTypeName}" />
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td > 
+                        <label value="Trạng thái" />
+                    </h:td>
+                    <h:td > 
+                        <label value="@{controller.bookSelected.statusName}" />
+                    </h:td>
+                </h:tr>
+            
+                <h:tr>
+                    <h:td colspan="2" style="text-align:right">
+                        <button label="Đóng" id="btnCancel" onClick="docBookCRUD.detach()" sclass="button blue" width="85px" image="/Share/img/icon/close.png"/>
+                    </h:td>
+                </h:tr>
+            </h:table>
+        </h:div> 
+    </window>
+</zk>

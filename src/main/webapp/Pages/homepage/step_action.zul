@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns="http://www.zkoss.org/2005/zul">
+
+	<h:div class="step_action">
+	<h:div class="step_action_title">
+	
+	</h:div>
+	</h:div>
+</zk>

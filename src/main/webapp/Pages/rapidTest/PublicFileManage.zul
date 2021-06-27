@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+        xmlns="http://www.zkoss.org/2005/zul" id="publicFileManage"
+        apply="com.viettel.module.rapidtest.DAO.PublicFileManageController">
+    <style src="/Share/css/formstyle.css" />
+    <caption label="Quản lý hồ sơ dùng chung" />
+    
+    <h:table width="100%" align="center">
+        <h:tr>
+            <h:td style="width:20%"></h:td>
+            <h:td style="width:10%">
+                <label value="Tên tệp" sclass="lb-create" />
+            </h:td>
+            <h:td style="width:40%">
+                <textbox id="txtattachName" maxlength="255" width="80%">
+                                     
+                </textbox>
+            </h:td>
+            <h:td style="width:10%">
+                <label value="Loại tệp" sclass="lb-create" />
+            </h:td>
+            <h:td style="width:40%">
+                <listbox id="lbFileType"
+                         mold="select"
+                         width="80%"
+                         onAfterRender='self.setSelectedIndex(0)'>
+                    <template name="model">
+                        <listitem label="${each.name}"
+                                  value="${each.categoryId}" />
+                    </template>
+                </listbox>
+            </h:td>
+        </h:tr>
+                    
+        <h:tr>
+            <h:td colspan="5" style="text-align:center">
+                <button id="btnSearch" label="Tìm kiếm" sclass="button" image="/Share/img/icon/search.jpg"/>
+                <button id="btnCreate" label="Thêm mới" sclass="button" image="/Share/img/icon/add_1.png"/>
+            </h:td>
+        </h:tr>
+                    
+        <h:tr>
+            <h:td colspan="5" style="text-align:center">
+                <listbox id="fileListbox" 
+                         multiple="false" style="word-wrap:break-word" vflex="true"
+                         emptyMessage="Không tồn tại danh mục" mold="paging" pageSize="10">
+                    <listhead sizable="true">
+                        <listheader width="5%" label="STT" align="center"/>
+                        <listheader width="30%" label="Tên tệp" align="left"/>
+                        <listheader width="30%" label="Loại tệp" align="left"/>
+                        <listheader width="25%" label="Mô tả" align="left"/>
+                        <listheader width="5%" label="Tải về" align="center"/>
+                        <listheader width="5%" label="Sửa" align="center"/>
+                        <listheader width="5%" label="Xoá" align="center"/>
+                    </listhead>
+                    <template name="model">
+                        <listitem value="${each}">
+                            <listcell label="${forEachStatus.index+1}" />
+                            <listcell label="${each.attach.attachName}" />
+                            <listcell label="${each.category.name}"/>
+                            <listcell label="${each.attach.attachDes}"/>
+                            <listcell >
+                                <image forward="onClick=fileListbox.onDownloadFile(${each})" 
+                                       src="/Share/img/icon/view.png" 
+                                       width="20px" height="20px" 
+                                       tooltiptext="Tải file"/>
+                            </listcell>
+                            <listcell>
+                                            
+                                <image src="/Share/img/icon/edit.png"
+                                       width="20px" height="20px"
+                                       forward="onClick=fileListbox.onEdit"
+                                       tooltiptext="Sửa" />
+                                
+                            </listcell>
+                            <listcell>
+                                            
+                                <image src="/Share/img/icon/delete.png"
+                                       width="20px" height="20px"
+                                       forward="onClick=fileListbox.onDeleteFile"
+                                       tooltiptext="Xóa" />
+                                
+                            </listcell>
+                        </listitem>
+                    </template>
+                </listbox>
+                <paging id="userPagingBottom" pageSize="10" detailed="true" />
+            </h:td>
+        </h:tr>
+                    
+    </h:table>
+            
+</window>

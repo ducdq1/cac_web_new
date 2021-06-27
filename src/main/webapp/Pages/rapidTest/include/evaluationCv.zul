@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+        xmlns="http://www.zkoss.org/2005/zul" id="businessWindow"
+        position="center,center" 
+        title="Thẩm định hồ sơ" apply="com.viettel.module.rapidtest.DAO.include.EvaluationController" width="100%">
+    <style src="/Share/css/formstyle.css" />
+    <style src="/Share/css/uploadstyle.css" />
+    <script type="text/javascript" src="/Share/js/UPMSamples.js" />
+    <vlayout id="layoutComment">
+        <label id="lbTopWarning" style="color: red;" />
+        <h:table width="100%" align="center">
+            <h:th width="15%" />
+            <h:th width="35%" />
+            <h:th width="15%" />
+            <h:th width="35%" />
+            <h:tr>
+                <h:td colspan="3">
+                    <label value="Thông tin thẩm định" sclass="lb-create" />
+                    <textbox id="userEvaluationTypeH" value = "1" visible="false"/>
+                </h:td>
+            </h:tr>
+                
+            <h:tr>
+                <h:td>
+                    <label value="Kết quả thẩm định"
+                           sclass="hightlight" />
+                    <label value=" *"
+                           sclass="label-required" />
+                </h:td>
+                <h:td>
+                    
+                    <radiogroup id="rbStatus"/>
+                        <radio id="ra1" label="Đạt yêu cầu" radiogroup="rbStatus" value="1"/>
+                        <radio id="ra3" label="Yêu cầu bổ sung" radiogroup="rbStatus" value="2"/>
+                    
+                </h:td>
+                
+            </h:tr>
+            <h:tr>
+                <h:td>
+                    <label value="Nội dung yêu cầu bổ sung" sclass="lb-create" />
+                </h:td>
+                <h:td colspan="3">
+                    <textbox id="mainContent" width="95%" rows="5"
+                             value="${$composer.obj.mainContent}"
+                             maxlength="500" />
+                </h:td>
+			
+            </h:tr>
+            <h:tr>
+                <h:td>
+                    <label value="Thời hạn hiệu lực của giấy" sclass="lb-create" />
+                </h:td>
+                <h:td colspan="1">
+                    <listbox id="lbEffective" mold="select" width="80%" emptyMessage="Chưa chọn nội dung">
+                        <listitem label="--Chọn--" value="-1" selected="true" />
+                        <listitem label="Không thời hạn" value="1" />
+                        <listitem label="3 năm" value="2" />
+                        <listitem label="5 năm" value="3" />
+                        
+                    </listbox>
+                </h:td>
+			
+            </h:tr>
+            <h:tr>
+                <h:td>
+                    <label value="Về pháp chế" sclass="lb-create" />
+                </h:td>
+                <h:td colspan="1">
+                    <listbox id="lbLegal" mold="select" width="80%" emptyMessage="Chưa chọn nội dung">
+                        <listitem label="--Chọn--" value="-1" selected="true" />
+                        <listitem label="Đồng ý" value="1" />
+                        <listitem label="Không đồng ý" value="0" />
+                        <listitem label="Yêu cầu bổ sung" value="2" />
+                    </listbox>
+                </h:td>
+			
+            </h:tr>
+            <h:tr>
+                <h:td>
+                    <label value="Lý do không cấp hoặc yêu cầu bổ sung" sclass="lb-create" />
+                </h:td>
+                <h:td colspan="3">
+                    <textbox id="legalContent" width="95%" rows="5"
+                             value="${$composer.obj.legalContent}"
+                             maxlength="500" />
+                </h:td>
+			
+            </h:tr>
+               
+        </h:table>
+        
+
+         <div align="center" visible="false">
+            <button id="btnSubmit" label="Gửi xử lý" visible="true"
+                    image="/Share/img/icon/send_document_1.png" />
+        </div>
+        <label id="lbBottomWarning" style="color: red;" />
+    </vlayout>
+</window>

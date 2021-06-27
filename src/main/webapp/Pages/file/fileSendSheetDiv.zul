@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">   
+    <window id="sendSheetDiv" apply="com.viettel.voffice.DAO.Files.SendSheetController">
+        <h:table class="viewTable">
+            <h:tr>
+                <h:td colspan="3" style="text-align:center;">
+                    <label value="PHIẾU TRÌNH GIẢI QUYẾT CÔNG VIỆC" style="font-weight:bold;font-size:14px"/>
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td width="30%" style="border:1px solid gray">                    
+                    <label value="Vấn đề trình :" style="font-weight:bold;"/>
+                </h:td>
+                <h:td colspan="2" width="100%" style="border:1px solid gray">
+                    <textbox id="txtTitle" maxlength="250" style="border:none;width:100%"/>
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td width="30%" style="border:1px solid gray">                    
+                    <label value="Đề xuất :" style="font-weight:bold;"/>
+                </h:td>
+                <h:td colspan="2" width="70%" style="border:1px solid gray">
+                    <textbox id="txtSuggest" maxlength="500" style="border:none;width:100%"/>
+                </h:td>
+            </h:tr>
+            <h:tr >
+                <h:td colspan="3" style="border:1px solid gray;text-align:center">
+                    <label style="font-weight:bold;font-size:12px" value="TÓM TẮT CÁC Ý KIẾN ĐÃ XỬ LÝ"/>
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td colspan="3" style="border:1px solid gray">
+                    <textbox id="txtSummary" rows="4" style="width:100%;border:none" maxlength="500"/>
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td colspan="3" style="border:1px solid gray;text-align:center">
+                    <label style="font-weight:bold;font-size:12px" value="ĐƠN VỊ TRÌNH KÝ"/>
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td width="33%" style="border:1px solid gray;text-align:center">
+                    <label style="font-weight:bold;font-size:12px" value="Chuyên viên thụ lý"/>
+                </h:td>
+                <h:td width="33%" style="border:1px solid gray;text-align:center">
+                    <label style="font-weight:bold;font-size:12px" value="Lãnh đạo cấp phòng ban (nếu có)"/>
+                </h:td>
+                <h:td width="33%" style="border:1px solid gray;text-align:center">
+                    <label style="font-weight:bold;font-size:12px" value="Thủ trưởng đơn vị"/>
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td width="33%" style="border:1px solid gray;text-align:center">
+                    <textbox id="txtStaff" rows="4" style="width:100%;border:none" maxlength="250"/>
+                </h:td>
+                <h:td width="33%" style="border:1px solid gray;text-align:center">
+                    <textbox id="txtDeptManager" rows="4" style="width:100%;border:none" maxlength="250"/>
+                </h:td>
+                <h:td width="33%" style="border:1px solid gray;text-align:center">
+                    <textbox id="txtAgencyManager" rows="4" style="width:100%;border:none" maxlength="250"/>
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td colspan="3" style="border:1px solid gray;text-align:center">
+                    <label style="font-weight:bold;font-size:12px" value="QUYẾT ĐỊNH CỦA LÃNH ĐẠO BỘ"/>
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td colspan="3" style="border:1px solid gray">
+                    <textbox id="txtChief" rows="4" style="width:100%;border:none" maxlength="1000" />
+                </h:td>
+            </h:tr>
+        </h:table>
+    </window>
+</zk>

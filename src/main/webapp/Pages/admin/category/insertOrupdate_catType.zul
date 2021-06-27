@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <window id="catTypeCRUD" title="${arg.titleWindow}" border="normal" width="580px"
+        apply="com.viettel.voffice.DAO.System.Category.CategoryDialogController" 
+        position="center,center" closable="true">
+        <h:div>
+            <h:table>
+                <h:tr>
+                    <h:td width="20%">
+                        <label value="Mã loại danh mục" width="120px" />
+                        <label value=" *" sclass="label-required" />
+                    </h:td>
+                    <h:td width="80%">
+                        <textbox id="txtCode" value="${arg.catTypeInfo.code}"
+                              width="435px"  maxlength="50" constraint="no empty:Bạn phải nhập mã danh mục" sclass="txtInput"/>
+                    </h:td>
+                
+                </h:tr>
+                
+                <h:tr>
+                    <h:td>
+                        <label value="Tên loại danh mục" width="120px" />
+                        <label value=" *" sclass="label-required" />
+                    </h:td>
+                    <h:td>
+                        <textbox value="${arg.catTypeInfo.name}" id="txtName"
+                              width="435px" maxlength="200"  constraint="no empty:Bạn phải nhập tên danh mục" sclass="txtInput"/>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td>
+                        <label value="Trạng thái" />
+                    </h:td>
+                    <h:td>
+                        <listbox id="lboxStatus" mold="select" width="200px" >
+                            <listitem label="Hoạt động" value="1" selected="${arg.catTypeInfo.isActive ==1 ? true: false}" />
+                            <listitem label="Không hoạt động" value="0" selected="${arg.catTypeInfo.isActive ==0 ? true: false}"/>
+                        </listbox>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td>
+                        <label value="Loại danh mục" />
+                    </h:td>
+                    <h:td>
+                        <listbox id="lboxIsSystem" mold="select" width="200px" >
+                            <listitem label="Thông thường" value="0" selected="${arg.catTypeInfo.isSystem != 1 ? true: false}"/>
+                            <listitem label="Hệ thống (Chỉ admin mới xem được)" value="1" selected="${arg.catTypeInfo.isSystem ==1 ? true: false}" />
+                        </listbox>
+                    </h:td>
+                </h:tr>
+                
+                <h:tr>
+                    <h:td>
+                        <label value="Danh mục có phụ thuộc đơn vị ?" />
+                    </h:td>
+                    <h:td>
+                        <listbox id="lboxIsDeptDepend" mold="select" width="200px" >
+                            <listitem label="Không" value="0" selected="${arg.catTypeInfo.isDeptDepend != 1 ? true: false}"/>
+                            <listitem label="Có" value="1" selected="${arg.catTypeInfo.isDeptDepend ==1 ? true: false}" />
+                        </listbox>
+                    </h:td>
+                </h:tr>
+                
+                <h:tr>
+                    <h:td colspan="2" style="text-align:right">
+                        <button label="Lưu" id="btnSave" image="/Share/img/icon/save.png" sclass="mybutton button blue small" width="85px"/>
+                        <button label="Huỷ bỏ" id="btnCancel" image="/Share/img/icon/close.png" sclass="mybutton button blue small" onClick="catTypeCRUD.detach()" width="85px"/>
+                    </h:td>
+                </h:tr>
+            </h:table>
+        </h:div> 
+    </window>
+</zk>

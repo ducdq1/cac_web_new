@@ -1,0 +1,74 @@
+@charset "utf-8";
+/* CSS Document */
+@font-face {
+    font-family: 'MYRIADPRO-REGULAR';
+    src: url('../fonts/MYRIADPRO-REGULAR.otf');
+    src: url('../fonts/MYRIADPRO-REGULAR.otf?#iefix'), /* IE4+ */
+         url('../fonts/MYRIADPRO-REGULAR.woff') format('woff'),
+         url('../fonts/MYRIADPRO-REGULAR.ttf') format('truetype'), /* font chuan */
+         url('../fonts/MYRIADPRO-REGULAR.svg#vni-courinormal') format('svg'); /* iphone, ipad*/
+}
+@font-face {
+    font-family: 'MYRIADPRO-BOLD';
+    src: url('../fonts/MYRIADPRO-BOLD.otf');
+    src: url('../fonts/MYRIADPRO-BOLD.otf?#iefix'), /* IE4+ */
+         url('../fonts/MYRIADPRO-BOLD.woff') format('woff'),
+         url('../fonts/MYRIADPRO-BOLD.ttf') format('truetype'), /* font chuan */
+         url('../fonts/MYRIADPRO-BOLD.svg#vni-courinormal') format('svg'); /* iphone, ipad*/
+}
+@font-face {
+    font-family: 'MyriadPro-BoldCond';
+    src: url('../fonts/MyriadPro-BoldCond.otf');
+    src: url('../fonts/MyriadPro-BoldCond.otf?#iefix'), /* IE4+ */
+         url('../fonts/MyriadPro-BoldCond.woff') format('woff'),
+         url('../fonts/MyriadPro-BoldCond.ttf') format('truetype'), /* font chuan */
+         url('../fonts/MyriadPro-BoldCond.svg#vni-courinormal') format('svg'); /* iphone, ipad*/
+}
+@font-face {
+    font-family: 'MYRIADPRO-COND';
+    src: url('../fonts/MYRIADPRO-COND.otf');
+    src: url('../fonts/MYRIADPRO-COND.otf?#iefix'), /* IE4+ */
+         url('../fonts/MYRIADPRO-COND.woff') format('woff'),
+         url('../fonts/MYRIADPRO-COND.ttf') format('truetype'), /* font chuan */
+         url('../fonts/MYRIADPRO-COND.svg#vni-courinormal') format('svg'); /* iphone, ipad*/
+}
+@font-face {
+    font-family: 'MYRIADPRO-SEMIBOLD';
+    src: url('../fonts/MYRIADPRO-SEMIBOLD.otf');
+    src: url('../fonts/MYRIADPRO-SEMIBOLD.otf?#iefix'), /* IE4+ */
+         url('../fonts/MYRIADPRO-SEMIBOLD.woff') format('woff'),
+         url('../fonts/MYRIADPRO-SEMIBOLD.ttf') format('truetype'), /* font chuan */
+         url('../fonts/MYRIADPRO-SEMIBOLD.svg#vni-courinormal') format('svg'); /* iphone, ipad*/
+}
+@font-face {
+    font-family: 'MyriadPro-SemiboldCond';
+    src: url('../fonts/MyriadPro-SemiboldCond.otf');
+    src: url('../fonts/MyriadPro-SemiboldCond.otf?#iefix'), /* IE4+ */
+         url('../fonts/MyriadPro-SemiboldCond.woff') format('woff'),
+         url('../fonts/MyriadPro-SemiboldCond.ttf') format('truetype'), /* font chuan */
+         url('../fonts/MyriadPro-SemiboldCond.svg#vni-courinormal') format('svg'); /* iphone, ipad*/
+}
+@font-face {
+    font-family: 'UVNVan_R';
+    src: url('../fonts/UVNVan_R.otf');
+    src: url('../fonts/UVNVan_R.otf?#iefix'), /* IE4+ */
+         url('../fonts/UVNVan_R.woff') format('woff'),
+         url('../fonts/UVNVan_R.ttf') format('truetype'), /* font chuan */
+         url('../fonts/UVNVan_R.svg#vni-courinormal') format('svg'); /* iphone, ipad*/
+}
+@font-face {
+    font-family: 'UVNThangVu';
+    src: url('../fonts/UVNThangVu.otf');
+    src: url('../fonts/UVNThangVu.otf?#iefix'), /* IE4+ */
+         url('../fonts/UVNThangVu.woff') format('woff'),
+         url('../fonts/UVNThangVu.ttf') format('truetype'), /* font chuan */
+         url('../fonts/UVNThangVu.svg#vni-courinormal') format('svg'); /* iphone, ipad*/
+}
+@font-face {
+    font-family: 'UVNHuongQue_N';
+    src: url('../fonts/UVNHuongQue_N.otf');
+    src: url('../fonts/UVNHuongQue_N.otf?#iefix'), /* IE4+ */
+         url('../fonts/UVNHuongQue_N.woff') format('woff'),
+         url('../fonts/UVNHuongQue_N.ttf') format('truetype'), /* font chuan */
+         url('../fonts/UVNHuongQue_N.svg#vni-courinormal') format('svg'); /* iphone, ipad*/
+}

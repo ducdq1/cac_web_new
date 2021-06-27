@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+   
+    <window id="nodeConfigDlg" border="normal" width="850px"
+            apply="com.viettel.voffice.DAO.System.Flow.FlowNodeConfigController" 
+            position="center,center" closable="true">
+        <caption label="Cấu hình node" />
+        <textbox id="txtNodeId" visible="false" />
+        <!--<label value="Trạng thái của hồ sơ: "/>
+        <selectbox id="statusSelectbox" >
+            <template name="model">
+                <label value="${each.name}" />
+            </template>
+        </selectbox>-->
+        <h:div>
+            <listbox id="lstDeptUser" 
+                     multiple="false"
+                     emptyMessage="Không tồn tại actor ">
+                <listhead sizable="true">
+                    <listheader width="10%" label="STT" align="center" />
+                    <listheader width="30%" label="Đơn vị"  />
+                    <listheader width="20%" label="Chức vụ" sort="auto" />
+                    <listheader width="20%" label="Cán bộ xử lý" />
+                    <listheader width="20%" label="Trách nhiệm" />
+                    <listheader width="20%" label="Allias" />
+                    <listheader width="20%" label="Sử dụng Allias" />
+                    <listheader width="20%" label="Mặc định chọn" />
+                </listhead>
+                <template name="model">
+                    <listitem value="${each}">
+                        <listcell label="${forEachStatus.index+1}" />
+                        <listcell>
+                            <label value="${each.deptName}" if="${each.deptId != -7}"/>
+                            <label value="${each.deptName}+${each.deptLevel}" if="${each.deptId == -7}"/>
+                            <image src="/Share/img/icon/back.png" if="${each.deptId == -7}" forward="onClick=lstDeptUser.onReduceDeptLevel"/>
+                            <image src="/Share/img/icon/next.png" if="${each.deptId == -7}" forward="onClick=lstDeptUser.onIncreaseDeptLevel"/>
+                        </listcell>
+                        <listcell>
+                            <label value="${each.posName}"/>
+                            <image if="${each.userId == null}" forward="onClick=lstDeptUser.onPosition" src="/Share/img/icon/user.gif" width="20px" height="20px" tooltiptext="Chọn chức vụ"/>
+                        </listcell>
+                        <listcell label="${each.userName}">
+                        </listcell>
+                        <listcell >
+                            <label value = "Xử lý chính" if="${each.processType == 1}"/>
+                            <label value = "Phối hợp" if="${each.processType == 0}"/>
+                            <label value = "Tham khảo" if="${each.processType == 2}"/>
+                            <label value = "Cho ý kiến" if="${each.processType == 3}"/>
+                            <label value = "Nhận để biết" if="${each.processType == 4}"/>
+                            <label value = "" if="${each.processType == null}"/>
+                            <image forward="onClick=lstDeptUser.onChangeProcessType" src="/Share/img/icon/user.gif" width="20px" height="20px" tooltiptext="Đổi vai trò"/>
+                        </listcell>
+                        <listcell>
+                            <zk if="${!(each.allias eq NULL or each.allias=='')}" >
+                                <textbox
+                                     value="${each.allias}" id="${each.nodeDeptUserId}"/>
+                            </zk>
+                            <zk if="${each.allias eq NULL or each.allias==''}" >
+                                <textbox
+                                     value="Cán bộ xử lý" id="${each.nodeDeptUserId}"/>
+                            </zk>
+                        </listcell>
+                        <listcell>
+                            <checkbox value="${each.nodeDeptUserId}"
+                                      checked="${each.useAllias==1}"
+                                      forward="onClick=lstDeptUser.onCheckUseAllias"/>
+                        </listcell>
+                        <listcell>
+                            <radiogroup id="rd_${each.nodeDeptUserId}" 
+                                        forward="onCheck=lstDeptUser.onCheckOptionSelected" />
+                            <radio value="1" checked="${each.optionSelected==1}"
+                                   label="Chọn sẵn" radiogroup="rd_${each.nodeDeptUserId}" />
+                            <radio value="2" checked="${each.optionSelected==2}"
+                                   label="Mặc định gửi" radiogroup="rd_${each.nodeDeptUserId}" />
+                            <radio value="0" checked="${each.optionSelected==0}"
+                                   label="Không chọn" radiogroup="rd_${each.nodeDeptUserId}" />
+                        </listcell>
+                    </listitem>
+                </template>
+            </listbox>
+            <div align="center">
+                <button height="30px" image="/Share/img/icon/save.png" id="btnAddNodeConfig" label="Chọn actor" />
+                <!--<button height="30px" image="/Share/img/icon/user.gif" id="btnAddPosConfig" label="Chọn chức vụ" />-->
+                <button height="30px" image="/Share/img/icon/close.png" id="btnSave" label="Lưu và Đóng" />
+            </div>
+        </h:div>
+    </window>
+</zk>

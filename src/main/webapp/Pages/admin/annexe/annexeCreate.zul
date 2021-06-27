@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window id="annexeCreateWnd" border="normal" width="530px"
+        xmlns:h="http://www.w3.org/1999/xhtml"
+        xmlns="http://www.zkoss.org/2005/zul"
+        apply="com.viettel.module.cosmetic.Controller.AnnexeCreateController" 
+        position="center,center" closable="true">
+    <style src="/Share/css/formstyle.css" />
+    <style src="/Share/css/uploadstyle.css" />
+    <script type="text/javascript" src="/Share/js/UPMSamples.js" />
+    <caption label="Quản lý danh mục chất cấm" />        
+    <h:div width="100%">
+        <h:table width="100%">
+            <h:tr>
+                <h:td width="20%">
+                    <label value="Substance" style="while"/>
+                </h:td>
+                <h:td width="80%">
+                    <textbox id="tbAnnexeId" 
+                             visible="false"/>
+                    <textbox id="txtSubstance" maxlength="2000" rows="2" width="90%"/>
+                </h:td >
+            </h:tr>
+            <h:tr>
+                <h:td width="20%">
+                    <label value="CasNumber"/>
+                </h:td>
+                <h:td width="80%">
+                    <textbox id="txtCasNumber" maxlength="500" rows="2" width="90%"/>
+                </h:td>
+            </h:tr>                             
+            <h:tr>
+                <h:td width="20%">
+                    <label value="Ref.No"/>
+                </h:td>
+                <h:td width="80%">
+                    <textbox id="txtRefNo" maxlength="500" rows="2" width="90%"/>
+                </h:td >
+            </h:tr>
+            <h:tr>
+                <h:td width="20%">
+                    <label value="FieldUse"/>
+                </h:td>
+                <h:td width="80%">
+                    <textbox id="txtFieldUse" maxlength="2000" rows="2" width="90%"/>
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td width="20%">
+                    <label value="MaximumAuthorized"/>
+                </h:td>
+                <h:td width="80%">
+                    <textbox id="txtMaximumAuthorized" maxlength="2000" rows="2" width="90%"/>
+                </h:td >
+            </h:tr>
+            <h:tr>
+                <h:td width="20%">
+                    <label value="LimitationRequirements"/>
+                </h:td>
+                <h:td width="80%">
+                    <textbox id="txtLimitationRequirements" maxlength="2000" rows="2" width="90%"/>
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td width="20%">
+                    <label value="ConditionsOfUse"/>
+                </h:td>
+                <h:td width="80%">
+                    <textbox id="txtConditionsOfUse" maxlength="2000" rows="2" width="90%"/>
+                </h:td >
+            </h:tr>
+            <h:tr>
+                <h:td width="20%">
+                    <label value="AllowedUntil"/>
+                </h:td>
+                <h:td width="80%">
+                    <datebox id="dbAllowedUntil" format="dd/MM/yyyy"/>
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td width="20%">
+                    <label value="Note"/>
+                </h:td>
+                <h:td width="80%">
+                    <textbox id="txtNote" maxlength="2000" rows="2" width="90%"/>
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td width="20%">
+                    <label value="Loại"/>
+                </h:td>                 	
+                <h:td width="80%">
+                    <listbox id="lbAnnexeType"  mold="select" width="50%">
+                        <listitem value="-1" label="--- Chọn ---" selected="true"/>
+                        <listitem value="2" label="Annexe II"/>
+                        <listitem value="3" label="Annexe III"/>
+                        <listitem value="5" label="Annexe V"/>
+                        <listitem value="6" label="Annexe VI"/>
+                        <listitem value="7" label="Annexe VII"/>
+                    </listbox>
+                </h:td >
+            </h:tr> 
+            <h:tr>
+                <h:td width="20%">
+                    <label value="Trạng thái"/>
+                </h:td>
+                <h:td width="80%">
+                    <listbox id="lbIsActive"  mold="select" width="50%">
+                        <listitem value="-1" label="--- Chọn ---" selected="true"/>
+                        <listitem value="1" label="Hoạt động"/>
+                        <listitem value="0" label="Không hoạt động"/>
+                    </listbox>
+                </h:td >
+            </h:tr>                                              
+            <h:tr> 
+                <h:td colspan="2" style="text-align:center">
+                    <button label="Lưu" id="btnSave" src="/Share/img/icon/Add.png"/>
+                    <button label="Huỷ bỏ" id="btnCancel" onClick="annexeCreateWnd.detach()" src="/Share/img/icon/close.png"/>
+                </h:td>
+            </h:tr>
+        </h:table>
+    </h:div> 
+</window>

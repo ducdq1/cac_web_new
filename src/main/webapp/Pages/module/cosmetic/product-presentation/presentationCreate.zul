@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul"
+    xmlns:h="http://www.w3.org/1999/xhtml">
+    
+    <window id="presentationCreateWnd" 
+            apply="com.viettel.module.cosmetic.Controller.ProductPresentationCreateController"
+            border="normal"
+            position="center,100px" width="60%" 
+            title="${$composer.getLabelCos('presentation_create_caption')}"
+            closable="true">
+        <style src="/Share/css/formstyle.css" />
+        <vlayout>
+            <groupbox mold="3d">
+                <!--<caption label="${$composer.getLabelName('presentation_create_caption')}" />-->
+                <h:table width="100%">
+                    <h:tr>
+                        <h:td width="10%">
+                            <label value="${$composer.getLabelName('presentation_label_name_vi')}" />
+                        </h:td>
+                        <h:td width="30%">
+                            <textbox id="tbNameVi" width="80%" maxlength="255"></textbox>
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td width="10%">
+                            <label value="${$composer.getLabelName('presentation_label_name_en')}" />
+                        </h:td>
+                        <h:td width="30%">
+                            <textbox id="tbNameEn" width="80%" maxlength="255"></textbox>
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td width="10%">
+                            <label value="${$composer.getLabelName('presentation_label_is_active')}" />
+                        </h:td>
+                        <h:td width="10%">
+                            <listbox id="lbIsActive" mold="select">
+                                <template name="model">
+                                    <listitem label="${each.name}" value="${each.value}" />
+                                </template>
+                            </listbox>
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td />
+                        <h:td>
+                            <button if="${$composer.getProductPresentationItem() != null}" id="btnUpdate" sclass="button" image="/Share/img/icon/add_1.png" forward="onClick=presentationCreateWnd.onAddOrUpdate(2)" label="${$composer.getLabelName('presentation_create_label_update')}" />
+                            <button if="${$composer.getProductPresentationItem() == null}" id="btnAdd" sclass="button" image="/Share/img/icon/add_1.png" forward="onClick=presentationCreateWnd.onAddOrUpdate(0)" label="${$composer.getLabelName('presentation_create_label_add')}" />
+                            <button if="${$composer.getProductPresentationItem() == null}" id="btnAddAndClose" sclass="button" image="/Share/img/icon/add_1.png" forward="onClick=presentationCreateWnd.onAddOrUpdate(1)" label="${$composer.getLabelName('presentation_create_label_add_and_close')}" />
+                        </h:td>
+                    </h:tr>
+                </h:table>
+            </groupbox>
+        </vlayout>
+    </window>
+
+</zk>

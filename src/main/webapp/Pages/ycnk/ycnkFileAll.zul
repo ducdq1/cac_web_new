@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+	xmlns="http://www.zkoss.org/2005/zul" id="ycnkFileAll"
+	apply="com.viettel.voffice.DAO.Ycnk.YcnkFileAllController">
+	<style src="/Share/css/formstyle.css" />
+	<script defer="true">
+		toolBar.widget = "ycnkFileAll";
+		addToolbar("Share/img/add.png","Thêm mới hồ sơ","onOpenCreate");
+	</script>
+        <zscript><![CDATA[
+        /**
+         * in a real application we would use something like 
+         *         List iterateOverMe = sessionScope.get("listToRender");
+         */
+        String[][] iterateOverMe = {
+                {"99", "Fred Flintstone"}
+                ,{"8", "Wilma Flintstone"}
+                ,{"65", "Barney Rubble"}
+                ,{"32", "Betty Rubble"}
+        };
+]]></zscript>
+	<include src="/Pages/common/searchToolbar.zul" />
+	<h:div class="contentDiv">
+		<include id="incSearchFullForm"
+			src="/Pages/ycnk/include/searchYcnkForm.zul" />
+	</h:div>
+	<h:div class="contentDiv">
+		<paging id="userPagingTop" pageSize="10" detailed="true" />
+		<listbox id="lbListDoc" emptyMessage="Không có hồ sơ nào" checkmark="true" multiple="true">
+			<listhead>
+				<listheader label="STT" align="center" hflex="min" />
+				<listheader label="ID" hflex="min" />
+				<listheader label="Mã hồ sơ" hflex="min" />
+				<listheader label="Loại hồ sơ" hflex="min" />
+				<listheader label="Tên tổ chức /cá nhân đăng ký" hflex="min" />
+				<listheader label="Ngày tạo" hflex="2" />
+				<listheader label="Ngày gửi" hflex="1" />
+				<listheader label="Nước xuất khẩu" hflex="2" />
+				<listheader label="Trạng thái" hflex="2" />
+                                <listheader label="Sửa" align="center" hflex="min"
+					visible="${$composer.isCRUDMenu()}" />
+				<listheader label="Xóa" align="center" hflex="min"
+					visible="${$composer.isCRUDMenu()}" />
+			</listhead>
+			<template name="model">
+				<listitem forward="onClick=lbListDoc.onOpenView(${each})">
+					<listcell label="${forEachStatus.index + 1 + userPagingTop.pageSize * userPagingTop.activePage}">
+					</listcell>
+					<listcell label="${each.fileId}"/>
+					<listcell label="${each.nswFileCode}">
+					</listcell>
+					<listcell label="${each.fileTypeCode}">
+					</listcell>
+					<listcell label="${each.registerName}">
+					</listcell>
+					<listcell label="${each.createdDate}">
+					</listcell>
+					<listcell label="${each.sendDate}">
+					</listcell>
+                                        <listcell label="${each.exporterNationCode}"></listcell>
+					<listcell label="${each.statusCode} - ${$composer.getStatus(each.statusCode)}"/>
+					<!--<listcell label="${statusArr[each.statusCode]}"/>-->
+                                        <listcell>
+                                            <image src="/Share/img/png/flow.png" sclass="img-cal" 
+                                                   tooltiptext="Xem luồng"
+                                                   width="20px" height="20px"
+                                                   forward="onClick=lbListDoc.onViewFlow(${each})"/>
+                                            <image src="/Share/img/icon/edit.png"
+                                                       width="20px" height="20px"
+                                                       forward="onClick=lbListDoc.onOpenUpdate(${each})"
+                                                       if="${$composer.isAbleToModify(each)}"
+                                                       tooltiptext="Sửa văn bản" />
+                                            <image src="/Share/img/icon/edit_disable.png"
+                                                       width="20px" height="20px"
+                                                       if="${!$composer.isAbleToModify(each)}"
+                                                       tooltiptext="Sửa văn bản" />
+                                        </listcell>
+					<listcell>
+						<image src="/Share/img/icon/delete.png"
+							width="20px" height="20px"
+							forward="onClick=lbListDoc.onDelete(${each})"
+							if="${$composer.isAbleToDelete(each)}"
+							tooltiptext="Xóa văn bản" />
+						<image src="/Share/img/icon/delete_disable.png"
+							width="20px" height="20px"
+							if="${!$composer.isAbleToDelete(each)}"
+							tooltiptext="Xóa văn bản" />
+					</listcell>
+				</listitem>
+			</template>
+		</listbox>
+		<paging id="userPagingBottom" pageSize="10" detailed="true" />
+	</h:div>
+	<separator />
+	
+</window>

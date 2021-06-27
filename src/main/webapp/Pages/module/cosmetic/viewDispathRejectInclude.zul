@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.zkoss.org/2005/zk/native"
+    xmlns="http://www.zkoss.org/2005/zul">
+    
+    <style src="/Share/css/formstyle.css" />
+    
+    <style src="/Share/css/formstyle.css" />
+    
+    <h:div width="100%">
+        <groupbox width="100%" sclass="gb-form-create" closable="false">
+            <caption label="THÔNG TIN CÔNG VĂN TỪ CHỐI" />
+            <h:table width="100%">
+                
+                <h:tr>
+                    <h:td width="15%">
+                        <label value="Số công văn"  sclass="lb-create" />
+                    </h:td>
+                    <h:td width="35%">
+                        <label width="95%" multiline="true" pre="true"
+                               value="${$composer.reject.receiveNo}"
+                               sclass="label-info"/>
+                    </h:td>
+                    <h:td width="15%">
+                        <label value="Ngày nhận"  sclass="lb-create" />
+                    </h:td>
+                    <h:td width="35%">
+                        <label width="95%" multiline="true" pre="true"
+                               value="${$composer.getFormatDate($composer.reject.receiveDate)}"
+                               sclass="label-info"/>
+                    </h:td>
+                    
+                
+                </h:tr>
+                <h:tr>
+                    <h:td width="15%">
+                        <label value="Công văn"  sclass="lb-create" />
+                    </h:td>
+                    <h:td width="35%">
+                        <a onClick = "$composer.onDownloadReject()">
+                            <label width="95%" multiline="true" pre="true"
+                                   value="Xem công văn từ chối"
+                                   sclass="highlight"/>
+                        </a>
+                    </h:td>
+                </h:tr>
+            </h:table>
+        </groupbox>
+    </h:div> 
+</zk>
+

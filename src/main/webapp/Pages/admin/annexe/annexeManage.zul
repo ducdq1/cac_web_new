@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <style src="/Share/css/formstyle.css"/>
+    <window width="100%" id="annexeManageWnd"
+            apply="com.viettel.module.cosmetic.Controller.AnnexeManageController" border="normal" height="100%">
+        <caption label="Quản lý danh mục chất cấm" />  
+        <h:div id="searchDiv" style="width:100%" align="center">
+            <h:table style="width:80%" class="searchTable">               
+                <h:tr>
+                    <h:td width="15%">
+                        <label value="Substance"/>
+                    </h:td>
+                    <h:td width="35%">
+                        <textbox id="txtSubstance" maxlength="255"/>
+                    </h:td >
+                    <h:td width="15%">
+                        <label value="CasNumber"/>
+                    </h:td>
+                    <h:td width="35%">
+                        <textbox id="txtCasNumber" maxlength="255"/>
+                    </h:td>
+                </h:tr>                                
+                <h:tr>
+                    <h:td width="15%">
+                        <label value="Ref.No"/>
+                    </h:td>
+                    <h:td width="35%">
+                        <textbox id="txtRefNo" maxlength="255"/>
+                    </h:td >
+                    <h:td width="15%">
+                        <label value="FieldUse"/>
+                    </h:td>
+                    <h:td width="35%">
+                        <textbox id="txtFieldUse" maxlength="255"/>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td width="15%">
+                        <label value="MaximumAuthorized"/>
+                    </h:td>
+                    <h:td width="35%">
+                        <textbox id="txtMaximumAuthorized" maxlength="255"/>
+                    </h:td >
+                    <h:td width="15%">
+                        <label value="LimitationRequirements"/>
+                    </h:td>
+                    <h:td width="35%">
+                        <textbox id="txtLimitationRequirements" maxlength="255"/>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td width="15%">
+                        <label value="ConditionsOfUse"/>
+                    </h:td>
+                    <h:td width="35%">
+                        <textbox id="txtConditionsOfUse" maxlength="255"/>
+                    </h:td >
+                    <h:td width="15%">
+                        <label value="AllowedUntil"/>
+                    </h:td>
+                    <h:td width="35%">
+                        <datebox id="dbAllowedUntil" format="dd/MM/yyyy"/>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td width="15%">
+                        <label value="Loại"/>
+                    </h:td>                 	
+                    <h:td width="35%">
+                        <listbox id="lbAnnexeType"  mold="select">
+                            <listitem value="-1" label="--- Chọn ---" selected="true"/>
+                            <listitem value="2" label="Annexe II"/>
+                            <listitem value="3" label="Annexe III"/>
+                            <listitem value="5" label="Annexe V"/>
+                            <listitem value="6" label="Annexe VI"/>
+                            <listitem value="7" label="Annexe VII"/>
+                        </listbox>
+                    </h:td >
+                    <h:td width="15%">
+                        <label value="Note"/>
+                    </h:td>
+                    <h:td width="35%">
+                        <textbox id="txtNote" maxlength="255"/>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td width="15%">
+                        <label value="Trạng thái"/>
+                    </h:td>
+                    <h:td width="35%">
+                        <listbox id="lbIsActive"  mold="select">
+                            <listitem value="-1" label="--- Chọn ---" selected="true"/>
+                            <listitem value="1" label="Hoạt động"/>
+                            <listitem value="0" label="Không hoạt động"/>
+                        </listbox>
+                    </h:td >
+                    <h:td width="15%">
+                        
+                    </h:td>
+                    <h:td width="35%">
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td colspan="4" style="text-align:center">
+                        <button id="btnSearch" label="Tìm kiếm" sclass="button" image="/Share/img/icon/search.jpg"/>
+                        <button id="btnCreate" label="Thêm mới" sclass="button" image="/Share/img/icon/add_1.png"/>
+                    </h:td>
+                </h:tr>
+            </h:table>
+        </h:div>
+        <h:div id="gridDiv" >
+            <listbox id="lbAnnexe" 
+                     multiple="false"
+                     style="word-wrap: break-word"
+                     emptyMessage="Không tồn tại bản ghi">
+                <listhead sizable="true">
+                    <listheader width="5%" label="STT" align="center"/>
+                    <listheader width="15%" label="Danh mục"/>
+                    <listheader width="50%" label="substance"  />
+                    <listheader width="20%" label="refNo"  />
+                    <listheader width="5%" label="Sửa" align="center"/>
+                    <listheader width="5%" label="Xoá" align="center"/>
+                </listhead>
+                <template name="model">
+                    <listitem value="${each}">
+                        <listcell label="${forEachStatus.index+1+userPagingBottom.pageSize*userPagingBottom.activePage}" />
+                        <listcell label="${each.annexeTypeName}" />
+                        <listcell label="${each.substance}" />
+                        <listcell label="${each.refNo}" />
+                        <listcell >
+                            <image forward="onClick=lbAnnexe.onEdit" src="/Share/img/icon/edit.png" 
+                                   width="20px" height="20px" tooltiptext="Sửa thông tin"/>
+                        </listcell>
+                        <listcell>
+                            <image forward="onClick=lbAnnexe.onDelete" src="/Share/img/icon/delete.png" 
+                                   width="20px" height="20px" tooltiptext="Xóa"/>
+                        </listcell>
+                    </listitem>
+                </template>
+            </listbox>
+            <paging id="userPagingBottom" pageSize="10" detailed="true"/>
+        </h:div>  
+    </window>
+</zk>

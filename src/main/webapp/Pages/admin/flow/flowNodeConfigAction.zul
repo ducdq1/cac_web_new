@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul"
+    xmlns:n="http://www.zkoss.org/2005/zk/native">
+   
+    <window id="actionConfigDlg" border="normal" width="650px"
+            apply="com.viettel.voffice.DAO.System.Flow.FlowActionConfigController" 
+            position="center,center" closable="true">
+        <caption label="Cấu hình action" />
+        <n:table>
+            <h:tr>
+                <h:td width="25%">
+                    <textbox id="txtFlowId" visible="false" />
+                    <textbox id="txtActionId" visible="false" />
+                    <textbox id="txtNextId" visible="false" />
+                    <textbox id="txtPrevId" visible="false" />
+                    <label value="Tên action"/>
+                </h:td>
+                <h:td width="75%">
+                    <textbox id="txtActionName" maxlength="200" value=""/>
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td width="25%">
+                    <label value="Tên form: "/>
+                </h:td>
+                <h:td width="75%">
+                    <selectbox id="listFormsSelectbox">
+                        <template name="model">
+                            <label value="${each.name}" />
+                        </template>
+                    </selectbox>
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td width="25%">
+                    <label value="Trạng thái: "/>
+                </h:td>
+                <h:td width="75%">
+                    <selectbox id="listStatusSelectbox">
+                        <template name="model">
+                            <label value="${each.name}" />
+                        </template>
+                    </selectbox>
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td width="25%">
+                    <label value="Loại thao tác: "/>
+                </h:td>
+                <h:td width="75%">
+                    <selectbox id="listActionTypeSelectbox">
+                        <template name="model">
+                            <label value="${each.name}" />
+                        </template>
+                    </selectbox>
+                </h:td>
+            </h:tr>
+        </n:table>
+        <h:div>
+            <div align="center">
+                <button height="30px" image="/Share/img/icon/save.png" id="btnSaveAction" label="Lưu lại" />
+                <button height="30px" image="/Share/img/icon/close.png" id="btnCancel" label="Đóng" onClick="actionConfigDlg.detach()" />
+            </div>
+        </h:div>
+    </window>
+</zk>

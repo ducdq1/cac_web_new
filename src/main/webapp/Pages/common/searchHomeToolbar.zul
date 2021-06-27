@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <h:div id="toolBar" class="toolBar">
+<!--        <h:div style="background-color:white; width:250px; height:22px; margin-top:5px; border : 1px solid rgb(197,210,223); border-radius:16px; float:right">
+            <h:input maxlength="200px" type="textbox" id="searchFullText" style="width:200px" onkeydown="toolBarCheckSearch(event);" autofocus="true"/>
+            <h:img src="Share/img/icon/search.jpg" style="width:16px; height:16px;float:left" onclick="toolBarSearch();"/>
+        </h:div>-->
+    </h:div>
+</zk>

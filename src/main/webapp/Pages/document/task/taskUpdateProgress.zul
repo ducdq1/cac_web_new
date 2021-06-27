@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./widowUpdateTaskProgress" ?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <window id="widowUpdateTaskProgress" title="Cập nhật tiến độ công việc" position="center,center" closable="true" apply="com.viettel.voffice.DAO.Document.TaskUpdateProgressController" width="70%">
+        <style>
+            .createTable tr
+            {
+            margin-bottom:2px;height:30px;
+            }
+        </style>
+        <h:div class="contentDivCreate">
+            <groupbox width="100%" sclass="gb-form-create">
+                <caption label="Thông tin công việc"/> 
+                <h:table  width="100%" class="lstdoc-table">
+                    <h:tr>
+                        <h:td width="18%">
+                            <label value="Tên công việc: " sclass="lb-create"/>
+                        </h:td>
+                        <h:td width="30%" colspan="3">
+                            <label value="${$composer.task.taskName}" width="89%" style="font-weight: bold;"/>
+                        </h:td>
+                        <h:td width="18%">
+                            <label value="Mô tả: " sclass="lb-create"/>
+                        </h:td>
+                        <h:td width="30%" rowspan="2">
+                                                        <textbox id="description" sclass="z-textbox" value="${$composer.task.description}"				
+                                     width="90%" maxlength="200" rows="3" readonly="true" style="font-weight: bold;border: none;background-color: #FFFFFF"/>
+                            <!--<label value="${$composer.task.description}"/>-->
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td width="12%" > 
+                            <label value="Loại công việc: " sclass="lb-create"/>
+                        </h:td>
+                        <h:td width="38%" colspan="3"> 
+                            <label value="${$composer.task.taskTypeName}" style="font-weight: bold;"/>
+                        </h:td>
+                    </h:tr>
+                    <h:tr >
+                        <h:td width="12%" > 
+                            <label value="Độ ưu tiên: " sclass="lb-create"/>
+                        </h:td>
+                        <h:td width="38%" colspan="3"> 
+                            <label value="${$composer.task.taskPriorityName}" style="font-weight: bold;"/>
+                        </h:td>
+                    </h:tr>
+                    <h:tr >
+                        <h:td width="12%" > 
+                            <label value="Công việc cha: " sclass="lb-create"/>
+                        </h:td>
+                        <h:td width="38%" colspan="3"> 
+                            <label  value="${$composer.task.taskParentName}" style="font-weight: bold;"/>
+                        </h:td>
+                        <h:td width="12%" > 
+                            <label value="Người giao việc: " sclass="lb-create"/>
+                        </h:td>
+                        <h:td width="28%" > 
+                            <label value="${$composer.task.userCreateName}" style="font-weight: bold;"/>
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td width="12%" > 
+                            <label value="Người thực hiện: " sclass="lb-create"/>
+                        </h:td>
+                        <h:td width="33%" colspan="3"> 
+                            <label					
+                                      value="${$composer.task.userPerformName}" style="font-weight: bold;"/>
+                        </h:td>
+                        <h:td width="12%" > 
+                            <label value="Người đồng thực hiện: " sclass="lb-create"/>
+                        </h:td>
+                        <h:td width="28%" > 
+                            <label value="${$composer.task.userHeptName}" style="font-weight: bold;"/>
+                        </h:td>
+                    </h:tr><!--
+-->                    <h:tr>
+                        <h:td width="12%">
+                            <label value="Ngày bắt đầu: " sclass="lb-create"/>
+                        </h:td>
+                        <h:td width="13%">
+                            <label value="${$composer.task.startTimeStr}" style="font-weight: bold;"/>
+                        </h:td>
+                        <h:td width="12%">
+                            <label value="Ngày hoàn thành: " sclass="lb-create"/>
+                        </h:td>
+                        <h:td width="13%">
+                            <label value="${$composer.task.deadlineStr}" style="font-weight: bold;"/>
+                        </h:td>
+                        <h:td width="12%">
+                            <label value="File đính kèm: " sclass="lb-create"/>
+                        </h:td>
+                        <h:td width="13%">
+<!--                            <label value="${$composer.task.deadlineStr}" style="font-weight: bold;"/>-->
+                        </h:td>
+                    </h:tr><!--
+                                            
+                    <h:tr>
+                        <h:td width="12%">
+                            <label value="Tệp văn bản đính kèm" sclass="lb-create"/>
+                        </h:td>
+                        <h:td width="13%" >
+                            <button width="85px" id="btnAttach" style="font-weight: bold;color: #F25D45;" sclass="attachBtn" 
+                                src="/Share/img/paperclip.png"
+                                upload="zk.UPMSample1,maxsize=10240,native" label="Chọn tệp"/>
+                            <vlayout id="flist" hflex="1" sclass="fileList" />
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td width="12%">
+                            
+                        </h:td>
+                        <h:td width="33%" colspan="2">
+                            <vlayout id="flist" hflex="1" sclass="fileList" />
+                        </h:td>
+                    </h:tr>-->
+                </h:table>
+            </groupbox>
+        </h:div>
+        <h:div class="contentDivCreate">
+            <groupbox width="100%" sclass="gb-form-create" id="groupUpdateProgress">
+                <caption label="Cập nhật tiến độ"/> 
+                <h:table  width="100%" class="lstdoc-table">
+                    <h:tr>
+                        <h:td width="12%">
+                            <label value="Trạng thái thực hiện:  " sclass="lb-create"/>
+                        </h:td>
+                        <h:td width="38%" colspan="3">
+                            <label value="${$composer.task.statusStr}" width="89%" style="font-weight: bold;"/>
+                        </h:td>
+                        <h:td width="18%">
+                            <label value="Nội dung " sclass="lb-create"/>
+                        </h:td>
+                        <h:td width="30%" rowspan="3">
+                                <textbox id="commentTask" sclass="z-textbox" 				
+                                     width="90%" maxlength="200" rows="5" />
+                            <!--<label value="${$composer.task.description}"/>-->
+                        </h:td>
+<!--                        <h:td width="18%">
+                            <label value="File đính kèm " sclass="lb-create"/>
+                        </h:td>-->
+                    </h:tr>
+                    <h:tr>
+                        <h:td width="15%">
+                            <label value="Tiến độ hoàn thành " sclass="lb-create"/>
+                        </h:td>
+                        <h:td width="30%" colspan="2">
+<!--                            <textbox value="" id="taskProgress" width="88%" maxlength="3">
+                                <attribute w:name="doKeyPress_">
+                                    <![CDATA[
+                                            function(evt)
+                                            {
+                                                    if (!this._shallIgnore(evt, "0123456789"))
+                                                            this.$doKeyPress_(evt);
+                                            }
+                                    ]]>
+                                </attribute>
+                            </textbox>-->
+                        <textbox xmlns:w="client" id="taskProgressPercent" maxlength="3">
+                            <attribute w:name="doKeyPress_">
+                                <![CDATA[
+                                        function(evt)
+                                        {
+                                                if (!this._shallIgnore(evt, "0123456789"))
+                                                        this.$doKeyPress_(evt);
+                                        }
+                                ]]>
+                            </attribute>
+                        </textbox>
+                        </h:td>
+                        <h:td width="5%" colspan="3">
+                            <label value="% " sclass="lb-create"/>
+                        </h:td>
+
+                    </h:tr>
+                    <h:tr>
+                        <h:td width="12%">
+                            <label value="Giai đoạn tiếp theo " sclass="lb-create"/>
+                        </h:td>
+                        <h:td width="30%" colspan="2">
+                            <listbox id="nextStageId"  rows="1" mold="select" selectedIndex="-1"
+					onSelect="" width="90%">
+                                <template name="model">
+						<listitem value="${each}">
+							<listcell label="${each.name}"/>
+						</listitem>
+                                </template>
+                            </listbox>
+                        </h:td>
+                        <h:td width="8%">
+                        </h:td>
+                        <h:td width="18%">
+                        </h:td>
+                        <h:td width="30%" >
+                        </h:td>
+                    </h:tr>
+                </h:table>
+            </groupbox>
+        </h:div>
+        <h:div class="contentDivCreate">
+            <groupbox width="100%" sclass="gb-form-create" id="childDiv">
+                <caption label="Danh sách các công việc con"/> 
+                <!--<h:table  width="100%" class="lstdoc-table">-->
+                    <listbox id="listChild" multiple="false" style="word-wrap:break-word;max-height:500px;min-height:350px" vflex="true"
+                                     emptyMessage="Không tồn tại bản ghi nào" mold="paging" pageSize="10" width="100%" 
+					onSelect="">
+                            <listhead sizable="true">
+                                    <listheader width="10%" label="STT" align="center" />
+                                    <listheader width="20%" label="Tên công việc" align="left"/>
+                                    <listheader width="20%" label="Người thực hiện" align="left"/>
+                                    <listheader width="20%" label="Tình trạng" align="center" />
+                                    <listheader width="10%" label="Ngày bắt đầu" align="center"/>
+                                    <listheader width="10%" label="Hạn hoàn thành" align="center"/>
+                                    <listheader width="10%" label="% tiến độ" align="center"/>
+                            </listhead>
+                            <template name="model">
+                                    <listitem value="${each}">
+                                            <listcell label="${forEachStatus.index+1}" />
+                                            <listcell label="${each.taskName}" />
+                                            <listcell label="${each.userPerformName}" />
+                                            <listcell label="${each.statusStr}" />
+                                            <listcell label="${each.startTimeStr}" />
+                                            <listcell label="${each.deadlineStr}" />
+                                            <listcell label="${each.progressPercent}" />
+                                    </listitem>
+                            </template>
+						
+                    </listbox>
+                <!--</h:table>-->
+            </groupbox>
+        </h:div>
+        <h:div class="contentDivCreate">
+            <groupbox width="100%" sclass="gb-form-create">
+                <caption label="Lịch sử thay đổi"/> 
+                <!--<h:table  width="100%" class="lstdoc-table">-->
+                    <listbox id="listTaskProgress" multiple="false" style="word-wrap:break-word;max-height:500px;min-height:350px" vflex="true"
+                                     emptyMessage="Không tồn tại bản ghi nào" mold="paging" pageSize="10" width="100%" 
+					onSelect="">
+                            <listhead sizable="true">
+                                    <listheader width="15%" label="Người thực hiện" />
+                                    <listheader width="15%" label="Thời gian" />
+                                    <listheader width="45%" label="Nội dung" />
+                                    <listheader width="10%" label="% thực hiện" />
+                                    <listheader width="15%" label="File đính kèm" />
+                            </listhead>
+                            <template name="model">
+                                    <listitem value="${each}">
+                                            <listcell label="${each.userCreateName}"/>
+                                            <listcell label="${each.createDate}"/>
+                                            <listcell label="${each.commentTask}"/>
+                                            <listcell label="${each.progressPercent}"/>
+                                            <listcell>
+                                                <image forward="onClick=userHelp.onDelete" src="/Share/img/icon/delete.png" width="20px" height="20px" tooltiptext="Xóa người phối hợp"/>
+                                            </listcell>
+                                    </listitem>
+                            </template>
+						
+                    </listbox>
+                <!--</h:table>-->
+            </groupbox>
+        </h:div>
+        <h:div class="contentDivCreate">
+            <div style="text-align:center" id="divUpdateProgress">
+                <button id="btnSaveTaskProgress" label="Ghi lại" sclass="button" image="/Share/img/icon/save.png"/>
+                <button id="btnCloseUpdateProgress" label="Đóng" sclass="button" image="/Share/img/icon/close.png"/>
+            </div>
+        </h:div>
+    </window>
+
+</zk>

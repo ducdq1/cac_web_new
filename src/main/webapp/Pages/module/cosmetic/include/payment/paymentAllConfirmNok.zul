@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+        xmlns="http://www.zkoss.org/2005/zul" id="businessWindow"
+        position="center,center" 
+        title="Thanh toán hồ sơ" apply="com.viettel.module.rapidtest.DAO.include.PaymentAllConfirmController" width="100%">
+    <style src="/Share/css/formstyle.css" />
+    <style src="/Share/css/uploadstyle.css" />
+    <script type="text/javascript" src="/Share/js/UPMSamples.js" />
+    <vlayout id="layoutComment">
+        <label id="lbTopWarning" style="color: red;" />
+        <h:div class="contentDiv">
+            
+            <listbox id="lboxFeePaymentInfo" emptyMessage="Không có bản ghi nào">
+                <listhead>
+                    <listheader label="STT" align="center" hflex="min" />
+                    <listheader label="Tên phí" hflex="2"/>
+                    <listheader label="Giá tiền"/>
+                    <listheader label="Hình thức thanh toán"/>
+                    <listheader label="Người xác nhận"/>
+                    <listheader label="Ngày xác nhận"/>
+                    <listheader label="Trạng thái xác nhận"/>
+                    <listheader label="Xác nhận" align="center" hflex="min" />
+                </listhead>
+                <template name="model">
+                    <listitem>
+                        <listcell
+                            label="${forEachStatus.index + 1 + userPagingTop.pageSize * userPagingTop.activePage}">
+                        </listcell>
+                        <listcell
+                            label="${each.feeName}">
+                        </listcell>
+                        <listcell
+                            label="${each.cost}">
+                        </listcell>
+                                        
+                        <listcell>
+                            <label if="${each.paymentTypeId== null}" value="Chưa thanh toán"></label>
+                            <label if="${each.paymentTypeId==1}" value="Thanh toán qua keypay"></label>
+                            <label if="${each.paymentTypeId==2}" value="Thanh toán chuyển khoản"></label>
+                            <label if="${each.paymentTypeId==3}" value="Thanh toán tiền mặt"></label>
+                        </listcell>
+                                        
+                        <listcell label="${each.paymentConfirm}">
+                        </listcell>
+                        <listcell label="${each.dateConfirm}">
+                        </listcell>
+                        <listcell>
+                            <label if="${each.status==1}" value="Mới tạo"></label>
+                            <label if="${each.status==2}" value="Đã thanh toán"></label>
+                            <label if="${each.status==3}" value="Đã xác nhận"></label>
+                            <label if="${each.status==4}" value="Đã từ chối"></label>
+                        </listcell>
+                        <listcell>
+                            <image src="/Share/img/icon/view.png"
+                                                       width="20px" height="20px"
+                                                       forward="onClick=lboxFeePaymentInfo.onPaymentConfirm(${each})"
+                                                       tooltiptext="Xác nhận thanh toán" />
+						
+                        </listcell>
+					
+                    </listitem>
+                </template>
+            </listbox>
+                
+               
+        </h:div>
+    
+      
+         <div align="center" visible="false">
+            <button id="btnSubmit" label="Từ chối" visible="true"
+                    image="/Share/img/icon/send_document_1.png" />
+        </div>
+        <label id="lbBottomWarning" style="color: red;" />
+    </vlayout>
+</window>
+	
+
+	

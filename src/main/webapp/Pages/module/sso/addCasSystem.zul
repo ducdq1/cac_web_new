@@ -1,0 +1,24 @@
+<window id="modalDialog" title="Thêm/Sửa hệ thống" border="normal"
+	width="500px"
+	apply="com.viettel.module.sso.controller.CasAddSystemController"
+	position="center,center" closable="true"
+	action="show: slideDown;hide: slideUp">
+	<vlayout style="padding:15px">
+		<hbox>
+			<div width="100px">
+				<label value="Tên Hệ Thống"></label>
+			</div>
+			<textbox id="tbName" width="330px"></textbox>
+		</hbox>
+		<hbox>
+			<div width="100px">
+				<label value="Địa Chỉ"></label>
+			</div>
+			<textbox id="tbUrl" width="330px"></textbox>
+		</hbox>
+		<div style="text-align:center;padding-top:10px" width="100%">
+		<button id="btnSave" width="100px" label="Lưu" />
+		<button id="btnCancel" width="100px" label="Hủy" onClick="modalDialog.onClose()"/>
+		</div>
+	</vlayout>
+</window>

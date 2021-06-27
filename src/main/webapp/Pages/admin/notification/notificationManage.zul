@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <style src="/Share/css/formstyle.css"/>
+    <window width="100%" id="notificationManageWnd"
+            apply="com.viettel.module.cosmetic.Controller.notification.NotificationManageController" border="normal" height="100%">
+        <caption label="Quản lý danh mục thông báo trang chủ" />
+    
+        <h:div id="searchDiv" style="width:100%" align="center">
+            <h:table style="width:80%" class="searchTable">
+                <h:tr>
+                    <h:td width="15%">
+                        <label value="Nội dung"/>
+                    </h:td>
+                    <h:td width="35%">
+                        <textbox id="txtContent" width="400px" maxlength="255"/>
+                    </h:td>
+                    <h:td width="15%">
+                        <label value="Loại nội dung"/>
+                    </h:td>
+                    <h:td width="35%">
+                        <listbox id="lboxType" mold="select" 
+                                 width="200px">
+                            <listitem label="-- Chọn --" value="-1" selected="true"  />
+                            <listitem label="Nội dung Thông báo" value="3" />
+                            <listitem label="Nội dung Hỗ trợ" value="2" />
+                            <listitem label="Nội dung Liên hệ" value="1"  />
+                        </listbox>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td colspan="4" style="text-align:center">
+                        <button id="btnSearch" label="Tìm kiếm" sclass="button" image="/Share/img/icon/search.jpg"/>
+                        <button id="btnCreate" label="Thêm mới" sclass="button" image="/Share/img/icon/add_1.png"/>
+                    </h:td>
+                </h:tr>
+            </h:table>
+        </h:div>
+        <h:div id="gridDiv" >
+            <listbox id="lbNotification" 
+                     multiple="false"
+                     style="word-wrap: break-word"
+                     emptyMessage="Không tồn tại bản ghi">
+                <listhead sizable="true">
+                    <listheader width="5%" label="STT" align="center"/>
+                    <listheader width="85%" label="Nội dung"  />                    
+                    <listheader width="5%" label="Sửa" align="center"/>
+                    <listheader width="5%" label="Xoá" align="center"/>
+                </listhead>
+                <template name="model">
+                    <listitem value="${each}">
+                        <listcell label="${forEachStatus.index+1+userPagingBottom.pageSize*userPagingBottom.activePage}" />
+                        <listcell label="${each.content}" />
+                        <listcell >
+                            <image forward="onClick=lbNotification.onEdit" src="/Share/img/icon/edit.png" 
+                                   width="20px" height="20px" tooltiptext="Sửa thông tin"/>
+                        </listcell>
+                        <listcell>
+                            <image forward="onClick=lbNotification.onDelete" src="/Share/img/icon/delete.png" 
+                                   width="20px" height="20px" tooltiptext="Xóa"/>
+                        </listcell>
+                    </listitem>
+                </template>
+            </listbox>
+            <paging id="userPagingBottom" pageSize="10" detailed="true"/>
+        </h:div>  
+    </window>
+</zk>

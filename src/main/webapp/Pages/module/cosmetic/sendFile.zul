@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+        xmlns="http://www.zkoss.org/2005/zul" id="businessWindow"
+        xmlns:w="http://www.zkoss.org/2005/zk/client"
+        apply="com.viettel.module.cosmetic.Controller.SendFileController" closable="false">
+        <style src="/Share/css/formstyle.css" />
+    <style src="/Share/css/uploadstyle.css" />
+    <script type="text/javascript" src="/Share/js/UPMSamples.js" />
+    <vlayout id="layoutComment">
+         <h:table width="100%" > 
+                <h:tr >
+                    <h:td width="100%" style="text-align:center">      
+                        <label id="lbWarning" class="notify" visible="false" />
+                    </h:td>
+                </h:tr>
+                 <h:tr>
+                    <h:td width="100%">      
+                        <textbox id="txtValidate" visible="false" />
+                    </h:td>
+                </h:tr>
+                
+            </h:table>
+
+            <div align="center">
+            <button id="btnSubmit" label="Gửi xử lý" visible="false"
+                    image="/Share/img/icon/send_document_1.png" />
+        </div>
+        <label id="lbBottomWarning" style="color: red;" />
+    </vlayout>
+</window>

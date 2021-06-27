@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <style src="/Share/css/formstyle.css"/>
+    <window width="100%" id="procedureFeeSubWnd"
+            apply="com.viettel.module.rapidtest.DAO.ProcedureFeeSubManageController" border="normal" height="100%">
+        <caption label="Quản lý phí" />
+        <h:div id="searchDiv" style="width:100%" align="center">
+            <h:table style="width:80%" class="searchTable">
+                <h:tr>
+                    <h:td width="15%">
+                        <label value="Thủ tục"/>
+                    </h:td>
+                    <h:td width="35%">
+                        <listbox id="lbProcedure" mold="select" onAfterRender='self.setSelectedIndex(0)'>
+                            <template name="model">
+                                <listitem label="${each.name}" value="${each.categoryId}" />
+                            </template>
+                        </listbox>
+                    </h:td >
+                    <h:td width="15%">
+                        <label value="Phí"/>
+                    </h:td>
+                    <h:td width="35%">
+                        <listbox id="lbFee" mold="select" onAfterRender='self.setSelectedIndex(0)'>
+                            <template name="model">
+                                <listitem label="${each.name}" value="${each.categoryId}" />
+                            </template>
+                        </listbox>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    
+                    <h:td width="15%">
+                        <label value="Thủ tục con"/>
+                    </h:td>
+                    <h:td width="35%">
+                        <listbox id="lbSub" mold="select" onAfterRender='self.setSelectedIndex(0)'>
+                            <template name="model">
+                                <listitem label="${each.name}" value="${each.categoryId}" />
+                            </template>
+                        </listbox>
+                    </h:td>
+
+
+                </h:tr>
+                <h:tr>
+                    <h:td colspan="4" style="text-align:center">
+                        <button id="btnSearch" label="Tìm kiếm" sclass="button" image="/Share/img/icon/search.jpg"/>
+                        <button id="btnCreate" label="Thêm mới" sclass="button" image="/Share/img/icon/add_1.png"/>
+                    </h:td>
+                </h:tr>
+            </h:table>
+        </h:div>
+        <h:div id="gridDiv" >
+            <listbox id="lbProcedureFeeSub" 
+                     multiple="false"
+                     style="word-wrap: break-word"
+                     emptyMessage="Không tồn tại bản ghi">
+                <listhead sizable="true">
+                    <listheader width="5%" label="STT" align="center"/>
+                    <listheader width="20%" label="Thủ tục"  />
+                    <listheader width="20%" label="Phí"  />
+                    <listheader width="20%" label="Thủ tục con"  />
+                    <listheader width="10%" label="Phí"  />
+                    <listheader width="15%" label="Giai đoạn"  />
+                    <listheader width="5%" label="Sửa" align="center"/>
+                    <listheader width="5%" label="Xoá" align="center"/>
+                </listhead>
+                <template name="model">
+                    <listitem value="${each}">
+                        <listcell label="${forEachStatus.index+1+userPagingBottom.pageSize*userPagingBottom.activePage}" />
+                        <listcell label="${each.procedureName}" />
+                        <listcell label="${each.feeName}" />
+                        <listcell label="${each.subProcedureName}" />
+                        <listcell label="${c:formatNumber(each.cost, '###,###,###')}" />
+                          
+                        <listcell label="${each.phase}" />
+                        <listcell >
+                            <image forward="onClick=lbProcedureFeeSub.onEdit" src="/Share/img/icon/edit.png" width="20px" height="20px" tooltiptext="Sửa thông tin"/>
+                        </listcell>
+                        <listcell>
+                            <image forward="onClick=lbProcedureFeeSub.onDelete" src="/Share/img/icon/delete.png" width="20px" height="20px" tooltiptext="Xóa"/>
+                        </listcell>
+                    </listitem>
+                </template>
+            </listbox>
+            <paging id="userPagingBottom" pageSize="10" detailed="true"/>
+        </h:div>  
+    </window>
+</zk>

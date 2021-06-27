@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.zkoss.org/2005/zk/native"
+	xmlns="http://www.zkoss.org/2005/zul">
+	<style src="/Share/css/formstyle.css" />
+	<groupbox id="fullSearchGbx" mold="3d" visible="false"
+		apply="com.viettel.voffice.DAO.Ycnk.include.YcnkFileSearchController">
+		<caption label="Tìm kiếm nâng cao" />
+		<h:table align="center" width="100%">
+			<h:th width="15%" />
+			<h:th width="35%" />
+			<h:th width="15%" />
+			<h:th width="35%" />
+			
+			<h:tr>
+				<h:td>
+					<label value="Ngày tạo, từ ngày" />
+				</h:td>
+				<h:td>
+					<datebox id="dbFromDay" cols="12"
+						format="dd/MM/yyyy" width="230px"
+						constraint="between 19000101 and 20991231: Thời gian phải nằm trong khoảng từ 1/1/1900 đến 31/12/2099" />
+				</h:td>
+				<h:td>
+					<label value="Đến ngày" />
+				</h:td>
+				<h:td>
+					<datebox id="dbToDay" cols="12" format="dd/MM/yyyy"
+						width="230px"
+						constraint="between 19000101 and 20991231: Thời gian phải nằm trong khoảng từ 1/1/1900 đến 31/12/2099" />
+				</h:td>
+			</h:tr>
+			
+
+			
+
+		</h:table>
+	</groupbox>
+</zk>

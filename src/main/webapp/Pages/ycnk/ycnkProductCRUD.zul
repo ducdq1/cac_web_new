@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+	xmlns="http://www.zkoss.org/2005/zul" xmlns:w="client"
+	position="center,center" width="100%" mode="embedded"
+	id="windowCRUDProduct"
+	apply="com.viettel.voffice.DAO.Ycnk.YcnkProductCRUDController"
+	onCtrlKey="$composer.keyEventHandle(event.getKeyCode())"
+	ctrlKeys="#f6#f7#f8">
+	<style src="/Share/css/formstyle.css" />
+	<style src="/Share/css/uploadstyle.css" />
+	<script type="text/javascript" src="/Share/js/UPMSamples.js" />
+	<h:div id="topToolbar" class="toolBar">
+		<button sclass="btnAction" image="/Share/img/png/quay-lai.png"
+			tooltiptext="Quay lại" forward="onClick=windowCRUDProduct.onClose" />
+		<button sclass="btnAction" label="Lưu và thêm mới (F6)"
+			image="/Share/img/png/luu-lai.png" onClick="$composer.onSave(1)" />
+		<button sclass="btnAction" label="Lưu và đóng (F7)"
+			image="/Share/img/png/luu-lai-va-dong.png"
+			onClick="$composer.onSave(2)" />
+		<button sclass="btnAction" label="Lưu và sao lưu (F8)"
+			image="/Share/img/png/luu-lai-sao-luu.png"
+			onClick="$composer.onSave(3)" />
+		<label id="lbTopWarning" class="notify" width="15%" multiline="false" />
+	</h:div>
+	<h:table width="100%" align="center">
+		<h:th width="15%" />
+		<h:th width="35%" />
+		<h:th width="15%" />
+		<h:th width="35%" />
+                <h:tr>
+			<h:td colspan="3">
+				<label value="Thông tin sản phẩm" sclass="lb-create" />
+			</h:td>
+		</h:tr>
+		<h:tr>
+			<h:td>
+				<label value="Mã sản phẩm" sclass="lb-create" />
+				<label value=" *" sclass="label-required" />
+			</h:td>
+			<h:td>
+				<textbox id="tbProductCode" width="95%" rows="1"
+					value="${$composer.ycnkProduct.productCode}"
+					maxlength="500" />
+			</h:td>
+			<h:td>
+				<label value="Tên sản phẩm" sclass="lb-create" />
+				<label value=" *" sclass="label-required" />
+			</h:td>
+			<h:td>
+				<textbox id="tbProductName" width="95%" rows="1"
+					value="${$composer.ycnkProduct.productName}"
+					maxlength="500" />
+			</h:td>
+		</h:tr>
+                <h:tr>
+			<h:td>
+				<label value="Mô tả sản phẩm" sclass="lb-create" />
+				<label value=" *" sclass="label-required" />
+			</h:td>
+			<h:td colspan="3">
+				<textbox id="tbProductDescriptions" width="95%" rows="3"
+					value="${$composer.ycnkProduct.productDescriptions}"
+					maxlength="500" />
+			</h:td>
+			
+		</h:tr>
+                <h:tr>
+			<h:td>
+				<label value="Mã nhóm sản phẩm" sclass="lb-create" />
+				<label value=" *" sclass="label-required" />
+			</h:td>
+			<h:td>
+				<textbox id="tbProductTypeCode" width="95%" rows="1"
+					value="${$composer.ycnkProduct.productTypeCode}"
+					maxlength="500" />
+			</h:td>
+			<h:td>
+				<label value="Tên khoa học" sclass="lb-create" />
+				<label value=" *" sclass="label-required" />
+			</h:td>
+			<h:td>
+				<textbox id="tbProductSienceName" width="95%" rows="1"
+					value="${$composer.ycnkProduct.productSienceName}"
+					maxlength="500" />
+			</h:td>
+		</h:tr>
+		<h:tr>
+			<h:td>
+				<label value="Cơ sở sản xuất" sclass="lb-create" />
+				<label value=" *" sclass="label-required" />
+			</h:td>
+			<h:td>
+				<textbox id="tbProductFacilities" width="95%" rows="1"
+					value="${$composer.ycnkProduct.productFacilities}"
+					maxlength="500" />
+			</h:td>
+			<h:td>
+				<label value="Địa chỉ nhà sản xuất" sclass="lb-create" />
+				<label value=" *" sclass="label-required" />
+			</h:td>
+			<h:td>
+				<textbox id="tbProductAddress" width="95%" rows="1"
+					value="${$composer.ycnkProduct.productAddress}"
+					maxlength="500" />
+			</h:td>
+		</h:tr>
+		<h:tr>
+			<h:td>
+				<label value="Loại bao bì" sclass="lb-create" />
+				<label value=" *" sclass="label-required" />
+			</h:td>
+			<h:td>
+				<textbox id="tbPakageTypeCode" width="95%" rows="1"
+					value="${$composer.ycnkProduct.pakageTypeCode}"
+					maxlength="500" />
+			</h:td>
+			<h:td>
+				<label value="Mã quốc gia xuất sứ" sclass="lb-create" />
+				<label value=" *" sclass="label-required" />
+			</h:td>
+			<h:td>
+				<textbox id="tbNationalCode" width="95%" rows="1"
+					value="${$composer.ycnkProduct.nationalCode}"
+					maxlength="500" />
+			</h:td>
+		</h:tr>
+                
+                <h:tr>
+			<h:td>
+				<label value="Số lượng" sclass="lb-create" />
+				<label value=" *" sclass="label-required" />
+			</h:td>
+			<h:td>
+				<textbox id="tbTotal" width="95%" rows="1"
+					value="${$composer.ycnkProduct.total}"
+					maxlength="500" />
+			</h:td>
+			<h:td>
+				<label value="Đơn vị" sclass="lb-create" />
+				<label value=" *" sclass="label-required" />
+			</h:td>
+			<h:td>
+				<textbox id="tbTotalUnitCode" width="95%" rows="1"
+					value="${$composer.ycnkProduct.totalUnitCode}"
+					maxlength="500" />
+			</h:td>
+		</h:tr>
+                <h:tr>
+			<h:td>
+				<label value="Khối lượng" sclass="lb-create" />
+				<label value=" *" sclass="label-required" />
+			</h:td>
+			<h:td>
+				<textbox id="tbNetweight" width="95%" rows="1"
+					value="${$composer.ycnkProduct.netweight}"
+					maxlength="500" />
+			</h:td>
+			<h:td>
+				<label value="Đơn vị" sclass="lb-create" />
+				<label value=" *" sclass="label-required" />
+			</h:td>
+			<h:td>
+				<textbox id="tbNetweightUnitCode" width="95%" rows="1"
+					value="${$composer.ycnkProduct.netweightUnitCode}"
+					maxlength="500" />
+			</h:td>
+		</h:tr>
+                
+                <h:tr>
+			<h:td>
+				<label value="Số công bố" sclass="lb-create" />
+				<label value=" *" sclass="label-required" />
+			</h:td>
+			<h:td>
+				<textbox id="tbConfirmAnnounceNo" width="95%" rows="1"
+					value="${$composer.ycnkProduct.confirmAnnounceNo}"
+					maxlength="500" />
+			</h:td>
+			<h:td>
+				<label value="Ngày cấp" sclass="lb-create" />
+				<label value=" *" sclass="label-required" />
+			</h:td>
+			<h:td>
+                                <datebox id="dbConfirmAnnounceDate"
+					value="${$composer.ycnkProduct.confirmAnnounceDate}"
+					format="dd/MM/yyyy"
+					constraint="no future, between 19000101 and 20991231: Ngày cấp không chính xác" />
+			</h:td>
+		</h:tr>
+                 <h:tr>
+			<h:td>
+				<label value="Địa điểm tập kết hàng hóa" sclass="lb-create" />
+				<label value=" *" sclass="label-required" />
+			</h:td>
+			<h:td>
+				<textbox id="tbStorePlace" width="95%" rows="1"
+					value="${$composer.ycnkProduct.storePlace}"
+					maxlength="500" />
+			</h:td>
+			<h:td>
+				<label value="Phương tiện vận chuyển" sclass="lb-create" />
+				<label value=" *" sclass="label-required" />
+			</h:td>
+			<h:td>
+                                <textbox id="tbTransport" width="95%" rows="1"
+					value="${$composer.ycnkProduct.transport}"
+					maxlength="500" />
+			</h:td>
+		</h:tr>
+                <h:tr>
+			<h:td>
+				<label value="Mục đích" sclass="lb-create" />
+				<label value=" *" sclass="label-required" />
+			</h:td>
+			<h:td>
+				<textbox id="tbPurpose" width="95%" rows="1"
+					value="${$composer.ycnkProduct.purpose}"
+					maxlength="500" />
+			</h:td>
+			<h:td>
+				<label value="Giấy phép kiểm tra" sclass="lb-create" />
+				<label value=" *" sclass="label-required" />
+			</h:td>
+			<h:td>
+                                <textbox id="tbCheckLicense" width="95%" rows="1"
+					value="${$composer.ycnkProduct.checkLicense}"
+					maxlength="500" />
+			</h:td>
+		</h:tr>
+                
+                <h:tr>
+			<h:td>
+				<label value="Địa điểm kiểm tra" sclass="lb-create" />
+				<label value=" *" sclass="label-required" />
+			</h:td>
+			<h:td>
+				<textbox id="tbCheckAddress" width="95%" rows="1"
+					value="${$composer.ycnkProduct.checkAddress}"
+					maxlength="500" />
+			</h:td>
+			<h:td>
+				<label value="Thời gian kiểm tra" sclass="lb-create" />
+				<label value=" *" sclass="label-required" />
+			</h:td>
+			<h:td>
+                                <datebox id="dbCheckTime"
+					value="${$composer.ycnkProduct.checkTime}"
+					format="dd/MM/yyyy"
+					constraint="no future, between 19000101 and 20991231: Ngày cấp không chính xác" />
+			</h:td>
+		</h:tr>
+                
+                <h:tr>
+			<h:td>
+				<label value="Phương thức kiểm tra" sclass="lb-create" />
+				<label value=" *" sclass="label-required" />
+			</h:td>
+			<h:td>
+				<textbox id="tbCheckMethod" width="95%" rows="1"
+					value="${$composer.ycnkProduct.checkMethod}"
+					maxlength="500" />
+			</h:td>
+			<h:td>
+				<label value="Đơn giá" sclass="lb-create" />
+				<label value=" *" sclass="label-required" />
+			</h:td>
+			<h:td>
+                                <textbox id="tbBaseUnit" width="95%" rows="1"
+					value="${$composer.ycnkProduct.baseUnit}"
+					maxlength="500" />
+			</h:td>
+		</h:tr>
+                
+                <h:tr>
+			<h:td>
+				<label value="Loại tiền tệ" sclass="lb-create" />
+				<label value=" *" sclass="label-required" />
+			</h:td>
+			<h:td>
+				<textbox id="tbCurrencyCode" width="95%" rows="1"
+					value="${$composer.ycnkProduct.currencyCode}"
+					maxlength="500" />
+			</h:td>
+			<h:td>
+				<label value="Thể tích" sclass="lb-create" />
+				<label value=" *" sclass="label-required" />
+			</h:td>
+			<h:td>
+                                <textbox id="tbVolume" width="95%" rows="1"
+					value="${$composer.ycnkProduct.volume}"
+					maxlength="500" />
+			</h:td>
+		</h:tr>
+                <h:tr>
+			<h:td>
+				<label value="Mã đơn vị thể tích" sclass="lb-create" />
+				<label value=" *" sclass="label-required" />
+			</h:td>
+			<h:td>
+				<textbox id="tbVolumeUnitCode" width="95%" rows="1"
+					value="${$composer.ycnkProduct.volumeUnitCode}"
+					maxlength="500" />
+			</h:td>
+			<h:td>
+				<label value="Đóng gói" sclass="lb-create" />
+				<label value=" *" sclass="label-required" />
+			</h:td>
+			<h:td>
+                                <textbox id="tbPakage" width="95%" rows="1"
+					value="${$composer.ycnkProduct.volume}"
+					maxlength="500" />
+			</h:td>
+		</h:tr>
+                
+                <h:tr>
+			<h:td>
+				<label value="Ngày sản xuất" sclass="lb-create" />
+				<label value=" *" sclass="label-required" />
+			</h:td>
+			<h:td>
+				<datebox id="dbCreatedDate"
+					value="${$composer.ycnkProduct.createdDate}"
+					format="dd/MM/yyyy"
+					constraint="no future, between 19000101 and 20991231: Ngày cấp không chính xác" />
+			</h:td>
+			<h:td>
+				<label value="Ngày hết hạn" sclass="lb-create" />
+				<label value=" *" sclass="label-required" />
+			</h:td>
+			<h:td>
+                                <datebox id="dbExpiredDate"
+					value="${$composer.ycnkProduct.expiredDate}"
+					format="dd/MM/yyyy"
+					constraint="no future, between 19000101 and 20991231: Ngày cấp không chính xác" />
+			</h:td>
+		</h:tr>
+	</h:table>
+        
+
+	<h:div id="bottomToolbar" class="toolBar">
+		<button sclass="btnAction" image="/Share/img/png/quay-lai.png"
+			tooltiptext="Quay lại" forward="onClick=windowCRUDProduct.onClose" />
+		<button sclass="btnAction" label="Lưu và thêm mới (F6)"
+			image="/Share/img/png/luu-lai.png" onClick="$composer.onSave(1)" />
+		<button sclass="btnAction" label="Lưu và đóng (F7)"
+			image="/Share/img/png/luu-lai-va-dong.png"
+			onClick="$composer.onSave(2)" />
+		<button sclass="btnAction" label="Lưu và sao lưu (F8)"
+			onClick="$composer.onSave(3)"
+			image="/Share/img/png/luu-lai-sao-luu.png" />
+		<label id="lbBottomWarning" class="notify" width="15%" multiline="false" />
+	</h:div>
+</window>

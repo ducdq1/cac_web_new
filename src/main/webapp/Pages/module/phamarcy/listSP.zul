@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.zkoss.org/2005/zk/native"
+	xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:w="http://www.zkoss.org/2005/zk/client">
+
+	<style src="/Share/css/formstyle.css" />
+
+	<listbox id="lbListSP" checkmark="false" mold="paging" pageSize="10"
+		nonselectableTags="*"
+		emptyMessage="Không tìm thấy sản phẩm nào">
+		<listhead sizable="true">
+			<listheader label="STT" align="center" style="width:5%" />
+			<listheader label="Tên xuất hàng" align="center"
+				style="width:23%" />
+			<listheader label="Tên báo giá" align="center"
+				style="width:23%" />
+			<listheader label="Đơn vị tính" align="center"
+				style="width:10%" />
+			<listheader label="Số lượng" align="center"
+				style="width:8%" />
+			<listheader label="Giá bán" align="center"
+				style="width:10%" />
+			<listheader label="Thành tiền" align="center"
+				style="width:10%" />
+			<listheader label="Sửa" align="center" hflex="min" />
+			<listheader label="Xóa" align="center" hflex="min" />
+
+
+		</listhead>
+		<template name="model">
+			<listitem
+				style="word-wrap: break-word !important; white-space: normal; text-align: left;">
+				<listcell>
+					<label
+						value="${ forEachStatus.index + 1 + userPagingTop.pageSize *
+						userPagingTop.activePage }">
+					</label>
+				</listcell>				
+				 
+				 <listcell style="text-align:left">
+				<label value="${each.name}" if="${!each.warning}" />
+					<label value="${each.name}" if="${each.warning}" style="color:red"/>
+				</listcell>
+				
+				<listcell style="text-align:left">
+				<label value="${each.productName}" if="${!each.warning}" />
+					<label value="${each.productName}" if="${each.warning}" style="color:red"/>
+				</listcell>
+				<listcell style="text-align:left">
+				<label value="${each.unit}"  if="${!each.warning}" />
+					<label value="${each.unit}"  if="${each.warning}" style="color:red"/>
+				</listcell>
+				<listcell style="text-align:right">
+				<label value="${$composer.formatNumber(each.amount,'###,###.####')}"   if="${!each.warning}" />
+					<label value="${$composer.formatNumber(each.amount,'###,###.####')}" if="${each.warning}" style="color:red"/>
+				</listcell>
+				
+				<listcell style="text-align:right">
+				<label value="${$composer.formatNumber(each.price,'###,###')}" if="${!each.warning}"  />
+					<label   value="${$composer.formatNumber(each.price,'###,###')}" if="${each.warning}" style="color:red"/>
+				</listcell>
+				
+				<listcell style="text-align:right">
+				<label value="${$composer.formatNumber(each.value,'###,###')}" if="${!each.warning}" />
+					<label value="${$composer.formatNumber(each.value,'###,###')}" if="${each.warning}" style="color:red"/>
+				</listcell>
+				
+				
+				
+				<listcell>
+					<image src="/Share/img/icon/edit.png" width="22px"
+						height="22px" forward="onClick=lbListSP.onOpenUpdateSP(${each})"
+						tooltiptext="Sửa" />
+				</listcell>
+				
+				<listcell>
+					<image src="/Share/img/icon/delete.png" width="22px"
+						height="22px" forward="onClick=lbListSP.onDeleteSP(${each})"						 
+						tooltiptext="Xóa" />					 
+				</listcell>
+				
+
+			</listitem>
+		</template>
+	</listbox>
+	<separator />
+	
+ <zscript><![CDATA[
+        String getStyle(){
+        	alert("dd");
+        	return "";
+        }
+    ]]>
+    </zscript>
+</zk>

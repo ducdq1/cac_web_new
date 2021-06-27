@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+        xmlns="http://www.zkoss.org/2005/zul" id="businessWindow"
+        position="center,center" 
+        title="Thẩm định hồ sơ" apply="com.viettel.module.rapidtest.DAO.include.EvaluationController" width="100%">
+    <style src="/Share/css/formstyle.css" />
+    <style src="/Share/css/uploadstyle.css" />
+    <script type="text/javascript" src="/Share/js/UPMSamples.js" />
+    <vlayout id="layoutComment">
+        <h:table width="100%" align="center">
+            <h:th width="15%" />
+            <h:th width="35%" />
+            <h:th width="15%" />
+            <h:th width="35%" />
+            <h:tr>
+                <h:td>
+                    <label value="Tên tổ chức cá nhân"
+                           sclass="hightlight" />
+                    <textbox id="userEvaluationTypeH" value = "5" visible="false"/>
+                </h:td>
+                <h:td>
+                    <label width="95%" multiline="true" pre="true"
+                                           value="${$composer.vFileRtfile.businessName}"
+                                           sclass="label-info" />
+                </h:td>
+            </h:tr> 
+            <h:tr>
+                <h:td>
+                    <label value="Tên sản phẩm"
+                           sclass="hightlight" />
+                </h:td>
+                <h:td>
+                    <label width="95%" multiline="true" pre="true"
+                                           value="${$composer.vFileRtfile.rapidTestName}"
+                                           sclass="label-info" />
+                </h:td>
+            </h:tr> 
+            <h:tr>
+                <h:td>
+                    <label value="Kết quả Xem xét"
+                           sclass="hightlight" />
+                </h:td>
+                <h:td>
+                    <label width="95%" multiline="true" pre="true"
+                                           value="${$composer.obj.staffEvaluationValue}"
+                                           sclass="label-info" />
+                </h:td>
+            </h:tr>    
+            <h:tr>
+                <h:td>
+                    <label value="Nội dung thẩm định"
+                           sclass="hightlight" />
+                    <label value=" *"
+                           sclass="label-required" />
+                </h:td>
+                <h:td>
+                    <label width="95%" multiline="true" pre="true"
+                                           value="${$composer.obj.staffEvaluationContent}"
+                                           sclass="label-info" />
+                    
+                </h:td>
+                
+                
+            </h:tr> 
+            <h:tr>
+                <h:td>
+                    <label value="Kết quả Xem xét"
+                           sclass="hightlight" />
+                    <label value=" *"
+                           sclass="label-required" />
+                </h:td>
+                <h:td>
+                    
+                    <radiogroup id="rbStatus" onSelect="$composer.onSelectStatus()"/>
+                        <radio id="ra1" label="Phê duyệt hồ sơ" radiogroup="rbStatus" value="1"/>
+                        <radio id="ra3" label="Phê duyệt công văn sửa đổi bổ sung" radiogroup="rbStatus" value="2"/>
+                    
+                </h:td>
+                
+            </h:tr>
+            <h:tr>
+                <h:td>
+                    <label value="Nội dung phê duyệt hoặc yêu cầu SĐBS" sclass="lb-create" />
+                </h:td>
+                <h:td colspan="3">
+                    <textbox id="mainContent" width="95%" rows="5"
+                             value="${$composer.obj.mainContent}"
+                             maxlength="500" />
+                </h:td>
+			
+            </h:tr>
+            
+               
+        </h:table>
+        
+
+      
+         <div align="center" visible="false">
+            <button id="btnSubmit" label="Gửi xử lý" visible="true"
+                    image="/Share/img/icon/send_document_1.png" />
+        </div>
+        <label id="lbBottomWarning" style="color: red;" />
+    </vlayout>
+</window>

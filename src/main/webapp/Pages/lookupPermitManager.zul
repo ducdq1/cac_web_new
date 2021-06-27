@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">   
+    <style src="../Share/homepage/style_comon.css"/>
+    <style src="/Share/css/formstyle.css" />
+    <style src="/Share/css/voffice.css"/>
+    <style>
+        .SpanTag {
+        font-family:'MYRIADPRO-COND'!important;
+        font-size:18px !important;
+        }
+        
+        .SpanTag2 {
+        font-family:'MYRIADPRO-COND'!important;
+        font-size:20px !important;
+        }
+        
+        .SpanTag3 {
+        font-family:'MYRIADPRO-COND'!important;
+        font-size:12px !important;
+        }
+        
+        .SpanTag4 {
+        font-family:'MYRIADPRO-COND'!important;
+        font-size:24px !important;
+        <!--border-bottom: 3px solid;-->
+        color: #df540a;
+        font-size: 24px;
+        font-weight: bold;
+        padding-bottom: 3px;
+        padding-left: 3px;
+        padding-right: 5px;
+        }
+    </style>
+    
+    <h:div style="width:100%;font-family:'MyriadPro-BoldCond'!important;
+              font-size:18px !important; background-color: #f8f8f8;
+    background-image: url('/../Share/homepage/images/body-bg.png');
+    background-position: center bottom;
+    background-repeat: repeat-x;">
+        <window width="100%" id="lookupPermitManageWnd"
+                apply="com.viettel.module.cosmetic.Controller.LookupPermitController" border="normal" height="100%">
+            <h:div class="header_hp">
+                <h:div class="banner">
+                    <h:div class="logo1">
+                        <h:img width="380" height="65" src="../Share/homepage/images/logo.png" />
+                    </h:div>
+                    <h:div class="hotline">
+                        <h:img width="" height="" src="../Share/homepage/images/hotline_img.png" />
+                    </h:div>
+                </h:div>
+            </h:div>
+            <h:div class="hr_name">
+                <h:ul class="h_menu">
+                    <h:li>
+                        <a href="/Pages/homepage.zul">Trang chủ</a>
+                    </h:li>
+                    <h:li>
+                        <a>THỦ TỤC HÀNH CHÍNH</a>
+                    </h:li>
+                    <h:li class="li-active">
+                        <a href="/Pages/admin/utility/lookupCosPermitManager.zul">TRA CỨU</a>
+                    </h:li>                	
+                    <h:li>
+                        <a>lIÊN HỆ</a>
+                    </h:li>                                       
+                </h:ul>
+            </h:div>
+            <h:div style="margin-top:10px;margin-bottom:10px;" class="SpanTag">
+                <h:br/>
+                <h:div>
+                    <h:div class="wrapper" >          
+                        <h:div id="searchDiv" style="width:100%" align="left">
+                            <h:table style="width:100%" class="searchTable">     
+                                <h:tr>
+                                    <h:td style="width:15%">
+                                        <label value="${$composer.getLabelName('lookup_permit_lbBusinessName')}"/>
+                                    </h:td>
+                                    <h:td style="width:35%">
+                                        <textbox id="txtBusinessName" width="400px" maxlength="255"/>
+                                    </h:td>
+                                    <h:td style="width:15%">
+                                        <label value="${$composer.getLabelName('lookup_permit_lbProductName')}"/>
+                                    </h:td>
+                                    <h:td style="width:35%">
+                                        <textbox id="txtProductName" width="400px" maxlength="255"/>
+                                    </h:td>
+                                </h:tr>  
+                                <h:tr>
+                                    <h:td>
+                                        <label value="${$composer.getLabelName('lookup_permit_lbBusinessAddress')}"/>
+                                    </h:td>
+                                    <h:td>
+                                        <textbox id="txtBusinessAddress" width="400px" maxlength="255"/>
+                                    </h:td>
+                                    <h:td>
+                                        <label value="${$composer.getLabelName('lookup_permit_lbReceiveNo')}"/>
+                                    </h:td>
+                                    <h:td>
+                                        <textbox id="txtReceiveNo" width="400px" maxlength="255"/>
+                                    </h:td>
+                                </h:tr> 
+                                <h:tr>
+                                    <h:td>
+                                        <label value="${$composer.getLabelName('lookup_permit_lbEffectiveDateFrom')}"/>
+                                    </h:td>
+                                    <h:td>
+                                        <datebox id="dbEffectiveDateFrom" format="dd/MM/yyyy"/>
+                                    </h:td>
+                                    <h:td>
+                                        <label value="${$composer.getLabelName('lookup_permit_lbEffectiveDateTo')}"/>
+                                    </h:td>
+                                    <h:td>
+                                        <datebox id="dbEffectiveDateTo" format="dd/MM/yyyy"/>
+                                    </h:td>
+                                </h:tr>
+                                <h:tr>
+                                    <h:td>
+                                        <label value="${$composer.getLabelName('lookup_permit_lbSort')}"/>
+                                    </h:td>                                        
+                                    <h:td>
+                                        <listbox id="lbSort"  mold="select">
+                                            <listitem label="${$composer.getLabelName('common_choose')}"
+                                                      value="${$composer.getLabelName('common_choose')}" selected="true" />
+                                            <listitem label="${$composer.getLabelName('lookup_permit_BusinessName_asc')}" value="1"/>
+                                            <listitem label="${$composer.getLabelName('lookup_permit_BusinessName_desc')}" value="2" />
+                                            <listitem label="${$composer.getLabelName('lookup_permit_ProductName_asc')}" value="3"/>
+                                            <listitem label="${$composer.getLabelName('lookup_permit_ProductName_desc')}" value="4" />
+                                            <listitem label="${$composer.getLabelName('lookup_permit_BusinessAddress_asc')}" value="5"/>
+                                            <listitem label="${$composer.getLabelName('lookup_permit_BusinessAddress_desc')}" value="6" />
+                                            <listitem label="${$composer.getLabelName('lookup_permit_ReceiveNo_asc')}" value="7"/>
+                                            <listitem label="${$composer.getLabelName('lookup_permit_ReceiveNo_desc')}" value="8" />
+                                        </listbox>
+                                    </h:td>
+                                    <h:td>
+                                    </h:td>
+                                    <h:td>
+                        
+                                    </h:td>
+                                </h:tr>                
+                                <h:tr>       
+                                    <h:td colspan="4" style="text-align:center">                        
+                                        <button id="btnSearch" label="Tìm kiếm" sclass="button" image="/Share/img/icon/search.jpg"/>
+                                        
+                                    </h:td>
+                                </h:tr>
+                            </h:table>
+                        </h:div>
+                        <h:div id="gridDiv" >
+                            <listbox id="lbLookupPermitManager" 
+                                     multiple="false"
+                                     style="word-wrap: break-word"
+                                     emptyMessage="Không tồn tại bản ghi">
+                                <listhead sizable="true">
+                                    <listheader width="3%" label="STT" align="center"/>
+                                    <listheader width="27%" label="Tên doanh nghiệp" align="center"/>
+                                    <listheader width="20%" label="Địa chỉ" align="center"/>
+                                    <listheader width="20%" label="Tên sản phẩm" align="center"/>
+                                    <listheader width="15%" label="Số công bố" align="center"/>
+                                    <listheader width="15%" label="Ngày cấp" align="center"/>                    
+                                </listhead>
+                                <template name="model">
+                                    <listitem value="${each}">
+                                        <listcell label="${forEachStatus.index+1+userPagingBottom.pageSize*userPagingBottom.activePage}" />
+                                        <listcell label="${each.businessName}" />
+                                        <listcell label="${each.businessAddress}" />
+                                        <listcell label="${each.productName}" />
+                                        <listcell label="${each.receiveNo}" />
+                                        <listcell label="${$composer.convertDateToString(each.effectiveDate)}"/>
+                                    </listitem>
+                                </template>
+                            </listbox>
+                            <paging id="userPagingBottom" pageSize="10" detailed="true"/>
+                        </h:div>  
+                    </h:div>            
+                </h:div>    
+            </h:div>  
+            <!-- Footer -->
+            <h:div class="footer_bt">
+                <label class="SpanTag3">
+                    Bản quyền: Cục Quản lý Dược - Bộ Y tế</label>
+                <h:br/>
+                <label class="SpanTag3">Địa chỉ: 138A Giảng Võ - Hà Nội</label>
+                <h:br/>
+                <label class="SpanTag3">Điện thoại: 844.37366483. Fax: 844.38234758. Email: cqldvn@moh.gov.vn</label>
+            </h:div>
+        </window>
+    </h:div>
+</zk>

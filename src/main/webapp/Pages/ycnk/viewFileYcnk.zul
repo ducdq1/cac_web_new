@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window id="windowDocInView"
+        xmlns:h="http://www.zkoss.org/2005/zk/native"
+        xmlns="http://www.zkoss.org/2005/zul" position="center,center"
+        mode="embedded"
+        apply="com.viettel.voffice.DAO.Ycnk.YcnkFileViewController">
+    <style src="/Share/css/formstyle.css" />
+    <style src="/Share/css/uploadstyle.css" />
+    <div id="divToolbarTop" class="toolBar">
+        
+        <image sclass="img-cal" style="float:left"
+               forward="onClick=windowDocInView.onClose"
+               src="/Share/img/png/quay-lai.png" tooltiptext="Quay lại" />
+        <image src="/Share/img/png/flow.png" sclass="img-cal"
+               forward="onClick=windowDocInView.onViewFlow" style="float:left"
+               tooltiptext="Xem luồng" />
+        <image sclass="img-cal" style="float:left"
+               forward="onClick=windowDocInView.onActiveFlow"
+               src="/Share/img/png/quan-ly-luong.png" tooltiptext="Kích hoạt" />
+        
+        <label id="lbTopWarning" class="notify" />
+    </div>
+    <h:div>
+        <h:table width="100%" height="100%">
+            <h:tr>
+                <h:td width="70%" style="vertical-align:top;">
+                    <groupbox width="100%" sclass="gb-form-create"
+                              id="groupboxDocInfo" vflex="1">
+                        <caption label="Thông tin hồ sơ mã: ${$composer.ycnkFile.fileId}" />
+                        <h:table width="100%" align="center"
+                                 sclass="table-view" class="viewTable">
+                            <h:th width="15%" dispaly="true" />
+                            <h:th width="35%" dispaly="true" />
+                            <h:th width="15%" dispaly="true" />
+                            <h:th width="35%" dispaly="true" />
+							
+                            <h:tr>
+                                <h:td>
+                                    <label value="Tên tổ chức /cá nhân đăng ký"
+                                           sclass="hightlight" />
+                                </h:td>
+                                <h:td>
+                                                                        
+                                                                       
+                                    <label id="labelRegisterName" width="80%"
+                                           value="${$composer.ycnkFile.registerName}"
+                                           sclass="label-info" />
+                                </h:td>
+                                <h:td>
+                                    <label value="Số CMT" sclass="lb-create" />
+                                </h:td>
+                                <h:td>
+                                    <label id="labelRegisterCmt" width="80%"
+                                           value="${$composer.ycnkFile.registerCmt}"
+                                           sclass="label-info" />
+                                </h:td>
+                            </h:tr>
+                            <h:tr>
+                                <h:td>
+                                    <label value="Ngày cấp" sclass="lb-create" />
+                                                                        
+                                </h:td>
+                                <h:td>
+                                    <label id="labelRegisterNgayCap" width="80%"
+                                           value="${$composer.ycnkFile.registerNgayCap}"
+                                           sclass="label-info" />
+                                                                        
+                                </h:td>
+                                <h:td>
+                                    <label value="Nơi cấp" sclass="lb-create" />
+                                                                        
+                                </h:td>
+                                <h:td>
+                                    <label id="labelRegisterNoiCap" width="95%"
+                                           value="${$composer.ycnkFile.registerNoiCap}"
+                                           sclass="label-info" />
+                                </h:td>
+                            </h:tr>
+                            <h:tr>
+                                <h:td>
+                                    <label value="Fax" sclass="lb-create" />
+                                </h:td>
+                                <h:td>
+                                                                    
+                                    <label id="labelRegisterFax" width="80%"
+                                           value="${$composer.ycnkFile.registerFax}"
+                                           sclass="label-info" />
+                                </h:td>
+                                <h:td>
+                                    <label value="Mail" sclass="lb-create" />
+                                </h:td>
+                                <h:td>
+                                                                    
+                                                                    
+                                    <label id="labelRegisterEmail" width="80%"
+                                           value="${$composer.ycnkFile.registerEmail}"
+                                           sclass="label-info" />
+                                </h:td>
+                            </h:tr>
+
+
+
+
+                            <h:tr>
+                                <h:td colspan="4">
+                                    <label value="Hồ sơ đăng ký" sclass="lb-create" />
+                                </h:td>
+                            </h:tr>
+                            <h:tr>
+                                <h:td>
+                                    <label value="Số hồ sơ" sclass="lb-create" />
+                                                                        
+                                </h:td>
+                                <h:td>
+                                                                    
+                                    <label id="labelNswFileCode" width="80%"
+                                           value="${$composer.ycnkFile.nswFileCode}"
+                                           sclass="label-info" />
+                                </h:td>
+                                <h:td>
+                                    <label value="Loại hồ sơ" sclass="lb-create" />
+                                </h:td>
+                                <h:td>
+                                                                    
+                                    <label id="labelFileTypeCode" width="80%"
+                                           value="${$composer.ycnkFile.fileTypeCode}"
+                                           sclass="label-info" />
+                                </h:td>
+                            </h:tr>
+                            <h:tr>
+                                <h:td>
+                                    <label value="Ngày tạo" sclass="lb-create" />
+                                </h:td>
+                                <h:td>
+                                    <!--				<datebox id="dbCreateDate"
+                                    value="${$composer.ycnkFile.createDate}"
+                                    format="dd/MM/yyyy"
+                                    constraint="no future, between 19000101 and 20991231: Ngày cấp không chính xác" />-->
+                                </h:td>
+                                <h:td>
+                                    <label value="Người tạo" sclass="lb-create" />
+                                </h:td>
+                                <h:td>
+                                    <!--                            <textbox id="tbCreateBy" width="95%" rows="1"
+                                    value="${$composer.ycnkFile.createBy}"
+                                    maxlength="14" />-->
+                                </h:td>
+                            </h:tr>
+                            <h:tr>
+                                <h:td>
+                                    <label value="Trạng thái" sclass="lb-create" />
+                                </h:td>
+                                <h:td>
+                                    <label id="labelStatusCode" width="80%"
+                                           value="${$composer.ycnkFile.statusCode}"
+                                           sclass="label-info" />
+                                </h:td>
+                                <h:td>
+                                    <label value="Mã số thuế" sclass="lb-create" />
+                                </h:td>
+                                <h:td>
+
+                                    <label id="labelBusinessTaxCode" width="80%"
+                                           value="${$composer.ycnkFile.businessTaxCode}"
+                                           sclass="label-info" />
+                                </h:td>
+                            </h:tr>
+                            <h:tr>
+                                <h:td>
+                                    <label value="Số vận đơn" sclass="lb-create" />
+                                </h:td>
+                                <h:td>
+                                    <label id="labelTransNo" width="80%"
+                                           value="${$composer.ycnkFile.transNo}"
+                                           sclass="label-info" />
+                                </h:td>
+                                <h:td>
+                                    <label value="Ngày vận đơn" sclass="lb-create" />
+                                </h:td>
+                                <h:td>
+                                    <label id="labelTransDate" width="80%"
+                                           value="${$composer.ycnkFile.transDate}"
+                                           sclass="label-info" />
+                                </h:td>
+                            </h:tr>
+                            <h:tr>
+                                <h:td>
+                                    <label value="Số hợp đồng" sclass="lb-create" />
+                                </h:td>
+                                <h:td>
+                                                                        
+                                    <label id="labelContractNo" width="80%"
+                                           value="${$composer.ycnkFile.contractNo}"
+                                           sclass="label-info" />
+                                </h:td>
+                                <h:td>
+                                    <label value="Ngày hợp đồng" sclass="lb-create" />
+                                </h:td>
+                                <h:td>
+                                    <label id="labelContractDate" width="80%"
+                                           value="${$composer.ycnkFile.contractDate}"
+                                           sclass="label-info" />
+                                </h:td>
+                            </h:tr>
+                            <h:tr>
+                                <h:td>
+                                    <label value="Ngày gửi" sclass="lb-create" />
+                                </h:td>
+                                <h:td>
+                                    <label id="labelSendDate" width="80%"
+                                           value="${$composer.ycnkFile.sendDate}"
+                                           sclass="label-info" />
+                                </h:td>
+                                <h:td>
+                                    <label value="Mã số thuế người ủy quyền" sclass="lb-create" />
+                                </h:td>
+                                <h:td>
+                                    <label id="labelAssignBusinessTaxCode" width="80%"
+                                           value="${$composer.ycnkFile.assignBusinessTaxCode}"
+                                           sclass="label-info" />
+                                </h:td>
+                            </h:tr>
+
+
+                            <h:tr>
+                                <h:td colspan="4">
+                                    <label value="Thông tin giấy phép nhập khẩu" sclass="lb-create" />
+                                </h:td>
+                            </h:tr>
+                            <h:tr>
+                                <h:td>
+                                    <label value="Đơn vị cấp phép" sclass="lb-create" />
+                                </h:td>
+                                <h:td>
+                                    <label id="labelDeptCode" width="80%"
+                                           value="${$composer.ycnkFile.deptCode}"
+                                           sclass="label-info" />
+                                </h:td>
+                                <h:td>
+                                    <label value="Tổ chức cá nhân xuất khẩu" sclass="lb-create" />
+                                    <label value=" *" sclass="label-required" />
+                                </h:td>
+                                <h:td>
+                                    <label id="labelExporterName" width="80%"
+                                           value="${$composer.ycnkFile.exporterName}"
+                                           sclass="label-info" />
+                                </h:td>
+                            </h:tr>
+
+                            <h:tr>
+                                <h:td>
+                                    <label value="Địa chỉ thương nhân xuất khẩu" sclass="lb-create" />
+                                </h:td>
+                                <h:td>
+                                    <label id="labelExporterAddress" width="80%"
+                                           value="${$composer.ycnkFile.exporterAddress}"
+                                           sclass="label-info" /> 
+                                </h:td>
+                                <h:td>
+                                    <label value="Điện thoại thương nhân xuất khẩu" sclass="lb-create" />
+                                </h:td>
+                                <h:td>
+                                    <label id="labelExporterPhone" width="80%"
+                                           value="${$composer.ycnkFile.exporterPhone}"
+                                           sclass="label-info" /> 
+                                </h:td>
+                            </h:tr>
+                            <h:tr>
+                                <h:td>
+                                    <label value="Fax" sclass="lb-create" />
+                                </h:td>
+                                <h:td>
+                                    <label id="labelExporterFax" width="80%"
+                                           value="${$composer.ycnkFile.exporterFax}"
+                                           sclass="label-info" /> 
+                                </h:td>
+                                <h:td>
+                                    <label value="Email" sclass="lb-create" />
+                                </h:td>
+                                <h:td>
+                                    <label id="labelExporterEmail" width="80%"
+                                           value="${$composer.ycnkFile.exporterEmail}"
+                                           sclass="label-info" /> 
+                                </h:td>
+                            </h:tr>
+                            <h:tr>
+                                <h:td>
+                                    <label value="Nước xuất khẩu" sclass="lb-create" />
+                                </h:td>
+                                <h:td>
+                                    <label id="labelExporterNationCode" width="80%"
+                                           value="${$composer.ycnkFile.exporterNationCode}"
+                                           sclass="label-info" /> 
+                                </h:td>
+                                <h:td>
+                                    <label value="Cửa khẩu xuất" sclass="lb-create" />
+                                </h:td>
+                                <h:td>
+                                    <label id="labelExporterGateCode" width="80%"
+                                           value="${$composer.ycnkFile.exporterGateCode}"
+                                           sclass="label-info" /> 
+                                </h:td>
+                            </h:tr>
+
+                            <h:tr>
+                                <h:td>
+                                    <label value="Tổ chức/ cá nhân nhập khẩu" sclass="lb-create" />
+                                    <label value=" *" sclass="label-required" />
+                                </h:td>
+                                <h:td>
+                                    <label id="labelImporterName" width="80%"
+                                           value="${$composer.ycnkFile.importerName}"
+                                           sclass="label-info" /> 
+                                </h:td>	
+                                <h:td>
+                                    <label value="Địa chỉ thương nhân nhập khẩu" sclass="lb-create" />
+                                </h:td>
+                                <h:td>
+                                    <label id="labelImporterAddress" width="80%"
+                                           value="${$composer.ycnkFile.importerAddress}"
+                                           sclass="label-info" /> 
+                                </h:td>
+
+                            </h:tr>
+                            <h:tr>
+                                <h:td>
+                                    <label value="Fax" sclass="lb-create" />
+                                </h:td>
+                                <h:td>
+                                    <label id="labelImporterFax" width="80%"
+                                           value="${$composer.ycnkFile.importerFax}"
+                                           sclass="label-info" /> 
+                                </h:td>
+                                <h:td>
+                                    <label value="Email" sclass="lb-create" />
+                                </h:td>
+                                <h:td>
+                                    <label id="labelImporterEmail" width="80%"
+                                           value="${$composer.ycnkFile.importerEmail}"
+                                           sclass="label-info" /> 
+                                </h:td>
+                            </h:tr>
+                            <h:tr>
+                                <h:td>
+                                    <label value="Điện thoại" sclass="lb-create" />
+                                </h:td>
+                                <h:td>
+                                    <label id="labelImporterPhone" width="80%"
+                                           value="${$composer.ycnkFile.importerPhone}"
+                                           sclass="label-info" /> 
+                                </h:td>
+                                <h:td>
+                                    <label value="Cửa khẩu nhập khẩu" sclass="lb-create" />
+                                </h:td>
+                                <h:td>
+                                    <label id="labelImporterGateCode" width="80%"
+                                           value="${$composer.ycnkFile.importerGateCode}"
+                                           sclass="label-info" /> 
+                                </h:td>
+                            </h:tr>
+                            <h:tr>
+                                <h:td>
+                                    <label value="Thời gian dự kiến nhập khẩu" sclass="lb-create" />
+                                </h:td>
+                                <h:td colspan="3">
+                                    <label id="labelComingDate" width="80%"
+                                           value="${$composer.ycnkFile.comingDate}"
+                                           sclass="label-info" /> 
+                                </h:td>
+
+                            </h:tr>
+							
+                        </h:table>
+                    </groupbox>
+
+					
+					
+                </h:td>
+				
+            </h:tr>
+        </h:table>
+    </h:div>
+    <div id="divToolbarBottom" class="toolBar">
+        <image sclass="img-cal" style="float:left"
+               forward="onClick=windowDocInView.onClose"
+               src="/Share/img/png/quay-lai.png" tooltiptext="Quay lại" />
+        <image src="/Share/img/png/flow.png" sclass="img-cal"
+               forward="onClick=windowDocInView.onViewFlow" style="float:left"
+               tooltiptext="Xem luồng" />
+        <label id="lbBottomWarning" class="notify" />
+    </div>
+</window>

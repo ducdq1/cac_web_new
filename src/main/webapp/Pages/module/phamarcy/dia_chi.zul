@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+	xmlns="http://www.zkoss.org/2005/zul" id="phamarcyAllDH"    
+	apply="com.viettel.module.phamarcy.controller.DiaChiController">
+	<style src="/Share/css/formstyle.css" />
+	<script defer="true">toolBar.widget = "phamarcyAll";</script>
+	<style>
+		.z-listheader-cnt{ color:#4584D3 !important;
+		}
+
+	</style>
+	<h:div class="contentDiv" style="width:99%;margin:0 auto;background-color:#FBEFFB">
+		<include id="incSearchFullForm"
+			src="/Pages/module/phamarcy/searchDC.zul" />
+	</h:div>
+	<h:div class="contentDiv" style="width:99%;margin:0 auto">
+	<listbox id="lbList" multiple="true" checkmark="false"
+		nonselectableTags="*"
+		emptyMessage="Không tìm thấy địa chỉ nào">
+		<listhead sizable="true">
+			<listheader label="STT" align="center" style="width:2%;font-size:13px" />
+			<listheader label="Tên đường" align="left"
+				style="width:25%;font-size:13px" />	
+			<listheader label="Khu vực" align="left"
+				style="width:25%;font-size:13px" />	 
+			<listheader label="Sửa" align="left" hflex="min" style=" font-size:13px"/>
+			<listheader label="Xóa" align="left" hflex="min" style=" font-size:13px"/>
+
+		</listhead>
+		
+		<template name="model">
+			<listitem
+				style="word-wrap: break-word !important; white-space: normal; text-align: left">
+				<listcell>
+					<label
+						value="${forEachStatus.index + 1 + userPagingBottom.pageSize *
+						userPagingBottom.activePage }">
+					</label>
+				</listcell>
+
+				<listcell style="text-align:left">
+					<label style="font-weight: bold" value="${each.streetName}" />
+				</listcell>
+				
+				<listcell style="text-align:left">
+					<label style="font-weight: bold" value="${each.area.areaName}" />
+				</listcell>
+				
+				<listcell>
+					<image src="/Share/img/icon/edit.png" width="22px"
+						height="22px" forward="onClick=lbList.onOpenUpdate(${each})"
+						tooltiptext="Sửa" />
+				</listcell>
+				
+				<listcell>
+					<image src="/Share/img/icon/delete.png" width="22px"
+						height="22px" forward="onClick=lbList.onDelete(${each})"
+						tooltiptext="Xóa" />
+					 
+				</listcell>
+			</listitem>
+		</template>
+	</listbox>
+		 <paging id="userPagingBottom" pageSize="10" detailed="true" />
+	</h:div>
+	<separator />
+</window>

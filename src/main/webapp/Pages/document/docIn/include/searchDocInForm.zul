@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.zkoss.org/2005/zk/native"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <style src="/Share/css/formstyle.css" />
+    <groupbox id="fullSearchGbx" mold="3d" visible="false"
+              apply="com.viettel.voffice.DAO.DocIn.include.DocInSearchController">
+        <caption label="Tìm kiếm nâng cao" />
+        <h:table align="center" width="100%">
+            <h:th width="15%" />
+            <h:th width="35%" />
+            <h:th width="15%" />
+            <h:th width="35%" />
+            <h:tr>
+                <h:td>
+                    <label value="Sổ văn bản" />
+                </h:td>
+                <h:td>
+                    <listbox id="lbBookIn" mold="select" width="80%" >
+                        <template name="model">
+                            <listitem label="${each.bookName}"
+                                      value="${each.bookId}" />
+                        </template>
+                    </listbox>
+                </h:td>
+                <h:td>
+                    <label value="Đơn vị ban hành" />
+                </h:td>
+                <h:td>
+                    <textbox id="tbPublishAgency" sclass="textbox"
+                             maxlength="500" />
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td>
+                    <label value="Ngày đến, từ ngày" />
+                </h:td>
+                <h:td>
+                    <datebox id="dbFromDay" cols="12" name="Từ ngày"
+                             format="dd/MM/yyyy"
+                             constraint="between 19000101 and 20991231: Thời gian phải nằm trong khoảng từ 1/1/1900 đến 31/12/2099" />
+                </h:td>
+                <h:td>
+                    <label value="Đến ngày" />
+                </h:td>
+                <h:td>
+                    <datebox id="dbToDay" cols="12" format="dd/MM/yyyy" name="Đến ngày"
+                             constraint="between 19000101 and 20991231: Thời gian phải nằm trong khoảng từ 1/1/1900 đến 31/12/2099" />
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td>
+                    <label value="Người ký" />
+                </h:td>
+                <h:td>
+                    <textbox id="tbSigner" sclass="textbox"
+                             maxlength="200" />
+                </h:td>
+                <h:td>
+                    <label value="Loại văn bản" />
+                </h:td>
+                <h:td>
+                    <listbox id="lbDocType" mold="select" width="80%"
+                             onAfterRender="self.setSelectedIndex(0)">
+                        <template name="model">
+                            <listitem label="${each.name}"
+                                      value="${each.categoryId}" />
+                        </template>
+                    </listbox>
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td>
+                    <label value="Ngày ban hành" />
+                </h:td>
+                <h:td>
+                    <datebox id="dbPublishDate" cols="12"
+                             format="dd/MM/yyyy"
+                             constraint="between 19000101 and 20991231: Thời gian phải nằm trong khoảng từ 1/1/1900 đến 31/12/2099" />
+                </h:td>
+                <h:td>
+                    <label value="Số / Kí hiệu" />
+                </h:td>
+                <h:td>
+                    <textbox id="tbDocCode" sclass="textbox"
+                             maxlength="50" />
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td>
+                    <label value="Trích yếu" />
+                </h:td>
+                <h:td>
+                    <textbox id="tbSummary" sclass="textbox"
+                             maxlength="250" rows="3" width="80%" />
+                </h:td>
+            </h:tr>
+            <h:tr>
+                <h:td colspan="4" align="center">
+                    <button id="btnSearch" label="Tìm kiếm"
+                            sclass="button" image="/Share/img/icon/search.jpg" />
+                </h:td>
+            </h:tr>
+        </h:table>
+    </groupbox>
+</zk>

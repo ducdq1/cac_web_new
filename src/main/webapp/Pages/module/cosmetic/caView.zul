@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul"
+    xmlns:h="native">
+    <window id="caViewWindow" width="100%"
+            apply="com.viettel.module.cosmetic.Controller.CaViewController"
+            border="normal"
+            title="${$composer.getLabelCos('ca_view_window_caption')}">
+        <style>
+            .center-horizontal {
+            text-align: center;
+            }
+        </style>
+        <vlayout>
+            <groupbox mold="3d">
+                <caption label="${$composer.getLabelCos('ca_view_search_caption')}" />
+                <h:table width="100%">
+                    <h:tr>
+                        <h:td width="5%"></h:td>
+                        <h:td width="10%">${$composer.getLabelCos('ca_crud_label_serial')}:</h:td>
+                        <h:td width="50%">
+                            <textbox id="tbSearchSerial" width="100%" maxlength="100" />
+                        </h:td>
+                        <h:td width="5%"></h:td>
+                        <h:td width="25%">
+                            <button sclass="button" id="btnSearch" label="${$composer.getLabelCos('common_search')}" image="/Share/img/icon/search.jpg" />
+                            <button sclass="button" id="btnAddNew" label="${$composer.getLabelCos('common_add')}" image="/Share/img/icon/add_1.png" />
+                        </h:td>
+                        <h:td width="5%"></h:td>
+                    </h:tr>
+                </h:table> 
+            </groupbox>
+            <groupbox mold="3d">
+                <listbox id="lbCAList" emptyMessage="${$composer.getLabelCos('ca_view_list_empty_messgae')}" mold="paging" pageSize="10" checkmark="false">
+                    <listhead>
+                        <listheader label="${$composer.getLabelCos('ca_view_label_stt')}" width="5%" sclass="center-horizontal" />
+                        <listheader label="${$composer.getLabelCos('ca_view_label_ca_serial')}" width="40%" />
+                        <listheader label="${$composer.getLabelCos('ca_view_label_stamper')}" width="5%" sclass="center-horizontal" />
+                        <listheader label="${$composer.getLabelCos('ca_view_label_signature')}" width="5%" sclass="center-horizontal" />
+                        <listheader label="Thừa lệnh" width="15%" sclass="center-horizontal" />
+                        <listheader label="Chức danh" width="15%" sclass="center-horizontal" />
+                        <listheader label="Tên" width="15%" sclass="center-horizontal" />
+                        <listheader label="${$composer.getLabelCos('ca_view_label_edit')}" width="5%" sclass="center-horizontal" />
+                        <listheader label="${$composer.getLabelCos('ca_view_label_delete')}" width="5%" sclass="center-horizontal" />
+                    </listhead>
+                    <template name="model">
+                        <listitem>
+                            <listcell label="${forEachStatus.index + 1}" style="text-align:center" />
+                            <listcell label="${each.caSerial}" />
+                            <listcell label="" style="text-align: center">
+                                <image if="${each.stamper != null}" forward="onClick=caViewWindow.onDownloadAttach(0)" src="/Share/img/icon/attach_min.png" width="16px" />
+                            </listcell>
+                            <listcell label="" style="text-align: center">
+                                <image if="${each.signature != null}" forward="onClick=caViewWindow.onDownloadAttach(1)" src="/Share/img/icon/attach_min.png" width="16px" />
+                            </listcell>
+                            <listcell label="${each.command}" />
+                            <listcell label="${each.position}" />
+                            <listcell label="${each.name}" />
+                            <listcell style="text-align: center">
+                                <image forward="onClick=caViewWindow.onEditItem" src="/Share/img/edit.png" width="20px" height="20px" tooltiptext="" />
+                            </listcell>
+                            <listcell style="text-align: center">
+                                <image forward="onClick=caViewWindow.onDeleteItem" src="/Share/img/delete.png" width="20px" height="20px" tooltiptext="" />
+                            </listcell>
+                        </listitem>
+                    </template>
+                </listbox>
+            </groupbox>
+        </vlayout>
+    </window>
+</zk>

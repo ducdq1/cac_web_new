@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <window id="usersDeptTree" apply="com.viettel.voffice.DAO.Document.TreeUsersDeptController" width="550px" height="400px" visible="false" border="normal" position="center" closable="true">
+        <caption label="Chọn đơn vị"/>
+<!--            <zscript><![CDATA[
+                TreeModel depts = new com.viettel.voffice.model.DeptTreeModel();
+                ]]>
+        </zscript>-->
+        <textbox id="userPerformName" visible="false"/>
+        <listbox id="usersHelp" visible="false"/>
+	<tree id="tree" checkmark="true"
+		style="overflow-x:hidden !important;overflow-y:auto;" vflex="1"
+		nonselectableTags="img" >
+		<treecols>
+			<treecol hflex="1" label="Tên đơn vị, cá nhân" />
+		</treecols>
+	</tree>
+        <div align="center">
+		<button image="/Share/img/icon/done.png" label="Xong"
+			id="btnSelect">
+		</button>
+	</div>
+    </window>
+</zk>

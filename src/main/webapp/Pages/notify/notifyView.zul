@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <window id="notifyWindow" 
+            apply="com.viettel.voffice.DAO.NotifyAlertController" 
+            border="normal" >
+        <caption label="Quản lý truyền thông"/>
+        <div>
+            <h:div style="width:100%" align="center">
+                <h:table style="width:80%" class="searchTable">
+                    <h:tr>
+                        <h:td>
+                            <label>Tiêu đề </label>
+                        </h:td>
+                        <h:td>
+                            <textbox id="txtSearchTitle" width="90%"/>
+                        </h:td>
+                        <h:td>
+                            <label>Nội dung</label>
+                        </h:td>
+                        <h:td>
+                            <textbox id="txtSearchContent" width="90%" />
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td>
+                            <label>Trạng thái</label>
+                        </h:td>
+                        <h:td>
+                            <listbox id="lboxStatus" mold="select" 
+                                     width="200px">
+                                <listitem label="Hoạt động" value="1"  selected="true" />
+                                <listitem label="Hết hạn" value="0" />
+                            </listbox>
+                        </h:td>
+                        <h:td>
+                        </h:td>
+                        <h:td>
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td colspan="4" style="text-align:center">
+                            <button height="30px" image="/Share/img/search.png" id="btnSearch" label="Tìm kiếm" style="margin-right:10px;" />
+                            <button height="30px" image="/Share/img/add.png" id="btnOpenCreate" label="Thêm mới" />
+                        </h:td>
+                    </h:tr>
+                </h:table>
+            </h:div>
+        </div>
+        <h:div>
+            <listbox id="lstItems"
+                     emptyMessage="Không có thông báo nào" style="word-wrap: break-word">
+                <listhead sizable="true">
+                    <listheader  width="5%" align="center" label="STT"/>
+                    <listheader  width="30%" label="Tên thông báo"/>
+                    <listheader  width="50%" label="Nội dung"/>
+                    <!--<listheader  width="30%" label="Người nhận"/>-->
+                    <!--<listheader  width="30%" label="Đơn vị nhận"/>-->
+                    <listheader  width="5%" label="Sửa" align="center"/>
+                    <listheader  width="10%" label="Trạng thái" align="center"/>
+                </listhead>
+                <template name="model">                    
+                    <listitem>
+                        <listcell label="${forEachStatus.index+1+userPagingBottom.pageSize*userPagingBottom.activePage}"/>
+                        <listcell label="${each.title}" />
+                        <listcell>
+                             <!-- <html content="${each.content}" /> -->
+                        </listcell>
+<!--                        <listcell label="${each.multiUser}" />
+                        <listcell label="${each.multiDept}" />-->
+                        <listcell>
+                            <image forward="onClick=lstItems.onEdit" src="/Share/img/icon/edit.png" width="20px" height="20px" tooltiptext="Sửa thông báo"/>
+                        </listcell>
+                        <listcell>
+                            <label value="Hoạt động" if="${each.status==1}" />
+                            <label value="Khóa" if="${each.status==0}" />
+                            <image if="${each.status==1}" forward="onClick=lstItems.onLock" src="/Share/img/icon/lock.png" width="20px" height="20px" tooltiptext="Khóa "/>
+                            <image if="${each.status==0}" forward="onClick=lstItems.onUnlock" src="/Share/img/icon/unlock.png" width="20px" height="20px" tooltiptext="Mở khóa"/>
+                        </listcell>
+                    </listitem>
+                </template>
+            </listbox>
+            <paging id="userPagingBottom" pageSize="10" detailed="true"/>
+        </h:div>
+    </window>
+    
+</zk>
+

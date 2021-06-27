@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <window id="roleDlg" apply="com.viettel.voffice.DAO.System.Users.UserRoleController" border="normal" width="700px" position="center"  closable="true">
+        <caption label="Danh sách vai trò"/>
+        <h:div>
+            <h:div style="width:100%" align="center">
+                <h:table style="width:80%" class="searchTable">
+                    <h:tr>
+                        <h:td>
+                            <label>Tên vai trò</label>
+                        </h:td>
+                        <h:td>
+                            <textbox id="txtSearchRoleName"/>
+                        </h:td>
+                        <h:td>
+                            <label>Mã vai trò</label>
+                        </h:td>
+                        <h:td>
+                            <textbox id="txtSearchRoleCode" />
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td>
+                            <label>Trạng thái</label>
+                        </h:td>
+                        <h:td>
+                            <listbox forward="onSelect=btnSearchRole.onClick" id="cbSearchRoleStatus" mold="select" width="200px" >
+                                <listitem label="Đã chọn" value='1' selected="true" />
+                                <listitem label="Chưa chọn" value='0' />
+                            </listbox>
+                        </h:td>
+                        <h:td>
+                        </h:td>
+                        <h:td>
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td colspan="4" style="text-align:center">
+                            <button height="30px" image="/Share/img/search.png" id="btnSearchRole" label="Tìm kiếm" />
+                        </h:td>
+                    </h:tr>
+                </h:table>
+            </h:div>
+        </h:div>
+        <h:div>
+            <listbox id="lstRoleItems" mold="paging" pageSize="20" emptyMessage="Không có vai trò nào" >
+                <listhead>
+                    <listheader width="10%" align="center" label="STT"/>
+                    <listheader width="30%" label="Vai trò"/>
+                    <listheader width="30%" label="Đơn vị"/>
+                    <listheader width="15%" label="Trạng thái" align="center"/>
+                    <listheader width="15%" label="Chọn" align="center"/>
+                </listhead>
+                <template name="model">
+                    <listitem>
+                        <listcell label="${forEachStatus.index+1}" />
+                        <listcell label="${each.roleName}" />
+                        <listcell label="${each.deptName}">
+                            <image if="${each.isActive==1}" forward="onClick=lstRoleItems.onChangeDept" src="/Share/img/icon/role.png" width="20px" height="20px" tooltiptext="Đổi đơn vị áp dụng"/>
+                        </listcell>
+                        <listcell >
+                            <label if="${each.isActive==1}" value="Đã chọn"/>
+                            <label if="${each.isActive==0}" value="Chưa chọn"/>
+                        </listcell>
+                        <listcell>
+                            <image forward="onClick=lstRoleItems.onDeleteRole" if="${each.isActive==1}" src="/Share/img/icon/delete.png" width="20px" height="20px"/>
+                            <image forward="onClick=lstRoleItems.onAddRole" if="${each.isActive==0}" src="/Share/img/add.png" width="20px" height="20px"/>
+                        </listcell>
+                    </listitem>
+                </template>
+            </listbox>
+        </h:div>
+    </window>
+</zk>
+

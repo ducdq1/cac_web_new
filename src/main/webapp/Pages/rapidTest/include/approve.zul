@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    
+ <zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <window id="windowApprove" title="Cập nhật thông tin phê duyệt" border="normal" width="50%" 
+            apply="com.viettel.module.rapidtest.DAO.include.ApproveController" 
+            position="center,center" closable="true">
+
+	<h:div id="topToolbar" class="toolBar">
+		<button sclass="btnAction" image="/Share/img/png/quay-lai.png"
+			tooltiptext="Quay lại" forward="onClick=windowCRUDProduct.onClose" />
+		
+		<button sclass="btnAction" label="Lưu và đóng (F7)"
+			image="/Share/img/png/luu-lai-va-dong.png"
+			onClick="$composer.onSave(2)" />
+		<label id="lbTopWarning" class="notify" width="15%" multiline="false" />
+	</h:div>
+        
+        
+	<h:table width="100%" align="center">
+		<h:th width="15%" />
+		<h:th width="35%" />
+		<h:th width="15%" />
+		<h:th width="35%" />
+                
+		<h:tr>
+			<h:td>
+				<label value="Kết quả xem xét" sclass="lb-create" />
+				
+			</h:td>
+			<h:td>
+				<label value="Đã xem xét đối chiếu" sclass="lb-create" />
+			</h:td>
+			
+		</h:tr>
+                <h:tr>
+			<h:td>
+				<label value="Nội dung thẩm định" sclass="lb-create" />
+				
+			</h:td>
+			<h:td>
+				<label value="Nguyen van dung" sclass="lb-create" />
+			</h:td>
+			
+		</h:tr>
+                <h:tr>
+			<h:td>
+				<label value="Nội dung xem xét" sclass="lb-create" />
+				
+			</h:td>
+			<h:td>
+				<label value="Ha Van Nam" sclass="lb-create" />
+			</h:td>
+			
+		</h:tr>
+                <h:tr>
+                    <h:td colspan="2">
+                        <radiogroup id="sv1" onCheck="choice1.value = self.selectedItem.label" />
+                        <radio id="ra1" label="Đạt yêu cầu" radiogroup="sv1" />
+                        <radio id="ra2" label="Trả thẩm định lại" radiogroup="sv1" />
+                        <radio id="ra3" label="Trả đối chiếu lại" radiogroup="sv1" />
+
+                    </h:td>    
+                    </h:tr>
+                
+              
+	</h:table>
+        
+
+	<h:div id="bottomToolbar" class="toolBar">
+		<button sclass="btnAction" image="/Share/img/png/quay-lai.png"
+			tooltiptext="Quay lại" forward="onClick=windowCRUDProduct.onClose" />
+		<button sclass="btnAction" label="Lưu và đóng (F7)"
+			image="/Share/img/png/luu-lai-va-dong.png"
+			onClick="$composer.onSave(2)" />
+		<label id="lbBottomWarning" class="notify" width="15%" multiline="false" />
+	</h:div>
+</window>
+ </zk>

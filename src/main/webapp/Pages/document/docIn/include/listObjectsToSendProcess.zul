@@ -1,0 +1,48 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<window id="wdListObjectsToSend" border="none"
+        apply="com.viettel.voffice.DAO.DocIn.include.ListObjectsToSendProcessComposer">
+    <groupbox id="grbListNDU" mold="3d" visible="true">
+        <caption id="cbListNDU" label="Danh sách người nhận xử lý" />
+        <listbox id="lbNodeDeptUser" mold="paging" pageSize="5"
+                 emptyMessage="Không có người nhận" nonselectableTags="img">
+            <listhead>
+                <listheader hflex="min" label="STT" />
+                <listheader hflex="1" label="Đơn vị" />
+                <listheader hflex="1" label="Chức vụ" />
+                <listheader hflex="1" label="Họ và tên" />
+                <listheader hflex="1" label="Xử lý" />
+                <listheader hflex="min" label="Xóa" id="lhDelete"/>
+            </listhead>
+            <template name="model">
+                <listitem>
+                    <listcell label="${forEachStatus.index+1}" />
+                    <listcell label="${each.deptName}" />
+                    <listcell label="${each.posName}" />
+                    <listcell label="${each.userName}" />
+                    <listcell>
+                        <label
+                            value="${$composer.loadProcessTypeName(each.processType)}" />
+                        <image src="/Share/img/icon/user.gif"
+                               width="20px" height="20px" tooltiptext="Đổi vai trò">
+                            <custom-attributes ndu="${each}" />
+                            <attribute name="onClick">
+                                self.previousSibling.setValue($composer.onChangeProcessType(self
+                                .getAttribute("ndu")));
+                            </attribute>
+                        </image>
+                    </listcell>
+                    <listcell>
+                        <image src="/Share/img/icon/13.png" width="20px"
+                               height="20px" tooltiptext="Xóa văn bản">
+                            <custom-attributes
+                                index="${forEachStatus.index}" />
+                            <attribute name="onClick">
+                                $composer.onDeleteListitem(self.getAttribute("index"));
+                            </attribute>
+                        </image>
+                    </listcell>
+                </listitem>
+            </template>
+        </listbox>
+    </groupbox>
+</window>

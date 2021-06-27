@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./docManWindow" ?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <style src="/Share/css/formstyle.css"/>
+    <window id="docManWindow" apply="com.viettel.voffice.DAO.Document.DocDraftController" border="none">
+        <script defer="true">
+            toolBar.widget = "docManWindow";
+        </script>
+        <include src="/Pages/common/searchToolbar.zul"/>
+        <h:div class="contentDiv">
+            <groupbox id="fullSearchGbx" mold="3d" visible="false" >
+                <caption label="Tìm kiếm nâng cao"/>
+                <h:table style="width:100%" sclass="searchTable">
+                    <h:tr>
+                        <h:td width="15%" rowspan="2">
+                            <label>Trích yếu</label>
+                        </h:td>
+                        <h:td width="35%" rowspan="2">
+                            <textbox id="documentAbstract" value="@{controller.searchForm.documentAbstract, access='both', save-when='none'}"
+                                     mold="rounded" width="450px" maxlength="250" multiline="true" rows="2"/>
+                        </h:td>
+                        <h:td width="15%">
+                            <label>Ký hiệu văn bản</label>
+                        </h:td>
+                        <h:td width="35%">
+                            <textbox id="documentCode" value="@{controller.searchForm.documentCode, access='both', save-when='none'}" mold="rounded" width="450px"/>
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td>
+                            <label>Loại văn bản</label>
+                        </h:td>
+                        <h:td>
+                            <listbox id="lboxDocType" width="250px" 
+                                     model="@{controller.catList}" mold="select" selectedItem="@{controller.catSelected}">
+                                <listitem self="@{each='cats'}" value="@{cats}">
+                                    <listcell label="@{cats.name}"  />
+                                </listitem>
+                            </listbox>
+                            <listbox id="lboxStatus" mold="select" width="250px" visible="false">
+                                <listitem label="--Chọn--" value="-1" selected="true" />
+                                <listitem label="Hoạt động" value="1"  />
+                                <listitem label="Không hoạt động" value="0" />
+                            </listbox>
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td>
+                            <label>Ngày tạo, từ ngày:</label>
+                        </h:td>
+                        <h:td>
+                            <datebox id="dateCreateFrom" format="dd/MM/yyyy" >
+                                <attribute name="onCreate" >
+                                    java.util.Calendar calFrom = java.util.Calendar.getInstance();
+                                    calFrom.add(java.util.Calendar.DATE, -7);
+                                    java.util.Date dateFrom = calFrom.getTime();
+                                    dateCreateFrom.setValue(dateFrom);
+                                </attribute>
+                            </datebox>
+                        </h:td>
+                        <h:td>
+                            <label>Đến ngày</label>
+                        </h:td>
+                        <h:td>
+                            <datebox id="dateCreateTo" cols="12" format="dd/MM/yyyy" onCreate="self.value = new Date()"/>
+                        </h:td>
+                    </h:tr>
+                    <h:tr>
+                        <h:td colspan="4" style="text-align:center">
+                            <button id="btnSearch" label="Tìm kiếm" sclass="button" image="/Share/img/icon/search.jpg" />
+                            <!--                        <button id="btnCreate" label="Thêm mới" sclass="button" image="/Share/img/icon/add_1.png" visible="false"/>-->
+                        </h:td>
+                    </h:tr>
+                </h:table>
+            </groupbox>
+        </h:div>
+        <h:div class="contentDiv" >
+            <menupopup id="actionPopup">
+            </menupopup>
+            <paging id="paging1" pageSize="10" detailed="true" />
+            <listbox id="docDraftListBox" 
+                     multiple="false" style="word-wrap:break-word;"
+                     emptyMessage="Không tồn tại văn bản" model="@{controller.documentList}" mold="paging" pagingPosition="both" pageSize="10" sclass="lstDocPublish" >
+                <listhead sizable="true" sclass="lst-header">
+                    <listheader width="5%" label="STT" />
+                    <listheader width="10%" label="Số/Ký hiệu" sclass="firstColumn" />
+                    <listheader width="15%" label="Loại văn bản" />
+                    <listheader width="25%" label="Trích yếu" sclass="firstColumn" />
+                    <listheader width="10%" label="Người tạo" />
+                    <listheader width="10%" label="Ngày tạo" />
+                    <zk if="${$composer.visibleColumn()==true}">
+                        <listheader width="10%" label="Người xử lý" />
+                    </zk>
+                    <listheader width="10%" label="Ngày xử lý" />
+                    <listheader width="10%" label="Trạng thái"  />
+                    <listheader width="10%" label="Xem luồng"  align="center"/>
+                    <listheader width="5%" label="Xử lý"  align="center"/>
+                    <zk if="${$composer.visibleColumn()==true}">
+                        <listheader width="5%" label="Sửa" align="center" />
+                        <listheader width="5%" label="Xoá" align="center"/>
+                    </zk>    
+                </listhead>
+                <template name="model">
+                    <listitem  value="${each}" class="${$composer.getClassUnread(each.processStatus)}">
+                        <listcell label="${controller.startIndex + forEachStatus.index + 1}" forward="onClick=docDraftListBox.onSelectView"/>
+                        <listcell label="${each.documentCode}" forward="onClick=docDraftListBox.onSelectView"/>
+                        <listcell label="${each.documentTypeName}" forward="onClick=docDraftListBox.onSelectView"/>
+                        <listcell label="${each.documentAbstract}" forward="onClick=docDraftListBox.onSelectView"/>
+                        <listcell label="${each.creatorName}" forward="onClick=docDraftListBox.onSelectView"/>
+                        <listcell label="${each.dateCreateStr}" forward="onClick=docDraftListBox.onSelectView"/>
+                        <zk if="${controller.visibleColumn()==true}">
+                            <listcell label="${each.processUserName}" forward="onClick=docDraftListBox.onSelectView"/>
+                        </zk>
+                        <listcell label="${each.processDateStr}" forward="onClick=docDraftListBox.onSelectView"/>
+                        <listcell label="${$composer.getDocStatus(each.status,each.processStatusName)}" forward="onClick=docDraftListBox.onSelectView"/>
+                        <listcell>  
+                            <image forward="onClick=docDraftListBox.onViewFlow" src="/Share/img/png/flow.png" width="20px" height="20px" tooltiptext="Xem luồng xử lý văn bản"/>   
+                        </listcell>
+                        <listcell>  
+                            <image forward="onClick=docDraftListBox.onViewAction" src="/Share/img/list.png" popup="actionPopup" width="20px" height="20px" tooltiptext="Xử lý văn bản"/>  
+                        </listcell>
+                        <zk if="${$composer.visibleColumn()==true}">
+                            <listcell>
+                                <zk if="${$composer.disableColumn(each.status,each.processStatusName)==true}">    
+                                    <image forward="onClick=docDraftListBox.onEdit" src="/Share/img/icon/edit.png" width="20px" height="20px" tooltiptext="Sửa văn bản"/>   
+                                </zk>
+                                <zk if="${$composer.disableColumn(each.status,each.processStatusName)==false}">    
+                                    <image src="/Share/img/icon/edit_disable.png" width="20px" height="20px"/>   
+                                </zk>
+                            </listcell>
+                            <listcell>
+                                <zk if="${$composer.disableColumn(each.status,each.processStatusName)==true}">    
+                                    <image forward="onClick=docDraftListBox.onDelete" src="/Share/img/icon/delete.png" width="20px" height="20px" tooltiptext="Xóa văn bản"/>   
+                                </zk>
+                                <zk if="${$composer.disableColumn(each.status,each.processStatusName)==false}">    
+                                    <image src="/Share/img/icon/delete_disable.png" width="20px" height="20px"/>   
+                                </zk>
+                            </listcell>
+                        </zk>
+                    </listitem> 
+                </template>
+            </listbox>
+            <paging id="paging" pageSize="10" detailed="true" />
+        </h:div>
+    </window>
+</zk>

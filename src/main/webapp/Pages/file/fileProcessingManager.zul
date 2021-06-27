@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+        xmlns="http://www.zkoss.org/2005/zul"
+        id="fileWnd"
+        apply="com.viettel.voffice.DAO.Files.FileProcessingController">
+    <script defer="true">
+        toolBar.widget = "fileWnd";
+        addToolbar("Share/img/add.png","Thêm mới hồ sơ","onOpenCreate");
+    </script>
+    <include src="/Pages/common/searchToolbar.zul"/>
+    <groupbox id="searchGroup" mold="3d" visible="false">
+        <caption label="Tìm kiếm hồ sơ"/>
+        <div id="searchDiv" class="contentDiv" align="center">
+            <h:table class="searchTable" width="80%">
+                <h:tr>
+                    <h:td>
+                        <label value="Từ ngày"/>
+                    </h:td>
+                    <h:td>
+                        <datebox id="dbFromDate"/>
+                    </h:td>
+                    <h:td>
+                        <label value="Đến ngày"/>
+                    </h:td>
+                    <h:td>
+                        <datebox id="dbToDate"/>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td>
+                        <label value="Mã hồ sơ"/>
+                    </h:td>
+                    <h:td>
+                        <textbox id="tbFileCode" maxlength="20"/>
+                    </h:td>
+                    <h:td>
+                        <label value="Tiêu đề"/>
+                    </h:td>
+                    <h:td>
+                        <textbox id="tbFileTitle"  maxlength="250"/>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td colspan="4" style="text-align:center">
+                        <button id="btnSearch" label="Tìm kiếm" image="/Share/img/search.png" height="25px"/>
+                    </h:td>
+                </h:tr>
+            </h:table>
+        </div>
+    </groupbox>
+    <h:div class="contentDiv">
+        <listbox id="lbFiles" emptyMessage="Không có hồ sơ nào">
+            <listhead>
+                <listheader label="STT" align="center" width="5%"/>
+                <listheader label="Mã hồ sơ" width="10%"/>
+                <listheader label="Tiêu đề" width="35%"/>
+                <listheader label="Người tạo" width="10%"/>
+                <listheader label="Ngày bắt đầu" width="10%"/>
+                <listheader label="Ngày kết thúc" width="10%"/>
+                <listheader label="Trạng thái" width="10%"/>
+                <listheader label="Sửa" align="center" width="5%"/>
+                <listheader label="Xóa" align="center" width="5%"/>
+            </listhead>
+            <template name="model">
+                <listitem>
+                    <listcell forward="onClick=lbFiles.onView">
+                        <label value="${forEachStatus.index + 1 + userPagingBottom.pageSize * userPagingBottom.activePage}"/>
+                    </listcell>
+                    <listcell forward="onClick=lbFiles.onView">
+                        <label value="${each.fileCode}"/>
+                    </listcell>
+                    <listcell forward="onClick=lbFiles.onView">
+                        <label value="${each.fileTitle}"/>
+                    </listcell>
+                    <listcell forward="onClick=lbFiles.onView">
+                        <label value="${each.creatorName}"/>
+                    </listcell>
+                    <listcell forward="onClick=lbFiles.onView">
+                        <label value="${each.dateStartStr}"/>
+                    </listcell >
+                    <listcell forward="onClick=lbFiles.onView">
+                        <label value="${each.dateFinishStr}"/>
+                    </listcell >
+                    <listcell forward="onClick=lbFiles.onView">
+                        <label value="Chờ xử lý" if="${each.status==0}"/>
+                        <label value="Đang xử lý" if="${each.status==1}"/>
+                        <label value="Đã gửi đi" if="${each.status==2}"/>
+                        <label value="Hoàn thành" if="${each.status==3}"/>
+                        <label value="Đã trả lại" if="${each.status==4}"/>
+                        <label value="Đã phê duyệt" if="${each.status==5}"/>
+                    </listcell >
+                    <listcell>
+                        <image src="/Share/img/icon/edit.png" width="20px" height="20px" forward="onClick=lbFiles.onOpenUpdate" if="${(each.isCreate==true||each.processType==1)and(each.status==1||each.status==4)}" tooltiptext="Sửa thông tin hồ sơ"/>
+                    </listcell>
+                    <listcell>
+                        <image src="/Share/img/icon/delete.png" width="20px" height="20px" forward="onClick=lbFiles.onDelete" if="${(each.isCreate==true||each.processType==1)and(each.status==1||each.status==4)}" tooltiptext="Xóa hồ sơ"/>
+                    </listcell>                 
+                </listitem>
+            </template>
+        </listbox>
+        <paging id="userPagingBottom" pageSize="10" detailed="true"/>
+    </h:div>
+</window>

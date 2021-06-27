@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+        xmlns="http://www.zkoss.org/2005/zul" id="PublicFileManagerList"  
+        position="center,center" width="60%"  title="Danh sách hồ sơ dùng chung"
+        apply="com.viettel.module.rapidtest.DAO.PublicFileManageListController" closable="true">
+    <style src="/Share/css/formstyle.css" />
+   
+        <listbox id="lstPublicFile" emptyMessage="Không có dữ liệu"  mold="paging" pageSize="10" checkmark="true" >
+             <listhead sizable="true">
+                <listheader label="" align="center" style="width:5%" />
+                <listheader label="Loại tệp" align="center" style="width:30%" />
+                <listheader label="Tên tệp" align="center" style="width:40%" />
+                <listheader label="Mô tả" align="center" style="width:30%" />
+            </listhead>
+            <template name="model">
+                <listitem>
+                    <listcell></listcell>
+                    <listcell label="${each.category.name}" style="text-align:left"></listcell>
+                    <listcell label="${each.attach.attachName}" style="text-align:left">
+                    </listcell>
+                    <listcell label="${each.attach.attachDes}" style="text-align:left">
+                    </listcell>
+                </listitem>
+             </template>
+        </listbox>
+          <h:table width="100%" align="center">           
+        <h:tr>
+            <h:td style="text-align:center" colspan="4">
+                <button id="btnSave" label="Chọn" sclass="button" image="/Share/img/icon/Add.png"/>
+                <button id="btnSearch" label="Đóng" sclass="button" image="/Share/img/icon/close.png" forward="onClick=PublicFileManagerList.onClose"/>
+            </h:td>
+            
+        </h:tr>
+    </h:table>
+            
+</window>

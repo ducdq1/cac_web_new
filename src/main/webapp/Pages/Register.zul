@@ -1,0 +1,631 @@
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns="http://www.zkoss.org/2005/zul">
+	<script src="/Share/register/js/menu.js" />
+	<script src="/Share/register/js/toolbar.js" />
+	<script src="/Share/register/js/flow.js" />
+	<script src="/Share/register/js/flowView.js" />
+	<script src="/Share/register/js/calendar.js" />
+	<style src="/Share/register/css/voffice.css" />
+
+	<style src="/Share/style_comon.css" />
+	<style src="/Share/add_font.css" />
+	<style src="/Share/register/css/formstyle.css" />
+
+	<script src="/Share/register/js/chosen/chosen.jquery.js" />
+	<script src="/Share/register/js/jquery.maskedinput.js" />
+	<script src="/Share/register/js/jquery.watermarkinput.js" />
+	<script type="text/javascript" src="/Share/register/js/UPMSamples.js" />
+	<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+		mode="overlapped"
+		xmlns="http://www.zkoss.org/2005/zul" id="registerWindows"
+		apply="com.viettel.module.rapidtest.DAO.RegisterController">
+		<style>
+			table.table_dl tr td:nth-child(2n) 
+			{ font-weight: bold;
+				height: 0px; }
+			table.table_dl tr td{
+				padding-bottom: 0px;
+			}
+		</style>
+		<div id="mainContent" style="width:100%;height:100%;">
+			<div class="wrapper_center">				 
+				 
+				<div class="wrapper_div">
+					<div class="wrapper">
+						<div class="form_div">
+							<div class="tkhs">
+								<div class="gt_title tkhs_title">
+									<div class="gt_title_t">
+										<label style="padding-left:10px;font-size:16px;font-weight:bold"
+											value="Đăng ký tài khoản doanh nghiệp" />
+									</div>
+								</div>
+								<h:div style="float:right">
+									<label id="lbTopWarning"
+										class="warning-info" width="95%" multiline="false"
+										style="color:red;" />
+								</h:div>
+								<div class="content_subdiv">
+									<h:table cellspacing="0"
+										cellpadding="0" border="0" class="table_dl"
+										style="padding-top:10px;">
+										<h:th width="15%" />
+										<h:th width="20%" />
+										<h:th width="15%" />
+										<h:th width="30%" />
+										<h:tr>
+											<h:td class="subtitle"
+												colspan="3">
+												<label
+													style="line-height:20px; font-weight:bold; font-size:14px; padding-left:15px;"
+													value="Thông tin Doanh nghiệp" />
+											</h:td>
+										</h:tr>
+										<h:tr style="padding-top:20px">
+											<h:td >
+												<label
+													value="Loại hình"
+													sclass="lb-create" style="align:right" />
+												<label value=" (*)"
+													sclass="label-required" />
+											</h:td>
+											<h:td>
+												<listbox
+													id="tbBusiness_type_name" mold="select" zclass="form_input"
+													tabindex="1"
+													emptyMessage="Lựa chọn">
+													<template
+														name="model">
+														<listitem
+															label="${each.name}" value="${each.categoryId}" />
+													</template>
+												</listbox>
+											</h:td>
+										</h:tr>
+										<h:tr>
+											<h:td colspan="2">
+												<label
+													value="Số giấy chứng nhận đủ điều kiện kinh doanh thuốc"
+													sclass="lb-create" style="align:right" />
+												<label value=" (*)"
+													sclass="label-required" id="lblRequiredCertificate"
+													visible="false" />
+											</h:td>
+											<h:td colspan="3">
+												<textbox
+													id="txtNumberCertificate" width="93%" rows="1" value="" tabindex="2"
+													zclass="form_input" maxlength="31" disabled="true" />
+											</h:td>
+											<h:td colspan="4">
+												<vlayout>
+													<button width="85px" 
+														id="btnAttach_RegisterBusinessCertificate" tabindex="3"
+														style="font-weight: bold;color: #F25D45;"														
+														sclass="attachBtn" src="/Share/register/img/paperclip.png"
+														upload="zk.UPMSample1, maxsize=51200, multiple=false, native"
+														visible="false" label="Chọn tệp"/>
+													<vlayout
+														id="flist" 
+														sclass="fileList" spacing="0" />
+												</vlayout>
+											</h:td>
+										</h:tr>
+										<h:tr>
+											<h:td colspan="2">
+												<label
+													value="Số giấy phép thành lập Văn phòng đại diện tại VN"
+													sclass="lb-create" style="align:right" />
+												<label value=" (*)"
+													sclass="label-required" id="lblRequiredNumberLicenses1"
+													visible="false" />
+											</h:td>
+											<h:td colspan="3">
+												<textbox
+													id="txtNumberLicensesEstablishedOffices" width="93%" tabindex="4"
+													rows="1" value="" zclass="form_input" maxlength="31"
+													disabled="true" />
+											</h:td>
+											<h:td colspan="4">
+												<vlayout>
+													<button width="85px"
+														id="btnAttach_EstablishedOfficesCertificate" tabindex="5"
+														style="font-weight: bold;color: #F25D45;"
+														sclass="attachBtn" src="/Share/register/img/paperclip.png"
+														upload="zk.UPMSample10,maxsize=51200,multiple=false,native"
+														visible="false" label="Chọn tệp" />
+													<vlayout
+														id="flist10" hflex="1"
+														sclass="fileList" spacing="0" />
+												</vlayout>
+											</h:td>
+										</h:tr>
+										<h:tr>
+											<h:td colspan="2">
+												<label
+													value="Số giấy phép hoạt động về thuốc và nguyên liệu làm thuốc tại VN"
+													sclass="lb-create" style="align:right" />
+												<label value=" (*)"
+													sclass="label-required" id="lblRequiredNumberLicenses2"
+													visible="false" />
+											</h:td>
+											<h:td colspan="3">
+												<textbox
+													id="txtNumberLicensesInMedicines" width="93%" rows="1" tabindex="6"
+													value="" zclass="form_input" maxlength="31"
+													disabled="true" />
+											</h:td>
+											<h:td colspan="4">
+												<vlayout>
+													<button width="85px"
+														id="btnAttach_ActivitiesCertificate" tabindex="7"
+														style="font-weight: bold;color: #F25D45;"
+														sclass="attachBtn" src="/Share/register/img/paperclip.png"
+														upload="zk.UPMSample11,maxsize=51200,multiple=false,native"
+														visible="false" label="Chọn tệp" />
+													<vlayout
+														id="flist11" hflex="1"
+														sclass="fileList" spacing="0" />
+												</vlayout>
+											</h:td>
+										</h:tr>
+										<h:tr>
+											<h:td>
+												<label
+													value="Tên tiếng Việt" sclass="lb-create" />
+												<label value=" (*)"
+													sclass="label-required" />
+											</h:td>
+											<h:td colspan="3">
+												<textbox
+													id="tbBusiness_name_vi" width="95%" rows="1" value="" tabindex="8"
+													zclass="form_input" maxlength="250" />
+											</h:td>
+										</h:tr>
+										<h:tr>
+											<h:td>
+												<label
+													value="Tên tiếng Anh" sclass="lb-create" />
+											</h:td>
+											<h:td colspan="3">
+												<textbox
+													id="tbBusiness_name_ENG" width="95%" rows="1" value="" tabindex="9"
+													zclass="form_input" maxlength="250" />
+											</h:td>
+										</h:tr>
+										<h:tr>
+											<h:td>
+												<label
+													value="Tên viết tắt" sclass="lb-create" />
+											</h:td>
+											<h:td>
+												<textbox
+													id="tbBusiness_name_alias" rows="1" value="" tabindex="10"
+													zclass="form_input" maxlength="50" />
+											</h:td>
+											<h:td
+												style="padding-left:50px;">
+												<label
+													value="Số đăng ký kinh doanh" sclass="lb-create" />
+											</h:td>
+											<h:td>
+												<textbox
+													id="tbBusiness_license" rows="1" value="" width="89%" tabindex="11"
+													zclass="form_input" maxlength="15" />
+											</h:td>
+										</h:tr>
+										<h:tr>
+											<h:td>
+												<label
+													value="Mã số thuế"
+													sclass="lb-create" />
+												<label value=" (*)" sclass="label-required" id="lblRequireTaxCode" />
+											</h:td>
+											<h:td>
+												<textbox
+													id="tbBusiness_tax_code" rows="1" value="" tabindex="12"
+													zclass="form_input" maxlength="15" />
+											</h:td>
+										</h:tr>
+										<h:tr>
+											<h:td>
+												<label
+													value="Cơ quan chủ quản"
+													sclass="lb-create" style="align:right" />
+											</h:td>
+											<h:td colspan="3">
+												<textbox
+													id="tbgoverning_body" width="95%" rows="1" value="" tabindex="13"
+													zclass="form_input" maxlength="255" />
+											</h:td>
+										</h:tr>
+										<h:tr>
+											<h:td>
+												<label
+													value="Năm thành lập"
+													sclass="lb-create" style="align:right" />
+											</h:td>
+											<h:td>
+												<textbox
+													id="txtNamThanhLap" rows="1" value="" zclass="form_input" tabindex="14"
+													maxlength="4" />
+											</h:td>
+										</h:tr>
+										<h:tr>
+											<h:td class="subtitle"
+												width="13%">
+												<label value="Địa chỉ"
+													style="line-height:20px; font-weight:bold; font-size:14px; padding-left:15px;" />
+											</h:td>
+										</h:tr>
+										<h:tr>
+											<h:td>
+												<label
+													value="Tỉnh/Thành phố"
+													sclass="lb-create" />
+												<label value=" (*)"
+													sclass="label-required" id="lblRequiredTinh"
+													visible="false" />
+											</h:td>
+											<h:td>
+												<listbox
+													id="tbBusiness_province" mold="select" disabled="true" tabindex="15"
+													zclass="form_input" emptyMessage="Phải chọn Tỉnh/Thành phố"
+													onSelect="$composer.onSelectProvince()">
+													<template
+														name="model">
+														<listitem
+															label="${each.name}" value="${each.placeId}" />
+													</template>
+												</listbox>
+											</h:td>
+										</h:tr>
+										<h:tr>
+											<h:td>
+												<label
+													value="Quận/Huyện"
+													sclass="lb-create" />
+												<label value=" (*)"
+													sclass="label-required" id="lblRequiredHuyen"
+													visible="false" />
+											</h:td>
+											<h:td>
+												<listbox
+													id="tbBusiness_district" mold="select" zclass="form_input" tabindex="16"
+													disabled="true" onSelect="$composer.onSelectDistrict()">
+													<template
+														name="model">
+														<listitem
+															label="${each.name}" value="${each.placeId}" />
+													</template>
+												</listbox>
+											</h:td>
+										</h:tr>
+										<h:tr>
+											<h:td>
+												<label
+													value="Xã/Phường/Thị trấn"
+													sclass="lb-create" />
+												<label value=" (*)"
+													sclass="label-required" id="lblRequiredXa" visible="false" />
+											</h:td>
+											<h:td>
+												<listbox
+													id="tbBusiness_town" mold="select" zclass="form_input" tabindex="17"
+													disabled="true">
+													<template
+														name="model">
+														<listitem
+															label="${each.name}" value="${each.placeId}" />
+													</template>
+												</listbox>
+											</h:td>
+										</h:tr>
+										<h:tr>
+											<h:td>
+												<label
+													value="Địa chỉ chi tiết" sclass="lb-create" />
+												<h:span
+													style="width: 13%">
+													<h:span
+														class="red_sign">
+														(*)
+													</h:span>
+												</h:span>
+											</h:td>
+											<h:td colspan="3">
+												<textbox
+													id="tbBusiness_add" width="95%" rows="1" value="" tabindex="18"
+													zclass="form_input" maxlength="250" />
+											</h:td>
+										</h:tr>
+										<h:tr>
+											<h:td>
+												<label
+													value="Điện thoại" sclass="lb-create" />
+												<h:span
+													style="width: 13%">
+													<h:span
+														class="red_sign">
+														(*)
+													</h:span>
+												</h:span>
+											</h:td>
+											<h:td>
+												<textbox
+													id="tbBusiness_telephone" rows="1" value="" tabindex="19"
+													zclass="form_input" maxlength="15" />
+											</h:td>
+											<h:td
+												style="padding-left:50px;">
+												<label value="Fax"
+													sclass="lb-create" />
+											</h:td>
+											<h:td>
+												<textbox
+													id="tbBusiness_fax" width="89%" rows="1" value="" tabindex="20"
+													zclass="form_input" maxlength="15" />
+											</h:td>
+										</h:tr>
+										<h:tr>
+											<h:td>
+												<label value="Email"
+													sclass="lb-create" />
+												<h:span
+													style="width: 13%">
+													<h:span
+														class="red_sign">
+														(*)
+													</h:span>
+												</h:span>
+											</h:td>
+											<h:td>
+												<textbox
+													id="tbManager_email" rows="1" value="" zclass="form_input" tabindex="21"
+													maxlength="50" />
+											</h:td>
+											<h:td
+												style="padding-left:50px;">
+												<label value="Website"
+													sclass="lb-create" />
+											</h:td>
+											<h:td>
+												<textbox
+													id="tbBusiness_website" width="89%" rows="1" value="" tabindex="22"
+													zclass="form_input" maxlength="255" />
+											</h:td>
+										</h:tr>
+										<h:tr>
+											<h:td colspan="2">
+												<label value="Email Doanh nghiệp chính là tên đăng nhập hệ thống." sclass="label-required" />
+											</h:td>
+										</h:tr>
+										<h:tr>
+											<h:td class="subtitle"
+												colspan="3">
+												<label
+													style="line-height:20px; font-weight:bold; font-size:14px; padding-left:15px;"
+													value="Thông tin người đại diện" />
+											</h:td>
+										</h:tr>
+										<h:tr>
+											<h:td>
+												<label value="Họ tên"
+													sclass="lb-create" />
+												<h:span
+													style="width: 13%">
+													<h:span
+														class="red_sign">
+														(*)
+													</h:span>
+												</h:span>
+											</h:td>
+											<h:td colspan="3">
+												<textbox
+													id="tbUser_full_name" width="95%" rows="1" value="" tabindex="23"
+													zclass="form_input" maxlength="250" />
+											</h:td>
+										</h:tr>
+										<h:tr>
+											<h:td>
+												<label value="Chức vụ"
+													sclass="lb-create" />
+												<h:span
+													style="width: 13%">
+													<h:span
+														class="red_sign">
+														(*)
+													</h:span>
+												</h:span>
+											</h:td>
+											<h:td>
+												<listbox
+													id="tbUser_type" mold="select" emptyMessage="Chọn chức vụ" tabindex="24"
+													zclass="form_input">
+													<template
+														name="model">
+														<listitem
+															label="${each.name}" value="${each.categoryId}" />
+													</template>
+												</listbox>
+											</h:td>
+											<h:td
+												style="padding-left:50px;">
+												<label
+													value="Điện thoại" sclass="lb-create" />
+												<h:span
+													style="width: 13%">
+													<h:span
+														class="red_sign">
+														(*)
+													</h:span>
+												</h:span>
+											</h:td>
+											<h:td>
+												<textbox
+													id="tbUser_mobile" width="89%" rows="1" value="" tabindex="25"
+													zclass="form_input" maxlength="15" />
+											</h:td>
+										</h:tr>
+										<h:tr>
+											<h:td>
+												<label
+													value="Email"
+													sclass="lb-create" style="align:right" />
+												<span
+													style="color:red">
+													(*)
+												</span>
+											</h:td>
+											<h:td>
+												<textbox
+													id="tbUserEmail" rows="1" value="" zclass="form_input" tabindex="26"
+													maxlength="50" />
+											</h:td>
+										</h:tr>
+
+										<h:tr>
+											<h:td class="subtitle"
+												colspan="3">
+												<label
+													style="line-height:20px; font-weight:bold; font-size:14px; padding-left:15px;"
+													value="Tên và địa chỉ văn phòng đại diện hoặc người liên lạc ở Việt Nam" />
+											</h:td>
+										</h:tr>
+										<h:tr>
+											<h:td>
+												<label value="Tên"
+													sclass="lb-create" />
+											</h:td>
+											<h:td>
+												<textbox
+													id="tbOfficeName" rows="1" value="" zclass="form_input" tabindex="27"
+													maxlength="250" />
+											</h:td>
+											<h:td
+												style="padding-left:50px;">
+												<label
+													value="Điện thoại" sclass="lb-create" />
+											</h:td>
+											<h:td>
+												<textbox
+													id="tbOfficePhone" width="89%" rows="1" value="" tabindex="28"
+													zclass="form_input" maxlength="15" />
+											</h:td>
+										</h:tr>
+										<h:tr>
+											<h:td>
+												<label
+													value="Địa chỉ chi tiết" sclass="lb-create" />
+											</h:td>
+											<h:td colspan="3">
+												<textbox
+													id="tbOfficeAddress" width="95%" rows="1" value="" tabindex="29"
+													zclass="form_input" maxlength="250" />
+											</h:td>
+										</h:tr>
+										<zscript>
+                                <![CDATA[
+	import org.zkforge.bwcaptcha.Captcha;
+	void verifyCaptcha(Textbox tbox, Captcha capt) {
+		if (!capt.getValue().equals(tbox.getValue())) {
+			throw new WrongValueException(tbox, "Code Error!");
+		}
+	}
+	void verifyCaptchaIgnoreCase(Textbox tbox, Captcha capt) {
+		if (!capt.getValue().equalsIgnoreCase(tbox.getValue())) {
+			throw new WrongValueException(tbox, "Code Error!");
+		}
+	}
+]]>
+                            </zscript>
+										<h:tr>
+											<h:td colspan="4"
+												align="center">
+												<h:div
+													style="margin-left:40%">
+													<vbox
+														id="vboxCaptchaId" visible="false">
+														<h:table
+															style="width:100%;">
+															<h:tr>
+																<h:td></h:td>
+																<h:td></h:td>
+															</h:tr>
+															<h:tr>
+																<h:td
+																	style="text-align:right;width:50%">
+																	<bw.captcha
+																		id="capcha" width="200" height="50"
+																		style="bgcolor:black;" />
+																</h:td>
+																<h:td
+																	style="text-align:left;width:50% ">
+																	<a
+																		onClick="capcha.randomValue();">
+																		<h:img
+																			width="20" height="20"
+																			src="../Share/register/img/icon/Refresh_icon.png"
+																			onClick="capcha.randomValue();"
+																			style="cursor: pointer; cursor: hand;" />
+																	</a>
+																</h:td>
+															</h:tr>
+															<h:tr>
+																<h:td
+																	colspan="2">
+																	<textbox
+																		id="txtCaptchaId"
+																		style="width:195px!important;border-style: solid!important;border-width: 1px!important; border-color: gray!important;" />
+																</h:td>
+															</h:tr>
+														</h:table>
+													</vbox>
+												</h:div>
+											</h:td>
+										</h:tr>
+									</h:table>
+									<div class="submit_button">
+										<button sclass="btnAction" tabindex="30"
+											label="Đăng ký" tooltiptext="Đăng ký"
+											onClick="$composer.onSave(2)" class="login_bt bt_dk" />
+										<button label="Thoát" tabindex="31"
+											sclass="btnAction" tooltiptext="Thoát"
+											href="/Pages/homepage.zul" class="login_bt bt_out" />
+									</div>
+									<h:div style="float:right">
+										<label id="lbBottomWarning"
+											class="warning-info" width="95%" multiline="false"
+											style="color:red;" />
+									</h:div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="footer_bt">
+					<div class="footer_content">
+						<div class="footer_lh">
+							Bản quyền:
+							<h:strong>
+								Cục Quản lý Dược - Bộ Y tế
+							</h:strong>
+							<h:br />
+							<h:strong>Địa chỉ:</h:strong>
+							138A Giảng Võ - Hà Nội
+							<h:br />
+							<h:strong>Điện thoại:</h:strong>
+							844.37366483.
+							<h:strong>Fax:</h:strong>
+							844.38234758.
+							<h:strong>Email:</h:strong>
+							cqldvn@moh.gov.vn
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</window>
+
+
+</zk>

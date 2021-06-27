@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+	xmlns="http://www.zkoss.org/2005/zul" id="windowCRUD"
+	position="center,center" width="50%"
+	apply="com.viettel.voffice.DAO.System.Application.AppCRUDController"
+	mode="overlapped">
+	<style src="/Share/css/formstyle.css" />
+	<style src="/Share/css/voffice.css" />
+	<include id="toolbarTop" src="/Pages/common/toolbarCRUD.zul" />
+	<h:table width="100%">
+		<h:tr>
+			<h:td width="30%">
+				<label value="Mã ứng dụng" />
+				<label value=" *" sclass="label-required" />
+			</h:td>
+			<h:td width="70%">
+				<textbox class="textbox-uppercase" id="tbAppCode"
+					width="95%" maxlength="50" if="${arg.application == null}" />
+				<textbox class="textbox-uppercase" id="tbAppCode"
+					width="95%" value="${arg.application.appCode}" disabled="true"
+					maxlength="50" if="${arg.application != null}" />
+			</h:td>
+		</h:tr>
+		<h:tr>
+			<h:td width="30%">
+				<label value="Tên ứng dụng" />
+				<label value=" *" sclass="label-required" />
+			</h:td>
+			<h:td width="70%">
+				<textbox id="tbAppName" width="95%" maxlength="100"
+					if="${arg.application == null}" />
+				<textbox id="tbAppName" width="95%" maxlength="100"
+					value="${arg.application.appName}" if="${arg.application != null}" />
+			</h:td>
+		</h:tr>
+		<h:tr>
+			<h:td width="30%">
+				<label value="Mô tả ứng dụng" />
+			</h:td>
+			<h:td width="70%">
+				<textbox id="tbAppDesc" width="95%" rows="10"
+					if="${arg.application == null}" maxlength="200"/>
+				<textbox id="tbAppDesc" width="95%" rows="10"
+					value="${arg.application.description}"
+					if="${arg.application != null}" maxlength="200"/>
+			</h:td>
+		</h:tr>
+		<h:tr>
+			<h:td width="30%">
+				<label value="Trạng thái" />
+				<label value=" *" sclass="label-required" />
+			</h:td>
+			<h:td width="70%">
+				<listbox id="listboxAppStatus" mold="select"
+					width="95%">
+					<listitem label="Hoạt động" value="1"
+						selected="true" />
+					<listitem label="Bị khóa" value="0" />
+				</listbox>
+			</h:td>
+		</h:tr>
+	</h:table>
+	<include id="toolbarBottom" src="/Pages/common/toolbarCRUD.zul" />
+</window>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./transferWin" ?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <window id="transferWin" title="${arg.titleAction}" border="normal" width="780px"
+            apply="com.viettel.voffice.DAO.Document.DocTransferController" 
+            position="center,center" closable="true" >
+        <style src="/Share/css/formstyle.css"/>
+        <style src="/Share/css/uploadstyle.css" />
+        <script type="text/javascript" src="/Share/js/UPMSamples.js" />
+        <h:div class="contentDialog">
+            <h:table>
+                <h:tr>
+                    <h:td >
+                        <listbox id="lstDeptUser"
+                                 multiple="false" checkmark="true"
+                                 emptyMessage="Không tồn tại actor" mold="paging" pageSize="8" pagingPosition="top" onAfterRender="self.setSelectedItem(self.getItemAtIndex(0))">
+                            <listhead sizable="true">
+                                <listheader width="10%" label="Chọn" align="center" />
+                                <listheader width="30%" label="Đơn vị"  />
+                                <listheader width="20%" label="Họ và tên" />
+                                <listheader width="20%" label="Chức vụ" />
+                                <listheader width="20%" label="Xử lý" />
+                            </listhead>
+                            <template name="model">
+                                <listitem value="${each}">
+                                    <listcell label="${forEachStatus.index+1}" />
+                                    <listcell label="${each.deptName}">
+                                    </listcell>
+                                    <listcell label="${each.fullName}">
+                                    </listcell>
+                                    <listcell label="${each.posName}" />
+                                    <listcell>
+                                        <label value = "Xử lý chính" if="${each.processType == 1}"/>
+<!--                                        <label value = "Phối hợp" if="${each.processType == 0}"/>
+                                        <label value = "Tham khảo" if="${each.processType == 2}"/>
+                                        <label value = "Cho ý kiến" if="${each.processType == 3}"/>
+                                        <label value = "" if="${each.processType == null}"/>
+                                        <label id="${forEachStatus.index}"/>
+                                        <image forward="onClick=lstDeptUser.onChangeProcessType()" src="/Share/img/icon/user.gif" width="20px" height="20px" tooltiptext="Đổi vai trò"/>-->
+                                    </listcell>
+                                </listitem>
+                            </template>
+                        </listbox>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td>
+                        <groupbox mold="3d" style="max-height:100px;overflow:auto">
+                            <caption label="Tệp đính kèm"/>
+                            <vlayout>
+                                <button width="85px" id="btnAttach" style="font-weight: bold;color: #F25D45;" sclass="attachBtn" 
+                                        src="/Share/img/paperclip.png"
+                                        upload="zk.UPMSample1,maxsize=10240,native" label="Attach"/>
+                                <vlayout id="flist" hflex="1" sclass="fileList" />
+                            </vlayout>
+                        </groupbox>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td>
+                        <textbox id="txtNote" value="" multiline="true" rows="4" width="99%" maxlength="500"/>
+                    </h:td>
+                </h:tr>
+            </h:table>
+        </h:div>
+        <separator bar="false" />
+        <h:div class="btAct" style="text-align:right">
+<!--            <label value="Lưu ý!" popup="status" style="float:left;color:red;font-weight:bold;margin-left:5px"/>
+            <popup id="status" width="300px">
+                <vlayout>
+                    Hướng dẫn: - Chỉ chọn 1 xử lý chính
+                    <separator bar="false" />
+                    - Khi chọn người phối hợp thì phải chọn xử lý chính
+                    <separator bar="false" />
+                    - Chọn nhận để biết thì không cần chọn xử lý chính          
+                </vlayout>
+            </popup>-->
+            <button label="${arg.actionName}" id="btnTransfer"  sclass="button blue " image="/Share/img/icon/send_document.png" />
+            <button width="85px" label="Đóng" id="btnCancel1" onClick="transferWin.detach()" sclass="button blue " image="/Share/img/icon/close.png"/>
+        </h:div>
+    </window>
+</zk>

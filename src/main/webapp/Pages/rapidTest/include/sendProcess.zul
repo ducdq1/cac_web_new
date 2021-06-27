@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+	xmlns="http://www.zkoss.org/2005/zul" id="wdSendProcess"
+	position="center,center" closable="true" border="normal"
+	title="Chuyển xử lý" apply="${arg.composer}" width="70%">
+	<style src="/Share/css/formstyle.css" />
+	<style src="/Share/css/uploadstyle.css" />
+	<script type="text/javascript" src="/Share/js/UPMSamples.js" />
+	<vlayout id="layoutComment">
+		<label id="lbTopWarning" style="color: red;" />
+		<include id="incSelectObjectsToSendProcess"
+			src="/Pages/ycnk/include/includeForm/listObjectsToSendProcess.zul">
+		</include>
+		<div width="100%" align="center">
+			<button id="btnChoose" label="Chọn" image="/Share/img/add.png"/>
+		</div>
+		<groupbox id="grbDeadline" mold="3d">
+			<caption id="ctDeadline" label="Hạn xử lý" />
+			<datebox id="dbDeadline" format="dd/MM/yyyy"
+				constraint="no past, between 19000101 and 20991231: Thời gian phải nằm trong khoảng từ 1/1/1900 đến 31/12/2099">
+			</datebox>
+		</groupbox>
+		<groupbox mold="3d">
+			<caption label="Tệp đính kèm" />
+			<vlayout>
+				<button width="85px" id="btnAttach"
+					style="font-weight: bold;color: #F25D45;" sclass="attachBtn"
+					src="/Share/img/paperclip.png"
+					upload="zk.UPMSample1,maxsize=10240,multiple=true,native"
+					label="Chọn tệp" />
+				<vlayout id="flist" hflex="1" sclass="fileList" />
+			</vlayout>
+		</groupbox>
+		<groupbox mold="3d">
+			<caption id="cbProcessContent" label="Nội dung xử lý" />
+			<textbox id="tbcomment" rows="10" width="100%"
+				maxlength="500" />
+		</groupbox>
+		<div align="center">
+			<button id="btnSend" label="Gửi xử lý"
+				image="/Share/img/icon/send_document_1.png" />
+		</div>
+		<label id="lbBottomWarning" style="color: red;" />
+	</vlayout>
+</window>

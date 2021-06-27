@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+        xmlns="http://www.zkoss.org/2005/zul"
+        id="windowViewQuaTrinhXuLy"
+        position="center,center"
+        width="100%"
+        border="normal"    
+        closable="true"    
+        apply="com.viettel.module.cosmetic.Controller.CosViewQuaTrinhXuLyController">
+    <style src="/Share/css/formstyle.css" />
+    <style src="/Share/css/uploadstyle.css" />
+    <script type="text/javascript" src="/Share/js/UPMSamples.js" />
+    <caption label="Xem thông tin quá trình xử lý" />
+    <h:div id="viewQuaTrinhXuLyDiv">
+        <h:div width="100%">
+            <label value="THÔNG TIN QUÁ TRÌNH XỬ LÝ HỒ SƠ" style="font-size: 90%;"/>
+            <h:br/>
+            <div
+                id="divMainBook">
+                <div id="divIncBook"/>
+            </div>
+            <div
+                id="divMainListPayment">
+                <div id="divIncListPayment"/>
+            </div>  
+            <div
+                id="divMainListEvaluation">
+                <div id="divIncListEvaluation"/>
+            </div>
+            <div
+                id="divMainIncListAddtion">
+                <div id="incListAddtion"/>
+            </div>   
+            <div id="mainIncListPermit">
+                <div id="incListPermit"/>
+            </div>
+            <div id="mainIncListDispathReject">
+                <div id="incListDispathReject"/>
+            </div>
+            <div id="mainIncProcessContent">
+                <div id="incProcessContent"/>
+            </div>                                       
+        </h:div> 
+        <h:table width="100%">
+            <h:tr> 
+                <h:td style="width:50%;text-align:right">
+                    <button label="Đóng" id="btnCancel"
+                            onClick="windowViewQuaTrinhXuLy.detach()"/>
+                </h:td>
+                <h:td style="width:50%;text-align:left" >                    
+                </h:td>            
+            </h:tr>
+        </h:table>
+    </h:div>
+</window>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns="http://www.zkoss.org/2005/zul">
+	<window id="resetPassDlg"
+		apply="com.viettel.voffice.DAO.System.Users.UserUpdatePassController"
+		width="500px" border="normal" position="center" closable="true">
+		<caption label="Thay đổi mật khẩu" />
+		<h:table style="width:100%;height:100%" class="createTable">
+				<h:th width="30%" />
+				<h:th width="70%" />
+			<h:tr>
+				<h:td>
+					<label>Mật khẩu hiện tại</label>
+				</h:td>
+				<h:td >
+					<textbox id="txtCurrentPassword" type="password" width="60%"
+						maxlength="100" />
+				</h:td>
+			</h:tr>
+			<h:tr>
+				<h:td >
+					<label>Mật khẩu</label>
+				</h:td>
+				<h:td >
+					<textbox id="txtPassword" type="password" width="60%"
+						maxlength="100" />
+				</h:td>
+			</h:tr>
+			<h:tr id="retypePasswordRow">
+				<h:td>
+					<label>Nhập lại mật khẩu</label>
+				</h:td>
+				<h:td >
+					<textbox id="txtReTypePassword" type="password" width="60%"
+						maxlength="100" />
+				</h:td>
+			</h:tr>
+			 <h:tr >
+                <h:td>
+                   
+                </h:td>
+                <h:td>
+                     <label style="color: red">(Mật khẩu nên có ít nhất 8 ký tự, bao gồm chữ, số, ký tự đặc biệt)</label>
+                </h:td>
+            </h:tr>
+			<h:tr><h:td></h:td>
+				<h:td style="text-align:left;" colspan="2">
+					<h:div >
+						<vbox id="vboxCaptchaId" visible="false">
+							<h:table style="width:100%;">
+								<h:tr>
+									<h:td></h:td>
+									<h:td></h:td>
+								</h:tr>
+								<h:tr>
+									<h:td
+										style="text-align:right;width:50%">
+										<bw.captcha id="capcha"
+											width="200" height="50" style="bgcolor:black;" />
+									</h:td>
+									<h:td
+										style="text-align:left;width:50% ">
+										<a
+											onClick="capcha.randomValue();">
+											<h:img width="20"
+												height="20" src="Share/img/icon/Refresh_icon.png"
+												onClick="capcha.randomValue();"
+												style="cursor: pointer; cursor: hand;" />
+										</a>
+									</h:td>
+								</h:tr>
+								<h:tr>
+									<h:td colspan="2">
+										<textbox id="txtCaptchaId"
+											style="width:195px!important;border-style: solid!important;border-width: 1px!important; border-color: gray!important;" />
+									</h:td>
+								</h:tr>
+							</h:table>
+						</vbox>
+					</h:div>
+				</h:td>
+			</h:tr>
+		 
+			<h:tr>
+				<h:td colspan="2" align="center">
+					<button height="30px"
+						image="/Share/img/icon/save.png" id="btnSavePassword"
+						label="Lưu lại" />
+				</h:td>
+			</h:tr>
+		</h:table>
+	</window>
+</zk>

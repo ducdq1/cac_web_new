@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+	xmlns="http://www.zkoss.org/2005/zul" position="center,center"
+	closable="true" border="normal" width="95%" maximizable="true"
+	title="Chi tiết ứng dụng" id="windowObjects"
+	apply="com.viettel.voffice.DAO.System.Application.ObjectController">
+	<style src="/Share/css/formstyle.css" />
+	<h:div style="width:20%;float:left;height:100%;" sclass="divLeft">
+		<groupbox mold="3d">
+			<caption label="Cây chức năng" />
+			<tree id="treeObject"></tree>
+		</groupbox>
+	</h:div>
+	<h:div style="width:80%;float:right;height:100%;"
+		sclass="divRight">
+		<vlayout>
+			<groupbox mold="3d">
+				<caption label="Bộ lọc ứng dụng" />
+				<h:table width="100%">
+					<h:tr>
+						<h:td width="20%">
+							<label value="Tên chức năng" />
+						</h:td>
+						<h:td width="30%">
+							<textbox id="tbObjectName" width="80%"
+								maxlength="100" />
+						</h:td>
+						<h:td width="20%">
+							<label value="Hoạt động" />
+						</h:td>
+						<h:td width="30%">
+							<listbox id="lbObjectStatus" mold="select"
+								width="80%">
+								<listitem label="Hoạt động" value="1" />
+								<listitem label="Bị khóa" value="0" />
+								<listitem label="--Chọn--" value="-1"
+									selected="true" />
+							</listbox>
+						</h:td>
+					</h:tr>
+					<h:tr>
+						<h:td width="20%">
+							<label value="Đường dẫn" />
+						</h:td>
+						<h:td width="30%">
+							<textbox id="tbObjectUrl" width="80%"
+								maxlength="500" />
+						</h:td>
+					</h:tr>
+					<h:tr>
+						<h:td colspan="4" align="center">
+							<button id="btnSearch" label="Lọc kết quả"
+								image="/Share/img/search.png" />
+						</h:td>
+					</h:tr>
+				</h:table>
+			</groupbox>
+			<groupbox mold="3d">
+				<caption label="Danh sách chức năng" />
+				<div>
+					<custom-attributes
+						org.zkoss.zul.listbox.rod="false" />
+					<listbox id="lbListObject" mold="paging"
+						emptyMessage="Không có dữ liệu" pageSize="5" checkmark="true">
+						<listhead>
+							<listheader label="STT" hflex="min" />
+							<listheader label="Mã chức năng" />
+							<listheader label="Tên chức năng" />
+							<listheader label="Đường dẫn" />
+							<listheader label="Loại chức năng" />
+							<listheader label="Thứ tự" />
+							<listheader label="Mô tả" />
+							<listheader label="Trạng thái" />
+							<listheader align="center" label="Xem"
+								hflex="min" />
+							<listheader align="center" label="Sửa"
+								hflex="min" />
+						</listhead>
+						<template name="model">
+							<listitem>
+								<listcell
+									label="${forEachStatus.index+1}" />
+								<listcell label="${each.objectCode}" />
+								<listcell label="${each.objectName}" />
+								<listcell label="${each.objectUrl}" />
+								<listcell>
+									<label value="Module"
+										if="${each.objectTypeId == 1}" />
+									<label value="Component"
+										if="${each.objectTypeId == 0}" />
+								</listcell>
+								<listcell label="${each.ord}" />
+								<listcell label="${each.description}" />
+								<listcell>
+									<label if="${each.status == 1}"
+										value="Hoạt động" />
+									<label if="${each.status != 1}"
+										value="Bị khóa" />
+								</listcell>
+								<listcell>
+									<image
+										src="/Share/img/icon/view.png" width="20px" height="20px"
+										forward="onClick=lbListObject.onOpenView(${each})" />
+								</listcell>
+								<listcell>
+									<image
+										src="/Share/img/icon/edit.png" width="20px" height="20px"
+										forward="onClick=lbListObject.onOpenUpdate(${each})" />
+								</listcell>
+							</listitem>
+						</template>
+					</listbox>
+				</div>
+				<include id="toolbarObjects"
+					src="/Pages/common/toolbarApplication.zul">
+				</include>
+			</groupbox>
+		</vlayout>
+	</h:div>
+</window>

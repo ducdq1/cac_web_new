@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+        xmlns="http://www.zkoss.org/2005/zul" id="windowRetrieve"
+        position="center,center" closable="true" border="normal"
+        title="Chọn đơn vị cần thu hồi" width="50%"
+        apply="com.viettel.voffice.DAO.DocIn.DocInRetrieveComposer">
+    <listbox id="lbDept" mold="paging" pageSize="5" checkmark="true"
+             emptyMessage="Không có đơn vị, cá nhân nào">
+        <listhead>
+            <listheader label="STT" hflex="min" />
+            <listheader label="Tên đơn vị" />
+            <listheader label="Chức vụ" />
+            <listheader label="Họ và tên" />
+            <listheader label="Loại xử lý" />
+        </listhead>
+        <template name="model">
+            <listitem>
+                <listcell label="${forEachStatus.index + 1}" />
+                <listcell label="${each.deptName }" />
+                <listcell label="${each.posName }" />
+                <listcell label="${each.userName }" />
+                <listcell
+                    label="${$composer.loadProcessType(each.processType)}" />
+            </listitem>
+        </template>
+    </listbox>
+    <groupbox mold="3d">
+        <caption label="Lí do thu hồi"></caption>
+        <textbox id="tbReason" multiline="true" rows="10" width="100%"
+                 maxlength="500">
+        </textbox>
+    </groupbox>
+    <div align="center">
+        <button id="btnRetrieve" label="Thu hồi"
+                image="/Share/img/icon/retrieve.png" />
+    </div>
+</window>

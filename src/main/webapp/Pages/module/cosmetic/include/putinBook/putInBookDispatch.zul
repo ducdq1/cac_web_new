@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+        xmlns="http://www.zkoss.org/2005/zul" id="businessWindow"
+        position="center,center" 
+        title="Tiếp nhận hồ sơ" apply="com.viettel.module.rapidtest.DAO.include.PutInBookDispatchController" width="100%">
+    <style src="/Share/css/formstyle.css" />
+    <style src="/Share/css/uploadstyle.css" />
+    <script type="text/javascript" src="/Share/js/UPMSamples.js" />
+    <vlayout id="layoutComment">
+        <label id="lbTopWarning" style="color: red;" />
+        <h:table width="100%" align="center">
+            <h:th width="15%" />
+            <h:th width="35%" />
+            <h:th width="15%" />
+            <h:th width="35%" />
+            <h:tr>
+                <h:td colspan="3">
+                    <label value="Thông tin sản phẩm" sclass="lb-create" />
+                </h:td>
+            </h:tr>
+                
+            <h:tr>
+                <h:td>
+                    <label value="Sổ văn bản"
+                           sclass="hightlight" />
+                    <label value=" *"
+                           sclass="label-required" />
+                </h:td>
+                <h:td>
+                    <listbox id="lbBookIn"
+                             onCreate="self.model=$composer.getListBoxModel(1)"
+                             mold="select" width="80%"
+                             onSelect="$composer.onSelectBook()">
+                        <template name="model">
+                            <listitem
+                                label="${each.bookName}" value="${each.bookId}" />
+                        </template>
+                    </listbox>
+                </h:td>
+                <h:td>
+                    <label value="Số đến"
+                           sclass="hightlight" />
+                    <label value=" *"
+                           sclass="label-required" />
+                </h:td>
+                <h:td>
+                    <intbox id="boxBookNumber" maxlength="9"
+                            constraint="no zero: Bạn phải nhập số lớn hơn 0"
+                            >
+                            
+                    </intbox>
+                </h:td>
+            </h:tr>
+            
+            <h:tr>
+                <h:td>
+                    <label value="Tên tổ chức cá nhân"
+                           sclass="hightlight" />
+                </h:td>
+                <h:td>
+                    <label width="95%" multiline="true" pre="true"
+                                           value="${$composer.vFileRtfile.businessName}"
+                                           sclass="label-info" />
+                </h:td>
+            </h:tr> 
+            <h:tr>
+                <h:td>
+                    <label value="Tên sản phẩm"
+                           sclass="hightlight" />
+                </h:td>
+                <h:td>
+                    <label width="95%" multiline="true" pre="true"
+                                           value="${$composer.vFileRtfile.rapidTestName}"
+                                           sclass="label-info" />
+                </h:td>
+            </h:tr> 
+            <h:tr>
+                <h:td>
+                    <label value="Kết quả Xem xét"
+                           sclass="hightlight" />
+                </h:td>
+                <h:td>
+                    <label width="95%" multiline="true" pre="true"
+                                           value="${$composer.obj.staffEvaluationValue}"
+                                           sclass="label-info" />
+                </h:td>
+            </h:tr>    
+            <h:tr>
+                <h:td>
+                    <label value="Nội dung thẩm định"
+                           sclass="hightlight" />
+                    <label value=" *"
+                           sclass="label-required" />
+                </h:td>
+                <h:td>
+                    <label width="95%" multiline="true" pre="true"
+                                           value="${$composer.obj.staffEvaluationContent}"
+                                           sclass="label-info" />
+                    
+                </h:td>
+                
+                
+            </h:tr> 
+        </h:table>
+        
+        <div align="center" visible="false">
+            <button id="btnSubmit" label="Cấp sô công văn SĐBS" visible="true"
+                    image="/Share/img/icon/send_document_1.png" />
+        </div>
+        <label id="lbBottomWarning" style="color: red;" />
+    </vlayout>
+</window>

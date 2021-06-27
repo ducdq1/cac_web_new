@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <style src="/Share/css/formstyle.css"/>
+    <window width="100%" id="nationManageWnd"
+            apply="com.viettel.voffice.DAO.System.Place.NationManageController" border="normal" height="100%">
+        <caption label="Quản lý danh mục quốc gia" />
+    
+        <h:div id="searchDiv" style="width:100%" align="center">
+            <h:table style="width:80%" class="searchTable">
+
+                <h:tr>
+                    <h:td width="15%">
+                        <label value="Tên quốc gia"/>
+                    </h:td>
+                    <h:td width="35%">
+                        <textbox id="txtName" width="400px" maxlength="255"/>
+                    </h:td>
+                    <h:td width="15%">
+                        <label value="Mã quốc gia"/>
+                    </h:td>
+                    <h:td width="35%">
+                        <textbox id="txtCode" width="400px" maxlength="255"/>
+                    </h:td>
+<!--                    <h:td width="15%">
+                        <label value="Thủ tục"/>
+                    </h:td>
+                    <h:td width="35%">
+                        <listbox id="lbProcedure" mold="select" onAfterRender='self.setSelectedIndex(0)'>
+                            <template name="model">
+                                <listitem label="${each.name}" value="${each.categoryId}" />
+                            </template>
+                        </listbox>
+                    </h:td >-->
+                    
+                </h:tr>
+                <h:tr>
+                    <h:td colspan="4" style="text-align:center">
+                        <button id="btnSearch" label="Tìm kiếm" sclass="button" image="/Share/img/icon/search.jpg"/>
+                        <button id="btnCreate" label="Thêm mới" sclass="button" image="/Share/img/icon/add_1.png"/>
+                    </h:td>
+                </h:tr>
+            </h:table>
+        </h:div>
+        <h:div id="gridDiv" >
+            <listbox id="lbNation" 
+                     multiple="false"
+                     style="word-wrap: break-word"
+                     emptyMessage="Không tồn tại bản ghi">
+                <listhead sizable="true">
+                    <listheader width="5%" label="STT" align="center"/>
+                    <listheader width="40%" label="Tên quốc gia"  />
+                    <listheader width="45%" label="Mã quốc gia"  />
+                    <listheader width="5%" label="Sửa" align="center"/>
+                    <listheader width="5%" label="Xoá" align="center"/>
+                </listhead>
+                <template name="model">
+                    <listitem value="${each}">
+                        <listcell label="${forEachStatus.index+1+userPagingBottom.pageSize*userPagingBottom.activePage}" />
+                        <listcell label="${each.name}" />
+                        <listcell label="${each.code}" />
+                        <listcell >
+                            <image forward="onClick=lbNation.onEdit" src="/Share/img/icon/edit.png" 
+                                   width="20px" height="20px" tooltiptext="Sửa thông tin"/>
+                        </listcell>
+                        <listcell>
+                            <image forward="onClick=lbNation.onDelete" src="/Share/img/icon/delete.png" 
+                                   width="20px" height="20px" tooltiptext="Xóa"/>
+                        </listcell>
+                    </listitem>
+                </template>
+            </listbox>
+            <paging id="userPagingBottom" pageSize="10" detailed="true"/>
+        </h:div>  
+    </window>
+</zk>

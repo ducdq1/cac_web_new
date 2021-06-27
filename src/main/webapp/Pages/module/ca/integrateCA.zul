@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:n="http://www.zkoss.org/2005/zk/native"
+        xmlns="http://www.zkoss.org/2005/zul" id="caIntegrationForm"
+        xmlns:w="http://www.zkoss.org/2005/zk/client"
+        apply="com.viettel.module.ca.ClientSigner">
+    <script type="text/javascript" src="/Share/js/ca/ViettelCAPlugin.js" />
+    <!--<script type="text/javascript" src="/Share/js/ca/clientSide.js" />-->
+    <n:object id="plugin0" type="application/x-viettelcasigner" width="300" height="300">
+    </n:object>
+    <n:br/>
+    
+    <n:input type="text" name="filepath" id="filepath" size="50"/> 
+    <n:input type="button" value="Browse..." onclick="getFileName();"/> 
+    
+    <n:input type="button" onclick="uploadFile();" value="Upload And Sign"/> 
+    <n:br/>
+    <n:div id="areaId"/>
+</window>
+

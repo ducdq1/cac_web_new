@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <style src="/Share/css/formstyle.css"/>
+    <window id="catManageWindow"
+            apply="com.viettel.voffice.DAO.System.Category.CategoryController" 
+            border="normal" width="100%" height="800px">
+        <caption label="Quản lý danh mục" />
+        <borderlayout>
+            <west autoscroll="true" size="30%" border="0" splittable="true">
+                <listbox id="catTypeListbox"
+                             multiple="false" style="word-wrap:break-word;" vflex="true"
+                             emptyMessage="Không tồn tại loại danh mục" mold="paging" pageSize="10">
+                        <listhead sizable="true">
+                            <listheader label="Danh sách loại danh mục" > 
+                                <button label="Thêm" forward="onClick=catTypeListbox.onCreateCatType" image="/Share/img/icon/add_1.png"/>
+                            </listheader>
+                            <listheader label="#" width="80px" align="center" />
+                        </listhead>
+                        <template name="model">
+                            <listitem value="${each}">
+                                <listcell label="${each.name}" forward="onClick=catTypeListbox.onSelectCatType"/>
+                                <listcell>
+                                    <image forward="onClick=catTypeListbox.onEditCatType" src="/Share/img/icon/edit.png" width="18px" height="18px" tooltiptext="Sửa loại danh mục"/>     
+                                    <image if="${each.isActive==1}" forward="onClick=catTypeListbox.onLockCatType" src="/Share/img/icon/lock.png" width="18px" height="18px" tooltiptext="Khóa loại danh mục"/>
+                                    <image if="${each.isActive!=1}" forward="onClick=catTypeListbox.onUnLockCatType" src="/Share/img/icon/unlock.png" width="18px" height="18px" tooltiptext="Mở khóa loại danh mục"/>
+                                    <image forward="onClick=catTypeListbox.onDeleteCatType"  src="/Share/img/icon/delete.png" width="18px" height="18px" tooltiptext="Xóa loại danh mục"/>
+                                </listcell>
+                            </listitem>
+                        </template>
+                    </listbox>
+            </west>
+            <center border="0">
+                  <groupbox width="100%" mold="3d" height="100%" id="gbCat">
+                        <caption label="Danh sách danh mục" />
+                        <h:div id="searchDiv" style="width:100%" align="center">
+                            <h:table style="width:90%" class="searchTable">
+                                <h:tr>
+                                    <h:td width="10%"> 
+                                        <label value="Tên"></label>
+                                    </h:td>
+                                    <h:td width="40%">
+                                        <textbox id="txtSearchName" value="" width="98%" maxlength="200"/>
+                                    </h:td>
+                                    <h:td width="10%">
+                                        <label value="Mã"></label>
+                                    </h:td>
+                                    <h:td>
+                                        <textbox id="txtSearchCode" value="" width="98%" maxlength="50"/>
+                                    </h:td>
+                                </h:tr>
+                                <h:tr>
+                                    <h:td>
+                                        <label value="Trạng thái"></label>
+                                    </h:td>
+                                    <h:td>
+                                        <listbox id="lboxStatus" mold="select" width="100%" >
+                                            <listitem label="---Chọn---" value="---Chọn---" selected="true" />
+                                            <listitem label="Hoạt động" value="1"  />
+                                            <listitem label="Bị khóa" value="0" />
+                                        </listbox>
+                                    </h:td>
+                                    <h:td>
+                                        
+                                    </h:td>
+                                    <h:td></h:td>
+                                </h:tr>
+                                <h:tr>
+                                    <h:td colspan="4" style="text-align:center">
+                                        <button id="btnSearch" label="Tìm kiếm" sclass="button" image="/Share/img/icon/search.jpg"/>
+                                        <button id="btnCreate" label="Thêm mới" sclass="button" image="/Share/img/icon/add_1.png"/>
+                                    </h:td>
+                                </h:tr>
+                            </h:table>
+                        </h:div>
+                            <hlayout>
+                            <listbox id="catListbox"
+                                     multiple="false" vflex="true"
+                                     emptyMessage="Không tồn tại danh mục" mold="paging" pageSize="10">
+                                <listhead sizable="true">
+                                    <listheader width="5%" label="STT" align="center"/>
+                                    <listheader width="20%" label="Tên danh mục" />
+                                    <listheader width="20%" label="Mã danh mục" />
+                                    <listheader width="20%" label="Giá trị" />
+                                    <listheader width="5%" label="Xem" align="center"/>
+                                    <listheader width="5%" label="Sửa" align="center"/>
+                                    <listheader width="15%" align="center" label="Khóa/Mở khóa" />
+                                    <listheader width="5%" label="Xoá" align="center"/>
+                                </listhead>
+                                <template name="model">
+                                    <listitem value="${each}">
+                                        <listcell label="${forEachStatus.index+1}" />
+                                        <listcell label="${each.name}" />
+                                        <listcell label="${each.code}" />
+                                        <listcell label="${each.value}" />
+                                        <!--<listcell label="${each.isActive ==1 ? 'Hoạt động' : 'Bị khóa'}" />-->   
+                                        <listcell >
+                                            <image forward="onClick=catListbox.onView" src="/Share/img/icon/view.png" width="20px" height="20px" tooltiptext="Xem chi tiết danh mục"/>
+                                        </listcell>
+                                        <listcell >
+                                            <image forward="onClick=catListbox.onEdit" src="/Share/img/icon/edit.png" width="20px" height="20px" tooltiptext="Sửa danh mục"/>
+                                        </listcell>
+                                        <listcell>
+                                            <label value="${each.isActive ==1 ? 'Hoạt động' : 'Bị khóa'}" />
+                                            <image if="${each.isActive==1}" forward="onClick=catListbox.onLockCat" src="/Share/img/icon/lock.png" width="20px" height="20px" tooltiptext="Khóa danh mục"/>
+                                            <image if="${each.isActive!=1}" forward="onClick=catListbox.onUnLockCat" src="/Share/img/icon/unlock.png" width="20px" height="20px" tooltiptext="Mở khóa danh mục"/>
+                                        </listcell>
+                                        <listcell>
+                                            <image forward="onClick=catListbox.onDelete" src="/Share/img/icon/delete.png" width="20px" height="20px" tooltiptext="Xóa danh mục"/>
+                                        </listcell>
+                                    </listitem>
+                                </template>
+                            </listbox>
+                            </hlayout>
+                    </groupbox>      
+            </center>
+        </borderlayout>
+<!--        <h:table style="width:100%;height:100%">
+            <h:tr style="height:100%">
+                <h:td style="width:400px;vertical-align:top">
+                    
+                </h:td>
+                <h:td style="vertical-align:top">
+                        
+                </h:td>
+            </h:tr>
+        </h:table>-->
+    </window>
+</zk>

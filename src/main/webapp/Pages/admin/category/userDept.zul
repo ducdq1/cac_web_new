@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <window id="selectDeptDlg" apply="com.viettel.voffice.DAO.System.Category.CategoryDialogController" width="550px" height="400px" visible="false" border="normal" position="center" closable="true">
+        <caption label="Chọn đơn vị"/>
+            <zscript><![CDATA[
+                TreeModel depts = new com.viettel.voffice.model.DeptTreeModel();]]>
+        </zscript>
+        <tree id="deptTree" model="${depts}" style="padding-top:0px">
+            <template name="model">
+                <treeitem label="${each.name}" id="${each.id}">
+                </treeitem>
+            </template>
+        </tree>
+    </window>
+</zk>

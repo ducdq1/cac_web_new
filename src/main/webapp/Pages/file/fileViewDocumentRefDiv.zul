@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">   
+    <window id="documentsDiv" apply="com.viettel.voffice.DAO.Files.DocumentRefController">
+        <listbox id="lbDocuments">
+            <listhead sizable="true">
+                <listheader width="5%" label="STT" align="center"/>
+                <listheader width="10%" label="Mã hiệu"/>
+                <listheader width="30%" label="Trích yếu" />
+                <listheader width="30%" label="Tóm tắt"  />
+                <listheader width="10%" label="Văn bản"  />
+                <listheader width="5%" label="File" align="center"  />
+                <listheader width="10%" label="Sửa | Xóa" align="center" />
+            </listhead>
+            <template name="model">
+                <listitem value="${each}">
+                    <listcell label="${forEachStatus.index+1}" forward="onClick=lbDocuments.onView" />
+                    <listcell label="${each.documentCode}" forward="onClick=lbDocuments.onView"  />
+                    <listcell label="${each.documentTitle}" forward="onClick=lbDocuments.onView"  />
+                    <listcell label="${each.documentSummary}" forward="onClick=lbDocuments.onView"  />
+                    <listcell forward="onClick=lbDocuments.onView" >
+                        <label value="Văn bản đến" if="${each.objectType==1}" />
+                        <label value="Văn bản đi" if="${each.objectType==2}" />
+                        <label value="Tham khảo" if="${each.objectType==3}" />
+                    </listcell>
+                    <listcell>
+                        <image src="/Share/img/menu/files.png" width="20px" height="20px" forward="onClick=lbDocuments.onDownloadAttach" tooltiptext="Download file"/>
+                    </listcell>
+                    <listcell>
+                        <image src="/Share/img/icon/edit.png" width="20px" height="20px" forward="onClick=lbDocuments.onEdit" if="${$composer.canEdit == true}" tooltiptext="Sửa văn bản liên quan"/>                        
+                        <image src="/Share/img/icon/delete.png" width="20px" height="20px" forward="onClick=lbDocuments.onDelete" if="${$composer.canEdit == true}" tooltiptext="Xóa văn bản liên quan"/>                        
+                    </listcell>                 
+                </listitem>
+            </template>
+        </listbox>
+    </window>
+</zk>

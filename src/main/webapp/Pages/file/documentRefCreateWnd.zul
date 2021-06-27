@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+   
+    <window id="documentRefCreateWnd" border="normal" width="550px"
+            apply="com.viettel.voffice.DAO.Files.DocumentRefCreateController"
+            position="center,center" closable="true">
+        <caption label="Văn bản liên quan" />
+        <h:div width="100%">
+            <h:table width="100%" style="border:1px solid white;border-collapse:collapse">
+                <h:tr>
+                    <h:td width="20%">
+                        <label value="Mã hiệu văn bản"  />
+                        <label value=" *" sclass="label-required" />
+                    </h:td>
+                    <h:td width="80%">
+                        <textbox id="txtDocumentCode"
+                                 width="400px" maxlength="50"/>
+                    </h:td>
+                
+                </h:tr>
+                <h:tr>
+                    <h:td>
+                        <label value="Đơn vị ban hành"  />
+                        <label value=" *" sclass="label-required" />
+                    </h:td>
+                    <h:td>
+                        <textbox id="txtPublishAgency"
+                                 width="400px" maxlength="250"/>
+                    </h:td>
+                
+                </h:tr>
+                <h:tr>
+                    <h:td>
+                        <label value="Trích yếu"  />
+                        <label value=" *" sclass="label-required" />
+                    </h:td>
+                    <h:td>
+                        <textbox id="txtDocumentTitle"
+                                 width="400px" maxlength="250" rows="2"
+                                style="resize:none"
+                                />
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td style="vertical-align:top">
+                        <label value="Tóm tắt nội dung"/>
+                    </h:td>
+                    <h:td>
+                        <textbox id="txtDocumentSummary"
+                                 width="400px" maxlength="500"
+                                 rows="4" style="resize:none"/>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td style="vertical-align:top">
+                        <label value="File đính kèm"/>
+                    </h:td>
+                    <h:td>
+                        <button width="85px" id="btnUpload" style="font-weight: bold;color: #F25D45;" upload="true" 
+                                src="/Share/img/paperclip.png"
+                                label="Chọn tệp"/>
+                        <listbox id="lbAttachs" width="400px" multiple="false" style="border:none">
+                            <listhead sizable="true">
+                                <listheader width="80%" />
+                                <listheader width="20%" align="center"/>
+                            </listhead>
+                            <template name="model">
+                                <listitem>
+                                    <listcell label="${each.attachName}" forward="onClick=lbAttachs.onDownload" />
+                                    <listcell>
+                                        <image forward="onClick=lbAttachs.onDelete" src="/Share/img/icon/delete.png" width="20px" height="20px"/>
+                                    </listcell>
+                                </listitem> 
+                            </template>
+                        </listbox>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td colspan="2" style="text-align:center">
+                        <button height="30px" image="/Share/img/icon/save.png" id="btnSave" label="Lưu lại" />
+                        <button height="30px" image="/Share/img/icon/close.png" id="btnCancel" label="Đóng"  onClick="documentRefCreateWnd.detach()"/>
+                    </h:td>
+                </h:tr>
+            </h:table>
+        </h:div> 
+    </window>
+</zk>

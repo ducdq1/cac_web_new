@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+	xmlns="http://www.zkoss.org/2005/zul"  >
+	<style>
+		body { background-image: url("http://125.212.203.66:80/thongtinthuoc/Share/img/404_2.png"); background-repeat:
+		no-repeat; }
+		
+		.button-direct {
+	margin: 30px;
+	align: center;
+	font-size: 13px;
+	background-color: #d64c00;
+	border: medium none;
+	border-radius: 2px;
+	color: #ffffff;
+	display: inline-block;
+	font-weight: bold;
+	height: 30px;
+	cursor: pointer
+	 
+}
+
+	</style>
+	 
+	<h:div align="center" style="width:100%;height:100%; margin-top:450px">
+		<button id="btnSave" width="140px" class="button-direct" 
+		 	href="http://125.212.203.66:80/thongtinthuoc"
+			autodisable="self" label="Về trang chủ"
+			height="35px" />
+	</h:div>
+	
+ 
+    
+    
+</window>

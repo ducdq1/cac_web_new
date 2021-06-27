@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.zkoss.org/2005/zk/native"
+    xmlns="http://www.zkoss.org/2005/zul">
+    
+    <style src="/Share/css/formstyle.css" />
+    <listbox id="lbList"  multiple="true"  checkmark="true"                              
+             style="word-wrap: break-word "
+             emptyMessage="${$composer.getLabelCos('common_emptyMessage')}">
+        <listhead sizable="true">
+            <listheader label="" align="center" style="width:5%" />
+            <listheader label="${$composer.getLabelCos('cosmetic_stt')}" align="center" style="width:5%" />
+            <listheader label="${$composer.getLabelCos('cosmetic_mahoso')}" align="center" style="width:10%"/>
+            <listheader label="${$composer.getLabelCos('cosmetic_tenbxn')}" align="center" style="width:20%"/>
+            <listheader label="${$composer.getLabelCos('cosmetic_tensp')}" align="center" style="width:20%"/>
+            <listheader label="${$composer.getLabelCos('cosmetic_tendoanhnghiep')}" align="center"  style="width:20%"/>
+            <listheader label="${$composer.getLabelCos('cosmetic_thoigiancapnhat')}" align="center"  style="width:10%"/>
+            <listheader label="${$composer.getLabelCos('cosmetic_trangthaihs')}" align="center" style="width:15%"/>
+            <listheader label="${$composer.getLabelCos('common_view')}" align="center" hflex="min"/>
+            <listheader label="${$composer.getLabelCos('common_action')}"  align="center" style="width:10%" />
+                                
+        </listhead>
+        <template name="model">
+            <listitem  style="word-wrap: break-word !important; white-space: normal; text-align: left">
+                <!--forward="onClick=lbList.onOpenView(${each})">-->
+                <listcell></listcell> 
+                <listcell label="${forEachStatus.index + 1 + userPagingTop.pageSize * userPagingTop.activePage}" />
+                <listcell style="text-align:left">
+                    <label value="${each.nswFileCode}" 
+                           tooltiptext="${each.nswFileCode}"
+                           if="${each.deadlineWarning == 1}"/>
+                    <label value="${each.nswFileCode}" 
+                           tooltiptext="${each.nswFileCode}"
+                           sclass="label-info-red"
+                           if="${each.deadlineWarning != 1}"/>
+                </listcell>
+                <listcell style="text-align:left">
+                    <label value="${each.brandName}" 
+                           tooltiptext="${each.brandName}"
+                           if="${each.deadlineWarning == 1}"/>
+                    <label value="${each.brandName}" 
+                           tooltiptext="${each.brandName}"
+                           sclass="label-info-red"
+                           if="${each.deadlineWarning != 1}"/>
+                </listcell>
+                <listcell style="text-align:left">
+                    <label value="${each.productName}" 
+                           tooltiptext="${each.productName}"
+                           if="${each.deadlineWarning == 1}"/>
+                    <label value="${each.productName}" 
+                           tooltiptext="${each.productName}"
+                           sclass="label-info-red"
+                           if="${each.deadlineWarning != 1}"/>
+                </listcell>
+                <listcell style="text-align:left">
+                    <label value="${each.businessName}" 
+                           tooltiptext="${each.businessName}"
+                           if="${each.deadlineWarning == 1}"/>
+                    <label value="${each.businessName}" 
+                           tooltiptext="${each.businessName}"
+                           sclass="label-info-red"
+                           if="${each.deadlineWarning != 1}"/>
+                </listcell>
+                <listcell style="text-align:center">
+                    <label value="${$composer.convertDateToString(each.modifyDate)}" 
+                           tooltiptext="${$composer.convertDateToString(each.modifyDate)}"
+                           if="${each.deadlineWarning == 1}"/>
+                    <label value="${$composer.convertDateToString(each.modifyDate)}" 
+                           tooltiptext="${$composer.convertDateToString(each.modifyDate)}"
+                           sclass="label-info-red"
+                           if="${each.deadlineWarning != 1}"/>
+                </listcell>
+                <listcell style="text-align:left">
+                    <label value="${$composer.getStatus(each.status)}" 
+                           tooltiptext="${$composer.getStatus(each.status)}"
+                           if="${each.deadlineWarning == 1}"/>
+                    <label value="${$composer.getStatus(each.status)}" 
+                           tooltiptext="${$composer.getStatus(each.status)}"
+                           sclass="label-info-red"
+                           if="${each.deadlineWarning != 1}"/> 
+                </listcell>
+                <listcell >
+                    <image src="/Share/img/icon/view.png"
+                           width="20px" height="20px"
+                           forward="onClick=lbList.onOpenView(${each})"
+                           tooltiptext="${$composer.getLabelCos('common_view')}" />
+                </listcell>                
+                <listcell style="text-align:left">          
+                    <image forward="onClick=lbList.onViewQuaTrinhXuLy(${each})" 
+                           src="/Share/img/icon/process.png"
+                           tooltiptext="${$composer.getLabelCos('common_xemQuaTrinhXuLy')}"
+                           width="20px" height="20px"/>          
+                    <image src="/Share/img/icon/excel_table.png"
+                           width="20px" height="20px"
+                           forward="onClick=lbList.onViewPhieuBaoThu(${each})" 
+                           tooltiptext="${$composer.getLabelCos('common_ViewPaymentOrder')}"  
+                           if="${$composer.checkPhieuBaoThu(each.fileId)==1}"/>   
+<!--                    <image src="/Share/img/icon/view_file.png"
+                           width="20px" height="20px"
+                           forward="onClick=lbList.onViewSDBS(${each})" 
+                           tooltiptext="${$composer.getLabelCos('common_xemNoiDungYeuCauSDBS')}"
+                           if="${$composer.checkDispathSDBS(each.fileId)==1}"/>-->
+                    <image src="/Share/img/icon/attach.png"
+                           width="20px" height="20px"
+                           forward="onClick=lbList.onDownLoadGiayPhep(${each})"
+                           if="${$composer.CheckGiayPhep(each.fileId)==1}"
+                           tooltiptext="${$composer.getLabelCos('common_xemPhieuCongBo')}" />                      
+                    <image src="/Share/img/icon/attach.png"
+                           width="20px" height="20px"
+                           forward="onClick=lbList.onDownLoadCVTC(${each})" 
+                           tooltiptext="${$composer.getLabelCos('common_xemCongVanTuChoi')}"
+                           if="${$composer.CheckCVTC(each.fileId)==1}"/>                          
+                    
+                    <!--                    <image src="/Share/img/icon/attach.png"
+                    width="20px" height="20px"
+                    forward="onClick=lbList.onDownLoadCVBS(${each})" 
+                    tooltiptext="Xem công văn yêu cầu SĐBS"/>-->
+                </listcell>
+            </listitem>
+        </template>
+    </listbox>
+    <separator />
+	
+</zk>

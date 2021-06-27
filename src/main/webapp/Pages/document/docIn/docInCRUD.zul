@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+        xmlns="http://www.zkoss.org/2005/zul" xmlns:w="client"
+        position="center,center" width="100%" mode="embedded"
+        id="windowCRUDDocIn"
+        apply="com.viettel.voffice.DAO.DocIn.DocInCRUDController"
+        onCtrlKey="$composer.keyEventHandle(event.getKeyCode())"
+        ctrlKeys="#f6#f7#f8">
+    <style src="/Share/css/formstyle.css" />
+    <style src="/Share/css/uploadstyle.css" />
+    <script type="text/javascript" src="/Share/js/UPMSamples.js" />
+    <h:div id="topToolbar" class="toolBar">
+        <button sclass="btnAction" image="/Share/img/png/quay-lai.png"
+                tooltiptext="Quay lại" forward="onClick=windowCRUDDocIn.onClose" />
+        <button sclass="btnAction" label="Lưu và thêm mới (F6)"
+                image="/Share/img/png/luu-lai.png" onClick="$composer.onSave(1)" />
+        <button sclass="btnAction" label="Lưu và đóng (F7)"
+                image="/Share/img/png/luu-lai-va-dong.png"
+                onClick="$composer.onSave(2)" />
+        <button sclass="btnAction" label="Lưu và sao lưu (F8)"
+                image="/Share/img/png/luu-lai-sao-luu.png"
+                onClick="$composer.onSave(3)" />
+        <label id="lbTopWarning" class="notify" width="15%"
+               multiline="false" />
+    </h:div>
+    <h:table width="100%" align="center">
+        <h:th width="15%" />
+        <h:th width="35%" />
+        <h:th width="15%" />
+        <h:th width="35%" />
+        <h:tr>
+            <h:td>
+                <label value="Sổ văn bản" sclass="lb-create" />
+                <label value=" *" sclass="label-required" />
+            </h:td>
+            <h:td>
+                <listbox id="lbBookIn" focus="true"
+                         onCreate="self.model=$composer.getListBoxModel(1)" mold="select"
+                         width="80%" onSelect="$composer.onSelectBook()">
+                    <template name="model">
+                        <listitem label="${each.bookName}"
+                                  value="${each.bookId}" />
+                    </template>
+                </listbox>
+            </h:td>
+            <h:td>
+                <label value="Số đến" sclass="lb-create" />
+                <label value=" *" sclass="label-required" />
+            </h:td>
+            <h:td>
+                <intbox id="boxBookNumber" maxlength="9"
+                        constraint="no zero: Bạn phải nhập số lớn hơn 0">
+                    <attribute w:name="doKeyPress_">
+                        function(evt){ if(!this._shallIgnore(evt,
+                        "1234567890")){ this.$doKeyPress_(evt); } }
+                    </attribute>
+                </intbox>
+            </h:td>
+        </h:tr>
+        <h:tr>
+            <h:td>
+                <label value="Số / Ký hiệu" sclass="lb-create" />
+            </h:td>
+            <h:td>
+                <textbox class="textbox-uppercase" id="tbDocCode"
+                         value="${$composer.documentReceive.documentCode}" maxlength="50"
+                         constraint="${rexDocCode}" />
+            </h:td>
+            <h:td>
+                <label value="Loại văn bản" sclass="lb-create" />
+                <label value=" *" sclass="label-required" />
+            </h:td>
+            <h:td>
+                <listbox id="lbDocType"
+                         onCreate="self.model=$composer.getListBoxModel(5)" mold="select"
+                         width="80%"
+                         onAfterRender='self.setSelectedIndex($composer.getSelectedIndexInModel(5)); $composer.onSelectDocType();'>
+                    <template name="model">
+                        <listitem label="${each.name}"/>
+                    </template>
+                </listbox>
+            </h:td>
+        </h:tr>
+        <h:tr>
+            <h:td>
+                <label value="Ngày ban hành" sclass="lb-create" />
+            </h:td>
+            <h:td>
+                <datebox id="dbPublishDay"
+                         value="${$composer.documentReceive.publishDate}"
+                         format="dd/MM/yyyy"
+                         constraint="no future, between 19000101 and 20991231: Thời gian phải nằm trong khoảng từ 1/1/1900 đến 31/12/2099" />
+            </h:td>
+            <h:td>
+                <label value="Ngày đến" sclass="lb-create" />
+                <label value=" *" sclass="label-required" />
+            </h:td>
+            <h:td>
+                <datebox id="dbReceivedDay"
+                         value="${$composer.documentReceive.receiveDate}"
+                         format="dd/MM/yyyy"
+                         constraint="no future, between 19000101 and 20991231: Thời gian phải nằm trong khoảng từ 1/1/1900 đến 31/12/2099" />
+            </h:td>
+        </h:tr>
+        <h:tr>
+            <h:td>
+                <label value="Nơi gửi" sclass="lb-create" />
+                <label value=" *" sclass="label-required" />
+            </h:td>
+            <h:td colspan="3">
+                <chosenbox model="${$composer.model}" tabindex="0"
+                           selectedIndex="-1" id="cbxOutsideOffice" width="95%"
+                           maxlength="400" creatable="true" createMessage="Thêm mới  - {0}"
+                           noResultsText="Không có đơn vị - {0}" onSelect="">
+                </chosenbox>
+            </h:td>
+        </h:tr>
+        <h:tr>
+            <h:td>
+                <label value="Người ký" sclass="lb-create" />
+            </h:td>
+            <h:td colspan="3">
+                <textbox id="tbSigner" width="95%"
+                         value="${$composer.documentReceive.signer}" maxlength="200" />
+            </h:td>
+        </h:tr>
+        <h:tr>
+            <h:td>
+                <label value="Chuyển cả bì" sclass="lb-create" />
+            </h:td>
+            <h:td colspan="3">
+                <checkbox id="cbSendPacking" />
+            </h:td>
+        </h:tr>
+        <h:tr>
+            <h:td>
+                <label value="Trích yếu" sclass="lb-create" />
+                <label value=" *" sclass="label-required" />
+            </h:td>
+            <h:td colspan="3">
+                <textbox id="tbAbstract" width="95%" rows="5"
+                         value="${$composer.documentReceive.documentAbstract}"
+                         maxlength="250" />
+            </h:td>
+        </h:tr>
+        <!--        <h:tr>
+            <h:td>
+                <label value="Số bản" sclass="lb-create" />
+            </h:td>
+            <h:td>
+                <intbox id="boxNumberDoc" maxlength="9"
+                        constraint="no zero: Bạn phải nhập số lớn hơn 0"
+                        value="${$composer.documentReceive.numberOfPage}">
+                    <attribute w:name="doKeyPress_">
+                        function(evt){ if(!this._shallIgnore(evt,
+                        "1234567890")){ this.$doKeyPress_(evt); } }
+                    </attribute>
+                </intbox>
+            </h:td>
+            <h:td>
+                <label value="Số trang" sclass="lb-create" />
+            </h:td>
+            <h:td>
+                <intbox id="boxNumberPage" maxlength="9"
+                        constraint="no zero: Bạn phải nhập số lớn hơn 0"
+                        value="${$composer.documentReceive.numberOfDoc}">
+                    <attribute w:name="doKeyPress_">
+                        function(evt){ if(!this._shallIgnore(evt,
+                        "1234567890")){ this.$doKeyPress_(evt); } }
+                    </attribute>
+                </intbox>
+            </h:td>
+        </h:tr>-->
+        <h:tr>
+            <h:td>
+                <label value="Độ mật" sclass="lb-create" />
+            </h:td>
+            <h:td>
+                <listbox id="lbSecurity"
+                         onCreate="self.model=$composer.getListBoxModel(2)" mold="select"
+                         width="80%"
+                         onAfterRender='self.setSelectedIndex($composer.getSelectedIndexInModel(2))'>
+                    <template name="model">
+                        <listitem label="${each.name}"
+                                  value="${each.categoryId}" />
+                    </template>
+                </listbox>
+            </h:td>
+            <h:td>
+                <label value="Độ khẩn" sclass="lb-create" />
+            </h:td>
+            <h:td>
+                <listbox id="lbPriority"
+                         onCreate="self.model=$composer.getListBoxModel(3)" mold="select"
+                         width="80%"
+                         onAfterRender='self.setSelectedIndex($composer.getSelectedIndexInModel(3))'>
+                    <template name="model">
+                        <listitem label="${each.name}"
+                                  value="${each.categoryId}" />
+                    </template>
+                </listbox>
+            </h:td>
+        </h:tr>
+        <h:tr>
+            <!-- 			<h:td> -->
+            <!-- 				<label value="Văn bản QPPL" sclass="lb-create" /> -->
+            <!-- 			</h:td> -->
+            <!-- 			<h:td> -->
+            <!-- 				<checkbox id="cbLawDoc" -->
+            <!-- 					checked="${$composer.documentReceive.isLawDocument == 1 ? true : false}" /> -->
+            <!-- 			</h:td> -->
+            <h:td>
+                <label value="Lĩnh vực" sclass="lb-create" />
+            </h:td>
+            <h:td>
+                <listbox id="lbDocArea" width="80%"
+                         onCreate='self.model=$composer.getListBoxModel(7)' mold="select"
+                         onAfterRender='self.setSelectedIndex($composer.getSelectedIndexInModel(4))'>
+                    <template name="model">
+                        <listitem label="${each.name}"
+                                  value="${each.categoryId}">
+                        </listitem>
+                    </template>
+                </listbox>
+            </h:td>
+            <h:td>
+                <label value="Phương thức nhận" sclass="lb-create" />
+            </h:td>
+            <h:td>
+                <listbox id="lbReceiveType"
+                         onCreate="self.model=$composer.getListBoxModel(4)" mold="select"
+                         width="80%"
+                         onAfterRender='self.setSelectedIndex($composer.getSelectedIndexInModel(4))'>
+                    <template name="model">
+                        <listitem label="${each.name}"
+                                  value="${each.categoryId}" />
+                    </template>
+                </listbox>
+            </h:td>
+        </h:tr>
+        <h:tr>
+            <h:td>
+                <label value="Hạn trả lời" sclass="lb-create" />
+            </h:td>
+            <h:td>
+                <datebox id="dbDeadlineTime"
+                         value="${$composer.documentReceive.deadlineByDate}"
+                         format="dd/MM/yyyy"
+                         constraint="between 19000101 and 20991231: Thời gian phải nằm trong khoảng từ 1/1/1900 đến 31/12/2099" />
+            </h:td>
+            <h:td>
+                <label value="Hạn trả lời (bằng số)" sclass="lb-create" />
+            </h:td>
+            <h:td>
+                <intbox id="boxDeadlineByWd" maxlength="9"
+                        constraint="no zero: Bạn phải nhập số lớn hơn 0">
+                    <attribute w:name="doKeyPress_">
+                        function(evt){ if(!this._shallIgnore(evt,
+                        "1234567890")){ this.$doKeyPress_(evt); } }
+                    </attribute>
+                </intbox>
+                <label value="(ngày)" sclass="lb-create" />
+            </h:td>
+        </h:tr>
+        <h:tr>
+            <h:td>
+                <label value="Tệp chứa nội dung toàn văn bản"
+                       sclass="lb-create" />
+            </h:td>
+            <h:td>
+                <vlayout>
+                    <button width="85px" id="btnAttach"
+                            style="font-weight: bold;color: #F25D45;" sclass="attachBtn"
+                            src="/Share/img/paperclip.png"
+                            upload="zk.UPMSample1,maxsize=10240,multiple=true,native"
+                            label="Chọn tệp" />
+                    <vlayout id="flist" hflex="1" sclass="fileList" />
+                </vlayout>
+            </h:td>
+            <h:td>
+                <label value="Văn bản QPPL" sclass="lb-create" />
+            </h:td>
+            <h:td>
+                <checkbox id="cbLawDoc"
+                          checked="${$composer.documentReceive.isLawDocument == 1 ? true : false}" />
+            </h:td>
+        </h:tr>
+        <h:tr>
+            <h:td>
+                <label value="Hồi báo văn bản" sclass="lb-create" />
+            </h:td>
+            <h:td align="left">
+                <checkbox id="cbIsDocAnswer">
+                    <attribute name="onCheck">
+                        gbReplyForDoc.visible = cbIsDocAnswer.isChecked();
+                        btnSearchDocIn.visible = cbIsDocAnswer.isChecked();
+                    </attribute>
+                </checkbox>
+                <button sclass="btnAction small"
+                        image="/Share/img/icon/search.jpg" label="Tìm văn bản đi"
+                        id="btnSearchDocIn"
+                        onCreate="self.visible=cbIsDocAnswer.isChecked()"
+                        tooltiptext="Tìm kiếm văn bản đi" />
+            </h:td>
+            <h:td></h:td>
+            <h:td></h:td>
+        </h:tr>
+        <h:tr>
+            <h:td colspan="4">
+                <groupbox width="100%" sclass="gb-form-create"
+                          id="gbReplyForDoc"
+                          onCreate="self.visible=cbIsDocAnswer.isChecked()">
+                    <caption label="Là hồi báo của văn bản đi" />
+                    <listbox id="lbDocOut"
+                             emptyMessage="Không có văn bản nào" mold="paging" vflex="true"
+                             pageSize="5">
+                        <listhead>
+                            <listheader label="STT" align="center"
+                                        hflex="min" />
+                            <listheader label="Số đến" align="center"
+                                        hflex="1" />
+                            <listheader label="Số / Kí hiệu" hflex="1" />
+                            <listheader label="Trích yếu" hflex="2" />
+                            <listheader label="Xóa" hflex="min" />
+                        </listhead>
+                        <template name="model">
+                            <listitem>
+                                <listcell
+                                    label="${forEachStatus.index+1}">
+                                </listcell>
+                                <listcell
+                                    label="${$composer.getBookOutNumber(each.documentPublishId)}">
+                                </listcell>
+                                <listcell
+                                    label="${each.documentCode}">
+                                </listcell>
+                                <listcell
+                                    label="${each.documentAbstract}">
+                                </listcell>
+                                <listcell>
+                                    <image src="/Share/img/icon/13.png"
+                                           width="20px" height="20px" tooltiptext="Xóa văn bản">
+                                        <custom-attributes
+                                            index="${forEachStatus.index}" />
+                                        <attribute name="onClick">
+                                            $composer.onDeleteDocOut(self.getAttribute("index"));
+                                        </attribute>
+                                    </image>
+                                </listcell>
+                            </listitem>
+                        </template>
+                    </listbox>
+                </groupbox>
+            </h:td>
+        </h:tr>
+        <h:tr>
+            <h:td colspan="4">
+                <groupbox sclass="gb-form-create" id="grbListLeader">
+                    <caption label="Danh sách lãnh đạo cho ý kiến" />
+                    <listbox id="lbLeader" mold="paging" pageSize="5"
+                             checkmark="true" style="border:none;">
+                        <listhead>
+                            <listheader label="Tên lãnh đạo" />
+                            <listheader label="Chức vụ" />
+                            <listheader label="Đơn vị" />
+                        </listhead>
+                        <template name="model">
+                            <listitem>
+                                <listcell label="${each.userName}">
+                                </listcell>
+                                <listcell label="${each.posName}"></listcell>
+                                <listcell label="${each.deptName}">
+                                </listcell>
+                            </listitem>
+                        </template>
+                    </listbox>
+                </groupbox>
+            </h:td>
+        </h:tr>
+        <h:tr>
+            <h:td colspan="4">
+                <groupbox sclass="gb-form-create"
+                          id="grbLeaderContent">
+                    <caption label="Nội dung ý kiến chỉ đạo" />
+                    <textbox id="tbLeaderOpinion" rows="10" width="100%"
+                             maxlength="500" />
+                </groupbox>
+            </h:td>
+        </h:tr>
+    </h:table>
+    <h:div id="bottomToolbar" class="toolBar">
+        <button sclass="btnAction" image="/Share/img/png/quay-lai.png"
+                tooltiptext="Quay lại" forward="onClick=windowCRUDDocIn.onClose" />
+        <button sclass="btnAction" label="Lưu và thêm mới (F6)"
+                image="/Share/img/png/luu-lai.png" onClick="$composer.onSave(1)" />
+        <button sclass="btnAction" label="Lưu và đóng (F7)"
+                image="/Share/img/png/luu-lai-va-dong.png"
+                onClick="$composer.onSave(2)" />
+        <button sclass="btnAction" label="Lưu và sao lưu (F8)"
+                onClick="$composer.onSave(3)"
+                image="/Share/img/png/luu-lai-sao-luu.png" />
+        <label id="lbBottomWarning" class="notify" width="15%"
+               multiline="false" />
+    </h:div>
+</window>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+   
+    <window id="nodePositionDlg" border="normal" width="500px"
+            apply="com.viettel.voffice.DAO.System.Flow.FlowNodePositionController" 
+            position="center,center" closable="true">
+        <caption label="Cấu hình node" />
+        <h:div>
+            <listbox id="lstPositionSelect" 
+                     checkmark="true"
+                     emptyMessage="Không tồn tại chức vụ" mold="paging" pageSize="10" >
+                <listhead sizable="true">
+                    <listheader width="20%" label="STT" align="center" />
+                    <listheader width="80%" label="Chức vụ"/>
+                </listhead>
+                <template name="model">
+                    <listitem selected="true" if="${each.deptId!=null}">
+                        <listcell label="${forEachStatus.index+1}" />
+                        <listcell label="${each.posName}"/>
+                    </listitem>
+                    <listitem selected="false" if="${each.deptId==null}">
+                        <listcell label="${forEachStatus.index+1}" />
+                        <listcell label="${each.posName}"/>
+                    </listitem>
+                </template>
+            </listbox>
+            <div align="center">
+                <button height="30px" image="/Share/img/icon/save.png" id="btnSaveNodePosition" label="Lưu lại" />
+                <button height="30px" image="/Share/img/icon/close.png" id="btnCancel" label="Đóng" onClick="nodePositionDlg.detach()" />
+            </div>
+        </h:div>
+    </window>
+</zk>

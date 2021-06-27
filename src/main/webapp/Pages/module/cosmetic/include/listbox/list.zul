@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="http://www.zkoss.org/2005/zk/native"
+    xmlns="http://www.zkoss.org/2005/zul"
+    xmlns:w="http://www.zkoss.org/2005/zk/client">
+    
+    <style src="/Share/css/formstyle.css" />
+    <script type="text/javascript" src="/Share/js/ca/ViettelCAPlugin.js" />
+    <script type="text/javascript" src="/Share/js/ca/serverSide.js" />
+    <h:object id="plugin0" type="application/x-viettelcasigner" width="3" height="0">
+    </h:object>
+    <listbox id="lbList"   multiple="true"  checkmark="true"
+             emptyMessage="${$composer.getLabelCos('common_emptyMessage')}">
+        <listhead sizable="true">
+            <listheader label="" align="center" style="width:5%" />
+            <listheader label="${$composer.getLabelCos('cosmetic_stt')}" align="center" style="width:5%" />
+            <listheader label="${$composer.getLabelCos('cosmetic_mahoso')}" align="center" style="width:10%"/>
+            <listheader label="${$composer.getLabelCos('cosmetic_tenbxn')}" align="center" style="width:20%"/>
+            <listheader label="${$composer.getLabelCos('cosmetic_tensp')}" align="center" style="width:20%"/>
+            <!--<listheader label="${$composer.getLabelCos('cosmetic_tendoanhnghiep')}" align="center"  style="width:20%"/>-->
+            <!--<listheader label="${$composer.getLabelCos('cosmetic_diachi')}" hflex="1" align="center"/>-->
+            <!--<listheader label="${$composer.getLabelCos('cosmetic_tennguoidaidien')}" hflex="min" align="center"/>-->
+            <!--<listheader label="${$composer.getLabelCos('cosmetic_dienthoai')}" hflex="min" align="center"/>-->
+            <listheader label="${$composer.getLabelCos('cosmetic_thoigiantao')}" align="center"  style="width:10%"/>
+            <listheader label="${$composer.getLabelCos('cosmetic_trangthaihs')}" align="center" style="width:15%"/>
+            <listheader label="${$composer.getLabelCos('common_view')}" align="center" hflex="min"/>
+            <listheader label="${$composer.getLabelCos('common_edit')}" align="center" hflex="min"
+                        visible="${$composer.isCRUDMenu()}"/>
+            <listheader label="${$composer.getLabelCos('common_delete')}" align="center" hflex="min"
+                        visible="${$composer.isCRUDMenu()}" />
+            <listheader label="${$composer.getLabelCos('common_action')}"  align="center" style="width:10%" />
+                                
+        </listhead>
+        <template name="model">
+            <listitem  style="word-wrap: break-word !important; white-space: normal; text-align: left">
+                <!--forward="onClick=lbList.onOpenView(${each})">-->
+                <listcell ></listcell>
+                <listcell label="${forEachStatus.index + 1 + userPagingTop.pageSize * userPagingTop.activePage}" />
+                <listcell>
+                    <label value="${each.nswFileCode}"></label>
+                </listcell>
+                <!--                label="${$composer.cutString(each.brandName, 100)}" 
+                tooltiptext="${each.brandName}" 
+                style="text-align:left"-->
+                <listcell style="text-align:left">
+                    <label value="${each.brandName}" 
+                           tooltiptext="${each.brandName}"
+                           if="${each.deadlineWarning == 1}"/>
+                    <label value="${each.brandName}"  
+                           tooltiptext="${each.brandName}"
+                           sclass="label-info-red"
+                           if="${each.deadlineWarning != 1}"/>
+                </listcell>
+                <listcell style="text-align:left">
+                    <label value="${each.productName}" 
+                           tooltiptext="${each.productName}"
+                           if="${each.deadlineWarning == 1}"/>
+                    <label value="${each.productName}" 
+                           tooltiptext="${each.productName}"
+                           sclass="label-info-red"
+                           if="${each.deadlineWarning != 1}"/>
+                </listcell>
+                <listcell style="text-align:center">
+                    <label value="${$composer.convertDateToString(each.createDate)}" 
+                           if="${each.deadlineWarning == 1}"/>
+                    <label value="${$composer.convertDateToString(each.createDate)}" 
+                           sclass="label-info-red"
+                           if="${each.deadlineWarning != 1}"/>
+                </listcell>
+                <listcell style="text-align:left">
+                    <label value="${$composer.getStatus(each.status)}" 
+                           if="${each.deadlineWarning == 1
+                                 and (each.status == 0
+                                 || each.status == 3
+                                 || each.status == 21
+                                 || each.status == 15
+                                 || each.status == 26
+                                 || each.status == 5)}"/>
+                    <label value="${$composer.getStatus(each.status)}" 
+                           sclass="label-info-red"
+                           if="${each.deadlineWarning != 1} and (each.status == 0
+                                 || each.status == 3
+                                 || each.status == 21
+                                 || each.status == 15
+                                 || each.status == 26
+                                 || each.status == 5)}"/>
+                    <label value="Đang xử lý" 
+                           if="${each.deadlineWarning == 1
+                                 and each.status != 0
+                                 and each.status != 3
+                                 and each.status != 21
+                                 and each.status != 15
+                                 and each.status != 26
+                                 and each.status != 5}"/>
+                    <label value="Đang xử lý" 
+                           sclass="label-info-red"
+                           if="${each.deadlineWarning != 1
+                                 and each.status != 0
+                                 and each.status != 3
+                                 and each.status != 21
+                                 and each.status != 15
+                                 and each.status != 26
+                                 and each.status != 5}"/>
+                </listcell>
+                <listcell>
+                    <image src="/Share/img/icon/view.png"
+                           width="20px" height="20px"
+                           forward="onClick=lbList.onOpenView(${each})"
+                           tooltiptext="${$composer.getLabelCos('common_view')}" />
+                </listcell>
+                <listcell>
+                    <image src="/Share/img/icon/edit.png"
+                           width="20px" height="20px"
+                           forward="onClick=lbList.onOpenUpdate(${each})"
+                           if="${$composer.isAbleToModify(each)}"
+                           tooltiptext="${$composer.getLabelCos('common_edit')}" />
+                    <image src="/Share/img/icon/lock.png"
+                           width="20px" height="20px"
+                           if="${!$composer.isAbleToModify(each)}"
+                           tooltiptext="${$composer.getLabelCos('common_edit')}" />
+                </listcell>
+                <listcell>
+                    <image src="/Share/img/icon/delete.png"
+                           width="20px" height="20px"
+                           forward="onClick=lbList.onDelete(${each})"
+                           if="${$composer.isAbleToDelete(each)}"
+                           tooltiptext="${$composer.getLabelCos('common_delete')}" />
+                    <image src="/Share/img/icon/lock.png"
+                           width="20px" height="20px"
+                           if="${!$composer.isAbleToDelete(each)}"
+                           tooltiptext="${$composer.getLabelCos('common_delete')}" />
+                </listcell>
+                                        
+                <listcell  style="text-align:left">
+                    <image src="/Share/img/icon/Copy-icon.png"
+                           width="20px" height="20px"
+                           forward="onClick=lbList.onCopy(${each})"
+                           tooltiptext="${$composer.getLabelCos('common_copy')}" />
+                    <image src="/Share/img/icon/sign.png"
+                           width="20px" height="20px"
+                           w:onClick="uploadCertFinalFile(${each.fileId});"
+                           if="${$composer.isAbleToModify(each)}"
+                           tooltiptext="${$composer.getLabelCos('common_sign')}" />                                        
+                    <image src="/Share/img/icon/excel_table.png"
+                           width="20px" height="20px"
+                           forward="onClick=lbList.onViewPhieuBaoThu(${each})" 
+                           tooltiptext="${$composer.getLabelCos('common_ViewPaymentOrder')}"  
+                           if="${$composer.checkPhieuBaoThu(each.fileId)==1}"/>    
+                    <image src="/Share/img/icon/view_file.png"
+                           width="20px" height="20px"
+                           forward="onClick=lbList.onViewSDBS(${each})" 
+                           tooltiptext="${$composer.getLabelCos('common_xemNoiDungYeuCauSDBS')}"  
+                           if="${$composer.checkDispathSDBS(each.fileId)==1}"/>             
+                    <image src="/Share/img/icon/attach.png"
+                           width="20px" height="20px"
+                           forward="onClick=lbList.onDownLoadGiayPhep(${each})" 
+                           if="${$composer.CheckGiayPhep(each.fileId)==1}"
+                           tooltiptext="${$composer.getLabelCos('common_xemPhieuCongBo')}" />
+                                               
+                    <image src="/Share/img/icon/attach.png"
+                           width="20px" height="20px"
+                           forward="onClick=lbList.onDownLoadCVTC(${each})" 
+                           tooltiptext="${$composer.getLabelCos('common_xemCongVanTuChoi')}"  
+                           if="${$composer.CheckCVTC(each.fileId)==1}"/>                                    
+                </listcell>
+            </listitem>
+        </template>
+    </listbox>
+    <separator />
+    <div id="signCA" align="center" visible="true" style="height: 1px">
+        <h:input type="text" name="filepath" id="filepath" size="50" style="display:none"/> 
+        <h:input type="hidden" id="base64Hash" value="" />
+        <textbox id="txtBase64Hash" value="" style="display:none"/>
+        <h:input type="hidden" id="certSerial" value="" />
+        <textbox id="txtCertSerial" value="" style="display:none"/>
+        <h:br/>
+        <h:div id="areaId" style="display: none"/>
+    </div>
+</zk>

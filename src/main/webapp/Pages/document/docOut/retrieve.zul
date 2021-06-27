@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./retrieveWin" ?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <window id="retrieveWin" title="Thu hồi văn bản" border="normal" width="780px"
+        apply="com.viettel.voffice.DAO.Document.DocRetrieveController" 
+        position="center,center" closable="true" >
+        <h:div class="contentDialog">
+            <h:table>
+                <h:tr>
+                    <h:td >
+                        <listbox id="lstDeptUser" 
+                                multiple="false" checkmark="true"
+                                emptyMessage="Không tồn tại actor" mold="paging" pageSize="8" pagingPosition="top" onAfterRender="self.setSelectedItem(self.getItemAtIndex(0))">
+                            <listhead sizable="true">
+                                <listheader width="10%" label="STT" align="center" />
+                                <listheader width="40%" label="Đơn vị xử lý"  />
+                                <listheader width="25%" label="Người xử lý" />
+                                <listheader width="25%" label="Chức vụ" />
+                            </listhead>
+                            <template name="model">
+                                <listitem value="${each}">
+                                    <listcell label="${forEachStatus.index+1}" />
+                                    <listcell label="${each.receiveGroup}">
+                                    </listcell>
+                                    <listcell label="${each.receiveUser}">
+                                    </listcell>
+                                    <listcell label="${each.positionName}" />
+                                </listitem>
+                            </template>
+                        </listbox>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td>
+                        <label value="Lý do thu hồi" sclass="label-info"/>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td>
+                        <textbox id="txtNote" value="" multiline="true" rows="4" width="99%"/>
+                    </h:td>
+                </h:tr>
+            </h:table>
+        </h:div>
+        <separator bar="false" />
+        <h:div class="btAct" style="text-align:right">
+            <button label="Đồng ý" id="btnRetrieve" image="/Share/img/icon/a2.png" width="85px"  sclass="button blue "/>
+            <button label="Hủy bỏ" id="btnCancel1" onClick="retrieveWin.detach()" sclass="button blue " width="85px" image="/Share/img/icon/close.png"/>
+        </h:div>
+    </window>   
+</zk>

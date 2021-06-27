@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+   
+    <window id="documentRefViewWnd" border="normal" width="550px"
+            apply="com.viettel.voffice.DAO.Files.DocumentRefViewController"
+            position="center,center" closable="true">
+        <caption label="Văn bản liên quan" />
+        <h:div width="100%">
+            <h:table class="viewTable">
+                <h:tr>
+                    <h:td width="40%">
+                        <label value="Mã hiệu văn bản"  />
+                    </h:td>
+                    <h:td width="60%">
+                        <label id="lblDocumentCode"/>
+                    </h:td>
+                
+                </h:tr>
+                <h:tr>
+                    <h:td>
+                        <label value="Đơn vị ban hành"  />
+                    </h:td>
+                    <h:td>
+                        <label id="lblPublishAgency"/>
+                    </h:td>
+                
+                </h:tr>
+                <h:tr>
+                    <h:td>
+                        <label value="Trích yếu"  />
+                    </h:td>
+                    <h:td>
+                        <label id="lblDocumentTitle"/>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td style="vertical-align:top">
+                        <label value="Tóm tắt nội dung"/>
+                    </h:td>
+                    <h:td>
+                        <label id="lblDocumentSummary"/>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td style="vertical-align:top">
+                        <label value="File đính kèm"/>
+                    </h:td>
+                    <h:td>
+                        <label id="lblAttach" value="Không có file đính kèm" style="color:red" />
+                        <listbox id="lbAttachs" width="100%" multiple="false" style="border:none" emptyMessage="Không có file đính kèm">
+                            <listhead sizable="true">
+                                <listheader width="100%" align="left" />
+                            </listhead>
+                            <template name="model">
+                                <listitem>
+                                    <listcell label="${each.attachName}" />
+                                </listitem> 
+                            </template>
+                        </listbox>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td colspan="2" style="text-align:center">
+                        <button height="30px" image="/Share/img/icon/close.png" id="btnCancel" label="Đóng"  onClick="documentRefViewWnd.detach()"/>
+                    </h:td>
+                </h:tr>
+            </h:table>
+        </h:div> 
+    </window>
+</zk>

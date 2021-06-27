@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./docBookCRUD" ?>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    
+    <window id="docBookCRUD" title="Thông tin sổ văn bản" border="normal" width="530px" height="320px" 
+        apply="com.viettel.voffice.DAO.System.Books.BookDialogController" 
+        position="center,center" closable="true">
+        <style>
+            .createTable tr
+            {
+            margin-bottom:2px;height:30px;
+            }
+        </style>
+        <h:div width="100%">
+            <h:table width="100%" sclass="createTable" style="border-spacing: 2px;">
+                <h:tr >
+                    <h:td width="22%">
+                        <label value="Tên sổ văn bản" width="120px" />
+                        <label value=" *" sclass="label-required" />
+                    </h:td>
+                    <h:td width="78%">
+                        <textbox id="bookName" value="@{controller.bookSelected.bookName, access='both', save-when='none'}"
+                              mold="rounded"
+                              width="400px" maxlength="500" sclass="txtInput"/>
+                    </h:td>
+                
+                </h:tr>
+                <h:tr >
+                    <h:td width="22%">
+                        <label value="Mã sổ" width="120px" />
+                        <label value=" *" sclass="label-required" />
+                    </h:td>
+                    <h:td width="78%">
+                        <textbox id="prefix" value="@{controller.bookSelected.prefix, access='both', save-when='none'}"
+                              mold="rounded"
+                              width="400px" maxlength="50" sclass="txtInput"/>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td>
+                        <label value="Số hiện tại" width="120px" />
+                        <label value=" *" sclass="label-required" />
+                    </h:td>
+                    <h:td>
+                        <intbox id="txtCurrentNumber" value="@{controller.bookSelected.currentNumber,access='both', save-when='none'}"  width="200px" maxlength="9" />
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td>
+                        <label value="Thứ tự" width="120px" />
+                    </h:td>
+                    <h:td>
+                        <intbox id="txtBookOrder" value="@{controller.bookSelected.bookOrder,access='both', save-when='none'}" width="200px" maxlength="9" />
+                    </h:td>
+                </h:tr>
+            
+                <h:tr>
+                    <h:td > 
+                        <label value="Chọn đơn vị" />
+                        <label value=" *" sclass="label-required" />
+                    </h:td>
+                    <h:td > 
+                        <textbox value="@{controller.bookSelected.deptName}" id="txtDeptName" 
+                             width="330px" readonly="true" mold="rounded" sclass="txtInput"/>
+                        <textbox value="@{controller.bookSelected.deptId,access='both', save-when='none'}" id="txtDeptId" readonly="true" visible="false"/>
+                        <button image="/Share/img/icon/delete.png" height="29px" width="32px" onClick="txtDeptName.setValue(null);txtDeptId.setValue(null);"/>
+                        <button id="btnShowDept" image="/Share/img/icon/dept.png" height="29px" width="32px"/>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td > 
+                        <label value="Loại thủ tục" />
+                        <label value=" *" sclass="label-required" />
+                    </h:td>
+                    <h:td > 
+                        <listbox id="lboxDocBookType" width="200px"  mold="select">
+                            <template name="model">
+                                <listitem label="${each.name}" value="${each.categoryId}" />
+                            </template>
+                        </listbox>
+                        
+<!--                        <listbox id="lboxDocBookType" width="200px" 
+                             model="@{controller.catList}" mold="select" selectedItem="@{controller.catSelected}">
+                            <listitem self="@{each=is}" value="@{is.categoryId}" label="@{is.name}"></listitem>
+                        </listbox>-->
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td > 
+                        <label value="Trạng thái" />
+                    </h:td>
+                    <h:td > 
+                        <listbox id="lboxStatus" mold="select" width="200px" >
+                            <listitem label="Hoạt động" value="1" selected="${controller.bookSelected.isActive ==1 ? true: false}"/>
+                            <listitem label="Không hoạt động" value="0" selected="${$composer.bookSelected.isActive ==0 ? true: false}"/>
+                        </listbox>
+                    </h:td>
+                </h:tr>
+            
+                <h:tr>
+                    <h:td colspan="2" style="text-align:right">
+                        <button label="Lưu" id="btnSave" sclass="button blue" image="/Share/img/icon/save.png" width="85px"/>
+                        <button label="Huỷ bỏ" id="btnCancel" onClick="docBookCRUD.detach()" sclass="button blue" width="85px" image="/Share/img/icon/close.png"/>
+                    </h:td>
+                </h:tr>
+            </h:table>
+        </h:div> 
+    </window>
+</zk>

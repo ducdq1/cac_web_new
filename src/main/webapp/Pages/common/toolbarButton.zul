@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<zk>
+    <toolbar height="26px"
+             style="background: #f9f9f9;
+    			border-bottom: 1px solid #BFD2DE;">
+        <toolbarbutton id="view" width="100px"
+                       label="Xem"
+                       onClick="@command('doView')" image="/Share/img/list.png" />
+        <toolbarbutton id="insert" width="90px"
+                       label="Thêm mới"
+                       onClick="@command('doInsert')" image="/Share/img/add.png" />
+        <toolbarbutton id="update" width="90px"
+                       label="Sửa"
+                       onClick="@command('doUpdate')" image="/Share/img/edit.png" />
+        <toolbarbutton id="delete" width="90px"
+                       label="Xoá"
+                       onClick="@command('doDelete')" image="/Share/img/delete.png" />
+        <toolbarbutton id="save" width="90px"
+                       label="Lưu"
+                       onClick="@command('doSave')" image="/Share/img/save.png" />
+        <toolbarbutton id="cancel" width="90px"
+                       label="Huỷ"
+                       onClick="@command('doCancel')" image="/Share/img/ignore.png" />
+        <toolbarbutton id="search" width="90px"
+                       label="Tìm kiếm"
+                       onClick="@command('doSearch')" image="/Share/img/search.png" />
+        <toolbarbutton id="searchAdvanced" width="160px"
+                       label="Nâng cao"
+                       onClick="@command('doAdvancedSearch')" image="/Share/img/search.png" />
+
+        <toolbarbutton id="previous" width="90px" visible="false"
+                       label="Quay lại"
+                       onClick="@command('doPrevious')" image="/Share/img/previous18.png" />
+        <toolbarbutton id="next" width="90px" visible="false"
+                       label="Tiếp theo"
+                       onClick="@command('doNext')" image="/Share/img/next18.png" />
+    </toolbar>
+</zk>

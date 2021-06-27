@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    <window id="createDlg"
+            title="Thêm mới chức vụ"
+            apply="com.viettel.voffice.DAO.PositionCreateController"
+            width="600px" border="normal" position="center" closable="true"
+            action="show: slideDown;hide: slideUp">
+        <h:div >
+            <h:table width="100%" height="100%" cellpadding="1" cellspacing="2">
+                <h:tr>
+                    <h:td width="20%"> 
+                        <textbox id="txtPosId" visible="false"/>
+                        <label value="Tên chức vụ" width="150px" />
+                        <label value=" *" sclass="label-required" />
+                    </h:td>
+                    <h:td width="80%"> 
+                        <textbox id="txtPosName"
+                                 width="99%" maxlength="180" />
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td width="20%"> 
+                        <label value="Mã chức vụ" width="150px" />
+                    </h:td>
+                    <h:td width="80%"> 
+                        <textbox id="txtPosCode"
+                                 width="99%" maxlength="20" />
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td width="20%"> 
+                        <label value="Mô tả" width="100px" />
+                    </h:td>
+                    <h:td width="80%"> 
+                        <textbox id="txtDescription"
+                                 width="99%" maxlength="1500" rows = "2"/>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                        <h:td>
+                            <label>Đơn vị</label>
+                            <label value=" *" sclass="label-required" />
+                        </h:td>
+                        <h:td>
+                            <textbox id="txtSearchDept"  readonly="true" style="width:70%"/>
+                            <textbox id="txtSearchDeptId" visible="false"/>
+                            <button id="btnShowSearchDept" image="/Share/img/icon/dept.png" height="30px"/>
+                            <button image="/Share/img/icon/delete.png" onClick="txtSearchDept.setValue(null);txtSearchDeptId.setValue(null);" height="30px"/>
+                        </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td>
+                        <label>Trạng thái</label>
+                    </h:td>
+                    <h:td>
+                        <listbox id="lboxStatus" mold="select"
+                                 width="33%" >
+                            <listitem label="Hoạt động" value="1"   />
+                            <listitem label="Khóa" value="0" />
+                        </listbox>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td width="20%"> 
+                        <label value="Vị trí" width="150px" />
+                    </h:td>
+                    <h:td width="80%"> 
+                        <textbox xmlns:w="client" id="txtPosOrder" maxlength="2">
+                            <attribute w:name="doKeyPress_">
+                                <![CDATA[
+                                        function(evt)
+                                        {
+                                                if (!this._shallIgnore(evt, "0123456789"))
+                                                        this.$doKeyPress_(evt);
+                                        }
+                                ]]>
+                            </attribute>
+                        </textbox>
+                    </h:td>
+                </h:tr>
+                <h:tr>
+                    <h:td colspan="2" style="text-align:center">
+                        <button label="Lưu" id="btnCreate" image="/Share/img/icon/save.png"
+                                width="85px" height="30px" sclass="button blue" style="margin-right:10px;" />
+                        <button label="Huỷ bỏ" id="btnClose" image="/Share/img/icon/close.png"
+                                width="85px" height="30px" sclass="button blue"  />         
+                    </h:td>
+                </h:tr>
+            </h:table>
+        </h:div>
+    </window>
+</zk>

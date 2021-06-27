@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+        xmlns="http://www.zkoss.org/2005/zul" id="businessWindow"
+        position="center,center" 
+        title="Phê duyệt từ chối hồ sơ" apply="com.viettel.module.cosmetic.Controller.include.CosEvaluationSignRejectController" width="100%">
+    <style src="/Share/css/formstyle.css" />
+    <style src="/Share/css/uploadstyle.css" />
+    <script type="text/javascript" src="/Share/js/UPMSamples.js" />
+    <script type="text/javascript" src="/Share/js/ca/ViettelCAPlugin.js" />
+    <script type="text/javascript" src="/Share/js/ca/serverSide.js" />
+    <h:object id="plugin0" type="application/x-viettelcasigner" width="3" height="10">
+    </h:object>
+    <h:br/>
+    <vlayout id="layoutComment">
+        <label id="lbTopWarning" style="color: red;" />
+        <div align="center" visible="true">
+        <button id="btnExportCVTC" label="Xem trước công văn từ chối" visible="true" />    
+        </div>  
+<!--        <h:table width="100%" align="center">
+            <h:th width="15%" />
+            <h:th width="35%" />
+            <h:th width="15%" />
+            <h:th width="35%" />
+            <h:tr>
+                <h:td>
+                    <label value="Tên tổ chức cá nhân"
+                           sclass="hightlight" />
+                    <textbox id="userEvaluationTypeH" value = "5" visible="false"/>
+                </h:td>
+                <h:td>
+                    <label width="95%" multiline="true" pre="true"
+                           value="${$composer.vFileCosfile.businessName}"
+                           sclass="label-info" />
+                </h:td>
+            </h:tr> 
+            <h:tr>
+                <h:td>
+                    <label value="Tên sản phẩm"
+                           sclass="hightlight" />
+                </h:td>
+                <h:td>
+                    <label width="95%" multiline="true" pre="true"
+                           value="${$composer.vFileCosfile.productName}"
+                           sclass="label-info" />
+                </h:td>
+            </h:tr> 
+            <h:tr>
+                <h:td>
+                    <label value="Kết quả xem xét"
+                           sclass="hightlight" />
+                </h:td>
+                <h:td>
+                    <label width="95%" multiline="true" pre="true"
+                           value="${$composer.obj.staffEvaluationValue}"
+                           sclass="label-info" />
+                </h:td>
+            </h:tr>    
+            <h:tr>
+                <h:td>
+                    <label value="Nội dung xem xét"
+                           sclass="hightlight" />
+                   
+                </h:td>
+                <h:td>
+                    <label width="95%" multiline="true" pre="true"
+                           value="${$composer.obj.staffEvaluationContent}"
+                           sclass="label-info" />
+                    
+                </h:td>
+                
+                
+            </h:tr> 
+            <h:tr>
+                <h:td>
+                    <label value="Kết quả phê duyệt"
+                           sclass="hightlight" />
+                   
+                </h:td>
+                <h:td>
+                    
+                    <radiogroup id="rbStatus" onSelect="$composer.onSelectStatus()"/>
+                    <radio id="ra1" label="Từ chối hồ sơ" radiogroup="rbStatus" value="1" selected="true"/>
+                    
+                </h:td>
+                
+            </h:tr>
+            <h:tr>
+                <h:td>
+                    <label value="Nội dung từ chối" sclass="lb-create" />
+                    <label value=" *"
+                            sclass="label-required" />
+                </h:td>
+                <h:td colspan="3">
+                    <textbox id="mainContent" width="95%" rows="5"  maxlength="500" />
+                                                 value="${$composer.obj.mainContent}"
+                            
+                </h:td>
+			
+            </h:tr>
+            
+               
+        </h:table>-->
+        
+
+      
+        <div align="center" visible="false">
+            <button id="btnSubmit" label="Gửi xử lý" visible="true"
+                    image="/Share/img/icon/send_document_1.png" />
+        </div>
+        <div align="center" visible="true" style="height: 1px">
+            <h:input type="text" name="filepath" id="filepath" size="50" style="display:none"/> 
+            <h:input type="hidden" id="base64Hash" value="" />
+            <textbox id="txtBase64Hash" value="" style="display:none"/>
+            <h:input type="hidden" id="certSerial" value="" />
+            <textbox id="txtCertSerial" value="" style="display:none"/>
+            <h:br/>
+            <h:div id="areaId" style="display: none"/>
+            <label id="lbBottomWarning" style="color: red;" />
+        </div>
+        <textbox id="txtValidate" value="1" visible="false" />
+    </vlayout>      
+</window>
