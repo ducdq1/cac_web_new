@@ -142,22 +142,32 @@ public class ProductDao extends GenericDAOHibernate<Product, Long> {
 				lstParam.add(StringUtils.toLikeString(code.toLowerCase()));
 
 				selectHql.append(
-						" or  lower(f.productName) like ? escape '/' or  lower(f.productNameSearch) like ? escape '/'  )");
+						" or  lower(f.productName) like ? escape '/' or  lower(f.productNameSearch) like ? escape '/'  ");
+				if (bo.getIsAgent() != null && bo.getIsAgent()) {
+					selectHql.append(
+							" or  lower(f.maDaiLy) like ? escape '/'  ");
+					lstParam.add(StringUtils.toLikeString(code.toLowerCase()));
+				}
+				selectHql.append(
+						" )");
 				lstParam.add(StringUtils.toLikeString(code.toLowerCase()));
 				lstParam.add(StringUtils.toLikeString(code.toLowerCase()));
 
-				if (bo.getType() != null) {
-					selectHql.append(
-							" and  f.productType IN(");
-					if(bo.getType() ==0){
-						selectHql.append( "0,1");
-					}else{
-						selectHql.append( "2,3,4");
-					}
-					
-					selectHql.append( ") ");
-					
+				if (bo.getIsAgent() != null && bo.getIsAgent()) {
+					selectHql.append(" and f.maDaiLy is not null ") ;
 				}
+				
+				if (bo.getType() != null) {
+					selectHql.append(" and  f.productType IN(");
+					if (bo.getType() == 0) {
+						selectHql.append("0,1");
+					} else {
+						selectHql.append("2,3,4");
+					}
+
+					selectHql.append(") ");
+				}
+				
 			}
 
 			selectHql.append(" order by lower(f.productCode)");
@@ -193,7 +203,7 @@ public class ProductDao extends GenericDAOHibernate<Product, Long> {
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public List<Product> searchProduct(SearchProductBO bo) {
+	public List<Product> getProductByCode(SearchProductBO bo) {
 
 		List<Product> lstProduct = new ArrayList<>();
 		try {
@@ -204,16 +214,26 @@ public class ProductDao extends GenericDAOHibernate<Product, Long> {
 				String code = bo.getProductCode();
 				String name = bo.getProductName();
 
-				if (code != null && !code.isEmpty()) {
-					selectHql.append(" and lower(f.productCode) = ? ");
-					lstParam.add((code.toLowerCase()));
-				}
+				if (bo.getIsAgent() != null && bo.getIsAgent()) {
+					if (code != null && !code.isEmpty()) {
+						selectHql.append(" and ( lower(f.productCode) = ? or lower(f.maDaiLy) = ? ) ");
+						lstParam.add((code.toLowerCase()));
+						lstParam.add((code.toLowerCase()));
+					}
+					
+					selectHql.append(" and f.maDaiLy is not null ");
+				} else {
+					if (code != null && !code.isEmpty()) {
+						selectHql.append(" and lower(f.productCode) = ? ");
+						lstParam.add((code.toLowerCase()));
+					}
 
-				if (name != null && !name.isEmpty()) {
-					selectHql.append(
-							" and  (lower(f.productName) like ? escape '/' or  lower(f.productNameSearch) like ? escape '/' ) ");
-					lstParam.add(StringUtils.toLikeString(name.toLowerCase()));
-					lstParam.add(StringUtils.toLikeString(name.toLowerCase()));
+					if (name != null && !name.isEmpty()) {
+						selectHql.append(
+								" and  (lower(f.productName) like ? escape '/' or  lower(f.productNameSearch) like ? escape '/' ) ");
+						lstParam.add(StringUtils.toLikeString(name.toLowerCase()));
+						lstParam.add(StringUtils.toLikeString(name.toLowerCase()));
+					}
 				}
 
 			}

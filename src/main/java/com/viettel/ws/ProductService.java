@@ -89,7 +89,7 @@ public class ProductService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public ProductResponse searchProduct(final SearchProductBO searchProductBO) {
 		List<com.viettel.module.phamarcy.BO.Product> lstProduct = new ArrayList<>();
-		lstProduct = new ProductDao().searchProduct(searchProductBO);
+		lstProduct = new ProductDao().getProductByCode(searchProductBO);
 		ProductResponse productResponse = new ProductResponse();
 
 		Long productId = null;

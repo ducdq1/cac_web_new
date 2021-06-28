@@ -73,7 +73,7 @@ public class AddProductController extends BaseComposer {
 	 */
 	private static final long serialVersionUID = 6105342511808925036L;
 	@Wire
-	private Textbox tbMaSP,tbMaHangHoa;
+	private Textbox tbMaSP,tbMaHangHoa,tbMaSPDaiLy,tbGiaKM;
 	@Wire
 	private Label lbDSP;
 	@Wire
@@ -215,6 +215,8 @@ public class AddProductController extends BaseComposer {
 		tbMaHangHoa.setValue(product.getMaHangHoa());
 		cbTenSP.setValue(product.getProductName());
 		tbMaSP.setText(product.getProductCode());
+		tbMaSPDaiLy.setText(product.getMaDaiLy());
+		tbGiaKM.setText(product.getPriceKM());
 		tbGiaNhap.setText(product.getPrice());
 		cbBaoHanh.setValue(product.getWarranty());
 		tbGia.setText(product.getSalePrice());
@@ -311,7 +313,15 @@ public class AddProductController extends BaseComposer {
 		} else {
 			product.setPrice(tbGiaNhap.getText());
 		}
-
+		
+		Long giaKM = getLongFromString(tbGiaKM.getText());
+		if (giaKM != null) {
+			product.setPriceKM(formatNumber(giaKM, "###,###"));
+		} else {
+			product.setPriceKM(tbGiaKM.getText());
+		}
+		
+		product.setMaDaiLy(tbMaSPDaiLy.getText().trim());
 		product.setSize(cbKichThuoc.getValue().toString());
 		product.setFeature(cbTinhNang.getValue());
 		product.setThongSoKT(cbThongSoKyThuat.getValue());

@@ -29,6 +29,7 @@ public class WorkerService {
 				user.setTelephone(worker.getPhone());
 				user.setFullName(worker.getName());
 				user.setUserId(worker.getId());
+				user.setUserName(worker.getPhone());
 				resp.setUser(user);
 			} else {
 				Workers newWorker = new Workers();
@@ -40,6 +41,7 @@ public class WorkerService {
 				user.setUserId(newWorker.getId());
 				user.setTelephone(newWorker.getPhone());
 				user.setFullName(newWorker.getName());
+				user.setUserName(newWorker.getPhone());
 				resp.setUser(user);
 			}
 		} catch (Exception e) {

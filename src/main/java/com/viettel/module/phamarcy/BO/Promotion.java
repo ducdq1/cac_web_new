@@ -47,7 +47,7 @@ public class Promotion implements Serializable {
 	private Date createDate;
 	
 	@Column(name = "NUMBER_SALE_OFF")
-	private Long numberSaleOff;
+	private String numberSaleOff;
 	
 	public Long getId() {
 		return id;
@@ -98,11 +98,11 @@ public class Promotion implements Serializable {
 		this.createDate = createDate;
 	}
 
-	public Long getNumberSaleOff() {
+	public String getNumberSaleOff() {
 		return numberSaleOff;
 	}
 
-	public void setNumberSaleOff(Long numberSaleOff) {
+	public void setNumberSaleOff(String numberSaleOff) {
 		this.numberSaleOff = numberSaleOff;
 	}
 	

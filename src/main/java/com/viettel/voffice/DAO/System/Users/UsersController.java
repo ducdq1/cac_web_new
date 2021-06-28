@@ -81,7 +81,7 @@ public class UsersController extends BaseComposer {
 				new String[][] { { Constants_XNN.USER_TYPE.ADMIN.toString(), "Quản trị hệ thống" },
 					{"0", "Bộ phận tem" },
 						{"2", "Nhân viên bán hàng" },
-						{ "3", "Quản lý bán hàng" }});
+						{ "3", "Quản lý bán hàng" },{ "4", "Nhân viên bán hàng đại lý" }});
 		cbUserType.setModel(infos);
 		cbUserType.renderAll();
 		cbUserType.setSelectedIndex(2);

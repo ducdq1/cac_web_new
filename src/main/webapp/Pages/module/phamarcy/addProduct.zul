@@ -88,6 +88,20 @@
 				</h:tr>
 				<h:tr>
 					<h:td style="text-align: right;">
+					</h:td>
+					<h:td colspan="1">
+					</h:td>
+				 
+					<h:td width="15%" style="text-align: right;">
+						<label sclass="lb-create" >Mã sản phẩm cho đại lý:</label>
+					</h:td>
+					<h:td width="85%" colspan="1">
+						<textbox id="tbMaSPDaiLy" maxlength="2000" style="margin-bottom:10px"/>
+					</h:td>
+
+				</h:tr>
+				<h:tr>
+					<h:td style="text-align: right;">
 						<label sclass="lb-create" >Xuất xứ:  </label>
 					</h:td>
 					<h:td colspan="1"  >
@@ -130,7 +144,15 @@
 						<textbox id="tbGia" maxlength="2000" style="margin-bottom:10px"/>
 					</h:td>
 				</h:tr>
-				
+				<h:tr>
+					<h:td style="text-align: right;">
+						<label sclass="lb-create">Giá khuyến mãi:  </label>
+					</h:td>
+					<h:td colspan="1">
+						<textbox id="tbGiaKM" maxlength="2000" style="margin-bottom:10px"/>
+					</h:td>
+				 
+				</h:tr>
 				<h:tr>
 					<h:td style="text-align: right;">
 						<label sclass="lb-create">Tính năng:  </label>

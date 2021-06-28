@@ -13,6 +13,7 @@ public class SearchProductBO {
 		@XmlElement
 		public int limit = 10;
 		public Integer type;
+		public Boolean isAgent;
 		
 		public String getProductCode() {
 			return productCode;
@@ -49,6 +50,12 @@ public class SearchProductBO {
 		}
 		public void setType(Integer type) {
 			this.type = type;
+		}
+		public Boolean getIsAgent() {
+			return isAgent;
+		}
+		public void setIsAgent(Boolean isAgent) {
+			this.isAgent = isAgent;
 		}  
 		
 }

@@ -61,6 +61,7 @@
                             <listitem label="Quản trị hệ thống" value="1" />
                             <listitem label="Nhân viên bán hàng" value="2" selected="true" />
                             <listitem label="Quản lý bán hàng" value="3" selected="true" />
+                             <listitem label="Nhân viên bán hàng đại lý" value="4" selected="true" />
                         </listbox>
                     </h:td>
                 </h:tr>
