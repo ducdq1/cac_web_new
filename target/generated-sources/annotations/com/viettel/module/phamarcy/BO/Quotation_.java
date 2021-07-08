@@ -22,6 +22,7 @@ public abstract class Quotation_ {
 	public static volatile SingularAttribute<Quotation, String> createUserCode;
 	public static volatile SingularAttribute<Quotation, String> createUserFullName;
 	public static volatile SingularAttribute<Quotation, Integer> type;
+	public static volatile SingularAttribute<Quotation, Long> isInvalid;
 	public static volatile SingularAttribute<Quotation, Date> quotationDate;
 	public static volatile SingularAttribute<Quotation, String> cusPhone;
 	public static volatile SingularAttribute<Quotation, Long> userCreate;

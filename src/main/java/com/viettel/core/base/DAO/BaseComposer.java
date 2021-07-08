@@ -533,6 +533,17 @@ public class BaseComposer extends SelectorComposer<Component> {
 		}
 		return null;
 	}
+	
+	public String getPriceFromString(String value) {
+		try {
+			
+			String temp=value.replace(".", "").replace(",", "");
+			return formatNumber(Long.parseLong(temp), "###,###");
+		} catch (NumberFormatException | NullPointerException e) {
+			LogUtils.addLog(e);
+		}
+		return value;
+	}
 
 	public Double getDoubleFromString(String value) {
 		try {

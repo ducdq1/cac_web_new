@@ -136,6 +136,7 @@ public class ProductService {
 		return productResponse;
 	}
 
+	@SuppressWarnings("unchecked")
 	@POST
 	@Path("/quotations")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -214,6 +215,11 @@ public class ProductService {
 						quotationResponse.setStatusCode(1000);
 						return quotationResponse;
 					}
+				}
+				
+				if(createQuotationBO.getIsInvalid()!=null && createQuotationBO.getIsInvalid()){
+					quotationUpdate.setIsInvalid(1L);
+					new QuotationDao().saveOrUpdate(quotationUpdate);
 				}
 				
 				if(createQuotationBO.getQuotation().getNote() != null ){

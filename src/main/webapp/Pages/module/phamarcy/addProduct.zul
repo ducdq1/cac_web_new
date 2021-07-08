@@ -131,25 +131,48 @@
 				</h:tr>
 				<h:tr>
 					<h:td style="text-align: right;">
-						<label sclass="lb-create">Giá nhập:  </label>
+						<label sclass="lb-create" style="color:red">Giá nhập:  </label>
 					</h:td>
 					<h:td colspan="1">
 						<textbox id="tbGiaNhap" maxlength="2000" style="margin-bottom:10px"/>
 					</h:td>
-				 
-					<h:td style="text-align: right;">
-						<label sclass="lb-create">Giá bán:  </label>
+				 <h:td style="text-align: right;">
+						<label sclass="lb-create" style="color:red">Giá nhập KM:  </label>
+					</h:td>
+					<h:td colspan="1">
+						<textbox id="tbGiaNhapKM" maxlength="2000" style="margin-bottom:10px"/>
+					</h:td>
+					
+				</h:tr>
+				<h:tr>
+				<h:td style="text-align: right;">
+						<label sclass="lb-create" style="color:red">Giá bán lẽ:  </label>
 					</h:td>
 					<h:td colspan="1">
 						<textbox id="tbGia" maxlength="2000" style="margin-bottom:10px"/>
 					</h:td>
+					
+					<h:td style="text-align: right;">
+						<label sclass="lb-create" style="color:red">Giá KM bán lẽ:  </label>
+					</h:td>
+					<h:td colspan="1">
+						<textbox id="tbGiaBLKM" maxlength="2000" style="margin-bottom:10px"/>
+					</h:td>
+					
+				 
 				</h:tr>
 				<h:tr>
 					<h:td style="text-align: right;">
-						<label sclass="lb-create">Giá khuyến mãi:  </label>
+						<label sclass="lb-create" style="color:red">Giá bán đại lý:  </label>
 					</h:td>
 					<h:td colspan="1">
-						<textbox id="tbGiaKM" maxlength="2000" style="margin-bottom:10px"/>
+						<textbox id="tbGiaDL" maxlength="2000" style="margin-bottom:10px"/>
+					</h:td>
+					<h:td style="text-align: right;">
+						<label sclass="lb-create" style="color:red">Giá KM đại lý:  </label>
+					</h:td>
+					<h:td colspan="1">
+						<textbox id="tbGiaDLKM" maxlength="2000" style="margin-bottom:10px"/>
 					</h:td>
 				 
 				</h:tr>

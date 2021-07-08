@@ -52,7 +52,7 @@ public class Product extends BaseComposer implements Serializable {
 	private String quotationName;
 
 	@Column(name = "PRICE")
-	private String price;
+	private String price;//gia nhap ban le
 
 	@Column(name = "IMAGE")
 	private String image;
@@ -64,7 +64,7 @@ public class Product extends BaseComposer implements Serializable {
 	private String unit;
 
 	@Column(name = "SALE_PRICE")
-	private String salePrice;
+	private String salePrice;//gia ban le
 
 	@Column(name = "WARRANTY")
 	private String warranty;// bao hanh
@@ -117,8 +117,18 @@ public class Product extends BaseComposer implements Serializable {
 	@Column(name = "CREATE_USER")
 	private String createUser;
 	
-	@Column(name = "PRICE_KM")
-	private String priceKM;
+	@Column(name = "PRICE_BL_KM")
+	private String priceBLKM;//gia ban le KM
+	
+	@Column(name = "PRICE_NHAP_KM")
+	private String priceNHAPKM;//gia nhap KM
+	
+	@Column(name = "PRICE_DL_KM")
+	private String priceDLKM;//gia dai ly KM
+	
+	@Column(name = "PRICE_DL")
+	private String priceDL;//gia ban dai ly
+	
 	
 	@Column(name = "MA_DAI_LY")
 	private String maDaiLy;
@@ -341,12 +351,36 @@ public class Product extends BaseComposer implements Serializable {
 		this.createUser = createUser;
 	}
 
-	public String getPriceKM() {
-		return priceKM;
+	public String getPriceBLKM() {
+		return priceBLKM;
 	}
 
-	public void setPriceKM(String priceKM) {
-		this.priceKM = priceKM;
+	public void setPriceBLKM(String priceBLKM) {
+		this.priceBLKM = priceBLKM;
+	}
+
+	public String getPriceNHAPKM() {
+		return priceNHAPKM;
+	}
+
+	public void setPriceNHAPKM(String priceNHAPKM) {
+		this.priceNHAPKM = priceNHAPKM;
+	}
+
+	public String getPriceDLKM() {
+		return priceDLKM;
+	}
+
+	public void setPriceDLKM(String priceDLKM) {
+		this.priceDLKM = priceDLKM;
+	}
+
+	public String getPriceDL() {
+		return priceDL;
+	}
+
+	public void setPriceDL(String priceDL) {
+		this.priceDL = priceDL;
 	}
 
 	public String getMaDaiLy() {

@@ -17,7 +17,6 @@ public abstract class Product_ {
 	public static volatile SingularAttribute<Product, String> productName;
 	public static volatile SingularAttribute<Product, String> maHangHoa;
 	public static volatile SingularAttribute<Product, String> quotationName;
-	public static volatile SingularAttribute<Product, String> priceKM;
 	public static volatile SingularAttribute<Product, String> feature;
 	public static volatile SingularAttribute<Product, String> trongLuongThung;
 	public static volatile SingularAttribute<Product, String> price;
@@ -29,10 +28,14 @@ public abstract class Product_ {
 	public static volatile SingularAttribute<Product, Long> productId;
 	public static volatile SingularAttribute<Product, String> salePrice;
 	public static volatile SingularAttribute<Product, Long> vat;
+	public static volatile SingularAttribute<Product, String> priceDL;
+	public static volatile SingularAttribute<Product, String> priceDLKM;
 	public static volatile SingularAttribute<Product, String> noiSanXuat;
 	public static volatile SingularAttribute<Product, String> unit;
 	public static volatile SingularAttribute<Product, String> productCode;
 	public static volatile SingularAttribute<Product, String> size;
+	public static volatile SingularAttribute<Product, String> priceBLKM;
+	public static volatile SingularAttribute<Product, String> priceNHAPKM;
 	public static volatile SingularAttribute<Product, String> createUser;
 	public static volatile SingularAttribute<Product, String> maDaiLy;
 

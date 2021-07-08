@@ -86,6 +86,9 @@ public class Quotation implements Serializable {
 	@Column(name = "FILE_NAME")
 	private String fileName;
 	
+	@Column(name = "IS_INVALID")
+	private Long isInvalid;
+	
 	public Long getQuotationID() {
 		return quotationID;
 	}
@@ -236,5 +239,14 @@ public class Quotation implements Serializable {
 
 	public void setSaledDate(Date saledDate) {
 		this.saledDate = saledDate;
-	}  
+	}
+
+	public Long getIsInvalid() {
+		return isInvalid;
+	}
+
+	public void setIsInvalid(Long isInvalid) {
+		this.isInvalid = isInvalid;
+	}
+	
 }

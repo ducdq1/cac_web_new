@@ -30,6 +30,9 @@ public class CreateQuotationBO {
 	@XmlElement
 	public Boolean isPreViewApprove;
 	
+	@XmlElement
+	public Boolean isInvalid;
+	
 	public Quotation getQuotation() {
 		return quotation;
 	}
@@ -84,6 +87,14 @@ public class CreateQuotationBO {
 
 	public void setIsPreViewApprove(Boolean isPreViewApprove) {
 		this.isPreViewApprove = isPreViewApprove;
-	}  
+	}
+
+	public Boolean getIsInvalid() {
+		return isInvalid;
+	}
+
+	public void setIsInvalid(Boolean isInvalid) {
+		this.isInvalid = isInvalid;
+	}
 
 }

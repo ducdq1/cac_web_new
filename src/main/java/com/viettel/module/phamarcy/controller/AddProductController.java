@@ -73,7 +73,7 @@ public class AddProductController extends BaseComposer {
 	 */
 	private static final long serialVersionUID = 6105342511808925036L;
 	@Wire
-	private Textbox tbMaSP,tbMaHangHoa,tbMaSPDaiLy,tbGiaKM;
+	private Textbox tbMaSP,tbMaHangHoa,tbMaSPDaiLy,tbGiaNhapKM,tbGiaBLKM,tbGiaDL,tbGiaDLKM;
 	@Wire
 	private Label lbDSP;
 	@Wire
@@ -216,10 +216,16 @@ public class AddProductController extends BaseComposer {
 		cbTenSP.setValue(product.getProductName());
 		tbMaSP.setText(product.getProductCode());
 		tbMaSPDaiLy.setText(product.getMaDaiLy());
-		tbGiaKM.setText(product.getPriceKM());
+		
+		tbGiaNhapKM.setText(product.getPriceNHAPKM());
+		tbGiaDL.setText(product.getPriceDL());
 		tbGiaNhap.setText(product.getPrice());
+		tbGia.setText(product.getSalePrice());//gia ban le
+		tbGiaDLKM.setText(product.getPriceDLKM());
+		tbGiaBLKM.setText(product.getPriceBLKM());
+		
 		cbBaoHanh.setValue(product.getWarranty());
-		tbGia.setText(product.getSalePrice());
+		
 		cbXuatXu.setValue(product.getMadeIn());
 		rdg.setSelectedIndex(product.getVat() == null ? 0 : product.getVat().intValue());
 		rdgProductType.setSelectedIndex(product.getProductType() == null ? 0 : product.getProductType().intValue());
@@ -307,30 +313,20 @@ public class AddProductController extends BaseComposer {
 		product.setProductName(cbTenSP.getValue());
 		product.setProductCode(tbMaSP.getText().toUpperCase());
 		// product.setPrice(getLongFromString(tbGiaNhap.getText().trim()));
-		Long giaNhap = getLongFromString(tbGiaNhap.getText());
-		if (giaNhap != null) {
-			product.setPrice(formatNumber(giaNhap, "###,###"));
-		} else {
-			product.setPrice(tbGiaNhap.getText());
-		}
+		 
 		
-		Long giaKM = getLongFromString(tbGiaKM.getText());
-		if (giaKM != null) {
-			product.setPriceKM(formatNumber(giaKM, "###,###"));
-		} else {
-			product.setPriceKM(tbGiaKM.getText());
-		}
+		product.setPrice(getPriceFromString(tbGiaNhap.getText().toString()));
+		product.setSalePrice(getPriceFromString(tbGia.getText()));
+		product.setPriceNHAPKM(getPriceFromString(tbGiaNhapKM.getText()));
+		product.setPriceDL(getPriceFromString(tbGiaDL.getText()));
+		product.setPriceDLKM(getPriceFromString(tbGiaDLKM.getText()));
+		product.setPriceBLKM(getPriceFromString(tbGiaBLKM.getText()));
 		
 		product.setMaDaiLy(tbMaSPDaiLy.getText().trim());
 		product.setSize(cbKichThuoc.getValue().toString());
 		product.setFeature(cbTinhNang.getValue());
 		product.setThongSoKT(cbThongSoKyThuat.getValue());
-		Long giaBan = getLongFromString(tbGia.getText());
-		if (giaBan != null) {
-			product.setSalePrice(formatNumber(giaBan, "###,###"));
-		} else {
-			product.setSalePrice(tbGia.getText());
-		}
+		
 		int index = rdgProductType.getSelectedIndex();
 
 		product.setProductType(Long.valueOf(rdgProductType.getSelectedIndex()));
