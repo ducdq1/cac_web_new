@@ -35,16 +35,19 @@ public class ProductCategory implements Serializable {
 
 	@Column(name = "DESCRIPTION")
 	private String description;
-	
+
 	@Column(name = "IMAGE_URL")
 	private String imageUrl;
-	
+
 	@Column(name = "IS_ACTIVE")
 	private Long isActive;
 
 	@Column(name = "TYPE")
 	private Long type;
-	
+
+	@Column(name = "CODE")
+	private String code;
+
 	public Long getId() {
 		return id;
 	}
@@ -61,7 +64,6 @@ public class ProductCategory implements Serializable {
 		this.name = name;
 	}
 
- 
 	public String getDescription() {
 		return description;
 	}
@@ -93,6 +95,14 @@ public class ProductCategory implements Serializable {
 	public void setType(Long type) {
 		this.type = type;
 	}
-	 
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
 	
 }

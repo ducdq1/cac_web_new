@@ -12,8 +12,12 @@ public class SearchProductBO {
 		public int offset = 0;
 		@XmlElement
 		public int limit = 10;
+		@XmlElement
 		public Integer type;
+		@XmlElement 
 		public Boolean isAgent;
+		@XmlElement
+		public String code;
 		
 		public String getProductCode() {
 			return productCode;
@@ -56,6 +60,11 @@ public class SearchProductBO {
 		}
 		public void setIsAgent(Boolean isAgent) {
 			this.isAgent = isAgent;
+		}
+		public String getCode() {
+			return code;
+		}
+		public void setCode(String code) {
+			this.code = code;
 		}  
-		
 }

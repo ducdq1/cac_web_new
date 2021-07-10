@@ -220,11 +220,13 @@ public class ProductService {
 				if(createQuotationBO.getIsInvalid()!=null && createQuotationBO.getIsInvalid()){
 					quotationUpdate.setIsInvalid(1L);
 					new QuotationDao().saveOrUpdate(quotationUpdate);
+					quotationResponse.setMessage("Cập nhật hiệu lực thành công");
 				}
 				
 				if(createQuotationBO.getQuotation().getNote() != null ){
 					quotationUpdate.setNote(createQuotationBO.getQuotation().getNote());
 					new QuotationDao().saveOrUpdate(quotationUpdate);
+					quotationResponse.setMessage("Cập nhật tiến độ thành công");
 				}
 				
 			}

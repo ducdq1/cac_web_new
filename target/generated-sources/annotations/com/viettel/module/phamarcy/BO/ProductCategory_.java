@@ -8,6 +8,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 @StaticMetamodel(ProductCategory.class)
 public abstract class ProductCategory_ {
 
+	public static volatile SingularAttribute<ProductCategory, String> code;
 	public static volatile SingularAttribute<ProductCategory, String> imageUrl;
 	public static volatile SingularAttribute<ProductCategory, String> name;
 	public static volatile SingularAttribute<ProductCategory, String> description;

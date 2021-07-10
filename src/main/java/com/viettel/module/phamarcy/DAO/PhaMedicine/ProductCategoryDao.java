@@ -48,7 +48,7 @@ public class ProductCategoryDao extends GenericDAOHibernate<ProductCategory, Lon
 		List<Workers> lstProduct = new ArrayList<>();
 		try {
 			List lstParam = new ArrayList();
-			StringBuilder selectHql = new StringBuilder("SELECT f from ProductCategory f where isActive = 1 ");
+			StringBuilder selectHql = new StringBuilder("SELECT f from ProductCategory f where isActive = 1 order by type asc");
 			StringBuilder hql = new StringBuilder();
 
 				if (name != null && !name.isEmpty()) {

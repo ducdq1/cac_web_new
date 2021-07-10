@@ -144,19 +144,27 @@ public class ProductDao extends GenericDAOHibernate<Product, Long> {
 				selectHql.append(
 						" or  lower(f.productName) like ? escape '/' or  lower(f.productNameSearch) like ? escape '/'  ");
 				if (bo.getIsAgent() != null && bo.getIsAgent()) {
-					selectHql.append(
-							" or  lower(f.maDaiLy) like ? escape '/'  ");
+					selectHql.append(" or  lower(f.maDaiLy) like ? escape '/'  ");
 					lstParam.add(StringUtils.toLikeString(code.toLowerCase()));
 				}
-				selectHql.append(
-						" )");
+
+				selectHql.append(" )");
 				lstParam.add(StringUtils.toLikeString(code.toLowerCase()));
 				lstParam.add(StringUtils.toLikeString(code.toLowerCase()));
 
 				if (bo.getIsAgent() != null && bo.getIsAgent()) {
-					selectHql.append(" and f.maDaiLy is not null ") ;
+					selectHql.append(" and f.maDaiLy is not null ");
 				}
 				
+				String typeCode = bo.getCode();
+				if (typeCode != null && !typeCode.isEmpty()) {
+					String [] codes = typeCode.split(",");
+					for (String searchProductCode : codes) {
+						selectHql.append(" and f.productCode like '"+searchProductCode+"%' ");	
+					}					
+				}
+			
+
 				if (bo.getType() != null) {
 					selectHql.append(" and  f.productType IN(");
 					if (bo.getType() == 0) {
@@ -167,7 +175,7 @@ public class ProductDao extends GenericDAOHibernate<Product, Long> {
 
 					selectHql.append(") ");
 				}
-				
+
 			}
 
 			selectHql.append(" order by lower(f.productCode)");
@@ -220,7 +228,7 @@ public class ProductDao extends GenericDAOHibernate<Product, Long> {
 						lstParam.add((code.toLowerCase()));
 						lstParam.add((code.toLowerCase()));
 					}
-					
+
 					selectHql.append(" and f.maDaiLy is not null ");
 				} else {
 					if (code != null && !code.isEmpty()) {
