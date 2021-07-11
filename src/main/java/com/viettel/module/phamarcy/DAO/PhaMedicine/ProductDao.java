@@ -147,6 +147,11 @@ public class ProductDao extends GenericDAOHibernate<Product, Long> {
 					selectHql.append(" or  lower(f.maDaiLy) like ? escape '/'  ");
 					lstParam.add(StringUtils.toLikeString(code.toLowerCase()));
 				}
+				
+				if (bo.getType() != null && bo.getType().intValue() == 1) {
+					selectHql.append("  or  lower(f.size) like ? escape '/'  ");
+					lstParam.add(StringUtils.toLikeString(code.toLowerCase()));
+				}
 
 				selectHql.append(" )");
 				lstParam.add(StringUtils.toLikeString(code.toLowerCase()));
@@ -159,26 +164,37 @@ public class ProductDao extends GenericDAOHibernate<Product, Long> {
 				String typeCode = bo.getCode();
 				if (typeCode != null && !typeCode.isEmpty()) {
 					String [] codes = typeCode.split(",");
+					int i = 0; 
 					for (String searchProductCode : codes) {
-						selectHql.append(" and f.productCode like '"+searchProductCode+"%' ");	
-					}					
+//						selectHql.append(" and f.productCode like '"+searchProductCode+"%' ");
+						if(i==0){
+							selectHql.append(" and (f.productCode like '"+searchProductCode+"%' ");
+						}else{
+							selectHql.append(" or f.productCode like '"+searchProductCode+"%' ");
+						}
+						i ++;						
+					}
+					selectHql.append(" )");
 				}
 			
 
 				if (bo.getType() != null) {
 					selectHql.append(" and  f.productType IN(");
-					if (bo.getType() == 0) {
+					if (bo.getType().intValue() == 0) {
 						selectHql.append("0,1");
 					} else {
 						selectHql.append("2,3,4");
 					}
-
 					selectHql.append(") ");
 				}
 
 			}
-
-			selectHql.append(" order by lower(f.productCode)");
+			
+			if (bo.getType() != null && bo.getType().intValue() == 1) {
+				selectHql.append(" order by lower(f.size)");
+			}else{
+				selectHql.append(" order by lower(f.productCode)");
+			}
 
 			Session currentSession = getSession();
 			if (currentSession == null || !currentSession.getTransaction().isActive()) {
