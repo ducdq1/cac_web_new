@@ -18,8 +18,8 @@
 					<label value="Mã sản phẩm" sclass="lb-create" />
 				</h:td>
 				<h:td>
-					<textbox id="tbMaSP" width="90%" rows="1"
-						maxlength="250" />
+					<textbox id="tbMaSP" width="60%" rows="1"
+					  />
 				</h:td>
 			 <h:td>
 					<label value="Loại sản phẩm" sclass="lb-create" />
@@ -35,6 +35,15 @@
 					</combobox>
 				</h:td> 
 			</h:tr>
+			<h:tr>
+				<h:td style="text-align: left;">
+					<label value="Mã hàng hóa" sclass="lb-create" />
+				</h:td>
+				<h:td>
+					<textbox id="tbMaHangHoa" width="60%" rows="1"
+						  />
+				</h:td>
+				</h:tr>
 
 			<h:tr>
 				<h:td style="height:20px">

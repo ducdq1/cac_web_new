@@ -6,7 +6,7 @@ public class PhamarcyFileModel {
 	private String productName;
 	private String productCode;
 	private Long areaId;
-
+	private String maHangHoa;
 	private String quotationCode;
 	private String quotationUserFullName;
 	private Date fromDate;
@@ -201,6 +201,14 @@ public class PhamarcyFileModel {
 
 	public void setDaBan(int daBan) {
 		this.daBan = daBan;
+	}
+
+	public String getMaHangHoa() {
+		return maHangHoa;
+	}
+
+	public void setMaHangHoa(String maHangHoa) {
+		this.maHangHoa = maHangHoa;
 	}
 	
 	

@@ -67,6 +67,13 @@ public class ProductDao extends GenericDAOHibernate<Product, Long> {
 					lstParam.add(StringUtils.toLikeString(name.toLowerCase()));
 					lstParam.add(StringUtils.toLikeString(name.toLowerCase()));
 				}
+				
+				String maHangHoa = searchModel.getMaHangHoa();
+				if(maHangHoa !=null && !maHangHoa.isEmpty()){
+					hql.append(" and lower(f.maHangHoa) like ? escape '/'");
+					lstParam.add(StringUtils.toLikeString(maHangHoa.toLowerCase()));
+				}
+				
 				int productType = searchModel.getProductType();
 				if (productType >= 1) {
 					hql.append(" and  f.productType =? ");

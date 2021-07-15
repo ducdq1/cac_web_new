@@ -281,7 +281,11 @@ public class AddProductController extends BaseComposer {
 			new ProductDao().saveOrUpdate(product);
 		}
 
-		saveImages(product.getProductId());
+		String pathImage = saveImages(product.getProductId());
+		if(pathImage !=null){
+			product.setImage(pathImage);
+			new ProductDao().saveOrUpdate(product);
+		}
 
 		try {
 			saveImageThongSoKT();
@@ -442,12 +446,13 @@ public class AddProductController extends BaseComposer {
 		return valid;
 	}
 
-	private void saveImages(Long objectId) {
+	private String saveImages(Long objectId) {
 		AttachDAO adhe = new AttachDAO();
+		Attachs attach = null;
 		for (Attachs att : attachs) {
 			try {
 				if (att.getAttachId() == null) {
-					adhe.saveFileAttach(att.getContent(), objectId, Constants.OBJECT_TYPE.CAC_IMAGE, null);
+					attach = adhe.saveFileAttach(att.getContent(), objectId, Constants.OBJECT_TYPE.CAC_IMAGE, null);
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -459,6 +464,12 @@ public class AddProductController extends BaseComposer {
 			att.setIsActive(0L);
 			dao.saveOrUpdate(att);
 		}
+		
+		if(attach !=null){
+			return attach.getFullPathFile();
+		}
+		
+		return null;
 	}
 
 	@Listen("onUpload = #btnUpload")

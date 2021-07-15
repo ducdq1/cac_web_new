@@ -315,8 +315,8 @@ public class AttachDAO extends BaseGenericForwardComposer {
 		} 
 	}
 
-	public void saveFileAttach(Media media, Long objectId, Long objectType, Long attachType) throws IOException {
-		saveFileAttach(media, objectId, objectType, attachType, null);
+	public Attachs saveFileAttach(Media media, Long objectId, Long objectType, Long attachType) throws IOException {
+		return saveFileAttach(media, objectId, objectType, attachType, null);
 	}
 
 	/**
@@ -330,14 +330,14 @@ public class AttachDAO extends BaseGenericForwardComposer {
 	 * @param callback
 	 * @throws IOException
 	 */
-	public void saveFileAttach(Media media, Long objectId, Long objectType, Long attachType,
+	public Attachs saveFileAttach(Media media, Long objectId, Long objectType, Long attachType,
 			AttachmentCallback callback) throws IOException {
 		// Neu ung dung chua co avatar thi return
 		if (media == null) {
 			if (callback != null) {
 				callback.onUploadFailed();
 			}
-			return;
+			return null;
 		}
 		AttachDAOHE attachDAOHE = new AttachDAOHE();
 		Attachs attach = new Attachs();
@@ -427,6 +427,7 @@ public class AttachDAO extends BaseGenericForwardComposer {
 				inputStream.close();
 			}
 		}
+		return attach;
 	}
 
 	// nghiepnc

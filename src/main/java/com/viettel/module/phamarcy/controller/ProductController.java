@@ -43,8 +43,10 @@ public class ProductController extends BaseComposer {
 	private static final long serialVersionUID = 1L;
 	@Wire("#incSearchFullForm #fullSearchGbx") // Form search
 	private Groupbox fullSearchGbx;
-	@Wire("#incSearchFullForm #tbMaSP") // Ma ho so
+	@Wire("#incSearchFullForm #tbMaSP") 
 	private Textbox tbMaSP;
+	@Wire("#incSearchFullForm #tbMaHangHoa") 
+	private Textbox tbMaHangHoa;
 	// @Wire("#incSearchFullForm #tbTenSP") // Ten thuoc
 	// private Textbox tbTenSP;
 	@Wire
@@ -78,7 +80,7 @@ public class ProductController extends BaseComposer {
 	@Listen("onClick = #incSearchFullForm #btnSearch")
 	public void onSearch() {
 		lastSearchModel.setProductCode(tbMaSP.getText().trim());
-		// lastSearchModel.setProductName(tbTenSP.getText().trim());
+		lastSearchModel.setMaHangHoa(tbMaHangHoa.getText().trim());
 
 		int index = cbLoaiSP.getSelectedIndex();
 		lastSearchModel.setProductType(index);
