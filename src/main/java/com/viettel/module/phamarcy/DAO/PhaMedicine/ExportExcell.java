@@ -1273,6 +1273,8 @@ public class ExportExcell extends BaseComposer {
 
 			createCell(colNum++, row0, cloneRow0.getCell(9).getCellStyle(),
 					"" + formatNumber(quotation.getTotalPrice(), "###,###,###.####"));
+			
+			createCell(colNum++, row0, cloneRow0.getCell(8).getCellStyle(),Long.valueOf(1).equals(quotation.getIsInvalid()) ? "X" : "" );
 
 			countRow++;
 		}
