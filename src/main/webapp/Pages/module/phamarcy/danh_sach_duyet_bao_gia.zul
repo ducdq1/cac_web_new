@@ -142,7 +142,7 @@
 				<listheader label="Mã báo giá" align="center"
 					style="width:7%" />
 				<listheader label="Tên Khách hàng" align="center"
-					style="width:20%" />
+					style="width:15%" />
 				<listheader label="Địa chỉ" align="center"
 					style="width:20%" />
 				<listheader label="Số điện thoại" align="center"
@@ -155,6 +155,8 @@
 					style="width:8%" />
 				<listheader label="Đã bán" align="center"
 					style="width:8%" />
+					<listheader label="Đã hủy" align="center"
+					hflex="min"  />
 				<listheader label="Duyệt" align="center" hflex="min" />
 
 			</listhead>
@@ -198,7 +200,9 @@
 						<label value="Chưa bán" if="${each.saledDate == null}" ></label>
 						<label value="Đã bán" if="${each.saledDate != null}" ></label> 
 					</listcell> 
-					
+					<listcell style="text-align:center">
+						<label value="Đã hủy" if="${each.isInvalid == 1}" ></label> 
+					</listcell>
 					<listcell>
 						<image src="/Share/img/icon/edit.png"
 							width="22px" height="22px"
