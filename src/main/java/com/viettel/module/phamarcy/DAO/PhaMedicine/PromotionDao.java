@@ -1,6 +1,7 @@
 package com.viettel.module.phamarcy.DAO.PhaMedicine;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -11,6 +12,7 @@ import com.viettel.core.base.DAO.GenericDAOHibernate;
 import com.viettel.core.base.model.PagingListModel;
 import com.viettel.module.phamarcy.BO.Promotion;
 import com.viettel.module.phamarcy.BO.Workers;
+import com.viettel.utils.DateTimeUtils;
 import com.viettel.utils.HibernateUtil;
 import com.viettel.utils.LogUtils;
 import com.viettel.utils.StringUtils;
@@ -42,7 +44,7 @@ public class PromotionDao extends GenericDAOHibernate<Promotion, Long> {
 	 * @return
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public PagingListModel findPromotions(String name) {
+	public PagingListModel findPromotions(String name,Date fromDate, Date toDate) {
 
 		Long count = 0L;
 		List<Workers> lstProduct = new ArrayList<>();
@@ -51,11 +53,25 @@ public class PromotionDao extends GenericDAOHibernate<Promotion, Long> {
 			StringBuilder selectHql = new StringBuilder("SELECT f from Promotion f where isActive = 1 ");
 			StringBuilder hql = new StringBuilder();
 
-				if (name != null && !name.isEmpty()) {
-					hql.append(" and  lower(f.name) like ? escape '/'");
-					 
-					lstParam.add(StringUtils.toLikeString(name));
-				}
+			if (name != null && !name.isEmpty()) {
+				hql.append(" and  lower(f.name) like ? escape '/'");
+				 
+				lstParam.add(StringUtils.toLikeString(name));
+			}
+			
+			if (fromDate != null) {
+				hql.append(" and f.toDateDate >= ? ");
+				fromDate = DateTimeUtils.setStartTimeOfDate(fromDate);
+				lstParam.add(fromDate);
+			}
+
+			if (toDate != null) {
+				hql.append(" and f.toDateDate < ? ");
+				toDate = DateTimeUtils.addOneDay(toDate);
+				toDate = DateTimeUtils.setStartTimeOfDate(toDate);
+				lstParam.add(toDate);
+			}
+			
 			hql.append(" order by createDate desc ");
 			selectHql.append(hql);
 

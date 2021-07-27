@@ -9,8 +9,10 @@ import javax.persistence.metamodel.StaticMetamodel;
 @StaticMetamodel(Promotion.class)
 public abstract class Promotion_ {
 
+	public static volatile SingularAttribute<Promotion, Date> fromDate;
 	public static volatile SingularAttribute<Promotion, String> numberSaleOff;
 	public static volatile SingularAttribute<Promotion, String> imageUrl;
+	public static volatile SingularAttribute<Promotion, Date> toDate;
 	public static volatile SingularAttribute<Promotion, String> name;
 	public static volatile SingularAttribute<Promotion, String> description;
 	public static volatile SingularAttribute<Promotion, Long> id;

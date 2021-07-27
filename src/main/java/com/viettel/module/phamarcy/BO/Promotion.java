@@ -46,6 +46,12 @@ public class Promotion implements Serializable {
 	@Column(name = "CREATE_DATE")
 	private Date createDate;
 	
+	@Column(name = "FROM_DATE")
+	private Date fromDate;
+	
+	@Column(name = "TO_DATE")
+	private Date toDate;
+	
 	@Column(name = "NUMBER_SALE_OFF")
 	private String numberSaleOff;
 	
@@ -105,6 +111,24 @@ public class Promotion implements Serializable {
 	public void setNumberSaleOff(String numberSaleOff) {
 		this.numberSaleOff = numberSaleOff;
 	}
+
+	public Date getFromDate() {
+		return fromDate;
+	}
+
+	public void setFromDate(Date fromDate) {
+		this.fromDate = fromDate;
+	}
+
+	public Date getToDate() {
+		return toDate;
+	}
+
+	public void setToDate(Date toDate) {
+		this.toDate = toDate;
+	}
+	
+	
 	
 	 
 }

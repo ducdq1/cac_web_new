@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    
+    <window id="resetPassDlg" title="Thêm mới khu vực" apply="com.viettel.module.phamarcy.controller.ThemKhuiyenMaiController" 
+    width="60%" border="normal" position="center" closable="true">
+     <style>
+    	tr{height:35px;
+    	}
+    </style>
+    <style src="/Share/css/formstyle.css" />
+         
+        
+        <h:table style="width:100%;height:100%;padding-left:10px" class="createTable">
+           
+            <h:tr >
+                <h:td>
+                    <label sclass="lb-create" >Tên khuyến mãi:</label>
+                </h:td>
+                <h:td>
+                    <textbox id="tbTenKM"   maxlength="2000"/>
+                </h:td>
+            </h:tr> 
+             <h:tr >
+                <h:td>
+                    <label sclass="lb-create" >Nội dung khuyến mãi:</label>
+                </h:td>
+                <h:td>
+                    <textbox id="tbNoiDung"   maxlength="2000" multiline="true" style="height:90px;width:90%"/>
+                </h:td>
+            </h:tr> 
+              <h:tr >
+                <h:td>
+                    <label sclass="lb-create" >Phần trăm khuyến mãi</label>
+                </h:td>
+                <h:td>
+                    <intbox id="tbSaleNum"   maxlength="2000"  />
+                </h:td>
+            </h:tr> 
+             <h:tr >
+                <h:td>
+                    <label sclass="lb-create" >Hiệu lực từ ngày</label>
+                </h:td>
+                <h:td>
+                    <datebox id="dbFromDate"   format="dd/MM/yyyy"
+						width="95%"
+						constraint="between 19000101 and 20991231: ${$composer.getLabel('date_validate')}"/>
+                </h:td>
+            </h:tr>
+           <h:tr >
+                <h:td>
+                    <label sclass="lb-create" >Hiệu lực đến ngày</label>
+                </h:td>
+                <h:td>
+                    <datebox id="dbToDate"   format="dd/MM/yyyy"
+						width="95%"
+						constraint="between 19000101 and 20991231: ${$composer.getLabel('date_validate')}"/>
+                </h:td>
+            </h:tr>
+            
+             <h:tr >
+                <h:td>
+                   
+                </h:td>
+                 
+            </h:tr>
+            <h:tr>
+                <h:td colspan="2" align="center">
+                    <button height="30px" image="/Share/img/icon/save.png" id="btnSave" label="Lưu lại" />
+                
+                    <button height="30px" image="/Share/img/icon/close.png"  style="margin-left:10px" label="Hủy bỏ" onClick="resetPassDlg.onClose()" />
+                </h:td>
+            </h:tr>
+        </h:table>
+    </window>
+</zk>
