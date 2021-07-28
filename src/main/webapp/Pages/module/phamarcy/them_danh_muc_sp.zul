@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.zkoss.org/2005/zul">
+    
+    <window id="resetPassDlg" title="Thêm danh mục sản phẩm" apply="com.viettel.module.phamarcy.controller.ThemDanhMucSPController" 
+    width="60%" border="normal" position="center" closable="true">
+     <style>
+    	tr{height:35px;
+    	}
+    </style>
+    <style src="/Share/css/formstyle.css" />
+         
+        
+        <h:table style="width:100%;height:100%;padding-left:10px" class="createTable">
+           
+            <h:tr >
+                <h:td>
+                    <label sclass="lb-create" >Tên danh mục:</label>
+                </h:td>
+                <h:td>
+                    <textbox id="tbTenDM"   maxlength="2000"/>
+                </h:td>
+            </h:tr> 
+             <h:tr >
+                <h:td>
+                    <label sclass="lb-create" >Mô tả danh mục:</label>
+                </h:td>
+                <h:td>
+                    <textbox id="tbNoiDung"   maxlength="2000" multiline="true" style="height:90px;width:90%"/>
+                </h:td>
+            </h:tr> 
+              <h:tr >
+               <h:td >
+					<label value="Loại sản phẩm:" sclass="lb-create" />
+				</h:td>
+				<h:td>
+					<radiogroup id="rdgLoaiSP" ></radiogroup>
+					<radio radiogroup="rdgLoaiSP" selected="true"
+						style="font-size:15px; "  label="Thiết bị" /> <h:br/>
+					<separator />
+					<radio radiogroup="rdgLoaiSP" 
+						style="font-size:15px"
+					 label="Gạch" class="radio-input" />
+				</h:td>	
+            </h:tr>
+            
+            <h:tr >
+                <h:td>
+                    <label sclass="lb-create" >Link hình ảnh:</label>
+                </h:td>
+                <h:td>
+                    <textbox id="tbImageUrl"   maxlength="2000" value=""/>
+                </h:td>
+            </h:tr> 
+             
+             <h:tr >
+                <h:td>
+                    <label sclass="lb-create" >Mã code:</label>
+                </h:td>
+                <h:td>
+                    <textbox id="tbCode"   maxlength="2000"/>
+                </h:td>
+            </h:tr> 
+            
+             <h:tr >
+                <h:td>
+                    <label sclass="lb-create" >Lấy dữ liệu:</label>
+                </h:td>
+               <h:td>
+					<radiogroup id="rdgLoaiSoSanh" ></radiogroup>
+					<radio radiogroup="rdgLoaiSoSanh" selected="true"
+						style="font-size:15px; "  label="Bao gồm mã code" /> <h:br/>
+					<separator />
+					<radio radiogroup="rdgLoaiSoSanh" 
+						style="font-size:15px"
+					  label="Không bao gồm mã code"  class="radio-input" />
+					  <separator />
+					  <radio radiogroup="rdgLoaiSoSanh" 
+						style="font-size:15px"
+					  label="Lấy theo xuất xứ"  class="radio-input" />
+				</h:td>	
+            </h:tr> 
+            
+             <h:tr >
+                <h:td>
+                   
+                </h:td>
+                 
+            </h:tr>
+            <h:tr>
+                <h:td colspan="2" align="center">
+                    <button height="30px" image="/Share/img/icon/save.png" id="btnSave" label="Lưu lại" />
+                
+                    <button height="30px" image="/Share/img/icon/close.png"  style="margin-left:10px" label="Hủy bỏ" onClick="resetPassDlg.onClose()" />
+                </h:td>
+            </h:tr>
+        </h:table>
+    </window>
+</zk>

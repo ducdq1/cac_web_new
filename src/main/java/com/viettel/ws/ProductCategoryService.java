@@ -20,7 +20,7 @@ public class ProductCategoryService {
 	@Path("/search")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ProductCategoryResponse searchProduct(final WorkerLoginRequest req) {
-		List<com.viettel.module.phamarcy.BO.ProductCategory> lstWorkers = new ProductCategoryDao().findProductCategorys(req.getName()).getLstReturn();
+		List<com.viettel.module.phamarcy.BO.ProductCategory> lstWorkers = new ProductCategoryDao().findProductCategorys(req.getName(),req.getType()).getLstReturn();
 		ProductCategoryResponse productResponse = new ProductCategoryResponse();
 
 		productResponse.setDatas(lstWorkers);

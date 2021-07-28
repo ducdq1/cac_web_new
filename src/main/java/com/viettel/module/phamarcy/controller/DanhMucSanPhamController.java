@@ -29,15 +29,17 @@ import com.viettel.core.base.DAO.BaseComposer;
 import com.viettel.core.base.model.PagingListModel;
 import com.viettel.module.phamarcy.BO.PhamarcyFileModel;
 import com.viettel.module.phamarcy.BO.Product;
+import com.viettel.module.phamarcy.BO.ProductCategory;
 import com.viettel.module.phamarcy.BO.Promotion;
 import com.viettel.module.phamarcy.BO.VPhaFileMedicine;
 import com.viettel.module.phamarcy.DAO.PhaMedicine.ExportExcell;
+import com.viettel.module.phamarcy.DAO.PhaMedicine.ProductCategoryDao;
 import com.viettel.module.phamarcy.DAO.PhaMedicine.ProductDao;
 import com.viettel.module.phamarcy.DAO.PhaMedicine.PromotionDao;
 import com.viettel.utils.Constants;
 import com.viettel.utils.LogUtils;
 
-public class DanhSachKhuyenMaiController extends BaseComposer {
+public class DanhMucSanPhamController extends BaseComposer {
 
 	private static final long serialVersionUID = 1L;
 	@Wire // Form search
@@ -101,9 +103,9 @@ public class DanhSachKhuyenMaiController extends BaseComposer {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void reloadModel(PhamarcyFileModel searchModel) {
 		try {
-			PromotionDao dao = new PromotionDao();
-			PagingListModel plm = dao.findPromotions(tbTenKM.getText().trim(), dbFromDay.getValue(), dbToDay.getValue());
-
+			ProductCategoryDao dao = new ProductCategoryDao();
+			PagingListModel plm = dao.findProductCategorys(tbTenKM.getText().trim(),null);
+			
 			userPagingBottom.setTotalSize(plm.getCount());
 			if (plm.getCount() == 0) {
 				userPagingBottom.setVisible(false);
@@ -159,7 +161,7 @@ public class DanhSachKhuyenMaiController extends BaseComposer {
 	public void onAdd() {
 		HashMap<String, Object> arguments = new HashMap<String, Object>();
 		arguments.put("parent", phamarcyAll);
-		createWindow("windowView", "/Pages/module/phamarcy/them_khuyen_mai.zul", arguments, Window.MODAL);
+		createWindow("windowView", "/Pages/module/phamarcy/them_danh_muc_sp.zul", arguments, Window.MODAL);
 	}
 
 	@Listen("onRefreshALL =#phamarcyAll")
@@ -167,18 +169,37 @@ public class DanhSachKhuyenMaiController extends BaseComposer {
 		reloadModel(lastSearchModel);
 	}
 
-
-	@Listen("onDeleteSP =#lbListSP")
-	public void onDeleteSP(Event event) {
-		final Promotion obj = (Promotion) event.getData();
-		String message = "Bạn muốn xóa khuyến mãi này?";
+	@Listen("onDelete =  #lbList")
+	public void onDelete(Event event) {
+		final Product obj = (Product) event.getData();
+		String message = String.format(Constants.Notification.DELETE_CONFIRM, Constants.DOCUMENT_TYPE_NAME.FILE) + " \""
+				+ obj.getProductName() + "\" này?";
 		EventListener<ClickEvent> clickListener = new EventListener<Messagebox.ClickEvent>() {
 
 			public void onEvent(ClickEvent event) throws Exception {
 
 				if (Messagebox.Button.YES.equals(event.getButton())) {
-					new PromotionDao().delete(obj);
-					showNotification("Xóa khuyến mãi thành công", Constants.Notification.INFO, 2000);
+					new ProductDao().delete(obj);
+					showNotification("Xóa sản phẩm thành công", Constants.Notification.INFO, 2000);
+					reloadModel(lastSearchModel);
+				}
+
+			}
+		};
+		showDialogConfirm(message, null, clickListener);
+	}
+
+	@Listen("onDeleteSP =#lbListSP")
+	public void onDeleteSP(Event event) {
+		final ProductCategory obj = (ProductCategory) event.getData();
+		String message = "Bạn muốn xóa danh mục này?";
+		EventListener<ClickEvent> clickListener = new EventListener<Messagebox.ClickEvent>() {
+
+			public void onEvent(ClickEvent event) throws Exception {
+
+				if (Messagebox.Button.YES.equals(event.getButton())) {
+					new ProductCategoryDao().delete(obj);
+					showNotification("Xóa thành công", Constants.Notification.INFO, 2000);
 					reloadModel(lastSearchModel);
 				}
 
@@ -189,12 +210,12 @@ public class DanhSachKhuyenMaiController extends BaseComposer {
 
 	@Listen("onOpenUpdate =#lbListSP")
 	public void onOpenUpdate(Event event) {
-		Promotion obj = (Promotion) event.getData();
+		ProductCategory obj = (ProductCategory) event.getData();
 
 		HashMap<String, Object> arguments = new HashMap<String, Object>();
 		arguments.put("parent", phamarcyAll);
-		arguments.put("promotion", obj);
-		createWindow("windowView", "/Pages/module/phamarcy/them_khuyen_mai.zul", arguments, Window.MODAL);
+		arguments.put("productCategory", obj);
+		createWindow("windowView", "/Pages/module/phamarcy/them_danh_muc_sp.zul", arguments, Window.MODAL);
 
 	}
 

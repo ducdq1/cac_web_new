@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <window xmlns:h="http://www.zkoss.org/2005/zk/native"
 	xmlns="http://www.zkoss.org/2005/zul" id="phamarcyAll" style=""
-	apply="com.viettel.module.phamarcy.controller.DanhSachKhuyenMaiController">
+	apply="com.viettel.module.phamarcy.controller.DanhMucSanPhamController">
 	<style src="/Share/css/formstyle.css" />
 	 
 	<script defer="true">toolBar.widget = "phamarcyAll";</script>
@@ -24,30 +24,11 @@
 			</h:tr>
 			<h:tr>
 				<h:td style="text-align: left;">
-					<label value="Tên Khuyến mãi" sclass="lb-create" />
+					<label value="Tên danh mục" sclass="lb-create" />
 				</h:td>
 				<h:td>
 					<textbox id="tbTenKM" width="90%" rows="1"
 						 />
-				</h:td>
-			<h:td style="text-align: right;">
-					<label value="Từ ngày:" sclass="lb-create" style="margin-top:10px"/>
-					<h:br/>
-					<label value="  " sclass="lb-create" style="font-size:8px !important"/>
-					<h:br/>
-					<label value="Đến ngày:" sclass="lb-create" />
-					<h:br/>
-					
-					</h:td>
-			<h:td>
-					
-			 <datebox id="dbFromDay" cols="12" format="dd/MM/yyyy"
-				width="170px"
-				constraint="between 19000101 and 20991231: ${$composer.getLabel('date_validate')}" />
-			  <h:br/>
-			  <datebox id="dbToDay" cols="12" format="dd/MM/yyyy"
-				width="170px"
-				constraint="between 19000101 and 20991231: ${$composer.getLabel('date_validate')}" />
 				</h:td>
 						
 			</h:tr>
@@ -79,15 +60,11 @@
 		emptyMessage="Không tìm thấy khuyến mãi nào">
 		<listhead sizable="true">
 			<listheader label="STT" align="center" style="width:5%" />
-			<listheader label="Tên khuyến mãi" align="center"
+			<listheader label="Tên danh mục" align="center"
 				style="width:16%" /> 
-			<listheader label="Nội dung khuyến mãi" align="center"
+			<listheader label="Mô tả danh mục" align="center"
 				style="width:30%" />
-			<listheader label="Số lượng khuyến mãi" align="center"
-				style="width:10%" />
-			 <listheader label="Hiệu lực từ ngày" align="center"
-				style="width:10%" />
-			<listheader label="Hiệu lực đến ngày" align="center"
+			<listheader label="Loại danh mục" align="center"
 				style="width:10%" />
 			<listheader label="Sửa" align="center" style="width:5%" />
 			<listheader label="Xóa" align="center" style="width:5%"  />
@@ -108,15 +85,12 @@
 				<listcell style="text-align:left">
 				<label value="${each.description}"   />
 				</listcell>
+				
 				<listcell style="text-align:left">
-				<label value="${each.numberSaleOff}"   />
+				<label value="Thiết bị" if="${each.type == 0}" ></label> 
+				<label value="Gạch" if="${each.type ==1}" ></label> 
 				</listcell>
-				<listcell >
-					<label value="${$composer.getFormatDate(each.fromDate)}"   />
-				</listcell>
-				<listcell >
-					<label value="${$composer.getFormatDate(each.toDate)}"   />
-				</listcell>
+				
 				<listcell>
 					<image src="/Share/img/icon/edit.png" width="22px"
 						height="22px" forward="onClick=lbListSP.onOpenUpdate(${each})"

@@ -3,7 +3,7 @@
 <zk xmlns:h="http://www.w3.org/1999/xhtml"
     xmlns="http://www.zkoss.org/2005/zul">
     
-    <window id="resetPassDlg" title="Thêm mới khu vực" apply="com.viettel.module.phamarcy.controller.ThemKhuiyenMaiController" 
+    <window id="resetPassDlg" title="Thêm khuyến mãi" apply="com.viettel.module.phamarcy.controller.ThemKhuyenMaiController" 
     width="60%" border="normal" position="center" closable="true">
      <style>
     	tr{height:35px;

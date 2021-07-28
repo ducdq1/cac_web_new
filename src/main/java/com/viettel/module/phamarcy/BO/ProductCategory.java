@@ -44,6 +44,9 @@ public class ProductCategory implements Serializable {
 
 	@Column(name = "TYPE")
 	private Long type;
+	
+	@Column(name = "SELECT_TYPE")
+	private Long selectType;
 
 	@Column(name = "CODE")
 	private String code;
@@ -104,5 +107,14 @@ public class ProductCategory implements Serializable {
 		this.code = code;
 	}
 
+	public Long getSelectType() {
+		return selectType;
+	}
+
+	public void setSelectType(Long selectType) {
+		this.selectType = selectType;
+	}
+
+	
 	
 }

@@ -42,13 +42,13 @@ public class ProductCategoryDao extends GenericDAOHibernate<ProductCategory, Lon
 	 * @return
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public PagingListModel findProductCategorys(String name) {
+	public PagingListModel findProductCategorys(String name,Long type) {
 
 		Long count = 0L;
 		List<Workers> lstProduct = new ArrayList<>();
 		try {
 			List lstParam = new ArrayList();
-			StringBuilder selectHql = new StringBuilder("SELECT f from ProductCategory f where isActive = 1 order by type asc");
+			StringBuilder selectHql = new StringBuilder("SELECT f from ProductCategory f where isActive = 1 ");
 			StringBuilder hql = new StringBuilder();
 
 				if (name != null && !name.isEmpty()) {
@@ -56,6 +56,14 @@ public class ProductCategoryDao extends GenericDAOHibernate<ProductCategory, Lon
 					 
 					lstParam.add(StringUtils.toLikeString(name));
 				}
+				
+				if(type !=null ){
+					hql.append(" and f.type = ? ");
+					 
+					lstParam.add(type);
+				}
+				
+				hql.append(" order by type asc, name asc ");
 
 			selectHql.append(hql);
 

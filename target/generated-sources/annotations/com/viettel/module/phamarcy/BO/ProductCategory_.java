@@ -12,6 +12,7 @@ public abstract class ProductCategory_ {
 	public static volatile SingularAttribute<ProductCategory, String> imageUrl;
 	public static volatile SingularAttribute<ProductCategory, String> name;
 	public static volatile SingularAttribute<ProductCategory, String> description;
+	public static volatile SingularAttribute<ProductCategory, Long> selectType;
 	public static volatile SingularAttribute<ProductCategory, Long> id;
 	public static volatile SingularAttribute<ProductCategory, Long> isActive;
 	public static volatile SingularAttribute<ProductCategory, Long> type;

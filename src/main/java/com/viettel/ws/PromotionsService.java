@@ -1,5 +1,6 @@
 package com.viettel.ws;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.POST;
@@ -18,7 +19,7 @@ public class PromotionsService {
 	@Path("/search")
 	@Produces(MediaType.APPLICATION_JSON)
 	public PromotionsResponse searchProduct(final WorkerLoginRequest req) {
-		List<com.viettel.module.phamarcy.BO.Promotion> lstWorkers = new PromotionDao().findPromotions(req.getName()).getLstReturn();
+		List<com.viettel.module.phamarcy.BO.Promotion> lstWorkers = new PromotionDao().findPromotions(req.getName(),new Date(),new Date()).getLstReturn();
 		PromotionsResponse productResponse = new PromotionsResponse();
 
 		productResponse.setDatas(lstWorkers);
