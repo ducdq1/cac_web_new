@@ -13,9 +13,12 @@
          
         
         <h:table style="width:100%;height:100%;padding-left:10px" class="createTable">
-           
+           		<h:tr >
+                <h:th width="14%"></h:th>
+                <h:th width="84%"></h:th>
+                </h:tr>
             <h:tr >
-                <h:td>
+                <h:td style="text-align:right">
                     <label sclass="lb-create" >Tên danh mục:</label>
                 </h:td>
                 <h:td>
@@ -23,7 +26,7 @@
                 </h:td>
             </h:tr> 
              <h:tr >
-                <h:td>
+                <h:td style="text-align:right">
                     <label sclass="lb-create" >Mô tả danh mục:</label>
                 </h:td>
                 <h:td>
@@ -31,7 +34,7 @@
                 </h:td>
             </h:tr> 
               <h:tr >
-               <h:td >
+               <h:td style="text-align:right">
 					<label value="Loại sản phẩm:" sclass="lb-create" />
 				</h:td>
 				<h:td>
@@ -46,7 +49,7 @@
             </h:tr>
             
             <h:tr >
-                <h:td>
+                <h:td style="text-align:right">
                     <label sclass="lb-create" >Link hình ảnh:</label>
                 </h:td>
                 <h:td>
@@ -55,7 +58,7 @@
             </h:tr> 
              
              <h:tr >
-                <h:td>
+                <h:td style="text-align:right">
                     <label sclass="lb-create" >Mã code:</label>
                 </h:td>
                 <h:td>
@@ -64,7 +67,7 @@
             </h:tr> 
             
              <h:tr >
-                <h:td>
+                <h:td style="text-align:right"> 
                     <label sclass="lb-create" >Lấy dữ liệu:</label>
                 </h:td>
                <h:td>

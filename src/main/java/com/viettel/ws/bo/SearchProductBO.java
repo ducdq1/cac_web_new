@@ -17,7 +17,10 @@ public class SearchProductBO {
 		@XmlElement 
 		public Boolean isAgent;
 		@XmlElement
-		public String code;
+		public String code;		
+		@XmlElement
+		public Integer searchType = 0 ;
+		
 		
 		public String getProductCode() {
 			return productCode;
@@ -66,5 +69,13 @@ public class SearchProductBO {
 		}
 		public void setCode(String code) {
 			this.code = code;
-		}  
+		}
+		public Integer getSearchType() {
+			return searchType;
+		}
+		public void setSearchType(Integer searchType) {
+			this.searchType = searchType;
+		}
+		
+		
 }

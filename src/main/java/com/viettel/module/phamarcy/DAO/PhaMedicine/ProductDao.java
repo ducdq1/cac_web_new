@@ -175,11 +175,26 @@ public class ProductDao extends GenericDAOHibernate<Product, Long> {
 					for (String searchProductCode : codes) {
 //						selectHql.append(" and f.productCode like '"+searchProductCode+"%' ");
 						if(i==0){
-							selectHql.append(" and (f.productCode like '"+searchProductCode+"%' ");
+							if(bo.getSearchType().intValue() == 0){
+  								selectHql.append(" and (f.productCode like '"+searchProductCode+"%' ");	
+ 							}else if(bo.getSearchType().intValue() == 1){
+								selectHql.append(" and (f.productCode not like '"+searchProductCode+"%' ");
+							}else {
+								//lay theo xuat xu
+								selectHql.append(" and (f.madeIn like '%"+searchProductCode+"%' ");
+							}
+							
 						}else{
-							selectHql.append(" or f.productCode like '"+searchProductCode+"%' ");
+							if(bo.getSearchType().intValue() == 0){
+								selectHql.append(" or f.productCode like '"+searchProductCode+"%' ");	
+							}else if(bo.getSearchType().intValue() == 1){
+								selectHql.append(" and f.productCode not like '"+searchProductCode+"%' ");
+							}else {
+								//lay theo xuat xu
+								selectHql.append(" or f.madeIn like '%"+searchProductCode+"%' ");
+							}
 						}
-						i ++;						
+        						i ++;						
 					}
 					selectHql.append(" )");
 				}

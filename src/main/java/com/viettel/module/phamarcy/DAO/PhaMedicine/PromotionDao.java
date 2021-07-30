@@ -66,7 +66,7 @@ public class PromotionDao extends GenericDAOHibernate<Promotion, Long> {
 			}
 
 			if (toDate != null) {
-				hql.append(" and ( f.fromDate is null Or trunc(f.toDate) >= ? ) ");
+				hql.append(" and ( f.fromDate is null Or f.toDate >= ? ) ");
 				//toDate = DateTimeUtils.addOneDay(toDate);
 				toDate = DateTimeUtils.setStartTimeOfDate(toDate);
 				lstParam.add(toDate);
