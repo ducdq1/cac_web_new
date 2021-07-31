@@ -63,7 +63,7 @@ public class ProductCategoryDao extends GenericDAOHibernate<ProductCategory, Lon
 					lstParam.add(type);
 				}
 				
-				hql.append(" order by type asc, name asc ");
+				hql.append(" order by type asc, orderBy asc ");
 
 			selectHql.append(hql);
 

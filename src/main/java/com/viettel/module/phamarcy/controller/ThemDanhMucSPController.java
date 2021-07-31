@@ -7,6 +7,7 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
@@ -27,7 +28,8 @@ public class ThemDanhMucSPController extends BaseComposer {
 	private static final long serialVersionUID = 6105342511808925036L;
 	@Wire
 	private Textbox tbTenDM,tbNoiDung,tbCode,tbImageUrl;
-	
+	@Wire
+	private Intbox tbThuTu;
 	@Wire
 	private Radiogroup rdgLoaiSP,rdgLoaiSoSanh;
 	@Wire
@@ -58,6 +60,7 @@ public class ThemDanhMucSPController extends BaseComposer {
 		tbCode.setText(area.getCode());
 		tbImageUrl.setValue(area.getImageUrl());
 		rdgLoaiSoSanh.setSelectedIndex(area.getSelectType() !=null ? area.getSelectType().intValue(): 0 );
+		tbThuTu.setValue(area.getOrderBy());
 	}
 
 	@Listen("onClick = #btnSave")
@@ -78,7 +81,7 @@ public class ThemDanhMucSPController extends BaseComposer {
 		area.setCode(tbCode.getText().trim());
 		area.setImageUrl(tbImageUrl.getValue());
 		area.setSelectType(Long.valueOf(rdgLoaiSoSanh.getSelectedIndex()));
-		
+		area.setOrderBy(tbThuTu.getValue());
 		new ProductCategoryDao().saveOrUpdate(area);
 
 		String message = "Thêm mới danh mục thành công.";

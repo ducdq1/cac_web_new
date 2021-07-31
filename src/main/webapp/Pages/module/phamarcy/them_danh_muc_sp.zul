@@ -68,7 +68,7 @@
             
              <h:tr >
                 <h:td style="text-align:right"> 
-                    <label sclass="lb-create" >Lấy dữ liệu:</label>
+                    <label sclass="lb-create" >Lấy dữ liệu theo:</label>
                 </h:td>
                <h:td>
 					<radiogroup id="rdgLoaiSoSanh" ></radiogroup>
@@ -84,7 +84,14 @@
 					  label="Lấy theo xuất xứ"  class="radio-input" />
 				</h:td>	
             </h:tr> 
-            
+              <h:tr >
+                <h:td style="text-align:right">
+                    <label sclass="lb-create" >Thứ tự sắp xếp:</label>
+                </h:td>
+                <h:td>
+                    <intbox id="tbThuTu"   maxlength="2000"/>
+                </h:td>
+            </h:tr> 
              <h:tr >
                 <h:td>
                    

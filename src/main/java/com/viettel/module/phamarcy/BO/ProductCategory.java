@@ -50,7 +50,10 @@ public class ProductCategory implements Serializable {
 
 	@Column(name = "CODE")
 	private String code;
-
+	
+	@Column(name = "ORDER_BY")
+	private Integer orderBy;
+	
 	public Long getId() {
 		return id;
 	}
@@ -113,6 +116,14 @@ public class ProductCategory implements Serializable {
 
 	public void setSelectType(Long selectType) {
 		this.selectType = selectType;
+	}
+
+	public Integer getOrderBy() {
+		return orderBy;
+	}
+
+	public void setOrderBy(Integer orderBy) {
+		this.orderBy = orderBy;
 	}
 
 	
