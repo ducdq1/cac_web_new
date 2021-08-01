@@ -12,6 +12,9 @@ public class WorkerLoginRequest {
 	@XmlElement
 	public Long type;
 
+	@XmlElement
+	public String inviterName;
+	
 	public String getName() {
 		return name;
 	}
@@ -35,7 +38,13 @@ public class WorkerLoginRequest {
 	public void setType(Long type) {
 		this.type = type;
 	}
-	
-	
+
+	public String getInviterName() {
+		return inviterName;
+	}
+
+	public void setInviterName(String inviterName) {
+		this.inviterName = inviterName;
+	} 
 
 }

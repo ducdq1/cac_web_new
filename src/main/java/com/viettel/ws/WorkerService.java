@@ -1,5 +1,6 @@
 package com.viettel.ws;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.POST;
@@ -31,11 +32,20 @@ public class WorkerService {
 				user.setUserId(worker.getId());
 				user.setUserName(worker.getPhone());
 				resp.setUser(user);
+				if(worker.getInviterName() == null){
+					worker.setInviterName(loginRequest.getInviterName());
+				}
+				worker.setName(loginRequest.getName());
+				worker.setLastLogin(new Date());
+				new WorkerDao().saveOrUpdate(worker);
+				
 			} else {
 				Workers newWorker = new Workers();
 				newWorker.setName(loginRequest.getName());
 				newWorker.setPhone(loginRequest.getPhone());
 				newWorker.setIsActive(1L);
+				newWorker.setLastLogin(new Date());
+				newWorker.setInviterName(loginRequest.getInviterName());
 				new WorkerDao().saveOrUpdate(newWorker);
 				Users user = new Users();
 				user.setUserId(newWorker.getId());

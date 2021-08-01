@@ -21,6 +21,9 @@ public class SearchProductBO {
 		@XmlElement
 		public Integer searchType = 0 ;
 		
+		@XmlElement
+		public Long productId;		
+		
 		
 		public String getProductCode() {
 			return productCode;
@@ -75,6 +78,12 @@ public class SearchProductBO {
 		}
 		public void setSearchType(Integer searchType) {
 			this.searchType = searchType;
+		}
+		public Long getProductId() {
+			return productId;
+		}
+		public void setProductId(Long productId) {
+			this.productId = productId;
 		}
 		
 		

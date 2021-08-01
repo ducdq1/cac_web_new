@@ -72,7 +72,7 @@ public class StatisticsDao extends GenericDAOHibernate<Statistics, Long> {
 		}
 		sql += " GROUP BY s.PRODUCT_ID)";
 		countsql += sql;
-		sql += " select s.counts,p.product_code,p.product_name from list_product s ";
+		sql += " select s.counts,p.product_code,p.product_name,p.product_type from list_product s ";
 		countsql += " select count(*) from list_product s ";
 		String join = " join product p on p.product_id = s.product_id where 1 = 1 ";
 		if (searchModel.getProductCode() != null && !searchModel.getProductCode().trim().isEmpty()) {

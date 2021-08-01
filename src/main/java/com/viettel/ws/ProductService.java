@@ -61,8 +61,7 @@ public class ProductService {
 		UserDAOHE udhe = new UserDAOHE();
 		String strLogin = udhe.checkLogin(loginRequest.getUserName(), loginRequest.getPw());
 		Users user = udhe.getUserByName(loginRequest.getUserName());
-		try {
-
+		try { 
 			if (strLogin.isEmpty() && user != null) {
 				resp.setUser(user);
 			} else {
@@ -128,7 +127,7 @@ public class ProductService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public ProductResponse findProduct(final SearchProductBO searchProductBO) {
 		List<com.viettel.module.phamarcy.BO.Product> lstProduct = new ArrayList<>();
-		lstProduct = new ProductDao().searchProductByCode(searchProductBO,searchProductBO.getOffset() * searchProductBO.getLimit(),searchProductBO.getLimit());
+		lstProduct = new ProductDao().searchProductByCode(searchProductBO,searchProductBO.getOffset() * searchProductBO.getLimit(), -1);
 		ProductResponse productResponse = new ProductResponse();
 
 		productResponse.setLstProduct(lstProduct);

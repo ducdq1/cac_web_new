@@ -47,6 +47,7 @@ public class StatisticsProductView implements Serializable {
 		this.counts = ((BigDecimal) object[0]).longValue();
 		this.productCode = (String) object[1];
 		this.productName = (String) object[2];
+		this.productType = ((BigDecimal) object[3]).longValue();
 	}
 
 	public Long getProductId() {

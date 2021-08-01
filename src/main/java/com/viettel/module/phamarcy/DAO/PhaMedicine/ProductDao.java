@@ -150,6 +150,12 @@ public class ProductDao extends GenericDAOHibernate<Product, Long> {
 
 				selectHql.append(
 						" or  lower(f.productName) like ? escape '/' or  lower(f.productNameSearch) like ? escape '/'  ");
+				lstParam.add(StringUtils.toLikeString(code.toLowerCase()));
+				lstParam.add(StringUtils.toLikeString(code.toLowerCase()));
+				
+				selectHql.append("  or  lower(f.madeIn) like ? escape '/'  ");				
+				lstParam.add(StringUtils.toLikeString(code.toLowerCase()));
+				
 				if (bo.getIsAgent() != null && bo.getIsAgent()) {
 					selectHql.append(" or  lower(f.maDaiLy) like ? escape '/'  ");
 					lstParam.add(StringUtils.toLikeString(code.toLowerCase()));
@@ -159,10 +165,12 @@ public class ProductDao extends GenericDAOHibernate<Product, Long> {
 					selectHql.append("  or  lower(f.size) like ? escape '/'  ");
 					lstParam.add(StringUtils.toLikeString(code.toLowerCase()));
 				}
+				
+					
+				
 
 				selectHql.append(" )");
-				lstParam.add(StringUtils.toLikeString(code.toLowerCase()));
-				lstParam.add(StringUtils.toLikeString(code.toLowerCase()));
+				
 
 				if (bo.getIsAgent() != null && bo.getIsAgent()) {
 					selectHql.append(" and f.maDaiLy is not null ");
@@ -236,7 +244,7 @@ public class ProductDao extends GenericDAOHibernate<Product, Long> {
 				query.setParameter(i, lstParam.get(i));
 			}
 
-			if (take > -1) {
+			if (take > -1) {	
 				query.setFirstResult(start);
 				query.setMaxResults(take);
 			}
@@ -263,13 +271,17 @@ public class ProductDao extends GenericDAOHibernate<Product, Long> {
 				if (bo.getIsAgent() != null && bo.getIsAgent()) {
 					if (code != null && !code.isEmpty()) {
 						selectHql.append(" and ( lower(f.productCode) = ? or lower(f.maDaiLy) = ? ) ");
-						lstParam.add((code.toLowerCase()));
-						lstParam.add((code.toLowerCase()));
+						lstParam.add(code.toLowerCase());
+						lstParam.add(code.toLowerCase());
 					}
 
 					selectHql.append(" and f.maDaiLy is not null ");
 				} else {
-					if (code != null && !code.isEmpty()) {
+					
+					if(bo.getProductId() !=null ){
+						selectHql.append(" and f.productId = ? ");
+						lstParam.add(bo.getProductId());
+					} else if (code != null && !code.isEmpty()) {
 						selectHql.append(" and lower(f.productCode) = ? ");
 						lstParam.add((code.toLowerCase()));
 					}

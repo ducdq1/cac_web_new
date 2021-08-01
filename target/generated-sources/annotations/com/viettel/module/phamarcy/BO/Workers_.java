@@ -1,5 +1,6 @@
 package com.viettel.module.phamarcy.BO;
 
+import java.util.Date;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
@@ -8,10 +9,12 @@ import javax.persistence.metamodel.StaticMetamodel;
 @StaticMetamodel(Workers.class)
 public abstract class Workers_ {
 
+	public static volatile SingularAttribute<Workers, Date> lastLogin;
 	public static volatile SingularAttribute<Workers, String> phone;
 	public static volatile SingularAttribute<Workers, String> name;
 	public static volatile SingularAttribute<Workers, Long> id;
 	public static volatile SingularAttribute<Workers, Long> isActive;
+	public static volatile SingularAttribute<Workers, String> inviterName;
 
 }
 

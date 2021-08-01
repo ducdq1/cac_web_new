@@ -1,6 +1,7 @@
 package com.viettel.module.phamarcy.BO;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -40,6 +41,12 @@ public class Workers  {
 	@Column(name = "IS_ACTIVE")
 	private Long isActive;
 
+	@Column(name = "LAST_LOGIN")
+	private Date lastLogin; 
+	
+	@Column(name = "INVITER_NAME")
+	private String inviterName;
+	
 	public Long getId() {
 		return id;
 	}
@@ -71,5 +78,21 @@ public class Workers  {
 	public void setIsActive(Long isActive) {
 		this.isActive = isActive;
 	}
-	 
+
+	public Date getLastLogin() {
+		return lastLogin;
+	}
+
+	public void setLastLogin(Date lastLogin) {
+		this.lastLogin = lastLogin;
+	}
+
+	public String getInviterName() {
+		return inviterName;
+	}
+
+	public void setInviterName(String inviterName) {
+		this.inviterName = inviterName;
+	} 
+ 
 }
