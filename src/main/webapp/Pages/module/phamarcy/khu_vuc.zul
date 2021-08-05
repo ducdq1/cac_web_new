@@ -20,9 +20,9 @@
 		<listhead sizable="true">
 			<listheader label="STT" align="center" style="width:2%;font-size:13px" />
 			<listheader label="Tên khu vực" align="left"
-				style="width:25%;font-size:13px" />		 
-			<listheader label="Sửa" align="left" hflex="min" style=" font-size:13px"/>
-			<listheader label="Xóa" align="left" hflex="min" style=" font-size:13px"/>
+				style="width:80%;font-size:13px" />		 
+			<listheader label="Sửa" align="center"   style="width:5%; font-size:13px"/>
+			<listheader label="Xóa" align="center"  style=" width:5%;font-size:13px"/>
 
 		</listhead>
 		

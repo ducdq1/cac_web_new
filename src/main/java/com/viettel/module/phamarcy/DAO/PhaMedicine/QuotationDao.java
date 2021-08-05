@@ -228,8 +228,8 @@ public class QuotationDao extends GenericDAOHibernate<Quotation, Long> {
 			
 			
 			hql.append(" order by f.status asc, f.modifyDate desc");
-
 			selectHql.append(hql);
+
 			countHql.append(hql);
 			//countTongTien.append(hql);
 

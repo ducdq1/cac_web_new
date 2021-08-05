@@ -22,9 +22,9 @@
 			<listheader label="Tên đường" align="left"
 				style="width:25%;font-size:13px" />	
 			<listheader label="Khu vực" align="left"
-				style="width:25%;font-size:13px" />	 
-			<listheader label="Sửa" align="left" hflex="min" style=" font-size:13px"/>
-			<listheader label="Xóa" align="left" hflex="min" style=" font-size:13px"/>
+				style="width:55%;font-size:13px" />	 
+			<listheader label="Sửa"   align="center" style="width:5%;font-size:13px"/>
+			<listheader label="Xóa"  align="center"  style="width:5%;font-size:13px"/>
 
 		</listhead>
 		

@@ -15,6 +15,7 @@ public abstract class Workers_ {
 	public static volatile SingularAttribute<Workers, Long> id;
 	public static volatile SingularAttribute<Workers, Long> isActive;
 	public static volatile SingularAttribute<Workers, String> inviterName;
+	public static volatile SingularAttribute<Workers, Date> createDate;
 
 }
 

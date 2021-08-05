@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window xmlns:h="http://www.zkoss.org/2005/zk/native"
+	xmlns="http://www.zkoss.org/2005/zul" id="phamarcyAll" style=""
+	apply="com.viettel.module.phamarcy.controller.DanhSachThoThay">
+	<style src="/Share/css/formstyle.css" />
+	 
+	<script defer="true">toolBar.widget = "phamarcyAll";</script>
+	<style>
+		.z-listheader-cnt{ color:#4584D3 !important;
+		}
+
+	</style>
+	<h:div class="contentDiv" style="width:99%;margin:0 auto;background-color:#FBEFFB">
+		<groupbox id="fullSearchGbx" mold="3d"
+		>
+		<caption
+			label="${$composer.getLabelCos('cosmetic_search_caption')}" />
+		<h:table align="center" width="80%" class="table-search">
+			<h:tr>
+				<h:th width="25%" />
+				<h:th width="30%" />
+				<h:th width="30%" />
+				<h:th width="38%" />
+			</h:tr>
+			<h:tr>
+				<h:td style="text-align: right;" colspan="1">
+					<label value="Tên, SĐT khách hàng hoặc người giới thiệu:" sclass="lb-create" />
+				</h:td>
+				<h:td >
+					<textbox id="tbTenKH" width="90%" rows="1"
+						 />
+				</h:td>
+						
+			</h:tr>
+
+			<h:tr>
+				<h:td style="height:20px">
+				</h:td>
+
+			</h:tr>
+
+			<h:tr>
+				<h:td colspan="4" align="center"
+					style="text-align: center">
+					<button id="btnSearch"
+						label="${$composer.getLabelCos('common_search')}" sclass="button"
+						image="/Share/img/icon/search.jpg" autodisable="self" />
+					
+				</h:td>
+			</h:tr>
+		</h:table>
+	</groupbox>
+	</h:div>
+	<h:div class="contentDiv" style="width:99%;margin:0 auto">
+
+		<listbox id="lbListSP" checkmark="true"  multiple="true" 
+		nonselectableTags="*"
+		emptyMessage="Không tìm thấy khuyến mãi nào">
+		<listhead sizable="true">
+			<listheader label="STT" align="center" style="width:5%" />
+			<listheader label="Tên khách hàng" align="center"
+				style="width:26%" /> 
+			<listheader label="Số điện thoại" align="center"
+				style="width:10%" />
+				<listheader label="Đăng nhập lần cuối" align="center"
+				style="width:10%" />
+			<listheader label="Người giới thiệu" align="center"
+				style="width:10%" />
+			<listheader label="Ngày giới thiệu" align="center"
+				style="width:10%" />
+			<listheader label="Xóa" align="center" style="width:5%"  />
+		</listhead>
+		<template name="model">
+			<listitem
+				style="word-wrap: break-word !important; white-space: normal; text-align: left;">
+				<listcell>
+					<label
+						value="${ forEachStatus.index + 1 + userPagingBottom.pageSize *
+						userPagingBottom.activePage }">
+					</label>
+				</listcell>				
+				 <listcell style="text-align:left">
+					<label value="${each.name}"  />
+				</listcell>
+				
+				<listcell style="text-align:center">
+				<label value="${each.phone}"   />
+				</listcell>
+				<listcell style="text-align:center">
+				<label value="${$composer.getFormatHoursAndeDate(each.lastLogin)}"   />
+				</listcell>
+			  <listcell style="text-align:center">
+				<label value="${each.inviterName}"   />
+				</listcell>
+				<listcell style="text-align:center">
+				<label value="${$composer.getFormatDate(each.createDate)}"   />
+				</listcell>
+				
+				
+				<listcell>
+					<image src="/Share/img/icon/delete.png" width="22px"
+						height="22px" forward="onClick=lbListSP.onDeleteSP(${each})"						 
+						tooltiptext="Xóa" />					 
+				</listcell>
+			</listitem>
+		</template>
+	</listbox>
+		<paging id="userPagingBottom" pageSize="10" detailed="true" />
+		
+		<h:br/>
+	</h:div>
+	<separator />
+</window>

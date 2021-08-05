@@ -46,6 +46,7 @@ public class WorkerService {
 				newWorker.setIsActive(1L);
 				newWorker.setLastLogin(new Date());
 				newWorker.setInviterName(loginRequest.getInviterName());
+				newWorker.setCreateDate(new Date());
 				new WorkerDao().saveOrUpdate(newWorker);
 				Users user = new Users();
 				user.setUserId(newWorker.getId());
@@ -65,7 +66,7 @@ public class WorkerService {
 	@Path("/search")
 	@Produces(MediaType.APPLICATION_JSON)
 	public WorkersResponse searchProduct(final WorkerLoginRequest req) {
-		List<com.viettel.module.phamarcy.BO.Workers> lstWorkers = new WorkerDao().findCustomers(req.getPhone(),req.getName()).getLstReturn();
+		List<com.viettel.module.phamarcy.BO.Workers> lstWorkers = new WorkerDao().findCustomers(req.getPhone(),1,-1).getLstReturn();
 		@SuppressWarnings("rawtypes")
 		WorkersResponse productResponse = new WorkersResponse();
 

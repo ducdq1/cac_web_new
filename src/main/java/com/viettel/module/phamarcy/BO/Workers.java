@@ -44,6 +44,9 @@ public class Workers  {
 	@Column(name = "LAST_LOGIN")
 	private Date lastLogin; 
 	
+	@Column(name = "CREATE_DATE")
+	private Date createDate; 
+	
 	@Column(name = "INVITER_NAME")
 	private String inviterName;
 	
@@ -93,6 +96,15 @@ public class Workers  {
 
 	public void setInviterName(String inviterName) {
 		this.inviterName = inviterName;
+	}
+
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
 	} 
- 
+
+	
 }

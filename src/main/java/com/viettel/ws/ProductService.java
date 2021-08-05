@@ -127,7 +127,7 @@ public class ProductService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public ProductResponse findProduct(final SearchProductBO searchProductBO) {
 		List<com.viettel.module.phamarcy.BO.Product> lstProduct = new ArrayList<>();
-		lstProduct = new ProductDao().searchProductByCode(searchProductBO,searchProductBO.getOffset() * searchProductBO.getLimit(), -1);
+		lstProduct = new ProductDao().searchProductByCode(searchProductBO,searchProductBO.getOffset() * searchProductBO.getLimit(), searchProductBO.getLimit());
 		ProductResponse productResponse = new ProductResponse();
 
 		productResponse.setLstProduct(lstProduct);

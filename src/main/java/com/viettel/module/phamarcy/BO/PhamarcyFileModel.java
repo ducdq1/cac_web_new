@@ -26,6 +26,7 @@ public class PhamarcyFileModel {
 	private boolean isApproveAble;
 	private boolean isSaled;
 	private int daBan = -1; 
+	private String inviterName;
 	
 	public boolean isApproveAble() {
 		return isApproveAble;
@@ -209,6 +210,14 @@ public class PhamarcyFileModel {
 
 	public void setMaHangHoa(String maHangHoa) {
 		this.maHangHoa = maHangHoa;
+	}
+
+	public String getInviterName() {
+		return inviterName;
+	}
+
+	public void setInviterName(String inviterName) {
+		this.inviterName = inviterName;
 	}
 	
 	
