@@ -50,6 +50,7 @@ public abstract class GenericHibernateDAO<T, ID extends Serializable> {
 		} catch (Exception e) {
 			Clients.showNotification("Lỗi kết nối", Constants.Notification.ERROR, null, "middle_center", 5000);
 			LogUtils.addLog(e);
+			e.printStackTrace();
 			return null;
 		}
 	}

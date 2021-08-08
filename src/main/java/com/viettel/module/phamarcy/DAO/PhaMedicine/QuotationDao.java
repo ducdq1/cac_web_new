@@ -122,9 +122,9 @@ public class QuotationDao extends GenericDAOHibernate<Quotation, Long> {
 		List<Product> lstProduct = new ArrayList<>();
 		try {
 			List lstParam = new ArrayList();
-			StringBuilder selectHql = new StringBuilder("SELECT distinct f from Quotation f where 1=1 ");
+			StringBuilder selectHql = new StringBuilder("SELECT f from Quotation f where 1=1 ");
 			StringBuilder countHql = new StringBuilder(
-					"select count(distinct f.quotationID) from Quotation f where 1=1 ");
+					"select count(f.quotationID) from Quotation f where 1=1 ");
 
 //			StringBuilder countTongTien = new StringBuilder(
 //					"select sum(a.amount * a.price) from QuotationDetail a,Quotation f  where f.quotationID = a.quotationId  ");

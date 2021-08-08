@@ -61,7 +61,7 @@ public class ProductService {
 		UserDAOHE udhe = new UserDAOHE();
 		String strLogin = udhe.checkLogin(loginRequest.getUserName(), loginRequest.getPw());
 		Users user = udhe.getUserByName(loginRequest.getUserName());
-		try { 
+		try {
 			if (strLogin.isEmpty() && user != null) {
 				resp.setUser(user);
 			} else {
@@ -121,17 +121,29 @@ public class ProductService {
 		}
 		return productResponse;
 	}
-	
+
 	@POST
 	@Path("/search-product")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ProductResponse findProduct(final SearchProductBO searchProductBO) {
-		List<com.viettel.module.phamarcy.BO.Product> lstProduct = new ArrayList<>();
-		lstProduct = new ProductDao().searchProductByCode(searchProductBO,searchProductBO.getOffset() * searchProductBO.getLimit(), searchProductBO.getLimit());
 		ProductResponse productResponse = new ProductResponse();
+		try {
+			long startTime = new Date().getTime();
+			System.out.println("--------Start Search-------");
+			System.out.println("Body: ");
+			System.out.println(new Gson().toJson(searchProductBO));
 
-		productResponse.setLstProduct(lstProduct);
+			List<com.viettel.module.phamarcy.BO.Product> lstProduct = new ArrayList<>();
+			lstProduct = new ProductDao().searchProductByCode(searchProductBO,
+					searchProductBO.getOffset() * searchProductBO.getLimit(), searchProductBO.getLimit());			
 
+			productResponse.setLstProduct(lstProduct);
+			System.out.println("--------End search result: " + lstProduct.size());
+			System.out.println("+ Time search: " + (new Date().getTime() - startTime));
+			return productResponse;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return productResponse;
 	}
 
@@ -150,10 +162,10 @@ public class ProductService {
 			model.setUserName(searchBO.getUserName());
 			model.setTrangThai(searchBO.getStatus());
 			model.setSearchText(searchBO.getSearch());
-			model.setApproveAble(searchBO.getIsApproveAble()==null? false: searchBO.getIsApproveAble());
+			model.setApproveAble(searchBO.getIsApproveAble() == null ? false : searchBO.getIsApproveAble());
 			model.setSaled(searchBO.getIsSaled() == null ? false : searchBO.getIsSaled());
-			PagingListModel result = new QuotationDao().findFilesByReceiverAndDeptId(model, searchBO.getOffset() * searchBO.getLimit(),
-					searchBO.getLimit());
+			PagingListModel result = new QuotationDao().findFilesByReceiverAndDeptId(model,
+					searchBO.getOffset() * searchBO.getLimit(), searchBO.getLimit());
 
 			quotations = result.getLstReturn();
 
@@ -185,7 +197,7 @@ public class ProductService {
 
 		return quotationDetailResponse;
 	}
-	
+
 	@POST
 	@Path("/quotation/update-saledate")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -199,35 +211,36 @@ public class ProductService {
 					quotationResponse.setStatusCode(1000);
 					return quotationResponse;
 				}
-				
-				if(createQuotationBO.getQuotationDate() !=null){
-					try{
-						Date saledDate = DateTimeUtils.convertStringToDate(createQuotationBO.getQuotationDate(), "dd/MM/yyyy");
-						if(saledDate !=null){
+
+				if (createQuotationBO.getQuotationDate() != null) {
+					try {
+						Date saledDate = DateTimeUtils.convertStringToDate(createQuotationBO.getQuotationDate(),
+								"dd/MM/yyyy");
+						if (saledDate != null) {
 							quotationUpdate.setSaledDate(saledDate);
 							new QuotationDao().saveOrUpdate(quotationUpdate);
-						}else{
+						} else {
 							throw new Exception("Bạn chưa nhập Ngày bán");
 						}
-					}catch(Exception e){
+					} catch (Exception e) {
 						quotationResponse.setMessage("Bạn chưa nhập Ngày bán");
 						quotationResponse.setStatusCode(1000);
 						return quotationResponse;
 					}
 				}
-				
-				if(createQuotationBO.getIsInvalid()!=null && createQuotationBO.getIsInvalid()){
+
+				if (createQuotationBO.getIsInvalid() != null && createQuotationBO.getIsInvalid()) {
 					quotationUpdate.setIsInvalid(1L);
 					new QuotationDao().saveOrUpdate(quotationUpdate);
 					quotationResponse.setMessage("Cập nhật hiệu lực thành công");
 				}
-				
-				if(createQuotationBO.getQuotation().getNote() != null ){
+
+				if (createQuotationBO.getQuotation().getNote() != null) {
 					quotationUpdate.setNote(createQuotationBO.getQuotation().getNote());
 					new QuotationDao().saveOrUpdate(quotationUpdate);
 					quotationResponse.setMessage("Cập nhật tiến độ thành công");
 				}
-				
+
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -237,7 +250,6 @@ public class ProductService {
 
 		return quotationResponse;
 	}
-	
 
 	@POST
 	@Path("/quotation/delete/{id}")
@@ -278,7 +290,7 @@ public class ProductService {
 
 			// duyet bao gia
 			if (createQuotationBO.getIsApproveAble() != null && createQuotationBO.getIsApproveAble() == true) {
-				
+
 				return approveQuotation(createQuotationBO);
 			}
 
@@ -301,7 +313,7 @@ public class ProductService {
 					}
 					isUpdate = true;
 				}
-				
+
 			}
 
 			Quotation quotation = getQuotation(quotationRequest, quotationUpdate);
@@ -310,34 +322,35 @@ public class ProductService {
 			quotation.setModifyDate(new Date());
 
 			new QuotationDao().saveOrUpdate(quotation);
-			quotationId = quotation.getQuotationID(); 
-			
-			List<QuotationDetail> lstQuotationDetailCurrent =  new QuotationDetailDao().getListQuotationDetail(quotationId);
-			
+			quotationId = quotation.getQuotationID();
+
+			List<QuotationDetail> lstQuotationDetailCurrent = new QuotationDetailDao()
+					.getListQuotationDetail(quotationId);
+
 			for (QuotationDetail obj : lstQuotationDetailCurrent) {
 				Long id = obj.getQuotationDetailId();
 				boolean exist = false;
 				for (QuotationDetail detail : createQuotationBO.getLstQuotationDetail()) {
-					if(detail.getQuotationDetailId() !=null &&
-							detail.getQuotationDetailId().intValue() == id.intValue()){
+					if (detail.getQuotationDetailId() != null
+							&& detail.getQuotationDetailId().intValue() == id.intValue()) {
 						exist = true;
 						break;
 					}
 				}
-				
-				if(!exist){
+
+				if (!exist) {
 					new QuotationDetailDao().delete(obj);
 				}
 			}
-			
+
 			List<QuotationDetail> lstQuotationDetail = createQuotationBO.getLstQuotationDetail();
 			for (QuotationDetail obj : lstQuotationDetail) {
-				if(obj.getQuotationDetailId() == null){
+				if (obj.getQuotationDetailId() == null) {
 					obj.setQuotationId(quotationId);
 					new QuotationDetailDao().saveOrUpdate(obj);
-				}else{
+				} else {
 					QuotationDetail update = new QuotationDetailDao().findById(obj.getQuotationDetailId());
-					if(update !=null){
+					if (update != null) {
 						update.setAttachId(obj.getAttachId());
 						update.setNote(obj.getNote());
 						update.setAmount(obj.getAmount());
@@ -347,54 +360,61 @@ public class ProductService {
 			}
 
 			quotationResponse.setQuotationId(quotationId);
-			if(isUpdate){
-				sendNotification("create","Cập nhật báo giá", String.format("%s vừa cập nhật báo giá cho khách hàng %s", createQuotationBO.getQuotation().getCreateUserFullName().toUpperCase(),createQuotationBO.getQuotation().getCusName()));
-			}else{
-				sendNotification("create","Có báo giá mới", String.format("%s vừa tạo một báo giá mới cho khách hàng %s", createQuotationBO.getQuotation().getCreateUserFullName().toUpperCase(),createQuotationBO.getQuotation().getCusName()));
+			if (isUpdate) {
+				sendNotification("create", "Cập nhật báo giá",
+						String.format("%s vừa cập nhật báo giá cho khách hàng %s",
+								createQuotationBO.getQuotation().getCreateUserFullName().toUpperCase(),
+								createQuotationBO.getQuotation().getCusName()));
+			} else {
+				sendNotification("create", "Có báo giá mới",
+						String.format("%s vừa tạo một báo giá mới cho khách hàng %s",
+								createQuotationBO.getQuotation().getCreateUserFullName().toUpperCase(),
+								createQuotationBO.getQuotation().getCusName()));
 			}
-			
+
 			System.out.println("Return response");
-				
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			quotationResponse.setMessage(e.getMessage());
 			quotationResponse.setStatusCode(1000);
-		} 
-				
+		}
+
 		return quotationResponse;
 	}
 
-	public static void sendNotification(final String topic,final String title, final String bodyStr){
-		
+	public static void sendNotification(final String topic, final String title, final String bodyStr) {
+
 		KThreadPoolExecutor.executeAccessLog((new Runnable() {
-            @Override
-            public void run() {
-            	System.out.println("SendNotification");
-            	NotificationBO body =new NotificationBO();
-        		body.setTo("/topics/"+topic);
-        		Notification notification = body.new Notification();
+			@Override
+			public void run() {
+				System.out.println("SendNotification");
+				NotificationBO body = new NotificationBO();
+				body.setTo("/topics/" + topic);
+				Notification notification = body.new Notification();
 
-        		notification.setTitle(title);
-        		notification.setBody(bodyStr);
+				notification.setTitle(title);
+				notification.setBody(bodyStr);
 
-        		body.setNotification(notification);
-            	pushNotification(body);
-            }
-        }));
-		 
+				body.setNotification(notification);
+				pushNotification(body);
+			}
+		}));
+
 	}
+
 	private QuotationResponse approveQuotation(CreateQuotationBO createQuotationBO) {
 		QuotationResponse quotationResponse = new QuotationResponse();
 		quotationResponse.setStatusCode(1000);
 		try {
 			int status = createQuotationBO.getQuotation().getStatus();
 			Quotation quotationBO = createQuotationBO.getQuotation();
-			
-			if (quotationBO == null || quotationBO.getQuotationID() == null ) {
+
+			if (quotationBO == null || quotationBO.getQuotationID() == null) {
 				quotationResponse.setMessage("Không tìm thấy báo giá");
 				return quotationResponse;
 			}
-			
+
 			if (status == Constants.BAO_GIA_STATUS_DA_XUAT_BAO_GIA.intValue()) {
 				quotationResponse.setMessage("Báo giá đã xử lý. Không thể cập nhật");
 				return quotationResponse;
@@ -408,15 +428,16 @@ public class ProductService {
 					try {
 						Long value = quotationDetail.getPrice();
 						if (value == null || value.compareTo(0L) < 0) {
-							quotationResponse
-									.setMessage("Giá bán của sản phẩm " + quotationDetail.getProductCode() + "  không hợp lệ ");
+							quotationResponse.setMessage(
+									"Giá bán của sản phẩm " + quotationDetail.getProductCode() + "  không hợp lệ ");
 							return quotationResponse;
 						}
 
 						quotationDetail.setPrice(value.longValue());
 						totalPrice = totalPrice.add(new BigDecimal(amount * value));
 					} catch (Exception e) {
-						quotationResponse.setMessage("Giá bán của sản phẩm " + quotationDetail.getProductCode() + "  không hợp lệ ");
+						quotationResponse.setMessage(
+								"Giá bán của sản phẩm " + quotationDetail.getProductCode() + "  không hợp lệ ");
 						return quotationResponse;
 					}
 				}
@@ -426,19 +447,20 @@ public class ProductService {
 				quotationResponse.setMessage("Bạn chưa nhập Ngày hết hạn");
 				return quotationResponse;
 			}
-			Date expiredDate = null ;
-			try{
+			Date expiredDate = null;
+			try {
 				expiredDate = DateTimeUtils.convertStringToDate(createQuotationBO.getExpiredDate(), "dd/MM/yyyy");
-				
-			}catch(Exception e){
+
+			} catch (Exception e) {
 				quotationResponse.setMessage("Bạn chưa nhập Ngày hết hạn");
 				return quotationResponse;
 			}
-			
-			//QuotationDetailDao dao = new QuotationDetailDao();
-			for (QuotationDetail quotationDetail : createQuotationBO.getLstQuotationDetail()) {				
-				if (quotationDetail.getQuotationDetailId() != null ) {
-					//System.out.println("chi tiet bao gia Id "+quotationDetail.getQuotationDetailId());
+
+			// QuotationDetailDao dao = new QuotationDetailDao();
+			for (QuotationDetail quotationDetail : createQuotationBO.getLstQuotationDetail()) {
+				if (quotationDetail.getQuotationDetailId() != null) {
+					// System.out.println("chi tiet bao gia Id
+					// "+quotationDetail.getQuotationDetailId());
 					QuotationDetail update = new QuotationDetailDao().findById(quotationDetail.getQuotationDetailId());
 					update.setPrice(quotationDetail.getPrice());
 					new QuotationDetailDao().saveOrUpdate(update);
@@ -447,38 +469,41 @@ public class ProductService {
 
 			Quotation quotationUpdate = new QuotationDao().findById(quotationBO.getQuotationID());
 			if (!createQuotationBO.getIsPreViewApprove()) {
-				if(quotationUpdate.getQuotationNumber() == null || quotationUpdate.getQuotationNumber().isEmpty()){
+				if (quotationUpdate.getQuotationNumber() == null || quotationUpdate.getQuotationNumber().isEmpty()) {
 					quotationUpdate.setQuotationNumber(new QuotationDao().getAutoPhaFileCode());
 				}
 				quotationUpdate.setStatus(Constants.BAO_GIA_STATUS_DA_XUAT_BAO_GIA.intValue());
 			}
-			
+
 			quotationUpdate.setQuotationDate(expiredDate);
 			quotationUpdate.setModifyDate(new Date());
 			quotationUpdate.setTotalPrice(totalPrice);
-			
-			List<QuotationDetail> listQuotationDetail = new QuotationDetailDao().getListQuotationDetail(quotationUpdate.getQuotationID());
-			String filePath = printBaoGia(listQuotationDetail, quotationUpdate, createQuotationBO.getIsPreViewApprove());
-			
-			if(filePath == null){
+
+			List<QuotationDetail> listQuotationDetail = new QuotationDetailDao()
+					.getListQuotationDetail(quotationUpdate.getQuotationID());
+			String filePath = printBaoGia(listQuotationDetail, quotationUpdate,
+					createQuotationBO.getIsPreViewApprove());
+
+			if (filePath == null) {
 				quotationResponse.setMessage("Không in được báo giá");
 				return quotationResponse;
-			} 
-			
+			}
+
 			new QuotationDao().saveOrUpdate(quotationUpdate);
 			quotationResponse.setMessage(quotationUpdate.getFileName());
 			quotationResponse.setStatusCode(200);
-			
-			if(createQuotationBO.getIsPreViewApprove()!=null
-					&& !createQuotationBO.getIsPreViewApprove()){
-				sendNotification(quotationUpdate.getCreateUserCode(),"Báo giá đã được duyệt: "+ quotationUpdate.getQuotationNumber(), String.format("Báo giá cho KH %s của bạn vừa được phê duyệt ", quotationUpdate.getCusName()));
+
+			if (createQuotationBO.getIsPreViewApprove() != null && !createQuotationBO.getIsPreViewApprove()) {
+				sendNotification(quotationUpdate.getCreateUserCode(),
+						"Báo giá đã được duyệt: " + quotationUpdate.getQuotationNumber(),
+						String.format("Báo giá cho KH %s của bạn vừa được phê duyệt ", quotationUpdate.getCusName()));
 			}
 			return quotationResponse;
 		} catch (Exception e) {
 			quotationResponse.setMessage(e.getMessage());
 			e.printStackTrace();
 		}
-		
+
 		return quotationResponse;
 	}
 
@@ -542,7 +567,7 @@ public class ProductService {
 		return null;
 	}
 
-	public static HangHoaBO pushNotification(NotificationBO body) { 
+	public static HangHoaBO pushNotification(NotificationBO body) {
 
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 		CloseableHttpResponse response = null;
@@ -553,11 +578,11 @@ public class ProductService {
 					"key=AAAAqfPZ1sQ:APA91bECNLIxhv2ZFNpVrNA_x33P7bK1el3jQBe3KbImmFjFxwRcM9vCsL7x6pf4Xx4rU0Nhi549sIAvsAtDS5ozHQRcZwlbT-nP-mCU1-vQbgihMXFydGMJxoLzzlGkPxotL3bm1nbY");
 			request.setHeader("Content-type", "application/json");
 			request.setHeader("Accept-Encoding", "UTF-8");
-			
-			request.setEntity(new StringEntity(new Gson().toJson(body),"UTF-8"));
+
+			request.setEntity(new StringEntity(new Gson().toJson(body), "UTF-8"));
 			System.out.println("FireBase request: " + new Gson().toJson(body));
 			response = httpClient.execute(request);
-			System.out.println("FireBase response: "+ response.getStatusLine().getStatusCode());
+			System.out.println("FireBase response: " + response.getStatusLine().getStatusCode());
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -578,9 +603,7 @@ public class ProductService {
 	}
 
 	public static void main(String[] args) {
-		//pushNotification("BG001");
+		// pushNotification("BG001");
 	}
-	
-	
 
 }

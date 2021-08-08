@@ -24,6 +24,8 @@ public class SearchProductBO {
 		@XmlElement
 		public Long productId;		
 		
+		@XmlElement 
+		public Boolean isGetPromotionProduct;
 		
 		public String getProductCode() {
 			return productCode;
@@ -85,6 +87,13 @@ public class SearchProductBO {
 		public void setProductId(Long productId) {
 			this.productId = productId;
 		}
+		public Boolean getIsGetPromotionProduct() {
+			return isGetPromotionProduct;
+		}
+		public void setIsGetPromotionProduct(Boolean isGetPromotionProduct) {
+			this.isGetPromotionProduct = isGetPromotionProduct;
+		}
+
 		
 		
 }
