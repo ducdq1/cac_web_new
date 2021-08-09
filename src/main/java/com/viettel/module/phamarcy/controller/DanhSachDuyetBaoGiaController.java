@@ -1,5 +1,7 @@
 package com.viettel.module.phamarcy.controller;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -18,6 +20,7 @@ import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
+import org.zkoss.zul.Filedownload;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelArray;
 import org.zkoss.zul.Listbox;
@@ -51,9 +54,9 @@ public class DanhSachDuyetBaoGiaController extends BaseComposer {
 
 	private static final long serialVersionUID = 1L;
 	@Wire
-	private Textbox tbMaNVBH,tbKhacHang,tbSDT,tbDiaChi;
+	private Textbox tbMaNVBH, tbKhacHang, tbSDT, tbDiaChi;
 	@Wire
-	private Datebox dbFromDay,dbToDay;
+	private Datebox dbFromDay, dbToDay;
 	@Wire
 	private Paging userPagingBottom;
 	@Wire
@@ -61,7 +64,7 @@ public class DanhSachDuyetBaoGiaController extends BaseComposer {
 	@Wire
 	private Window danhSachBaoGia;
 	@Wire
-	private Combobox cbTrangThai,cbDaBan;
+	private Combobox cbTrangThai, cbDaBan;
 	@Wire
 	private Label lbTongtien;
 
@@ -72,9 +75,9 @@ public class DanhSachDuyetBaoGiaController extends BaseComposer {
 	ListModelArray lstModel;
 	int indexUpdate;// cap nhat sp bao gia
 	QuotationDetail quotationDetailUpdate;
-	
+
 	Quotation quotation = new Quotation();
-	
+
 	@Override
 	public void doBeforeComposeChildren(Component comp) throws Exception {
 		lastSearchModel = new PhamarcyFileModel();
@@ -87,29 +90,30 @@ public class DanhSachDuyetBaoGiaController extends BaseComposer {
 		super.doAfterCompose(comp);
 		lstQuotationDetail = new ArrayList<>();
 
-//		HttpServletRequest req = (HttpServletRequest) Executions.getCurrent().getNativeRequest();
-//		HttpSession httpSession = req.getSession(true);
-//		UserToken userToken =(UserToken) httpSession.getAttribute("userToken");
-//		if(userToken != null){
-//			tbMaNVBH.setText(userToken.getUserName());
-//			tbTenNVBH.setText(userToken.getUserFullName());
-//		}
-		Calendar c = Calendar.getInstance();   // this takes current date
-	    c.set(Calendar.DAY_OF_MONTH, 1);
-	    dbFromDay.setValue(c.getTime());
-	    
-	    cbTrangThai.setSelectedIndex(1);
-	    cbDaBan.setSelectedIndex(0);
-		onSearch();
-		
-	}
+		// HttpServletRequest req = (HttpServletRequest)
+		// Executions.getCurrent().getNativeRequest();
+		// HttpSession httpSession = req.getSession(true);
+		// UserToken userToken =(UserToken)
+		// httpSession.getAttribute("userToken");
+		// if(userToken != null){
+		// tbMaNVBH.setText(userToken.getUserName());
+		// tbTenNVBH.setText(userToken.getUserFullName());
+		// }
+		Calendar c = Calendar.getInstance(); // this takes current date
+		c.set(Calendar.DAY_OF_MONTH, 1);
+		dbFromDay.setValue(c.getTime());
 
+		cbTrangThai.setSelectedIndex(1);
+		cbDaBan.setSelectedIndex(0);
+		onSearch();
+
+	}
 
 	@Listen("onClick = #btnSearch")
 	public void onSearch() {
-		//lastSearchModel.setProductCode(tbMaSP.getText().trim());
+		// lastSearchModel.setProductCode(tbMaSP.getText().trim());
 		// lastSearchModel.setProductName(tbTenSP.getText().trim());
-//		lastSearchModel.setQuotationUserFullName(tbTenNVBH.getText().trim());
+		// lastSearchModel.setQuotationUserFullName(tbTenNVBH.getText().trim());
 		lastSearchModel.setUserName(tbMaNVBH.getText().trim());
 		lastSearchModel.setTenHK(tbKhacHang.getText().trim());
 		lastSearchModel.setSoDT(tbSDT.getText().trim());
@@ -125,60 +129,59 @@ public class DanhSachDuyetBaoGiaController extends BaseComposer {
 			LogUtils.addLog(ex);
 		}
 	}
-	
-	
+
 	@Listen("onClick = #btnSave")
 	public void onSave() {
-		try{
-		if(tbMaNVBH.getValue().isEmpty()){
-			tbKhacHang.setErrorMessage("Mã nhân viên không được để trống");
-			return;
-		}
-		
-//		if(tbTenNVBH.getValue().isEmpty()){
-//			tbKhacHang.setErrorMessage("Tên nhân viên không được để trống");
-//			return;
-//		}
-		
-		if(tbKhacHang.getValue().isEmpty()){
-			tbKhacHang.setErrorMessage("Tên khách hàng không được để trống");
-			return;
-		}
-		
-		if(tbDiaChi.getValue().isEmpty()){
-			tbKhacHang.setErrorMessage("Địa chỉ khách hàng không được để trống");
-			return;
-		}
-		 
-		if(quotation.getQuotationNumber() == null){
-			quotation.setQuotationNumber(new QuotationDao().getAutoPhaFileCode());
-		}
-		
-		quotation.setCreateDate(new Date());
-		quotation.setModifyDate(new Date());
-		quotation.setQuotationDate(new Date());
-//		quotation.setCreateUserFullName(tbTenNVBH.getText().trim());
-		quotation.setCreateUserCode(tbMaNVBH.getText().trim());
-		quotation.setCusName(tbKhacHang.getText().trim());
-		quotation.setCusAddress(tbDiaChi.getText().trim());
-		quotation.setCusPhone(tbSDT.getText().trim());
-		quotation.setCreateUserFullNameSearch(new BaseGenericForwardComposer().removeVietnameseChar(quotation.getCreateUserFullName()));
-		
-	    new QuotationDao().saveOrUpdate(quotation);
-		Long quotationId = quotation.getQuotationID();
+		try {
+			if (tbMaNVBH.getValue().isEmpty()) {
+				tbKhacHang.setErrorMessage("Mã nhân viên không được để trống");
+				return;
+			}
 
-		for (QuotationDetail obj : lstQuotationDetail) {
-			obj.setQuotationId(quotationId);
-			new QuotationDetailDao().saveOrUpdate(obj);
-		}
-		
-		showSuccessNotification("Lưu báo giá thành công");
-		}catch(Exception e){
-			showNotification("Lưu không thành công \n"+e.getMessage());
+			// if(tbTenNVBH.getValue().isEmpty()){
+			// tbKhacHang.setErrorMessage("Tên nhân viên không được để trống");
+			// return;
+			// }
+
+			if (tbKhacHang.getValue().isEmpty()) {
+				tbKhacHang.setErrorMessage("Tên khách hàng không được để trống");
+				return;
+			}
+
+			if (tbDiaChi.getValue().isEmpty()) {
+				tbKhacHang.setErrorMessage("Địa chỉ khách hàng không được để trống");
+				return;
+			}
+
+			if (quotation.getQuotationNumber() == null) {
+				quotation.setQuotationNumber(new QuotationDao().getAutoPhaFileCode());
+			}
+
+			quotation.setCreateDate(new Date());
+			quotation.setModifyDate(new Date());
+			quotation.setQuotationDate(new Date());
+			// quotation.setCreateUserFullName(tbTenNVBH.getText().trim());
+			quotation.setCreateUserCode(tbMaNVBH.getText().trim());
+			quotation.setCusName(tbKhacHang.getText().trim());
+			quotation.setCusAddress(tbDiaChi.getText().trim());
+			quotation.setCusPhone(tbSDT.getText().trim());
+			quotation.setCreateUserFullNameSearch(
+					new BaseGenericForwardComposer().removeVietnameseChar(quotation.getCreateUserFullName()));
+
+			new QuotationDao().saveOrUpdate(quotation);
+			Long quotationId = quotation.getQuotationID();
+
+			for (QuotationDetail obj : lstQuotationDetail) {
+				obj.setQuotationId(quotationId);
+				new QuotationDetailDao().saveOrUpdate(obj);
+			}
+
+			showSuccessNotification("Lưu báo giá thành công");
+		} catch (Exception e) {
+			showNotification("Lưu không thành công \n" + e.getMessage());
 		}
 	}
-	
-	
+
 	@Listen("onClick = #btnThemSP")
 	public void addListItem() {
 		HashMap<String, Object> arguments = new HashMap<String, Object>();
@@ -189,7 +192,7 @@ public class DanhSachDuyetBaoGiaController extends BaseComposer {
 
 	@Listen("onOK=#danhSachBaoGia")
 	public void onEnter() {
-	 onSearch();
+		onSearch();
 	}
 
 	/**
@@ -254,7 +257,6 @@ public class DanhSachDuyetBaoGiaController extends BaseComposer {
 		createWindow("windowView", "/Pages/module/phamarcy/generalview/phamarcyView.zul", arguments, Window.EMBEDDED);
 	}
 
-
 	@Listen("onReload =#danhSachBaoGia")
 	public void onRefreshAll(Event event) {
 		reloadModel(lastSearchModel);
@@ -269,6 +271,30 @@ public class DanhSachDuyetBaoGiaController extends BaseComposer {
 		createWindow("windowView", "/Pages/module/phamarcy/bao_gia_sp.zul", arguments, Window.MODAL);
 	}
 
+	@Listen("onClick = #btnExport")
+	public void onExportExcel() throws FileNotFoundException {
+		lastSearchModel.setUserName(tbMaNVBH.getText().trim());
+		lastSearchModel.setTenHK(tbKhacHang.getText().trim());
+		lastSearchModel.setSoDT(tbSDT.getText().trim());
+		lastSearchModel.setFromDate(dbFromDay.getValue());
+		lastSearchModel.setToDate(dbToDay.getValue());
+		lastSearchModel.setDiaChi(tbDiaChi.getText().trim());
+		lastSearchModel.setTrangThai(Integer.valueOf(cbTrangThai.getSelectedItem().getValue().toString()));
+		lastSearchModel.setDaBan(Integer.valueOf(cbDaBan.getSelectedItem().getValue().toString()));
+		reloadModel(lastSearchModel);
+		QuotationDao dao = new QuotationDao();
+		PagingListModel plm = dao.findFilesByReceiverAndDeptId(lastSearchModel, 0, -1);
+		List<Quotation> lstQuotations = plm.getLstReturn();
+
+		String filePath = new ExportExcell().exportKiemTraBaoGia(lstQuotations, dbFromDay.getValue(),
+				dbToDay.getValue(), true);
+		if (filePath != null) {
+			Filedownload.save(new File(filePath), "application/application/x-xls");
+		} else {
+			showNotification("Có lỗi xãy ra");
+		}
+	}
+
 	@Listen("onClick = #btnPrint")
 	public void onPrint() {
 		lastSearchModel.setUserName(tbMaNVBH.getText().trim());
@@ -281,12 +307,11 @@ public class DanhSachDuyetBaoGiaController extends BaseComposer {
 		lastSearchModel.setDaBan(Integer.valueOf(cbDaBan.getSelectedItem().getValue().toString()));
 		reloadModel(lastSearchModel);
 		QuotationDao dao = new QuotationDao();
-		PagingListModel plm = dao.findFilesByReceiverAndDeptId(lastSearchModel, 0 , -1);
+		PagingListModel plm = dao.findFilesByReceiverAndDeptId(lastSearchModel, 0, -1);
 		List<Quotation> lstQuotations = plm.getLstReturn();
-		 
-		
-		
-		String filePath = new ExportExcell().exportKiemTraBaoGia(lstQuotations, dbFromDay.getValue(), dbToDay.getValue());
+
+		String filePath = new ExportExcell().exportKiemTraBaoGia(lstQuotations, dbFromDay.getValue(),
+				dbToDay.getValue(), false);
 		if (filePath != null) {
 			String URL;
 			URL = "Pages/module/phamarcy/generalview/viewPDF.zul?filePath=";

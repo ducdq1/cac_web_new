@@ -707,7 +707,7 @@ public class ExportExcell extends BaseComposer {
 		// RegionUtil.setBorderRight(BorderStyle.THIN, region, sheet);
 
 	}
-	
+
 	private static void createCellWithBorder(int cellNum, XSSFRow row, CellStyle style, String content) {
 		row.createCell(cellNum).setCellValue(content == null ? "" : !content.equals(": null") ? content : ":");
 		style.setBorderBottom(CellStyle.BORDER_DASHED);
@@ -719,7 +719,6 @@ public class ExportExcell extends BaseComposer {
 		row.getCell(cellNum).setCellStyle(style);
 
 	}
-	
 
 	private void createCell(int cellNum, XSSFRow row, String content) {
 		row.createCell(cellNum).setCellValue(content == null ? "" : !content.equals(": null") ? content : ":");
@@ -791,7 +790,7 @@ public class ExportExcell extends BaseComposer {
 		}
 	}
 
-	public String exportKiemTraBaoGia(List<Quotation> quotations, Date fromDate, Date toDate) {
+	public String exportKiemTraBaoGia(List<Quotation> quotations, Date fromDate, Date toDate, boolean isExportExcel) {
 		XSSFWorkbook workbook;
 
 		String filePath;
@@ -814,8 +813,12 @@ public class ExportExcell extends BaseComposer {
 			workbook.write(fileOut);
 			fileOut.close();
 
-			String fileFinal = convertToPdf(filePathOut, false);
-			return fileFinal;
+			if (isExportExcel) {
+				return filePathOut;
+			} else {
+				String fileFinal = convertToPdf(filePathOut, false);
+				return fileFinal;
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -992,7 +995,7 @@ public class ExportExcell extends BaseComposer {
 			countQuotation++;
 			colNum = 0;
 			sheet.shiftRows(rowNum, sheet.getLastRowNum(), 1);
-			row0 =  createRow(rowNum, sheet, cloneRow0);
+			row0 = createRow(rowNum, sheet, cloneRow0);
 			rowNum++;
 			createCell(colNum++, row0, cloneRow0.getCell(0).getCellStyle(), "" + countQuotation);
 			createCell(colNum++, row0, cloneRow0.getCell(1).getCellStyle(), quotationDetail.getProductName());
@@ -1224,7 +1227,7 @@ public class ExportExcell extends BaseComposer {
 		Font fontItalicNormal = workbook.getSheet("KHACH_1").getRow(4).getCell(1).getCellStyle().getFont();
 		fontNormal.setFontName("Times New Roman");
 		fontItalic.setFontName("Times New Roman");
-		
+
 		String dateToDate = "";
 		if (fromDate != null) {
 			String strFromDate = new SimpleDateFormat("dd/MM/yyyy").format(fromDate);
@@ -1264,11 +1267,11 @@ public class ExportExcell extends BaseComposer {
 			sheet.shiftRows(rowNum, sheet.getLastRowNum(), 1);
 			// row0 = createRow(rowNum, sheet, cloneRow0);
 			row0 = sheet.createRow(rowNum);
-			
-			
+
 			rowNum++;
 			createCellWithBorder(colNum++, row0, cloneRow0.getCell(0).getCellStyle(), "" + countQuotation);
-			createCellWithBorder(colNum++, row0, cloneRow0.getCell(1).getCellStyle(), quotation.getCreateUserCode().toUpperCase());
+			createCellWithBorder(colNum++, row0, cloneRow0.getCell(1).getCellStyle(),
+					quotation.getCreateUserCode().toUpperCase());
 			createCellWithBorder(colNum++, row0, cloneRow0.getCell(2).getCellStyle(),
 					quotation.getQuotationNumber() == null ? "" : quotation.getQuotationNumber());
 			createCellWithBorder(colNum++, row0, cloneRow0.getCell(3).getCellStyle(), quotation.getCusName());
@@ -1278,19 +1281,21 @@ public class ExportExcell extends BaseComposer {
 			createCellWithBorder(colNum++, row0, cloneRow0.getCell(6).getCellStyle(),
 					quotation.getStatus() == Constants.BAO_GIA_STATUS_DA_XUAT_BAO_GIA
 							? new SimpleDateFormat("dd/MM/yyyy").format(quotation.getModifyDate()) : "");
-			
-			createCellWithBorder(colNum++, row0, cloneRow0.getCell(7).getCellStyle(), quotation.getStatus() == Constants.BAO_GIA_STATUS_DA_XUAT_BAO_GIA
-					? quotation.getNote() == null ? "" : quotation.getNote() : "");
-			
-			createCellWithBorder(colNum++, row0, cloneRow0.getCell(8).getCellStyle(), quotation.getSaledDate() == null ? ""
-					: new SimpleDateFormat("dd/MM/yyyy").format(quotation.getSaledDate()));
+
+			createCellWithBorder(colNum++, row0, cloneRow0.getCell(7).getCellStyle(),
+					quotation.getStatus() == Constants.BAO_GIA_STATUS_DA_XUAT_BAO_GIA
+							? quotation.getNote() == null ? "" : quotation.getNote() : "");
+
+			createCellWithBorder(colNum++, row0, cloneRow0.getCell(8).getCellStyle(), quotation.getSaledDate() == null
+					? "" : new SimpleDateFormat("dd/MM/yyyy").format(quotation.getSaledDate()));
 
 			createCellWithBorder(colNum++, row0, cloneRow0.getCell(9).getCellStyle(),
 					"" + formatNumber(quotation.getTotalPrice(), "###,###,###.####"));
-			
-			createCellWithBorder(colNum++, row0, cloneRow0.getCell(8).getCellStyle(),Long.valueOf(1).equals(quotation.getIsInvalid()) ? "X" : "" );
-			
-			//row0.setHeight((short)(row0.getHeight() + (short)650 ) );
+
+			createCellWithBorder(colNum++, row0, cloneRow0.getCell(8).getCellStyle(),
+					Long.valueOf(1).equals(quotation.getIsInvalid()) ? "X" : "");
+
+			// row0.setHeight((short)(row0.getHeight() + (short)650 ) );
 			short h = cloneRow0.getHeight();
 			row0.setHeight(h);
 			countRow++;
@@ -1348,10 +1353,9 @@ public class ExportExcell extends BaseComposer {
 			quotations.add(quotation);
 			quotations.add(quotation);
 			writeDataKiemTraBaoGia(workbook, quotations, null, null);
-			
-			
-			 //writeDataBaoGiaCongTrinh(workbook, details, quotation);
-			//writeDataBaoGia(workbook, details, quotation);
+
+			// writeDataBaoGiaCongTrinh(workbook, details, quotation);
+			// writeDataBaoGia(workbook, details, quotation);
 			// ResourceBundle rb = ResourceBundle.getBundle("config");
 			// String PATH = rb.getString("ConvertService");
 			// FileUtil.mkdirs(PATH);

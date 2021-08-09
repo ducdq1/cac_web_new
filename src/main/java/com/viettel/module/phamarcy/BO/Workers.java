@@ -50,6 +50,9 @@ public class Workers  {
 	@Column(name = "INVITER_NAME")
 	private String inviterName;
 	
+	@Column(name = "CUS_GROUP")
+	private Long cusGroup;
+	
 	public Long getId() {
 		return id;
 	}
@@ -104,7 +107,15 @@ public class Workers  {
 
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
+	}
+
+	public Long getCusGroup() {
+		return cusGroup;
+	}
+
+	public void setCusGroup(Long cusGroup) {
+		this.cusGroup = cusGroup;
 	} 
 
-	
+   	
 }

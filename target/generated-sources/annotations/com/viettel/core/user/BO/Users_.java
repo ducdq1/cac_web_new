@@ -15,6 +15,7 @@ public abstract class Users_ {
 	public static volatile SingularAttribute<Users, String> staffCode;
 	public static volatile SingularAttribute<Users, Long> gender;
 	public static volatile SingularAttribute<Users, String> ip;
+	public static volatile SingularAttribute<Users, String> roles;
 	public static volatile SingularAttribute<Users, Long> deptId;
 	public static volatile SingularAttribute<Users, Long> businessId;
 	public static volatile SingularAttribute<Users, String> businessName;

@@ -137,6 +137,12 @@ public class Users implements Serializable {
 	private Long businessId;
 	@Column(name = "BUSINESS_NAME")
 	private String businessName;
+	
+	@Column(name = "ROLES")
+	private String roles;
+	
+	@Transient
+	private Long cusGroup;
 
 //	@Lob
 //	@Column(name = "SALT")
@@ -358,6 +364,26 @@ public class Users implements Serializable {
 
 	public void setBusinessName(String businessName) {
 		this.businessName = businessName;
+	}
+	
+	
+
+	public String getRoles() {
+		return roles;
+	}
+
+	public void setRoles(String roles) {
+		this.roles = roles;
+	}
+	
+	
+
+	public Long getCusGroup() {
+		return cusGroup;
+	}
+
+	public void setCusGroup(Long cusGroup) {
+		this.cusGroup = cusGroup;
 	}
 
 	@Override

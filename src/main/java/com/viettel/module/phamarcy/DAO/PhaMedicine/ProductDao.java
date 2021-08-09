@@ -216,7 +216,7 @@ public class ProductDao extends GenericDAOHibernate<Product, Long> {
 				}
 
 				if (bo.getIsGetPromotionProduct() != null && bo.getIsGetPromotionProduct() == true) {
-					selectHql.append(" and   f.priceBLKM is not null ");
+					selectHql.append(" and f.priceBLKM is not null ");
 				}
 
 			}

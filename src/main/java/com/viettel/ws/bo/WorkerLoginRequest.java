@@ -11,6 +11,8 @@ public class WorkerLoginRequest {
 	public String phone;
 	@XmlElement
 	public Long type;
+	@XmlElement
+	public Long cusGroup;
 
 	@XmlElement
 	public String inviterName;
@@ -45,6 +47,14 @@ public class WorkerLoginRequest {
 
 	public void setInviterName(String inviterName) {
 		this.inviterName = inviterName;
-	} 
+	}
 
+	public Long getCusGroup() {
+		return cusGroup;
+	}
+
+	public void setCusGroup(Long cusGroup) {
+		this.cusGroup = cusGroup;
+	} 
+   
 }

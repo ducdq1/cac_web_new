@@ -31,12 +31,17 @@ public class WorkerService {
 				user.setFullName(worker.getName());
 				user.setUserId(worker.getId());
 				user.setUserName(worker.getPhone());
+				user.setCusGroup(worker.getCusGroup());
 				resp.setUser(user);
+
 				if(worker.getInviterName() == null){
 					worker.setInviterName(loginRequest.getInviterName());
 				}
+				
 				worker.setName(loginRequest.getName());
 				worker.setLastLogin(new Date());
+				worker.setCusGroup(loginRequest.getCusGroup());
+				
 				new WorkerDao().saveOrUpdate(worker);
 				
 			} else {
@@ -47,12 +52,14 @@ public class WorkerService {
 				newWorker.setLastLogin(new Date());
 				newWorker.setInviterName(loginRequest.getInviterName());
 				newWorker.setCreateDate(new Date());
+				newWorker.setCusGroup(loginRequest.getCusGroup());
 				new WorkerDao().saveOrUpdate(newWorker);
 				Users user = new Users();
 				user.setUserId(newWorker.getId());
 				user.setTelephone(newWorker.getPhone());
 				user.setFullName(newWorker.getName());
 				user.setUserName(newWorker.getPhone());
+				user.setCusGroup(newWorker.getCusGroup());
 				resp.setUser(user);
 			}
 		} catch (Exception e) {

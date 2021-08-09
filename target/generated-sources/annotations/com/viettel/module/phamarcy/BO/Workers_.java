@@ -11,6 +11,7 @@ public abstract class Workers_ {
 
 	public static volatile SingularAttribute<Workers, Date> lastLogin;
 	public static volatile SingularAttribute<Workers, String> phone;
+	public static volatile SingularAttribute<Workers, Long> cusGroup;
 	public static volatile SingularAttribute<Workers, String> name;
 	public static volatile SingularAttribute<Workers, Long> id;
 	public static volatile SingularAttribute<Workers, Long> isActive;

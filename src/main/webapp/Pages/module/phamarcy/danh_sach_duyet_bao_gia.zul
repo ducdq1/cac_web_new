@@ -119,11 +119,10 @@
 						label="${$composer.getLabelCos('common_search')}" sclass="button"
 						image="/Share/img/icon/search.jpg" autodisable="self" />
 											<label value=" " width="20px"/>
-   <button label="In kiểm tra"
-							id="btnPrint" autodisable="true"
-						sclass="button"
-				 
-							image="/Share/img/icon/print_ic_small.png" />
+			   <button label="In kiểm tra" id="btnPrint" autodisable="true"
+				 sclass="button" image="/Share/img/icon/print_ic_small.png" />
+				  <button label="Xuất Excel  " id="btnExport" autodisable="true"
+				 sclass="button" image="/Share/img/icon/excel_icon_24x24.png"/>
 	</h:div>
 	
 		</groupbox>
