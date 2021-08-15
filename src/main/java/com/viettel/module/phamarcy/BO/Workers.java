@@ -50,6 +50,9 @@ public class Workers  {
 	@Column(name = "INVITER_NAME")
 	private String inviterName;
 	
+	@Column(name = "PROCESSOR")
+	private String processor;
+	
 	@Column(name = "CUS_GROUP")
 	private Long cusGroup;
 	
@@ -115,7 +118,15 @@ public class Workers  {
 
 	public void setCusGroup(Long cusGroup) {
 		this.cusGroup = cusGroup;
+	}
+
+	public String getProcessor() {
+		return processor;
+	}
+
+	public void setProcessor(String processor) {
+		this.processor = processor;
 	} 
 
-   	
+      	
 }

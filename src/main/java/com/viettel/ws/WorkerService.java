@@ -11,11 +11,25 @@ import javax.ws.rs.core.MediaType;
 import com.viettel.core.user.BO.Users;
 import com.viettel.module.phamarcy.BO.Workers;
 import com.viettel.module.phamarcy.DAO.PhaMedicine.WorkerDao;
+import com.viettel.ws.bo.UpdateWorkerProcessorRequest;
 import com.viettel.ws.bo.WorkerLoginRequest;
 
 @Path("workers")
 public class WorkerService {
 
+	@POST
+	@Path("/updateProcessor")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Workers updateProcessor(final UpdateWorkerProcessorRequest loginRequest) {
+		Workers worker = new WorkerDao().getWorkerByPhone(loginRequest.getWorkerId());
+		if(worker != null && worker.getProcessor() == null){
+			worker.setProcessor(loginRequest.getProcessor());
+			new WorkerDao().saveOrUpdate(worker);
+		}
+		
+		return worker;
+	}
+	
 	@POST
 	@Path("/login")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -28,12 +42,13 @@ public class WorkerService {
 			if (worker != null) {
 				Users user = new Users();
 				user.setTelephone(worker.getPhone());
-				user.setFullName(worker.getName());
+				user.setFullName(loginRequest.getName());
 				user.setUserId(worker.getId());
 				user.setUserName(worker.getPhone());
 				user.setCusGroup(worker.getCusGroup());
-				resp.setUser(user);
-
+				user.setBusinessName(worker.getProcessor());
+				resp.setUser(user);				 
+				
 				if(worker.getInviterName() == null){
 					worker.setInviterName(loginRequest.getInviterName());
 				}

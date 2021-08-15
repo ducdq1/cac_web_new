@@ -114,10 +114,13 @@ public class ProductService {
 				e.printStackTrace();
 			}
 		}
+		
+		if (searchProductBO.getIsViewTonKho()) {
 
-		HangHoaBO tonKho = layThongTinTonKho(maVT);
-		if (tonKho != null) {
-			productResponse.setTonKho(tonKho);
+			HangHoaBO tonKho = layThongTinTonKho(maVT);
+			if (tonKho != null) {
+				productResponse.setTonKho(tonKho);
+			}
 		}
 		return productResponse;
 	}
@@ -133,8 +136,9 @@ public class ProductService {
 			System.out.println("Body: ");
 			System.out.println(new Gson().toJson(searchProductBO));
 
-			List<com.viettel.module.phamarcy.BO.Product> lstProduct = new ProductDao().searchProductByCode(searchProductBO,
-					searchProductBO.getOffset() * searchProductBO.getLimit(), searchProductBO.getLimit());			
+			List<com.viettel.module.phamarcy.BO.Product> lstProduct = new ProductDao().searchProductByCode(
+					searchProductBO, searchProductBO.getOffset() * searchProductBO.getLimit(),
+					searchProductBO.getLimit());
 
 			productResponse.setLstProduct(lstProduct);
 			System.out.println("--------End search result: " + lstProduct.size());

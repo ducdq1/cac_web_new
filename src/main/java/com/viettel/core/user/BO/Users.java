@@ -127,8 +127,6 @@ public class Users implements Serializable {
 	private Date birthday;
 	@Column(name = "IDNUMBER")
 	private String idNumber;
-	@Transient
-	private int random;
 	// linhdx loai nguoi dung: Binh thuong hay quan tri, de co the xem duoc 1 so
 	// danh muc hay toan bo danh muc
 	@Column(name = "USER_TYPE")
@@ -333,15 +331,6 @@ public class Users implements Serializable {
 		this.idNumber = idNumber;
 	}
 
-	public int getRandom() {
-		SecureRandom ran = new SecureRandom();
-		return ran.nextInt(100);
-	}
-
-	public void setRandom(int random) {
-		this.random = random;
-	}
-
 	public Long getUserType() {
 		return userType;
 	}
@@ -365,9 +354,7 @@ public class Users implements Serializable {
 	public void setBusinessName(String businessName) {
 		this.businessName = businessName;
 	}
-	
-	
-
+	  
 	public String getRoles() {
 		return roles;
 	}

@@ -147,7 +147,7 @@ public class UserViewController extends BaseComposer {
         }
         
         if (StringUtils.isNotNullNotEmptyNotWhiteSpace(u.getAvartarPath())){
-        	avatar.setSrc(ResourceBundleUtil.getString("dir_avartar") + u.getUserId() + "?time=" + u.getRandom());
+        	avatar.setSrc(ResourceBundleUtil.getString("dir_avartar") + u.getUserId() + "?time=" + new Date().getTime());
 		} else {
 			avatar.setSrc(ResourceBundleUtil.getString("dir_avartar") + "default-avatar.png");
 		}
