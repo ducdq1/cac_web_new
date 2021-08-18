@@ -3,6 +3,9 @@ package com.viettel.module.phamarcy.DAO.PhaMedicine;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.FlushModeType;
+
+import org.hibernate.FlushMode;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.exception.SQLGrammarException;
@@ -220,20 +223,17 @@ public class ProductDao extends GenericDAOHibernate<Product, Long> {
 				}
 
 			}
-
-			/*
-			 * if (bo.getType() != null && bo.getType().intValue() == 1) {
-			 * selectHql.append(" order by lower(f.size)"); }else{
-			 * selectHql.append(" order by lower(f.productCode)"); }
-			 */
+ 
 
 			Session currentSession = getSession();
+			
 			if (currentSession == null || !currentSession.getTransaction().isActive()) {
 				currentSession = HibernateUtil.getSessionAndBeginTransaction();
 				LogUtils.addLog("Loi da bi dong session");
 				System.out.println("Loi da bi dong session");
 			}
 
+			currentSession.setFlushMode(FlushMode.MANUAL);
 			Query query = currentSession.createQuery(selectHql.toString());
 
 			// Query query = session.createQuery(selectHql.toString());
@@ -255,6 +255,7 @@ public class ProductDao extends GenericDAOHibernate<Product, Long> {
 			System.out.println("--------Start Query-------");
 			
 			lstProduct = query.list();
+			currentSession.setFlushMode(FlushMode.AUTO);
 			System.out.println("--------End Query-------");
 		} catch (Exception e) {
 			System.out.println("--------Query Loi-------");
@@ -297,7 +298,7 @@ public class ProductDao extends GenericDAOHibernate<Product, Long> {
 
 					if (name != null && !name.isEmpty()) {
 						selectHql.append(
-								" and  (lower(f.productName) like ? escape '/' or  lower(f.productNameSearch) like ? escape '/' ) ");
+								" and  (lower(f.productName) like ? escape '/' or lower(f.productNameSearch) like ? escape '/' ) ");
 						lstParam.add(StringUtils.toLikeString(name.toLowerCase()));
 						lstParam.add(StringUtils.toLikeString(name.toLowerCase()));
 					}
@@ -313,6 +314,7 @@ public class ProductDao extends GenericDAOHibernate<Product, Long> {
 				LogUtils.addLog("Loi da bi dong session");
 			}
 
+			currentSession.setFlushMode(FlushMode.MANUAL);
 			Query query = currentSession.createQuery(selectHql.toString());
 
 			// Query query = session.createQuery(selectHql.toString());
@@ -325,8 +327,10 @@ public class ProductDao extends GenericDAOHibernate<Product, Long> {
 				query.setParameter(i, lstParam.get(i));
 			}
 
+			System.out.println("--------Start Find Product-------");
 			lstProduct = query.list();
-
+			System.out.println("--------End Find Product-------");
+			currentSession.setFlushMode(FlushMode.AUTO);
 		} catch (SQLGrammarException e) {
 			LogUtils.addLog(e);
 		}

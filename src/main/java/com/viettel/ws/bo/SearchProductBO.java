@@ -31,7 +31,7 @@ public class SearchProductBO {
 	public Boolean isGetPromotionProduct;
 
 	@XmlElement
-	public Boolean isViewTonKho;
+	public Boolean isViewTonKho = true;
 
 	public String getProductCode() {
 		return productCode;
