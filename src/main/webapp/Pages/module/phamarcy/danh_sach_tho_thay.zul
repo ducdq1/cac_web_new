@@ -62,8 +62,10 @@
 				style="width:26%" /> 
 			<listheader label="Số điện thoại" align="center"
 				style="width:10%" />
-				<listheader label="Đăng nhập lần cuối" align="center"
+		    <listheader label="Nhóm khách hàng" align="center"
 				style="width:10%" />
+			<listheader label="Đăng nhập lần cuối" align="center"
+			style="width:10%" />
 			<listheader label="Người giới thiệu" align="center"
 				style="width:10%" />
 			<listheader label="Ngày giới thiệu" align="center"
@@ -84,8 +86,16 @@
 				</listcell>
 				
 				<listcell style="text-align:center">
-				<label value="${each.phone}"   />
+					<label value="${each.phone}"   />
 				</listcell>
+				<listcell style="text-align:center">
+						<label value="Cty Xây dựng" if="${each.cusGroup == 0}" ></label>
+						<label value="Cty TK và Thi Công " if="${each.cusGroup == 1}" ></label>
+						<label value="Thầu xây dựng" if="${each.cusGroup == 2}" ></label>
+						<label value="Thợ xây dựng" if="${each.cusGroup == 3}" ></label>
+						<label value="Thợ Điện nước" if="${each.cusGroup == 4}" ></label>  
+                </listcell>
+					
 				<listcell style="text-align:center">
 				<label value="${$composer.getFormatHoursAndeDate(each.lastLogin)}"   />
 				</listcell>

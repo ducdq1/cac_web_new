@@ -89,6 +89,9 @@ public class Quotation implements Serializable {
 	@Column(name = "IS_INVALID")
 	private Long isInvalid;
 	
+	@Column(name = "QUOTATION_USER_NAME")
+	private String quoationUserName;
+	
 	public Long getQuotationID() {
 		return quotationID;
 	}
@@ -248,5 +251,13 @@ public class Quotation implements Serializable {
 	public void setIsInvalid(Long isInvalid) {
 		this.isInvalid = isInvalid;
 	}
-	
+
+	public String getQuoationUserName() {
+		return quoationUserName;
+	}
+
+	public void setQuoationUserName(String quoationUserName) {
+		this.quoationUserName = quoationUserName;
+	}
+ 
 }

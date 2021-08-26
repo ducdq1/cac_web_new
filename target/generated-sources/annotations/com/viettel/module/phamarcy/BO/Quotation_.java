@@ -28,6 +28,7 @@ public abstract class Quotation_ {
 	public static volatile SingularAttribute<Quotation, Long> userCreate;
 	public static volatile SingularAttribute<Quotation, String> cusAddress;
 	public static volatile SingularAttribute<Quotation, Long> userModify;
+	public static volatile SingularAttribute<Quotation, String> quoationUserName;
 	public static volatile SingularAttribute<Quotation, Date> createDate;
 	public static volatile SingularAttribute<Quotation, Integer> status;
 

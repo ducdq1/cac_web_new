@@ -3,9 +3,11 @@ package com.viettel.ws;
 import java.util.Date;
 import java.util.List;
 
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import com.viettel.core.user.BO.Users;
@@ -17,6 +19,18 @@ import com.viettel.ws.bo.WorkerLoginRequest;
 @Path("workers")
 public class WorkerService {
 
+	@GET
+	@Path("/updateLastLogin")
+	
+	@Produces(MediaType.APPLICATION_JSON)
+	public void updateLastLogin(@QueryParam(value = "workerId") String workerId) {
+		Workers worker = new WorkerDao().getWorkerByPhone(workerId);
+		if(worker != null ){
+			worker.setLastLogin(new Date());
+			new WorkerDao().saveOrUpdate(worker);
+		}		
+	}
+	
 	@POST
 	@Path("/updateProcessor")
 	@Produces(MediaType.APPLICATION_JSON)
