@@ -416,6 +416,7 @@ public class BaoGiaController extends BaseComposer {
 							Quotation update = new QuotationDao().findById(quotation.getQuotationID());
 							update.setStatus(Constants.BAO_GIA_STATUS_DA_XUAT_BAO_GIA.intValue());
 							update.setFileName(quotation.getFileName());
+							update.setQuoationUserName(getUserName());
 							new QuotationDao().saveOrUpdate(update);
 							quotation.setStatus(Constants.BAO_GIA_STATUS_DA_XUAT_BAO_GIA.intValue());
 							if (parrent != null) {
