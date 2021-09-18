@@ -90,7 +90,7 @@ public class Quotation implements Serializable {
 	private Long isInvalid;
 	
 	@Column(name = "QUOTATION_USER_NAME")
-	private String quoationUserName;
+	private String quotationUserName;
 	
 	public Long getQuotationID() {
 		return quotationID;
@@ -252,12 +252,14 @@ public class Quotation implements Serializable {
 		this.isInvalid = isInvalid;
 	}
 
-	public String getQuoationUserName() {
-		return quoationUserName;
+	public String getQuotationUserName() {
+		return quotationUserName;
 	}
 
-	public void setQuoationUserName(String quoationUserName) {
-		this.quoationUserName = quoationUserName;
+	public void setQuotationUserName(String quotationUserName) {
+		this.quotationUserName = quotationUserName;
 	}
+
+	 
  
 }

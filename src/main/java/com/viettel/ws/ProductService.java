@@ -476,7 +476,7 @@ public class ProductService {
 					quotationUpdate.setQuotationNumber(new QuotationDao().getAutoPhaFileCode());
 				}
 				quotationUpdate.setStatus(Constants.BAO_GIA_STATUS_DA_XUAT_BAO_GIA.intValue());
-				quotationUpdate.setQuoationUserName(createQuotationBO.getUserName());
+				quotationUpdate.setQuotationUserName(createQuotationBO.getUserName());
 			}
 
 			quotationUpdate.setQuotationDate(expiredDate);
