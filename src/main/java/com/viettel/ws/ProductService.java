@@ -115,13 +115,14 @@ public class ProductService {
 			}
 		}
 		
-		if (searchProductBO.getIsViewTonKho()) {
+		//if (searchProductBO.getIsViewTonKho()) {
 
 			HangHoaBO tonKho = layThongTinTonKho(maVT);
 			if (tonKho != null) {
 				productResponse.setTonKho(tonKho);
 			}
-		}
+		//}
+		
 		return productResponse;
 	}
 

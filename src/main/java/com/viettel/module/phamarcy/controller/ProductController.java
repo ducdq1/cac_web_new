@@ -260,8 +260,20 @@ public class ProductController extends BaseComposer {
 		HashMap<String, Object> arguments = new HashMap<String, Object>();
 		arguments.put("parent", phamarcyAll);
 		arguments.put("product", obj);
+		arguments.put("isCopy", false );
 		createWindow("windowView", "/Pages/module/phamarcy/addProduct.zul", arguments, Window.MODAL);
 
 	}
 	
+	@Listen("onCopy = #incListSP #lbListSP")
+	public void onCopy(Event event) {
+		Product obj = (Product) event.getData();
+
+		HashMap<String, Object> arguments = new HashMap<String, Object>();
+		arguments.put("parent", phamarcyAll);
+		arguments.put("product", obj);
+		arguments.put("isCopy", true );
+		createWindow("windowView", "/Pages/module/phamarcy/addProduct.zul", arguments, Window.MODAL);
+
+	}
 }

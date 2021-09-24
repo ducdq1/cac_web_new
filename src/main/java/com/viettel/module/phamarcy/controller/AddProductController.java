@@ -113,7 +113,8 @@ public class AddProductController extends BaseComposer {
 	public static final int TYPE_BAO_HANH = 9;
 	public static final int TYPE_MAU_SAC = 10;
 	int productType;// 0: thiet bi, 1 Gach
-
+	Boolean isCopy ;
+	
 	@Override
 	public void doBeforeComposeChildren(Component comp) throws Exception {
 		attachs = new ArrayList<Attachs>();
@@ -130,12 +131,15 @@ public class AddProductController extends BaseComposer {
 		HashMap<String, Object> arguments = (HashMap<String, Object>) Executions.getCurrent().getArg();
 		product = (Product) arguments.get("product");
 		parent = (Window) arguments.get("parent");
-
+		isCopy =(Boolean) arguments.get("isCopy");
+		
 		if (product != null) {
 			viewData();
 			isUpdate = true;
 			createDlg.setTitle("Cập nhật sản phẩm");
 		}
+		
+		 
 		loadComboboxData();
 
 	}
@@ -237,10 +241,14 @@ public class AddProductController extends BaseComposer {
 		cbDonViTinh.setValue(product.getUnit());
 		cbColor.setValue(product.getColor());
 		cbThongSoKyThuat.setValue(product.getThongSoKT());
-		attachs = new AttachDAOHE().findAllAttachByAttachCodeAndAttachTye(Constants.OBJECT_TYPE.CAC_IMAGE,
+		
+		if(!isCopy){
+			attachs = new AttachDAOHE().findAllAttachByAttachCodeAndAttachTye(Constants.OBJECT_TYPE.CAC_IMAGE,
 				product.getProductId());
-		ListModelArray lstModel = new ListModelArray(attachs);
-		lbListImages.setModel(lstModel);
+			ListModelArray lstModel = new ListModelArray(attachs);
+			lbListImages.setModel(lstModel);
+		}		
+		
 
 		byte[] data = getQRCodeImage(product.getProductCode());
 		if (data != null) {
@@ -308,7 +316,7 @@ public class AddProductController extends BaseComposer {
 	}
 
 	private void getProduct() {
-		if (product == null) {
+		if (product == null || isCopy) {
 			product = new Product();
 		}
 		
@@ -363,7 +371,7 @@ public class AddProductController extends BaseComposer {
 
 	private boolean validate() {
 
-		if (product == null) {
+		if (product == null || isCopy) {
 			product = new Product();
 		}
 		
