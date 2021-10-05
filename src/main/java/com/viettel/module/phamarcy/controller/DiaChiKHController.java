@@ -41,7 +41,6 @@ import com.viettel.module.phamarcy.DAO.PhaMedicine.StreetDao;
 import com.viettel.utils.Constants;
 import com.viettel.utils.LogUtils;
 
-import oracle.net.nl.mesg.NLSR_pt_BR;
 
 /**
  *

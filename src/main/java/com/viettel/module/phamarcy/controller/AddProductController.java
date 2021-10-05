@@ -73,7 +73,7 @@ public class AddProductController extends BaseComposer {
 	 */
 	private static final long serialVersionUID = 6105342511808925036L;
 	@Wire
-	private Textbox tbMaSP,tbMaHangHoa,tbMaSPDaiLy,tbGiaNhapKM,tbGiaBLKM,tbGiaDL,tbGiaDLKM;
+	private Textbox tbMaSP, tbMaHangHoa, tbMaSPDaiLy, tbGiaNhapKM, tbGiaBLKM, tbGiaDL, tbGiaDLKM;
 	@Wire
 	private Label lbDSP;
 	@Wire
@@ -113,8 +113,8 @@ public class AddProductController extends BaseComposer {
 	public static final int TYPE_BAO_HANH = 9;
 	public static final int TYPE_MAU_SAC = 10;
 	int productType;// 0: thiet bi, 1 Gach
-	Boolean isCopy ;
-	
+	Boolean isCopy;
+
 	@Override
 	public void doBeforeComposeChildren(Component comp) throws Exception {
 		attachs = new ArrayList<Attachs>();
@@ -131,15 +131,18 @@ public class AddProductController extends BaseComposer {
 		HashMap<String, Object> arguments = (HashMap<String, Object>) Executions.getCurrent().getArg();
 		product = (Product) arguments.get("product");
 		parent = (Window) arguments.get("parent");
-		isCopy =(Boolean) arguments.get("isCopy");
-		
+		isCopy = (Boolean) arguments.get("isCopy");
+
+		if (isCopy == null) {
+			isCopy = false;
+		}
+
 		if (product != null) {
 			viewData();
 			isUpdate = true;
 			createDlg.setTitle("Cập nhật sản phẩm");
 		}
-		
-		 
+
 		loadComboboxData();
 
 	}
@@ -220,16 +223,16 @@ public class AddProductController extends BaseComposer {
 		cbTenSP.setValue(product.getProductName());
 		tbMaSP.setText(product.getProductCode());
 		tbMaSPDaiLy.setText(product.getMaDaiLy());
-		
+
 		tbGiaNhapKM.setText(product.getPriceNHAPKM());
 		tbGiaDL.setText(product.getPriceDL());
 		tbGiaNhap.setText(product.getPrice());
-		tbGia.setText(product.getSalePrice());//gia ban le
+		tbGia.setText(product.getSalePrice());// gia ban le
 		tbGiaDLKM.setText(product.getPriceDLKM());
 		tbGiaBLKM.setText(product.getPriceBLKM());
-		
+
 		cbBaoHanh.setValue(product.getWarranty());
-		
+
 		cbXuatXu.setValue(product.getMadeIn());
 		rdg.setSelectedIndex(product.getVat() == null ? 0 : product.getVat().intValue());
 		rdgProductType.setSelectedIndex(product.getProductType() == null ? 0 : product.getProductType().intValue());
@@ -241,21 +244,20 @@ public class AddProductController extends BaseComposer {
 		cbDonViTinh.setValue(product.getUnit());
 		cbColor.setValue(product.getColor());
 		cbThongSoKyThuat.setValue(product.getThongSoKT());
-		
-		if(!isCopy){
+
+		if (isCopy!=null && !isCopy) {
 			attachs = new AttachDAOHE().findAllAttachByAttachCodeAndAttachTye(Constants.OBJECT_TYPE.CAC_IMAGE,
-				product.getProductId());
+					product.getProductId());
 			ListModelArray lstModel = new ListModelArray(attachs);
 			lbListImages.setModel(lstModel);
-		}		
-		
+		}
 
 		byte[] data = getQRCodeImage(product.getProductCode());
 		if (data != null) {
 			QRCode.setContent(new AImage("qrcode", data));
 		}
 
-		if (product.getProductType() != null && product.getProductType().intValue() >= 2 ) {
+		if (product.getProductType() != null && product.getProductType().intValue() >= 2) {
 			tbDSP.setText(product.getDsp());
 			tbDSP.setVisible(true);
 			lbDSP.setVisible(true);
@@ -271,7 +273,7 @@ public class AddProductController extends BaseComposer {
 		if (!validateTextBox(tbMaHangHoa)) {
 			return;
 		}
-		
+
 		if (!validateTextBox(tbMaSP)) {
 			return;
 		}
@@ -290,7 +292,7 @@ public class AddProductController extends BaseComposer {
 		}
 
 		String pathImage = saveImages(product.getProductId());
-		if(pathImage !=null){
+		if (pathImage != null) {
 			product.setImage(pathImage);
 			new ProductDao().saveOrUpdate(product);
 		}
@@ -319,26 +321,24 @@ public class AddProductController extends BaseComposer {
 		if (product == null || isCopy) {
 			product = new Product();
 		}
-		
-		
+
 		product.setMaHangHoa(tbMaHangHoa.getText().trim());
 		product.setProductName(cbTenSP.getValue());
 		product.setProductCode(tbMaSP.getText().toUpperCase());
 		// product.setPrice(getLongFromString(tbGiaNhap.getText().trim()));
-		 
-		
+
 		product.setPrice(getPriceFromString(tbGiaNhap.getText().toString()));
 		product.setSalePrice(getPriceFromString(tbGia.getText()));
 		product.setPriceNHAPKM(getPriceFromString(tbGiaNhapKM.getText()));
 		product.setPriceDL(getPriceFromString(tbGiaDL.getText()));
 		product.setPriceDLKM(getPriceFromString(tbGiaDLKM.getText()));
 		product.setPriceBLKM(getPriceFromString(tbGiaBLKM.getText()));
-		
+
 		product.setMaDaiLy(tbMaSPDaiLy.getText().trim());
 		product.setSize(cbKichThuoc.getValue().toString());
 		product.setFeature(cbTinhNang.getValue());
 		product.setThongSoKT(cbThongSoKyThuat.getValue());
-		
+
 		int index = rdgProductType.getSelectedIndex();
 
 		product.setProductType(Long.valueOf(rdgProductType.getSelectedIndex()));
@@ -354,15 +354,14 @@ public class AddProductController extends BaseComposer {
 		if (index >= 2) {
 			product.setDsp(tbDSP.getText());
 		}
-		
+
 		HttpServletRequest req = (HttpServletRequest) Executions.getCurrent().getNativeRequest();
 		HttpSession httpSession = req.getSession(true);
 		UserToken userToken = (UserToken) httpSession.getAttribute("userToken");
 		if (userToken != null) {
-			product.setCreateUser(userToken.getUserName() +" - " + userToken.getUserFullName());
+			product.setCreateUser(userToken.getUserName() + " - " + userToken.getUserFullName());
 		}
-		
-		
+
 		// String productNameSearch = new
 		// BaseGenericForwardComposer().removeVietnameseChar(product.getProductName());
 		// product.setProductNameSearch(productNameSearch);
@@ -371,28 +370,28 @@ public class AddProductController extends BaseComposer {
 
 	private boolean validate() {
 
-		if (product == null || isCopy) {
+		if (product == null || (isCopy != null && isCopy)) {
 			product = new Product();
 		}
-		
+
 		if (new ProductDao().checkExistMaHangHoa(tbMaHangHoa.getText().trim().toLowerCase(), product.getProductId())) {
 			tbMaHangHoa.setErrorMessage("Mã hàng hóa này đã tồn tại. Vui lòng nhập mã khác");
 			return false;
 		}
-		
+
 		HangHoaBO hangHoa = ProductService.layThongTinTonKho(tbMaHangHoa.getText().trim());
-		if(hangHoa != null){
-			if(hangHoa.getSo_luong() == null && hangHoa.getsError() !=null){
+		if (hangHoa != null) {
+			if (hangHoa.getSo_luong() == null && hangHoa.getsError() != null) {
 				tbMaHangHoa.setErrorMessage(hangHoa.getsError());
 				return false;
 			}
 		}
-		
+
 		if (new ProductDao().checkExistProductCode(tbMaSP.getText().trim().toLowerCase(), product.getProductId())) {
 			tbMaSP.setErrorMessage("Mã sản phẩm này đã tồn tại. Vui lòng nhập mã khác");
 			return false;
 		}
-		
+
 		if (!validateCombobox(cbTenSP, "Tên sản phẩm")) {
 			return false;
 		}
@@ -407,8 +406,8 @@ public class AddProductController extends BaseComposer {
 		if (!validateCombobox(cbKichThuoc, "Kích thước")) {
 			return false;
 		}
-		
-		if(cbDonViTinh.getValue() == null || cbDonViTinh.getValue().isEmpty()){
+
+		if (cbDonViTinh.getValue() == null || cbDonViTinh.getValue().isEmpty()) {
 			showNotification("Chưa nhập Đơn Vị Tính", Constants.Notification.WARNING, 1000);
 			return false;
 		}
@@ -472,11 +471,11 @@ public class AddProductController extends BaseComposer {
 			att.setIsActive(0L);
 			dao.saveOrUpdate(att);
 		}
-		
-		if(attach !=null){
+
+		if (attach != null) {
 			return attach.getFullPathFile();
 		}
-		
+
 		return null;
 	}
 
@@ -637,11 +636,11 @@ public class AddProductController extends BaseComposer {
 	@SuppressWarnings("deprecation")
 	public File createImage(Product product, boolean isTemp) throws IOException {
 		int index = rdgProductType.getSelectedIndex();
-		
+
 		if (index == 0 || index == 1) {
 			return createThietBiImage(isTemp);
 		}
-		
+
 		HttpServletRequest request = (HttpServletRequest) Executions.getCurrent().getNativeRequest();
 		String path = request.getRealPath("/WEB-INF/template/thong_so_kt_gach.png");
 
