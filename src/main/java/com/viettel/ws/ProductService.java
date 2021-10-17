@@ -16,9 +16,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.http.HttpEntity;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -539,12 +541,23 @@ public class ProductService {
 			return null;
 		}
 
+		
+		
 		CloseableHttpClient httpClient = HttpClients.createDefault();
+		
 		CloseableHttpResponse response = null;
 		try {
 			String url = ResourceBundleUtil.getString("pm_kho_url");
 			HttpGet request = new HttpGet(url + URLEncoder.encode(maVT, StandardCharsets.UTF_8.toString()));
+			
 
+			RequestConfig.Builder requestConfig = RequestConfig.custom();
+			requestConfig.setConnectTimeout(20 * 1000);
+			requestConfig.setConnectionRequestTimeout(20 * 1000);
+			requestConfig.setSocketTimeout(20 * 1000);
+
+			request.setConfig(requestConfig.build());
+			
 			response = httpClient.execute(request);
 			HttpEntity entity = response.getEntity();
 			if (response.getStatusLine().getStatusCode() == 200 && entity != null) {
@@ -580,7 +593,7 @@ public class ProductService {
 			String url = "https://fcm.googleapis.com/fcm/send";
 			HttpPost request = new HttpPost(url);
 			request.setHeader("Authorization",
-					"key=AAAAqfPZ1sQ:APA91bECNLIxhv2ZFNpVrNA_x33P7bK1el3jQBe3KbImmFjFxwRcM9vCsL7x6pf4Xx4rU0Nhi549sIAvsAtDS5ozHQRcZwlbT-nP-mCU1-vQbgihMXFydGMJxoLzzlGkPxotL3bm1nbY");
+					ResourceBundleUtil.getString("firebase_token"));
 			request.setHeader("Content-type", "application/json");
 			request.setHeader("Accept-Encoding", "UTF-8");
 
