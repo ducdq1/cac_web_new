@@ -89,6 +89,8 @@
          <mapping class="com.viettel.module.phamarcy.BO.Workers"/>
          <mapping class="com.viettel.module.phamarcy.BO.ProductCategory"/>
          <mapping class="com.viettel.module.phamarcy.BO.Promotion"/>
+         <mapping class="com.viettel.module.phamarcy.BO.CKBaoGia"/>
+         <mapping class="com.viettel.module.phamarcy.BO.CKBaoGiaDetail"/>
           <mapping class="com.viettel.module.phamarcy.BO.QuotationDetail"/>
             <mapping class="com.viettel.module.phamarcy.BO.Quotation"/>
             <mapping class="com.viettel.module.phamarcy.BO.Order"/>

@@ -14,6 +14,7 @@ import com.viettel.core.base.DAO.GenericDAOHibernate;
 import com.viettel.core.base.model.PagingListModel;
 import com.viettel.module.phamarcy.BO.PhamarcyFileModel;
 import com.viettel.module.phamarcy.BO.Product;
+import com.viettel.module.phamarcy.BO.Quotation;
 import com.viettel.utils.HibernateUtil;
 import com.viettel.utils.LogUtils;
 import com.viettel.utils.StringUtils;
@@ -34,6 +35,17 @@ public class ProductDao extends GenericDAOHibernate<Product, Long> {
 		getSession().flush();
 		getSession().getTransaction().commit();
 	}
+	
+	@Override
+	public void delete(Product quotation){
+		if(quotation !=null){
+			super.delete(quotation);
+		}
+		
+		getSession().flush();
+		getSession().getTransaction().commit();
+	}
+	
 
 	/**
 	 * Search ho so can bo cho xu ly

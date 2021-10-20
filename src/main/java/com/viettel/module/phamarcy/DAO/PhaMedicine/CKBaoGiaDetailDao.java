@@ -6,16 +6,17 @@ import java.util.List;
 import org.hibernate.Query;
 
 import com.viettel.core.base.DAO.GenericDAOHibernate;
+import com.viettel.module.phamarcy.BO.CKBaoGiaDetail;
 import com.viettel.module.phamarcy.BO.QuotationDetail;
 
-public class QuotationDetailDao extends GenericDAOHibernate<QuotationDetail, Long> {
+public class CKBaoGiaDetailDao extends GenericDAOHibernate<CKBaoGiaDetail, Long> {
 
-	public QuotationDetailDao() {
-		super(QuotationDetail.class);
+	public CKBaoGiaDetailDao() {
+		super(CKBaoGiaDetail.class);
 	}
 
 	@Override
-	public void saveOrUpdate(QuotationDetail phamarcy) {
+	public void saveOrUpdate(CKBaoGiaDetail phamarcy) {
 		if (phamarcy != null) {
 			super.saveOrUpdate(phamarcy);
 		}
@@ -25,7 +26,7 @@ public class QuotationDetailDao extends GenericDAOHibernate<QuotationDetail, Lon
 	}
 	
 	@Override
-	public void delete(QuotationDetail quotation){
+	public void delete(CKBaoGiaDetail quotation){
 		if(quotation !=null){
 			super.delete(quotation);
 		}
@@ -35,9 +36,9 @@ public class QuotationDetailDao extends GenericDAOHibernate<QuotationDetail, Lon
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<QuotationDetail> getListQuotationDetail(Long id) {
-		List<QuotationDetail> lstProduct = new ArrayList<>();
-			StringBuilder selectHql = new StringBuilder("SELECT  f from QuotationDetail f where quotationId=? ");
+	public List<CKBaoGiaDetail> getListQuotationDetail(Long id) {
+		List<CKBaoGiaDetail> lstProduct = new ArrayList<>();
+			StringBuilder selectHql = new StringBuilder("SELECT  f from CKBaoGiaDetail f where ckbgId=? ");
 			Query query=getSession().createQuery(selectHql.toString());
 			query.setParameter(0, id);
 			lstProduct=query.list();
@@ -46,14 +47,14 @@ public class QuotationDetailDao extends GenericDAOHibernate<QuotationDetail, Lon
 	}
 	
 	public void deleteListQuotationDetail(Long id) {
-			StringBuilder selectHql = new StringBuilder("DELETE QuotationDetail where quotationId=? ");
+			StringBuilder selectHql = new StringBuilder("DELETE CKBaoGiaDetail where ckbgId=? ");
 			Query query=getSession().createQuery(selectHql.toString());
 			query.setParameter(0, id);
 			query.executeUpdate();
 	}
 	
 	public void deleteQuotationDetail(Long id) {
-		StringBuilder selectHql = new StringBuilder("DELETE QuotationDetail where quotationDetailId=? ");
+		StringBuilder selectHql = new StringBuilder("DELETE CKBaoGiaDetail where ckDetailId=? ");
 		Query query=getSession().createQuery(selectHql.toString());
 		query.setParameter(0, id);
 		query.executeUpdate();

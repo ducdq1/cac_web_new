@@ -12,6 +12,8 @@ import org.hibernate.exception.SQLGrammarException;
 
 import com.viettel.core.base.DAO.GenericDAOHibernate;
 import com.viettel.core.base.model.PagingListModel;
+import com.viettel.module.phamarcy.BO.CKBaoGia;
+import com.viettel.module.phamarcy.BO.Customer;
 import com.viettel.module.phamarcy.BO.PhamarcyFileModel;
 import com.viettel.module.phamarcy.BO.Product;
 import com.viettel.module.phamarcy.BO.Quotation;
@@ -20,14 +22,14 @@ import com.viettel.utils.HibernateUtil;
 import com.viettel.utils.LogUtils;
 import com.viettel.utils.StringUtils;
 
-public class QuotationDao extends GenericDAOHibernate<Quotation, Long> {
+public class CKBaoGiaDao extends GenericDAOHibernate<CKBaoGia, Long> {
 
-	public QuotationDao() {
-		super(Quotation.class);
+	public CKBaoGiaDao() {
+		super(CKBaoGia.class);
 	}
 
 	@Override
-	public void saveOrUpdate(Quotation phamarcy) {
+	public void saveOrUpdate(CKBaoGia phamarcy) {
 		if (phamarcy != null) {
 			super.saveOrUpdate(phamarcy);
 		}
@@ -37,7 +39,7 @@ public class QuotationDao extends GenericDAOHibernate<Quotation, Long> {
 	}
 	
 	@Override
-	public void delete(Quotation quotation){
+	public void delete(CKBaoGia quotation){
 		if(quotation !=null){
 			super.delete(quotation);
 		}
@@ -46,8 +48,9 @@ public class QuotationDao extends GenericDAOHibernate<Quotation, Long> {
 		getSession().getTransaction().commit();
 	}
 	
+	
 	public void deleteQuotation(Long id) {
-		StringBuilder selectHql = new StringBuilder("DELETE Quotation where quotationID=? and status = 0 ");
+		StringBuilder selectHql = new StringBuilder("DELETE CKBaoGia where quotationID=? and status = 0 ");
 		Query query=getSession().createQuery(selectHql.toString());
 		query.setParameter(0, id);
 		query.executeUpdate();
@@ -61,7 +64,7 @@ public class QuotationDao extends GenericDAOHibernate<Quotation, Long> {
 	public Long countPhafile(String year) {
 		String param = "/" + year;
 		Query query = getSession()
-				.createQuery("select count(a) from Quotation a where a.quotationNumber like ? escape '/' ");
+				.createQuery("select count(a) from CKBaoGia a where a.ckNumber like ? escape '/' ");
 		query.setParameter(0, StringUtils.toLikeString(param));
 		Long count = (Long) query.uniqueResult();
 		return count;
@@ -107,22 +110,12 @@ public class QuotationDao extends GenericDAOHibernate<Quotation, Long> {
 	 * @return
 	 */
 	public boolean isFileCodeExist(String fileCode) {
-		Query query = getSession().createQuery("select count(a) from Quotation a where a.quotationNumber = ?");
+		Query query = getSession().createQuery("select count(a) from CKBaoGia a where a.ckNumber = ?");
 		query.setParameter(0, fileCode);
 		Long count = (Long) query.uniqueResult();
 		return count > 0;
 	}
 
-	/**
-	 * Search ho so can bo cho xu ly
-	 * 
-	 * @param searchModel
-	 * @param receiverId
-	 * @param receiveDeptId
-	 * @param start
-	 * @param take
-	 * @return
-	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public PagingListModel findFilesByReceiverAndDeptId(PhamarcyFileModel searchModel, int start, int take) {
 		Date startDate = null;
@@ -198,10 +191,8 @@ public class QuotationDao extends GenericDAOHibernate<Quotation, Long> {
 					lstParam.add(StringUtils.toLikeString(searchText.toLowerCase()));
 					
 					hql.append("  lower(f.cusPhone) like ? escape '/' )");
-					lstParam.add(StringUtils.toLikeString(searchText.toLowerCase()));
-					
+					lstParam.add(StringUtils.toLikeString(searchText.toLowerCase()));					
 				}
-
 			}
 
 			if (startDate != null) {

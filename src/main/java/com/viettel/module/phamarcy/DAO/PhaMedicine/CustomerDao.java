@@ -31,7 +31,16 @@ public class CustomerDao extends GenericDAOHibernate<Customer, Long> {
 		getSession().flush();
 		getSession().getTransaction().commit();
 	}
-
+	
+	@Override
+	public void delete(Customer quotation){
+		if(quotation !=null){
+			super.delete(quotation);
+		}
+		
+		getSession().flush();
+		getSession().getTransaction().commit();
+	}
 	/**
 	 * Search ho so can bo cho xu ly
 	 * 
