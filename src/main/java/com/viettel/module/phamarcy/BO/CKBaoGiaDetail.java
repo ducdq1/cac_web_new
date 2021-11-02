@@ -65,6 +65,9 @@ public class CKBaoGiaDetail implements Serializable {
 	
 	@Column(name = "AMOUNT")
 	private Double amount;
+	
+	@Column(name = "DEPOSIT")
+	private Long deposit;
 
 	@Column(name = "PRICE")
 	private Long price;
@@ -231,6 +234,13 @@ public class CKBaoGiaDetail implements Serializable {
 	public void setPickDate(Date pickDate) {
 		this.pickDate = pickDate;
 	}
-	
+
+	public Long getDeposit() {
+		return deposit;
+	}
+
+	public void setDeposit(Long deposit) {
+		this.deposit = deposit;
+	}	
 	
 }

@@ -101,6 +101,7 @@ public class ProductService {
 				maVT = p.getMaHangHoa();
 				List<Attachs> atts = new AttachDAOHE().findByObjectId(p.getProductId());
 				p.setImages(atts);
+				p.setSize(p.getSize() == null ? "" : p.getSize());
 			}
 		}
 
@@ -585,7 +586,7 @@ public class ProductService {
 		return null;
 	}
 
-	public static HangHoaBO pushNotification(NotificationBO body) {
+	public static void pushNotification(NotificationBO body) {
 
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 		CloseableHttpResponse response = null;
@@ -617,7 +618,6 @@ public class ProductService {
 				e.printStackTrace();
 			}
 		}
-		return null;
 	}
 
 	public static void main(String[] args) {

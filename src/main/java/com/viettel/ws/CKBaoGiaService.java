@@ -155,11 +155,15 @@ public class CKBaoGiaService {
 			}
 
 			CKBaoGia quotationUpdate = new CKBaoGiaDao().findById(quotationRequest.getCkId());
-
+			
 			boolean isUpdate = quotationUpdate != null;
 
 			CKBaoGia quotation = getQuotation(quotationRequest, quotationUpdate);
-
+			if (quotation.getCkNumber() == null || quotation.getCkNumber().isEmpty()) {
+				quotation.setCkNumber(new CKBaoGiaDao().getAutoPhaFileCode());
+			}
+			
+			
 			quotation.setCreateDate(new Date());
 			quotation.setModifyDate(new Date());
 
@@ -192,9 +196,10 @@ public class CKBaoGiaService {
 				} else {
 					CKBaoGiaDetail update = new CKBaoGiaDetailDao().findById(obj.getCkDetailId());
 					if (update != null) {
-						update.setAttachId(obj.getAttachId());
-						update.setNote(obj.getNote());
 						update.setAmount(obj.getAmount());
+						update.setPrice(obj.getPrice());
+						update.setPickDate(obj.getPickDate());
+						update.setDeposit(obj.getPrice()/2);
 						new CKBaoGiaDetailDao().saveOrUpdate(update);
 					}
 				}
@@ -365,6 +370,7 @@ public class CKBaoGiaService {
 			update.setCusName(input.getCusName());
 			update.setType(input.getType());
 			update.setProductType(input.getProductType());
+			update.setCkContent(update.getCkContent());
 			return update;
 		} else {
 			return input;
