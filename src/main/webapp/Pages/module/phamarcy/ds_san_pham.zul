@@ -10,8 +10,10 @@
 		emptyMessage="Không tìm thấy sản phẩm nào">
 		<listhead sizable="true">
 			<listheader label="STT" align="center" style="width:3%" />
+			<listheader label="Mã hàng hóa" align="center"
+				style="width:10%" />
 			<listheader label="Mã sản phẩm" align="center"
-				style="width:13%" />
+				style="width:10%" />
 			<listheader label="Tên sản phẩm" align="center"
 				style="width:18%" />
 			<listheader label="Giá nhập" align="center"
@@ -34,7 +36,10 @@
 						value="${ forEachStatus.index + 1 + userPagingBottom.pageSize *
 						userPagingBottom.activePage }">
 					</label>
-				</listcell>				
+				</listcell>	
+				<listcell style="text-align:left">
+					<label value="${each.maHangHoa}"  />
+				</listcell>			
 				 <listcell style="text-align:left">
 					<label value="${each.productCode}"  />
 				</listcell>
