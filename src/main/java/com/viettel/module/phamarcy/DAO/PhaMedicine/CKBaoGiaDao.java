@@ -48,13 +48,7 @@ public class CKBaoGiaDao extends GenericDAOHibernate<CKBaoGia, Long> {
 		getSession().getTransaction().commit();
 	}
 	
-	
-	public void deleteQuotation(Long id) {
-		StringBuilder selectHql = new StringBuilder("DELETE CKBaoGia where quotationID=? and status = 0 ");
-		Query query=getSession().createQuery(selectHql.toString());
-		query.setParameter(0, id);
-		query.executeUpdate();
-}
+ 
 	
 	/**
 	 * Dem so ho so
@@ -125,9 +119,9 @@ public class CKBaoGiaDao extends GenericDAOHibernate<CKBaoGia, Long> {
 		List<Product> lstProduct = new ArrayList<>();
 		try {
 			List lstParam = new ArrayList();
-			StringBuilder selectHql = new StringBuilder("SELECT f from Quotation f where 1=1 ");
+			StringBuilder selectHql = new StringBuilder("SELECT f from CKBaoGia f where 1=1 ");
 			StringBuilder countHql = new StringBuilder(
-					"select count(f.quotationID) from Quotation f where 1=1 ");
+					"select count(f.ckId) from CKBaoGia f where 1=1 ");
 
 //			StringBuilder countTongTien = new StringBuilder(
 //					"select sum(a.amount * a.price) from QuotationDetail a,Quotation f  where f.quotationID = a.quotationId  ");
@@ -145,7 +139,7 @@ public class CKBaoGiaDao extends GenericDAOHibernate<CKBaoGia, Long> {
 				toDate = searchModel.getToDate();
 
 				if (code != null && !code.isEmpty()) {
-					hql.append(" and lower(f.quotationNumber) like ? escape '/'");
+					hql.append(" and lower(f.ckNumber) like ? escape '/'");
 					lstParam.add(StringUtils.toLikeString(code.toLowerCase()));
 				}
 				
@@ -164,12 +158,12 @@ public class CKBaoGiaDao extends GenericDAOHibernate<CKBaoGia, Long> {
 					lstParam.add(StringUtils.toLikeString(cusPhone.toLowerCase()));
 				}
 				
-				if(searchModel.isApproveAble() == false){
-					if (userName != null && !userName.isEmpty()) {
-						hql.append(" and lower(f.createUserCode) = ? ");
-						lstParam.add(userName.toLowerCase());
-					}
+				
+				if (userName != null && !userName.isEmpty()) {
+					hql.append(" and lower(f.createUserCode) = ? ");
+					lstParam.add(userName.toLowerCase());
 				}
+				
 				 
 
 				if (name != null && !name.isEmpty()) {
@@ -181,7 +175,7 @@ public class CKBaoGiaDao extends GenericDAOHibernate<CKBaoGia, Long> {
 				
 				String searchText = searchModel.getSearchText();
 				if(searchText !=null){
-					hql.append(" and (lower(f.quotationNumber) like ? escape '/' or  ");
+					hql.append(" and (lower(f.ckNumber) like ? escape '/' or  ");
 					lstParam.add(StringUtils.toLikeString(searchText.toLowerCase()));
 					
 					hql.append("  lower(f.cusName) like ? escape '/' or  ");
@@ -215,20 +209,10 @@ public class CKBaoGiaDao extends GenericDAOHibernate<CKBaoGia, Long> {
 				}
 			}
 			
-			if(searchModel.isSaled()){
-				hql.append(" and f.saledDate is not null ");
-			}
-			
-			int daBan = searchModel.getDaBan();
-			if(daBan == 1){
-				hql.append(" and f.saledDate is not null ");
-			}else if(daBan == 0){
-			    hql.append(" and f.saledDate is  null ");
-			}
 			
 			
 			
-			hql.append(" order by f.status asc, f.modifyDate desc");
+			hql.append(" order by f.modifyDate desc");
 			selectHql.append(hql);
 
 			countHql.append(hql);

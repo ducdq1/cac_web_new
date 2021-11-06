@@ -59,6 +59,7 @@ import com.viettel.module.phamarcy.BO.Quotation;
 import com.viettel.module.phamarcy.BO.QuotationDetail;
 import com.viettel.module.phamarcy.BO.Street;
 import com.viettel.utils.Constants;
+import com.viettel.utils.DateTimeUtils;
 import com.viettel.utils.FileUtil;
 import com.viettel.utils.ResourceBundleUtil;
 import com.viettel.voffice.BO.Document.Attachs;
@@ -1282,14 +1283,17 @@ public class ExportExcell extends BaseComposer {
 					quotation.getCusPhone() == null ? "" : quotation.getCusPhone());
 			createCellWithBorder(colNum++, row0, cloneRow0.getCell(6).getCellStyle(),
 					quotation.getStatus() == Constants.BAO_GIA_STATUS_DA_XUAT_BAO_GIA
-							? new SimpleDateFormat("dd/MM/yyyy").format(quotation.getModifyDate()) : "");
+							? new SimpleDateFormat("dd/MM/yyyy").format(quotation.getModifyDate())
+							: "");
 
 			createCellWithBorder(colNum++, row0, cloneRow0.getCell(7).getCellStyle(),
 					quotation.getStatus() == Constants.BAO_GIA_STATUS_DA_XUAT_BAO_GIA
-							? quotation.getNote() == null ? "" : quotation.getNote() : "");
+							? quotation.getNote() == null ? "" : quotation.getNote()
+							: "");
 
-			createCellWithBorder(colNum++, row0, cloneRow0.getCell(8).getCellStyle(), quotation.getSaledDate() == null
-					? "" : new SimpleDateFormat("dd/MM/yyyy").format(quotation.getSaledDate()));
+			createCellWithBorder(colNum++, row0, cloneRow0.getCell(8).getCellStyle(),
+					quotation.getSaledDate() == null ? ""
+							: new SimpleDateFormat("dd/MM/yyyy").format(quotation.getSaledDate()));
 
 			createCellWithBorder(colNum++, row0, cloneRow0.getCell(9).getCellStyle(),
 					"" + formatNumber(quotation.getTotalPrice(), "###,###,###.####"));
@@ -1316,65 +1320,55 @@ public class ExportExcell extends BaseComposer {
 
 		return sheet;
 	}
-	
-	public String exportCamKetBaoGia(List<CKBaoGiaDetail> quotationDetails, CKBaoGia quotation, boolean isPreView,
-			boolean fromAPI) {
+
+	public String exportCamKetBaoGia(List<CKBaoGiaDetail> quotationDetails, CKBaoGia quotation) {
 		XSSFWorkbook workbook;
 
 		String filePath;
 		String dir_upload = ResourceBundleUtil.getString("dir_upload");
-		if (fromAPI) {
-			filePath = dir_upload + "ketoan/WEB-INF/template/MAU_BAO_GIA.xlsx";
+		if (quotation.getType() == null || quotation.getType() == 0) {
+			filePath = dir_upload + "ketoan/WEB-INF/template/MAU_CAM_KET_DAT_HANG_GACH.xlsx";
 		} else {
-			HttpServletRequest request = (HttpServletRequest) Executions.getCurrent().getNativeRequest();
-			filePath = request.getRealPath("/WEB-INF/template/MAU_BAO_GIA.xlsx");
+			filePath = dir_upload + "ketoan/WEB-INF/template/MAU_CAM_KET_DAT_HANG_TB.xlsx";
 		}
+
 		InputStream fs;
 		try {
 
-			String fileName = "BAO_GIA_" + new Date().getTime() / 1000 + ".xlsx";
-			if (isPreView) {
-				fileName = "temp/" + fileName;
-			}
-			String filePathOut = dir_upload + "/bao_gia/" + fileName;
+			String fileName = "CK_DH_" + new Date().getTime() / 1000 + ".xlsx";
+		 
+
+			String filePathOut = dir_upload + "/ck_bao_gia/" + fileName;
 
 			fs = new FileInputStream(filePath);
 			workbook = new XSSFWorkbook(fs);
 
-			if (quotation.getType() == null || quotation.getType() == 0) {
-				writeDataBaoGia(workbook, quotationDetails, quotation);
-			} else {// xuat bao gia cong trinh
-				writeDataBaoGiaCongTrinh(workbook, quotationDetails, quotation);
-			}
+			writeDataCamKetBaoGia(workbook, quotationDetails, quotation);
 
 			FileOutputStream fileOut = new FileOutputStream(filePathOut);
 			workbook.write(fileOut);
 			fileOut.close();
 
-			String fileFinal = convertToPdf(filePathOut, fromAPI);
+			String fileFinal = convertToPdf(filePathOut, true);
 			if (fileFinal != null) {
 				quotation.setFileName(fileName.replace(".xlsx", ".pdf"));
 			}
 
-			if (isPreView) {
-				quotation.setFileName(fileName.replace(".xlsx", ".pdf") + "_watermarked.pdf");
-				return addWaterMark(fileFinal);
-			} else {
-				return fileFinal;
-			}
+			return fileFinal;
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
-	
+
 	public static XSSFSheet writeDataCamKetBaoGia(XSSFWorkbook workbook, List<CKBaoGiaDetail> quotationDetails,
 			CKBaoGia quotation) throws IOException {
+
 		String dir_upload = ResourceBundleUtil.getString("dir_upload");
 
 		int rowNum = 11;
-		XSSFSheet sheet = workbook.getSheet("Sheet2");
+		XSSFSheet sheet = workbook.getSheet("Sheet1");
 
 		XSSFRow cloneRow0 = workbook.getSheet("Sheet2").getRow(10);
 
@@ -1383,117 +1377,129 @@ public class ExportExcell extends BaseComposer {
 		int colNum = 0;
 		int countQuotation = 0;
 
-		Font fontBold = workbook.getSheet("Sheet2").getRow(0).getCell(6).getCellStyle().getFont();
-		Font fontNormal = workbook.getSheet("Sheet2").getRow(0).getCell(8).getCellStyle().getFont();
-		Font fontItalic = workbook.getSheet("Sheet2").getRow(5).getCell(1).getCellStyle().getFont();
+		Font fontBold = workbook.getSheet("Sheet2").getRow(2).getCell(7).getCellStyle().getFont();
+		Font fontNormal = workbook.getSheet("Sheet2").getRow(2).getCell(6).getCellStyle().getFont();
+		Font fontItalic = workbook.getSheet("Sheet2").getRow(4).getCell(1).getCellStyle().getFont();
 		Font fontItalicNormal = workbook.getSheet("Sheet2").getRow(4).getCell(1).getCellStyle().getFont();
 		fontNormal.setFontName("Times New Roman");
 		fontItalic.setFontName("Times New Roman");
 
 		// Thong tin bao gia
+		String sck = "Số CK : ";
 		XSSFRichTextString SO_BG = new XSSFRichTextString(
-				"Số CK : " + (quotation.getCkNumber() == null ? "" : quotation.getCkNumber()));
-		SO_BG.applyFont(0, 7, fontBold);
-		SO_BG.applyFont(8, SO_BG.length(), fontNormal);
-		sheet.getRow(0).getCell(7).setCellValue(SO_BG);
+				sck + (quotation.getCkNumber() == null ? "" : quotation.getCkNumber()));
+		SO_BG.applyFont(0, sck.length(), fontBold);
+		SO_BG.applyFont(sck.length(), SO_BG.length(), fontNormal);
+		sheet.getRow(2).getCell(7).setCellValue(SO_BG);
 
-		XSSFRichTextString MA_NV = new XSSFRichTextString("Mã NV: " + quotation.getCreateUserCode().toUpperCase());
-		MA_NV.applyFont(0, 6, fontBold);
-		MA_NV.applyFont(7, MA_NV.length(), fontNormal);
-		sheet.getRow(1).getCell(7).setCellValue(MA_NV);
+		String mnv = "Mã NV: ";
+		XSSFRichTextString MA_NV = new XSSFRichTextString(mnv + quotation.getCreateUserCode().toUpperCase());
+		MA_NV.applyFont(0, mnv.length(), fontBold);
+		MA_NV.applyFont(mnv.length(), MA_NV.length(), fontNormal);
+		sheet.getRow(3).getCell(7).setCellValue(MA_NV);
 
 		Date datetime = new Date();
 		String date = new SimpleDateFormat("dd").format(datetime);
 		String month = new SimpleDateFormat("MM").format(datetime);
 		String year = new SimpleDateFormat("yyyy").format(datetime);
-		sheet.getRow(4).getCell(0).setCellValue(String.format("Ngày %s tháng %s năm %s", date, month, year));
+		sheet.getRow(5).getCell(1).setCellValue(String.format("Ngày %s tháng %s năm %s", date, month, year));
 
+		String KH = "Khách hàng: ";
 		XSSFRichTextString TEN_KH = new XSSFRichTextString("Khách hàng: " + quotation.getCusName());
-		TEN_KH.applyFont(0, 8, fontItalic);
-		TEN_KH.applyFont(9, TEN_KH.length(), fontNormal);
-		sheet.getRow(5).getCell(1).setCellValue(TEN_KH);
+		TEN_KH.applyFont(0, KH.length(), fontBold);
+		TEN_KH.applyFont(KH.length() + 1, TEN_KH.length(), fontNormal);
+		sheet.getRow(6).getCell(1).setCellValue(TEN_KH);
 
 		XSSFRichTextString DIA_CHI_KH = new XSSFRichTextString("Địa chỉ: " + quotation.getCusAddress());
-		DIA_CHI_KH.applyFont(0, 7, fontItalic);
+		DIA_CHI_KH.applyFont(0, 7, fontBold);
 		DIA_CHI_KH.applyFont(8, DIA_CHI_KH.length(), fontNormal);
-		sheet.getRow(6).getCell(1).setCellValue(DIA_CHI_KH);
+		sheet.getRow(7).getCell(1).setCellValue(DIA_CHI_KH);
 
 		XSSFRichTextString SDT = new XSSFRichTextString(
 				String.format("SĐT: %s", (quotation.getCusPhone() == null ? "" : quotation.getCusPhone())));
-		SDT.applyFont(0, 3, fontItalic);
+		SDT.applyFont(0, 3, fontBold);
 		SDT.applyFont(4, SDT.length(), fontNormal);
-		sheet.getRow(5).getCell(7).setCellValue(SDT);
-
+		sheet.getRow(6).getCell(6).setCellValue(SDT);
 
 		for (CKBaoGiaDetail quotationDetail : quotationDetails) {
 			countQuotation++;
-			colNum = 0;
+			colNum = 1;
 			sheet.shiftRows(rowNum, sheet.getLastRowNum(), 1);
 			row0 = createRow(rowNum, sheet, cloneRow0);
 			rowNum++;
 			createCell(colNum++, row0, cloneRow0.getCell(0).getCellStyle(), "" + countQuotation);
 			createCell(colNum++, row0, cloneRow0.getCell(1).getCellStyle(), quotationDetail.getProductName());
-			createCell(colNum++, row0, cloneRow0.getCell(2).getCellStyle(), "");
-			createCell(colNum++, row0, cloneRow0.getCell(3).getCellStyle(), quotationDetail.getUnit());
-			createCell(colNum++, row0, cloneRow0.getCell(4).getCellStyle(),
+			createCell(colNum++, row0, cloneRow0.getCell(2).getCellStyle(), quotationDetail.getUnit());
+			createCell(colNum++, row0, cloneRow0.getCell(3).getCellStyle(),
 					"" + formatNumber(quotationDetail.getAmount(), "###,###,###.####"));
-			createCell(colNum++, row0, cloneRow0.getCell(5).getCellStyle(),
+			createCell(colNum++, row0, cloneRow0.getCell(4).getCellStyle(),
 					"" + formatNumber(quotationDetail.getPrice(), "###,###,###.####"));
-			createCell(colNum++, row0, cloneRow0.getCell(6).getCellStyle(),
+			createCell(colNum++, row0, cloneRow0.getCell(5).getCellStyle(),
 					"" + formatNumber(quotationDetail.getAmount() * quotationDetail.getPrice(), "###,###,###.####"));
-			createCell(colNum++, row0, cloneRow0.getCell(7).getCellStyle(), quotationDetail.getNote());
+
+			createCell(colNum++, row0, cloneRow0.getCell(6).getCellStyle(), ""
+					+ formatNumber((quotationDetail.getAmount() * quotationDetail.getPrice()) / 2, "###,###,###.####"));
+			createCell(colNum++, row0, cloneRow0.getCell(7).getCellStyle(),
+					DateTimeUtils.convertDateToStringFormat(quotationDetail.getPickDate(), "dd/MM/yyyy"));
 
 			countRow++;
 		}
-		sheet.getRow(rowNum).getCell(5).setCellValue(formatNumber(quotation.getTotalPrice(), "###,###,###.####"));
+
+		sheet.getRow(rowNum).getCell(6).setCellValue(formatNumber(quotation.getTotalPrice(), "###,###,###.####"));
 		sheet.getRow(rowNum).setHeight((short) 600);
 
+		if (quotation.getType() == 1) {
+			sheet.getRow(rowNum + 6).getCell(2).setCellValue(quotation.getCkContent());
+		}
+
 		workbook.removeSheetAt(1);
-		workbook.removeSheetAt(1);
+		// workbook.removeSheetAt(1);
 
 		return sheet;
 	}
-	
-	
 
 	public static void main(String[] args) {
 		XSSFWorkbook workbook;
-		String path = "E://DATA/MAU_BAO_GIA/MAU_KIEM_TRA_BAO_GIA.xlsx";
+		String path = "D:\\CAC\\cac_web\\cac_web_new\\src\\main\\webapp\\WEB-INF\\template\\MAU_CAM_KET_DAT_HANG_TB.xlsx";
 		InputStream fs;
 		try {
+
 			fs = new FileInputStream(path);
 			workbook = new XSSFWorkbook(fs);
-			Quotation quotation = new Quotation();
+			CKBaoGia quotation = new CKBaoGia();
 			quotation.setCusName("Đoàn Quang Đức");
 			quotation.setCusPhone("0349566239");
 			quotation.setCusAddress("271 nguyễn văn linh 271 nguyễn văn linh 271 nguyễn văn ");
 			quotation.setCreateUserCode("NV007");
 			quotation.setCreateUserFullName("Đoàn quang đức");
-			quotation.setQuotationNumber("001/2021");
+			quotation.setCkNumber("001/2021");
 			quotation.setTotalPrice(new BigDecimal(2000000));
-			quotation.setQuotationDate(new Date());
-			quotation.setType(0);
-			List<QuotationDetail> details = new ArrayList<QuotationDetail>();
-			QuotationDetail detail = new QuotationDetail();
-			detail.setProductName("Bàn cầu 1 khối ToTo MS885DT8 Bàn cầu 1 khối ToTo MS885DT8 ToTo MS885DT8 Bàn cầu ");
+			quotation.setCkDate(new Date());
+			quotation.setType(1);
+			quotation.setCkContent("4/ Hàng trả lại không được vượt quá 20% so với hàng đặt.");
+			List<CKBaoGiaDetail> details = new ArrayList<CKBaoGiaDetail>();
+
+			CKBaoGiaDetail detail = new CKBaoGiaDetail();
+			detail.setProductName("Bàn cầu 1 khối ToTo MS885DT8 Bàn cầu 1 ");
 			detail.setAmount(5d);
 			detail.setPrice(10000L);
 			detail.setUnit("met vuong ");
-			detail.setNote("271 nguyễn văn linh 271 nguyễn văn linh 271 nguyễn văn linh 271 nguyễn văn linh");
+			detail.setNote("271 nguyễn văn linh 271 nguyễn văn linh 271 n");
+			detail.setPickDate(new Date());
+			details.add(detail);
+			details.add(detail);
+			details.add(detail);
+			details.add(detail);
+			details.add(detail);
+			details.add(detail);
+			details.add(detail);
+			details.add(detail);
+			details.add(detail);
 
-			details.add(detail);
-			details.add(detail);
-			details.add(detail);
-			details.add(detail);
-			details.add(detail);
-			details.add(detail);
-			details.add(detail);
-			details.add(detail);
-			details.add(detail);
-			List<Quotation> quotations = new ArrayList<>();
-			quotations.add(quotation);
-			quotations.add(quotation);
-			writeDataKiemTraBaoGia(workbook, quotations, null, null);
+//			List<CKBaoGiaDetail> quotations = new ArrayList<>();
+//			quotations.add(quotation);
+//			quotations.add(quotation);
+			writeDataCamKetBaoGia(workbook, details, quotation);
 
 			// writeDataBaoGiaCongTrinh(workbook, details, quotation);
 			// writeDataBaoGia(workbook, details, quotation);
@@ -1506,7 +1512,7 @@ public class ExportExcell extends BaseComposer {
 			// }
 
 			String fileName = "BAO_GIA_" + new Date().getTime() / 1000 + ".xlsx";
-			String filePath = "E://DATA/MAU_BAO_GIA/" + File.separatorChar + fileName;
+			String filePath = "D:\\CAC\\temp" + File.separatorChar + fileName;
 
 			FileOutputStream fileOut = new FileOutputStream(filePath);
 			workbook.write(fileOut);
@@ -1517,7 +1523,9 @@ public class ExportExcell extends BaseComposer {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
 
+	private void callApi() {
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 		CloseableHttpResponse response = null;
 		try {
@@ -1552,7 +1560,6 @@ public class ExportExcell extends BaseComposer {
 				e.printStackTrace();
 			}
 		}
-
 	}
 
 }

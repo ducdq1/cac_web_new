@@ -4,7 +4,8 @@ public class QuotationResponse {
 	int statusCode = 200;
 	String message ="success";
 	Long quotationId;
-
+	
+	String filePath;
 	
 	public Long getQuotationId() {
 		return quotationId;
@@ -29,6 +30,16 @@ public class QuotationResponse {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+
+	public String getFilePath() {
+		return filePath;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
 	 
+	
+	
 	
 }

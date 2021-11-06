@@ -62,12 +62,12 @@ public class CKBaoGiaService {
 
 	@SuppressWarnings("unchecked")
 	@POST
-	@Path("/quotations")
+	@Path("/list")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ListQuotationResponse getQuotations(SearchQuotationBO searchBO) {
+	public ListCKBGResponse getQuotations(SearchQuotationBO searchBO) {
 
-		List<Quotation> quotations = null;
-		ListQuotationResponse quotationResponse = new ListQuotationResponse();
+		List<CKBaoGia> quotations = null;
+		ListCKBGResponse quotationResponse = new ListCKBGResponse();
 		quotationResponse.setStatusCode(200);
 		quotationResponse.setMessage("success");
 		try {
@@ -77,7 +77,7 @@ public class CKBaoGiaService {
 			model.setSearchText(searchBO.getSearch());
 			model.setApproveAble(searchBO.getIsApproveAble() == null ? false : searchBO.getIsApproveAble());
 			model.setSaled(searchBO.getIsSaled() == null ? false : searchBO.getIsSaled());
-			PagingListModel result = new QuotationDao().findFilesByReceiverAndDeptId(model,
+			PagingListModel result = new CKBaoGiaDao().findFilesByReceiverAndDeptId(model,
 					searchBO.getOffset() * searchBO.getLimit(), searchBO.getLimit());
 
 			quotations = result.getLstReturn();
@@ -96,11 +96,11 @@ public class CKBaoGiaService {
 	@POST
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ListQuotationDetailResponse getQuotations(@PathParam("id") Long id) {
-		List<QuotationDetail> quotationDetails = null;
-		ListQuotationDetailResponse quotationDetailResponse = new ListQuotationDetailResponse();
+	public ListCKBGDetailResponse getQuotations(@PathParam("id") Long id) {
+		List<CKBaoGiaDetail> quotationDetails = null;
+		ListCKBGDetailResponse quotationDetailResponse = new ListCKBGDetailResponse();
 		try {
-			quotationDetails = new QuotationDetailDao().getListQuotationDetail(id);
+			quotationDetails = new CKBaoGiaDetailDao().getListQuotationDetail(id);
 			quotationDetailResponse.setListData(quotationDetails);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -117,13 +117,13 @@ public class CKBaoGiaService {
 	public ListQuotationDetailResponse deleteQuotation(@PathParam("id") Long id) {
 		ListQuotationDetailResponse quotationDetailResponse = new ListQuotationDetailResponse();
 		try {
-			QuotationDao quotationDao = new QuotationDao();
-			QuotationDetailDao detailDao = new QuotationDetailDao();
-			Quotation quotationUpdate = new QuotationDao().findById(id);
+			CKBaoGiaDao quotationDao = new CKBaoGiaDao();
+			CKBaoGiaDetailDao detailDao = new CKBaoGiaDetailDao();
+			CKBaoGia quotationUpdate = new CKBaoGiaDao().findById(id);
 			if (quotationUpdate != null && quotationUpdate.getStatus() == Constants.BAO_GIA_STATUS_TAO_MOI.intValue()) {
 				quotationDao.delete(quotationUpdate);
-				List<QuotationDetail> lstQuotationDetail = new QuotationDetailDao().getListQuotationDetail(id);
-				for (QuotationDetail quotationDetail : lstQuotationDetail) {
+				List<CKBaoGiaDetail> lstQuotationDetail = new CKBaoGiaDetailDao().getListQuotationDetail(id);
+				for (CKBaoGiaDetail quotationDetail : lstQuotationDetail) {
 					detailDao.delete(quotationDetail);
 				}
 			}
@@ -155,15 +155,14 @@ public class CKBaoGiaService {
 			}
 
 			CKBaoGia quotationUpdate = new CKBaoGiaDao().findById(quotationRequest.getCkId());
-			
+
 			boolean isUpdate = quotationUpdate != null;
 
 			CKBaoGia quotation = getQuotation(quotationRequest, quotationUpdate);
 			if (quotation.getCkNumber() == null || quotation.getCkNumber().isEmpty()) {
 				quotation.setCkNumber(new CKBaoGiaDao().getAutoPhaFileCode());
 			}
-			
-			
+
 			quotation.setCreateDate(new Date());
 			quotation.setModifyDate(new Date());
 
@@ -189,6 +188,7 @@ public class CKBaoGiaService {
 			}
 
 			List<CKBaoGiaDetail> lstQuotationDetail = createQuotationBO.getCkBaoGiaDetail();
+			BigDecimal totalPrice = new BigDecimal(0);
 			for (CKBaoGiaDetail obj : lstQuotationDetail) {
 				if (obj.getCkbgId() == null) {
 					obj.setCkbgId(quotationId);
@@ -199,20 +199,37 @@ public class CKBaoGiaService {
 						update.setAmount(obj.getAmount());
 						update.setPrice(obj.getPrice());
 						update.setPickDate(obj.getPickDate());
-						update.setDeposit(obj.getPrice()/2);
+						update.setDeposit(obj.getPrice() / 2);
 						new CKBaoGiaDetailDao().saveOrUpdate(update);
 					}
 				}
-			}
+				
+				final Double amount = obj.getAmount() == null ? 0d : obj.getAmount();
+				Long value = obj.getPrice() == null ? 0 : obj.getPrice();
 
+				totalPrice = totalPrice.add(new BigDecimal(amount * value));
+			}
+			
+			quotation.setTotalPrice(totalPrice);
+			
+			String filePath = printCamket(lstQuotationDetail, quotation);
+			if (filePath == null) {
+				quotationResponse.setMessage("Không in được cam kết");
+				return quotationResponse;
+			}
+			
+			new CKBaoGiaDao().saveOrUpdate(quotation);
+			
+			quotationResponse.setFilePath(filePath);
 			quotationResponse.setQuotationId(quotationId);
+			
 			if (isUpdate) {
-				sendNotification("create", "Cập nhật cam kết đặt giữ hàng",
+				sendNotification("create", "Cam kết đặt giữ hàng",
 						String.format("%s vừa cập nhật cam kết đặt giữ hàng cho khách hàng %s",
 								createQuotationBO.getCkBaoGia().getCreateUserFullName().toUpperCase(),
 								createQuotationBO.getCkBaoGia().getCusName()));
 			} else {
-				sendNotification("create", "Cam kết đặt giữ hàng mới",
+				sendNotification("create", "Cam kết đặt giữ hàng",
 						String.format("%s vừa tạo một cam kết đặt giữ hàng mới cho khách hàng %s",
 								createQuotationBO.getCkBaoGia().getCreateUserFullName().toUpperCase(),
 								createQuotationBO.getCkBaoGia().getCusName()));
@@ -243,119 +260,15 @@ public class CKBaoGiaService {
 				notification.setBody(bodyStr);
 
 				body.setNotification(notification);
-				//ProductService.pushNotification(body);
+				// ProductService.pushNotification(body);
 			}
 		}));
 
 	}
 
-	private QuotationResponse approveQuotation(CreateQuotationBO createQuotationBO) {
-		QuotationResponse quotationResponse = new QuotationResponse();
-		quotationResponse.setStatusCode(1000);
-		try {
-			int status = createQuotationBO.getQuotation().getStatus();
-			Quotation quotationBO = createQuotationBO.getQuotation();
 
-			if (quotationBO == null || quotationBO.getQuotationID() == null) {
-				quotationResponse.setMessage("Không tìm thấy báo giá");
-				return quotationResponse;
-			}
-
-			if (status == Constants.BAO_GIA_STATUS_DA_XUAT_BAO_GIA.intValue()) {
-				quotationResponse.setMessage("Báo giá đã xử lý. Không thể cập nhật");
-				return quotationResponse;
-			}
-
-			BigDecimal totalPrice = new BigDecimal(0);
-			for (QuotationDetail quotationDetail : createQuotationBO.getLstQuotationDetail()) {
-				if (quotationDetail != null) {
-					final Double amount = quotationDetail.getAmount() == null ? 0d : quotationDetail.getAmount();
-
-					try {
-						Long value = quotationDetail.getPrice();
-						if (value == null || value.compareTo(0L) < 0) {
-							quotationResponse.setMessage(
-									"Giá bán của sản phẩm " + quotationDetail.getProductCode() + "  không hợp lệ ");
-							return quotationResponse;
-						}
-
-						quotationDetail.setPrice(value.longValue());
-						totalPrice = totalPrice.add(new BigDecimal(amount * value));
-					} catch (Exception e) {
-						quotationResponse.setMessage(
-								"Giá bán của sản phẩm " + quotationDetail.getProductCode() + "  không hợp lệ ");
-						return quotationResponse;
-					}
-				}
-			}
-
-			if (createQuotationBO.getExpiredDate() == null) {
-				quotationResponse.setMessage("Bạn chưa nhập Ngày hết hạn");
-				return quotationResponse;
-			}
-			Date expiredDate = null;
-			try {
-				expiredDate = DateTimeUtils.convertStringToDate(createQuotationBO.getExpiredDate(), "dd/MM/yyyy");
-
-			} catch (Exception e) {
-				quotationResponse.setMessage("Bạn chưa nhập Ngày hết hạn");
-				return quotationResponse;
-			}
-
-			// QuotationDetailDao dao = new QuotationDetailDao();
-			for (QuotationDetail quotationDetail : createQuotationBO.getLstQuotationDetail()) {
-				if (quotationDetail.getQuotationDetailId() != null) {
-					// System.out.println("chi tiet bao gia Id
-					// "+quotationDetail.getQuotationDetailId());
-					QuotationDetail update = new QuotationDetailDao().findById(quotationDetail.getQuotationDetailId());
-					update.setPrice(quotationDetail.getPrice());
-					new QuotationDetailDao().saveOrUpdate(update);
-				}
-			}
-
-			Quotation quotationUpdate = new QuotationDao().findById(quotationBO.getQuotationID());
-			if (!createQuotationBO.getIsPreViewApprove()) {
-				if (quotationUpdate.getQuotationNumber() == null || quotationUpdate.getQuotationNumber().isEmpty()) {
-					quotationUpdate.setQuotationNumber(new QuotationDao().getAutoPhaFileCode());
-				}
-				quotationUpdate.setStatus(Constants.BAO_GIA_STATUS_DA_XUAT_BAO_GIA.intValue());
-				quotationUpdate.setQuotationUserName(createQuotationBO.getUserName());
-			}
-
-			quotationUpdate.setQuotationDate(expiredDate);
-			quotationUpdate.setModifyDate(new Date());
-			quotationUpdate.setTotalPrice(totalPrice);
-
-			List<QuotationDetail> listQuotationDetail = new QuotationDetailDao()
-					.getListQuotationDetail(quotationUpdate.getQuotationID());
-			String filePath = printBaoGia(listQuotationDetail, quotationUpdate,
-					createQuotationBO.getIsPreViewApprove());
-
-			if (filePath == null) {
-				quotationResponse.setMessage("Không in được báo giá");
-				return quotationResponse;
-			}
-
-			new QuotationDao().saveOrUpdate(quotationUpdate);
-			quotationResponse.setMessage(quotationUpdate.getFileName());
-			quotationResponse.setStatusCode(200);
-
-			if (createQuotationBO.getIsPreViewApprove() != null && !createQuotationBO.getIsPreViewApprove()) {
-				sendNotification(quotationUpdate.getCreateUserCode(),
-						"Báo giá đã được duyệt: " + quotationUpdate.getQuotationNumber(),
-						String.format("Báo giá cho KH %s của bạn vừa được phê duyệt ", quotationUpdate.getCusName()));
-			}
-			return quotationResponse;
-		} catch (Exception e) {
-			quotationResponse.setMessage(e.getMessage());
-			e.printStackTrace();
-		}
-
-		return quotationResponse;
-	}
-
-	private String printBaoGia(List<QuotationDetail> lstQuotationDetail, Quotation quotation, boolean isPreview) {
-		String filePath = new ExportExcell().exportBaoGia(lstQuotationDetail, quotation, isPreview, true);
+	private String printCamket(List<CKBaoGiaDetail> lstQuotationDetail, CKBaoGia quotation ) {
+		String filePath = new ExportExcell().exportCamKetBaoGia(lstQuotationDetail, quotation);
 		if (filePath != null) {
 			return filePath;
 		} else {
@@ -376,54 +289,5 @@ public class CKBaoGiaService {
 			return input;
 		}
 	}
-
-	public static HangHoaBO layThongTinTonKho(String maVT) {
-
-		if (maVT == null || maVT.isEmpty()) {
-			return null;
-		}
-
-		CloseableHttpClient httpClient = HttpClients.createDefault();
-
-		CloseableHttpResponse response = null;
-		try {
-			String url = ResourceBundleUtil.getString("pm_kho_url");
-			HttpGet request = new HttpGet(url + URLEncoder.encode(maVT, StandardCharsets.UTF_8.toString()));
-
-			RequestConfig.Builder requestConfig = RequestConfig.custom();
-			requestConfig.setConnectTimeout(20 * 1000);
-			requestConfig.setConnectionRequestTimeout(20 * 1000);
-			requestConfig.setSocketTimeout(20 * 1000);
-
-			request.setConfig(requestConfig.build());
-
-			response = httpClient.execute(request);
-			HttpEntity entity = response.getEntity();
-			if (response.getStatusLine().getStatusCode() == 200 && entity != null) {
-
-				String result = EntityUtils.toString(entity);
-				HangHoaBO tonKho = new Gson().fromJson(result, HangHoaBO.class);
-				return tonKho;
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (response != null)
-					response.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			try {
-				httpClient.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		return null;
-	}
-
-  
 
 }
