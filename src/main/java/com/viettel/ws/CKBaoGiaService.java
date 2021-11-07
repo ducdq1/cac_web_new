@@ -117,13 +117,16 @@ public class CKBaoGiaService {
 		ListQuotationDetailResponse quotationDetailResponse = new ListQuotationDetailResponse();
 		try {
 			CKBaoGiaDao quotationDao = new CKBaoGiaDao();
-			CKBaoGiaDetailDao detailDao = new CKBaoGiaDetailDao();
 			CKBaoGia quotationUpdate = new CKBaoGiaDao().findById(id);
-			if (quotationUpdate != null && quotationUpdate.getStatus() == Constants.BAO_GIA_STATUS_TAO_MOI.intValue()) {
+			if (quotationUpdate != null) {
 				quotationDao.delete(quotationUpdate);
 				List<CKBaoGiaDetail> lstQuotationDetail = new CKBaoGiaDetailDao().getListQuotationDetail(id);
 				for (CKBaoGiaDetail quotationDetail : lstQuotationDetail) {
-					detailDao.delete(quotationDetail);
+					try {
+						new CKBaoGiaDetailDao().delete(quotationDetail);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
 			}
 
@@ -199,29 +202,30 @@ public class CKBaoGiaService {
 						update.setPrice(obj.getPrice());
 						update.setPickDate(obj.getPickDate());
 						update.setDeposit(obj.getPrice() / 2);
+						update.setPercent(obj.getPercent());
 						new CKBaoGiaDetailDao().saveOrUpdate(update);
 					}
 				}
-				
+
 				final Double amount = obj.getAmount() == null ? 0d : obj.getAmount();
 				Long value = obj.getPrice() == null ? 0 : obj.getPrice();
 
 				totalPrice = totalPrice.add(new BigDecimal(amount * value));
 			}
-			
+
 			quotation.setTotalPrice(totalPrice);
-			
+
 			String filePath = printCamket(lstQuotationDetail, quotation);
 			if (filePath == null) {
 				quotationResponse.setMessage("Không in được cam kết");
 				return quotationResponse;
 			}
-			
+
 			new CKBaoGiaDao().saveOrUpdate(quotation);
-			
+
 			quotationResponse.setFilePath(filePath);
 			quotationResponse.setQuotationId(quotationId);
-			
+
 			if (isUpdate) {
 				sendNotification("create", "Cam kết đặt giữ hàng",
 						String.format("%s vừa cập nhật cam kết đặt giữ hàng cho khách hàng %s",
@@ -265,8 +269,7 @@ public class CKBaoGiaService {
 
 	}
 
-
-	private String printCamket(List<CKBaoGiaDetail> lstQuotationDetail, CKBaoGia quotation ) {
+	private String printCamket(List<CKBaoGiaDetail> lstQuotationDetail, CKBaoGia quotation) {
 		String filePath = new ExportExcell().exportCamKetBaoGia(lstQuotationDetail, quotation);
 		if (filePath != null) {
 			return filePath;
@@ -282,7 +285,7 @@ public class CKBaoGiaService {
 			update.setCusName(input.getCusName());
 			update.setType(input.getType());
 			update.setProductType(input.getProductType());
-			update.setCkContent(update.getCkContent());
+			update.setCkContent(input.getCkContent());
 			return update;
 		} else {
 			return input;

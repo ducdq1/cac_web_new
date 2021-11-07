@@ -1283,17 +1283,14 @@ public class ExportExcell extends BaseComposer {
 					quotation.getCusPhone() == null ? "" : quotation.getCusPhone());
 			createCellWithBorder(colNum++, row0, cloneRow0.getCell(6).getCellStyle(),
 					quotation.getStatus() == Constants.BAO_GIA_STATUS_DA_XUAT_BAO_GIA
-							? new SimpleDateFormat("dd/MM/yyyy").format(quotation.getModifyDate())
-							: "");
+							? new SimpleDateFormat("dd/MM/yyyy").format(quotation.getModifyDate()) : "");
 
 			createCellWithBorder(colNum++, row0, cloneRow0.getCell(7).getCellStyle(),
 					quotation.getStatus() == Constants.BAO_GIA_STATUS_DA_XUAT_BAO_GIA
-							? quotation.getNote() == null ? "" : quotation.getNote()
-							: "");
+							? quotation.getNote() == null ? "" : quotation.getNote() : "");
 
-			createCellWithBorder(colNum++, row0, cloneRow0.getCell(8).getCellStyle(),
-					quotation.getSaledDate() == null ? ""
-							: new SimpleDateFormat("dd/MM/yyyy").format(quotation.getSaledDate()));
+			createCellWithBorder(colNum++, row0, cloneRow0.getCell(8).getCellStyle(), quotation.getSaledDate() == null
+					? "" : new SimpleDateFormat("dd/MM/yyyy").format(quotation.getSaledDate()));
 
 			createCellWithBorder(colNum++, row0, cloneRow0.getCell(9).getCellStyle(),
 					"" + formatNumber(quotation.getTotalPrice(), "###,###,###.####"));
@@ -1336,9 +1333,9 @@ public class ExportExcell extends BaseComposer {
 		try {
 
 			String fileName = "CK_DH_" + new Date().getTime() / 1000 + ".xlsx";
-		 
 
-			String filePathOut = dir_upload + "/ck_bao_gia/" + fileName;
+			String filePathTemp = "/ck_bao_gia/" + fileName;
+			String filePathOut = dir_upload + filePathTemp;
 
 			fs = new FileInputStream(filePath);
 			workbook = new XSSFWorkbook(fs);
@@ -1354,7 +1351,7 @@ public class ExportExcell extends BaseComposer {
 				quotation.setFileName(fileName.replace(".xlsx", ".pdf"));
 			}
 
-			return fileFinal;
+			return quotation.getFileName();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1437,9 +1434,14 @@ public class ExportExcell extends BaseComposer {
 			createCell(colNum++, row0, cloneRow0.getCell(5).getCellStyle(),
 					"" + formatNumber(quotationDetail.getAmount() * quotationDetail.getPrice(), "###,###,###.####"));
 			createCell(colNum++, row0, cloneRow0.getCell(6).getCellStyle(), quotationDetail.getPercent() + " %");
-			createCell(colNum++, row0, cloneRow0.getCell(7).getCellStyle(), ""
-					+ formatNumber((quotationDetail.getAmount() * quotationDetail.getPrice()) / 2, "###,###,###.####"));
 			
+			double percent = (double) ((double)quotationDetail.getPercent() /(double) 100);
+			Integer money = (int) ((quotationDetail.getAmount() * quotationDetail.getPrice())
+					* (percent));
+
+			createCell(colNum++, row0, cloneRow0.getCell(7).getCellStyle(),
+					"" + formatNumber(money, "###,###,###.####"));
+
 			createCell(colNum++, row0, cloneRow0.getCell(8).getCellStyle(),
 					DateTimeUtils.convertDateToStringFormat(quotationDetail.getPickDate(), "dd/MM/yyyy"));
 
@@ -1461,7 +1463,7 @@ public class ExportExcell extends BaseComposer {
 
 	public static void main(String[] args) {
 		XSSFWorkbook workbook;
-		String path = "D:\\DATA\\DU_AN\\phamarcy\\src\\main\\webapp\\WEB-INF\\template\\MAU_CAM_KET_DAT_HANG_TB.xlsx";
+		String path = "D:\\DATA\\DU_AN\\phamarcy\\src\\main\\webapp\\WEB-INF\\template\\MAU_CAM_KET_DAT_HANG_GACH.xlsx";
 		InputStream fs;
 		try {
 
@@ -1476,7 +1478,7 @@ public class ExportExcell extends BaseComposer {
 			quotation.setCkNumber("001/2021");
 			quotation.setTotalPrice(new BigDecimal(2000000));
 			quotation.setCkDate(new Date());
-			quotation.setType(1);
+			quotation.setType(0);
 			quotation.setCkContent("4/ Hàng trả lại không được vượt quá 20% so với hàng đặt.");
 			List<CKBaoGiaDetail> details = new ArrayList<CKBaoGiaDetail>();
 
@@ -1498,9 +1500,9 @@ public class ExportExcell extends BaseComposer {
 			details.add(detail);
 			details.add(detail);
 
-//			List<CKBaoGiaDetail> quotations = new ArrayList<>();
-//			quotations.add(quotation);
-//			quotations.add(quotation);
+			// List<CKBaoGiaDetail> quotations = new ArrayList<>();
+			// quotations.add(quotation);
+			// quotations.add(quotation);
 			writeDataCamKetBaoGia(workbook, details, quotation);
 
 			// writeDataBaoGiaCongTrinh(workbook, details, quotation);
