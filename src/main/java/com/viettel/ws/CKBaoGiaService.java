@@ -73,7 +73,6 @@ public class CKBaoGiaService {
 		try {
 			PhamarcyFileModel model = new PhamarcyFileModel();
 			model.setUserName(searchBO.getUserName());
-			model.setTrangThai(searchBO.getStatus());
 			model.setSearchText(searchBO.getSearch());
 			model.setApproveAble(searchBO.getIsApproveAble() == null ? false : searchBO.getIsApproveAble());
 			model.setSaled(searchBO.getIsSaled() == null ? false : searchBO.getIsSaled());

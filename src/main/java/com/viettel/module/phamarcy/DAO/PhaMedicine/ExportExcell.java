@@ -1378,7 +1378,7 @@ public class ExportExcell extends BaseComposer {
 		int countQuotation = 0;
 
 		Font fontBold = workbook.getSheet("Sheet2").getRow(2).getCell(7).getCellStyle().getFont();
-		Font fontNormal = workbook.getSheet("Sheet2").getRow(2).getCell(6).getCellStyle().getFont();
+		Font fontNormal = workbook.getSheet("Sheet2").getRow(2).getCell(7).getCellStyle().getFont();
 		Font fontItalic = workbook.getSheet("Sheet2").getRow(4).getCell(1).getCellStyle().getFont();
 		Font fontItalicNormal = workbook.getSheet("Sheet2").getRow(4).getCell(1).getCellStyle().getFont();
 		fontNormal.setFontName("Times New Roman");
@@ -1390,13 +1390,13 @@ public class ExportExcell extends BaseComposer {
 				sck + (quotation.getCkNumber() == null ? "" : quotation.getCkNumber()));
 		SO_BG.applyFont(0, sck.length(), fontBold);
 		SO_BG.applyFont(sck.length(), SO_BG.length(), fontNormal);
-		sheet.getRow(2).getCell(7).setCellValue(SO_BG);
+		sheet.getRow(2).getCell(8).setCellValue(SO_BG);
 
 		String mnv = "Mã NV: ";
 		XSSFRichTextString MA_NV = new XSSFRichTextString(mnv + quotation.getCreateUserCode().toUpperCase());
 		MA_NV.applyFont(0, mnv.length(), fontBold);
 		MA_NV.applyFont(mnv.length(), MA_NV.length(), fontNormal);
-		sheet.getRow(3).getCell(7).setCellValue(MA_NV);
+		sheet.getRow(3).getCell(8).setCellValue(MA_NV);
 
 		Date datetime = new Date();
 		String date = new SimpleDateFormat("dd").format(datetime);
@@ -1436,10 +1436,11 @@ public class ExportExcell extends BaseComposer {
 					"" + formatNumber(quotationDetail.getPrice(), "###,###,###.####"));
 			createCell(colNum++, row0, cloneRow0.getCell(5).getCellStyle(),
 					"" + formatNumber(quotationDetail.getAmount() * quotationDetail.getPrice(), "###,###,###.####"));
-
-			createCell(colNum++, row0, cloneRow0.getCell(6).getCellStyle(), ""
+			createCell(colNum++, row0, cloneRow0.getCell(6).getCellStyle(), quotationDetail.getPercent() + " %");
+			createCell(colNum++, row0, cloneRow0.getCell(7).getCellStyle(), ""
 					+ formatNumber((quotationDetail.getAmount() * quotationDetail.getPrice()) / 2, "###,###,###.####"));
-			createCell(colNum++, row0, cloneRow0.getCell(7).getCellStyle(),
+			
+			createCell(colNum++, row0, cloneRow0.getCell(8).getCellStyle(),
 					DateTimeUtils.convertDateToStringFormat(quotationDetail.getPickDate(), "dd/MM/yyyy"));
 
 			countRow++;
@@ -1448,7 +1449,7 @@ public class ExportExcell extends BaseComposer {
 		sheet.getRow(rowNum).getCell(6).setCellValue(formatNumber(quotation.getTotalPrice(), "###,###,###.####"));
 		sheet.getRow(rowNum).setHeight((short) 600);
 
-		if (quotation.getType() == 1) {
+		if (quotation.getType() == 0) {
 			sheet.getRow(rowNum + 6).getCell(2).setCellValue(quotation.getCkContent());
 		}
 
@@ -1460,7 +1461,7 @@ public class ExportExcell extends BaseComposer {
 
 	public static void main(String[] args) {
 		XSSFWorkbook workbook;
-		String path = "D:\\CAC\\cac_web\\cac_web_new\\src\\main\\webapp\\WEB-INF\\template\\MAU_CAM_KET_DAT_HANG_TB.xlsx";
+		String path = "D:\\DATA\\DU_AN\\phamarcy\\src\\main\\webapp\\WEB-INF\\template\\MAU_CAM_KET_DAT_HANG_TB.xlsx";
 		InputStream fs;
 		try {
 
@@ -1483,6 +1484,7 @@ public class ExportExcell extends BaseComposer {
 			detail.setProductName("Bàn cầu 1 khối ToTo MS885DT8 Bàn cầu 1 ");
 			detail.setAmount(5d);
 			detail.setPrice(10000L);
+			detail.setPercent(20);
 			detail.setUnit("met vuong ");
 			detail.setNote("271 nguyễn văn linh 271 nguyễn văn linh 271 n");
 			detail.setPickDate(new Date());
@@ -1512,7 +1514,7 @@ public class ExportExcell extends BaseComposer {
 			// }
 
 			String fileName = "BAO_GIA_" + new Date().getTime() / 1000 + ".xlsx";
-			String filePath = "D:\\CAC\\temp" + File.separatorChar + fileName;
+			String filePath = "D:\\DATA\\temp" + File.separatorChar + fileName;
 
 			FileOutputStream fileOut = new FileOutputStream(filePath);
 			workbook.write(fileOut);

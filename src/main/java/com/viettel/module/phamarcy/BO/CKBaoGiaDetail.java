@@ -59,6 +59,9 @@ public class CKBaoGiaDetail implements Serializable {
 	
 	@Column(name = "UNIT")
 	private String unit; 
+	
+	@Column(name = "PERCENT")
+	private Integer percent; 
 
 	@Column(name = "NOTE")
 	private String note;
@@ -94,6 +97,15 @@ public class CKBaoGiaDetail implements Serializable {
 	@Transient
 	private String amountStr;
 	
+	
+
+	public Integer getPercent() {
+		return percent;
+	}
+
+	public void setPercent(Integer percent) {
+		this.percent = percent;
+	}
 
 	public Long getProductId() {
 		return productId;

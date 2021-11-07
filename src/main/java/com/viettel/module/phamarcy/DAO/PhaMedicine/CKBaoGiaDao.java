@@ -202,12 +202,6 @@ public class CKBaoGiaDao extends GenericDAOHibernate<CKBaoGia, Long> {
 				lstParam.add(toDate);
 			}
 			
-			if(searchModel.isApproveAble() == false){
-				if(searchModel.getTrangThai()>=0){
-					hql.append(" and f.status = ? ");
-					lstParam.add(searchModel.getTrangThai());
-				}
-			}
 			
 			
 			
