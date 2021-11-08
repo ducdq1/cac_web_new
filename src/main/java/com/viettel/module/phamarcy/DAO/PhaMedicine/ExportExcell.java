@@ -1374,7 +1374,7 @@ public class ExportExcell extends BaseComposer {
 		int colNum = 0;
 		int countQuotation = 0;
 
-		Font fontBold = workbook.getSheet("Sheet2").getRow(2).getCell(7).getCellStyle().getFont();
+		Font fontBold = workbook.getSheet("Sheet2").getRow(2).getCell(8).getCellStyle().getFont();
 		Font fontNormal = workbook.getSheet("Sheet2").getRow(2).getCell(7).getCellStyle().getFont();
 		Font fontItalic = workbook.getSheet("Sheet2").getRow(4).getCell(1).getCellStyle().getFont();
 		Font fontItalicNormal = workbook.getSheet("Sheet2").getRow(4).getCell(1).getCellStyle().getFont();
@@ -1434,10 +1434,9 @@ public class ExportExcell extends BaseComposer {
 			createCell(colNum++, row0, cloneRow0.getCell(5).getCellStyle(),
 					"" + formatNumber(quotationDetail.getAmount() * quotationDetail.getPrice(), "###,###,###.####"));
 			createCell(colNum++, row0, cloneRow0.getCell(6).getCellStyle(), quotationDetail.getPercent() + " %");
-			
-			double percent = (double) ((double)quotationDetail.getPercent() /(double) 100);
-			Integer money = (int) ((quotationDetail.getAmount() * quotationDetail.getPrice())
-					* (percent));
+
+			double percent = (double) ((double) quotationDetail.getPercent() / (double) 100);
+			Integer money = (int) ((quotationDetail.getAmount() * quotationDetail.getPrice()) * (percent));
 
 			createCell(colNum++, row0, cloneRow0.getCell(7).getCellStyle(),
 					"" + formatNumber(money, "###,###,###.####"));
@@ -1450,10 +1449,7 @@ public class ExportExcell extends BaseComposer {
 
 		sheet.getRow(rowNum).getCell(6).setCellValue(formatNumber(quotation.getTotalPrice(), "###,###,###.####"));
 		sheet.getRow(rowNum).setHeight((short) 600);
-
-		if (quotation.getType() == 0) {
-			sheet.getRow(rowNum + 6).getCell(2).setCellValue(quotation.getCkContent());
-		}
+		sheet.getRow(rowNum + 6).getCell(2).setCellValue(quotation.getCkContent());
 
 		workbook.removeSheetAt(1);
 		// workbook.removeSheetAt(1);
