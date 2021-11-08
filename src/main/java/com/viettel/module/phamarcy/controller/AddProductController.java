@@ -379,7 +379,7 @@ public class AddProductController extends BaseComposer {
 			return false;
 		}
 
-		HangHoaBO hangHoa = ProductService.layThongTinTonKho(tbMaHangHoa.getText().trim());
+		HangHoaBO hangHoa =  ProductService.layThongTinTonKho(tbMaHangHoa.getText().trim());
 		if (hangHoa != null) {
 			if (hangHoa.getSo_luong() == null && hangHoa.getsError() != null) {
 				tbMaHangHoa.setErrorMessage(hangHoa.getsError());

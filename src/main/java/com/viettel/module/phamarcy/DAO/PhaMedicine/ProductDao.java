@@ -224,6 +224,8 @@ public class ProductDao extends GenericDAOHibernate<Product, Long> {
 					selectHql.append(" and  f.productType IN(");
 					if (bo.getType().intValue() == 0) {
 						selectHql.append("0,1");
+					} else if(bo.getType().intValue() == 2) {
+						selectHql.append("5");
 					} else {
 						selectHql.append("2,3,4");
 					}

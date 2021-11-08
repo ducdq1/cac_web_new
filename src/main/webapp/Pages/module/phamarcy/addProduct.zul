@@ -53,6 +53,13 @@
 						<radio radiogroup="rdgProductType" style="font-size:14px;margin-left:22px  "
 							label="Gạch G065 và G20" class="radio-input" />
 							</groupbox>
+							
+							 <groupbox width="97%" style="margin-top:5px;margin-bottom:10px">
+					<caption label="Hàng khuyến mãi" style="font-size:13px;margin-bottom:10px" />
+						<radio radiogroup="rdgProductType" style="font-size:14px; "
+							label="Hàng khuyến mãi" class="radio-input" />
+						 
+							</groupbox>
 					</h:td>
 				</h:tr>
 				<h:tr>

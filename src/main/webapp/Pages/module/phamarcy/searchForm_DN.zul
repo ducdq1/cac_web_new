@@ -32,6 +32,7 @@
 					<comboitem value="2" label="Gạch G001" />
 					<comboitem value="3" label="Gạch lớn" />
 					<comboitem value="3" label="Gạch G065 và G20" />
+					<comboitem value="5" label="Hàng Khuyến mãi" />
 					</combobox>
 				</h:td> 
 			</h:tr>
