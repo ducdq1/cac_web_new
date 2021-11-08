@@ -32,6 +32,7 @@ import com.viettel.convert.service.PdfDocxFile;
 import com.viettel.module.phamarcy.utils.EncryptionUtil;
 import com.viettel.utils.Constants;
 import com.viettel.utils.Constants_Cos;
+import com.viettel.utils.DateTimeUtils;
 import com.viettel.utils.FileUtil;
 import com.viettel.utils.LogUtils;
 import com.viettel.utils.ResourceBundleUtil;
@@ -107,7 +108,7 @@ public class AttachDAO extends BaseGenericForwardComposer {
 			// String filePath = f.getAbsolutePath();
 		} catch (IOException | Docx4JException ex) {
 			LogUtils.addLog(ex);
-		}  
+		}
 	}
 
 	public void saveFileAttach(PdfDocxFile pdfDocxFile, String fileName, Long objectId, Long objectType,
@@ -125,7 +126,7 @@ public class AttachDAO extends BaseGenericForwardComposer {
 		String separator = ResourceBundleUtil.getString("separator");
 		folderPath += separator + Constants_Cos.OBJECT_TYPE_STR.PERMIT_STR;
 		OutputStream outputStream = null;
-		fileName=FileUtil.getSafeFileName(fileName);
+		fileName = FileUtil.getSafeFileName(fileName);
 		try {
 			attach.setAttachPath(folderPath);
 			attach.setAttachName(fileName);
@@ -163,7 +164,7 @@ public class AttachDAO extends BaseGenericForwardComposer {
 			if (outputStream != null) {
 				outputStream.close();
 			}
-			 
+
 		}
 	}
 
@@ -180,7 +181,7 @@ public class AttachDAO extends BaseGenericForwardComposer {
 
 		ResourceBundle rb = ResourceBundle.getBundle("config");
 		String separator = rb.getString("separator");
-		//fileName=FileUtil.getSafeFileName(fileName);
+		// fileName=FileUtil.getSafeFileName(fileName);
 		File afile = new File(fileName);
 		String fName = afile.getName();
 		// hieptq update 306015
@@ -312,7 +313,7 @@ public class AttachDAO extends BaseGenericForwardComposer {
 
 		} catch (IOException | Docx4JException ex) {
 			LogUtils.addLog(ex);
-		} 
+		}
 	}
 
 	public Attachs saveFileAttach(Media media, Long objectId, Long objectType, Long attachType) throws IOException {
@@ -345,12 +346,13 @@ public class AttachDAO extends BaseGenericForwardComposer {
 		// target)
 
 		String folderPath = "";
-		String separator = "/";//= ResourceBundleUtil.getString("separator");
+		String separator = "/";// = ResourceBundleUtil.getString("separator");
 		if (!"/".equals(separator) && !("\\").equals(separator)) {
 			separator = "/";
 		}
 
-		String fileName = new BaseGenericForwardComposer().removeVietnameseChar(new Date().getTime()+"_"+media.getName());
+		String fileName = new BaseGenericForwardComposer()
+				.removeVietnameseChar(new Date().getTime() + "_" + media.getName());
 
 		InputStream inputStream = null;
 		OutputStream outputStream = null;
@@ -382,10 +384,13 @@ public class AttachDAO extends BaseGenericForwardComposer {
 			} else if (objectType == Constants.OBJECT_TYPE.CAC_IMAGE
 					|| objectType == Constants.OBJECT_TYPE.CAC_IMAGE_TSKT) {
 				folderPath += separator + Constants.OBJECT_TYPE_STR.IMAGE_STR;
-			}else if (objectType == Constants.OBJECT_TYPE.CAC_AVATAR
-					 ) {
+			} else if (objectType == Constants.OBJECT_TYPE.CAC_AVATAR) {
 				folderPath += separator + Constants.OBJECT_TYPE_STR.AVATAR_STR;
-			}  
+			}
+
+
+			String subFolder = DateTimeUtils.convertDateToStringFormat(new Date(), "MMYYYY");
+			folderPath += separator + subFolder ;
 			String path = folderPath + separator + attach.getAttachId();
 			attach.setAttachPath(path);
 			attachDAOHE.saveOrUpdate(attach);
@@ -544,105 +549,104 @@ public class AttachDAO extends BaseGenericForwardComposer {
 	}
 
 	// nghiepnc
-		public void saveFileAttachRegister(Media media,  Long objectId, Long objectType, Long attachType,
-				String attachDes) throws IOException {
-			AttachDAOHE attachDAOHE = new AttachDAOHE();
+	public void saveFileAttachRegister(Media media, Long objectId, Long objectType, Long attachType, String attachDes)
+			throws IOException {
+		AttachDAOHE attachDAOHE = new AttachDAOHE();
 
-			Attachs attach = new Attachs();
-			 
+		Attachs attach = new Attachs();
 
-			String folderPath = "";
-			String separator = ResourceBundleUtil.getString("separator");
-			InputStream inputStream = null;
-			OutputStream outputStream = null;
-			String fileName = new BaseGenericForwardComposer().removeVietnameseChar(media.getName());
-			 fileName = FileUtil.getSafeFileName(media.getName());
+		String folderPath = "";
+		String separator = ResourceBundleUtil.getString("separator");
+		InputStream inputStream = null;
+		OutputStream outputStream = null;
+		String fileName = new BaseGenericForwardComposer().removeVietnameseChar(media.getName());
+		fileName = FileUtil.getSafeFileName(media.getName());
+		try {
+			attach.setAttachPath(folderPath);
+			attach.setAttachName(fileName);
+			attach.setIsActive(Constants.Status.ACTIVE);
+			attach.setObjectId(objectId);
+
 			try {
-				attach.setAttachPath(folderPath);
-				attach.setAttachName(fileName);
-				attach.setIsActive(Constants.Status.ACTIVE);
-				attach.setObjectId(objectId);
-
-				try {
-					if (getUserId() != null) {
-						attach.setCreatorId(getUserId());
-						attach.setModifierId(getUserId());
-					} else {
-						attach.setCreatorId(null);
-						attach.setModifierId(null);
-					}
-
-					if (getFullName() != null) {
-						attach.setCreatorName(getFullName());
-					} else {
-						attach.setCreatorName(null);
-					}
-				} catch (NullPointerException e) {
-					LogUtils.addLog(e);
-				}
-
-				attach.setDateCreate(new Date());
-				attach.setDateModify(new Date());
-				attach.setAttachCat(objectType);
-				attach.setAttachDes(attachDes);
-				if (attachType != null) {
-					attach.setAttachType(attachType);
-				}
-				attachDAOHE.saveOrUpdate(attach);
-				if (objectType == Constants.OBJECT_TYPE.COSMETIC_PUBLIC_PROFILE) {
-					folderPath += separator + Constants.OBJECT_TYPE_STR.RAPID_TEST_PUBLIC_PROFILE_STR;
-				} else if (objectType == Constants.OBJECT_TYPE.TEMPLATE) {
-					folderPath += separator + Constants.OBJECT_TYPE_STR.TEMPLATE_STR;
-				} else if (objectType == Constants.OBJECT_TYPE.REGISTER) {
-					folderPath += separator + Constants.OBJECT_TYPE_STR.COSMETIC_REGISTER_STR;
+				if (getUserId() != null) {
+					attach.setCreatorId(getUserId());
+					attach.setModifierId(getUserId());
 				} else {
-					Date date = new Date();
-					DateFormat dateFormat = new SimpleDateFormat("yyyy");
-					folderPath += separator + Constants.OBJECT_TYPE_STR.RAPID_TEST_DOCUMENT_STR + separator
-							+ dateFormat.format(date) + separator + Constants.OBJECT_TYPE_STR.RAPID_TEST_FILE_TYPE_STR
-							+ separator + objectId;
+					attach.setCreatorId(null);
+					attach.setModifierId(null);
 				}
 
-				String path = folderPath + separator + attach.getAttachId();
-				// update lai attach path
-				attach.setAttachPath(path);
-				attachDAOHE.saveOrUpdate(attach);
-				// tao folder
-				String dir_upload = ResourceBundleUtil.getString("dir_upload") + separator;
-
-				File fd = new File(dir_upload + folderPath);
-				if (!fd.exists()) {
-					fd.mkdirs();
-				}
-				// tao file
-				File f = new File(dir_upload + attach.getFullPathFile());
-				if (f.exists()) {
+				if (getFullName() != null) {
+					attach.setCreatorName(getFullName());
 				} else {
-					f.createNewFile();
+					attach.setCreatorName(null);
 				}
-				// save to hard disk and database
-				inputStream = media.getStreamData();
-				outputStream = null;
-				outputStream = new FileOutputStream(f);
+			} catch (NullPointerException e) {
+				LogUtils.addLog(e);
+			}
 
-				byte[] buffer = new byte[1024];
-				int len;
-				while ((len = inputStream.read(buffer)) > 0) {
-					outputStream.write(buffer, 0, len);
-				}
-				// String filePath = f.getAbsolutePath();
-			} catch (IOException ex) {
-				LogUtils.addLog(ex);
-			} finally {
-				if (outputStream != null) {
-					outputStream.close();
-				}
-				if (inputStream != null) {
-					inputStream.close();
-				}
+			attach.setDateCreate(new Date());
+			attach.setDateModify(new Date());
+			attach.setAttachCat(objectType);
+			attach.setAttachDes(attachDes);
+			if (attachType != null) {
+				attach.setAttachType(attachType);
+			}
+			attachDAOHE.saveOrUpdate(attach);
+			if (objectType == Constants.OBJECT_TYPE.COSMETIC_PUBLIC_PROFILE) {
+				folderPath += separator + Constants.OBJECT_TYPE_STR.RAPID_TEST_PUBLIC_PROFILE_STR;
+			} else if (objectType == Constants.OBJECT_TYPE.TEMPLATE) {
+				folderPath += separator + Constants.OBJECT_TYPE_STR.TEMPLATE_STR;
+			} else if (objectType == Constants.OBJECT_TYPE.REGISTER) {
+				folderPath += separator + Constants.OBJECT_TYPE_STR.COSMETIC_REGISTER_STR;
+			} else {
+				Date date = new Date();
+				DateFormat dateFormat = new SimpleDateFormat("yyyy");
+				folderPath += separator + Constants.OBJECT_TYPE_STR.RAPID_TEST_DOCUMENT_STR + separator
+						+ dateFormat.format(date) + separator + Constants.OBJECT_TYPE_STR.RAPID_TEST_FILE_TYPE_STR
+						+ separator + objectId;
+			}
+
+			String path = folderPath + separator + attach.getAttachId();
+			// update lai attach path
+			attach.setAttachPath(path);
+			attachDAOHE.saveOrUpdate(attach);
+			// tao folder
+			String dir_upload = ResourceBundleUtil.getString("dir_upload") + separator;
+
+			File fd = new File(dir_upload + folderPath);
+			if (!fd.exists()) {
+				fd.mkdirs();
+			}
+			// tao file
+			File f = new File(dir_upload + attach.getFullPathFile());
+			if (f.exists()) {
+			} else {
+				f.createNewFile();
+			}
+			// save to hard disk and database
+			inputStream = media.getStreamData();
+			outputStream = null;
+			outputStream = new FileOutputStream(f);
+
+			byte[] buffer = new byte[1024];
+			int len;
+			while ((len = inputStream.read(buffer)) > 0) {
+				outputStream.write(buffer, 0, len);
+			}
+			// String filePath = f.getAbsolutePath();
+		} catch (IOException ex) {
+			LogUtils.addLog(ex);
+		} finally {
+			if (outputStream != null) {
+				outputStream.close();
+			}
+			if (inputStream != null) {
+				inputStream.close();
 			}
 		}
-		
+	}
+
 	/**
 	 * Tra ve duong dan tuong doi, bo di thu muc upload cau hinh trong file
 	 * config
@@ -676,7 +680,7 @@ public class AttachDAO extends BaseGenericForwardComposer {
 	public static boolean removeFile(String path, boolean absolute) {
 		String folderPath = ResourceBundleUtil.getString("dir_upload");
 		String separator = ResourceBundleUtil.getString("separator");
-		if (!("/").equals(separator)&& !("\\").equals(separator)) {
+		if (!("/").equals(separator) && !("\\").equals(separator)) {
 			separator = "/";
 		}
 		if (!absolute) {
@@ -857,10 +861,10 @@ public class AttachDAO extends BaseGenericForwardComposer {
 	}
 
 	public void viewPdfOnBrowser(Attachs att) {
-		if(att==null){
+		if (att == null) {
 			showWarningNotify(getLabel("file_not_exist"));
 		}
-		
+
 		String path = att.getFullPathFile();
 		path = ResourceBundleUtil.getString("dir_upload") + path;
 		File f = new File(path);

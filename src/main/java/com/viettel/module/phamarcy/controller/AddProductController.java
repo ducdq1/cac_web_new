@@ -298,8 +298,8 @@ public class AddProductController extends BaseComposer {
 		}
 
 		try {
-			saveImageThongSoKT();
-		} catch (IOException e) {
+			//saveImageThongSoKT();
+		} catch (Exception e) {
 			showNotification("Không thể lưu hình ảnh thông số kỹ thuật", Constants.Notification.ERROR, 1500);
 			return;
 		}
@@ -379,13 +379,13 @@ public class AddProductController extends BaseComposer {
 			return false;
 		}
 
-		HangHoaBO hangHoa =  ProductService.layThongTinTonKho(tbMaHangHoa.getText().trim());
+		/*HangHoaBO hangHoa =  ProductService.layThongTinTonKho(tbMaHangHoa.getText().trim());
 		if (hangHoa != null) {
 			if (hangHoa.getSo_luong() == null && hangHoa.getsError() != null) {
 				tbMaHangHoa.setErrorMessage(hangHoa.getsError());
 				return false;
 			}
-		}
+		}*/
 
 		if (new ProductDao().checkExistProductCode(tbMaSP.getText().trim().toLowerCase(), product.getProductId())) {
 			tbMaSP.setErrorMessage("Mã sản phẩm này đã tồn tại. Vui lòng nhập mã khác");
@@ -726,7 +726,7 @@ public class AddProductController extends BaseComposer {
 					+ "/TSKT_" + new Date().getTime() + ".png");
 		}
 
-		ImageIO.write(image, "png", outPut);
+		//ImageIO.write(image, "png", outPut);
 		System.out.println("Done");
 		return outPut;
 	}
