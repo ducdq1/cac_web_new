@@ -1404,7 +1404,7 @@ public class ExportExcell extends BaseComposer {
 		String KH = "Khách hàng: ";
 		XSSFRichTextString TEN_KH = new XSSFRichTextString("Khách hàng: " + quotation.getCusName());
 		TEN_KH.applyFont(0, KH.length(), fontBold);
-		TEN_KH.applyFont(KH.length() + 1, TEN_KH.length(), fontNormal);
+		TEN_KH.applyFont(KH.length(), TEN_KH.length(), fontNormal);
 		sheet.getRow(6).getCell(1).setCellValue(TEN_KH);
 
 		XSSFRichTextString DIA_CHI_KH = new XSSFRichTextString("Địa chỉ: " + quotation.getCusAddress());
@@ -1433,7 +1433,7 @@ public class ExportExcell extends BaseComposer {
 					"" + formatNumber(quotationDetail.getPrice(), "###,###,###.####"));
 			createCell(colNum++, row0, cloneRow0.getCell(5).getCellStyle(),
 					"" + formatNumber(quotationDetail.getAmount() * quotationDetail.getPrice(), "###,###,###.####"));
-			createCell(colNum++, row0, cloneRow0.getCell(6).getCellStyle(), quotationDetail.getPercent() + " %");
+			createCell(colNum++, row0, cloneRow0.getCell(6).getCellStyle(), quotationDetail.getPercent() + "%");
 
 			double percent = (double) ((double) quotationDetail.getPercent() / (double) 100);
 			Integer money = (int) ((quotationDetail.getAmount() * quotationDetail.getPrice()) * (percent));
@@ -1449,8 +1449,9 @@ public class ExportExcell extends BaseComposer {
 
 		sheet.getRow(rowNum).getCell(6).setCellValue(formatNumber(quotation.getTotalPrice(), "###,###,###.####"));
 		sheet.getRow(rowNum).setHeight((short) 600);
+		sheet.getRow(rowNum + 5).setHeight((short) 600);
 		sheet.getRow(rowNum + 6).getCell(2).setCellValue(quotation.getCkContent());
-
+		sheet.getRow(rowNum + 6).setHeight((short) 600);
 		workbook.removeSheetAt(1);
 		// workbook.removeSheetAt(1);
 
@@ -1459,7 +1460,7 @@ public class ExportExcell extends BaseComposer {
 
 	public static void main(String[] args) {
 		XSSFWorkbook workbook;
-		String path = "D:\\DATA\\DU_AN\\phamarcy\\src\\main\\webapp\\WEB-INF\\template\\MAU_CAM_KET_DAT_HANG_GACH.xlsx";
+		String path = "D:\\DATA\\DU_AN\\phamarcy\\src\\main\\webapp\\WEB-INF\\template\\MAU_CAM_KET_DAT_HANG_TB.xlsx";
 		InputStream fs;
 		try {
 
@@ -1474,8 +1475,8 @@ public class ExportExcell extends BaseComposer {
 			quotation.setCkNumber("001/2021");
 			quotation.setTotalPrice(new BigDecimal(2000000));
 			quotation.setCkDate(new Date());
-			quotation.setType(0);
-			quotation.setCkContent("4/ Hàng trả lại không được vượt quá 20% so với hàng đặt.");
+			quotation.setType(1);
+			quotation.setCkContent("4/ Hàng trả lại không được vượt quá 20% so với hàng đặt");
 			List<CKBaoGiaDetail> details = new ArrayList<CKBaoGiaDetail>();
 
 			CKBaoGiaDetail detail = new CKBaoGiaDetail();
