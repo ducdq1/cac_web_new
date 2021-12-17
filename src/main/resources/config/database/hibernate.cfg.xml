@@ -96,7 +96,8 @@
             <mapping class="com.viettel.module.phamarcy.BO.Order"/>
             <mapping class="com.viettel.module.phamarcy.BO.OrderDetail"/>
         <mapping class="com.viettel.module.phamarcy.BO.VOrderDetail"/>
-         
+         <mapping class="com.viettel.module.phamarcy.BO.ThauTho"/>
+         <mapping class="com.viettel.module.phamarcy.BO.ThauThoKH"/>
         <mapping class="com.viettel.core.sys.BO.Place"/>
           <mapping class="com.viettel.module.phamarcy.BO.Street"/>
            <mapping class="com.viettel.module.phamarcy.BO.Area"/>

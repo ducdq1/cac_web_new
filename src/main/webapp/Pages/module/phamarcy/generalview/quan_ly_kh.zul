@@ -186,22 +186,16 @@
 		emptyMessage="Không tìm thấy địa chỉ nào">
 		<listhead sizable="true">
 			<listheader label="STT" align="center" style="width:4%;font-size:13px" />
-			<listheader label="Tên khách hàng" align="left"
+			<listheader label="Đối tác" align="left"
 				style="width:16%;font-size:13px" />
-			<listheader label="Địa chỉ" align="left"
+			<listheader label="Khách Hàng" align="left"
 				style="width:15%;font-size:13px" />	
 			<listheader label="Điện thoại" align="left"
 				style="width:10%;font-size:13px" />	
-			 <listheader label="Người giới thiệu" align="left"
+			 <listheader label="Địa chỉ thi công" align="left"
 				style="width:8%;font-size:13px" />	
-			<listheader label="Nhân viên khảo sát" align="left"
+			<listheader label="Ngày nhập PM" align="left"
 				style="width:10%;font-size:13px" /> 
-			<listheader label="Trạng thái" align="left"
-				style="width:7%;font-size:13px" />	 
-			<listheader label="Đã gọi điện" align="left"
-				style="width:10%;font-size:13px" />
-			<listheader label="Lấy hàng" align="left"
-				style="width:10%;font-size:13px" />	 
 			<listheader label="Sửa" align="left" hflex="min" style=" font-size:13px"/>
 			<listheader label="Xóa" align="left" hflex="min" style=" font-size:13px"/>
 
@@ -238,21 +232,6 @@
 					<label style="" value="${each.surveyName}" />
 				</listcell>
 
-				<listcell style="text-align:left">					 
-					<label style="color:red" value="${each.trangThai}" if="${each.status == 0}"/>
-					<label style="color:red" value="${each.trangThai}" if="${each.status == 1}"/>
-					<label style="color:green" value="${each.trangThai}" if="${each.status == 2}"/>	
-					<label style="color:green" value="${each.trangThai}" if="${each.status == 3}"/>				
-				</listcell>
-				
-				<listcell style="text-align:left">
-					<label style="" value="${each.numCall}" />
-				</listcell>
-				
-				<listcell style="text-align:left">
-					<label style="" value="${each.layHang}" />
-				</listcell>
-				
 				<listcell>
 					<image src="/Share/img/icon/edit.png" width="22px"
 						height="22px" forward="onClick=lbList.onOpenUpdate(${each})"
