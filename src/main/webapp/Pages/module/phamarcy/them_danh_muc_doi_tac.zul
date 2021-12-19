@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <window xmlns:h="http://www.w3.org/1999/xhtml"
 	xmlns="http://www.zkoss.org/2005/zul" title="Thêm mới nhóm đối tác"
-	apply="com.viettel.module.phamarcy.controller.AddNhomDoiTacUnitController"
-	id="createDlg1" width="70%" border="normal" position="center"
+	apply="com.viettel.module.phamarcy.controller.AddNhomDoiTacController"
+	id="createDlg1" width="50%" border="normal" position="center"
 	closable="true">
 	<style>
 		.z-textbox-uppercase{ text-transform:uppercase; }
@@ -15,19 +15,35 @@
 		<div style="width:100%;float:left; padding-left:10px">
 			<h:table style="width:100%;height:100%;padding-left:10px"
 				class="createTable">
-				<h:th width="10%" />
-				<h:th width="70%" />
-				<h:th width="10%" />
-				<h:th width="10%" />
+				<h:th width="15%" />
+				<h:th width="65%" />
+				<h:th width="12%" />
+				<h:th width="12%" />
 				<h:tr>
-					<h:td>
-						<label sclass="lb-create">Giá trị:</label>
+					<h:td style="text-align: right;">
+						<label sclass="lb-create">Tên danh mục:</label>
 					</h:td>
 					<h:td colspan="3">
-						<textbox id="tbValue" maxlength="2000"  /> 
+						<textbox id="tbTen" maxlength="2000"  /> 
 					</h:td>
 				</h:tr>
-			<h:tr/>
+				
+				<h:tr>
+					<h:td colspan="4">
+					<div style="padding-top:10px; padding-left:10px;float:left"
+						width="98%">
+				
+						<div style=" margin:0 auto ;padding-top:20px" align="center">
+							<button class="button" height="30px"
+								image="/Share/img/icon/save.png" id="btnSave" label="Lưu lại" />
+				
+							<button class="button" height="30px"
+								image="/Share/img/icon/close.png" style="margin-left:10px"
+								label="Đóng" onClick="createDlg1.onClose()" />
+						</div>
+					</div>
+						</h:td>
+				</h:tr>
 				<h:tr>
 					<h:td colspan="4">
 					<h:br/>
@@ -36,13 +52,11 @@
 							<listhead sizable="true">
 								<listheader label="STT" align="center"
 									style="width:5%" />
-								<listheader label="Tên nhóm đối tác"
-									align="center" style="width:70%" />
-									<listheader label="Địa chỉ"
+								<listheader label="Tên danh mục"
 									align="center" style="width:70%" />
 								<listheader label="Sửa" align="center"
 									hflex="min" />
-								<listheader label="Xóa" align="center"
+								<listheader label="Xóa" align="center" 
 									hflex="min" />
 							</listhead>
 							<template name="model">
@@ -56,10 +70,6 @@
 									<listcell style="text-align:left">
 										<label
 											value="${each.ten}" />
-									</listcell>
-									<listcell style="text-align:left">
-										<label
-											value="${each.diaChi}" />
 									</listcell>
 									<listcell>
 										<image
@@ -85,18 +95,7 @@
 			</h:table>
 		</div>
 	</div>
-	<div style="padding-top:30px; padding-left:10px;float:left"
-		width="98%">
 
-		<div style=" margin:0 auto ;padding-top:20px" align="center">
-			<button class="button" height="30px"
-				image="/Share/img/icon/save.png" id="btnSave" label="Lưu lại" />
-
-			<button class="button" height="30px"
-				image="/Share/img/icon/close.png" style="margin-left:10px"
-				label="Hủy bỏ" onClick="createDlg1.onClose()" />
-		</div>
-	</div>
 
 	<zscript><![CDATA[
 	void doCheck() {

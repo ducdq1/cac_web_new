@@ -51,12 +51,12 @@ public class ThauThoKH extends BaseComposer implements Serializable {
 
 	@Column(name = "DIA_CHI")
 	private String diaChi;
-
+	
+	@Column(name = "DIA_CHI_THI_CONG")
+	private String diaChiThiCong;
+	
 	@Column(name = "SDT")
 	private String sdt;
-
-	@Column(name = "IS_ACTIVE")
-	private Long isActive;
 
 	@Column(name = "NGAY_NHAP")
 	private Date ngayNhap;
@@ -79,9 +79,16 @@ public class ThauThoKH extends BaseComposer implements Serializable {
 	@Column(name = "QUA_CN")
 	private String quaCN;
 
-	@Column(name = "THAU_THO_ID")
-	private Long thauThoId;
-
+	@Column(name = "NHOM_THAU_THO")
+	private String nhomThauTho;
+	
+	@Column(name = "NGUOI_NHAP")
+	private String nguoiNhap;
+	
+	@Column(name = "USER_ID")
+	private Long userId;
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -112,14 +119,6 @@ public class ThauThoKH extends BaseComposer implements Serializable {
 
 	public void setSdt(String sdt) {
 		this.sdt = sdt;
-	}
-
-	public Long getIsActive() {
-		return isActive;
-	}
-
-	public void setIsActive(Long isActive) {
-		this.isActive = isActive;
 	}
 
 	public Date getNgayNhap() {
@@ -178,12 +177,39 @@ public class ThauThoKH extends BaseComposer implements Serializable {
 		this.quaCN = quaCN;
 	}
 
-	public Long getThauThoId() {
-		return thauThoId;
+	public String getNhomThauTho() {
+		return nhomThauTho;
 	}
 
-	public void setThauThoId(Long thauThoId) {
-		this.thauThoId = thauThoId;
+	public void setNhomThauTho(String nhomThauTho) {
+		this.nhomThauTho = nhomThauTho;
 	}
 
+	public String getNguoiNhap() {
+		return nguoiNhap;
+	}
+
+	public void setNguoiNhap(String nguoiNhap) {
+		this.nguoiNhap = nguoiNhap;
+	}
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
+	public String getDiaChiThiCong() {
+		return diaChiThiCong;
+	}
+
+	public void setDiaChiThiCong(String diaChiThiCong) {
+		this.diaChiThiCong = diaChiThiCong;
+	}
+
+	
+
+	
 }

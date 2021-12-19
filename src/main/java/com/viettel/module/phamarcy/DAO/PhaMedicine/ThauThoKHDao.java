@@ -20,19 +20,21 @@ import com.viettel.module.phamarcy.BO.PhamarcyFileModel;
 import com.viettel.module.phamarcy.BO.Product;
 import com.viettel.module.phamarcy.BO.Quotation;
 import com.viettel.module.phamarcy.BO.ThauTho;
+import com.viettel.module.phamarcy.BO.ThauThoKH;
+import com.viettel.module.phamarcy.BO.ThauThoSearchModel;
 import com.viettel.utils.DateTimeUtils;
 import com.viettel.utils.HibernateUtil;
 import com.viettel.utils.LogUtils;
 import com.viettel.utils.StringUtils;
 
-public class ThauThoDao extends GenericDAOHibernate<ThauTho, Long> {
+public class ThauThoKHDao extends GenericDAOHibernate<ThauThoKH, Long> {
 
-	public ThauThoDao() {
-		super(ThauTho.class);
+	public ThauThoKHDao() {
+		super(ThauThoKH.class);
 	}
 
 	@Override
-	public void saveOrUpdate(ThauTho phamarcy) {
+	public void saveOrUpdate(ThauThoKH phamarcy) {
 		if (phamarcy != null) {
 			super.saveOrUpdate(phamarcy);
 		}
@@ -42,7 +44,7 @@ public class ThauThoDao extends GenericDAOHibernate<ThauTho, Long> {
 	}
 
 	@Override
-	public void delete(ThauTho quotation) {
+	public void delete(ThauThoKH quotation) {
 		if (quotation != null) {
 			super.delete(quotation);
 		}
@@ -50,31 +52,56 @@ public class ThauThoDao extends GenericDAOHibernate<ThauTho, Long> {
 		getSession().flush();
 		getSession().getTransaction().commit();
 	}
- 
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public PagingListModel findAll(Long type, int start, int take) {
+	public PagingListModel findAll(ThauThoSearchModel searchModel, int start, int take) {
 		Long count = 0L;
 		List<ThauTho> lstProduct = new ArrayList<>();
 		try {
 			List lstParam = new ArrayList();
-			StringBuilder selectHql = new StringBuilder("SELECT f from ThauTho f where 1=1 ");
-			StringBuilder countHql = new StringBuilder("select count(f.id) from ThauTho f where 1=1 ");
+			StringBuilder selectHql = new StringBuilder("SELECT f from ThauThoKH f where 1=1 ");
+			StringBuilder countHql = new StringBuilder("select count(f.id) from ThauThoKH f where 1=1 ");
 
 			// StringBuilder countTongTien = new StringBuilder(
 			// "select sum(a.amount * a.price) from QuotationDetail a,Quotation
 			// f where f.quotationID = a.quotationId ");
 			StringBuilder hql = new StringBuilder();
 
-			hql.append(" AND   f.type = ? ");
-			
-			hql.append(" order by f.ten asc");
+			if (searchModel != null) {
+
+				String searchText = searchModel.getSearchText();
+				if (searchText != null && !searchText.isEmpty()) {
+
+					hql.append("  And (lower(f.diaChi) like ? escape '/' or  ");
+					lstParam.add(StringUtils.toLikeString(searchText.toLowerCase()));
+
+					hql.append("  lower(f.ten) like ? escape '/' ) or ");
+					lstParam.add(StringUtils.toLikeString(searchText.toLowerCase()));
+
+					hql.append("  lower(f.sdt) like ? escape '/' ) )");
+					lstParam.add(StringUtils.toLikeString(searchText.toLowerCase()));
+				}
+
+				Date fromDate = searchModel.getFromDate();
+				if (fromDate != null) {
+					hql.append(" and  f.ngayNhap >= trunc(?) ");
+					lstParam.add(fromDate);
+				}
+
+				Date toDate = searchModel.getToDate();
+				if (toDate != null) {
+					hql.append(" and  f.ngayNhap < trunc(?) +1");
+					lstParam.add(toDate);
+				}
+
+			}
+
+			hql.append(" order by f.ngayNhap desc");
 			selectHql.append(hql);
 
 			countHql.append(hql);
 			// countTongTien.append(hql);
-			lstParam.add(type);
-			
+
 			Session currentSession = getSession();
 			if (currentSession == null || !currentSession.getTransaction().isActive()) {
 				currentSession = HibernateUtil.getSessionAndBeginTransaction();

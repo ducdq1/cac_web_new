@@ -197,7 +197,7 @@ public class LoginDAO extends BaseComposer {
 				token.setPosId(user.getPosId());
 				token.setPosName(user.getPosName());
 				token.setAvatarPath(user.getAvartarPath());
-
+				token.setUserType(user.getUserType());
 				List lstDepartments = udhe.getWorkingDepartmentOfUser(user.getUserId());
 				//
 				// Fix session fixation

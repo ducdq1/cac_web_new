@@ -703,12 +703,6 @@ public class ExportExcell extends BaseComposer {
 		row.getCell(cellNum).setCellStyle(style);
 		row.getCell(cellNum).setCellStyle(style);
 
-		// CellRangeAddress region = new CellRangeAddress(6, 8, 1, 10);
-		// RegionUtil.setBorderBottom(BorderStyle.THIN, region, sheet);
-		// RegionUtil.setBorderTop(BorderStyle.THIN, region, sheet);
-		// RegionUtil.setBorderLeft(BorderStyle.THIN, region, sheet);
-		// RegionUtil.setBorderRight(BorderStyle.THIN, region, sheet);
-
 	}
 
 	private static void createCellWithBorder(int cellNum, XSSFRow row, CellStyle style, String content) {

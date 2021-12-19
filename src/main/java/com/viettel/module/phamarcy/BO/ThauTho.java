@@ -47,14 +47,8 @@ public class ThauTho extends BaseComposer implements Serializable {
 	@Column(name = "TEN")
 	private String ten;
 
-	@Column(name = "DIA_CHI")
-	private String diaChi;
-
-	@Column(name = "SDT")
-	private String sdt;
-
-	@Column(name = "IS_ACTIVE")
-	private Long isActive;
+	@Column(name = "TYPE")
+	private Long type;
 
 	public Long getId() {
 		return id;
@@ -72,28 +66,14 @@ public class ThauTho extends BaseComposer implements Serializable {
 		this.ten = ten;
 	}
 
-	public String getDiaChi() {
-		return diaChi;
+	public Long getType() {
+		return type;
 	}
 
-	public void setDiaChi(String diaChi) {
-		this.diaChi = diaChi;
+	public void setType(Long type) {
+		this.type = type;
 	}
-
-	public String getSdt() {
-		return sdt;
-	}
-
-	public void setSdt(String sdt) {
-		this.sdt = sdt;
-	}
-
-	public Long getIsActive() {
-		return isActive;
-	}
-
-	public void setIsActive(Long isActive) {
-		this.isActive = isActive;
-	}
+	
+	
 
 }

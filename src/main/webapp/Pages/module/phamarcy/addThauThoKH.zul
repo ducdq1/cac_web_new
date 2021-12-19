@@ -3,18 +3,22 @@
 <zk xmlns:h="http://www.w3.org/1999/xhtml"
     xmlns="http://www.zkoss.org/2005/zul">
     
-    <window id="resetPassDlg" title="Thêm mới khách hàng" 
+    <window id="createDlg" title="Thêm mới khách hàng" 
     apply="com.viettel.module.phamarcy.controller.AddThauThoKHController" width="70%" border="normal" position="center" closable="true">
      <style>
     	tr{height:35px;
     	}
     	input[type="checkbox" i] {
-   width:20px;
-   margin-left:20px;
-}
-.z-label, .z-radio-cnt, .z-checkbox-cnt, .z-loading {
-    font-size: 14px;
-}
+		   width:20px;
+		   margin-left:20px;
+		}
+		.z-label, .z-radio-cnt, .z-checkbox-cnt, .z-loading {
+		    font-size: 14px;
+		}
+		 .z-combobox-inp{
+    height:25px;
+    font-size:17px;
+    }
     </style>
     <style src="/Share/css/formstyle.css" />
          
@@ -22,7 +26,7 @@
         <h:table style="width:100%;height:100%;padding-left:0px" class="createTable">
         
         <h:tr style="height:5px">
-				<h:th width="10%" />
+				<h:th width="13%" />
 				<h:th width="20%" />
 				<h:th width="8%" />
 				<h:th width="20%" />
@@ -32,8 +36,6 @@
                 <h:td style="text-align: right;">
                     <label sclass="lb-create" style="color:red;font-weight: 700">Thông tin đối tác KH:</label>
                 </h:td>
-                
-                
             </h:tr> 
             
            <h:tr >
@@ -41,28 +43,17 @@
                     <label sclass="lb-create" >Nhóm đối tác KH:</label>
                 </h:td>
                <h:td colspan="1">
-						<div><combobox autodrop="true" autocomplete="true" id="cbNhomDoiTac" width="82%" maxlength="2000" style="margin-bottom:10px" >
+						<div><combobox  autodrop="true" autocomplete="true" id="cbNhomDoiTac" width="80%" maxlength="2000" style="margin-bottom:10px" >
 						<template name="model">
 							<comboitem value="${each}"
-									label="${each.value}" />
+									label="${each.ten}"  />
 						</template>
 				</combobox>
 						<button class="button" height="30px"
-							image="/Share/img/icon/Add.png" id="btnThemDoiTac" label="Thêm nhóm đối tác" tooltip="Thêm nhóm đối tác" /></div>
+							image="/Share/img/icon/Add.png" id="btnThemDoiTac" label="Thêm" tooltip="Thêm nhóm đối tác" /></div>
 					</h:td>
                
             </h:tr>
-            
-             <h:tr >
-                <h:td style="text-align: right;">
-                    <label sclass="lb-create" >Địa chỉ:</label>
-                </h:td>
-               <h:td colspan="1">
-						 <label id="diaChiDoiTac" sclass="lb-create" ></label>
-					</h:td>
-               
-            </h:tr>
-            
             	<h:tr >
                 <h:td style="text-align: right;">
                     <label sclass="lb-create" style="color:red;font-weight: 700">Thông tin khách hàng:</label>
@@ -76,15 +67,22 @@
 				<h:td>
 					<textbox id="tbTenKH"> </textbox>
 				</h:td>
-                 
-             
                	<h:td style="text-align: right;">
 					<label value="Số điện thoại:" sclass="lb-create" />
 				</h:td>
 				<h:td>
 					<textbox id="tbDT"> </textbox>
 				</h:td>
-               
+            </h:tr>
+             
+             <h:tr >
+                <h:td style="text-align: right;">
+                    <label sclass="lb-create" >Địa chỉ:</label>
+                    
+                </h:td>
+               <h:td colspan="1">
+						 <textbox id="diaChiDoiTac"> </textbox>
+					</h:td>
             </h:tr>
             
              <h:tr >
@@ -129,7 +127,14 @@
 					<label value="Loại quà: " sclass="lb-create" />
 				</h:td>
 				<h:td>
-					<textbox id="tbLoaiQua"> </textbox>
+					<div><combobox  autodrop="true" autocomplete="true" id="cbLoaiQua" width="80%" maxlength="2000" style="margin-bottom:10px" >
+						<template name="model">
+							<comboitem value="${each}"
+									label="${each.ten}"  />
+						</template>
+				</combobox>
+						<button class="button" height="30px"
+							image="/Share/img/icon/Add.png" id="btnThemLoaiQua" label="Thêm" tooltip="Thêm nhóm đối tác" /></div>
 				</h:td>
 				</h:tr>
             	<h:tr >
@@ -146,8 +151,6 @@
 						width="40%" height="20px"
 						constraint="between 19000101 and 20991231: ${$composer.getLabel('date_validate')}" />
 				</h:td>
-            
-				
            </h:tr> 
             
              <h:tr>            
@@ -186,7 +189,14 @@
 						sclass="lb-create" />
 				</h:td>
 				<h:td>
-					<textbox id="tbLoaiQuaCuoiNam"> </textbox>
+					<div><combobox  autodrop="true" autocomplete="true" id="cbLoaiQuaCuoiNam" width="80%" maxlength="2000" style="margin-bottom:10px" >
+						<template name="model">
+							<comboitem value="${each}"
+									label="${each.ten}"  />
+						</template>
+				</combobox>
+						<button class="button" height="30px"
+							image="/Share/img/icon/Add.png" id="btnThemLoaiQuaCuoiNam" label="Thêm" tooltip="Thêm nhóm đối tác" /></div>
 				</h:td> 
 				
            </h:tr> 
@@ -196,7 +206,7 @@
             <h:tr>
                 <h:td colspan="4" align="center">
                     <button height="30px" image="/Share/img/icon/Save-icon.png" id="btnSave" label="Lưu " class="button z-button-os"/>                  
-                    <button height="30px" image="/Share/img/icon/close.png"  class="button z-button-os" style="margin-left:10px" label="Hủy bỏ" onClick="resetPassDlg.onClose()" />
+                    <button height="30px" image="/Share/img/icon/close.png"  class="button z-button-os" style="margin-left:10px" label="Hủy bỏ" onClick="createDlg.onClose()" />
                 </h:td>
             </h:tr>
         </h:table>

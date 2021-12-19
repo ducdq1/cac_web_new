@@ -35,13 +35,13 @@ public class AddNhomDoiTacController extends BaseComposer {
 	 */
 	private static final long serialVersionUID = 1L;
 	@Wire
-	private Textbox tbTen,  tbDiaChi;
+	private Textbox tbTen;
 	@Wire
 	Window createDlg1;
 	@Wire
 	Listbox lbList;
 	Window parent;
-	int type, productType;
+	Long type;
 	boolean isUpdate = true;
 	ThauTho unitUpdate;
 
@@ -51,12 +51,21 @@ public class AddNhomDoiTacController extends BaseComposer {
 
 		HashMap<String, Object> arguments = (HashMap<String, Object>) Executions.getCurrent().getArg();
 		parent = (Window) arguments.get("parent");
-
+		type = (Long) arguments.get("type");
+		if (type.equals(AddThauThoKHController.LOAI_DOI_TAC)) {
+			createDlg1.setTitle("Thêm nhóm đối tác");
+		}
+		else if (type.equals(AddThauThoKHController.LOAI_QUA)) {
+			createDlg1.setTitle("Thêm loại quà");
+		}
+		else if (type.equals(AddThauThoKHController.LOAI_QUA_CUOI_NAM)) {
+			createDlg1.setTitle("Thêm loại quà cuối năm");
+		}
 		initListbox();
 	}
 
 	private void initListbox() {
-		List<ThauTho> units = new ThauThoDao().findAll(null, -1, -1).getLstReturn();
+		List<ThauTho> units = new ThauThoDao().findAll(type, -1, -1).getLstReturn();
 		ListModelArray lstModel = new ListModelArray(units);
 		lbList.setModel(lstModel);
 	}
@@ -69,22 +78,20 @@ public class AddNhomDoiTacController extends BaseComposer {
 	@Listen("onClick = #btnSave")
 	public void onSave() {
 		String value = tbTen.getText().trim();
-		String diaChi = tbDiaChi.getText().trim();
 
 		if (value.isEmpty()) {
-			showNotification("Chưa nhập giá trị", Constants.Notification.WARNING, 1000);
+			tbTen.setErrorMessage("Trường bắt buộc nhập");
 			return;
 		}
-		 
+
 		if (unitUpdate == null) {
 			unitUpdate = new ThauTho();
 		}
-		
+
 		unitUpdate.setTen(tbTen.getText().trim());
-		unitUpdate.setDiaChi(tbDiaChi.getText().trim());
-		unitUpdate.setIsActive(1L);
-		
-		 new ThauThoDao().saveOrUpdate(unitUpdate);
+		unitUpdate.setType(type);
+
+		new ThauThoDao().saveOrUpdate(unitUpdate);
 		showNotification("Thêm thành công", Constants.Notification.INFO, 1000);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("type", type);
@@ -94,24 +101,27 @@ public class AddNhomDoiTacController extends BaseComposer {
 		unitUpdate = null;
 		initListbox();
 		tbTen.setText("");
-		tbDiaChi.setText("");
 	}
 
 	@Listen("onDeleteSP =  #lbList")
 	public void onDeleteSP(Event event) {
-		unitUpdate = (ThauTho) event.getData();
+		final ThauTho thauTho = (ThauTho) event.getData();
 		String message = String.format("Xóa dữ liệu này?");
 		EventListener<ClickEvent> clickListener = new EventListener<Messagebox.ClickEvent>() {
 
 			public void onEvent(ClickEvent event) throws Exception {
 
 				if (Messagebox.Button.YES.equals(event.getButton())) {
-					new ThauThoDao().delete(unitUpdate);
+					if (unitUpdate != null && unitUpdate.getId().equals(thauTho.getId())) {
+						unitUpdate = null;
+					}
+
+					new ThauThoDao().delete(thauTho);
 					showNotification("Xóa thành công", Constants.Notification.INFO, 2000);
 					initListbox();
 					HashMap<String, Object> map = new HashMap<String, Object>();
 					map.put("type", type);
-					map.put("value", tbValue.getText().trim());
+					map.put("value", tbTen.getText().trim());
 					Events.sendEvent("onAddUnit", parent, map);
 				}
 
@@ -122,8 +132,8 @@ public class AddNhomDoiTacController extends BaseComposer {
 
 	@Listen("onOpenUpdate = #lbList")
 	public void onOpenUpdate(Event event) {
-		unitUpdate = (Unit) event.getData();
-		tbValue.setText(unitUpdate.getValue());
+		unitUpdate = (ThauTho) event.getData();
+		tbTen.setText(unitUpdate.getTen());
 	}
 
 }

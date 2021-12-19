@@ -22,6 +22,8 @@ public class UserToken {
     private String posName;
     private String avatarPath;
     private List lstMenu;
+    
+    private Long userType;
 
     public Long getUserId() {
         return userId;
@@ -102,4 +104,15 @@ public class UserToken {
     public void setLstMenu(List lstMenu) {
         this.lstMenu = lstMenu;
     }
+
+	public Long getUserType() {
+		return userType;
+	}
+
+	public void setUserType(Long userType) {
+		this.userType = userType;
+	}
+    
+    
 }
+
