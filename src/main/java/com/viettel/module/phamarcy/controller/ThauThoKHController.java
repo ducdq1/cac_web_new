@@ -207,7 +207,7 @@ public class ThauThoKHController extends BaseComposer {
 			return;
 		}
 
-		String filePath = new ExportKHExcell().exportData(lstProducts);
+		String filePath = new ExportKHExcell().exportData(lstProduct);
 		if (filePath != null) {
 			String URL;
 			URL = "Pages/module/phamarcy/generalview/viewPDF.zul?filePath=";

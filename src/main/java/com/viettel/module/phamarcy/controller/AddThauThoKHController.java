@@ -78,7 +78,7 @@ public class AddThauThoKHController extends BaseComposer {
 	 */
 	private static final long serialVersionUID = 6105342511808925036L;
 	@Wire
-	private Textbox tbTenKH,tbNoiDungTienHoaHong, diaChiDoiTac, tbDT, tbDiaChiThiCong, tbTienHoaHong;
+	private Textbox tbTenKH, tbNoiDungTienHoaHong, diaChiDoiTac, tbDT, tbDiaChiThiCong, tbTienHoaHong;
 	@Wire
 	private Label lbDSP;
 	@Wire
@@ -168,7 +168,7 @@ public class AddThauThoKHController extends BaseComposer {
 		};
 
 		combobox.setModel(ListModels.toListSubModel(new ListModelList(units), comparator, 20));
-		 
+
 	}
 
 	private void viewData() throws IOException {
@@ -176,7 +176,8 @@ public class AddThauThoKHController extends BaseComposer {
 		tbDiaChiThiCong.setText(thauThoKH.getDiaChiThiCong());
 		tbDT.setText(thauThoKH.getSdt());
 		dbCreateDate.setValue(thauThoKH.getNgayNhap());
-		tbTienHoaHong.setText(formatNumber(thauThoKH.getTienHoahong(), "###,###,###.####"));
+		tbTienHoaHong.setText(
+				thauThoKH.getTienHoahong() != null ? formatNumber(thauThoKH.getTienHoahong(), "###,###,###.####") : "");
 		dbNgayTangHoaHong.setValue(thauThoKH.getNgayTangHH());
 		cbLoaiQua.setText(thauThoKH.getQua());
 		dbNgayTangQua.setValue(thauThoKH.getNgayTangQua());
@@ -227,7 +228,7 @@ public class AddThauThoKHController extends BaseComposer {
 		thauThoKH.setNguoiNhap(createUser);
 		thauThoKH.setUserId(createUserId);
 		thauThoKH.setNoiDunHoaHong(tbNoiDungTienHoaHong.getText().trim());
-		
+
 		new ThauThoKHDao().saveOrUpdate(thauThoKH);
 
 		showNotification("Lưu thông tin thành công", Constants.Notification.INFO, 1500);
