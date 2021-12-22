@@ -15,10 +15,10 @@
 		.z-label, .z-radio-cnt, .z-checkbox-cnt, .z-loading {
 		    font-size: 14px;
 		}
-		 .z-combobox-inp{
-    height:25px;
-    font-size:17px;
-    }
+		z-datebox-inp, .z-combobox-inp{
+	    height:25px;
+	    font-size:17px;
+	    }
     </style>
     <style src="/Share/css/formstyle.css" />
          
@@ -40,7 +40,7 @@
             
            <h:tr >
                 <h:td style="text-align: right;">
-                    <label sclass="lb-create" >Nhóm đối tác KH:</label>
+                    <label sclass="lb-create" >Nhóm đối tác KH:</label><label sclass="lb-create" style="color:red">(*)</label>
                 </h:td>
                <h:td colspan="1">
 						<div><combobox  autodrop="true" autocomplete="true" id="cbNhomDoiTac" width="80%" maxlength="2000" style="margin-bottom:10px" >
@@ -62,13 +62,13 @@
              
              <h:tr >
                	<h:td style="text-align: right;">
-					<label value="Khách hàng: " sclass="lb-create" />
+					<label value="Khách hàng: " sclass="lb-create" /><label sclass="lb-create" style="color:red">(*)</label>
 				</h:td>
 				<h:td>
 					<textbox id="tbTenKH"> </textbox>
 				</h:td>
                	<h:td style="text-align: right;">
-					<label value="Số điện thoại:" sclass="lb-create" />
+					<label value="Số điện thoại:" sclass="lb-create" /><label sclass="lb-create" style="color:red">(*)</label>
 				</h:td>
 				<h:td>
 					<textbox id="tbDT"> </textbox>
@@ -94,7 +94,7 @@
 				</h:td>
                    
                   <h:td style="text-align: right;">
-                    <label sclass="lb-create" >Ngày nhập PM:</label>
+                    <label sclass="lb-create" >Ngày nhập PM:</label><label sclass="lb-create" style="color:red">(*)</label>
                 </h:td>
                 
                 <h:td>
@@ -161,6 +161,17 @@
 				</h:td>
 				<h:td>
 					<textbox id="tbTienHoaHong"> </textbox>
+				</h:td> 
+				
+           </h:tr> 
+            <h:tr>            
+            
+            <h:td style="text-align: right;">
+					<label value="Nội dung:"
+						sclass="lb-create" />
+				</h:td>
+				<h:td>
+					<textbox id="tbNoiDungTienHoaHong" multiline="true" height="70px" width="90%"> </textbox>
 				</h:td> 
 				
            </h:tr> 

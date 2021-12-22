@@ -143,9 +143,10 @@ public class ExportKHExcell extends BaseComposer {
 					DateTimeUtils.convertDateToStringFormat(quotationDetail.getNgayTangHH(), "dd/MM/yyyy"));
 			createCell(colNum++, row0, cloneRow0.getCell(10).getCellStyle(), quotationDetail.getTienHoahong() == null
 					? "" : formatNumber(quotationDetail.getTienHoahong(), "###,###,###.####"));
-			createCell(colNum++, row0, cloneRow0.getCell(7).getCellStyle(),
+			createCell(colNum++, row0, cloneRow0.getCell(11).getCellStyle(), quotationDetail.getNoiDunHoaHong());
+			createCell(colNum++, row0, cloneRow0.getCell(12).getCellStyle(),
 					DateTimeUtils.convertDateToStringFormat(quotationDetail.getNgayTangQuaCN(), "dd/MM/yyyy"));
-			createCell(colNum++, row0, cloneRow0.getCell(8).getCellStyle(), quotationDetail.getQuaCN());
+			createCell(colNum++, row0, cloneRow0.getCell(13).getCellStyle(), quotationDetail.getQuaCN());
 
 			countRow++;
 		}
@@ -167,6 +168,7 @@ public class ExportKHExcell extends BaseComposer {
 		style.setBorderBottom(CellStyle.BORDER_HAIR);
 		style.setBorderTop(CellStyle.BORDER_HAIR);
 		style.setBorderLeft(CellStyle.BORDER_HAIR);
+		style.setBorderRight(CellStyle.BORDER_HAIR);
 		row.getCell(cellNum).setCellStyle(style);
 
 	}

@@ -72,7 +72,10 @@ public class ThauThoKH extends BaseComposer implements Serializable {
 
 	@Column(name = "TIEN_HH")
 	private Long tienHoahong;
-
+	
+	@Column(name = "NOI_DUNG_HOA_HONG")
+	private String noiDunHoaHong;
+	
 	@Column(name = "NGAY_TANG_QUA_CN")
 	private Date ngayTangQuaCN;
 
@@ -207,6 +210,14 @@ public class ThauThoKH extends BaseComposer implements Serializable {
 
 	public void setDiaChiThiCong(String diaChiThiCong) {
 		this.diaChiThiCong = diaChiThiCong;
+	}
+
+	public String getNoiDunHoaHong() {
+		return noiDunHoaHong;
+	}
+
+	public void setNoiDunHoaHong(String noiDunHoaHong) {
+		this.noiDunHoaHong = noiDunHoaHong;
 	}
 
 	

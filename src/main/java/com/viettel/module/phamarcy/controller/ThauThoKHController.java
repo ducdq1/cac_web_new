@@ -214,7 +214,7 @@ public class ThauThoKHController extends BaseComposer {
 			URL = URL + EncryptionUtil.encode(filePath);
 			// URL = URL + (path);
 			String link = String.format(
-					"window.open('%s','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')", URL);
+					"window.open('%s','','fullscreen=yes,scrollbars=1,resizable=1')", URL);
 			Clients.evalJavaScript(link);
 
 		} else {
