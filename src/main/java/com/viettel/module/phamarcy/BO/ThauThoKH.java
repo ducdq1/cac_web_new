@@ -91,6 +91,8 @@ public class ThauThoKH extends BaseComposer implements Serializable {
 	@Column(name = "USER_ID")
 	private Long userId;
 	
+	@Column(name = "NV_PT")
+	private String nhanVienPhuTrach;
 	
 	public Long getId() {
 		return id;
@@ -218,6 +220,14 @@ public class ThauThoKH extends BaseComposer implements Serializable {
 
 	public void setNoiDunHoaHong(String noiDunHoaHong) {
 		this.noiDunHoaHong = noiDunHoaHong;
+	}
+
+	public String getNhanVienPhuTrach() {
+		return nhanVienPhuTrach;
+	}
+
+	public void setNhanVienPhuTrach(String nhanVienPhuTrach) {
+		this.nhanVienPhuTrach = nhanVienPhuTrach;
 	}
 
 	

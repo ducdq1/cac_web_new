@@ -128,25 +128,26 @@ public class ExportKHExcell extends BaseComposer {
 			row0 = createRow(rowNum, sheet, cloneRow0);
 			rowNum++;
 			createCell(colNum++, row0, cloneRow0.getCell(0).getCellStyle(), "" + countQuotation);
-			createCell(colNum++, row0, cloneRow0.getCell(1).getCellStyle(), quotationDetail.getNhomThauTho());
-			createCell(colNum++, row0, cloneRow0.getCell(2).getCellStyle(), quotationDetail.getDiaChi());
-			createCell(colNum++, row0, cloneRow0.getCell(3).getCellStyle(),
+			createCell(colNum++, row0, cloneRow0.getCell(1).getCellStyle(), quotationDetail.getNhanVienPhuTrach());
+			createCell(colNum++, row0, cloneRow0.getCell(2).getCellStyle(), quotationDetail.getNhomThauTho());
+			createCell(colNum++, row0, cloneRow0.getCell(3).getCellStyle(), quotationDetail.getDiaChi());
+			createCell(colNum++, row0, cloneRow0.getCell(4).getCellStyle(),
 					DateTimeUtils.convertDateToStringFormat(quotationDetail.getNgayNhap(), "dd/MM/yyyy"));
-			createCell(colNum++, row0, cloneRow0.getCell(4).getCellStyle(), quotationDetail.getTen());
-			createCell(colNum++, row0, cloneRow0.getCell(5).getCellStyle(), quotationDetail.getSdt());
-			createCell(colNum++, row0, cloneRow0.getCell(6).getCellStyle(), quotationDetail.getDiaChiThiCong());
+			createCell(colNum++, row0, cloneRow0.getCell(5).getCellStyle(), quotationDetail.getTen());
+			createCell(colNum++, row0, cloneRow0.getCell(6).getCellStyle(), quotationDetail.getSdt());
+			createCell(colNum++, row0, cloneRow0.getCell(7).getCellStyle(), quotationDetail.getDiaChiThiCong());
 
-			createCell(colNum++, row0, cloneRow0.getCell(7).getCellStyle(),
+			createCell(colNum++, row0, cloneRow0.getCell(8).getCellStyle(),
 					DateTimeUtils.convertDateToStringFormat(quotationDetail.getNgayTangQua(), "dd/MM/yyyy"));
-			createCell(colNum++, row0, cloneRow0.getCell(8).getCellStyle(), quotationDetail.getQua());
-			createCell(colNum++, row0, cloneRow0.getCell(9).getCellStyle(),
+			createCell(colNum++, row0, cloneRow0.getCell(9).getCellStyle(), quotationDetail.getQua());
+			createCell(colNum++, row0, cloneRow0.getCell(10).getCellStyle(),
 					DateTimeUtils.convertDateToStringFormat(quotationDetail.getNgayTangHH(), "dd/MM/yyyy"));
-			createCell(colNum++, row0, cloneRow0.getCell(10).getCellStyle(), quotationDetail.getTienHoahong() == null
+			createCell(colNum++, row0, cloneRow0.getCell(11).getCellStyle(), quotationDetail.getTienHoahong() == null
 					? "" : formatNumber(quotationDetail.getTienHoahong(), "###,###,###.####"));
-			createCell(colNum++, row0, cloneRow0.getCell(11).getCellStyle(), quotationDetail.getNoiDunHoaHong());
-			createCell(colNum++, row0, cloneRow0.getCell(12).getCellStyle(),
+			createCell(colNum++, row0, cloneRow0.getCell(12).getCellStyle(), quotationDetail.getNoiDunHoaHong());
+			createCell(colNum++, row0, cloneRow0.getCell(13).getCellStyle(),
 					DateTimeUtils.convertDateToStringFormat(quotationDetail.getNgayTangQuaCN(), "dd/MM/yyyy"));
-			createCell(colNum++, row0, cloneRow0.getCell(13).getCellStyle(), quotationDetail.getQuaCN());
+			createCell(colNum++, row0, cloneRow0.getCell(14).getCellStyle(), quotationDetail.getQuaCN());
 
 			countRow++;
 		}

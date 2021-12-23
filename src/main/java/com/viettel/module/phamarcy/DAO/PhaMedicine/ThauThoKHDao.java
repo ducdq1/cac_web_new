@@ -81,7 +81,12 @@ public class ThauThoKHDao extends GenericDAOHibernate<ThauThoKH, Long> {
 					hql.append("  lower(f.diaChiThiCong) like ? escape '/'  or ");
 					lstParam.add(StringUtils.toLikeString(searchText.toLowerCase()));
 					
-
+					hql.append("  lower(f.nhomThauTho) like ? escape '/'  or ");
+					lstParam.add(StringUtils.toLikeString(searchText.toLowerCase()));
+					
+					hql.append("  lower(f.nhanVienPhuTrach) like ? escape '/'  or ");
+					lstParam.add(StringUtils.toLikeString(searchText.toLowerCase()));
+					
 					hql.append("  lower(f.sdt) like ? escape '/'  )");
 					lstParam.add(StringUtils.toLikeString(searchText.toLowerCase()));
 				}

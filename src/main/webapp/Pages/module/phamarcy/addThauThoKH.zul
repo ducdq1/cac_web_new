@@ -33,6 +33,16 @@
 			</h:tr>
 			
 			<h:tr >
+               	<h:td style="text-align: right;">
+					<label value="Nhân viên phụ trách: " sclass="lb-create" /><label sclass="lb-create" style="color:red">(*)</label>
+				</h:td>
+				<h:td>
+					<textbox id="tbNVPT"> </textbox>
+				</h:td>       
+			 
+            </h:tr>
+            
+			<h:tr >
                 <h:td style="text-align: right;">
                     <label sclass="lb-create" style="color:red;font-weight: 700">Thông tin đối tác KH:</label>
                 </h:td>
@@ -54,6 +64,8 @@
 					</h:td>
                
             </h:tr>
+             
+            
             	<h:tr >
                 <h:td style="text-align: right;">
                     <label sclass="lb-create" style="color:red;font-weight: 700">Thông tin khách hàng:</label>
@@ -107,7 +119,7 @@
             
             	<h:tr >
                 <h:td style="text-align: right;">
-                    <label sclass="lb-create" style="color:red;font-weight: 700">Quà tặng:</label>
+                    <label sclass="lb-create" style="color:red;font-weight: 700">Quà tặng theo đợt:</label>
                 </h:td>
             </h:tr> 
             

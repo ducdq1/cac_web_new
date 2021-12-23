@@ -78,7 +78,7 @@ public class AddThauThoKHController extends BaseComposer {
 	 */
 	private static final long serialVersionUID = 6105342511808925036L;
 	@Wire
-	private Textbox tbTenKH, tbNoiDungTienHoaHong, diaChiDoiTac, tbDT, tbDiaChiThiCong, tbTienHoaHong;
+	private Textbox tbTenKH, tbNVPT, tbNoiDungTienHoaHong, diaChiDoiTac, tbDT, tbDiaChiThiCong, tbTienHoaHong;
 	@Wire
 	private Label lbDSP;
 	@Wire
@@ -187,11 +187,15 @@ public class AddThauThoKHController extends BaseComposer {
 		diaChiDoiTac.setValue(thauThoKH.getDiaChi());
 		tbNoiDungTienHoaHong.setValue(thauThoKH.getNoiDunHoaHong());
 		cbNhomDoiTac.setValue(thauThoKH.getNhomThauTho());
-
+		tbNVPT.setValue(thauThoKH.getNhanVienPhuTrach());
 	}
 
 	@Listen("onClick = #btnSave")
 	public void onSave() {
+		if (!validateTextBox(tbNVPT)) {
+			return;
+		}
+		
 		if (!validateNhomDoiTac() || !validateLoaiQua(cbLoaiQua) || !validateLoaiQua(cbLoaiQuaCuoiNam)) {
 			return;
 		}
@@ -228,7 +232,8 @@ public class AddThauThoKHController extends BaseComposer {
 		thauThoKH.setNguoiNhap(createUser);
 		thauThoKH.setUserId(createUserId);
 		thauThoKH.setNoiDunHoaHong(tbNoiDungTienHoaHong.getText().trim());
-
+		thauThoKH.setNhanVienPhuTrach(tbNVPT.getText().trim());
+		
 		new ThauThoKHDao().saveOrUpdate(thauThoKH);
 
 		showNotification("Lưu thông tin thành công", Constants.Notification.INFO, 1500);
