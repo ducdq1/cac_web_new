@@ -85,12 +85,12 @@
 			<listhead sizable="true">
 				<listheader label="STT" align="center"
 					style="width:4%;font-size:13px" />
-				<listheader label="NV Phụ trách" align="center"
-					style="width:8%;font-size:13px" />
+				<listheader label="NV PT" align="center"
+					style="width:5%;font-size:13px" />
 				<listheader label="Nhóm đối tác" align="center"
 					style="width:15%;font-size:13px" />
 				<listheader label="Khách Hàng" align="center"
-					style="width:20%;font-size:13px" />
+					style="width:10%;font-size:13px" />
 				<listheader label="Điện thoại" align="center"
 					style="width:10%;font-size:13px" />
 					<listheader label="Địa chỉ" align="center"
@@ -98,7 +98,7 @@
 				<listheader label="Địa chỉ thi công" align="center"
 					style="width:20%;font-size:13px" />
 				<listheader label="Ngày nhập PM" align="center"
-					style="width:8%;font-size:13px" />
+					style="width:10%;font-size:13px" />
 				<listheader label="Quà theo đợt" align="center"
 					style="width:10%;font-size:13px" />
 				<listheader label="Tiền hoa hồng" align="center"
