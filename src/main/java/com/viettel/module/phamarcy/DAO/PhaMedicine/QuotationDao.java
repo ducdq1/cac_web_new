@@ -35,24 +35,24 @@ public class QuotationDao extends GenericDAOHibernate<Quotation, Long> {
 		getSession().flush();
 		getSession().getTransaction().commit();
 	}
-	
+
 	@Override
-	public void delete(Quotation quotation){
-		if(quotation !=null){
+	public void delete(Quotation quotation) {
+		if (quotation != null) {
 			super.delete(quotation);
 		}
-		
+
 		getSession().flush();
 		getSession().getTransaction().commit();
 	}
-	
+
 	public void deleteQuotation(Long id) {
 		StringBuilder selectHql = new StringBuilder("DELETE Quotation where quotationID=? and status = 0 ");
-		Query query=getSession().createQuery(selectHql.toString());
+		Query query = getSession().createQuery(selectHql.toString());
 		query.setParameter(0, id);
 		query.executeUpdate();
-}
-	
+	}
+
 	/**
 	 * Dem so ho so
 	 * 
@@ -133,11 +133,11 @@ public class QuotationDao extends GenericDAOHibernate<Quotation, Long> {
 		try {
 			List lstParam = new ArrayList();
 			StringBuilder selectHql = new StringBuilder("SELECT f from Quotation f where 1=1 ");
-			StringBuilder countHql = new StringBuilder(
-					"select count(f.quotationID) from Quotation f where 1=1 ");
+			StringBuilder countHql = new StringBuilder("select count(f.quotationID) from Quotation f where 1=1 ");
 
-//			StringBuilder countTongTien = new StringBuilder(
-//					"select sum(a.amount * a.price) from QuotationDetail a,Quotation f  where f.quotationID = a.quotationId  ");
+			// StringBuilder countTongTien = new StringBuilder(
+			// "select sum(a.amount * a.price) from QuotationDetail a,Quotation
+			// f where f.quotationID = a.quotationId ");
 			StringBuilder hql = new StringBuilder();
 
 			if (searchModel != null) {
@@ -147,7 +147,7 @@ public class QuotationDao extends GenericDAOHibernate<Quotation, Long> {
 				String cusAddress = searchModel.getDiaChi();
 				String cusPhone = searchModel.getSoDT();
 				String userName = searchModel.getUserName();
-				
+
 				startDate = searchModel.getFromDate();
 				toDate = searchModel.getToDate();
 
@@ -155,29 +155,28 @@ public class QuotationDao extends GenericDAOHibernate<Quotation, Long> {
 					hql.append(" and lower(f.quotationNumber) like ? escape '/'");
 					lstParam.add(StringUtils.toLikeString(code.toLowerCase()));
 				}
-				
+
 				if (cusName != null && !cusName.isEmpty()) {
 					hql.append(" and lower(f.cusName) like ? escape '/'");
 					lstParam.add(StringUtils.toLikeString(cusName.toLowerCase()));
 				}
-				
+
 				if (cusAddress != null && !cusAddress.isEmpty()) {
 					hql.append(" and lower(f.cusAddress) like ? escape '/'");
 					lstParam.add(StringUtils.toLikeString(cusAddress.toLowerCase()));
 				}
-				
+
 				if (cusPhone != null && !cusPhone.isEmpty()) {
 					hql.append(" and lower(f.cusPhone) like ? escape '/'");
 					lstParam.add(StringUtils.toLikeString(cusPhone.toLowerCase()));
 				}
-				
-				if(searchModel.isApproveAble() == false){
+
+				if (searchModel.isApproveAble() == false) {
 					if (userName != null && !userName.isEmpty()) {
 						hql.append(" and lower(f.createUserCode) = ? ");
 						lstParam.add(userName.toLowerCase());
 					}
 				}
-				 
 
 				if (name != null && !name.isEmpty()) {
 					hql.append(
@@ -185,21 +184,21 @@ public class QuotationDao extends GenericDAOHibernate<Quotation, Long> {
 					lstParam.add(StringUtils.toLikeString(name.toLowerCase()));
 					lstParam.add(StringUtils.toLikeString(name.toLowerCase()));
 				}
-				
+
 				String searchText = searchModel.getSearchText();
-				if(searchText !=null){
+				if (searchText != null) {
 					hql.append(" and (lower(f.quotationNumber) like ? escape '/' or  ");
 					lstParam.add(StringUtils.toLikeString(searchText.toLowerCase()));
-					
+
 					hql.append("  lower(f.cusName) like ? escape '/' or  ");
 					lstParam.add(StringUtils.toLikeString(searchText.toLowerCase()));
-					
+
 					hql.append("  lower(f.cusAddress) like ? escape '/' or  ");
 					lstParam.add(StringUtils.toLikeString(searchText.toLowerCase()));
-					
+
 					hql.append("  lower(f.cusPhone) like ? escape '/' )");
 					lstParam.add(StringUtils.toLikeString(searchText.toLowerCase()));
-					
+
 				}
 
 			}
@@ -216,32 +215,30 @@ public class QuotationDao extends GenericDAOHibernate<Quotation, Long> {
 				toDate = DateTimeUtils.setStartTimeOfDate(toDate);
 				lstParam.add(toDate);
 			}
-			
-			if(searchModel.isApproveAble() == false){
-				if(searchModel.getTrangThai()>=0){
+
+			if (searchModel.isApproveAble() == false) {
+				if (searchModel.getTrangThai() >= 0) {
 					hql.append(" and f.status = ? ");
 					lstParam.add(searchModel.getTrangThai());
 				}
 			}
-			
-			if(searchModel.isSaled()){
+
+			if (searchModel.isSaled()) {
 				hql.append(" and f.saledDate is not null ");
 			}
-			
+
 			int daBan = searchModel.getDaBan();
-			if(daBan == 1){
+			if (daBan == 1) {
 				hql.append(" and f.saledDate is not null ");
-			}else if(daBan == 0){
-			    hql.append(" and f.saledDate is  null ");
+			} else if (daBan == 0) {
+				hql.append(" and f.saledDate is  null ");
 			}
-			
-			
-			
+
 			hql.append(" order by f.status asc, f.modifyDate desc");
 			selectHql.append(hql);
 
 			countHql.append(hql);
-			//countTongTien.append(hql);
+			// countTongTien.append(hql);
 
 			Session currentSession = getSession();
 			if (currentSession == null || !currentSession.getTransaction().isActive()) {
@@ -258,34 +255,35 @@ public class QuotationDao extends GenericDAOHibernate<Quotation, Long> {
 			}
 
 			Query countQuery = currentSession.createQuery(countHql.toString());
-			//Query countTongTienQuery = currentSession.createQuery(countTongTien.toString());
+			// Query countTongTienQuery =
+			// currentSession.createQuery(countTongTien.toString());
 
 			for (int i = 0; i < lstParam.size(); i++) {
 				query.setParameter(i, lstParam.get(i));
 				countQuery.setParameter(i, lstParam.get(i));
-				//countTongTienQuery.setParameter(i, lstParam.get(i));
+				// countTongTienQuery.setParameter(i, lstParam.get(i));
 			}
 
 			count = (Long) countQuery.uniqueResult();
-//			Double sum = (Double) countTongTienQuery.uniqueResult();
-//			
-//			if (sum != null) {
-//				tongTien = new BigDecimal(sum);
-//			}
-			
-			if(take > -1){
+			// Double sum = (Double) countTongTienQuery.uniqueResult();
+			//
+			// if (sum != null) {
+			// tongTien = new BigDecimal(sum);
+			// }
+
+			if (take > -1) {
 				query.setFirstResult(start);
 				query.setMaxResults(take);
 			}
 			lstProduct = query.list();
 			// Neu page > 2 truy van khong co ket qua thi restart lai page truoc
 			// do
-//			if (start >= 10 && lstProduct.size() == 0) {
-//				start -= 10;
-//				query.setFirstResult(start);
-//				query.setMaxResults(take);
-//				lstProduct = query.list();
-//			}
+			// if (start >= 10 && lstProduct.size() == 0) {
+			// start -= 10;
+			// query.setFirstResult(start);
+			// query.setMaxResults(take);
+			// lstProduct = query.list();
+			// }
 
 		} catch (SQLGrammarException e) {
 			LogUtils.addLog(e);
@@ -295,13 +293,23 @@ public class QuotationDao extends GenericDAOHibernate<Quotation, Long> {
 		model.setTongTien(tongTien);
 		return model;
 	}
-	
-	//Lay thong tin tong tien cua 1 don hang
-		public Double getTotalValueOrder(Long orderId){
-			String countTongTien =
-					"select sum(a.amount * a.price) from QuotationDetail a where a.quotationId = ?  ";
-			Query countTongTienQuery = getSession().createQuery(countTongTien.toString()).setParameter(0, orderId);
-			return (Double) countTongTienQuery.uniqueResult();
+
+	// Lay thong tin tong tien cua 1 don hang
+	public Double getTotalValueOrder(Long orderId) {
+		String countTongTien = "select sum(a.amount * a.price) from QuotationDetail a where a.quotationId = ?  ";
+		Query countTongTienQuery = getSession().createQuery(countTongTien.toString()).setParameter(0, orderId);
+		return (Double) countTongTienQuery.uniqueResult();
+	}
+
+	public List<Quotation> getByPhoneAndAddress(String phone, String address,Long quotationId) {
+		String countTongTien = "select a from Quotation a where a.cusPhone = ? and a.cusAddress = ? and (a.isInvalid is null or a.isInvalid = 0) ";
+		if(quotationId !=null){
+			countTongTien += " and a.quotationID <> " +quotationId ;
 		}
+
+		Query countTongTienQuery = getSession().createQuery(countTongTien.toString()).setParameter(0, phone.trim())
+				.setParameter(1, address.trim());
+		return countTongTienQuery.list();
+	}
 
 }

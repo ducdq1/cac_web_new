@@ -117,15 +117,15 @@ public class ProductService {
 				e.printStackTrace();
 			}
 		}
-		
-		//if (searchProductBO.getIsViewTonKho()) {
 
-			HangHoaBO tonKho = layThongTinTonKho(maVT);
-			if (tonKho != null) {
-				productResponse.setTonKho(tonKho);
-			}
-		//}
-		
+		// if (searchProductBO.getIsViewTonKho()) {
+
+		HangHoaBO tonKho = layThongTinTonKho(maVT);
+		if (tonKho != null) {
+			productResponse.setTonKho(tonKho);
+		}
+		// }
+
 		return productResponse;
 	}
 
@@ -320,7 +320,11 @@ public class ProductService {
 					}
 					isUpdate = true;
 				}
+			}
 
+			QuotationResponse quotationResponseValidate = validateCreateQuotation(createQuotationBO);
+			if (quotationResponseValidate != null) {
+				return quotationResponseValidate;
 			}
 
 			Quotation quotation = getQuotation(quotationRequest, quotationUpdate);
@@ -388,6 +392,36 @@ public class ProductService {
 		}
 
 		return quotationResponse;
+	}
+
+	private QuotationResponse validateCreateQuotation(CreateQuotationBO createQuotationBO) {
+		if (createQuotationBO.getQuotation().getCusPhone() != null
+				&& createQuotationBO.getQuotation().getCusAddress() != null) {
+			List<Quotation> quotations = new QuotationDao().getByPhoneAndAddress(
+					createQuotationBO.getQuotation().getCusPhone(), createQuotationBO.getQuotation().getCusAddress(),
+					createQuotationBO.getQuotation().getQuotationID());
+
+			for (Quotation quotation : quotations) {
+				List<QuotationDetail> quotationDetails = new QuotationDetailDao()
+						.getListQuotationDetail(quotation.getQuotationID());
+
+				for (QuotationDetail quotationDetailNew : createQuotationBO.getLstQuotationDetail()) {
+					for (QuotationDetail quotationDetail : quotationDetails) {
+						if (quotationDetailNew.getProductCode().equals(quotationDetail.getProductCode())) {
+							QuotationResponse quotationResponse = new QuotationResponse();
+							quotationResponse
+									.setMessage(String.format("Sản phẩm %s đã được báo giá BG: %s",
+											quotationDetailNew.getProductCode(), quotation.getQuotationNumber() ==null ? "(Báo giá mới chưa có mã)" :  quotation.getQuotationNumber()));
+							quotationResponse.setStatusCode(1000);
+							return quotationResponse;
+						}
+					}
+				}
+
+			}
+
+		}
+		return null;
 	}
 
 	public static void sendNotification(final String topic, final String title, final String bodyStr) {
@@ -542,15 +576,12 @@ public class ProductService {
 			return null;
 		}
 
-		
-		
 		CloseableHttpClient httpClient = HttpClients.createDefault();
-		
+
 		CloseableHttpResponse response = null;
 		try {
 			String url = ResourceBundleUtil.getString("pm_kho_url");
 			HttpGet request = new HttpGet(url + URLEncoder.encode(maVT, StandardCharsets.UTF_8.toString()));
-			
 
 			RequestConfig.Builder requestConfig = RequestConfig.custom();
 			requestConfig.setConnectTimeout(20 * 1000);
@@ -558,7 +589,7 @@ public class ProductService {
 			requestConfig.setSocketTimeout(20 * 1000);
 
 			request.setConfig(requestConfig.build());
-			
+
 			response = httpClient.execute(request);
 			HttpEntity entity = response.getEntity();
 			if (response.getStatusLine().getStatusCode() == 200 && entity != null) {
@@ -593,8 +624,7 @@ public class ProductService {
 		try {
 			String url = "https://fcm.googleapis.com/fcm/send";
 			HttpPost request = new HttpPost(url);
-			request.setHeader("Authorization",
-					ResourceBundleUtil.getString("firebase_token"));
+			request.setHeader("Authorization", ResourceBundleUtil.getString("firebase_token"));
 			request.setHeader("Content-type", "application/json");
 			request.setHeader("Accept-Encoding", "UTF-8");
 
