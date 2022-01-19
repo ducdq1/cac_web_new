@@ -105,7 +105,7 @@ public class ThauThoKHDao extends GenericDAOHibernate<ThauThoKH, Long> {
 
 			}
 
-			hql.append(" order by f.ngayNhap desc");
+			hql.append(" order by f.ngayNhap asc,f.ten asc ");
 			selectHql.append(hql);
 
 			countHql.append(hql);

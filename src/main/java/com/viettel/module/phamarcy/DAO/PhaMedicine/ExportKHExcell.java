@@ -159,7 +159,7 @@ public class ExportKHExcell extends BaseComposer {
 
 	private static XSSFRow createRow(int rowNum, XSSFSheet sheet, XSSFRow cloneRow) {
 		XSSFRow row = sheet.createRow(rowNum);
-		row.setHeight((short) -1);
+		row.setHeight((short)4500);
 
 		return row;
 	}
