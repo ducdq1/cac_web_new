@@ -229,7 +229,7 @@ public class KHController extends BaseComposer {
 	public void onAdd() {
 		HashMap<String, Object> arguments = new HashMap<String, Object>();
 		arguments.put("parent", phamarcyAllDH);
-		createWindow("windowView", "/Pages/module/phamarcy/addThauThoKH.zul", arguments, Window.MODAL);
+		createWindow("windowView", "/Pages/module/phamarcy/addKH.zul", arguments, Window.MODAL);
 	}
 
 	@Listen("onRefreshALL =#phamarcyAllDH")
@@ -264,7 +264,7 @@ public class KHController extends BaseComposer {
 		HashMap<String, Object> arguments = new HashMap<String, Object>();
 		arguments.put("parent", phamarcyAllDH);
 		arguments.put("Customer", obj);
-		createWindow("windowView", "/Pages/module/phamarcy/addThauThoKH.zul", arguments, Window.MODAL);
+		createWindow("windowView", "/Pages/module/phamarcy/addKH.zul", arguments, Window.MODAL);
 
 	}
 
