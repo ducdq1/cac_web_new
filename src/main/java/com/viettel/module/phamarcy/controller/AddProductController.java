@@ -19,6 +19,7 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.zkoss.image.AImage;
 import org.zkoss.image.Image;
 import org.zkoss.util.media.Media;
@@ -205,14 +206,25 @@ public class AddProductController extends BaseComposer {
 			Attachs media = item.getValue();
 			Listcell cell = (Listcell) item.getChildren().get(2);
 			org.zkoss.zul.Image image = (org.zkoss.zul.Image) cell.getFirstChild();
+			HttpServletRequest request = (HttpServletRequest) Executions.getCurrent().getNativeRequest();
+			String pathFile = request.getRealPath("/Share/img/icon_play.jpg");
+
 			if (media.getAttachId() != null) {
 				String dir_upload = ResourceBundleUtil.getString("dir_upload");
 				File file = new File(dir_upload + media.getFullPathFile());
 				if (file.exists()) {
-					image.setContent(new org.zkoss.image.AImage(file));
+					if(media.getAttachName().endsWith(".mp4")){
+						image.setContent(new org.zkoss.image.AImage(new File(pathFile)));
+					}else{
+						image.setContent(new org.zkoss.image.AImage(file));						
+					}
 				}
 			} else {
-				image.setContent(media.getContent());
+				if (media.getContent() instanceof Image) {
+					image.setContent((Image) media.getContent());
+				} else {
+					image.setContent(new org.zkoss.image.AImage(new File(pathFile)));
+				}
 			}
 		}
 
@@ -245,7 +257,7 @@ public class AddProductController extends BaseComposer {
 		cbColor.setValue(product.getColor());
 		cbThongSoKyThuat.setValue(product.getThongSoKT());
 
-		if (isCopy!=null && !isCopy) {
+		if (isCopy != null && !isCopy) {
 			attachs = new AttachDAOHE().findAllAttachByAttachCodeAndAttachTye(Constants.OBJECT_TYPE.CAC_IMAGE,
 					product.getProductId());
 			ListModelArray lstModel = new ListModelArray(attachs);
@@ -298,7 +310,7 @@ public class AddProductController extends BaseComposer {
 		}
 
 		try {
-			//saveImageThongSoKT();
+			// saveImageThongSoKT();
 		} catch (Exception e) {
 			showNotification("Không thể lưu hình ảnh thông số kỹ thuật", Constants.Notification.ERROR, 1500);
 			return;
@@ -379,13 +391,13 @@ public class AddProductController extends BaseComposer {
 			return false;
 		}
 
-		/*HangHoaBO hangHoa =  ProductService.layThongTinTonKho(tbMaHangHoa.getText().trim());
-		if (hangHoa != null) {
-			if (hangHoa.getSo_luong() == null && hangHoa.getsError() != null) {
-				tbMaHangHoa.setErrorMessage(hangHoa.getsError());
-				return false;
-			}
-		}*/
+		/*
+		 * HangHoaBO hangHoa =
+		 * ProductService.layThongTinTonKho(tbMaHangHoa.getText().trim()); if
+		 * (hangHoa != null) { if (hangHoa.getSo_luong() == null &&
+		 * hangHoa.getsError() != null) {
+		 * tbMaHangHoa.setErrorMessage(hangHoa.getsError()); return false; } }
+		 */
 
 		if (new ProductDao().checkExistProductCode(tbMaSP.getText().trim().toLowerCase(), product.getProductId())) {
 			tbMaSP.setErrorMessage("Mã sản phẩm này đã tồn tại. Vui lòng nhập mã khác");
@@ -483,12 +495,12 @@ public class AddProductController extends BaseComposer {
 	public void handle(UploadEvent evt) throws IOException {
 		Media[] mediasUpload = evt.getMedias();
 		for (Media media : mediasUpload) {
-			if (media instanceof org.zkoss.image.Image) {
-				Attachs att = new Attachs();
-				att.setAttachName(media.getName());
-				att.setContent((Image) media);
-				attachs.add(att);
-			}
+			Attachs att = new Attachs();
+			att.setAttachName(media.getName());
+			// if (media instanceof org.zkoss.image.Image ) {
+			att.setContent((Media) media);
+			// }
+			attachs.add(att);
 		}
 
 		ListModelArray lstModel = new ListModelArray(attachs);
@@ -726,7 +738,7 @@ public class AddProductController extends BaseComposer {
 					+ "/TSKT_" + new Date().getTime() + ".png");
 		}
 
-		//ImageIO.write(image, "png", outPut);
+		// ImageIO.write(image, "png", outPut);
 		System.out.println("Done");
 		return outPut;
 	}
@@ -876,6 +888,31 @@ public class AddProductController extends BaseComposer {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Listen("onClick = #btnViewFile")
+	public void viewMedias() {
+
+	}
+
+	@Listen("onViewMedia = #lbListImages")
+	public void onViewMedia(Event evt) throws IOException {
+		Long index = (Long) evt.getData();
+		index = index - 1;
+		Attachs att = attachs.get(index.intValue());
+
+		try {
+
+			String port = (Executions.getCurrent().getServerPort() == 80) ? ""
+					: (":" + Executions.getCurrent().getServerPort());
+			String url = Executions.getCurrent().getScheme() + "://" + Executions.getCurrent().getServerName() + port;// +
+																														// Executions.getCurrent().getDesktop().getRequestPath();
+			url += att.getFullPathFile();
+			Executions.getCurrent().sendRedirect(url, "_blank");
+			// Filedownload.save(f, "application/application/png");
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

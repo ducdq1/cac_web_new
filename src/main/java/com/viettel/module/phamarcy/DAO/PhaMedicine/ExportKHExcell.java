@@ -180,7 +180,7 @@ public class ExportKHExcell extends BaseComposer {
 
 		String path;
 		if (fromAPI) {
-			path = ResourceBundleUtil.getString("dir_upload") + "ketoan/WEB-INF/template/OfficeToPDF.exe";
+			path = ResourceBundleUtil.getString("dir_upload") + ResourceBundleUtil.getString("app_name") +"/WEB-INF/template/OfficeToPDF.exe";
 		} else {
 			HttpServletRequest request = (HttpServletRequest) Executions.getCurrent().getNativeRequest();
 			path = request.getRealPath("/WEB-INF/template/OfficeToPDF.exe");

@@ -26,6 +26,7 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.zkoss.image.Image;
+import org.zkoss.util.media.Media;
 
 import com.viettel.core.base.DAO.BaseGenericForwardComposer;
 import com.viettel.utils.Constants;
@@ -116,7 +117,7 @@ public class Attachs implements Serializable, Cloneable {
     @Transient
     private String creatorName;
     @Transient
-    private Image content;
+    private Media content;
     @Transient
     private String modifierName;
 
@@ -359,11 +360,11 @@ public class Attachs implements Serializable, Cloneable {
         return fullPathFile;
     }
 
-    public Image getContent() {
+    public Media getContent() {
 		return content;
 	}
 
-	public void setContent(Image content) {
+	public void setContent(Media content) {
 		this.content = content;
 	}
 

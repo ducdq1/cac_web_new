@@ -370,7 +370,8 @@
 						</listcell>
 
 						<listcell>
-							<image width="200px" height="200px" />
+							<image width="200px" height="200px" forward="onClick=lbListImages.onViewMedia(${forEachStatus.index + 1 + userPagingTop.pageSize *
+								userPagingTop.activePage})"		/>
 						</listcell>
 
 						<listcell>

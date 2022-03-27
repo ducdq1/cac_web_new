@@ -65,6 +65,7 @@ import com.viettel.utils.ResourceBundleUtil;
 import com.viettel.voffice.BO.Document.Attachs;
 
 public class ExportExcell extends BaseComposer {
+
 	@SuppressWarnings("deprecation")
 	public File exportExcell(List<Product> products, int productType) throws Exception {
 		HttpServletRequest request = (HttpServletRequest) Executions.getCurrent().getNativeRequest();
@@ -831,7 +832,7 @@ public class ExportExcell extends BaseComposer {
 		String filePath;
 		String dir_upload = ResourceBundleUtil.getString("dir_upload");
 		if (fromAPI) {
-			filePath = dir_upload + "ketoan/WEB-INF/template/MAU_BAO_GIA.xlsx";
+			filePath = dir_upload + ResourceBundleUtil.getString("app_name") + "/WEB-INF/template/MAU_BAO_GIA.xlsx";
 		} else {
 			HttpServletRequest request = (HttpServletRequest) Executions.getCurrent().getNativeRequest();
 			filePath = request.getRealPath("/WEB-INF/template/MAU_BAO_GIA.xlsx");
@@ -1176,7 +1177,8 @@ public class ExportExcell extends BaseComposer {
 
 		String path;
 		if (fromAPI) {
-			path = ResourceBundleUtil.getString("dir_upload") + "ketoan/WEB-INF/template/OfficeToPDF.exe";
+			path = ResourceBundleUtil.getString("dir_upload") + ResourceBundleUtil.getString("app_name")
+					+ "/WEB-INF/template/OfficeToPDF.exe";
 		} else {
 			HttpServletRequest request = (HttpServletRequest) Executions.getCurrent().getNativeRequest();
 			path = request.getRealPath("/WEB-INF/template/OfficeToPDF.exe");
@@ -1318,9 +1320,11 @@ public class ExportExcell extends BaseComposer {
 		String filePath;
 		String dir_upload = ResourceBundleUtil.getString("dir_upload");
 		if (quotation.getType() == null || quotation.getType() == 0) {
-			filePath = dir_upload + "ketoan/WEB-INF/template/MAU_CAM_KET_DAT_HANG_GACH.xlsx";
+			filePath = dir_upload + ResourceBundleUtil.getString("app_name")
+					+ "/WEB-INF/template/MAU_CAM_KET_DAT_HANG_GACH.xlsx";
 		} else {
-			filePath = dir_upload + "ketoan/WEB-INF/template/MAU_CAM_KET_DAT_HANG_TB.xlsx";
+			filePath = dir_upload + ResourceBundleUtil.getString("app_name")
+					+ "/WEB-INF/template/MAU_CAM_KET_DAT_HANG_TB.xlsx";
 		}
 
 		InputStream fs;
