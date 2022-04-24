@@ -293,7 +293,10 @@ public class ProductDao extends GenericDAOHibernate<Product, Long> {
 				String name = bo.getProductName();
 
 				if (bo.getIsAgent() != null && bo.getIsAgent()) {
-					if (code != null && !code.isEmpty()) {
+					if (bo.getProductId() != null) {
+						selectHql.append(" and f.productId = ? ");
+						lstParam.add(bo.getProductId());
+					} else if (code != null && !code.isEmpty()) {
 						selectHql.append(" and ( lower(f.productCode) = ? or lower(f.maDaiLy) = ? ) ");
 						lstParam.add(code.toLowerCase());
 						lstParam.add(code.toLowerCase());

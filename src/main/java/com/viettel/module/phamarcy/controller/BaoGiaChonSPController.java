@@ -7,6 +7,9 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.zkoss.image.Image;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
@@ -212,14 +215,25 @@ public class BaoGiaChonSPController extends BaseComposer {
 			Attachs media = item.getValue();
 			Listcell cell = (Listcell) item.getChildren().get(1);
 			org.zkoss.zul.Image image = (org.zkoss.zul.Image) cell.getFirstChild();
+			HttpServletRequest request = (HttpServletRequest) Executions.getCurrent().getNativeRequest();
+			String pathFile = request.getRealPath("/Share/img/icon_play.jpg");
+			
 			if (media.getAttachId() != null) {
 				String dir_upload = ResourceBundleUtil.getString("dir_upload");
 				File file = new File(dir_upload + media.getFullPathFile());
 				if (file.exists()) {
-					image.setContent(new org.zkoss.image.AImage(file));
+					if(media.getAttachName().endsWith(".mp4")){
+						image.setContent(new org.zkoss.image.AImage(new File(pathFile)));
+					}else{
+						image.setContent(new org.zkoss.image.AImage(file));						
+					}
 				}
 			} else {
-				image.setContent(media.getContent());
+				if (media.getContent() instanceof Image) {
+					image.setContent((Image) media.getContent());
+				} else {
+					image.setContent(new org.zkoss.image.AImage(new File(pathFile)));
+				}
 			}
 
 			if (quotationDetail.getAttachId() != null && media.getAttachId().equals(quotationDetail.getAttachId())) {

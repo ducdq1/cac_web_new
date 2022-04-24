@@ -52,8 +52,6 @@ public class DiaChiController extends BaseComposer {
 	private static final long serialVersionUID = 1L;
 	@Wire("#incSearchFullForm #fullSearchGbx") // Form search
 	private Groupbox fullSearchGbx;
-	@Wire("#incSearchFullForm #tbMaSP") // Ma ho so
-	private Listbox tbMaSP;
 	@Wire("#incSearchFullForm #tbTenDuong") // Ma ho so
 	private Textbox tbTenDuong;
 	// End search form
@@ -87,14 +85,7 @@ public class DiaChiController extends BaseComposer {
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
-		List lstArea = new StreetDao().getListArea();
-		Area a = new Area();
-		a.setAreaId(-1L);
-		a.setAreaName("-- Tất cả --");
-		lstArea.add(0, a);
-		ListModelList lstModel = new ListModelList(lstArea);
-		tbMaSP.setModel(lstModel);
-
+		
 		onSearch();
 
 	}
@@ -102,12 +93,7 @@ public class DiaChiController extends BaseComposer {
 	@Listen("onClick = #incSearchFullForm #btnSearch")
 	public void onSearch() {
 		lastSearchModel = new PhamarcyFileModel();
-		if(tbMaSP.getSelectedItem() !=null){
-			lastSearchModel.setAreaId((Long) tbMaSP.getSelectedItem().getValue());
-		}else{
-			lastSearchModel.setAreaId(-1L);
-		}
-		
+		 
 		lastSearchModel.setDiaChi(tbTenDuong.getText().trim());
 		
 		try {
@@ -350,7 +336,7 @@ public class DiaChiController extends BaseComposer {
 	 * set chon item 0 trong combo loai tep dinh kem
 	 */
 	public void getSelectedIndexInModel() {
-		tbMaSP.setSelectedIndex(0);
+	 
 
 	}
 	@Listen("onClick = #incSearchFullForm #btnPrint")

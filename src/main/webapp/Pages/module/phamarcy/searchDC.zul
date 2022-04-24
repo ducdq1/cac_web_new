@@ -15,19 +15,6 @@
 				<h:th width="38%" />
 			</h:tr>
 			<h:tr>
-				<h:td style="text-align: left;">
-					<label value="Khu vực: " sclass="lb-create" />
-				</h:td>
-				<h:td>
-					<listbox id="tbMaSP" height="25px"
-					onAfterRender='$composer.getSelectedIndexInModel()'
-					mold="select" width="50%">
-					<template name="model">
-						<listitem label="${each.areaName}"
-							value="${each.areaId}" />
-					</template>
-				</listbox>
-				</h:td>
 				 
 				<h:td style="text-align: left;">
 					<label value="Tên đường: " sclass="lb-create" />

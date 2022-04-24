@@ -58,24 +58,23 @@ public class CustomerDao extends GenericDAOHibernate<Customer, Long> {
 		List<Customer> lstProduct = new ArrayList<>();
 		try {
 			List lstParam = new ArrayList();
-			StringBuilder selectHql = new StringBuilder("SELECT f from Customer f where 1=1 and status !=-1 ");
-			StringBuilder countHql = new StringBuilder("select count(f.customerId) from Customer f where 1=1 and status !=-1 ");
+			StringBuilder selectHql = new StringBuilder("SELECT f from Customer f where 1=1  ");
+			StringBuilder countHql = new StringBuilder("select count(f.customerId) from Customer f where 1=1  ");
 			StringBuilder hql = new StringBuilder();
 
 			if (searchModel != null) {
 				String name = searchModel.getTenHK();
 				if (name != null && !name.isEmpty()) {
-					hql.append(" and  lower(f.street.streetName) like ? escape '/'");
+					hql.append(" and  lower(f.name) like ? escape '/'");
 					 
 					lstParam.add(StringUtils.toLikeString(name.toLowerCase()));
 				}
 				
 				String diaChi=searchModel.getDiaChi();
-				if (  !diaChi.isEmpty()) {
-					hql.append(" and (lower(f.address) like ? escape '/'");
+				if ( !diaChi.isEmpty()) {
+					hql.append(" and lower(f.address) like ? escape '/' ");
 					lstParam.add(StringUtils.toLikeString(diaChi.toLowerCase()));
-					hql.append(" or lower(f.street.streetName) like ? escape '/' )");
-					lstParam.add(StringUtils.toLikeString(diaChi.toLowerCase()));
+					 
 				}
 				
 				String soDT=searchModel.getSoDT();
@@ -85,64 +84,30 @@ public class CustomerDao extends GenericDAOHibernate<Customer, Long> {
 				}
 				
 				
-				Long areaId=searchModel.getAreaId();
-				if(areaId!=null && !areaId.equals(-2L)){
-					hql.append(" and f.street.area.areaId =? ");
-					lstParam.add(areaId);
-				}
-				
-				int trangThai=searchModel.getTrangThai();
-				if(trangThai != -2){
-					hql.append(" and f.status =?");
-					lstParam.add(trangThai);
-				}
-				
-				String assignname=searchModel.getAssignName();
-				if (!assignname.isEmpty()) {
-					hql.append(" and lower(f.assignName) like ? escape '/'");
-					lstParam.add(StringUtils.toLikeString(assignname.toLowerCase()));
-				}
-				
-				String surveyName=searchModel.getSurveyName();
-				if (!surveyName.isEmpty()) {
-					hql.append(" and lower(f.surveyName) like ? escape '/'");
-					lstParam.add(StringUtils.toLikeString(surveyName.toLowerCase()));
-				}
-				
-				
-				Date fromDate=searchModel.getFromDate();
-				if(fromDate!=null){
-					hql.append(" and  f.buyDate >= trunc(?) ");
-					lstParam.add(fromDate);
-				}
-				
-				Date toDate = searchModel.getToDate();
-				if (toDate != null) {
-					hql.append(" and  f.buyDate < trunc(?) +1");
-					lstParam.add(toDate);
-				}	
-				
-				int layhang=searchModel.getLayHang();
-				if(layhang !=-1){
-					hql.append(" and f.isBuy=?");
-					lstParam.add(layhang);
-				}
-				
 				Date createFromDate=searchModel.getCreateFromDate();
 				Date createToDate=searchModel.getCreateToDate();
 				
 				if(createFromDate!=null){
-					hql.append(" and f.createDate >= trunc(?)");
+					hql.append(" and f.ngayNhapPM >= trunc(?)");
 					lstParam.add(createFromDate);
 				}
 				
 				if(createToDate!=null){
-					hql.append(" and f.createDate < trunc(?) +1 ");
+					hql.append(" and f.ngayNhapPM < trunc(?) +1 ");
 					lstParam.add(createToDate);
 				}
+				
+				String nhanVien = searchModel.getSurveyName();
+				
+				if (nhanVien != null && !nhanVien.isEmpty()) {
+					hql.append(" and  lower(f.giayDan.nhanVien) like ? escape '/'");					 
+					lstParam.add(StringUtils.toLikeString(nhanVien.toLowerCase()));
+				}
+				
+				
 			}
 
-			hql.append(" order by lower(f.street.area.areaName),lower(f.street.streetName), LPAD(f.address, 10)");
+			hql.append(" order by giayDanId desc, ngayDiDan asc ");
 
 			selectHql.append(hql);
 			countHql.append(hql);
@@ -191,7 +156,7 @@ public class CustomerDao extends GenericDAOHibernate<Customer, Long> {
 	}
 
 	public Customer checkExistCusTomer(Customer cus) {
-		String query = "Select p From Customer p Where status !=-1 and  ((p.street.streetId=? and  ";
+		String query = "Select p From Customer p Where  ((p.street.streetId=? and  ";
 		query += " lower(p.address) =? )  or lower(p.phone) =?)";
 		 if(cus.getCustomerId() != null){
 			 query += " and p.customerId !=? " ;

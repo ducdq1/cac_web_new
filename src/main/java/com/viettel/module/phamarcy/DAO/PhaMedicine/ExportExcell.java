@@ -34,6 +34,7 @@ import org.apache.poi.xssf.usermodel.XSSFRichTextString;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.zkoss.xel.fn.CommonFns;
 import org.zkoss.zk.ui.Executions;
 
 import com.google.zxing.BarcodeFormat;
@@ -54,6 +55,8 @@ import com.itextpdf.text.pdf.PdfStamper;
 import com.viettel.core.base.DAO.BaseComposer;
 import com.viettel.module.phamarcy.BO.CKBaoGia;
 import com.viettel.module.phamarcy.BO.CKBaoGiaDetail;
+import com.viettel.module.phamarcy.BO.Customer;
+import com.viettel.module.phamarcy.BO.GiayDan;
 import com.viettel.module.phamarcy.BO.Product;
 import com.viettel.module.phamarcy.BO.Quotation;
 import com.viettel.module.phamarcy.BO.QuotationDetail;
@@ -1456,7 +1459,200 @@ public class ExportExcell extends BaseComposer {
 		return sheet;
 	}
 
+	public static XSSFSheet writeDataKhachHang(XSSFWorkbook workbook, List<Customer> customers) throws IOException {
+
+		String dir_upload = ResourceBundleUtil.getString("dir_upload");
+
+		int rowNum = 5;
+		XSSFSheet sheet = workbook.getSheet("Sheet1");
+
+		XSSFRow cloneRow0 = workbook.getSheet("Sheet2").getRow(5);
+
+		XSSFRow row0 = null;
+		int countRow = 0;
+		int colNum = 0;
+		int countQuotation = 0;
+
+		Font fontBold = workbook.getSheet("Sheet2").getRow(5).getCell(8).getCellStyle().getFont();
+		Font fontNormal = workbook.getSheet("Sheet2").getRow(5).getCell(0).getCellStyle().getFont();
+		Font fontItalic = workbook.getSheet("Sheet2").getRow(5).getCell(1).getCellStyle().getFont();
+		Font fontItalicNormal = workbook.getSheet("Sheet2").getRow(5).getCell(1).getCellStyle().getFont();
+		fontNormal.setFontName("Times New Roman");
+		fontItalic.setFontName("Times New Roman");
+
+		int countGapChuNha = 0;
+		int countKoGapChuNha = 0;
+		Long currentGiayDan = -1L;
+
+		Integer soLuongGiayDan = 0;
+		Integer soLuongDaGian = 0;
+		Integer soLuongDungThongtin = 0;
+		boolean isFirst = false;
+		for (Customer cus : customers) {
+			countQuotation++;
+			colNum = 0;
+			sheet.shiftRows(rowNum, sheet.getLastRowNum(), 1);
+			row0 = createRow(rowNum, sheet, cloneRow0);
+			rowNum++;
+			isFirst = false;
+			Long giayDanId = cus.getGiayDan().getId();
+
+			if (!currentGiayDan.equals(giayDanId)) {
+				soLuongGiayDan = cus.getGiayDan().getSoLuong().intValue();
+				soLuongDaGian = 0;
+				soLuongDungThongtin = 0;
+				isFirst =true;
+			}
+
+			if (cus.getNgayDiDan() != null) {
+				soLuongDaGian += 1;
+			}
+			
+			if(cus.getKetQuaKiemTra() !=null && cus.getKetQuaKiemTra().intValue() == 1){
+				soLuongDungThongtin +=1;
+			}
+
+			currentGiayDan = giayDanId;
+
+			createCell(colNum++, row0, cloneRow0.getCell(0).getCellStyle(), formatDate(cus.getGiayDan().getNgayNhan()));
+			createCell(colNum++, row0, cloneRow0.getCell(1).getCellStyle(), isFirst ? 
+					formatNumber(cus.getGiayDan().getSoLuong(), "###,###,###.####") : "");
+			createCell(colNum++, row0, cloneRow0.getCell(2).getCellStyle(), cus.getNgayDiDan() != null ? "1" : "0");
+			createCell(colNum++, row0, cloneRow0.getCell(3).getCellStyle(), "" + (soLuongGiayDan - soLuongDaGian));
+			createCell(colNum++, row0, cloneRow0.getCell(4).getCellStyle(), (cus.getKetQuaKiemTra() !=null && cus.getKetQuaKiemTra().intValue() == 0) ? "1" :"");
+			createCell(colNum++, row0, cloneRow0.getCell(5).getCellStyle(), ""+soLuongDungThongtin );
+			createCell(colNum++, row0, cloneRow0.getCell(6).getCellStyle(), formatDate(cus.getNgayDiDan()));
+			createCell(colNum++, row0, cloneRow0.getCell(7).getCellStyle(), "" + countQuotation);
+
+			createCell(colNum++, row0, cloneRow0.getCell(8).getCellStyle(), cus.getAddress());
+			createCell(colNum++, row0, cloneRow0.getCell(9).getCellStyle(), cus.getPhone());
+
+			String koGapChuNha = "";
+			if (cus.getGapChuNha() != null && cus.getGapChuNha().intValue() == 0) {
+				koGapChuNha = "X";
+				countKoGapChuNha++;
+			}
+			createCell(colNum++, row0, cloneRow0.getCell(10).getCellStyle(), koGapChuNha);
+
+			String gapChuNha = "";
+			if (cus.getGapChuNha() != null && cus.getGapChuNha().intValue() == 1) {
+				gapChuNha = "X";
+				countGapChuNha++;
+			}
+
+			createCell(colNum++, row0, cloneRow0.getCell(11).getCellStyle(), gapChuNha);
+
+			createCell(colNum++, row0, cloneRow0.getCell(12).getCellStyle(), cus.getTienDoKhiDanGiay());
+			createCell(colNum++, row0, cloneRow0.getCell(13).getCellStyle(), cus.getGiayDan().getNhanVien());
+			createCell(colNum++, row0, cloneRow0.getCell(14).getCellStyle(), cus.getNhanVienKiemTra());
+			createCell(colNum++, row0, cloneRow0.getCell(15).getCellStyle(), cus.getXacNhanQuanLy());
+			countRow++;
+		}
+
+		sheet.getRow(rowNum).getCell(10).setCellValue(formatNumber(countKoGapChuNha, "###,###,###"));
+		sheet.getRow(rowNum).getCell(11).setCellValue(formatNumber(countGapChuNha, "###,###,###"));
+		sheet.getRow(rowNum).setHeight((short) 600);
+		workbook.removeSheetAt(1);
+
+		return sheet;
+	}
+
+	public File exportKhacHang(List<Customer> customers) {
+		XSSFWorkbook workbook;
+
+		String filePath;
+		String dir_upload = ResourceBundleUtil.getString("dir_upload");
+
+		HttpServletRequest request = (HttpServletRequest) Executions.getCurrent().getNativeRequest();
+		filePath = request.getRealPath("/WEB-INF/template/BM_DAN_GIAY.xlsx");
+
+		InputStream fs;
+		try {
+
+			String fileName = "KH_" + new Date().getTime() / 1000 + ".xlsx";
+
+			ResourceBundle rb = ResourceBundle.getBundle("config");
+			String PATH = rb.getString("ConvertService");
+			FileUtil.mkdirs(PATH);
+			File fd = new File(PATH);
+			if (!fd.exists()) {
+				fd.mkdirs();
+			}
+
+			String filePathOut = PATH + File.separatorChar + fileName;
+
+			fs = new FileInputStream(filePath);
+			workbook = new XSSFWorkbook(fs);
+
+			writeDataKhachHang(workbook, customers);
+			FileOutputStream fileOut = new FileOutputStream(filePathOut);
+			workbook.write(fileOut);
+			fileOut.close();
+
+			return new File(filePathOut);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	public static void main(String[] args) {
+		testXuatKhachHang();
+	}
+
+	private static void testXuatKhachHang() {
+		XSSFWorkbook workbook;
+		String path = "D:\\DATA\\DU_AN\\phamarcy\\src\\main\\webapp\\WEB-INF\\template\\BM_DAN_GIAY.xlsx";
+		InputStream fs;
+		try {
+
+			fs = new FileInputStream(path);
+			workbook = new XSSFWorkbook(fs);
+
+			List<Customer> details = new ArrayList<Customer>();
+
+			Customer detail = new Customer();
+			detail.setName("Đoàn Quang Đức");
+			detail.setPhone("0349566239");
+			detail.setAddress("271 nguyễn văn linh");
+			detail.setGapChuNha(1L);
+			detail.setNgayDiDan(new Date());
+			detail.setNhanVienDanGiay("Anh");
+			detail.setTienDoKhiDanGiay("Chưa xong nhà");
+			detail.setNhanVienKiemTra("NV001");
+			detail.setXacNhanQuanLy("Được");
+
+			GiayDan g = new GiayDan();
+			g.setSoLuong(100L);
+			g.setNgayNhan(new Date());
+			g.setNhanVien("NV002");
+			detail.setGiayDan(g);
+
+			details.add(detail);
+			/*
+			 * details.add(detail); details.add(detail); details.add(detail);
+			 * details.add(detail); details.add(detail); details.add(detail);
+			 * details.add(detail); details.add(detail);
+			 */
+
+			writeDataKhachHang(workbook, details);
+
+			String fileName = "KH_" + new Date().getTime() / 1000 + ".xlsx";
+			String filePath = "D:\\DATA\\temp" + File.separatorChar + fileName;
+
+			FileOutputStream fileOut = new FileOutputStream(filePath);
+			workbook.write(fileOut);
+			fileOut.close();
+
+			convertToPdf(filePath, true);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static void testXuatBaoGia() {
 		XSSFWorkbook workbook;
 		String path = "D:\\DATA\\DU_AN\\phamarcy\\src\\main\\webapp\\WEB-INF\\template\\MAU_CAM_KET_DAT_HANG_TB.xlsx";
 		InputStream fs;
@@ -1559,6 +1755,15 @@ public class ExportExcell extends BaseComposer {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	private static String formatDate(Date mDate) {
+		String sTemp = "";
+		if (mDate != null) {
+			sTemp = CommonFns.formatDate(mDate, "dd/MM/yyyy");
+		}
+		return sTemp;
+
 	}
 
 }

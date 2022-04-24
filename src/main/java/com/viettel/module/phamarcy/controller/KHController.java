@@ -1,5 +1,7 @@
 package com.viettel.module.phamarcy.controller;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +13,7 @@ import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Datebox;
+import org.zkoss.zul.Filedownload;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelArray;
 import org.zkoss.zul.ListModelList;
@@ -35,6 +38,7 @@ import com.viettel.module.phamarcy.BO.Product;
 import com.viettel.module.phamarcy.BO.Street;
 import com.viettel.module.phamarcy.BO.VPhaFileMedicine;
 import com.viettel.module.phamarcy.DAO.PhaMedicine.CustomerDao;
+import com.viettel.module.phamarcy.DAO.PhaMedicine.ExportExcell;
 import com.viettel.module.phamarcy.DAO.PhaMedicine.ExportFileDAO;
 import com.viettel.module.phamarcy.DAO.PhaMedicine.ProductDao;
 import com.viettel.module.phamarcy.DAO.PhaMedicine.StreetDao;
@@ -48,12 +52,10 @@ import com.viettel.utils.LogUtils;
  */
 public class KHController extends BaseComposer {
 
-	@Wire // Ma ho so
-	private Listbox lbTrangThai,tbArea;
 	@Wire
-	private Textbox tbTenKH, tbSoDT, tbDiaChi, tbAssignName,tbSurveyName;
+	private Textbox tbTenKH, tbSoDT, tbDiaChi, tbNhanVien;
 	@Wire
-	private Datebox dbFromDay,dbToDay,dbCreateFromDay,dbCreateToDay;
+	private Datebox dbCreateFromDay,dbCreateToDay;
 	// End search form
 	@Wire
 	private Paging userPagingBottom;
@@ -79,71 +81,6 @@ public class KHController extends BaseComposer {
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
-		List<Area> lstArea=new StreetDao().getListArea();
-		Area area=new Area();
-		area.setAreaId(-2L);
-		area.setAreaName("-- Tất cả --");
-		lstArea.add(0, area);
-		
-		ListModelList mlstArea = new ListModelList(lstArea);
-		tbArea.setModel(mlstArea);
-		
-		List<Category> lstTrangThai = new ArrayList<>();
-		Category category = new Category();
-		category.setName("-- Tất cả --");
-		category.setCategoryId(-2L);
-		lstTrangThai.add(category);
-	    category = new Category();
-		category.setName(getLabel("sai_sdt"));
-		category.setCategoryId(0L);
-		lstTrangThai.add(category);
-
-		category = new Category();
-		category.setName(getLabel("sai_dia_chi"));
-		category.setCategoryId(1L);
-		lstTrangThai.add(category);
-
-		category = new Category();
-		category.setName(getLabel("xong_roi"));
-		category.setCategoryId(2L);
-		lstTrangThai.add(category);
-
-		category = new Category();
-		category.setName(getLabel("da_qt"));
-		category.setCategoryId(3L);
-		lstTrangThai.add(category);
-		
-		ListModelList lstModelTrangThai = new ListModelList(lstTrangThai);
-		lbTrangThai.setModel(lstModelTrangThai);
-
-		List<Category> lstbLayHang = new ArrayList<>();
-		category = new Category();		 
-		category.setCategoryId(-1L);		
-		category.setName("-- Tất cả --");
-		lstbLayHang.add(category);
-		
-		category = new Category();		 
-		category.setName(getLabel("chua_lay_hang"));
-		category.setCategoryId(0L);
-		lstbLayHang.add(category);
-
-		category = new Category();
-	
-		category.setName(getLabel("da_lay_hang"));
-		category.setCategoryId(1L);
-		lstbLayHang.add(category);
-		
-		category = new Category();
-		
-		category.setName(getLabel("ko_lay_hang"));
-		category.setCategoryId(2L);
-		lstbLayHang.add(category);
-		
-		
-		ListModelList lstModelLayHang = new ListModelList(lstbLayHang);
-		lbLayHang.setModel(lstModelLayHang);
-		
-		
 		onSearch();
 
 	}
@@ -154,27 +91,12 @@ public class KHController extends BaseComposer {
 		lastSearchModel.setTenHK(tbTenKH.getText().trim());
 		lastSearchModel.setDiaChi(tbDiaChi.getText().trim());
 		lastSearchModel.setSoDT(tbSoDT.getText().trim());
-		lastSearchModel.setFromDate(dbFromDay.getValue());
-		lastSearchModel.setToDate(dbToDay.getValue());
+ 
 		lastSearchModel.setCreateFromDate(dbCreateFromDay.getValue());
 		lastSearchModel.setCreateToDate(dbCreateToDay.getValue());
-		if(lbLayHang.getSelectedItem()!=null){
-		lastSearchModel.setLayHang(((Long)lbLayHang.getSelectedItem().getValue()).intValue());
-		}else{
-			lastSearchModel.setLayHang(-1);
-		}
+		  
 		
-		lastSearchModel.setSurveyName(tbSurveyName.getText().trim());
-		Listitem item = lbTrangThai.getSelectedItem();
-		if (item != null) {
-			lastSearchModel.setTrangThai(((Long) item.getValue()).intValue());
-		} else {
-			lastSearchModel.setTrangThai(-2);
-		}
-		lastSearchModel.setAssignName(tbAssignName.getText().trim());
-		if (tbArea.getSelectedItem() != null) {
-			lastSearchModel.setAreaId((Long) tbArea.getSelectedItem().getValue());
-		}
+		lastSearchModel.setSurveyName(tbNhanVien.getText().trim());
 		try {
 			userPagingBottom.setActivePage(0);
 			reloadModel(lastSearchModel);
@@ -245,9 +167,8 @@ public class KHController extends BaseComposer {
 
 			public void onEvent(ClickEvent event) throws Exception {
 
-				if (Messagebox.Button.YES.equals(event.getButton())) {
-					obj.setStatus(-1);
-					new CustomerDao().saveOrUpdate(obj);
+				if (Messagebox.Button.YES.equals(event.getButton())) {					
+					new CustomerDao().delete(obj);
 					showNotification("Xóa khách hàng thành công", Constants.Notification.INFO, 2000);
 					reloadModel(lastSearchModel);
 				}
@@ -284,7 +205,7 @@ public class KHController extends BaseComposer {
 	 */
 	public void getSelectedIndexInModel() {
 		 
-		lbTrangThai.setSelectedIndex(0);
+		 
 	}
 	
 	public void getLayHangSelectedIndexInModel(){
@@ -293,26 +214,21 @@ public class KHController extends BaseComposer {
 }
 	
 	@Listen("onClick=#btnPrint")
-	public void onPrint() {
+	public void onPrint() throws FileNotFoundException {
 		PagingListModel page=new CustomerDao().findCustomers(lastSearchModel, -2, -2);
-		List<Customer> lstProduct = page.getLstReturn();
+		List<Customer> customers = page.getLstReturn();
 		
-		if (lstProduct.isEmpty()) {
+		if (customers.isEmpty()) {
 			showNotification("Không có khách hàng nào để in", Constants.Notification.ERROR, 3000);
 			return;
 		}
 		
-		for (Customer customer : lstProduct) {
-			customer.setData();
-		}
+		File f = new ExportExcell().exportKhacHang(customers);
 		
-		Long layHang=(Long)lbLayHang.getSelectedItem().getValue() ;
-		
-		new ExportFileDAO().exportDiaChiKH(lstProduct,layHang.intValue());
+		Filedownload.save(f, "application/application/x-xls");
 	}
 	
-	public void getStreetSelectedIndexInModel() {
-		tbArea.setSelectedIndex(0);
+	public void getStreetSelectedIndexInModel() { 
 	}
 
 }

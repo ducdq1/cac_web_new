@@ -58,11 +58,11 @@ public class StreetDao extends GenericDAOHibernate<Street, Long> {
 				lstParam.add(StringUtils.toLikeString(name.toLowerCase()));
 			}
 			
-			Long areaId=searchModel.getAreaId();
+			/*Long areaId=searchModel.getAreaId();
 			if(!areaId.equals(-1L)){
 				hql.append(" and f.area.areaId =?");
 				lstParam.add(areaId);
-			}
+			}*/
 			
 		}
 

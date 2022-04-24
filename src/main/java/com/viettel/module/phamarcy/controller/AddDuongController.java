@@ -32,7 +32,7 @@ public class AddDuongController extends BaseComposer {
 	private Listbox tbMaSP;
 	@Wire
 	private Textbox tbTenSP;
-	 
+
 	@Wire
 	private Window resetPassDlg;
 	private Window parent;
@@ -40,16 +40,12 @@ public class AddDuongController extends BaseComposer {
 	boolean isUpdate = false;
 	Boolean isImport;
 
-	List<Area> lstArea;
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
-		lstArea=new StreetDao().getListArea() ;
-		ListModelList lstModel = new ListModelList(lstArea);
-		tbMaSP.setModel(lstModel);
-		
+
 		HashMap<String, Object> arguments = (HashMap<String, Object>) Executions.getCurrent().getArg();
 		parent = (Window) arguments.get("parent");
 		street = (Street) arguments.get("street");
@@ -67,7 +63,6 @@ public class AddDuongController extends BaseComposer {
 
 	@Listen("onClick = #btnSave")
 	public void onSave() {
-		 
 
 		if (!validateTextBox(tbTenSP)) {
 			return;
@@ -77,23 +72,19 @@ public class AddDuongController extends BaseComposer {
 		if (street == null) {
 			street = new Street();
 		}
-		
+
 		streetId = street.getStreetId();
-		
-		Area area=new Area();
-		area.setAreaId((Long)tbMaSP.getSelectedItem().getValue());
-		street.setArea(area);
+
+
 		street.setStreetName(tbTenSP.getText().trim());
 
-		if (new StreetDao().checkExistStreet(tbTenSP.getText().trim().toLowerCase(),streetId)) {
+		if (new StreetDao().checkExistStreet(tbTenSP.getText().trim().toLowerCase(), streetId)) {
 			tbTenSP.setErrorMessage("Tên đường này đã tồn tại. Vui lòng nhập đường khác");
 			return;
 		}
-		
-		
- 
 
-		//String productNameSearch = new BaseGenericForwardComposer().removeVietnameseChar(product.getProductName());
+		// String productNameSearch = new
+		// BaseGenericForwardComposer().removeVietnameseChar(product.getProductName());
 
 		if (isImport == null) {
 			new StreetDao().saveOrUpdate(street);
@@ -111,24 +102,12 @@ public class AddDuongController extends BaseComposer {
 		Events.sendEvent("onRefreshALL", parent, map);
 		resetPassDlg.onClose();
 	}
-	
+
 	/**
 	 * set chon item 0 trong combo loai tep dinh kem
 	 */
 	public void getSelectedIndexInModel() {
-		if(isUpdate){
-			int index=0;
-		for (Area area: lstArea) {
-			if(area.getAreaId().equals(street.getArea().getAreaId())){
-				tbMaSP.setSelectedIndex(index);
-				break;
-			}
-			index++;
-		}	
-		}else{
-			tbMaSP.setSelectedIndex(0);
-		}
+		 
 	}
-	
-	
+
 }
