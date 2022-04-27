@@ -1547,11 +1547,13 @@ public class ExportExcell extends BaseComposer {
 			createCell(colNum++, row0, cloneRow0.getCell(14).getCellStyle(), cus.getNhanVienKiemTra());
 			createCell(colNum++, row0, cloneRow0.getCell(15).getCellStyle(), cus.getXacNhanQuanLy());
 			countRow++;
+			row0.setHeight((short)-1);
 		}
 
 		sheet.getRow(rowNum).getCell(10).setCellValue(formatNumber(countKoGapChuNha, "###,###,###"));
 		sheet.getRow(rowNum).getCell(11).setCellValue(formatNumber(countGapChuNha, "###,###,###"));
 		sheet.getRow(rowNum).setHeight((short) 600);
+	
 		workbook.removeSheetAt(1);
 
 		return sheet;

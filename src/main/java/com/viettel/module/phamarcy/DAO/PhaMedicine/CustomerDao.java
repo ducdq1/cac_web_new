@@ -157,19 +157,25 @@ public class CustomerDao extends GenericDAOHibernate<Customer, Long> {
 
 	public Customer checkExistCusTomer(Customer cus) {
 		String query = "Select p From Customer p Where  ((p.street.streetId=? and  ";
-		query += " lower(p.address) =? )  or lower(p.phone) =?)";
+		query += " lower(p.address) =? )  ";
+		List<Object> params = new ArrayList<>();
+		params.add( cus.getStreet().getStreetId());
+		params.add(cus.getAddress().toLowerCase());
+		if(StringUtils.isNotNullNotEmptyNotWhiteSpace(cus.getPhone())){
+			query += " or lower(p.phone) =? ";
+			params.add(cus.getPhone());
+		}
+		query += " ) ";
+		
 		 if(cus.getCustomerId() != null){
 			 query += " and p.customerId !=? " ;
+			 params.add(cus.getCustomerId());
 		 }
 		 
-		Query countQuery = getSession().createQuery(query);
-		countQuery.setParameter(0, cus.getStreet().getStreetId());
-		countQuery.setParameter(1, cus.getAddress().toLowerCase());
-		countQuery.setParameter(2, cus.getPhone().toLowerCase());
-		
 		 
-		if(cus.getCustomerId() !=null){
-			countQuery.setParameter(3, cus.getCustomerId());
+		Query countQuery = getSession().createQuery(query);
+		 for (int i = 0; i < params.size(); i++) {
+			 countQuery.setParameter(i, params.get(i));
 		}
 		
 		List<Customer> lst=countQuery.list();

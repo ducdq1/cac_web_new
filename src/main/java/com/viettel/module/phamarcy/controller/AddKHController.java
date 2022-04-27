@@ -142,8 +142,14 @@ public class AddKHController extends BaseComposer {
 		tbDT.clearErrorMessage();
 		tbDiaChi.clearErrorMessage();
 
-		if (lbNgayNhanGiay.getSelectedIndex() < 0) {
+		if (lbNhanVien.getSelectedItem() == null) {
 			showNotification("Bạn chưa chọn Nhân viên", Constants.Notification.WARNING);
+			return;
+		}
+		
+		
+		if (lbNgayNhanGiay.getSelectedIndex() < 0) {
+			showNotification("Bạn chưa chọn Ngày nhận giấy", Constants.Notification.WARNING);
 			return;
 		}
 
@@ -152,17 +158,17 @@ public class AddKHController extends BaseComposer {
 			return;
 		}
 
-		if (!validateTextBox(tbTenKH)) {
+		/*if (!validateTextBox(tbTenKH)) {
 			return;
-		}
+		}*/
 
 		if (!validateTextBox(tbDiaChi)) {
 			return;
 		}
 
-		if (!validateTextBox(tbDT)) {
+		/*if (!validateTextBox(tbDT)) {
 			return;
-		}
+		}*/
 
 		if (cus == null) {
 			cus = new Customer();
@@ -179,7 +185,7 @@ public class AddKHController extends BaseComposer {
 
 		Customer cusCheck = new CustomerDao().checkExistCusTomer(toCheck);
 		if (cusCheck != null) {
-			if (cusCheck.getPhone().equals(toCheck.getPhone())) {
+			if (cusCheck.getPhone()!=null && cusCheck.getPhone().equals(toCheck.getPhone())) {
 				tbDT.setErrorMessage("Số điện thoại đã tồn tại");
 				return;
 			} else if (toCheck.getStreet() != null && cusCheck.getStreet() != null
