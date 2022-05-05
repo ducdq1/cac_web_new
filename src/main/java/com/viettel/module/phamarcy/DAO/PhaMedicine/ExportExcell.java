@@ -26,7 +26,9 @@ import org.apache.http.util.EntityUtils;
 import org.apache.poi.hssf.util.CellRangeAddress;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.util.Units;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFClientAnchor;
 import org.apache.poi.xssf.usermodel.XSSFDrawing;
 import org.apache.poi.xssf.usermodel.XSSFFont;
@@ -1525,7 +1527,10 @@ public class ExportExcell extends BaseComposer {
 			createCell(colNum++, row0, cloneRow0.getCell(7).getCellStyle(), "" + countQuotation);
 
 			createCell(colNum++, row0, cloneRow0.getCell(8).getCellStyle(), cus.getAddress());
-			createCell(colNum++, row0, cloneRow0.getCell(9).getCellStyle(), cus.getPhone());
+			XSSFCellStyle style = cloneRow0.getCell(9).getCellStyle();
+			style.setWrapText(true);
+			style.setAlignment(HorizontalAlignment.LEFT);
+			createCell(colNum++, row0, style, cus.getName() == null ? ""  : cus.getName() + ": "  + cus.getPhone());
 
 			String koGapChuNha = "";
 			if (cus.getGapChuNha() != null && cus.getGapChuNha().intValue() == 0) {
@@ -1548,6 +1553,7 @@ public class ExportExcell extends BaseComposer {
 			createCell(colNum++, row0, cloneRow0.getCell(15).getCellStyle(), cus.getXacNhanQuanLy());
 			countRow++;
 			row0.setHeight((short)-1);
+			
 		}
 
 		sheet.getRow(rowNum).getCell(10).setCellValue(formatNumber(countKoGapChuNha, "###,###,###"));
