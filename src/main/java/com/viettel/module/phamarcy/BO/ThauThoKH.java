@@ -61,9 +61,6 @@ public class ThauThoKH extends BaseComposer implements Serializable {
 	@Column(name = "NGAY_NHAP")
 	private Date ngayNhap;
 	
-	@Column(name = "NGAY_GOI_KH")
-	private Date ngayGoiKH;
-
 	@Column(name = "NGAY_TANG_QUA")
 	private Date ngayTangQua;
 
@@ -233,15 +230,4 @@ public class ThauThoKH extends BaseComposer implements Serializable {
 		this.nhanVienPhuTrach = nhanVienPhuTrach;
 	}
 
-	public Date getNgayGoiKH() {
-		return ngayGoiKH;
-	}
-
-	public void setNgayGoiKH(Date ngayGoiKH) {
-		this.ngayGoiKH = ngayGoiKH;
-	}
-
-	
-
-	
 }

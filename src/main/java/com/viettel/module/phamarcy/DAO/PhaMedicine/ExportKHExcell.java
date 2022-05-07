@@ -137,18 +137,16 @@ public class ExportKHExcell extends BaseComposer {
 			createCell(colNum++, row0, cloneRow0.getCell(6).getCellStyle(), quotationDetail.getSdt());
 			createCell(colNum++, row0, cloneRow0.getCell(7).getCellStyle(), quotationDetail.getDiaChiThiCong());
 			createCell(colNum++, row0, cloneRow0.getCell(8).getCellStyle(),
-					DateTimeUtils.convertDateToStringFormat(quotationDetail.getNgayGoiKH(), "dd/MM/yyyy"));
-			createCell(colNum++, row0, cloneRow0.getCell(9).getCellStyle(),
 					DateTimeUtils.convertDateToStringFormat(quotationDetail.getNgayTangQua(), "dd/MM/yyyy"));
-			createCell(colNum++, row0, cloneRow0.getCell(10).getCellStyle(), quotationDetail.getQua());
-			createCell(colNum++, row0, cloneRow0.getCell(11).getCellStyle(),
+			createCell(colNum++, row0, cloneRow0.getCell(9).getCellStyle(), quotationDetail.getQua());
+			createCell(colNum++, row0, cloneRow0.getCell(10).getCellStyle(),
 					DateTimeUtils.convertDateToStringFormat(quotationDetail.getNgayTangHH(), "dd/MM/yyyy"));
-			createCell(colNum++, row0, cloneRow0.getCell(12).getCellStyle(), quotationDetail.getTienHoahong() == null
+			createCell(colNum++, row0, cloneRow0.getCell(11).getCellStyle(), quotationDetail.getTienHoahong() == null
 					? "" : formatNumber(quotationDetail.getTienHoahong(), "###,###,###.####"));
-			createCell(colNum++, row0, cloneRow0.getCell(13).getCellStyle(), quotationDetail.getNoiDunHoaHong());
-			createCell(colNum++, row0, cloneRow0.getCell(14).getCellStyle(),
+			createCell(colNum++, row0, cloneRow0.getCell(12).getCellStyle(), quotationDetail.getNoiDunHoaHong());
+			createCell(colNum++, row0, cloneRow0.getCell(13).getCellStyle(),
 					DateTimeUtils.convertDateToStringFormat(quotationDetail.getNgayTangQuaCN(), "dd/MM/yyyy"));
-			createCell(colNum++, row0, cloneRow0.getCell(15).getCellStyle(), quotationDetail.getQuaCN());
+			createCell(colNum++, row0, cloneRow0.getCell(14).getCellStyle(), quotationDetail.getQuaCN());
 
 			countRow++;
 		}

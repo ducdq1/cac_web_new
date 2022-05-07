@@ -89,19 +89,11 @@
              
              <h:tr >
                 <h:td style="text-align: right;">
-                    <label sclass="lb-create" >Địa chỉ:</label>                    
+                    <label sclass="lb-create" >Địa chỉ và Ngày gọi KH:</label>                    
                 </h:td>
                <h:td colspan="1">
-						 <textbox id="diaChiDoiTac"> </textbox>
+						 <textbox id="diaChiDoiTac" multiline="true" height="70px" width="90%" />
 					</h:td>
-				<h:td style="text-align: right;">
-					<label value="Ngày gọi KH: " sclass="lb-create" />
-				</h:td>	
-					 <h:td>
-                   <datebox id="dbNgayGoiKH"  format="dd/MM/yyyy"
-						width="40%" height="20px"
-						constraint="between 19000101 and 20991231: ${$composer.getLabel('date_validate')}" />
-                </h:td>
             </h:tr>
             
              <h:tr >
