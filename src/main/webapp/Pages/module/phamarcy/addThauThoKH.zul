@@ -4,7 +4,7 @@
     xmlns="http://www.zkoss.org/2005/zul">
     
     <window id="createDlg" title="Thêm mới khách hàng" 
-    apply="com.viettel.module.phamarcy.controller.AddThauThoKHController" width="70%" border="normal" position="center" closable="true">
+    apply="com.viettel.module.phamarcy.controller.AddThauThoKHController" width="80%" border="normal" position="center" closable="true">
      <style>
     	tr{height:35px;
     	}
@@ -26,9 +26,9 @@
         <h:table style="width:100%;height:100%;padding-left:0px" class="createTable">
         
         <h:tr style="height:5px">
-				<h:th width="13%" />
-				<h:th width="20%" />
-				<h:th width="8%" />
+				<h:th width="18%" />
+				<h:th width="18%" />
+				<h:th width="16%" />
 				<h:th width="20%" />
 			</h:tr>
 			
@@ -89,12 +89,19 @@
              
              <h:tr >
                 <h:td style="text-align: right;">
-                    <label sclass="lb-create" >Địa chỉ:</label>
-                    
+                    <label sclass="lb-create" >Địa chỉ:</label>                    
                 </h:td>
                <h:td colspan="1">
 						 <textbox id="diaChiDoiTac"> </textbox>
 					</h:td>
+				<h:td style="text-align: right;">
+					<label value="Ngày gọi KH: " sclass="lb-create" />
+				</h:td>	
+					 <h:td>
+                   <datebox id="dbNgayGoiKH"  format="dd/MM/yyyy"
+						width="40%" height="20px"
+						constraint="between 19000101 and 20991231: ${$composer.getLabel('date_validate')}" />
+                </h:td>
             </h:tr>
             
              <h:tr >

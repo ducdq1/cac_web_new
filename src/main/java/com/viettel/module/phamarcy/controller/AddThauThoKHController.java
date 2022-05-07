@@ -82,7 +82,7 @@ public class AddThauThoKHController extends BaseComposer {
 	@Wire
 	private Label lbDSP;
 	@Wire
-	private Datebox dbCreateDate, dbNgayTangQua, dbNgayTangHoaHong, dbNgayTangQuaCuoiNam;
+	private Datebox dbCreateDate, dbNgayGoiKH,dbNgayTangQua, dbNgayTangHoaHong, dbNgayTangQuaCuoiNam;
 	@Wire
 	private Combobox cbNhomDoiTac, cbLoaiQua, cbLoaiQuaCuoiNam;
 	@Wire
@@ -181,6 +181,7 @@ public class AddThauThoKHController extends BaseComposer {
 		dbNgayTangHoaHong.setValue(thauThoKH.getNgayTangHH());
 		cbLoaiQua.setText(thauThoKH.getQua());
 		dbNgayTangQua.setValue(thauThoKH.getNgayTangQua());
+		dbNgayGoiKH.setValue(thauThoKH.getNgayGoiKH());
 		cbLoaiQuaCuoiNam.setText(thauThoKH.getQuaCN());
 		dbNgayTangQuaCuoiNam.setValue(thauThoKH.getNgayTangQuaCN());
 		cbNhomDoiTac.setValue(thauThoKH.getNhomThauTho());
@@ -233,6 +234,7 @@ public class AddThauThoKHController extends BaseComposer {
 		thauThoKH.setUserId(createUserId);
 		thauThoKH.setNoiDunHoaHong(tbNoiDungTienHoaHong.getText().trim());
 		thauThoKH.setNhanVienPhuTrach(tbNVPT.getText().trim());
+		thauThoKH.setNgayGoiKH(dbNgayGoiKH.getValue());
 		
 		new ThauThoKHDao().saveOrUpdate(thauThoKH);
 

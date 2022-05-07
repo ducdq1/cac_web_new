@@ -705,11 +705,13 @@ public class ExportExcell extends BaseComposer {
 	}
 
 	private static void createCell(int cellNum, XSSFRow row, CellStyle style, String content) {
-		row.createCell(cellNum).setCellValue(content == null ? "" : !content.equals(": null") ? content : ":");
+		row.createCell(cellNum).setCellValue(content == null ? "" : !content.equals(": null") ? content : ":");		 
 		row.getCell(cellNum).setCellStyle(style);
 		row.getCell(cellNum).setCellStyle(style);
 
 	}
+	 
+	
 
 	private static void createCellWithBorder(int cellNum, XSSFRow row, CellStyle style, String content) {
 		row.createCell(cellNum).setCellValue(content == null ? "" : !content.equals(": null") ? content : ":");

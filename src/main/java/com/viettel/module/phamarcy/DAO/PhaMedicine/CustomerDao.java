@@ -107,7 +107,7 @@ public class CustomerDao extends GenericDAOHibernate<Customer, Long> {
 				
 			}
 
-			hql.append(" order by giayDanId desc, ngayNhapPM asc ");
+			hql.append(" order by f.giayDan.ngayNhan asc, ngayNhapPM asc ");
 
 			selectHql.append(hql);
 			countHql.append(hql);
