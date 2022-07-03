@@ -55,6 +55,8 @@ import com.itextpdf.text.pdf.PdfGState;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
 import com.viettel.core.base.DAO.BaseComposer;
+import com.viettel.core.user.BO.Users;
+import com.viettel.core.user.DAO.UserDAOHE;
 import com.viettel.module.phamarcy.BO.CKBaoGia;
 import com.viettel.module.phamarcy.BO.CKBaoGiaDetail;
 import com.viettel.module.phamarcy.BO.Customer;
@@ -705,13 +707,11 @@ public class ExportExcell extends BaseComposer {
 	}
 
 	private static void createCell(int cellNum, XSSFRow row, CellStyle style, String content) {
-		row.createCell(cellNum).setCellValue(content == null ? "" : !content.equals(": null") ? content : ":");		 
+		row.createCell(cellNum).setCellValue(content == null ? "" : !content.equals(": null") ? content : ":");
 		row.getCell(cellNum).setCellStyle(style);
 		row.getCell(cellNum).setCellStyle(style);
 
 	}
-	 
-	
 
 	private static void createCellWithBorder(int cellNum, XSSFRow row, CellStyle style, String content) {
 		row.createCell(cellNum).setCellValue(content == null ? "" : !content.equals(": null") ? content : ":");
@@ -856,10 +856,17 @@ public class ExportExcell extends BaseComposer {
 			fs = new FileInputStream(filePath);
 			workbook = new XSSFWorkbook(fs);
 
-			if (quotation.getType() == null || quotation.getType() == 0) {
-				writeDataBaoGia(workbook, quotationDetails, quotation);
-			} else {// xuat bao gia cong trinh
-				writeDataBaoGiaCongTrinh(workbook, quotationDetails, quotation);
+			Users user = new UserDAOHE().getByUserName(quotation.getCreateUserCode());
+
+			//Neu dai  ly thi xuat theo mau khac
+			if (user != null && user.getUserType() == 4) {
+				writeDataBaoGiaDaiLy(workbook, quotationDetails, quotation);
+			} else {
+				if (quotation.getType() == null || quotation.getType() == 0) {
+					writeDataBaoGia(workbook, quotationDetails, quotation);
+				} else {// xuat bao gia cong trinh
+					writeDataBaoGiaCongTrinh(workbook, quotationDetails, quotation);
+				}
 			}
 
 			FileOutputStream fileOut = new FileOutputStream(filePathOut);
@@ -1046,7 +1053,8 @@ public class ExportExcell extends BaseComposer {
 
 		workbook.removeSheetAt(1);
 		workbook.removeSheetAt(1);
-
+		workbook.removeSheetAt(1);
+		
 		return sheet;
 	}
 
@@ -1055,9 +1063,15 @@ public class ExportExcell extends BaseComposer {
 		String dir_upload = ResourceBundleUtil.getString("dir_upload");
 		int rowNum = 17;
 		XSSFSheet sheet = workbook.getSheet("CTR");
+		
 		workbook.setSheetHidden(0, true);
 		workbook.setSheetHidden(1, true);
-		workbook.setSelectedTab(2);
+		
+	 
+		
+		
+		
+		
 		CellStyle style = workbook.createCellStyle(); // Create new style
 		style.setWrapText(true); // Set wordwrap
 		style.setAlignment(CellStyle.ALIGN_LEFT);
@@ -1122,6 +1136,139 @@ public class ExportExcell extends BaseComposer {
 		String expriredYear = new SimpleDateFormat("yyyy").format(exprired);
 
 		sheet.getRow(19).getCell(0).setCellValue(String.format("* Báo giá có hiệu lực đến ngày %s tháng %s năm %s",
+				expriredDate, expriredMonth, expriredYear));
+
+		for (QuotationDetail quotationDetail : quotationDetails) {
+			countQuotation++;
+			colNum = 0;
+			sheet.shiftRows(rowNum, sheet.getLastRowNum(), 1);
+			XSSFRow row0 = createRow(rowNum, sheet, cloneRow0);
+			rowNum++;
+			createCell(colNum++, row0, cloneRow0.getCell(0).getCellStyle(), "" + countQuotation);
+			createCell(colNum++, row0, cloneRow0.getCell(1).getCellStyle(), quotationDetail.getProductName());
+			createCell(colNum++, row0, cloneRow0.getCell(2).getCellStyle(), "");
+			createCell(colNum++, row0, cloneRow0.getCell(3).getCellStyle(), quotationDetail.getUnit());
+			createCell(colNum++, row0, cloneRow0.getCell(4).getCellStyle(),
+					"" + formatNumber(quotationDetail.getAmount(), "###,###,###.####"));
+			createCell(colNum++, row0, cloneRow0.getCell(5).getCellStyle(),
+					"" + formatNumber(quotationDetail.getPrice(), "###,###,###.####"));
+			createCell(colNum++, row0, cloneRow0.getCell(6).getCellStyle(),
+					"" + formatNumber(quotationDetail.getAmount() * quotationDetail.getPrice(), "###,###,###.####"));
+			createCell(colNum++, row0, cloneRow0.getCell(7).getCellStyle(), quotationDetail.getNote());
+
+			Attachs image = quotationDetail.getImage();
+			if (image != null) {
+				File file = new File(dir_upload + image.getFullPathFile());// new
+																			// File("E://DATA/MAU_BAO_GIA/hinh1.png");
+				if (file.exists()) {
+					byte[] bytes = FileUtils.readFileToByteArray(file);// getQRCodeImage(product.getProductCode());
+					int my_picture_id = workbook.addPicture(bytes, XSSFWorkbook.PICTURE_TYPE_PNG);
+					XSSFDrawing drawing = (XSSFDrawing) sheet.createDrawingPatriarch();
+					XSSFClientAnchor my_anchor = new XSSFClientAnchor();
+					my_anchor = new XSSFClientAnchor();
+					my_anchor.setCol1(2); // Column B
+					my_anchor.setRow1(rowNum - 1); // Row 3
+					my_anchor.setCol2(3); // Column C
+					my_anchor.setRow2(rowNum); // Row 4
+					int padding = 4;
+
+					// set padding
+					my_anchor.setDx1(Math.round(padding * Units.EMU_PER_PIXEL));
+					my_anchor.setDx2(Math.round(-padding * Units.EMU_PER_PIXEL));
+
+					my_anchor.setDy1(padding * Units.EMU_PER_PIXEL);
+					my_anchor.setDy2(-padding * Units.EMU_PER_PIXEL);
+
+					drawing.createPicture(my_anchor, my_picture_id);
+				}
+			}
+
+			countRow++;
+		}
+
+		sheet.getRow(rowNum).setHeight((short) 600);
+		sheet.getRow(rowNum).getCell(5).setCellValue(formatNumber(quotation.getTotalPrice(), "###,###,###.####"));
+
+		workbook.removeSheetAt(3);
+		workbook.removeSheetAt(0);
+		workbook.removeSheetAt(0);
+		
+		return sheet;
+	}
+	
+	public static XSSFSheet writeDataBaoGiaDaiLy(XSSFWorkbook workbook, List<QuotationDetail> quotationDetails,
+			Quotation quotation) throws IOException {
+		String dir_upload = ResourceBundleUtil.getString("dir_upload");
+		int rowNum = 14;
+		XSSFSheet sheet = workbook.getSheet("DAI_LY");
+		workbook.setSheetHidden(0, true);
+		workbook.setSheetHidden(1, true);
+		workbook.setSheetHidden(2, true);
+		workbook.setSelectedTab(3);
+		CellStyle style = workbook.createCellStyle(); // Create new style
+		style.setWrapText(true); // Set wordwrap
+		style.setAlignment(CellStyle.ALIGN_LEFT);
+
+		XSSFRow cloneRow0 = workbook.getSheet("KHACH_1").getRow(10);
+
+		int countRow = 0;
+		int colNum = 0;
+
+		int countQuotation = 0;
+
+		Font fontBold = workbook.getSheet("KHACH_1").getRow(0).getCell(6).getCellStyle().getFont();
+		Font fontNormal = workbook.getSheet("KHACH_1").getRow(0).getCell(8).getCellStyle().getFont();
+		Font fontItalic = workbook.getSheet("KHACH_1").getRow(5).getCell(1).getCellStyle().getFont();
+		Font fontItalicNormal = workbook.getSheet("KHACH_1").getRow(4).getCell(1).getCellStyle().getFont();
+		fontNormal.setFontName("Times New Roman");
+		fontItalic.setFontName("Times New Roman");
+
+		// Thong tin bao gia
+		XSSFRichTextString SO_BG = new XSSFRichTextString(
+				"Số BG  : " + (quotation.getQuotationNumber() == null ? "" : quotation.getQuotationNumber()));
+		SO_BG.applyFont(0, 8, fontBold);
+		SO_BG.applyFont(9, SO_BG.length(), fontNormal);
+		sheet.getRow(2).getCell(7).setCellValue(SO_BG);
+
+		XSSFRichTextString MA_NV = new XSSFRichTextString("Mã NV: " + quotation.getCreateUserCode().toUpperCase());
+		MA_NV.applyFont(0, 6, fontBold);
+		MA_NV.applyFont(7, MA_NV.length(), fontNormal);
+		sheet.getRow(3).getCell(7).setCellValue(MA_NV);
+
+		// XSSFRichTextString TEN_NV = new XSSFRichTextString("Tên NV:
+		// "+quotation.getCreateUserFullName());
+		// TEN_NV.applyFont(0, 7, fontBold);
+		// TEN_NV.applyFont(8, TEN_NV.length(), fontNormal);
+		// sheet.getRow(7).getCell(7).setCellValue(TEN_NV);
+
+		Date datetime = new Date();
+		String date = new SimpleDateFormat("dd").format(datetime);
+		String month = new SimpleDateFormat("MM").format(datetime);
+		String year = new SimpleDateFormat("yyyy").format(datetime);
+		sheet.getRow(6).getCell(0).setCellValue(String.format("Ngày %s tháng %s năm %s", date, month, year));
+
+		XSSFRichTextString TEN_KH = new XSSFRichTextString("Kính gửi: " + quotation.getCusName());
+		TEN_KH.applyFont(0, 8, fontItalic);
+		TEN_KH.applyFont(9, TEN_KH.length(), fontNormal);
+		sheet.getRow(7).getCell(1).setCellValue(TEN_KH);
+
+		XSSFRichTextString DIA_CHI_KH = new XSSFRichTextString("Địa chỉ: " + quotation.getCusAddress());
+		DIA_CHI_KH.applyFont(0, 7, fontItalic);
+		DIA_CHI_KH.applyFont(8, DIA_CHI_KH.length(), fontNormal);
+		sheet.getRow(8).getCell(1).setCellValue(DIA_CHI_KH);
+
+		XSSFRichTextString SDT = new XSSFRichTextString(
+				String.format("SĐT: %s", (quotation.getCusPhone() == null ? "" : quotation.getCusPhone())));
+		SDT.applyFont(0, 3, fontItalic);
+		SDT.applyFont(4, SDT.length(), fontNormal);
+		sheet.getRow(7).getCell(7).setCellValue(SDT);
+
+		Date exprired = quotation.getQuotationDate();
+		String expriredDate = new SimpleDateFormat("dd").format(exprired);
+		String expriredMonth = new SimpleDateFormat("MM").format(exprired);
+		String expriredYear = new SimpleDateFormat("yyyy").format(exprired);
+
+		sheet.getRow(16).getCell(0).setCellValue(String.format("* Báo giá có hiệu lực đến ngày %s tháng %s năm %s",
 				expriredDate, expriredMonth, expriredYear));
 
 		for (QuotationDetail quotationDetail : quotationDetails) {
@@ -1505,26 +1652,27 @@ public class ExportExcell extends BaseComposer {
 				soLuongGiayDan = cus.getGiayDan().getSoLuong().intValue();
 				soLuongDaGian = 0;
 				soLuongDungThongtin = 0;
-				isFirst =true;
+				isFirst = true;
 			}
 
 			if (cus.getNgayDiDan() != null) {
 				soLuongDaGian += 1;
 			}
-			
-			if(cus.getKetQuaKiemTra() !=null && cus.getKetQuaKiemTra().intValue() == 1){
-				soLuongDungThongtin +=1;
+
+			if (cus.getKetQuaKiemTra() != null && cus.getKetQuaKiemTra().intValue() == 1) {
+				soLuongDungThongtin += 1;
 			}
 
 			currentGiayDan = giayDanId;
 
 			createCell(colNum++, row0, cloneRow0.getCell(0).getCellStyle(), formatDate(cus.getGiayDan().getNgayNhan()));
-			createCell(colNum++, row0, cloneRow0.getCell(1).getCellStyle(), isFirst ? 
-					formatNumber(cus.getGiayDan().getSoLuong(), "###,###,###.####") : "");
+			createCell(colNum++, row0, cloneRow0.getCell(1).getCellStyle(),
+					isFirst ? formatNumber(cus.getGiayDan().getSoLuong(), "###,###,###.####") : "");
 			createCell(colNum++, row0, cloneRow0.getCell(2).getCellStyle(), cus.getNgayDiDan() != null ? "1" : "0");
 			createCell(colNum++, row0, cloneRow0.getCell(3).getCellStyle(), "" + (soLuongGiayDan - soLuongDaGian));
-			createCell(colNum++, row0, cloneRow0.getCell(4).getCellStyle(), (cus.getKetQuaKiemTra() !=null && cus.getKetQuaKiemTra().intValue() == 0) ? "1" :"");
-			createCell(colNum++, row0, cloneRow0.getCell(5).getCellStyle(), ""+soLuongDungThongtin );
+			createCell(colNum++, row0, cloneRow0.getCell(4).getCellStyle(),
+					(cus.getKetQuaKiemTra() != null && cus.getKetQuaKiemTra().intValue() == 0) ? "1" : "");
+			createCell(colNum++, row0, cloneRow0.getCell(5).getCellStyle(), "" + soLuongDungThongtin);
 			createCell(colNum++, row0, cloneRow0.getCell(6).getCellStyle(), formatDate(cus.getNgayDiDan()));
 			createCell(colNum++, row0, cloneRow0.getCell(7).getCellStyle(), "" + countQuotation);
 
@@ -1532,7 +1680,7 @@ public class ExportExcell extends BaseComposer {
 			XSSFCellStyle style = cloneRow0.getCell(9).getCellStyle();
 			style.setWrapText(true);
 			style.setAlignment(HorizontalAlignment.LEFT);
-			createCell(colNum++, row0, style, cus.getName() == null ? ""  : cus.getName() + ": "  + cus.getPhone());
+			createCell(colNum++, row0, style, cus.getName() == null ? "" : cus.getName() + ": " + cus.getPhone());
 
 			String koGapChuNha = "";
 			if (cus.getGapChuNha() != null && cus.getGapChuNha().intValue() == 0) {
@@ -1554,14 +1702,14 @@ public class ExportExcell extends BaseComposer {
 			createCell(colNum++, row0, cloneRow0.getCell(14).getCellStyle(), cus.getNhanVienKiemTra());
 			createCell(colNum++, row0, cloneRow0.getCell(15).getCellStyle(), cus.getXacNhanQuanLy());
 			countRow++;
-			row0.setHeight((short)-1);
-			
+			row0.setHeight((short) -1);
+
 		}
 
 		sheet.getRow(rowNum).getCell(10).setCellValue(formatNumber(countKoGapChuNha, "###,###,###"));
 		sheet.getRow(rowNum).getCell(11).setCellValue(formatNumber(countGapChuNha, "###,###,###"));
 		sheet.getRow(rowNum).setHeight((short) 600);
-	
+
 		workbook.removeSheetAt(1);
 
 		return sheet;
@@ -1608,7 +1756,8 @@ public class ExportExcell extends BaseComposer {
 	}
 
 	public static void main(String[] args) {
-		testXuatKhachHang();
+		//testXuatKhachHang();
+		testXuatBaoGia();
 	}
 
 	private static void testXuatKhachHang() {
@@ -1664,7 +1813,7 @@ public class ExportExcell extends BaseComposer {
 
 	private static void testXuatBaoGia() {
 		XSSFWorkbook workbook;
-		String path = "D:\\DATA\\DU_AN\\phamarcy\\src\\main\\webapp\\WEB-INF\\template\\MAU_CAM_KET_DAT_HANG_TB.xlsx";
+		String path = "D:\\DATA\\DU_AN\\phamarcy\\src\\main\\webapp\\WEB-INF\\template\\MAU_BAO_GIA.xlsx";
 		InputStream fs;
 		try {
 
@@ -1704,7 +1853,27 @@ public class ExportExcell extends BaseComposer {
 			// List<CKBaoGiaDetail> quotations = new ArrayList<>();
 			// quotations.add(quotation);
 			// quotations.add(quotation);
-			writeDataCamKetBaoGia(workbook, details, quotation);
+			//writeDataCamKetBaoGia(workbook, quotationDetails, quotation)(workbook, details, quotation);
+			
+			List<QuotationDetail> quotationDetails = new ArrayList<>();
+			QuotationDetail quotationDetail = new QuotationDetail();
+			quotationDetail.setPrice(1233L);
+			quotationDetail.setAmount(1234D);
+			quotationDetail.setProductCode("ABC");
+			quotationDetail.setProductName("NABD");
+			quotationDetails.add(quotationDetail);
+			
+			Quotation quotation1 = new Quotation();
+			quotation1.setCusName("abc");
+			quotation1.setCusAddress("123");
+			quotation1.setQuotationNumber("123");
+			quotation1.setQuotationUserName("NV001");
+			
+			
+			
+			writeDataBaoGiaDaiLy(workbook, quotationDetails, quotation1);
+			
+			
 
 			// writeDataBaoGiaCongTrinh(workbook, details, quotation);
 			// writeDataBaoGia(workbook, details, quotation);

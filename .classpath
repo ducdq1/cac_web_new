@@ -46,5 +46,6 @@
 			<attribute name="optional" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="lib/ojdbc14.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
