@@ -52,6 +52,26 @@ public class ThauThoKHDao extends GenericDAOHibernate<ThauThoKH, Long> {
 		getSession().flush();
 		getSession().getTransaction().commit();
 	}
+	
+	public boolean checkExistByPhone(String phone, Long id) {
+		String query = "Select count(p.id) From ThauThoKH p Where lower(p.sdt)= ?";
+
+		if (id != null) {
+			query += " and p.id !=?";
+		}
+
+		Query countQuery = getSession().createQuery(query);
+		countQuery.setParameter(0, phone);
+
+		if (id != null) {
+			countQuery.setParameter(1, id);
+		}
+
+		countQuery.setParameter(0, phone);
+		Long count = (Long) countQuery.uniqueResult();
+		return count > 0;
+	}
+	
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public PagingListModel findAll(ThauThoSearchModel searchModel, int start, int take) {

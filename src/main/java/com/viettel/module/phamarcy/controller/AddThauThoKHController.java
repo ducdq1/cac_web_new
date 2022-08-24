@@ -234,8 +234,16 @@ public class AddThauThoKHController extends BaseComposer {
 		thauThoKH.setNoiDunHoaHong(tbNoiDungTienHoaHong.getText().trim());
 		thauThoKH.setNhanVienPhuTrach(tbNVPT.getText().trim());
 		
-		new ThauThoKHDao().saveOrUpdate(thauThoKH);
-
+		
+		ThauThoKHDao thauThoKHDao = new ThauThoKHDao();
+		if(thauThoKHDao.checkExistByPhone(thauThoKH.getSdt(), thauThoKH.getId())){
+			tbDT.setErrorMessage("Số điện thoại này đã bị trùng");
+			return;
+		}
+		
+		
+		thauThoKHDao.saveOrUpdate(thauThoKH);
+		 
 		showNotification("Lưu thông tin thành công", Constants.Notification.INFO, 1500);
 
 		HashMap<String, Object> map = new HashMap<String, Object>();
