@@ -135,18 +135,12 @@ public class ProductService {
 	public ProductResponse findProduct(final SearchProductBO searchProductBO) {
 		ProductResponse productResponse = new ProductResponse();
 		try {
-			long startTime = new Date().getTime();
-			System.out.println("--------Start Search-------");
-			System.out.println("Body: ");
-			System.out.println(new Gson().toJson(searchProductBO));
 
 			List<com.viettel.module.phamarcy.BO.Product> lstProduct = new ProductDao().searchProductByCode(
 					searchProductBO, searchProductBO.getOffset() * searchProductBO.getLimit(),
 					searchProductBO.getLimit());
 
 			productResponse.setLstProduct(lstProduct);
-			System.out.println("--------End search result: " + lstProduct.size());
-			System.out.println("+ Time search: " + (new Date().getTime() - startTime));
 			return productResponse;
 		} catch (Exception e) {
 			e.printStackTrace();

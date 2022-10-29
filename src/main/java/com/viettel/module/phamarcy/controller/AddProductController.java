@@ -74,7 +74,7 @@ public class AddProductController extends BaseComposer {
 	 */
 	private static final long serialVersionUID = 6105342511808925036L;
 	@Wire
-	private Textbox tbMaSP, tbMaHangHoa, tbMaSPDaiLy, tbGiaNhapKM, tbGiaBLKM, tbGiaDL, tbGiaDLKM;
+	private Textbox tbMaSP, tbMaHangHoa,tbMaHangHoaMoi, tbMaSPDaiLy, tbGiaNhapKM, tbGiaBLKM, tbGiaDL, tbGiaDLKM;
 	@Wire
 	private Label lbDSP;
 	@Wire
@@ -232,6 +232,7 @@ public class AddProductController extends BaseComposer {
 
 	private void viewData() throws IOException {
 		tbMaHangHoa.setValue(product.getMaHangHoa());
+		tbMaHangHoaMoi.setValue(product.getMaHangHoaMoi());
 		cbTenSP.setValue(product.getProductName());
 		tbMaSP.setText(product.getProductCode());
 		tbMaSPDaiLy.setText(product.getMaDaiLy());
@@ -335,6 +336,7 @@ public class AddProductController extends BaseComposer {
 		}
 
 		product.setMaHangHoa(tbMaHangHoa.getText().trim());
+		product.setMaHangHoaMoi(tbMaHangHoaMoi.getText().trim());
 		product.setProductName(cbTenSP.getValue());
 		product.setProductCode(tbMaSP.getText().toUpperCase());
 		// product.setPrice(getLongFromString(tbGiaNhap.getText().trim()));
@@ -386,8 +388,8 @@ public class AddProductController extends BaseComposer {
 			product = new Product();
 		}
 
-		if (new ProductDao().checkExistMaHangHoa(tbMaHangHoa.getText().trim().toLowerCase(), product.getProductId())) {
-			tbMaHangHoa.setErrorMessage("Mã hàng hóa này đã tồn tại. Vui lòng nhập mã khác");
+		if (new ProductDao().checkExistMaHangHoa(tbMaHangHoaMoi.getText().trim().toLowerCase(), product.getProductId())) {
+			tbMaHangHoaMoi.setErrorMessage("Mã hàng hóa này đã tồn tại. Vui lòng nhập mã khác");
 			return false;
 		}
 

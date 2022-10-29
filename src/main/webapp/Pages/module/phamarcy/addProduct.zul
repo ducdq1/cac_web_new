@@ -69,6 +69,12 @@
 					<h:td>
 						<textbox id="tbMaHangHoa" > </textbox>
 					</h:td>
+					<h:td style="text-align: right;">
+						<label sclass="lb-create">Mã vật tư mới(*):  </label>
+					</h:td>
+					<h:td>
+						<textbox id="tbMaHangHoaMoi" > </textbox>
+					</h:td>
 				 </h:tr>
 				<h:tr>
 					<h:td style="text-align: right;">

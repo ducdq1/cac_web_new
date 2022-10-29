@@ -114,6 +114,9 @@ public class Product extends BaseComposer implements Serializable {
 	@Column(name = "MA_HANG_HOA")
 	private String maHangHoa;
 	
+	@Column(name = "MA_HANG_HOA_MOI")
+	private String maHangHoaMoi;//ma hang hoa cho PM KiotViet
+	
 	@Column(name = "CREATE_USER")
 	private String createUser;
 	
@@ -132,6 +135,7 @@ public class Product extends BaseComposer implements Serializable {
 	
 	@Column(name = "MA_DAI_LY")
 	private String maDaiLy;
+	
 	
 	public Long getProductId() {
 		return productId;
@@ -390,5 +394,14 @@ public class Product extends BaseComposer implements Serializable {
 	public void setMaDaiLy(String maDaiLy) {
 		this.maDaiLy = maDaiLy;
 	}
+
+	public String getMaHangHoaMoi() {
+		return maHangHoaMoi;
+	}
+
+	public void setMaHangHoaMoi(String maHangHoaMoi) {
+		this.maHangHoaMoi = maHangHoaMoi;
+	}
+	
 	 
 }

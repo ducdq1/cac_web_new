@@ -85,7 +85,10 @@ public class ProductDao extends GenericDAOHibernate<Product, Long> {
 
 				String maHangHoa = searchModel.getMaHangHoa();
 				if (maHangHoa != null && !maHangHoa.isEmpty()) {
-					hql.append(" and lower(f.maHangHoa) like ? escape '/'");
+					hql.append(" and ( lower(f.maHangHoa) like ? escape '/'");
+					lstParam.add(StringUtils.toLikeString(maHangHoa.toLowerCase()));
+					
+					hql.append(" or lower(f.maHangHoaMoi) like ? escape '/' )");
 					lstParam.add(StringUtils.toLikeString(maHangHoa.toLowerCase()));
 				}
 
@@ -161,6 +164,9 @@ public class ProductDao extends GenericDAOHibernate<Product, Long> {
 				String code = bo.getProductCode();
 				if (code != null && !code.isEmpty()) {
 					selectHql.append(" and (lower(f.productCode) like ? escape '/' ");
+					lstParam.add(StringUtils.toLikeString(code.toLowerCase()));
+					
+					selectHql.append(" or lower(f.maHangHoaMoi) like ? escape '/' ");
 					lstParam.add(StringUtils.toLikeString(code.toLowerCase()));
 
 					selectHql.append(
@@ -383,7 +389,7 @@ public class ProductDao extends GenericDAOHibernate<Product, Long> {
 	}
 
 	public boolean checkExistMaHangHoa(String productCode, Long productId) {
-		String query = "Select count(p.productId) From Product p Where lower(p.maHangHoa)= ?";
+		String query = "Select count(p.productId) From Product p Where lower(p.maHangHoaMoi)= ?";
 
 		if (productId != null) {
 			query += " and p.productId !=?";

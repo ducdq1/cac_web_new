@@ -38,7 +38,7 @@
 					</label>
 				</listcell>	
 				<listcell style="text-align:left">
-					<label value="${each.maHangHoa}"  />
+					<label value="${each.maHangHoaMoi}"  />
 				</listcell>			
 				 <listcell style="text-align:left">
 					<label value="${each.productCode}"  />
