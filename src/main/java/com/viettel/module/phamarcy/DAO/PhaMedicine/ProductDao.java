@@ -350,9 +350,7 @@ public class ProductDao extends GenericDAOHibernate<Product, Long> {
 				query.setParameter(i, lstParam.get(i));
 			}
 
-			System.out.println("--------Start Find Product-------");
 			lstProduct = query.list();
-			System.out.println("--------End Find Product-------");
 			currentSession.setFlushMode(FlushMode.AUTO);
 		} catch (SQLGrammarException e) {
 			LogUtils.addLog(e);
