@@ -48,8 +48,9 @@ public class KiotVietService {
 			SSLContext ctx = SSLContexts.custom().useProtocol("TLSv1.2").build();
 			httpClient = HttpClientBuilder.create().setSslcontext(ctx).build();
 
-			String url = ResourceBundleUtil.getString("kiot_viet_product_url");
-			HttpGet request = new HttpGet(url + URLEncoder.encode(maVT, StandardCharsets.UTF_8.toString()));
+			String url = ResourceBundleUtil.getString("kiot_viet_product_url")
+					+ URLEncoder.encode(maVT, StandardCharsets.UTF_8.toString());
+			HttpGet request = new HttpGet(url);
 
 			RequestConfig.Builder requestConfig = RequestConfig.custom();
 			requestConfig.setConnectTimeout(20 * 1000);
@@ -77,7 +78,7 @@ public class KiotVietService {
 			if (response.getStatusLine().getStatusCode() == 200 && entity != null) {
 
 				String result = EntityUtils.toString(entity);
-				System.out.println(result);
+				// System.out.println(result);
 				HangHoaBO tonKho = new HangHoaBO();//
 				KiotVietProductResponse kiotVietProductResponse = new Gson().fromJson(result,
 						KiotVietProductResponse.class);
