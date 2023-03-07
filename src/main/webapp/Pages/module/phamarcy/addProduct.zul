@@ -393,7 +393,7 @@
 		</div>
 
 		<div style=" margin:0 auto ;padding-top:20px" align="center">
-			<button class="button" height="30px"
+			<button  class="button" height="30px"
 				image="/Share/img/icon/save.png" id="btnSave" label="Lưu lại" />
 
 			<button class="button" height="30px"

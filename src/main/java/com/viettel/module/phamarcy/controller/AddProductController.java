@@ -30,6 +30,7 @@ import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Filedownload;
@@ -91,6 +92,9 @@ public class AddProductController extends BaseComposer {
 	@Wire
 	Canvas cvs;
 	@Wire
+	Button btnSave;
+	
+	@Wire
 	private Radiogroup rdg, rdgProductType;
 	@Wire
 	private Window createDlg;
@@ -145,6 +149,13 @@ public class AddProductController extends BaseComposer {
 		}
 
 		loadComboboxData();
+
+		HttpServletRequest req = (HttpServletRequest) Executions.getCurrent().getNativeRequest();
+		HttpSession httpSession = req.getSession(true);
+		UserToken userToken = (UserToken) httpSession.getAttribute("userToken");
+		if (userToken != null && !userToken.getUserType().equals(3L)) {
+			btnSave.setVisible(false);
+		}
 
 	}
 
@@ -537,6 +548,8 @@ public class AddProductController extends BaseComposer {
 		} catch (WriterException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
+			e.printStackTrace();
+		}catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
