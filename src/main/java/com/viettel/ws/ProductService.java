@@ -2,6 +2,7 @@ package com.viettel.ws;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -664,7 +665,15 @@ public class ProductService {
 	}
 
 	public static void main(String[] args) {
+		BigDecimal bigDecimal = new BigDecimal(1.35);
+		
+		System.out.println(bigDecimal.toString());
+		bigDecimal = bigDecimal.setScale(0, RoundingMode.UP);
+		
+		System.out.println(bigDecimal);
+		
 
+		
 		// layToken();
 		//layThongTinTonKho_KiotViet("TB001BC-ACT832-CW-S32VN");
 	}

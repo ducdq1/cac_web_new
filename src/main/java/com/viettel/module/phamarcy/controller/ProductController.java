@@ -6,7 +6,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -26,6 +30,7 @@ import org.zkoss.zul.Window;
 
 import com.viettel.core.base.DAO.BaseComposer;
 import com.viettel.core.base.model.PagingListModel;
+import com.viettel.core.user.model.UserToken;
 import com.viettel.module.phamarcy.BO.PhamarcyFileModel;
 import com.viettel.module.phamarcy.BO.Product;
 import com.viettel.module.phamarcy.BO.VPhaFileMedicine;
@@ -77,6 +82,19 @@ public class ProductController extends BaseComposer {
 		onSearch();
 	}
 
+	//User ke toan thi ko cho phep xem/sua gia
+	public boolean isNotUserKeToan(){
+		HttpServletRequest req = (HttpServletRequest) Executions.getCurrent().getNativeRequest();
+		HttpSession httpSession = req.getSession(true);
+		UserToken userToken = (UserToken) httpSession.getAttribute("userToken");
+	 
+		if (userToken != null) {
+			 return !userToken.getUserName().equals("kt");
+		}
+		
+		return true;
+	}
+	
 	@Listen("onClick = #incSearchFullForm #btnSearch")
 	public void onSearch() {
 		lastSearchModel.setProductCode(tbMaSP.getText().trim());

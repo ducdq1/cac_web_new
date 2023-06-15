@@ -71,7 +71,7 @@ public class BaoGiaController extends BaseComposer {
 	@Wire
 	private Label lbTongtien;
 	@Wire
-	private Button btnClose, btnSave,btnPreView;
+	private Button btnClose, btnPrint,btnSave,btnPreView;
 	@Wire
 	Radiogroup rdgLoaiBaoGia;
 	@Wire
@@ -103,15 +103,22 @@ public class BaoGiaController extends BaseComposer {
 
 		quotation = (Quotation) arguments.get("quotation");
 		parrent = (Window) arguments.get("parrent");
+		
+
+		
+		HttpServletRequest req = (HttpServletRequest) Executions.getCurrent().getNativeRequest();
+		HttpSession httpSession = req.getSession(true);
+		UserToken userToken = (UserToken) httpSession.getAttribute("userToken");
+		
+		
 		if (quotation == null) {
 			btnClose.setVisible(false);
 			phamarcyAll.setClosable(false);
 			phamarcyAll.setTitle("");
 			quotation = new Quotation();
 			lstQuotationDetail = new ArrayList<>();
-			HttpServletRequest req = (HttpServletRequest) Executions.getCurrent().getNativeRequest();
-			HttpSession httpSession = req.getSession(true);
-			UserToken userToken = (UserToken) httpSession.getAttribute("userToken");
+			
+			
 			if (userToken != null) {
 				tbMaNVBH.setValue(userToken.getUserName());
 				tbTenNVBH.setValue(userToken.getUserFullName());
@@ -145,6 +152,13 @@ public class BaoGiaController extends BaseComposer {
 			btnPreView.setVisible(false);
 		}else{
 			btnPreView.setVisible(true);
+		}
+		
+		if (userToken != null && userToken.getUserType().intValue() != 3) {
+			btnPreView.setVisible(false);
+			btnSave.setVisible(false);
+			btnPrint.setVisible(false); 
+			
 		}
 	}
 

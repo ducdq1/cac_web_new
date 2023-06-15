@@ -2,6 +2,7 @@ package com.viettel.module.phamarcy.BO;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Date;
 
 import javax.persistence.Basic;
@@ -137,6 +138,9 @@ public class Quotation implements Serializable {
 	}
 
 	public void setTotalPrice(BigDecimal totalPrice) {
+		if(totalPrice != null){
+			totalPrice = totalPrice.setScale(0, RoundingMode.UP);
+		}
 		this.totalPrice = totalPrice;
 	}
 
