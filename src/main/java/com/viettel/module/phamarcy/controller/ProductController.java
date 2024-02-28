@@ -82,17 +82,17 @@ public class ProductController extends BaseComposer {
 		onSearch();
 	}
 
-	//User ke toan thi ko cho phep xem/sua gia
+	//Chi cho phep QLBH xem/sua gia
 	public boolean isNotUserKeToan(){
 		HttpServletRequest req = (HttpServletRequest) Executions.getCurrent().getNativeRequest();
 		HttpSession httpSession = req.getSession(true);
 		UserToken userToken = (UserToken) httpSession.getAttribute("userToken");
 	 
 		if (userToken != null) {
-			 return !userToken.getUserName().equals("kt");
+			 return userToken.getUserType().equals(3L);
 		}
 		
-		return true;
+		return false;
 	}
 	
 	@Listen("onClick = #incSearchFullForm #btnSearch")

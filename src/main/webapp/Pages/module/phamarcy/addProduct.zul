@@ -69,12 +69,7 @@
 					<h:td>
 						<textbox id="tbMaHangHoa" > </textbox>
 					</h:td>
-					<h:td style="text-align: right;">
-						<label sclass="lb-create">Mã vật tư mới(*):  </label>
-					</h:td>
-					<h:td>
-						<textbox id="tbMaHangHoaMoi" > </textbox>
-					</h:td>
+					
 				 </h:tr>
 				<h:tr>
 					<h:td style="text-align: right;">
@@ -114,7 +109,7 @@
 
 				</h:tr>
 				<h:tr>
-					<h:td style="text-align: right;">
+					<!-- <h:td style="text-align: right;">
 						<label sclass="lb-create" >Xuất xứ:  </label>
 					</h:td>
 					<h:td colspan="1"  >
@@ -126,7 +121,7 @@
 						</combobox>
 						<button class="button" height="30px"
 							image="/Share/img/icon/Add.png" id="btnThemXuatXu" label="" tooltip="Thêm xuất xứ" /></div>
-					</h:td>
+					</h:td> -->
 			 
 					<h:td style="text-align: right;">
 						<label sclass="lb-create">Thông tin bảo hành:  </label>
@@ -190,7 +185,7 @@
 				 
 				</h:tr>
 				<h:tr>
-					<h:td style="text-align: right;">
+					<!-- <h:td style="text-align: right;">
 						<label sclass="lb-create">Tính năng:  </label>
 					</h:td>
 					<h:td colspan="1">
@@ -203,7 +198,7 @@
 						<button class="button" height="30px"
 							image="/Share/img/icon/Add.png" id="btnThemTinhNang" label="" />
 							</div>
-					</h:td>
+					</h:td> -->
 				 
 					<h:td style="text-align: right;">
 						<label sclass="lb-create">Kích thước:  </label> 
@@ -220,8 +215,7 @@
 							</div>
 					</h:td>
 					
-				</h:tr>
-					<h:tr>
+			 
 					<h:td style="text-align: right;">
 						<label sclass="lb-create">Đơn vị tính(*):  </label>
 					</h:td>
@@ -237,7 +231,7 @@
 							</div>
 					</h:td>
 				 
-					<h:td style="text-align: right;">
+				<!-- 	<h:td style="text-align: right;">
 						<label sclass="lb-create">Trọng lượng thùng:  </label> 
 					</h:td>
 					<h:td>
@@ -249,11 +243,11 @@
 						</combobox>
 						<button class="button" height="30px"
 							image="/Share/img/icon/Add.png" id="btnThemTrongLuongThung" label="" /></div>
-					</h:td>
+					</h:td> -->
 					 
 				</h:tr>
 				<h:tr>
-					<h:td style="text-align: right;">
+					<!-- <h:td style="text-align: right;">
 						<label sclass="lb-create">Đóng gói viên/thùng:  </label> 
 					</h:td>
 					<h:td>
@@ -266,7 +260,7 @@
 						<button class="button" height="30px"
 							image="/Share/img/icon/Add.png" id="btnThemDongGoi" label="" />
 							</div>
-					</h:td>
+					</h:td> -->
 					<h:td style="text-align: right;">
 						<label sclass="lb-create">Nơi sản xuất:  </label> 
 					</h:td>
@@ -282,9 +276,8 @@
 							image="/Share/img/icon/Add.png" id="btnThemNoiSanXuat" label="" />
 							</div>
 					</h:td>
-				</h:tr>
-				<h:tr>
-					<h:td style="text-align: right;">
+				 
+					<!-- <h:td style="text-align: right;">
 						<label sclass="lb-create">Mô tả màu sắc:  </label>
 					</h:td>
 					<h:td colspan="1">
@@ -296,11 +289,11 @@
 						</combobox>
 						<button class="button" height="30px"
 							image="/Share/img/icon/Add.png" id="btnThemMauSac" label="" tooltip="Thêm mô tả màu sắc" /></div>
-					</h:td>
-				 <h:td style="text-align: right;">
+					</h:td> -->
+				 <!--<h:td style="text-align: right;">
 						<label sclass="lb-create">Thông số kỹ thuật:  </label> 
 					</h:td>
-					<h:td>
+					 <h:td>
 						<div><combobox id="cbThongSoKyThuat" autocomplete="true" width="82%" style="margin-bottom:10px">
 						<template name="model">
 							<comboitem value="${each}"
@@ -310,9 +303,9 @@
 						<button class="button" height="30px"
 							image="/Share/img/icon/Add.png" id="btnThemThongSoKT" label="" />
 							</div>
-					</h:td>
-				</h:tr>
-				<h:tr>
+					</h:td> -->
+				<!-- </h:tr>
+				<h:tr> -->
 					<h:td style="text-align: right;">
 						<label id="lbDSP" sclass="lb-create" visible="false">Dòng sản phẩm:  </label> 
 					</h:td>

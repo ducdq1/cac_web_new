@@ -263,7 +263,7 @@ public class ExportExcell extends BaseComposer {
 
 			createCell(colNum++, row5, cloneRow5.getCell(0).getCellStyle(), cloneRow5.getCell(0).getStringCellValue());
 			createCell(colNum++, row5, cloneRow5.getCell(1).getCellStyle(),
-					product.getMadeIn() == null ? "" : product.getMadeIn().toUpperCase());
+					product.getNoiSanXuat() == null ? "" : product.getNoiSanXuat().toUpperCase());
 			createCell(colNum++, row5, cloneRow5.getCell(2).getCellStyle(), "");
 
 			if (countRow % 2 == 0) {
@@ -584,7 +584,7 @@ public class ExportExcell extends BaseComposer {
 
 			createCell(colNum++, row6, cloneRow6.getCell(0).getCellStyle(), cloneRow6.getCell(0).getStringCellValue());
 			createCell(colNum++, row6, cloneRow6.getCell(1).getCellStyle(),
-					String.format(": %s", product.getMadeIn() == null ? "" : product.getMadeIn().toUpperCase()));
+					String.format(": %s", product.getNoiSanXuat() == null ? "" : product.getNoiSanXuat().toUpperCase()));
 			createCell(colNum++, row6, cloneRow6.getCell(2).getCellStyle(), "");
 
 			countRow++;
@@ -858,7 +858,7 @@ public class ExportExcell extends BaseComposer {
 
 			Users user = new UserDAOHE().getByUserName(quotation.getCreateUserCode());
 
-			//Neu dai  ly thi xuat theo mau khac
+			// Neu dai ly thi xuat theo mau khac
 			if (user != null && user.getUserType() == 4) {
 				writeDataBaoGiaDaiLy(workbook, quotationDetails, quotation);
 			} else {
@@ -954,8 +954,8 @@ public class ExportExcell extends BaseComposer {
 		int colNum = 0;
 		int countQuotation = 0;
 
-		Font fontBold = workbook.getSheet("KHACH_1").getRow(0).getCell(6).getCellStyle().getFont();
-		Font fontNormal = workbook.getSheet("KHACH_1").getRow(0).getCell(8).getCellStyle().getFont();
+		Font fontBold = workbook.getSheet("KHACH_1").getRow(0).getCell(7).getCellStyle().getFont();
+		Font fontNormal = workbook.getSheet("KHACH_1").getRow(0).getCell(9).getCellStyle().getFont();
 		Font fontItalic = workbook.getSheet("KHACH_1").getRow(5).getCell(1).getCellStyle().getFont();
 		Font fontItalicNormal = workbook.getSheet("KHACH_1").getRow(4).getCell(1).getCellStyle().getFont();
 		fontNormal.setFontName("Times New Roman");
@@ -966,12 +966,12 @@ public class ExportExcell extends BaseComposer {
 				"Số BG : " + (quotation.getQuotationNumber() == null ? "" : quotation.getQuotationNumber()));
 		SO_BG.applyFont(0, 7, fontBold);
 		SO_BG.applyFont(8, SO_BG.length(), fontNormal);
-		sheet.getRow(0).getCell(7).setCellValue(SO_BG);
+		sheet.getRow(0).getCell(8).setCellValue(SO_BG);
 
 		XSSFRichTextString MA_NV = new XSSFRichTextString("Mã NV: " + quotation.getCreateUserCode().toUpperCase());
 		MA_NV.applyFont(0, 6, fontBold);
 		MA_NV.applyFont(7, MA_NV.length(), fontNormal);
-		sheet.getRow(1).getCell(7).setCellValue(MA_NV);
+		sheet.getRow(1).getCell(8).setCellValue(MA_NV);
 
 		Date datetime = new Date();
 		String date = new SimpleDateFormat("dd").format(datetime);
@@ -1004,6 +1004,10 @@ public class ExportExcell extends BaseComposer {
 				expriredDate, expriredMonth, expriredYear));
 
 		for (QuotationDetail quotationDetail : quotationDetails) {
+
+			Product product = new ProductDao().findById(quotationDetail.getProductId());
+			String salePrice = product != null ? product.getSalePrice() : "";
+
 			countQuotation++;
 			colNum = 0;
 			sheet.shiftRows(rowNum, sheet.getLastRowNum(), 1);
@@ -1016,10 +1020,12 @@ public class ExportExcell extends BaseComposer {
 			createCell(colNum++, row0, cloneRow0.getCell(4).getCellStyle(),
 					"" + formatNumber(quotationDetail.getAmount(), "###,###,###.####"));
 			createCell(colNum++, row0, cloneRow0.getCell(5).getCellStyle(),
-					"" + formatNumber(quotationDetail.getPrice(), "###,###,###.####"));
+					salePrice);
 			createCell(colNum++, row0, cloneRow0.getCell(6).getCellStyle(),
+					"" + formatNumber(quotationDetail.getPrice(), "###,###,###.####"));
+			createCell(colNum++, row0, cloneRow0.getCell(7).getCellStyle(),
 					"" + formatNumber(quotationDetail.getAmount() * quotationDetail.getPrice(), "###,###,###.####"));
-			createCell(colNum++, row0, cloneRow0.getCell(7).getCellStyle(), quotationDetail.getNote());
+			createCell(colNum++, row0, cloneRow0.getCell(8).getCellStyle(), quotationDetail.getNote());
 
 			Attachs image = quotationDetail.getImage();
 			if (image != null) {
@@ -1054,7 +1060,7 @@ public class ExportExcell extends BaseComposer {
 		workbook.removeSheetAt(1);
 		workbook.removeSheetAt(1);
 		workbook.removeSheetAt(1);
-		
+
 		return sheet;
 	}
 
@@ -1063,15 +1069,10 @@ public class ExportExcell extends BaseComposer {
 		String dir_upload = ResourceBundleUtil.getString("dir_upload");
 		int rowNum = 17;
 		XSSFSheet sheet = workbook.getSheet("CTR");
-		
+
 		workbook.setSheetHidden(0, true);
 		workbook.setSheetHidden(1, true);
-		
-	 
-		
-		
-		
-		
+
 		CellStyle style = workbook.createCellStyle(); // Create new style
 		style.setWrapText(true); // Set wordwrap
 		style.setAlignment(CellStyle.ALIGN_LEFT);
@@ -1192,10 +1193,10 @@ public class ExportExcell extends BaseComposer {
 		workbook.removeSheetAt(3);
 		workbook.removeSheetAt(0);
 		workbook.removeSheetAt(0);
-		
+
 		return sheet;
 	}
-	
+
 	public static XSSFSheet writeDataBaoGiaDaiLy(XSSFWorkbook workbook, List<QuotationDetail> quotationDetails,
 			Quotation quotation) throws IOException {
 		String dir_upload = ResourceBundleUtil.getString("dir_upload");
@@ -1756,7 +1757,7 @@ public class ExportExcell extends BaseComposer {
 	}
 
 	public static void main(String[] args) {
-		//testXuatKhachHang();
+		// testXuatKhachHang();
 		testXuatBaoGia();
 	}
 
@@ -1853,8 +1854,9 @@ public class ExportExcell extends BaseComposer {
 			// List<CKBaoGiaDetail> quotations = new ArrayList<>();
 			// quotations.add(quotation);
 			// quotations.add(quotation);
-			//writeDataCamKetBaoGia(workbook, quotationDetails, quotation)(workbook, details, quotation);
-			
+			// writeDataCamKetBaoGia(workbook, quotationDetails,
+			// quotation)(workbook, details, quotation);
+
 			List<QuotationDetail> quotationDetails = new ArrayList<>();
 			QuotationDetail quotationDetail = new QuotationDetail();
 			quotationDetail.setPrice(1233L);
@@ -1862,18 +1864,14 @@ public class ExportExcell extends BaseComposer {
 			quotationDetail.setProductCode("ABC");
 			quotationDetail.setProductName("NABD");
 			quotationDetails.add(quotationDetail);
-			
+
 			Quotation quotation1 = new Quotation();
 			quotation1.setCusName("abc");
 			quotation1.setCusAddress("123");
 			quotation1.setQuotationNumber("123");
 			quotation1.setQuotationUserName("NV001");
-			
-			
-			
+
 			writeDataBaoGiaDaiLy(workbook, quotationDetails, quotation1);
-			
-			
 
 			// writeDataBaoGiaCongTrinh(workbook, details, quotation);
 			// writeDataBaoGia(workbook, details, quotation);

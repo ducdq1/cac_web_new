@@ -75,12 +75,12 @@ public class AddProductController extends BaseComposer {
 	 */
 	private static final long serialVersionUID = 6105342511808925036L;
 	@Wire
-	private Textbox tbMaSP, tbMaHangHoa,tbMaHangHoaMoi, tbMaSPDaiLy, tbGiaNhapKM, tbGiaBLKM, tbGiaDL, tbGiaDLKM;
+	private Textbox tbMaSP, tbMaHangHoa, tbMaSPDaiLy, tbGiaNhapKM, tbGiaBLKM, tbGiaDL, tbGiaDLKM;
 	@Wire
 	private Label lbDSP;
 	@Wire
-	private Combobox cbXuatXu, cbKichThuoc, cbTinhNang, cbDonViTinh, cbTrongLuongThung, cbDongGoi, cbNoiSanXuat,
-			cbThongSoKyThuat, cbTenSP, cbColor, cbBaoHanh;
+	private Combobox   cbKichThuoc, cbDonViTinh, cbNoiSanXuat,
+			 cbTenSP,   cbBaoHanh;
 	@Wire
 	private Textbox tbGia, tbGiaNhap, tbDSP;
 	@Wire
@@ -161,16 +161,16 @@ public class AddProductController extends BaseComposer {
 
 	private void loadComboboxData() {
 		initCombobox(TYPE_TEN_SP, cbTenSP);
-		initCombobox(TYPE_DONG_GOI_VIEN_THUNG, cbDongGoi);
+//		initCombobox(TYPE_DONG_GOI_VIEN_THUNG, cbDongGoi);
 		initCombobox(TYPE_DVT, cbDonViTinh);
 		initCombobox(TYPE_KICK_THUOC, cbKichThuoc);
 		initCombobox(TYPE_NOI_SX, cbNoiSanXuat);
-		initCombobox(TYPE_TINH_NANG, cbTinhNang);
-		initCombobox(TYPE_TRONG_LUONG_THUNG, cbTrongLuongThung);
-		initCombobox(TYPE_XUAT_XU, cbXuatXu);
-		initCombobox(TYPE_THONG_SO_KT, cbThongSoKyThuat);
+//		initCombobox(TYPE_TINH_NANG, cbTinhNang);
+//		initCombobox(TYPE_TRONG_LUONG_THUNG, cbTrongLuongThung);
+//		initCombobox(TYPE_XUAT_XU, cbXuatXu);
+//		initCombobox(TYPE_THONG_SO_KT, cbThongSoKyThuat);
 		initCombobox(TYPE_BAO_HANH, cbBaoHanh);
-		initCombobox(TYPE_MAU_SAC, cbColor);
+//		initCombobox(TYPE_MAU_SAC, cbColor);
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -243,7 +243,7 @@ public class AddProductController extends BaseComposer {
 
 	private void viewData() throws IOException {
 		tbMaHangHoa.setValue(product.getMaHangHoa());
-		tbMaHangHoaMoi.setValue(product.getMaHangHoaMoi());
+//		tbMaHangHoaMoi.setValue(product.getMaHangHoaMoi());
 		cbTenSP.setValue(product.getProductName());
 		tbMaSP.setText(product.getProductCode());
 		tbMaSPDaiLy.setText(product.getMaDaiLy());
@@ -257,17 +257,17 @@ public class AddProductController extends BaseComposer {
 
 		cbBaoHanh.setValue(product.getWarranty());
 
-		cbXuatXu.setValue(product.getMadeIn());
+//		cbXuatXu.setValue(product.getMadeIn());
 		rdg.setSelectedIndex(product.getVat() == null ? 0 : product.getVat().intValue());
 		rdgProductType.setSelectedIndex(product.getProductType() == null ? 0 : product.getProductType().intValue());
 		cbKichThuoc.setValue(product.getSize());
-		cbTinhNang.setValue(product.getFeature());
-		cbDongGoi.setValue(product.getDongGoi());
+//		cbTinhNang.setValue(product.getFeature());
+//		cbDongGoi.setValue(product.getDongGoi());
 		cbNoiSanXuat.setValue(product.getNoiSanXuat());
-		cbTrongLuongThung.setValue(product.getTrongLuongThung());
+//		cbTrongLuongThung.setValue(product.getTrongLuongThung());
 		cbDonViTinh.setValue(product.getUnit());
-		cbColor.setValue(product.getColor());
-		cbThongSoKyThuat.setValue(product.getThongSoKT());
+//		cbColor.setValue(product.getColor());
+//		cbThongSoKyThuat.setValue(product.getThongSoKT());
 
 		if (isCopy != null && !isCopy) {
 			attachs = new AttachDAOHE().findAllAttachByAttachCodeAndAttachTye(Constants.OBJECT_TYPE.CAC_IMAGE,
@@ -347,7 +347,7 @@ public class AddProductController extends BaseComposer {
 		}
 
 		product.setMaHangHoa(tbMaHangHoa.getText().trim());
-		product.setMaHangHoaMoi(tbMaHangHoaMoi.getText().trim());
+//		product.setMaHangHoaMoi(tbMaHangHoaMoi.getText().trim());
 		product.setProductName(cbTenSP.getValue());
 		product.setProductCode(tbMaSP.getText().toUpperCase());
 		// product.setPrice(getLongFromString(tbGiaNhap.getText().trim()));
@@ -361,21 +361,21 @@ public class AddProductController extends BaseComposer {
 
 		product.setMaDaiLy(tbMaSPDaiLy.getText().trim());
 		product.setSize(cbKichThuoc.getValue().toString());
-		product.setFeature(cbTinhNang.getValue());
-		product.setThongSoKT(cbThongSoKyThuat.getValue());
+//		product.setFeature(cbTinhNang.getValue());
+//		product.setThongSoKT(cbThongSoKyThuat.getValue());
 
 		int index = rdgProductType.getSelectedIndex();
 
 		product.setProductType(Long.valueOf(rdgProductType.getSelectedIndex()));
 		product.setVat(Long.valueOf(rdg.getSelectedIndex()));
 		product.setWarranty(cbBaoHanh.getValue());
-		product.setMadeIn(cbXuatXu.getValue());
-		product.setDongGoi(cbDongGoi.getValue());
-		product.setTrongLuongThung(cbTrongLuongThung.getValue());
+//		product.setMadeIn(cbXuatXu.getValue());
+//		product.setDongGoi(cbDongGoi.getValue());
+//		product.setTrongLuongThung(cbTrongLuongThung.getValue());
 		product.setNoiSanXuat(cbNoiSanXuat.getValue());
 		product.setUnit(cbDonViTinh.getValue());
 		product.setCreateDate(new Date());
-		product.setColor(cbColor.getValue().toString());
+//		product.setColor(cbColor.getValue().toString());
 		if (index >= 2) {
 			product.setDsp(tbDSP.getText());
 		}
@@ -399,10 +399,10 @@ public class AddProductController extends BaseComposer {
 			product = new Product();
 		}
 
-		if (new ProductDao().checkExistMaHangHoa(tbMaHangHoaMoi.getText().trim().toLowerCase(), product.getProductId())) {
-			tbMaHangHoaMoi.setErrorMessage("Mã hàng hóa này đã tồn tại. Vui lòng nhập mã khác");
-			return false;
-		}
+//		if (new ProductDao().checkExistMaHangHoa(tbMaHangHoaMoi.getText().trim().toLowerCase(), product.getProductId())) {
+//			tbMaHangHoaMoi.setErrorMessage("Mã hàng hóa này đã tồn tại. Vui lòng nhập mã khác");
+//			return false;
+//		}
 
 		/*
 		 * HangHoaBO hangHoa =
@@ -420,13 +420,13 @@ public class AddProductController extends BaseComposer {
 		if (!validateCombobox(cbTenSP, "Tên sản phẩm")) {
 			return false;
 		}
-		if (!validateCombobox(cbXuatXu, "Xuất xứ")) {
-			return false;
-		}
-
-		if (!validateCombobox(cbTinhNang, "Tính năng")) {
-			return false;
-		}
+//		if (!validateCombobox(cbXuatXu, "Xuất xứ")) {
+//			return false;
+//		}
+//
+//		if (!validateCombobox(cbTinhNang, "Tính năng")) {
+//			return false;
+//		}
 
 		if (!validateCombobox(cbKichThuoc, "Kích thước")) {
 			return false;
@@ -440,24 +440,24 @@ public class AddProductController extends BaseComposer {
 			return false;
 		}
 
-		if (!validateCombobox(cbTrongLuongThung, "Trọng lượng thùng")) {
-			return false;
-		}
-		if (!validateCombobox(cbDongGoi, "Đóng gói viên/thùng")) {
-			return false;
-		}
+//		if (!validateCombobox(cbTrongLuongThung, "Trọng lượng thùng")) {
+//			return false;
+//		}
+//		if (!validateCombobox(cbDongGoi, "Đóng gói viên/thùng")) {
+//			return false;
+//		}
 		if (!validateCombobox(cbNoiSanXuat, "Nơi sản xuất")) {
 			return false;
 		}
-		if (!validateCombobox(cbThongSoKyThuat, "Thông số kỹ thuật")) {
-			return false;
-		}
+//		if (!validateCombobox(cbThongSoKyThuat, "Thông số kỹ thuật")) {
+//			return false;
+//		}
 		if (!validateCombobox(cbBaoHanh, "Thông tin bảo hành")) {
 			return false;
 		}
-		if (!validateCombobox(cbColor, "Mô tả màu sắc")) {
-			return false;
-		}
+//		if (!validateCombobox(cbColor, "Mô tả màu sắc")) {
+//			return false;
+//		}
 		return true;
 	}
 
@@ -635,27 +635,27 @@ public class AddProductController extends BaseComposer {
 		item.setLabel(value);
 
 		if (type == AddProductController.TYPE_XUAT_XU) {
-			initCombobox(type, cbXuatXu);
+//			initCombobox(type, cbXuatXu);
 		} else if (type == AddProductController.TYPE_DVT) {
 			initCombobox(type, cbDonViTinh);
 		} else if (type == AddProductController.TYPE_DONG_GOI_VIEN_THUNG) {
-			initCombobox(type, cbDongGoi);
+//			initCombobox(type, cbDongGoi);
 		} else if (type == AddProductController.TYPE_KICK_THUOC) {
 			initCombobox(type, cbKichThuoc);
 		} else if (type == AddProductController.TYPE_NOI_SX) {
 			initCombobox(type, cbNoiSanXuat);
 		} else if (type == AddProductController.TYPE_TINH_NANG) {
-			initCombobox(type, cbTinhNang);
+//			initCombobox(type, cbTinhNang);
 		} else if (type == AddProductController.TYPE_TRONG_LUONG_THUNG) {
-			initCombobox(type, cbTrongLuongThung);
+//			initCombobox(type, cbTrongLuongThung);
 		} else if (type == AddProductController.TYPE_THONG_SO_KT) {
-			initCombobox(type, cbThongSoKyThuat);
+			//initCombobox(type, cbThongSoKyThuat);
 		} else if (type == AddProductController.TYPE_TEN_SP) {
 			initCombobox(type, cbTenSP);
 		} else if (type == AddProductController.TYPE_BAO_HANH) {
 			initCombobox(type, cbBaoHanh);
 		} else if (type == AddProductController.TYPE_MAU_SAC) {
-			initCombobox(type, cbColor);
+//			initCombobox(type, cbColor);
 		}
 
 	}
