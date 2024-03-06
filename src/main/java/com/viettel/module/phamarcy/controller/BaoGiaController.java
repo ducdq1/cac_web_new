@@ -20,6 +20,7 @@ import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelArray;
@@ -76,7 +77,9 @@ public class BaoGiaController extends BaseComposer {
 	Radiogroup rdgLoaiBaoGia;
 	@Wire
 	Datebox dbExpireDate;
-
+	@Wire
+	Checkbox cbShowPrice;
+	
 	PhamarcyFileModel lastSearchModel;
 	private List<QuotationDetail> lstQuotationDetail;
 	private List<Product> lstProductsCombobox;
@@ -135,6 +138,8 @@ public class BaoGiaController extends BaseComposer {
 			tbMaNVBH.setValue(quotation.getCreateUserCode());
 			rdgLoaiBaoGia.setSelectedIndex(quotation.getType() == null ? 0 : quotation.getType());
 			dbExpireDate.setValue(quotation.getQuotationDate());
+			cbShowPrice.setChecked(quotation.getIsShowPrice()!=null && quotation.getIsShowPrice().equals(1L ) ? true: false); 
+			
 			if (quotation.getStatus() == Constants.BAO_GIA_STATUS_DA_XUAT_BAO_GIA) {
 				btnSave.setDisabled(true);
 			}
@@ -216,6 +221,8 @@ public class BaoGiaController extends BaseComposer {
 
 			quotation.setModifyDate(new Date());
 			quotation.setTotalPrice(totalPrice);
+			quotation.setIsShowPrice(cbShowPrice.isChecked() ? 1L : 0L);
+			
 			// ngay het han
 			quotation.setQuotationDate(dbExpireDate.getValue());
 
@@ -398,7 +405,7 @@ public class BaoGiaController extends BaseComposer {
 	@Listen("onClick = #btnPrint")
 	public void btnPrint(Event event) {
 		String message = "Sau khi in báo giá sẽ không được phép chỉnh sửa. Bạn có muốn in báo giá?";
-		String fileBaoGia = getFileBaoGia();
+		/*String fileBaoGia = getFileBaoGia();
 		if(fileBaoGia != null){
 			String URL;
 			URL = "Pages/module/phamarcy/generalview/viewPDF.zul?filePath=";
@@ -409,7 +416,7 @@ public class BaoGiaController extends BaseComposer {
 					URL);
 			Clients.evalJavaScript(link);
 			return;
-		}
+		}*/
 		
 		EventListener<ClickEvent> clickListener = new EventListener<Messagebox.ClickEvent>() {
 			public void onEvent(ClickEvent event) throws Exception {

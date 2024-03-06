@@ -93,6 +93,9 @@ public class Quotation implements Serializable {
 	@Column(name = "QUOTATION_USER_NAME")
 	private String quotationUserName;
 	
+	@Column(name = "IS_SHOW_PRICE")
+	private Long isShowPrice = 1L;//hien thi gia le	
+	
 	public Long getQuotationID() {
 		return quotationID;
 	}
@@ -262,6 +265,14 @@ public class Quotation implements Serializable {
 
 	public void setQuotationUserName(String quotationUserName) {
 		this.quotationUserName = quotationUserName;
+	}
+
+	public Long getIsShowPrice() {
+		return isShowPrice;
+	}
+
+	public void setIsShowPrice(Long isShowPrice) {
+		this.isShowPrice = isShowPrice;
 	}
 
 	 

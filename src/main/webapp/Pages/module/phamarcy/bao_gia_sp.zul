@@ -173,6 +173,11 @@
 		  <datebox id="dbExpireDate" cols="12" format="dd/MM/yyyy"
 						width="120px"
 						constraint="between 19000101 and 20991231: ${$composer.getLabel('date_validate')}" />
+						<h:br/>
+						<label value="Hiển thị giá bán lẽ(trên báo giá):" sclass="lb-create"
+							style=" margin-right:0px">
+						</label>
+						 <checkbox id="cbShowPrice"></checkbox>
 	 </h:div>
 	 <h:br/>
  	<h:div style="witdh:100%;margin:0 auto;text-align:center">

@@ -583,8 +583,8 @@ public class ExportExcell extends BaseComposer {
 			}
 
 			createCell(colNum++, row6, cloneRow6.getCell(0).getCellStyle(), cloneRow6.getCell(0).getStringCellValue());
-			createCell(colNum++, row6, cloneRow6.getCell(1).getCellStyle(),
-					String.format(": %s", product.getNoiSanXuat() == null ? "" : product.getNoiSanXuat().toUpperCase()));
+			createCell(colNum++, row6, cloneRow6.getCell(1).getCellStyle(), String.format(": %s",
+					product.getNoiSanXuat() == null ? "" : product.getNoiSanXuat().toUpperCase()));
 			createCell(colNum++, row6, cloneRow6.getCell(2).getCellStyle(), "");
 
 			countRow++;
@@ -1005,8 +1005,14 @@ public class ExportExcell extends BaseComposer {
 
 		for (QuotationDetail quotationDetail : quotationDetails) {
 
-			Product product = new ProductDao().findById(quotationDetail.getProductId());
-			String salePrice = product != null ? product.getSalePrice() : "";
+			String salePrice = "";
+
+			if ((quotation.getIsShowPrice() != null && quotation.getIsShowPrice().equals(1L))) {
+				Product product = new ProductDao().findById(quotationDetail.getProductId());
+				if (product != null) {
+					salePrice = product.getSalePrice();
+				}
+			}
 
 			countQuotation++;
 			colNum = 0;
@@ -1019,8 +1025,8 @@ public class ExportExcell extends BaseComposer {
 			createCell(colNum++, row0, cloneRow0.getCell(3).getCellStyle(), quotationDetail.getUnit());
 			createCell(colNum++, row0, cloneRow0.getCell(4).getCellStyle(),
 					"" + formatNumber(quotationDetail.getAmount(), "###,###,###.####"));
-			createCell(colNum++, row0, cloneRow0.getCell(5).getCellStyle(),
-					salePrice);
+			createCell(colNum++, row0, cloneRow0.getCell(5).getCellStyle(), salePrice);
+
 			createCell(colNum++, row0, cloneRow0.getCell(6).getCellStyle(),
 					"" + formatNumber(quotationDetail.getPrice(), "###,###,###.####"));
 			createCell(colNum++, row0, cloneRow0.getCell(7).getCellStyle(),

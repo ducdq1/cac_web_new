@@ -69,6 +69,11 @@ public class Product extends BaseComposer implements Serializable {
 	@Column(name = "WARRANTY")
 	private String warranty;// bao hanh
 
+	@Column(name = "DATE_INPUT_PRICE")
+	private Date dateInputPrice;//ngay nhap gia
+	
+	
+	
 	@Transient
 	private String priceString;
 
@@ -402,6 +407,14 @@ public class Product extends BaseComposer implements Serializable {
 	public void setMaHangHoaMoi(String maHangHoaMoi) {
 		this.maHangHoaMoi = maHangHoaMoi;
 	}
-	
+
+	public Date getDateInputPrice() {
+		return dateInputPrice;
+	}
+
+	public void setDateInputPrice(Date dateInputPrice) {
+		this.dateInputPrice = dateInputPrice;
+	}
+
 	 
 }
