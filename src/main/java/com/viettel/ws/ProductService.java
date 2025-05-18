@@ -116,6 +116,10 @@ public class ProductService {
 		String maVT = "";
 		if (lstProduct.size() > 0) {
 			for (com.viettel.module.phamarcy.BO.Product p : lstProduct) {
+				if(p.getDateInputPrice() != null){
+					p.setCreateDate(p.getDateInputPrice());
+				}
+				
 				productId = p.getProductId();
 				maVT = p.getMaHangHoa();
 				List<Attachs> atts = new AttachDAOHE().findByObjectId(p.getProductId());

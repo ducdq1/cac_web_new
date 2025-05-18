@@ -72,8 +72,6 @@ public class Product extends BaseComposer implements Serializable {
 	@Column(name = "DATE_INPUT_PRICE")
 	private Date dateInputPrice;//ngay nhap gia
 	
-	
-	
 	@Transient
 	private String priceString;
 
